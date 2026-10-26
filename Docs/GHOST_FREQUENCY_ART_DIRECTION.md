@@ -30,11 +30,13 @@ Maintain the palette's gameplay meanings with glyphs, labels, and state text. Ne
 
 ## Motion, budget, and controls
 
-The left rail's **FX+ / FX− / FX0** button cycles these modes:
+Settings → **DISPLAY** toggles control each layer independently:
 
-- **Full:** animated field and glass, packet trains, and scanner pulses. Shader rendering is capped at 30 updates/second; decorative vectors update at up to 24/second while live tool progress remains responsive.
-- **Reduced:** frozen ambient shader textures, softer glass, static route markers and scanner rings. Action progress, trace values, and warnings still update with gameplay.
-- **Off:** both shader layers disappear; the static palette, brackets, route markings, and all game controls remain available.
+- **Signal field:** procedural map background (and node intel card treatment).
+- **Phosphor glass:** screen-wide glass overlay.
+- **Animate display effects:** when on, enabled layers animate; when off, they stay visible but frozen.
+
+Together these replace the legacy **FX+ / FX− / FX0** presets: both layers on with animation is Full; both on without animation is Reduced; both off is Off. Graph packet trains and scanner pulses follow the animation toggle. Shader rendering is capped at 30 updates/second; decorative vectors update at up to 24/second while live tool progress remains responsive. Action progress, trace values, and warnings still update with gameplay when animation is off. The static palette, brackets, route markings, and all game controls remain available when layers are disabled.
 
 The preference persists locally through PlayerPrefs and is separate from the career save. The field texture is capped at 1280 × 800 and is only rendered for a visible map. Glass is capped at 1920 × 1080. Two RGBA textures need at most about 12 MiB; neither uses depth or mipmaps. UI rebuilds reuse the textures when dimensions remain stable. Resize recreates only the affected texture. Destruction releases materials and GPU textures. Unsupported shaders fall back to the static theme.
 

@@ -312,20 +312,21 @@ namespace HackThePlanet.Editor
                     case 20:
                         Check(app.Root.ClassListContains("trace-alert"),"High trace changes the workstation warning treatment.");
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/07-trace-warning.png"));
-                        Check(app.ActivateVisibleControl("effects"),"Effects control is wired.");
-                        Check(app.Visuals.Mode==SignalEffects.Reduced,"Full effects cycle to static reduced effects.");smokePhase++;return;
+                        Check(app.ActivateVisibleControl("settings"),"Settings opens for display effect controls.");
+                        Check(app.ActivateVisibleControl("effect-animate"),"Animate display effects toggle is wired.");
+                        Check(app.Visuals.Mode==SignalEffects.Reduced,"Disabling animation freezes shader motion.");smokePhase++;return;
                     case 21:
                         frozenField=ReadPixels(app.Visuals.FieldTexture);frozenGlass=ReadPixels(app.Visuals.GlassTexture);
                         sharedField=app.Visuals.FieldTexture;sharedGlass=app.Visuals.GlassTexture;
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/08-reduced-effects.png"));smokePhase++;return;
                     case 22:
                         Check(frozenField.SequenceEqual(ReadPixels(app.Visuals.FieldTexture))&&frozenGlass.SequenceEqual(ReadPixels(app.Visuals.GlassTexture)),"Reduced shader textures stay exactly static across frames.");
-                        Check(app.ActivateVisibleControl("effects")&&app.Visuals.Mode==SignalEffects.Off,"Reduced effects cycle to off.");smokePhase++;return;
+                        Check(app.ActivateVisibleControl("effect-signal-field")&&app.ActivateVisibleControl("effect-phosphor-glass")&&app.Visuals.Mode==SignalEffects.Off,"Display layers can be turned off.");smokePhase++;return;
                     case 23:
                         Check(app.Root.Q<Image>("signal-field").resolvedStyle.display==DisplayStyle.None&&app.Root.Q<Image>("phosphor-glass").resolvedStyle.display==DisplayStyle.None,"Off mode hides both shader layers.");
                         Check(app.Root.Q<Button>("action-scan")!=null,"Action controls survive effects changes.");
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/09-effects-off.png"));
-                        Check(app.ActivateVisibleControl("effects")&&app.Visuals.Mode==SignalEffects.Full,"Off effects cycle back to full.");smokePhase++;return;
+                        Check(app.ActivateVisibleControl("effect-signal-field")&&app.ActivateVisibleControl("effect-phosphor-glass")&&app.ActivateVisibleControl("effect-animate")&&app.Visuals.Mode==SignalEffects.Full,"Display layers and animation restore full effects.");smokePhase++;return;
                     case 24:
                         Check(ReferenceEquals(sharedField,app.Visuals.FieldTexture)&&ReferenceEquals(sharedGlass,app.Visuals.GlassTexture),"UI rebuilds reuse both GPU textures.");
                         Check(!frozenField.SequenceEqual(ReadPixels(app.Visuals.FieldTexture)),"Full effects animate the signal field.");

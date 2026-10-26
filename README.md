@@ -19,9 +19,7 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 | Right- or middle-drag graph | Pan |
 | FIT | Recenter the graph |
 | F1 or ? | Operator field guide |
-| Escape or ESC button | Settings menu: text size, Resume, Reset Game Save, Quit |
-| SND | Toggle interface sounds |
-| FX+ / FX− / FX0 | Cycle animated, reduced/static, and disabled display effects |
+| Escape or ⚙ button | Settings menu: text size, display effects, interface sounds, Resume, Reset Game Save, Quit |
 
 ## Career loop
 
@@ -43,7 +41,7 @@ Early branch roots cost 45 XP. Bridge has two prepared crossings per operation; 
 
 The game automatically saves your career and active operation every five seconds and at important transitions. Reopened operations start paused, including any running tool. Saves use atomic replacement and a previous-save backup.
 
-Open Settings with **Escape** or the **ESC** button on the left rail. The menu pauses an active operation; **Resume** restores its previous pause state. **Reset Game Save** asks for confirmation, then starts a fresh career and resets the recovery backup. **Quit** saves your career before closing the game.
+Open Settings with **Escape** or the **⚙** button on the left rail. The menu pauses an active operation; **Resume** restores its previous pause state. Display effects and interface sounds are configured here as well. **Reset Game Save** asks for confirmation, then starts a fresh career and resets the recovery backup. **Quit** saves your career before closing the game.
 
 Open **Settings → Cheats / Debug** to add **1,000,000 credits**, add **1,000,000 XP**, or **unlock the whole tech tree** for free. **Reset Game** uses the same confirmation as **Reset Game Save** and starts a fresh career (clears contracts, research, hardware, reports, and any active operation). Credit and XP grants are repeatable and XP also counts toward total earned XP. Changes autosave to the current career. Special abilities still use the normal Research loadout and slot limits. Escape returns to Settings; Resume restores the operation's previous pause state.
 
@@ -63,7 +61,7 @@ Source files are under `Assets/HackThePlanet/Runtime/`. The gameplay definitions
 
 `NetworkGenerator` builds seeded topology and stable XYZ positions together for previews and live operations. V2 active saves preserve their topology, positions, tools, queues, counters, and timed statuses. The seven original low-poly hardware meshes are game-owned resources; regenerate them with `scripts/generate_network_models.py` using Python 3. The importer keeps meshes readable for player-side instancing. Lore includes eighteen story fragments and nine reusable company fragments for freelance work.
 
-The **Ghost Frequency** graphics style uses mint phosphor, bracketed instrument cards, circuit routes with packet flow, a procedural signal field, and subtle phosphor glass. Display effects can be reduced to a static treatment or disabled from the left rail. The [art-direction guide](Docs/GHOST_FREQUENCY_ART_DIRECTION.md) covers the palette, shader stack, motion settings, and rendering budget.
+The **Ghost Frequency** graphics style uses mint phosphor, bracketed instrument cards, circuit routes with packet flow, a procedural signal field, and subtle phosphor glass. Display effects can be reduced to a static treatment or disabled from Settings. The [art-direction guide](Docs/GHOST_FREQUENCY_ART_DIRECTION.md) covers the palette, shader stack, motion settings, and rendering budget.
 
 The **Hack The Planet** editor menu provides scene setup, gameplay asset validation, simulation and data-driven validation, a rendered workstation smoke test, and Windows builds. Builds reject invalid gameplay assets. See the [gameplay authoring guide](Docs/DATA_DRIVEN_GAMEPLAY.md) for asset types, composable rules, extension examples, and runtime APIs. The smoke test uses an isolated in-memory career and does not write to the player's career save.
 

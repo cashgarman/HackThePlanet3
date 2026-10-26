@@ -12,7 +12,7 @@
 .rail-button { border-color: #284139; color: #809e94; }
 .rail-button.active { background-color: #132b23; border-color: #73b697; color: #9bfacb; border-left-width: 3px; }
 .rail-small { margin-bottom: 5px; }
-.effects-button { border-width: 1px; border-color: #2a4840; color: #9bfacb; padding: 6px; margin-bottom: 12px; font-size: 8px; }
+.settings-button { border-color: #2a4840; color: #9bfacb; }
 .left-panel, .right-panel { background-color: #0b1318; border-color: #293d38; }
 .panel-heading { border-bottom-color: #294139; }
 .contract-card { background-color: #101b20; border-color: #293b38; }

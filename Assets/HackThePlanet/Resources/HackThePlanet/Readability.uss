@@ -43,6 +43,7 @@ Label { min-width: 0; }
 .map-footer { height: auto; min-height: 48px; padding: 6px 12px; flex-wrap: wrap; }
 .legend { flex-wrap: wrap; flex-grow: 1; flex-shrink: 1; }
 .legend-key { margin-right: 12px; margin-bottom: 4px; }
+.legend-dot { width: 10px; height: 10px; margin-right: 7px; flex-shrink: 0; }
 .map-controls { flex-shrink: 0; margin-top: 4px; margin-bottom: 4px; }
 .network-key { flex-grow: 1; flex-shrink: 1; min-width: 0; margin-right: 12px; }
 .network-key .unity-foldout__text { font-size: 10px; color: #9cb8ab; }

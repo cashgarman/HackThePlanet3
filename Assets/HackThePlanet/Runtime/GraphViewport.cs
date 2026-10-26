@@ -100,7 +100,7 @@ namespace HackThePlanet
             savedCamera = cameraState ?? new GraphCameraState();
             fitPending=!savedCamera.Initialized||(!savedCamera.UserAdjusted&&savedCamera.NodeCount!=graph.Nodes.Count);
             savedCamera.NodeCount=graph.Nodes.Count;
-            if (savedCamera.FocusedId != selectedId) savedCamera.FocusedId = null;
+            savedCamera.FocusedId = string.IsNullOrEmpty(selectedId) ? null : selectedId;
             this.research = research;
             AddToClassList("graph-viewport");
             style.flexGrow = 1;
@@ -455,11 +455,10 @@ namespace HackThePlanet
             if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
             waypointOverlay?.Reposition(textScale);
             links.SelectionVisible = false;
-            focusedCard.style.display = DisplayStyle.None;
+            bool showFocusedCard = false;
             foreach (var pair in nodeButtons)
             {
-                var button = pair.Value;
-                button.style.display = DisplayStyle.None;
+                pair.Value.style.display = DisplayStyle.None;
                 if (pair.Key != selectedId) continue;
                 var node = scene.Nodes[pair.Key];
                 var point = camera.WorldToViewportPoint(node.Position);
@@ -471,33 +470,24 @@ namespace HackThePlanet
                 float halfSize = Mathf.Max(10, Mathf.Abs(edge.y - point.y) * contentRect.height + 4);
                 var nodeCenter = new Vector2(point.x * contentRect.width, (1 - point.y) * contentRect.height);
                 var reticle = new Rect(nodeCenter.x - halfSize, nodeCenter.y - halfSize, halfSize * 2, halfSize * 2);
-                bool focused = savedCamera.FocusedId == pair.Key;
                 float rightSpace = contentRect.width - reticle.xMax - 20;
                 float leftSpace = reticle.xMin - 20;
-                var focusedSize = focused ? MeasureFocusedCard(Mathf.Max(rightSpace, leftSpace)) : Vector2.zero;
-                float width = focused ? focusedSize.x : Mathf.Min((research ? 118 : 104) * textScale, contentRect.width - 16);
-                float height = focused ? focusedSize.y : 26 * textScale;
-                float top = reticle.yMax + 12;
-                if (top + height > contentRect.height) top = reticle.yMin - 12 - height;
-                var card = new Rect(Mathf.Round(Mathf.Clamp(nodeCenter.x - width / 2, 0, contentRect.width - width)),
-                    Mathf.Round(Mathf.Clamp(top, 0, Mathf.Max(0, contentRect.height - height))), width, height);
-                VisualElement cardElement = button;
-                if (focused)
-                {
-                    float beside = rightSpace >= leftSpace || width <= rightSpace + 1 ? reticle.xMax + 12 : reticle.xMin - width - 12;
-                    card.x = Mathf.Clamp(beside, 8, Mathf.Max(8, contentRect.width - width - 8));
-                    card.y = Mathf.Clamp(nodeCenter.y - height / 2, 8, Mathf.Max(8, contentRect.height - height - 8));
-                    cardElement = focusedCard;
-                }
-                cardElement.style.display = DisplayStyle.Flex;
-                cardElement.style.width = width;
-                cardElement.style.height = height;
-                cardElement.style.left = card.x;
-                cardElement.style.top = card.y;
+                var focusedSize = MeasureFocusedCard(Mathf.Max(rightSpace, leftSpace));
+                float width = focusedSize.x;
+                float height = focusedSize.y;
+                float beside = rightSpace >= leftSpace || width <= rightSpace + 1 ? reticle.xMax + 12 : reticle.xMin - width - 12;
+                var card = new Rect(Mathf.Clamp(beside, 8, Mathf.Max(8, contentRect.width - width - 8)),
+                    Mathf.Clamp(nodeCenter.y - height / 2, 8, Mathf.Max(8, contentRect.height - height - 8)), width, height);
+                showFocusedCard = true;
+                focusedCard.style.width = width;
+                focusedCard.style.height = height;
+                focusedCard.style.left = card.x;
+                focusedCard.style.top = card.y;
                 links.SelectionVisible = true;
                 links.SelectionRect = reticle;
                 links.CardRect = card;
             }
+            focusedCard.style.display = showFocusedCard ? DisplayStyle.Flex : DisplayStyle.None;
             links.MarkDirtyRepaint();
         }
 
