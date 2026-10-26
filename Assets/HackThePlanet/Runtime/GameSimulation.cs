@@ -7,450 +7,426 @@ using UnityEngine;
 
 namespace HackThePlanet
 {
-    [Serializable]
-    public sealed class Career
+    [Serializable] public sealed class HardwareLevel { public string id; public int level; }
+    [Serializable] public sealed class CounterState { public string key; public int value; }
+    [Serializable] public sealed class StatusState
     {
-        public int version = 1, credits = 600, xp, day = 1, totalEarnedXp, cpu, bandwidth, memory, jobs;
-        public List<string> completed = new List<string>();
-        public List<string> unlocked = new List<string> { "base" };
-        public List<string> equipped = new List<string>();
-        public List<string> news = new List<string> { "EXCHANGE ONLINE // A new operator has entered the network. Your first contract is waiting." };
-        public List<OperationReport> reports = new List<OperationReport>();
+        public string id,target;
+        public float remaining;
+        public bool preventsTrace,disablesDefense;
+    }
+    [Serializable] public sealed class Career
+    {
+        public int version=2, credits=-1, xp, day=1, totalEarnedXp, jobs;
+        public bool initialized;
+        public List<HardwareLevel> hardware=new List<HardwareLevel>();
+        public List<string> completed=new List<string>(), unlocked=new List<string>(), equipped=new List<string>(), news=new List<string>();
+        public List<OperationReport> reports=new List<OperationReport>();
+        public List<LoreFragment> lore=new List<LoreFragment>();
         public Operation operation;
+        [NonSerialized] public bool saveBlocked;
+        public int Level(string id)=>hardware?.FirstOrDefault(x=>x.id==id)?.level??0;
+        public void SetLevel(string id,int level){hardware??=new List<HardwareLevel>();var item=hardware.FirstOrDefault(x=>x.id==id);if(item==null)hardware.Add(new HardwareLevel{id=id,level=level});else item.level=level;}
+        // Compatibility helpers for existing editor fixtures. Runtime hardware uses definition IDs.
+        public int cpu { get=>Level("cpu");set=>SetLevel("cpu",value); }
+        public int bandwidth { get=>Level("bandwidth");set=>SetLevel("bandwidth",value); }
+        public int memory { get=>Level("memory");set=>SetLevel("memory",value); }
     }
-
-    [Serializable]
-    public sealed class QueuedTool
+    [Serializable] public sealed class QueuedTool
     {
-        public string target;
-        public ToolKind kind;
-        public QueuedTool(ToolKind tool, string id) { target = id; kind = tool; }
+        public string target,actionId;
+        public ToolKind kind {get=>Enum.TryParse<ToolKind>(actionId,true,out var value)?value:ToolKind.Scan;set=>actionId=value.ToString().ToLowerInvariant();}
+        public QueuedTool(){}
+        public QueuedTool(ToolKind tool,string id){kind=tool;target=id;}
+        public QueuedTool(string action,string id){actionId=action;target=id;}
     }
-
-    [Serializable]
-    public sealed class ToolTask
+    [Serializable] public sealed class ToolTask
     {
-        public string target;
-        public ToolKind kind;
-        public float duration, elapsed, trace;
+        public string target,actionId;
+        public float duration,elapsed,trace;
+        public ToolKind kind {get=>Enum.TryParse<ToolKind>(actionId,true,out var value)?value:ToolKind.Scan;set=>actionId=value.ToString().ToLowerInvariant();}
     }
-
-    [Serializable]
-    public sealed class Operation
+    [Serializable] public sealed class Operation
     {
-        public string contractId;
-        public int seed;
+        public string contractId,entryNode,lastControlled;
+        public int seed,generationVersion;
         public List<NetNode> nodes;
         public List<NetLink> links;
-        public List<string> log = new List<string>();
-        public List<QueuedTool> queue = new List<QueuedTool>();
+        public List<string> log=new List<string>();
+        public List<QueuedTool> queue=new List<QueuedTool>();
+        public List<CounterState> counters=new List<CounterState>();
+        public List<StatusState> statuses=new List<StatusState>();
         public ToolTask task;
-        public float trace, elapsed, decoyRemaining;
-        public bool paused, decoyUsed, backdoorUsed, firstRelayUsed, cascadeApplied;
-        public string lastControlled = "home";
+        public float trace,elapsed;
+        public bool paused;
+        public float decoyRemaining=>statuses?.Where(s=>s.preventsTrace).Select(s=>s.remaining).DefaultIfEmpty(0).Max()??0;
     }
-
-    [Serializable]
-    public sealed class OperationReport
+    [Serializable] public sealed class OperationReport
     {
-        public string title, company, verdict, narrative;
+        public string title,company,verdict,narrative;
         public bool success;
         public float trace;
-        public int credits, xp, day, bonusFiles;
-        public List<string> log = new List<string>();
+        public int credits,xp,day,bonusFiles;
+        public List<string> log=new List<string>();
     }
+    public sealed class ToolPreview { public bool allowed;public string reason;public float duration,trace; }
 
-    public sealed class ToolPreview
-    {
-        public bool allowed;
-        public string reason;
-        public float duration, trace;
-    }
-
-    // The simulation owns mission state. UI and saves are projections of these facts.
     public sealed class GameSimulation
     {
-        public Career Career { get; private set; }
-        public Operation Op => Career.operation;
-        public Contract Job { get; private set; }
-        public GraphDocument KnownGraph { get; private set; }
-        public GraphScene Scene { get; private set; }
-        public OperationReport LastReport { get; private set; }
-        public int Revision { get; private set; }
+        public GameCatalog Catalog {get;}
+        public Career Career {get;private set;}
+        public Operation Op=>Career.operation;
+        public Contract Job {get;private set;}
+        public GraphDocument KnownGraph {get;private set;}
+        public GraphScene Scene {get;private set;}
+        public OperationReport LastReport {get;private set;}
+        public int Revision {get;private set;}
         public event Action Changed;
-        public bool Active => Op != null;
-        public int Slots => 2 + Career.memory;
-        public bool Has(string id) => Career.unlocked.Contains(id);
-        public bool Equipped(string id) => Has(id) && Career.equipped.Contains(id);
-        public NetNode Node(string id) => Op?.nodes.FirstOrDefault(n => n.id == id);
-        public IEnumerable<NetNode> Neighbors(NetNode node) => Op.links.Where(l => l.a == node.id || l.b == node.id).Select(l => Node(l.a == node.id ? l.b : l.a));
-        public bool Reachable(NetNode node) => node != null && node.known && (node.controlled || Neighbors(node).Any(n => n.controlled));
-        public int ObjectiveCount => Active ? Op.nodes.Count(n => n.objective && ObjectiveDone(n)) : 0;
-        public int ObjectiveTotal => Active ? Op.nodes.Count(n => n.objective) : 0;
-        public bool ObjectiveComplete => Active && ObjectiveCount == ObjectiveTotal;
-        public bool ObjectiveDone(NetNode node) => node.kind == NodeKind.SecurityHub && Job.kind == JobKind.Disrupt ? node.controlled : node.collected;
-        public float Progress => Op?.task == null ? 0 : Mathf.Clamp01(Op.task.elapsed / Op.task.duration);
-
-        public GameSimulation(Career career = null)
+        private int effectDepth,effectCount;
+        public bool Active=>Op!=null;
+        public int ResearchCount=>Career.unlocked.Except(Catalog.Data.career.initialTechnologies.Select(t=>t.id)).Count();
+        public int ResearchTotal=>Catalog.Data.technologies.Length-Catalog.Data.career.initialTechnologies.Length;
+        public float RefundFraction=>Catalog.Data.career.refundFraction;
+        public int Slots=>Mathf.Max(0,Mathf.FloorToInt(Stat("slots")));
+        public int QueueCapacity=>Mathf.Max(0,Mathf.FloorToInt(Stat("queueCapacity")));
+        public float TraceLimit=>Catalog.Data.career.traceLimit;
+        public float TraceWarning=>Catalog.Data.career.traceWarning;
+        public float TraceDanger=>Catalog.Data.career.traceDanger;
+        public float TraceFraction=>Active?Op.trace/TraceLimit:0;
+        public float[] SimulationSpeeds=>Catalog.Data.career.simulationSpeeds.ToArray();
+        public bool StoryComplete=>Catalog.Contracts(Career).Where(x=>!x.recurring).All(x=>Career.completed.Contains(x.id));
+        public string Rank=>Catalog.Data.career.ranks.Where(x=>Career.jobs>=x.jobs).OrderBy(x=>x.jobs).LastOrDefault()?.title??string.Empty;
+        public bool Has(string id)=>Career.unlocked.Contains(id);
+        public bool Equipped(string id)=>Has(id)&&Career.equipped.Contains(id);
+        public NetNode Node(string id)=>Op?.nodes.FirstOrDefault(n=>n.id==id);
+        public IEnumerable<NetNode> Neighbors(NetNode node)=>node==null||Op==null?Enumerable.Empty<NetNode>():Op.links.Where(l=>l.a==node.id||l.b==node.id).Select(l=>Node(l.a==node.id?l.b:l.a));
+        public bool Reachable(NetNode node)=>node!=null&&node.known&&(node.controlled||Neighbors(node).Any(n=>n.controlled));
+        private ContractDefinition Definition=>Catalog.Contract(Job?.id);
+        public int ObjectiveCount=>!Active?0:Definition.objectives.Count(o=>o.complete.Test(Context(Node(o.nodeId))));
+        public int ObjectiveTotal=>Active?Definition.objectives.Length:0;
+        public bool ObjectiveComplete=>Active&&ObjectiveTotal>0&&ObjectiveCount==ObjectiveTotal;
+        public bool ObjectiveDone(NetNode node)=>Active&&Definition.objectives.Where(o=>o.nodeId==node?.id).All(o=>o.complete.Test(Context(node)));
+        public float Progress=>Op?.task==null?0:Mathf.Clamp01(Op.task.elapsed/Op.task.duration);
+        public int Scanners=>!Active?0:Op.nodes.Count(n=>Catalog.NodeType(n.typeId).auras.Any(a=>a.modifier.stat=="tracePressure"&&a.source.Test(Context(n))));
+        public GameSimulation(Career career=null):this(GameCatalog.Default,career){}
+        public GameSimulation(GameCatalog catalog,Career career=null)
         {
-            Career = career ?? new Career();
-            Normalize();
-            if (Active)
-            {
-                Job = ResolveContract(Op.contractId, Op.seed);
-                if (Job == null || Op.nodes == null || Op.links == null) Career.operation = null;
-                else { Op.paused = true; RefreshGraph(); }
-            }
+            Catalog=catalog??throw new ArgumentNullException(nameof(catalog));Career=career??catalog.CreateCareer();Normalize();ValidateCareer(Career,Catalog);
+            if(Active){Job=Catalog.DescribeContract(Catalog.Contract(Op.contractId),Career);Job.seed=Op.seed;Op.paused=true;SyncStatuses();RefreshGraph();}
         }
-
         private void Normalize()
         {
-            Career.completed ??= new List<string>(); Career.unlocked ??= new List<string>();
-            Career.equipped ??= new List<string>(); Career.news ??= new List<string>(); Career.reports ??= new List<OperationReport>();
-            Career.completed = Career.completed.Where(id => GameContent.Story.Any(c => c.id == id)).Distinct().ToList();
-            Career.unlocked = Career.unlocked.Where(id => GameContent.FindTech(id) != null).Distinct().ToList();
-            if (!Has("base")) Career.unlocked.Add("base");
-            Career.cpu = Mathf.Clamp(Career.cpu, 0, 3); Career.bandwidth = Mathf.Clamp(Career.bandwidth, 0, 3); Career.memory = Mathf.Clamp(Career.memory, 0, 2);
-            Career.credits = Mathf.Max(0, Career.credits); Career.xp = Mathf.Max(0, Career.xp); Career.day = Mathf.Max(1, Career.day);
-            Career.equipped = Career.equipped.Where(id => Has(id) && GameContent.FindTech(id).special).Distinct().Take(Slots).ToList();
-            if (Active) { Op.queue ??= new List<QueuedTool>(); Op.log ??= new List<string>(); }
+            Career.completed??=new List<string>();Career.unlocked??=new List<string>();Career.equipped??=new List<string>();Career.news??=new List<string>();
+            Career.reports??=new List<OperationReport>();Career.lore??=new List<LoreFragment>();Career.hardware??=new List<HardwareLevel>();
+            if(!Career.initialized)
+            {
+                var defaults=Catalog.Data.career;if(Career.credits<0)Career.credits=defaults.credits;if(Career.xp==0)Career.xp=defaults.xp;if(Career.day==1)Career.day=defaults.day;
+                foreach(var tech in defaults.initialTechnologies)if(!Has(tech.id))Career.unlocked.Add(tech.id);
+                if(Career.news.Count==0)Career.news.Add(defaults.welcome);Career.initialized=true;
+            }
+            if(Op!=null&&string.IsNullOrEmpty(Op.contractId)&&(Op.nodes==null||Op.nodes.Count==0)&&(Op.links==null||Op.links.Count==0)&&Op.trace==0&&Op.elapsed==0)Career.operation=null;
+            if(Active)
+            {
+                Op.queue??=new List<QueuedTool>();Op.log??=new List<string>();Op.counters??=new List<CounterState>();Op.statuses??=new List<StatusState>();
+                if(Op.task!=null&&string.IsNullOrEmpty(Op.task.actionId)&&Op.task.duration==0)Op.task=null;
+            }
         }
-
-        private Contract ResolveContract(string id, int seed)
+        public static void ValidateCareer(Career career,GameCatalog catalog)
         {
-            var job = GameContent.Contracts(Career).FirstOrDefault(c => c.id == id);
-            if (job != null && job.recurring) job.seed = seed;
-            return job;
+            void Require(bool pass,string message){if(!pass)throw new InvalidDataException("Career v2: "+message+". The save has not been overwritten.");}
+            Require(career.version==2,"unsupported save version");Require(career.credits>=0&&career.xp>=0&&career.day>=1,"invalid economy values");
+            Require(career.completed.All(id=>catalog.Contract(id)!=null&&!catalog.Contract(id).recurring),"unknown completed contract");
+            Require(career.unlocked.All(id=>catalog.Technology(id)!=null)&&career.unlocked.Distinct().Count()==career.unlocked.Count,"unknown or duplicate technology");
+            Require(career.equipped.All(id=>career.unlocked.Contains(id)&&catalog.Technology(id).special)&&career.equipped.Distinct().Count()==career.equipped.Count,"invalid equipped technology");
+            Require(career.hardware.All(h=>catalog.Data.hardware.Any(d=>d.id==h.id&&h.level>=0&&h.level<=d.tiers.Length))&&career.hardware.Select(h=>h.id).Distinct().Count()==career.hardware.Count,"unknown hardware or invalid tier");
+            var op=career.operation;if(op==null)return;
+            Require(catalog.Contract(op.contractId)!=null,"unknown active contract "+op.contractId);
+            Require(op.nodes!=null&&op.nodes.Count>0&&op.links!=null,"missing active network");var ids=new HashSet<string>(op.nodes.Select(n=>n.id));
+            Require(ids.Count==op.nodes.Count&&op.nodes.All(n=>catalog.Data.nodeTypes.Any(t=>t.id==n.typeId)),"unknown or duplicate network node");
+            Require(ids.Contains(op.entryNode)&&ids.Contains(op.lastControlled)&&op.links.All(l=>ids.Contains(l.a)&&ids.Contains(l.b)),"missing network reference");
+            Require(catalog.Contract(op.contractId).objectives.All(o=>ids.Contains(o.nodeId)),"missing objective target");
+            Require(op.task==null||(catalog.Action(op.task.actionId)!=null&&(catalog.Action(op.task.actionId).operatorTarget||ids.Contains(op.task.target))&&op.task.duration>0&&Finite(op.task.duration)&&Finite(op.task.elapsed)&&Finite(op.task.trace)&&op.task.trace>=0&&op.task.elapsed>=0&&op.task.elapsed<=op.task.duration),"invalid running action");
+            Require(op.queue.All(q=>catalog.Action(q.actionId)!=null&&(catalog.Action(q.actionId).operatorTarget||ids.Contains(q.target))),"unknown queued action or target");
+            Require(op.statuses.All(s=>catalog.Data.statuses.Any(d=>d.id==s.id)&&(string.IsNullOrEmpty(s.target)||ids.Contains(s.target))&&s.remaining>0&&Finite(s.remaining)),"unknown or invalid status");
+            Require(Finite(op.trace)&&op.trace>=0&&Finite(op.elapsed)&&op.elapsed>=0,"invalid operation time or trace");
         }
-
+        private static bool Finite(float value)=>!float.IsNaN(value)&&!float.IsInfinity(value);
+        internal RuleContext Context(NetNode node=null,ActionDefinition action=null)=>new RuleContext{Catalog=Catalog,Simulation=this,Career=Career,Contract=Job,Node=node,Action=action};
         public bool Start(Contract job)
         {
-            if (Active || job == null || Career.completed.Count < job.requiredWins || (!job.recurring && Career.completed.Contains(job.id))) return false;
-            Job = job;
-            Career.operation = new Operation { contractId=job.id, seed=job.seed, nodes=GameContent.Network(job, Career), links=GameContent.Links(job.seed) };
-            Reveal(Node("home"), 1);
-            if (Has("blueprint")) foreach (var node in Op.nodes.Where(n => n.objective).ToArray()) Reveal(node, 1);
-            Log("TUNNEL OPEN // " + Job.company + ". Gateway secured.");
-            Log("CLIENT // " + job.objective);
-            if (Career.completed.Count == 0) Log("GUIDE // Select Public relay, then HACK. Control connected nodes to reach the gold objective.");
-            RefreshGraph(); Touch(); return true;
+            var definition=Catalog.Contract(job?.id);
+            if(Active||definition==null||Career.completed.Count<definition.requiredWins||(!definition.recurring&&Career.completed.Contains(definition.id)))return false;
+            Job=JsonUtility.FromJson<Contract>(JsonUtility.ToJson(job));Job.networkId=definition.network.id;Job.lore=Catalog.DescribeContract(definition,Career).lore;
+            var network=NetworkGenerator.Generate(Job,Career,Catalog);
+            Career.operation=new Operation{contractId=Job.id,seed=Job.seed,nodes=network.nodes,links=network.links,generationVersion=NetworkGenerator.Version,entryNode=definition.network.entryNode,lastControlled=definition.network.entryNode};
+            foreach(var goal in definition.objectives)Node(goal.nodeId).objective=true;
+            Dispatch(RuleEvent.OperationStarted,Context());Log("TUNNEL OPEN // "+Job.company+". Gateway secured.");Log("CLIENT // "+Job.objective);RefreshGraph();Touch();return true;
         }
-
-        public void SetPaused(bool paused) { if (!Active) return; Op.paused = paused; Touch(); }
-
-        public int EffectiveSecurity(NetNode node)
+        public void SetPaused(bool paused){if(!Active)return;Op.paused=paused;Touch();}
+        public string PreferredNode(Contract job,bool preview=false){var n=Catalog.Network(job.networkId??Catalog.Contract(job.id).network.id);return preview?n.previewNode:n.preferredNode;}
+        public float Stat(string stat)=>Stat(stat,Context());
+        internal float Stat(string stat,RuleContext c)=>ApplyModifiers(stat,stat=="security"?(c.Node?.security??0):Catalog.BaseStat(stat),c);
+        private IEnumerable<Modifier> Modifiers(string stat,RuleContext context)
         {
-            int value = node.security;
-            if (node.kind == NodeKind.Firewall || node.kind == NodeKind.Database)
-                if (Neighbors(node).Any(n => n.kind == NodeKind.SecurityHub && !n.controlled && n.suppressed <= 0)) value += 2;
-            return Mathf.Max(1, value);
-        }
-
-        public int Scanners => Active ? Op.nodes.Count(n => n.kind == NodeKind.Scanner && !n.controlled && n.suppressed <= 0 && Neighbors(n).Any(a => a.controlled)) : 0;
-
-        public ToolPreview Preview(ToolKind kind, string id)
-        {
-            var p = new ToolPreview();
-            var node = Node(id);
-            if (!Active || node == null) { p.reason = "Connect to a contract first."; return p; }
-            if (!node.known) { p.reason = "Scan to discover this system."; return p; }
-            if (!Reachable(node) && kind != ToolKind.Backdoor) { p.reason = "Control a connected neighbor first."; return p; }
-            int security = EffectiveSecurity(node);
-            float speed = 1 + Career.cpu * .2f;
-            switch (kind)
+            foreach(var m in Catalog.Data.modifiers)if(m.stat==stat)yield return m;
+            foreach(var t in Catalog.Data.technologies.Where(t=>Has(t.id)&&(!t.special||Equipped(t.id))))foreach(var m in t.modifiers)if(m.stat==stat)yield return m;
+            foreach(var h in Catalog.Data.hardware)for(int i=0;i<Career.Level(h.id);i++)foreach(var m in h.tiers[i].modifiers)if(m.stat==stat)yield return m;
+            if(!Active)yield break;var seen=new HashSet<string>();
+            foreach(var source in Op.nodes)foreach(var aura in Catalog.NodeType(source.typeId).auras)
             {
-                case ToolKind.Scan:
-                    if (node.scanned) { p.reason="Already scanned. Its surrounding connections are known."; return p; }
-                    p.duration = Has("signal") ? 1.5f : 3; p.trace = Has("signal") ? 0 : 2; break;
-                case ToolKind.Hack:
-                    if (node.controlled) { p.reason="You already control this system."; return p; }
-                    p.duration = (3 + security * 1.7f) / speed * (Has("efficient") ? .75f : 1);
-                    p.trace = (3 + security * 1.7f) * (Has("quiet") ? .7f : 1) * (Has("weakpoint") && node.scanned ? .6f : 1);
-                    break;
-                case ToolKind.Download:
-                    if (!node.controlled) { p.reason="Hack this system before recovering its files."; return p; }
-                    if (node.collected) { p.reason="Files already secured."; return p; }
-                    if (!node.objective && !node.bonus) { p.reason="No contract files or optional archives on this node."; return p; }
-                    if (node.kind == NodeKind.SecurityHub) { p.reason="Control the hub to satisfy this objective."; return p; }
-                    if (Job.kind == JobKind.Disrupt && !Node("n14").controlled) { p.reason="Take control of Security hub before erasing the index."; return p; }
-                    p.duration = (node.objective ? 9 : 7) / (1 + Career.bandwidth * .3f) * (Has("selective") && node.objective ? .55f : 1);
-                    p.trace = (node.objective ? 8 : 6) * (Has("selective") && node.objective ? .7f : 1); break;
-                case ToolKind.Disrupt:
-                    string tech = node.kind == NodeKind.SecurityHub ? "blackout" : "disrupt";
-                    if (node.kind != NodeKind.Scanner && node.kind != NodeKind.SecurityHub) { p.reason="Select a scanner or security hub."; return p; }
-                    if (!Equipped(tech)) { p.reason="Research and equip " + GameContent.FindTech(tech).title + "."; return p; }
-                    if (node.controlled || node.suppressed > 0) { p.reason="This defense is already offline."; return p; }
-                    p.duration=2.5f; p.trace=2; break;
-                case ToolKind.Bridge:
-                    if (!Equipped("bridge")) { p.reason="Research and equip Firewall bridge."; return p; }
-                    if (node.controlled || node.kind != NodeKind.Firewall || Neighbors(node).Count(n => n.controlled) < 2)
-                    { p.reason="Requires an uncontrolled firewall with two controlled neighbors."; return p; }
-                    p.duration=2; p.trace=0; break;
-                case ToolKind.Backdoor:
-                    if (!Equipped("backdoor") || Op.backdoorUsed) { p.reason="Requires an equipped, unused Backdoor."; return p; }
-                    if (node.controlled || (node.kind != NodeKind.Workstation && node.kind != NodeKind.Relay)) { p.reason="Choose an uncontrolled, discovered workstation or relay."; return p; }
-                    p.duration=1; p.trace=0; break;
+                if(aura.modifier.stat!=stat||!aura.source.Test(context.At(source)))continue;
+                if(aura.adjacentOnly&&(context.Node==null||!Neighbors(source).Any(n=>n.id==context.Node.id)))continue;
+                if(!aura.modifier.when.Test(context))continue;if(!aura.stack&&!seen.Add(aura.id))continue;yield return aura.modifier;
             }
-            bool free = kind == ToolKind.Bridge || kind == ToolKind.Backdoor || (kind == ToolKind.Hack && node.kind == NodeKind.Relay && Has("ghost") && !Op.firstRelayUsed);
-            p.trace = free ? 0 : (p.trace + p.duration * Scanners * .18f) * (Has("buffer") ? .85f : 1);
-            p.allowed=true; p.reason=Op.task != null ? "Queue after the current task." : "Ready to execute."; return p;
         }
-
-        public bool Execute(ToolKind kind, string id)
+        private float ApplyModifiers(string stat,float basis,RuleContext c)
         {
-            if (!Active) return false;
-            if (Op.task != null)
-            {
-                if (Op.queue.Count >= (Has("chain") ? 3 : 1)) return false;
-                var node = Node(id);
-                // Future neighbors may be queued; execution rechecks every prerequisite.
-                if (node == null || !node.known || (kind == ToolKind.Hack && node.controlled)) return false;
-                if (Op.queue.Any(q => q.kind == kind && q.target == id) || (Op.task.target == id && Op.task.kind == kind)) return false;
-                if (kind == ToolKind.Hack && !Reachable(node) && (!Has("chain") || !Op.links.Any(l => (l.a == id && l.b == Op.task.target) || (l.b == id && l.a == Op.task.target)))) return false;
-                Op.queue.Add(new QueuedTool(kind, id)); Log("QUEUED // " + kind + " : " + node.label); Touch(); return true;
-            }
-            var p = Preview(kind, id);
-            if (!p.allowed) return false;
-            Op.task = new ToolTask { kind=kind, target=id, duration=p.duration, trace=p.trace };
-            Log("RUN // " + kind.ToString().ToUpperInvariant() + " : " + Node(id).label);
-            Touch(); return true;
+            c.Enter();try{foreach(var m in Modifiers(stat,c).OrderBy(m=>m.priority))if(m.when.Test(c))basis=RuleMath.Apply(m.operation,basis,m.value.Evaluate(c));return basis;}finally{c.Leave();}
         }
-
-        public void ClearQueue() { if (!Active) return; Op.queue.Clear(); Touch(); }
-
+        public int EffectiveSecurity(NetNode node)=>node==null?0:Mathf.Max(Mathf.RoundToInt(Stat("minimumSecurity")),Mathf.RoundToInt(Stat("security",Context(node))));
+        private bool Granted(ActionDefinition action)=>action.initiallyAvailable||Catalog.Data.technologies.Any(t=>Has(t.id)&&(!t.special||Equipped(t.id))&&t.grants.Any(a=>a.id==action.id));
+        public IReadOnlyList<ActionInfo> AvailableActions(string targetId=null)
+        {
+            if(!Active)return Array.Empty<ActionInfo>();var node=Node(targetId);
+            return Catalog.Actions.Where(a=>a.operatorTarget==(node==null)&&a.Definition.visible.Test(Context(node,a.Definition))).ToArray();
+        }
+        private IEnumerable<Requirement> Requirements(ActionDefinition action,NetNode node)
+        {
+            foreach(var r in action.requirements)yield return r;
+            foreach(var rule in Definition.actionRules.Where(r=>r.action.id==action.id))foreach(var r in rule.requirements)yield return r;
+            foreach(var goal in Definition.objectives.Where(o=>o.nodeId==node?.id&&o.action?.id==action.id))foreach(var r in goal.actionRequirements)yield return r;
+        }
+        public string ActionTitle(string actionId,string targetId=null)
+        {
+            var action=Catalog.Action(actionId);var objective=Active?Definition.objectives.FirstOrDefault(o=>o.nodeId==targetId&&o.action?.id==actionId):null;
+            return string.IsNullOrEmpty(objective?.actionLabel)?action?.title:objective.actionLabel;
+        }
+        public ToolPreview Preview(string actionId,string targetId=null)
+        {
+            var p=new ToolPreview();var a=Catalog.Action(actionId);var node=Node(targetId);
+            if(!Active||a==null||(!a.operatorTarget&&node==null)){p.reason="Connect to a contract and select a valid action target.";return p;}
+            var c=Context(a.operatorTarget?null:node,a);
+            if(!a.visible.Test(c)){p.reason="This action does not apply to this target.";return p;}
+            if(!Granted(a)){p.reason="Research and equip "+string.Join(" / ",Catalog.Data.technologies.Where(t=>t.grants.Any(x=>x.id==a.id)).Select(t=>t.title))+".";return p;}
+            float limit=a.useLimit.Evaluate(c);if(limit>0&&Counter("uses:"+a.id)>=limit){p.reason="This ability has no uses remaining in this operation.";return p;}
+            foreach(var r in Requirements(a,node))if(!r.condition.Test(c)){p.reason=Catalog.Format(r.message,c);return p;}
+            p.duration=ApplyModifiers("duration",a.duration.Evaluate(c),c);c.Duration=p.duration;
+            float trace=ApplyModifiers("baseTrace",a.baseTrace.Evaluate(c),c);p.trace=ApplyModifiers("trace",trace+p.duration*Stat("tracePressure",c),c);
+            if(a.traceFree||Stat("traceFree",c)>0)p.trace=0;
+            if(!Finite(p.duration)||!Finite(p.trace)||p.duration<0||(!a.operatorTarget&&p.duration==0)||p.trace<0)throw new InvalidOperationException("Invalid duration/trace in action "+a.id);
+            p.allowed=true;p.reason=Op.task!=null&&a.queueable?"Queue after the current task.":"Ready to execute.";return p;
+        }
+        public bool CanQueue(string actionId,string targetId)
+        {
+            var a=Catalog.Action(actionId);var n=Node(targetId);
+            if(!Active||Op.task==null||a==null||!a.queueable||a.operatorTarget||n==null||Op.queue.Count>=QueueCapacity)return false;
+            if(Op.queue.Any(q=>q.actionId==actionId&&q.target==targetId)||(Op.task.actionId==actionId&&Op.task.target==targetId))return false;
+            var c=Context(n,a);if(!a.queueRequirements.All(r=>r.condition.Test(c)))return false;
+            if(a.futureNeighborQueue&&!Reachable(n)&&!(Stat("futureQueue",c)>0&&Neighbors(Node(Op.task.target)).Any(x=>x.id==targetId)))return false;return true;
+        }
+        public bool Execute(string actionId,string targetId=null)
+        {
+            var action=Catalog.Action(actionId);if(!Active||action==null)return false;
+            if(Op.task!=null&&action.queueable&&!action.operatorTarget)
+            {
+                if(!CanQueue(actionId,targetId))return false;Op.queue.Add(new QueuedTool(actionId,targetId));Log("QUEUED // "+ActionTitle(actionId,targetId)+" : "+Node(targetId).label);Touch();return true;
+            }
+            var p=Preview(actionId,targetId);if(!p.allowed)return false;
+            var task=new ToolTask{actionId=actionId,target=action.operatorTarget?null:targetId,duration=p.duration,trace=p.trace};
+            if(action.operatorTarget&&p.duration==0){Op.trace=Mathf.Min(TraceLimit,Op.trace+p.trace);CompleteTask(task);RefreshGraph();Touch();return true;}
+            if(Op.task!=null)return false;Op.task=task;Log("RUN // "+ActionTitle(actionId,targetId)+" : "+(Node(targetId)?.label??"operator"));Touch();return true;
+        }
+        private string LegacyAction(ToolKind kind,string target)
+        {
+            string group=kind.ToString().ToLowerInvariant();var n=Node(target);return Catalog.Data.actions.FirstOrDefault(a=>a.legacyGroup==group&&a.visible.Test(Context(n,a)))?.id??group;
+        }
+        public ToolPreview Preview(ToolKind kind,string id)=>Preview(LegacyAction(kind,id),id);
+        public bool Execute(ToolKind kind,string id)=>Execute(LegacyAction(kind,id),id);
+        public bool Decoy()=>Execute("decoy");
+        public void ClearQueue(){if(!Active)return;Op.queue.Clear();Touch();}
         public void Tick(float delta)
         {
-            if (!Active || Op.paused || delta <= 0) return;
-            delta = Mathf.Min(delta, .5f);
-            Op.elapsed += delta;
-            Op.decoyRemaining = Mathf.Max(0, Op.decoyRemaining - delta);
-            bool suppressionExpired = false;
-            foreach (var node in Op.nodes)
-                if (node.suppressed > 0)
-                {
-                    float old = node.suppressed; node.suppressed = Mathf.Max(0, old - delta);
-                    if (node.suppressed == 0) { suppressionExpired = true; Log("DEFENSE ONLINE // " + node.label); }
-                }
-            if (suppressionExpired) Touch();
-            if (Op.task == null) return; // Planning and reading never add idle trace.
-            var task = Op.task;
-            float step = Mathf.Min(delta, task.duration - task.elapsed);
-            if (Op.decoyRemaining <= 0) Op.trace += step / task.duration * task.trace;
-            task.elapsed += step;
-            if (Op.trace >= 100) { Op.trace=100; Disconnect(true); return; }
-            if (task.elapsed + .0001f < task.duration) return;
-            CompleteTask(task);
-            Op.task = null;
-            RefreshGraph(); Touch();
-            while (Active && Op.task == null && Op.queue.Count > 0)
+            if(!Active||Op.paused||delta<=0||!Finite(delta))return;
+            delta=Mathf.Min(delta,Catalog.Data.career.maxTick);Op.elapsed+=delta;bool expired=false;
+            foreach(var status in Op.statuses.ToArray())
             {
-                var next = Op.queue[0]; Op.queue.RemoveAt(0);
-                if (!Execute(next.kind, next.target)) Log("SKIPPED // Queued action no longer meets its requirements.");
+                status.remaining=Mathf.Max(0,status.remaining-delta);if(status.remaining>0)continue;
+                Op.statuses.Remove(status);expired=true;SyncStatuses();
+                Log("STATUS EXPIRED // "+Catalog.Data.statuses.First(s=>s.id==status.id).title+" : "+(Node(status.target)?.label??"operator"));Dispatch(RuleEvent.StatusExpired,Context(Node(status.target)));
+            }
+            SyncStatuses();if(expired)Touch();var task=Op.task;
+            if(task==null){if(!Op.statuses.Any(s=>s.preventsTrace))Op.trace+=delta*Stat("idleTracePerSecond");CheckTrace();return;}
+            float step=Mathf.Min(delta,task.duration-task.elapsed);
+            if(!Op.statuses.Any(s=>s.preventsTrace))Op.trace+=step/task.duration*task.trace*Stat("traceGrowth");task.elapsed+=step;
+            if(CheckTrace())return;if(task.elapsed+.0001f<task.duration)return;
+            CompleteTask(task);Op.task=null;RefreshGraph();Touch();
+            while(Active&&Op.task==null&&Op.queue.Count>0)
+            {
+                var next=Op.queue[0];Op.queue.RemoveAt(0);if(!Execute(next.actionId,next.target))Log("SKIPPED // Queued action no longer meets its requirements.");
             }
         }
-
+        private bool CheckTrace(){if(Op.trace<TraceLimit)return false;Op.trace=TraceLimit;Disconnect(true);return true;}
         private void CompleteTask(ToolTask task)
         {
-            var node = Node(task.target);
-            switch (task.kind)
+            var action=Catalog.Action(task.actionId);var c=Context(Node(task.target),action);c.Duration=task.duration;
+            AddCounter("uses:"+action.id,1);ApplyEffects(action.effects,c);Dispatch(RuleEvent.ActionCompleted,c);
+            if(ObjectiveComplete)Log("ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available.");
+        }
+        internal void ApplyEffects(IEnumerable<Effect> effects,RuleContext c)
+        {
+            if(effectDepth++==0)effectCount=0;
+            try{if(effectDepth>64)throw new InvalidOperationException("Gameplay trigger depth limit exceeded.");foreach(var effect in effects){if(++effectCount>4096)throw new InvalidOperationException("Gameplay effect execution budget exceeded.");effect.Apply(c);}}
+            finally{effectDepth--;}
+        }
+        private void Dispatch(RuleEvent evt,RuleContext c)
+        {
+            var triggers=Catalog.Data.triggers.Concat(Catalog.Data.technologies.Where(t=>Has(t.id)&&(!t.special||Equipped(t.id))).SelectMany(t=>t.triggers)).ToArray();
+            foreach(var t in triggers)
             {
-                case ToolKind.Scan:
-                    node.scanned = true; Reveal(node, Has("wide") ? 3 : 2);
-                    Log("SCAN COMPLETE // New routes mapped around " + node.label + "."); break;
-                case ToolKind.Hack:
-                case ToolKind.Bridge:
-                case ToolKind.Backdoor:
-                    node.controlled=true; Op.lastControlled=node.id;
-                    if (node.kind == NodeKind.Relay) Op.firstRelayUsed=true;
-                    if (task.kind == ToolKind.Backdoor) Op.backdoorUsed=true;
-                    Reveal(node, Has("passive") && node.kind == NodeKind.Relay ? 3 : 1);
-                    Log("CONTROL ESTABLISHED // " + node.label + ".");
-                    if (node.kind == NodeKind.SecurityHub) ApplyCascade();
-                    break;
-                case ToolKind.Download:
-                    node.collected=true;
-                    Log(node.objective ? "OBJECTIVE SECURED // " + node.label + "." : "OPTIONAL ARCHIVE // +120 cr / +15 XP on successful extraction.");
-                    break;
-                case ToolKind.Disrupt:
-                    node.suppressed=60;
-                    Log("DEFENSE SUPPRESSED // " + node.label + " offline for 60 seconds.");
-                    if (node.kind == NodeKind.SecurityHub) ApplyCascade(); break;
-            }
-            if (ObjectiveComplete) Log("ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available.");
-        }
-
-        private void ApplyCascade()
-        {
-            if (!Has("cascade") || Op.cascadeApplied) return;
-            foreach (var wall in Op.nodes.Where(n => n.kind == NodeKind.Firewall)) wall.security=Mathf.Max(1, wall.security-2);
-            Op.cascadeApplied=true; Log("SYSTEM CASCADE // Firewall security reduced across the network.");
-        }
-
-        public bool Decoy()
-        {
-            if (!Active || !Equipped("decoy") || Op.decoyUsed) return false;
-            Op.trace=Mathf.Max(0, Op.trace-15); Op.decoyRemaining=20; Op.decoyUsed=true;
-            Log("DECOY ACTIVE // -15 trace. Trace growth suspended for 20 seconds."); Touch(); return true;
-        }
-
-        private void Reveal(NetNode source, int radius)
-        {
-            var visited = new HashSet<string> { source.id };
-            var frontier = new List<NetNode> { source }; source.known=true;
-            for (int i=0; i<radius; i++)
-            {
-                var next = new List<NetNode>();
-                foreach (var node in frontier)
-                    foreach (var neighbor in Neighbors(node))
-                        if (visited.Add(neighbor.id)) { neighbor.known=true; next.Add(neighbor); }
-                frontier=next;
+                if(t.on!=evt||(!string.IsNullOrEmpty(t.onceKey)&&Counter(t.onceKey)>0)||!t.when.Test(c))continue;
+                if(!string.IsNullOrEmpty(t.onceKey))AddCounter(t.onceKey,1);ApplyEffects(t.effects,c);
             }
         }
-
+        public int Counter(string key)=>Op?.counters.FirstOrDefault(x=>x.key==key)?.value??0;
+        internal void AddCounter(string key,int amount){var item=Op.counters.FirstOrDefault(x=>x.key==key);if(item==null)Op.counters.Add(new CounterState{key=key,value=amount});else item.value+=amount;}
+        public float StatusRemaining(string id,string target=null)=>Op?.statuses.Where(s=>s.id==id&&s.target==target).Select(s=>s.remaining).DefaultIfEmpty(0).Max()??0;
+        internal void ApplyStatus(StatusDefinition status,string target,float duration)
+        {
+            if(duration<=0||!Finite(duration))throw new InvalidOperationException("Invalid status duration for "+status.id);
+            var state=Op.statuses.FirstOrDefault(s=>s.id==status.id&&s.target==target);
+            if(state==null){state=new StatusState{id=status.id,target=target,preventsTrace=status.preventsTrace,disablesDefense=status.disablesDefense};Op.statuses.Add(state);}state.remaining=duration;SyncStatuses();
+        }
+        private void SyncStatuses(){foreach(var n in Op.nodes)n.suppressed=Op.statuses.Where(s=>s.target==n.id&&s.disablesDefense).Select(s=>s.remaining).DefaultIfEmpty(0).Max();}
+        internal IEnumerable<NetNode> Select(NodeSelector selector,RuleContext c)
+        {
+            IEnumerable<NetNode> nodes;
+            switch(selector.scope)
+            {
+                case SelectionScope.All:nodes=Op.nodes;break;
+                case SelectionScope.Neighbors:nodes=Neighbors(c.Node);break;
+                case SelectionScope.Entry:nodes=new[]{Node(Op.entryNode)};break;
+                case SelectionScope.Named:nodes=new[]{Node(selector.nodeId)};break;
+                default:nodes=new[]{c.Node};break;
+            }
+            return nodes.Where(n=>n!=null&&selector.filter.Test(c.At(n)));
+        }
+        internal void SetState(NetNode node,NodeState state,bool value,RuleContext context)
+        {
+            switch(state)
+            {
+                case NodeState.Known:node.known=value;break;
+                case NodeState.Scanned:node.scanned=value;break;
+                case NodeState.Collected:node.collected=value;break;
+                case NodeState.Objective:node.objective=value;break;
+                case NodeState.Bonus:node.bonus=value;break;
+                case NodeState.Controlled:
+                    bool changed=node.controlled!=value;node.controlled=value;if(value&&changed){Op.lastControlled=node.id;Dispatch(RuleEvent.ControlEstablished,context.At(node));}break;
+                default:throw new InvalidOperationException("This state is computed and cannot be assigned: "+state);
+            }
+        }
+        internal void Reveal(NetNode source,int radius)
+        {
+            if(source==null)return;var visited=new HashSet<string>{source.id};var frontier=new List<NetNode>{source};source.known=true;
+            for(int i=0;i<radius;i++){var next=new List<NetNode>();foreach(var n in frontier)foreach(var neighbor in Neighbors(n))if(visited.Add(neighbor.id)){neighbor.known=true;next.Add(neighbor);}frontier=next;}
+        }
         public void RefreshGraph()
         {
-            if (!Active) return;
-            // Only discovered facts enter Graph Explorer. Hidden routes cannot leak through path queries.
-            KnownGraph=new GraphDocument("operation-" + Op.contractId, Job.title);
-            foreach (var n in Op.nodes.Where(n => n.known))
-                KnownGraph.UpsertNode(new GraphNodeRecord(n.id, n.kind.ToString(), n.label,
-                    new Dictionary<string, GraphValue> { ["controlled"]=GraphValue.From(n.controlled), ["objective"]=GraphValue.From(n.objective) }));
-            foreach (var link in Op.links.Where(l => Node(l.a).known && Node(l.b).known))
+            if(!Active)return;KnownGraph=new GraphDocument("operation-"+Op.contractId,Job.title);
+            foreach(var n in Op.nodes.Where(n=>n.known))KnownGraph.UpsertNode(new GraphNodeRecord(n.id,n.kind.ToString(),n.label,new Dictionary<string,GraphValue>{["controlled"]=GraphValue.From(n.controlled),["objective"]=GraphValue.From(n.objective)}));
+            foreach(var link in Op.links.Where(l=>Node(l.a).known&&Node(l.b).known))
             {
-                KnownGraph.UpsertEdge(new GraphEdgeRecord(link.a + ">" + link.b, link.a, link.b, "network"));
-                KnownGraph.UpsertEdge(new GraphEdgeRecord(link.b + ">" + link.a, link.b, link.a, "network"));
+                KnownGraph.UpsertEdge(new GraphEdgeRecord(link.a+">"+link.b,link.a,link.b,"network"));KnownGraph.UpsertEdge(new GraphEdgeRecord(link.b+">"+link.a,link.b,link.a,"network"));
             }
-            Scene=new GraphScene(KnownGraph, new GraphSchema());
-            foreach (var n in Op.nodes.Where(n => n.known))
-            { Scene.Nodes[n.id].Position=new Vector3(n.x, n.y, 0); Scene.Nodes[n.id].Pinned=true; }
+            Scene=new GraphScene(KnownGraph,new GraphSchema());foreach(var n in Op.nodes.Where(n=>n.known)){Scene.Nodes[n.id].Position=n.position;Scene.Nodes[n.id].Pinned=true;}
         }
-
-        public GraphPathResult Route(string id, bool controlledOnly = false)
+        public GraphPathResult Route(string id,bool controlledOnly=false)=>!Active||Scene==null?null:GraphPathfinder.Find(Scene,Op.entryNode,id,controlledOnly?e=>Node(e.From).controlled&&(Node(e.To).controlled||e.To==id):(Func<IGraphEdge,bool>)null);
+        public OperationReport Disconnect(bool caught=false)
         {
-            if (!Active || Scene == null) return null;
-            return GraphPathfinder.Find(Scene, "home", id, controlledOnly ? e => Node(e.From).controlled && (Node(e.To).controlled || e.To == id) : (Func<IGraphEdge,bool>)null);
-        }
-
-        public OperationReport Disconnect(bool caught = false)
-        {
-            if (!Active) return null;
-            bool success = !caught && ObjectiveComplete;
-            var report = new OperationReport { title=Job.title, company=Job.company, trace=Op.trace, success=success, day=Career.day,
-                verdict=success ? "CONTRACT COMPLETE" : caught ? "CONNECTION ISOLATED" : "CONTRACT ABORTED",
-                narrative=success ? Job.aftermath : caught ? "The defender isolated your session. Equipment and research are safe. The contract can be retried with a different route." : "You disconnected before securing every required file. Your equipment and research are safe; the contract remains available.",
-                log=new List<string>(Op.log), bonusFiles=Op.nodes.Count(n => n.bonus && n.collected) };
-            if (success)
+            if(!Active)return null;bool success=!caught&&ObjectiveComplete;
+            var outcome=caught?OperationOutcome.Caught:success?OperationOutcome.Delivered:OperationOutcome.Aborted;
+            var policy=Catalog.Data.career.outcomes.Single(p=>p.outcome==outcome);
+            var report=new OperationReport{title=Job.title,company=Job.company,trace=Op.trace,success=success,day=Career.day,verdict=policy.verdict,narrative=Catalog.Format(policy.narrative,Context()),log=new List<string>(Op.log),bonusFiles=Op.nodes.Count(n=>n.bonus&&n.collected)};
+            if(policy.bankRewards)
             {
-                bool quiet = Op.trace < Job.quietLimit;
-                report.credits=Job.credits+report.bonusFiles*120+(quiet ? 150 : 0);
-                report.xp=Job.xp+Mathf.Min(30, report.bonusFiles*15)+(quiet ? 10 : 0);
-                Career.credits+=report.credits; Career.xp+=report.xp; Career.totalEarnedXp+=report.xp; Career.jobs++;
-                if (!Job.recurring && !Career.completed.Contains(Job.id)) Career.completed.Add(Job.id);
-                Career.news.Insert(0, "DAY " + Career.day.ToString("00") + " // " + Job.aftermath);
-                Career.day++;
+                var c=Context();foreach(var reward in Catalog.Data.rewards.rules)if(reward.when.Test(c)){report.credits+=Mathf.RoundToInt(reward.credits.Evaluate(c));report.xp+=Mathf.RoundToInt(reward.xp.Evaluate(c));}
+                Career.credits+=report.credits;Career.xp+=report.xp;Career.totalEarnedXp+=report.xp;
             }
-            Career.reports.Insert(0, report); if (Career.reports.Count > 20) Career.reports.RemoveAt(20);
-            LastReport=report; Career.operation=null; KnownGraph=null; Scene=null; Touch(); return report;
+            if(policy.bankLore)foreach(var n in Op.nodes.Where(n=>n.bonus&&n.collected)){var fragment=LoreContent.Find(Job,n.loreId);if(fragment!=null&&!Career.lore.Any(f=>f.id==fragment.id))Career.lore.Add(fragment);}
+            if(policy.recordCompletion)
+            {
+                Career.jobs++;
+                if(!Job.recurring&&!Career.completed.Contains(Job.id))Career.completed.Add(Job.id);
+                Career.news.Insert(0,"DAY "+Career.day.ToString("00")+" // "+Job.aftermath);
+            }
+            Career.day+=policy.dayAdvance;
+            Career.reports.Insert(0,report);if(Career.reports.Count>Catalog.Data.career.reportLimit)Career.reports.RemoveRange(Catalog.Data.career.reportLimit,Career.reports.Count-Catalog.Data.career.reportLimit);
+            LastReport=report;Career.operation=null;KnownGraph=null;Scene=null;Touch();return report;
         }
-
         public bool BuyTech(string id)
         {
-            var tech=GameContent.FindTech(id);
-            if (Active || tech == null || Has(id) || Career.xp < tech.cost || !tech.parents.All(Has)) return false;
-            Career.xp-=tech.cost; Career.unlocked.Add(id);
-            if (tech.special && Career.equipped.Count < Slots) Career.equipped.Add(id);
-            Touch(); return true;
+            var tech=Catalog.Technology(id);
+            if((Active&&!Catalog.Data.career.researchDuringOperations)||tech==null||Has(id)||Career.xp<tech.cost||!tech.parents.All(t=>Has(t.id)))return false;
+            Career.xp-=tech.cost;Career.unlocked.Add(id);if(tech.special&&Career.equipped.Count<Slots)Career.equipped.Add(id);Touch();return true;
         }
-
         public bool ToggleEquip(string id)
         {
-            if (Active || !Has(id) || GameContent.FindTech(id)?.special != true) return false;
-            if (Career.equipped.Contains(id)) Career.equipped.Remove(id);
-            else if (Career.equipped.Count < Slots) Career.equipped.Add(id);
-            else return false;
-            Touch(); return true;
+            if((Active&&!Catalog.Data.career.equipDuringOperations)||!Has(id)||Catalog.Technology(id)?.special!=true)return false;
+            if(Career.equipped.Contains(id))Career.equipped.Remove(id);else if(Career.equipped.Count<Slots)Career.equipped.Add(id);else return false;Touch();return true;
         }
-
         public bool RefundResearch()
         {
-            if (Active) return false;
-            Career.xp+=Career.unlocked.Sum(id => GameContent.FindTech(id)?.cost ?? 0);
-            Career.unlocked=new List<string> { "base" }; Career.equipped.Clear(); Touch(); return true;
+            if(Active&&!Catalog.Data.career.researchDuringOperations)return false;var initial=Catalog.Data.career.initialTechnologies.Select(t=>t.id).ToArray();
+            Career.xp+=Mathf.FloorToInt(Career.unlocked.Except(initial).Sum(id=>Catalog.Technology(id).cost)*Catalog.Data.career.refundFraction);Career.unlocked=initial.ToList();Career.equipped.Clear();Touch();return true;
         }
-
-        public int UpgradePrice(int type)
+        public int UpgradePrice(string id){var h=Catalog.Data.hardware.FirstOrDefault(x=>x.id==id);var level=Career.Level(id);return h!=null&&level<h.tiers.Length?h.tiers[level].price:0;}
+        public bool Upgrade(string id)
         {
-            int level = type == 0 ? Career.cpu : type == 1 ? Career.bandwidth : Career.memory;
-            return type == 2 ? (level == 0 ? 600 : 1400) : new[] { 400, 900, 1600, 0 }[Mathf.Clamp(level, 0, 3)];
+            var h=Catalog.Data.hardware.FirstOrDefault(x=>x.id==id);
+            if((Active&&!Catalog.Data.career.hardwareDuringOperations)||h==null||Career.Level(id)>=h.tiers.Length||Career.credits<UpgradePrice(id))return false;
+            Career.credits-=UpgradePrice(id);Career.SetLevel(id,Career.Level(id)+1);Touch();return true;
         }
-
-        public bool Upgrade(int type)
-        {
-            if (Active || type < 0 || type > 2) return false;
-            int level=type == 0 ? Career.cpu : type == 1 ? Career.bandwidth : Career.memory;
-            if (level >= (type == 2 ? 2 : 3)) return false;
-            int price=UpgradePrice(type); if (Career.credits < price) return false;
-            Career.credits-=price;
-            if (type == 0) Career.cpu++; else if (type == 1) Career.bandwidth++; else Career.memory++;
-            Touch(); return true;
-        }
-
-        public void Log(string message)
-        {
-            if (!Active) return;
-            int min=(int)Op.elapsed/60, sec=(int)Op.elapsed%60;
-            Op.log.Add(min.ToString("00") + ":" + sec.ToString("00") + "  " + message);
-            if (Op.log.Count > 100) Op.log.RemoveAt(0);
-        }
-
-        private void Touch() { Revision++; Changed?.Invoke(); }
+        public int UpgradePrice(int index)=>index>=0&&index<Catalog.Hardware.Count?UpgradePrice(Catalog.Hardware[index].id):0;
+        public bool Upgrade(int index)=>index>=0&&index<Catalog.Hardware.Count&&Upgrade(Catalog.Hardware[index].id);
+        public string RewardDescription=>Catalog.Format("Below "+Job?.quietLimit+"% trace: +{quietCredits} cr / +{quietXp} XP\nOptional archives: +{archiveCredits} cr / +{archiveXp} XP each (XP capped at +{archiveXpCap})",Context());
+        public string ArchiveDescription=>Catalog.Format("+{archiveCredits} cr / +{archiveXp} XP per archive; up to +{archiveXpCap} archive XP.",Context());
+        public void Log(string message){if(!Active)return;int min=(int)Op.elapsed/60,sec=(int)Op.elapsed%60;Op.log.Add(min.ToString("00")+":"+sec.ToString("00")+"  "+message);if(Op.log.Count>Catalog.Data.career.logLimit)Op.log.RemoveAt(0);}
+        private void Touch(){Revision++;Changed?.Invoke();}
     }
 
     [Unity.Scripting.LifecycleManagement.NoAutoStaticsCleanup]
     public static class CareerStorage
     {
-        public static string SavePath => Path.Combine(Application.persistentDataPath, "career-v1.json");
-        public static string Warning { get; private set; }
-
-        public static Career Load(string path = null)
+        public static string SavePath=>Path.Combine(Application.persistentDataPath,"career-v2.json");
+        public static string Warning {get;private set;}
+        [Serializable] private sealed class SaveHeader { public int version; }
+        public static Career Load(string path=null,GameCatalog catalog=null)
         {
-            path ??= SavePath; Warning=null;
-            if (!File.Exists(path)) return new Career();
-            try
+            catalog??=GameCatalog.Default;path??=SavePath;Warning=null;if(!File.Exists(path))return catalog.CreateCareer();
+            Career Read(string p)
             {
-                var career=JsonUtility.FromJson<Career>(File.ReadAllText(path));
-                if (career == null || career.version != 1) throw new InvalidDataException("Unsupported career save.");
-                return career;
+                string json=File.ReadAllText(p);var header=JsonUtility.FromJson<SaveHeader>(json);
+                var career=JsonUtility.FromJson<Career>(json);if(career==null||header==null||header.version!=2)throw new InvalidDataException("Unsupported career save.");return new GameSimulation(catalog,career).Career;
             }
-            catch (Exception ex)
+            try{return Read(path);}
+            catch(InvalidDataException ex){Warning=ex.Message;throw;}
+            catch(Exception ex)
             {
-                Warning="The career save could not be read. A backup was preserved. " + ex.Message;
-                try { File.Copy(path, path + ".unreadable-" + DateTime.UtcNow.ToString("yyyyMMddHHmmss"), true); } catch { }
-                if (File.Exists(path+".bak"))
-                    try { return JsonUtility.FromJson<Career>(File.ReadAllText(path+".bak")) ?? new Career(); } catch { }
-                return new Career();
+                Warning="The career save could not be read. "+ex.Message;
+                try{File.Copy(path,path+".unreadable-"+DateTime.UtcNow.ToString("yyyyMMddHHmmss"),true);}catch{}
+                if(File.Exists(path+".bak"))try{return Read(path+".bak");}catch(Exception backup){Warning+=" Backup: "+backup.Message;}
+                var fresh=catalog.CreateCareer();fresh.saveBlocked=true;return fresh;
             }
         }
-
-        public static bool Reset(string path = null)
+        public static bool Reset(string path=null){var career=GameCatalog.Default.CreateCareer();return Save(career,path)&&Save(career,path);}
+        public static bool Save(Career career,string path=null,GameCatalog catalog=null)
         {
-            // Replace twice so recovery cannot bring back the previous career.
-            var career=new Career();
-            return Save(career,path)&&Save(career,path);
-        }
-
-        public static bool Save(Career career, string path = null)
-        {
-            path ??= SavePath;
+            path??=SavePath;if(career.saveBlocked){Warning="Autosave is disabled to preserve an unreadable career. Use Reset Save to start a new one.";return false;}
             try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
-                File.WriteAllText(path+".tmp", JsonUtility.ToJson(career, true));
-                if (File.Exists(path)) File.Replace(path+".tmp", path, path+".bak");
-                else File.Move(path+".tmp", path);
-                Warning=null; return true;
+                GameSimulation.ValidateCareer(career,catalog??GameCatalog.Default);Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path)));File.WriteAllText(path+".tmp",JsonUtility.ToJson(career,true));
+                if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);Warning=null;return true;
             }
-            catch (Exception ex) { Warning="Autosave could not write: " + ex.Message; Debug.LogWarning(Warning); return false; }
+            catch(Exception ex){Warning="Autosave could not write: "+ex.Message;Debug.LogWarning(Warning);return false;}
         }
     }
 }

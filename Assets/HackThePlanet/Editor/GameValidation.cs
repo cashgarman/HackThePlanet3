@@ -26,6 +26,22 @@ namespace HackThePlanet.Editor
             if(!sim.Execute(ToolKind.Hack,id))throw new InvalidOperationException("Cannot hack "+id+" / "+sim.Preview(ToolKind.Hack,id).reason);
             FinishTask(sim);
         }
+        public static void Traverse(GameSimulation sim,string target)
+        {
+            var parent=new Dictionary<string,string>();
+            var queue=new Queue<string>();
+            foreach(var node in sim.Op.nodes.Where(n=>n.controlled)){queue.Enqueue(node.id);parent[node.id]=null;}
+            while(queue.Count>0&&!parent.ContainsKey(target))
+            {
+                var id=queue.Dequeue();
+                foreach(var node in sim.Neighbors(sim.Node(id)))
+                    if(!parent.ContainsKey(node.id)){parent[node.id]=id;queue.Enqueue(node.id);}
+            }
+            if(!parent.ContainsKey(target))throw new InvalidOperationException("No route to "+target);
+            var path=new List<string>();
+            for(var id=target;id!=null;id=parent[id])path.Add(id);
+            path.Reverse();foreach(var id in path)Hack(sim,id);
+        }
         private static void Recover(GameSimulation sim,string id)
         {
             if(!sim.Execute(ToolKind.Download,id))throw new InvalidOperationException("Cannot recover "+id+" / "+sim.Preview(ToolKind.Download,id).reason);
@@ -37,11 +53,12 @@ namespace HackThePlanet.Editor
             results.Clear();string dir=Path.Combine(Directory.GetParent(Application.dataPath).FullName,"Artifacts");Directory.CreateDirectory(dir);
             try
             {
+                NetworkValidation.Run(Check);
                 var sim=new GameSimulation();
                 Check(!sim.Start(GameContent.Story[1]),"Locked contracts cannot start.");
                 Check(sim.Start(GameContent.Story[0]),"Starting contract connects.");
-                Check(sim.Op.nodes.Count==25,"Every operation has 25 stable systems.");
-                Check(sim.KnownGraph.Nodes.Count==3,"Known Graph Explorer document excludes undiscovered systems.");
+                Check(sim.Op.nodes.Count==32,"First operation has 32 stable systems.");
+                Check(sim.KnownGraph.Nodes.Count==2,"Known Graph Explorer document excludes undiscovered systems.");
                 Check(!sim.Route("n22").IsReachable,"Shortest-path queries cannot reveal unknown routes.");
                 Check(!sim.Execute(ToolKind.Hack,"n22"),"Remote unknown targets cannot be hacked.");
                 Check(!sim.Execute(ToolKind.Download,"n2"),"Recovery requires ownership and an eligible file.");
@@ -95,11 +112,11 @@ namespace HackThePlanet.Editor
                 foreach(var job in GameContent.Story)
                 {
                     Check(campaign.Start(job),"Campaign unlock / "+job.title);
-                    Hack(campaign,"n2");Hack(campaign,"n6");Hack(campaign,"n10");
-                    if(job.kind==JobKind.Investigate){Hack(campaign,"n9");Recover(campaign,"n9");}
-                    Hack(campaign,"n14");Hack(campaign,"n18");Hack(campaign,"n22");Recover(campaign,"n22");
-                    if(job.kind==JobKind.Alter){Hack(campaign,"n15");Hack(campaign,"n16");Hack(campaign,"n20");Recover(campaign,"n20");}
-                    if(job.kind==JobKind.Investigate){Hack(campaign,"n15");Hack(campaign,"n19");Recover(campaign,"n19");}
+                    var generated=NetworkGenerator.Generate(job,campaign.Career);
+                    foreach(var id in generated.approaches.Last().Skip(1))Hack(campaign,id);
+                    if(job.kind==JobKind.Disrupt)Traverse(campaign,"n14");
+                    foreach(var target in campaign.Op.nodes.Where(n=>n.objective&&n.kind!=NodeKind.SecurityHub).ToArray())
+                    {Traverse(campaign,target.id);Recover(campaign,target.id);}
                     Check(campaign.Active&&campaign.ObjectiveComplete,"All required objectives viable / "+job.title);
                     var result=campaign.Disconnect();Check(result.success,"Career delivery / "+job.title+" / "+result.trace.ToString("0.0")+"% trace");
                     if(!campaign.Has("quiet"))campaign.BuyTech("quiet");

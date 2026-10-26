@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: ContractDefinition-paper-trail
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: paper-trail
+  title: Paper Trail
+  description: Morrow's automated debt system has been charging a neighborhood twice. Correct the ledger and its backup mirror so the change survives the next sync.
+  company: {fileID: 11400000, guid: a38585048094c004fada0f97f97a1fce, type: 2}
+  network: {fileID: 11400000, guid: 91e48806285ad734ca698b8c5a18124a, type: 2}
+  client: JUNE // public-interest archivist
+  tag: RECORD ALTERATION
+  objective: Correct Research vault AND Backup mirror.
+  condition: 'Synchronize both records. Below 65% trace: +10 XP / +150 cr.'
+  aftermath: Thousands of duplicate balances disappear. Morrow replaces a maintenance identity; its perimeter gets a little stronger.
+  displayKind: 1
+  recurring: 0
+  requiredWins: 1
+  quietLimit: 65
+  credits:
+    rid: 213507065135235671
+  xp:
+    rid: 213507065135235672
+  difficulty:
+    rid: 213507065135235673
+  seed:
+    rid: 213507065135235674
+  objectives:
+  - nodeId: n22
+    label: 
+    actionLabel: Correct record
+    action: {fileID: 11400000, guid: 4fe544649661bc44595b63ddec95ca4b, type: 2}
+    complete:
+      rid: 213507065135235675
+    actionRequirements: []
+  - nodeId: n20
+    label: 
+    actionLabel: Correct record
+    action: {fileID: 11400000, guid: 4fe544649661bc44595b63ddec95ca4b, type: 2}
+    complete:
+      rid: 213507065135235676
+    actionRequirements: []
+  actionRules: []
+  lore:
+  - id: paper-trail/0
+    title: Rounding errors
+    company: MORROW FINANCIAL
+    contract: Paper Trail
+    text: 'MORROW / INCIDENT 441: Duplicate balances correlate exactly with the migration date. Customer support has filed nineteen matching reports. The classification remains ''individual payment dispute''.'
+  - id: paper-trail/1
+    title: The second signature
+    company: MORROW FINANCIAL
+    contract: Paper Trail
+    text: 'Ledger maintenance memo: Both primary and mirror require correction. An automated reconciliation job restores whichever record carries the older authorization stamp. A single correction will disappear overnight.'
+  - id: paper-trail/2
+    title: A letter never sent
+    company: MORROW FINANCIAL
+    contract: Paper Trail
+    text: 'Unsent message from a collections clerk: I can see the charge twice. I can see the payment once. The script tells me to say the account is accurate. I am keeping copies of everything.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235671
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 850
+    - rid: 213507065135235672
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 65
+    - rid: 213507065135235673
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507065135235674
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 222
+    - rid: 213507065135235675
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507065135235676
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3

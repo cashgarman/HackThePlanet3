@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62601865bd13fb44892f496feaa5dfc, type: 3}
+  m_Name: HardwareDefinition-bandwidth
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.HardwareDefinition
+  id: bandwidth
+  title: Fiber uplink
+  description: Improves performance for every operation.
+  category: BANDWIDTH
+  statLabel: TRANSFER SPEED
+  displayedStat: transferSpeed
+  tiers:
+  - price: 400
+    modifiers:
+    - stat: transferSpeed
+      priority: 0
+      operation: 0
+      when:
+        rid: 213507065135235759
+      value:
+        rid: 213507065135235760
+  - price: 900
+    modifiers:
+    - stat: transferSpeed
+      priority: 0
+      operation: 0
+      when:
+        rid: 213507065135235761
+      value:
+        rid: 213507065135235762
+  - price: 1600
+    modifiers:
+    - stat: transferSpeed
+      priority: 0
+      operation: 0
+      when:
+        rid: 213507065135235763
+      value:
+        rid: 213507065135235764
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235759
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235760
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.3
+    - rid: 213507065135235761
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235762
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.3
+    - rid: 213507065135235763
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235764
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.3

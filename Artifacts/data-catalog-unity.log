@@ -1,0 +1,907 @@
+VBCSCompilerPreWarmer: watching VBCSCompiler (PID 78816)
+VBCSCompilerPreWarmer: pre-warm launched (dotnet PID 79712)
+VBCSCompiler prewarm took 28.40 ms
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from 'trunk' branch; Version is '7000.0.0a11 (fac09b31727f) revision 16433307'; Using compiler version '195136248'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-cashg" at "2026-10-26T10:31:59.8385845Z"
+OS: 'Windows 11  (10.0.26200) Professional' Language: 'en' Physical Memory: 65451 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-10-26T10:31:59Z
+
+COMMAND LINE ARGUMENTS:
+D:\Unity\7000.0.0a11\Editor\Unity.exe
+-batchmode
+-projectPath
+I:\HackThePlanet\HackThePlanet
+-executeMethod
+HackThePlanet.Editor.DefaultGameplayAssets.SaveCatalog
+-quit
+-logFile
+I:\HackThePlanet\HackThePlanet\Artifacts\data-catalog-unity.log
+Successfully changed project path to: I:\HackThePlanet\HackThePlanet
+I:/HackThePlanet/HackThePlanet
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-remapper-allocator-initial-capacity=32768"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-entities-archetype-allocator-budget=16777216"
+    "memorysetup-entities-query-allocator-budget=16777216"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=1"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.
+Player connection [78060]  Target information:
+
+Player connection [78060]  * "[IP] 172.25.160.1 [Port] 55504 [ProcessId] 25240 [Flags] 130 [Guid] 711292764 [EditorId] 711292764 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-CD8FRRB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [78060]  * "[IP] 192.168.1.71 [Port] 55504 [ProcessId] 25240 [Flags] 130 [Guid] 711292764 [EditorId] 711292764 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-CD8FRRB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [78060] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [78060] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 7052, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.19.0'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-cashg"
+[Licensing::IpcConnector] LicenseClient-cashg channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-cashg-1.19.0 doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 79036)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-cashg-1.19.0" at "2026-10-26T10:32:00.1154669Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 79036, path: "D:/Unity/7000.0.0a11/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Package Manager] Connected to IPC stream "Upm-25240" after 0.4 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.19.0+4cc3dda
+  Session Id:              4e35f02eebcb4737a924e2e928c14b0b
+  Correlation Id:          6e7483d822cb8579e2a6b3b1866cb545
+  External correlation Id: 4504751406450602716
+  Machine Id:              IqTSMm/g9VUki0yVFmkneWb+DS4=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-cashg-1.19.0" (connect: 0.10s, validation: 0.26s, handshake: 0.04s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-cashg-1.19.0-notifications" at "2026-10-26T10:32:00.4141005Z"
+[Licensing::Module] Connected to LicensingClient (PId: 79036, launch time: 0.01, total connection time: 0.40s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 14873-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.59s
+[Licensing::Module] Licensing is initialized (took 0.04s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+Initialising UDS system complete:
+  - System type: Client
+  - Resource namespace: 22393187e1727b3b125091d21e82f6be
+  - Shared memory size: 1073741824
+  - Command buffer id: 1052576
+  - Command buffer size: 8192
+  - Hashmap size: 4194304
+  - Service connected: false
+Launching Unity Data Store - D:/Unity/7000.0.0a11/Editor/Data/Tools/Unity.DataStore.exe 
+Unity Data Store artifact dir = Library/DataStore, working dir = I:/HackThePlanet/HackThePlanetUnity Data Store running and initialised
+[Physics::Module] Selected backend (deferred post-plugins).
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 7000.0.0a11 (fac09b31727f)
+[EntityIdStore] init: VM path (explicit commit), pageSize=4096, blockCount=262144, entitiesPerBlock=1024, blocksPerSlotPage=0, slots reserved=4294967296 bytes
+[Subsystems] Discovering subsystems at path D:/Unity/7000.0.0a11/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path I:/HackThePlanet/HackThePlanet/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 3080 (ID=0x2206)
+    Vendor:          NVIDIA
+    VRAM:            10053 MB
+    App VRAM Budget: 9285 MB
+    Driver:          32.0.16.1060
+Initialize CoreCLR
+Initialized ClrProfiler
+CodeReloadManager initialized
+Registering Unity assembly bundles:
+	D:/Unity/7000.0.0a11/Editor/Data/Managed/UnityEngine/modules-assemblybundle.json
+	D:/Unity/7000.0.0a11/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/assemblybundle.json
+	D:/Unity/7000.0.0a11/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/modules-assemblybundle.json
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Loaded Assemblies : TypeCache.Refresh : performing complete scan for 1-st domain.
+Loaded Assemblies : TypeCache.Refresh : scanning 176 assemblies
+Loaded Assemblies : TypeCache.Refresh : initializing pseudo-attribute cache
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Cecil'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Cecil.Mdb'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Cecil.Pdb'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.WindowsStandalone.Extensions'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UmbraModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.ShaderPreprocessorModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.ShaderCompilationModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.ShaderBuildSettingsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.GraphicsStateCollectionSerializerModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.GIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.CoreBusinessMetricsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.AssetComplianceModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.XRModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.VFXModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UIElementsSamplesModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UIAutomationModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.SpriteShapeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.U2DModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TextCoreTextEngineModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TextCoreFontEngineModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.SpriteMaskModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.SketchUpModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.ShaderVariantAnalyserModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.SceneTemplateModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.SafeModeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.GenericRemoteModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.PresetsUIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.MediaModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.VideoModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.LightingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.JobsProfilerModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.QuickInstallModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.GridModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.GraphViewModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.EmbreeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TilemapModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.DiagnosticsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.ContentLoadModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.ClothModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.SceneViewModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.BuildProfileModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.BuildAnalysisModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TerrainModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TextRenderingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.Physics2DModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.AIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.AdaptivePerformanceModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.DeviceSimulatorModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.AccessibilityModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.VectorGraphicsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UIBuilderModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UIToolkitAuthoringModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.AnimationWindowModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.PhysicsCore2DModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TimelineFoundationModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.SmartStringsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.PropertiesModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.ProjectAuditorModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.PhysicsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.MathematicsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.LocalizationRuntimeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UIElementsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.GraphToolkitModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.MultiplayerModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.HierarchyModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.QuickSearchModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.PlayModeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.EditorToolbarModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.GridAndSnapModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UnityConnectModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.CommandStateObserverModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.BurstModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.AcceleratorClientModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TreeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.CoreModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UpbUnityAllocModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UmbraModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TetgenModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ShaderVariantAnalyticsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.PhysicsBackendPhysXModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.HotReloadModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.GraphicsStateCollectionSerializerModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.GIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.InputModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.XRModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.WindModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.VehiclesModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityConsentModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.U2DRuntimeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.SpriteShapeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TerrainPhysicsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.StreamingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.SpriteMaskModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.GameCenterModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ScreenCaptureModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.VirtualTexturingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.MetalFXModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.RenderAs2DModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.DirectorModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ParticleSystemModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.NVIDIAModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityWebRequestWWWModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityWebRequestAudioModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityWebRequestAssetBundleModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityWebRequestTextureModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.LocalizationModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.IdentifiersModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.VideoModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.VFXModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TerrainModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TilemapModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.GridModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.CrashReportingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ClusterRendererModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ClusterInputModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ClothModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AssetBundleModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.Physics2DModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.PerformanceReportingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityAnalyticsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AMDModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityConnectModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AdaptivePerformanceModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.SubsystemsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.MarshallingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AndroidJNIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityAnalyticsCommonModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.PhysicsCore2DModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TLSModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TimelineFoundationModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ScriptingReflectionModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.MultiplayerModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.LocalizationRuntimeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityWebRequestModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.SmartStringsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ContentLoadModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.HierarchyModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.EntitiesPropertiesModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.InsightsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UnityCurlModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.CommandStateObserverModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.DSPGraphModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AudioModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.VectorGraphicsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ImageConversionModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UIElementsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.JSONSerializeModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AnimationModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.InputForUIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.PhysicsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.HierarchyCoreModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.IMGUIModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UICommonModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.InputLegacyModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TextCoreTextEngineModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TextCoreFontEngineModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TextRenderingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.AccessibilityModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.PropertiesModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.CoreModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.EntitiesModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ManagedKernelModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.MathematicsModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.BurstModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.ScriptingModule'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'acceleratorclientcore'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Private.Scripting'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Scripting.ObjectTransfer'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.AcceleratorClient'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.AcceleratorClient.Bootstrap'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Scripting'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'System.Net.Http'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.Net.Http'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'Bee.BeeDriver2'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Bee.BeeDriver2'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'ExCSS.Unity'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'ExCSS.Unity'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'System.Private.CoreLib'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.Private.CoreLib'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'System.Net.Primitives'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.Net.Primitives'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'System.Net.Sockets'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.Net.Sockets'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'System.Collections.NonGeneric'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.Collections.NonGeneric'
+Loaded Assemblies : Dependency graph rebuilt
+Loaded Assemblies : TypeCache.Refresh : DONE! age = 0
+Registering precompiled unity dll's ...
+Register platform support module: D:/Unity/7000.0.0a11/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002572 seconds.
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Hack The Planet
+Package Manager log level set to [2]
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Scripting: successfully reloaded assembly
+Domain Reload Profiling: 3390ms
+	BeginReloadAssembly (2164ms)
+		CreateAndSetChildDomain (3ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (94ms)
+	LoadAllAssembliesAndSetupDomain (71ms)
+		LoadAssemblies (563ms)
+		RebuildTransferFunctionScriptingTraits (4ms)
+		TypeCache.Refresh (1319ms)
+			TypeCache.ScanAssembly (1227ms)
+		AnalyzeDomain (2ms)
+	FinalizeReload (1046ms)
+		SetupLoadedEditorAssemblies (0ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (158ms)
+			ProcessInitializeOnLoadAttributes (159ms)
+			ProcessInitializeOnLoadMethodAttributes (213ms)
+	Serialization: 56ms
+		Read: 56ms, 3662160 bytes
+		Write: 0ms, 0 bytes
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 57 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ide.rider@3.1.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.ide.rider@570989d4a882)
+    com.unity.ide.visualstudio@2.0.28 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.ide.visualstudio@b5edea5f33f4)
+    com.unity.searcher@4.9.5 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.searcher@a463122f2c00)
+  Built-in packages:
+    com.unity.inputsystem@7.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.inputsystem@676b6e3c8afe)
+    com.unity.render-pipelines.universal@17.7.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.render-pipelines.universal@a16e7c4baaf7)
+    com.unity.ugui@7.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.ugui@6b38b0e38663)
+    com.unity.modules.accessibility@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.jsonserialize)
+    com.unity.modules.localizationruntime@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.localizationruntime)
+    com.unity.modules.particlesystem@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.physics2d)
+    com.unity.modules.physicscore2d@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.physicscore2d)
+    com.unity.modules.screencapture@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.screencapture)
+    com.unity.modules.smartstrings@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.smartstrings)
+    com.unity.modules.spritemask@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.spritemask)
+    com.unity.modules.terrain@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.terrainphysics)
+    com.unity.modules.tetgen@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.tetgen)
+    com.unity.modules.tilemap@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.tilemap)
+    com.unity.modules.timelinefoundation@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.timelinefoundation)
+    com.unity.modules.ui@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.video)
+    com.unity.modules.wind@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.xr)
+    com.unity.modules.subsystems@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.modules.hierarchycore)
+    com.unity.render-pipelines.core@17.7.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.render-pipelines.core@b73cf774851f)
+    com.unity.shadergraph@17.7.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.shadergraph@fd600b7c1c2d)
+    com.unity.render-pipelines.universal-config@17.7.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.render-pipelines.universal-config@767fc04a69c2)
+    com.unity.test-framework@1.9.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.test-framework@9f1800d472fe)
+    com.unity.graph-authoring@1.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.graph-authoring@5160de0695dc)
+    com.unity.burst@2.0.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.burst@626e66ab421b)
+    com.unity.collections@6.7.0 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.collections@28abc463ca66)
+    com.unity.profiling.core@1.0.3 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.profiling.core@e5b83a35e7fd)
+    com.unity.ext.nunit@2.1.2 (location: I:\HackThePlanet\HackThePlanet\Library\PackageCache\com.unity.ext.nunit@260ecc9e68d9)
+  Embedded packages:
+    com.cashg.graph-explorer@file:I:\HackThePlanet\HackThePlanet\Packages\com.cashg.graph-explorer (location: I:\HackThePlanet\HackThePlanet\Packages\com.cashg.graph-explorer)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.03 seconds
+Failed to extract CoreCLR stacktrace from Log message
+The GUID inside 'Packages/com.cashg.graph-explorer/Tests/Editor/GraphRevisionTimelineTests.cs.meta' cannot be extracted by the YAML Parser. Attempting to extract it via string matching instead. Please verify the file does not contain unexpected data.
+Failed to extract CoreCLR stacktrace from Log message
+The .meta file Packages/com.cashg.graph-explorer/Tests/Editor/GraphRevisionTimelineTests.cs.meta does not have a valid GUID and its corresponding Asset file will be ignored. If this file is not malformed, please add a GUID, or delete the .meta file and it will be recreated correctly
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+Starting: D:\Unity\7000.0.0a11\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: I:/HackThePlanet/HackThePlanet
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 2s986ms
+[715/731    1s] Csc Library/Bee/artifacts/1900b0aE.dag/HackThePlanet.dll (+2 others)
+[716/731    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/HackThePlanet.dll (+pdb)
+2026-10-26 10:32:07 AM ILPP: Loading assembly Library\Bee\artifacts\1900b0aE.dag\HackThePlanet.dll
+
+2026-10-26 10:32:07 AM ILPP: Running postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\Tools\UnityEngine.ManagedKernelModule.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\Managed\Bootstrap\Unity.Scripting.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsModule.dll
+
+2026-10-26 10:32:07 AM ILPP: Finished postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+2026-10-26 10:32:07 AM ILPP: Skipping postprocessor zzzUnity.Burst.CodeGen.BurstILPostProcessor for HackThePlanet (filter opted out)
+
+2026-10-26 10:32:07 AM ILPP: Finished assembly Library\Bee\artifacts\1900b0aE.dag\HackThePlanet.dll
+[717/731    0s] CopyFiles Library/ScriptAssemblies/HackThePlanet.pdb
+[718/731    0s] CopyFiles Library/ScriptAssemblies/HackThePlanet.dll
+[719/731    0s] Csc Library/Bee/artifacts/1900b0aE.dag/HackThePlanet.Editor.dll (+2 others)
+Assets\HackThePlanet\Editor\GameplayBaseline.cs(25,88): warning UAC1009: Field 'approaches' uses an unsupported type 'System.Collections.Generic.List<System.Collections.Generic.List<string>>'. Refer to the Serialization rules analyzer reference. (https://docs.unity3d.com/7000.0/Documentation/Manual/script-serialization-analyzer.html#uac1009)
+
+Assets\HackThePlanet\Editor\DataDrivenValidation.cs(11,25): warning UAL0010: A type with static fields, automatic properties or events must have a Unity.Scripting.LifecycleManagement.AutoStaticsCleanup or NoAutoStaticsCleanup attribute. AutoStaticsCleanup additionally requires the type and all its containing types to be declared partial. Static members: results.
+
+Assets\HackThePlanet\Editor\DataDrivenValidation.cs(13,46): warning UAL0013: A type with static fields, automatic properties or events must have a Unity.Scripting.LifecycleManagement.AutoStaticsCleanup or NoAutoStaticsCleanup attribute. AutoStaticsCleanup additionally requires the type and all its containing types to be declared partial.
+[720/731    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
+[721/731    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/HackThePlanet.Editor.dll (+pdb)
+2026-10-26 10:32:08 AM ILPP: Loading assembly Library\Bee\artifacts\1900b0aE.dag\HackThePlanet.Editor.dll
+
+2026-10-26 10:32:08 AM ILPP: Running postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\Tools\UnityEngine.ManagedKernelModule.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\Managed\Bootstrap\Unity.Scripting.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsModule.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\netstandard.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\System.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\System.Core.dll
+
+2026-10-26 10:32:08 AM ILPP: Finished postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+2026-10-26 10:32:08 AM ILPP: Skipping postprocessor zzzUnity.Burst.CodeGen.BurstILPostProcessor for HackThePlanet.Editor (filter opted out)
+
+2026-10-26 10:32:08 AM ILPP: Finished assembly Library\Bee\artifacts\1900b0aE.dag\HackThePlanet.Editor.dll
+[722/731    0s] CopyFiles Library/ScriptAssemblies/HackThePlanet.Editor.pdb
+[723/731    0s] CopyFiles Library/ScriptAssemblies/HackThePlanet.Editor.dll
+[724/731    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[725/731    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp.dll (+pdb)
+2026-10-26 10:32:08 AM ILPP: Loading assembly Library\Bee\artifacts\1900b0aE.dag\Assembly-CSharp.dll
+
+2026-10-26 10:32:08 AM ILPP: Running postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\Tools\UnityEngine.ManagedKernelModule.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\Managed\Bootstrap\Unity.Scripting.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll
+
+2026-10-26 10:32:08 AM ILPP: Finished postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+2026-10-26 10:32:08 AM ILPP: Skipping postprocessor zzzUnity.Burst.CodeGen.BurstILPostProcessor for Assembly-CSharp (filter opted out)
+
+2026-10-26 10:32:08 AM ILPP: Finished assembly Library\Bee\artifacts\1900b0aE.dag\Assembly-CSharp.dll
+[726/731    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
+[727/731    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
+[728/731    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+2026-10-26 10:32:08 AM ILPP: Loading assembly Library\Bee\artifacts\1900b0aE.dag\Assembly-CSharp-Editor.dll
+
+2026-10-26 10:32:08 AM ILPP: Running postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\Tools\UnityEngine.ManagedKernelModule.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\Managed\Bootstrap\Unity.Scripting.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll
+
+Loading assembly D:\Unity\7000.0.0a11\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsModule.dll
+
+2026-10-26 10:32:08 AM ILPP: Finished postprocessor Unity.Jobs.CodeGen.JobsILPostProcessor
+
+2026-10-26 10:32:08 AM ILPP: Skipping postprocessor zzzUnity.Burst.CodeGen.BurstILPostProcessor for Assembly-CSharp-Editor (filter opted out)
+
+2026-10-26 10:32:08 AM ILPP: Finished assembly Library\Bee\artifacts\1900b0aE.dag\Assembly-CSharp-Editor.dll
+[729/731    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[730/731    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (2.93 seconds), 16 items updated, 731 evaluated
+Assets\HackThePlanet\Editor\GameplayBaseline.cs(25,88): warning UAC1009: Field 'approaches' uses an unsupported type 'System.Collections.Generic.List<System.Collections.Generic.List<string>>'. Refer to the Serialization rules analyzer reference. (https://docs.unity3d.com/7000.0/Documentation/Manual/script-serialization-analyzer.html#uac1009)
+Assets\HackThePlanet\Editor\DataDrivenValidation.cs(11,25): warning UAL0010: A type with static fields, automatic properties or events must have a Unity.Scripting.LifecycleManagement.AutoStaticsCleanup or NoAutoStaticsCleanup attribute. AutoStaticsCleanup additionally requires the type and all its containing types to be declared partial. Static members: results.
+Assets\HackThePlanet\Editor\DataDrivenValidation.cs(13,46): warning UAL0013: A type with static fields, automatic properties or events must have a Unity.Scripting.LifecycleManagement.AutoStaticsCleanup or NoAutoStaticsCleanup attribute. AutoStaticsCleanup additionally requires the type and all its containing types to be declared partial.
+AssetDatabase: script compilation time: 3.216419s
+Begin MonoManager ReloadAssembly
+Total cache size 267963919
+Total cache size after purge 267963919, took 00:00:01.4422054
+Loaded Assemblies : TypeCache.Refresh : partial scan of changed assemblies
+Loaded Assemblies : Detect changed : assembly 'Unity.Collections.LowLevel.ILSupport' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'UnityEditor.Graphs' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'UnityEditor.UI.Analytics' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.VisualStudio.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.TextMeshPro.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.TextMeshPro' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.Rider.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'UnityEditor.TestRunner' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'JetBrains.Rider.PathLocator' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Universal.Shaders' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Universal.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.ShaderGraph.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.Searcher.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.ShaderGraph.Utilities' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Universal.2D.Editor.Overrides' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Universal.2D.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Core.ShaderLibrary' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Core.Editor.Shared' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Core.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.Rendering.LightTransport.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.PathTracing.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InternalAPIEngineBridge.RenderPipelines.Core.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InternalAPIEngineBridge.004' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InternalAPIEditorBridge.ShaderGraph.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InputSystem.TestFramework' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'UnityEngine.TestRunner' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InputSystem.ForUI.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InputSystem.ForUI' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.GraphAuthoring.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.Collections' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.Burst' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'HackThePlanet.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'HackThePlanet' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Cashg.GraphExplorer.Tests.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'nunit.framework' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Cashg.GraphExplorer.Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Cashg.GraphExplorer.Presentation' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Universal.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Universal.Config.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Core.Runtime.Shared' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.SurfaceCache.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.PathTracing.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.UnifiedRayTracing.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InternalAPIEngineBridge.ObjectDispatcher.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipeline.Universal.ShaderLibrary' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.GPUDriven.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.Profiling.Core' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.RenderPipelines.Core.Runtime' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Unity.InputSystem' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'UnityEditor.UI' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'UnityEngine.UI' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Cashg.GraphExplorer' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Assembly-CSharp-Editor' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : assembly 'Assembly-CSharp' marked not up-to-date due to it is NEW
+Loaded Assemblies : Detect changed : detected 176 up-to-date assemblies and 56 non-up-to-date assemblies 
+Loaded Assemblies : Detect changed : AllLoadedAssembliesAreUnchanged = false
+Loaded Assemblies : Detect changed : KnownAssembliesAreExactlyTheSame = false
+Loaded Assemblies : TypeCache.Refresh : initializing pseudo-attribute cache
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Collections.LowLevel.ILSupport'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.Graphs'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UI.Analytics'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.VisualStudio.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.TextMeshPro.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.TextMeshPro'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Rider.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.TestRunner'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'JetBrains.Rider.PathLocator'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Universal.Shaders'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Universal.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.ShaderGraph.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Searcher.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.ShaderGraph.Utilities'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Universal.2D.Editor.Overrides'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Universal.2D.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Core.ShaderLibrary'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Core.Editor.Shared'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Core.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Rendering.LightTransport.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.PathTracing.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InternalAPIEngineBridge.RenderPipelines.Core.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InternalAPIEngineBridge.004'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InternalAPIEditorBridge.ShaderGraph.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InputSystem.TestFramework'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.TestRunner'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InputSystem.ForUI.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InputSystem.ForUI'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.GraphAuthoring.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Collections'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Burst'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'HackThePlanet.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'HackThePlanet'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Cashg.GraphExplorer.Tests.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'nunit.framework'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Cashg.GraphExplorer.Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Cashg.GraphExplorer.Presentation'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Universal.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Universal.Config.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Core.Runtime.Shared'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.SurfaceCache.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.PathTracing.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.UnifiedRayTracing.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InternalAPIEngineBridge.ObjectDispatcher.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipeline.Universal.ShaderLibrary'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.GPUDriven.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.Profiling.Core'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.RenderPipelines.Core.Runtime'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Unity.InputSystem'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEditor.UI'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'UnityEngine.UI'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Cashg.GraphExplorer'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Assembly-CSharp-Editor'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'Assembly-CSharp'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.Private.CoreLib'
+Loaded Assemblies : TypeCache.Refresh : creating new Records for additional assembly 'System.ComponentModel.TypeConverter'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.ComponentModel.TypeConverter'
+Loaded Assemblies : TypeCache.Refresh : scanning assembly 'System.Net.Sockets'
+Loaded Assemblies : Dependency graph rebuilt
+Loaded Assemblies : TypeCache.Refresh : DONE! age = 0
+Out-of-process importers: 'AudioImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'ComputeShaderImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'FBXImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'Mesh3DSImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'NativeFormatImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'PrefabImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'RayTracingShaderImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'ShaderImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'TextScriptImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'TextureImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'TrueTypeFontImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'VideoClipImporter' will import out-of-process when Parallel Import is enabled
+Out-of-process importers: 'VisualEffectImporter' will import out-of-process when Parallel Import is enabled
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Scripting: successfully reloaded assembly
+Domain Reload Profiling: 6666ms
+	BeginReloadAssembly (3540ms)
+		DisableScriptedObjects (65ms)
+	RebuildNativeTypeToScriptingClass (35ms)
+	initialDomainReloadingComplete (218ms)
+	LoadAllAssembliesAndSetupDomain (165ms)
+		LoadAssemblies (1290ms)
+		TypeCache.Refresh (744ms)
+			TypeCache.ScanAssembly (715ms)
+		AnalyzeDomain (82ms)
+			BuildScriptInfoCaches (75ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (2705ms)
+		SetupLoadedEditorAssemblies (0ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (100ms)
+			ProcessInitializeOnLoadAttributes (1435ms)
+			ProcessInitializeOnLoadMethodAttributes (37ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (3ms)
+		AwakeInstancesAfterBackupRestoration (87ms)
+	Serialization: 539ms
+		Read: 357ms, 7976515 bytes
+		Write: 182ms, 172934 bytes
+Starting new worker id: 0 with log in I:/HackThePlanet/HackThePlanet/Logs/AssetImportWorkerHW0.log
+
+Asset Pipeline Refresh (id=a65515abc446b5d45b33a826976636c7): Total: 10.939 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=3507 ms
+		Asset DB Callback time: managed=94 ms, native=49 ms
+		Scripting: domain reloads=1, domain reload time=4068 ms, compile time=3218 ms, other=0 ms
+		Serialization: total=548.805 ms / 8013.3 KB (read=362.337 ms / 7810.4 KB, write=186.469 ms / 202.9 KB)
+		Project Asset Count: scripts=880, non-scripts=2780
+		Asset File Changes: new=0, changed=7, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokePackagesCallback: 42.463ms
+	ApplyChangesToAssetFolders: 1.293ms
+	Scan: 295.513ms
+	Collect global state as custom dependencies: 51.158ms
+	OnSourceAssetsModified: 1.637ms
+	CategorizeScriptCompilationAssets: 34.967ms
+	ProcessAssetsWithTransientArtifactChanges: 131.550ms
+	CategorizeAssets: 111.017ms
+	CompileScripts: 3218.129ms
+	ImportOutOfDateAssets: 2732.760ms (2710.365ms without children)
+		ReloadNativeAssets: 0.059ms
+		UnloadImportedAssets: 0.915ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.803ms
+		ImportSchedulerStart: 20.612ms
+	PostProcessAllAssets: 99.457ms
+		VCAutoAddAssetPostprocess 1.412ms
+		XRBuildSystem.XRAssetImported 0.089ms
+		PostProcessCallbackCreateDeferredMaterials 0.074ms
+		MonoPostProcessAllAssets: 93.080ms
+			AssetPostprocessor.OnPostprocessAllAssets 55.760ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 12.101ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 9.081ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.968ms
+			SyncVS.PostprocessSyncProject 1.846ms
+			AssetChangedListener.OnPostprocessAllAssets 1.305ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 1.094ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 0.831ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.105ms
+			TMP_SettingsPostProcessor.OnPostprocessAllAssets 0.103ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.097ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 0.085ms
+	PostAssetChangesProfiler: 7.140ms
+	UnloadStreamsBegin: 2.053ms
+	PersistCurrentRevisions: 0.124ms
+	GenerateScriptTypeHashes: 7.549ms
+	GenerateScriptTypeSerializationHashes: 16.037ms
+	Untracked: 4195.583ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Scanning for USB devices : 27.578ms
+Initializing Unity extensions:
+Unloading 19 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 3695 unused Assets / (6.8 MB). Loaded Objects now: 4838.
+Memory consumption went from 260.5 MB to 253.7 MB.
+Total: 23.295200 ms (FindLiveObjects: 0.495900 ms CreateObjectMapping: 0.218600 ms MarkObjects: 19.572500 ms  DeleteObjects: 2.740600 ms)
+
+Serialization during EditorStartup: 654.69 ms / 23560.9 KB (read 468.21 ms / 23358.0 KB, write 186.48 ms / 202.9 KB)
+	DomainReload: 596.61 ms / 11534.8 KB (read 413.89 ms / 11365.9 KB, write 182.73 ms / 168.9 KB)
+Importing 'GUID: 40e640e029b0cf048b2d16aa706ecc9a - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NodeTypeDefinition-database.asset' with importer (NativeFormatImporter)
+UDMSerializedFileBridge: default-value fill is enabled (UDMBRIDGE_NO_DEFAULT_VALUES=<unset>)
+Imported 'GUID: 40e640e029b0cf048b2d16aa706ecc9a' -> (Import Result ID: '1d7cb357549747d780d4e94fe240925d') in 0.021 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=20e5d5cec47b2f04666ef0b4f54a2121 DependenciesID=ab5476064259484c9d565ff7006cbabe StaticDependenciesID=c61075cfe1ffb7c487563c5d020134f4 
+Importing 'GUID: 90c0200ef61cdcb49a73f70f906b8afe - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NodeTypeDefinition-securityhub.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 90c0200ef61cdcb49a73f70f906b8afe' -> (Import Result ID: '7df4681db8dd6cb665ac591f63147703') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=aa3f4333fd266aa54670ae7a9d41df51 DependenciesID=dd0148a48a280d9adc2b012639b7133a StaticDependenciesID=219d15894e700cea8696199430bcbe15 
+Importing 'GUID: c0617335f605afc4dbc6b1f7c65964ed - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-paper-trail.asset' with importer (NativeFormatImporter)
+Imported 'GUID: c0617335f605afc4dbc6b1f7c65964ed' -> (Import Result ID: '38f88d6d95cde061d0b2757698efab34') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=67004cfd2cebf10890a3d49eea03d061 DependenciesID=52e8b5ab17e071e8928c927fe90c5099 StaticDependenciesID=c3845f6beecdb19223f1750ddd39f0a9 
+Importing 'GUID: d02b02e90af4a02459c84e2860eb416d - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-efficient.asset' with importer (NativeFormatImporter)
+Imported 'GUID: d02b02e90af4a02459c84e2860eb416d' -> (Import Result ID: '9177dba670b29371aef3c7564a282fd8') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d4b62f0bea30dd369163dd9a93bb01c0 DependenciesID=dc03dc392348008aafc8bbe8dbb3647f StaticDependenciesID=c93917be58a3453e8ffcc36362c40f7d 
+Importing 'GUID: 7155d1072beb25347b4b7b4b36465adc - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/RewardDefinition-delivery.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 7155d1072beb25347b4b7b4b36465adc' -> (Import Result ID: '74d3808367bb5c09131fe9a34cac1107') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a2783de52f2f47dca7266ea0a6d98ad6 DependenciesID=a14d586fbc808c3367b6b25da41fc74d StaticDependenciesID=5a89de70e73cbde4295b66c37ebaa962 
+Importing 'GUID: 91e48806285ad734ca698b8c5a18124a - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NetworkDefinition-corporate-network.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 91e48806285ad734ca698b8c5a18124a' -> (Import Result ID: '5bfde7405b633084556c3c5c68ced794') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=196a86cc665094ae43b8914aed159a19 DependenciesID=69f50efac574aa8e3a131a39f5234dbe StaticDependenciesID=a667e9cbf77457a1fe19aa85b94e9210 
+Importing 'GUID: b1bb9f042b3cf72449a7ff19258f0b5f - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-disrupt.asset' with importer (NativeFormatImporter)
+Imported 'GUID: b1bb9f042b3cf72449a7ff19258f0b5f' -> (Import Result ID: '45385ed39c4520cf8865b31c0b985c93') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f14d17a1c9f4dcf219b2fd63be3438b2 DependenciesID=c7a8ccdaceae16fad52c13b9937bf577 StaticDependenciesID=01720fde000645f1be0fdb8a30b743d6 
+Importing 'GUID: 02007a6d582b84e4285820f1fb29f002 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-backdoor.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 02007a6d582b84e4285820f1fb29f002' -> (Import Result ID: '0873fc63971c802705b2f71966b5cda3') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=54ac21baa6600b43203f9bb8a1fb22b7 DependenciesID=cf45710229ab0e44afd8ed9f5e319ee2 StaticDependenciesID=176b64addedf0829cd28e1f915735f78 
+Importing 'GUID: 52f3b4d9295bf374096c0b9e2ffa4f10 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-quiet-copy.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 52f3b4d9295bf374096c0b9e2ffa4f10' -> (Import Result ID: '77fec56081dfd50ceab1e9eb0591592d') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1d9360d27b92d726af26b7bc4fd36654 DependenciesID=d4d3b3dd8753f1581af133d0c00f16b1 StaticDependenciesID=23ad93cd2355fe14d748e8b7af7da5aa 
+Importing 'GUID: 62a919ca7efd03446baa8bed873feda0 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/StatusDefinition-trace-protection.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 62a919ca7efd03446baa8bed873feda0' -> (Import Result ID: '4819d64badf19d1cd220ade283deb905') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d3443063de8170314335c6401bdabcf1 DependenciesID=796c0bb22c5c4d42bcb461c74add4c2e StaticDependenciesID=db5b6833fc798feba5819e4e88620e73 
+Importing 'GUID: a215407cf5b42f342ba4bdd1ade10238 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-backdoor.asset' with importer (NativeFormatImporter)
+Imported 'GUID: a215407cf5b42f342ba4bdd1ade10238' -> (Import Result ID: '9af06df7dba8d71a169c6eeb5e1af226') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ca7fb984a3a2ae209bbdaaf87d932f82 DependenciesID=fcfcaa99dc21cd26788a45688068fb61 StaticDependenciesID=a15e26f0eaaae57c359d6720cf74280e 
+Importing 'GUID: f2a427d096339e84ba013e2e96c5dddd - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-disrupt.asset' with importer (NativeFormatImporter)
+Imported 'GUID: f2a427d096339e84ba013e2e96c5dddd' -> (Import Result ID: '1766144127dccd1991bda1ec46304971') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f6d8c6e081ef41ea60be7691c9a34cf7 DependenciesID=fb63694ef6ea87d459851f6aebccdd8a StaticDependenciesID=79521b7296876a48a537ddf914fd00b5 
+Importing 'GUID: a38585048094c004fada0f97f97a1fce - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/CompanyDefinition-company-1.asset' with importer (NativeFormatImporter)
+Imported 'GUID: a38585048094c004fada0f97f97a1fce' -> (Import Result ID: 'e9861f5b63991fb6eebfd230ea753f46') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bcfdf60818f992773176166c762bad25 DependenciesID=33b3b6e7e7ab3a0748f94682483d016c StaticDependenciesID=692b4933caad0c8e12adcc0119952891 
+Importing 'GUID: d372926651530a04498cc1a605c4f20b - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-weakpoint.asset' with importer (NativeFormatImporter)
+Imported 'GUID: d372926651530a04498cc1a605c4f20b' -> (Import Result ID: 'ac6ca143f0edcc9982497ae4a77f4217') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=339eae36ca229b2e1df68ee646ffcbea DependenciesID=7f00eae8a6282ec13497ddafbe09db1e StaticDependenciesID=3f9a75a7430f2c113006d789bee339c3 
+Importing 'GUID: f3ae92a7f7b25714096647271b2e19c0 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NodeTypeDefinition-firewall.asset' with importer (NativeFormatImporter)
+Imported 'GUID: f3ae92a7f7b25714096647271b2e19c0' -> (Import Result ID: '31917300c6614cc0ff8032f675ee4c1c') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=21cff2323cfc851faa7fae89ec8bdff3 DependenciesID=d227100666cc822317c846b0f881e257 StaticDependenciesID=2c9e79827bb0104393fdfd9626c92063 
+Importing 'GUID: 542f66cc58161534f8726d914285e3cb - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NodeTypeDefinition-relay.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 542f66cc58161534f8726d914285e3cb' -> (Import Result ID: 'fa434ede4d199f2fd83ab7d5d9c8990f') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a487854387980462eb213caf5e766e21 DependenciesID=fbf3452a1afcdb10b3c60d5646e2ed09 StaticDependenciesID=ecb9a68e92ca11915502734a2d3e8d3f 
+Importing 'GUID: 554a34ee47dcb2047ad9fd879ff2eb05 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/StatusDefinition-suppression.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 554a34ee47dcb2047ad9fd879ff2eb05' -> (Import Result ID: 'b35db648f52e0e97e3bd4fcc1f3b598d') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e75e44fe55375588a591f8320e4c6359 DependenciesID=b20481eb4afd26308a8156751064c0ea StaticDependenciesID=c3395e9d3b458d89f131b089d67daade 
+Importing 'GUID: 8571fa92309420a41a3245b9bc9e6957 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-chain.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 8571fa92309420a41a3245b9bc9e6957' -> (Import Result ID: '9240c434a281de9e0911daa7f2814b2f') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5ec12b106e7513697eb811d333676fef DependenciesID=d7c76943ddb5d17290941c481a2e28cd StaticDependenciesID=85fae3d2e3407fd7a980181588dff946 
+Importing 'GUID: c54c0ae90e29426429d15bfd1a142f41 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-passive.asset' with importer (NativeFormatImporter)
+Imported 'GUID: c54c0ae90e29426429d15bfd1a142f41' -> (Import Result ID: '93e95d1e1987f4d9a64ac1f0bd41ca4d') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=89e81649b418f06d13b116ae6b127233 DependenciesID=754f3ad796b04ed9cc0b36558b5032a7 StaticDependenciesID=e2feb758675303baeec5700f1344651d 
+Importing 'GUID: e5f0a7ba0bd2d7b448df523afba5988c - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-last-light.asset' with importer (NativeFormatImporter)
+Imported 'GUID: e5f0a7ba0bd2d7b448df523afba5988c' -> (Import Result ID: '02b696bfa27acdd42a405eda1e66e30a') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7eecb4a049cc3d0f150392135b3d6c6b DependenciesID=65b5133104d7273068a7261a6b9fa097 StaticDependenciesID=feec4129cb1ed46ca91e33376714271f 
+Importing 'GUID: f5b66d540a4aeea488d75fe867d364aa - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-base.asset' with importer (NativeFormatImporter)
+Imported 'GUID: f5b66d540a4aeea488d75fe867d364aa' -> (Import Result ID: '7d6b81360c298b89b2f57a8a07bae712') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=57500e9bfab6f8972cea6e8491728127 DependenciesID=3f9541dcccf050920baf9364a468355b StaticDependenciesID=99e8df999bfc634f14bf04f4feac3133 
+Importing 'GUID: 26ed31311fc34f34cafa733356a67b42 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NodeTypeDefinition-gateway.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 26ed31311fc34f34cafa733356a67b42' -> (Import Result ID: '60d5bca0a234ec4d2f9aeb5ce754c290') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3ccdf6f06c3b3889e50c562eb8283a05 DependenciesID=eac605eb231a41e07ab93da839d7e23b StaticDependenciesID=cfc36d9bda70f07301de2972e37bd924 
+Importing 'GUID: 56c0d7be17c2d5944bdb526614c4181e - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-ghost.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 56c0d7be17c2d5944bdb526614c4181e' -> (Import Result ID: 'b4dd2e18f124d052704132abe0d889f1') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=220078dc9aaeffc8f91f635bb938bfe8 DependenciesID=f14e9f56336ddb43fcfa4fbc1dc7635e StaticDependenciesID=a3844bed9cecabab720e7eb7ddc7ed05 
+Importing 'GUID: 569fd3aeaca330f47b18aba677a3dc9e - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-blueprint.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 569fd3aeaca330f47b18aba677a3dc9e' -> (Import Result ID: '5bb7f466c5d275ba8688153addab02ee') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b7a95574e76bbdc9653d9676394ccb60 DependenciesID=02533067b9a44b1d8ff2be3947767f29 StaticDependenciesID=2c60ac7a45d9f46ea17f045e54be9cb3 
+Importing 'GUID: f6b923e25e2345d458b9122b2f7f8805 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-freelance-0.asset' with importer (NativeFormatImporter)
+Imported 'GUID: f6b923e25e2345d458b9122b2f7f8805' -> (Import Result ID: '4ba43141e2f8906fb681c47324f36562') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8af03bc61ab9de8ff8c2cce5f2b00488 DependenciesID=2e6b2f5e1489e0ad07c19f7e50a3ff25 StaticDependenciesID=fe17bb9c5eefe3443a147cf99c242ec0 
+Importing 'GUID: f64b8d6c8b8ff1c408c0a1df9cb29414 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/CareerDefinition-career.asset' with importer (NativeFormatImporter)
+Imported 'GUID: f64b8d6c8b8ff1c408c0a1df9cb29414' -> (Import Result ID: 'd03f2b36f98aff6ccf80ebd68118365b') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c39a05d6aa98367a8fd62d88f0f12c7e DependenciesID=6ee2a784d5b6d311b093c51b6f9c5086 StaticDependenciesID=bf1d3a936bb61f65d517f1ac6ff1be42 
+Importing 'GUID: 0779b29f2c38de047b1fbf6685e0eafb - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-bridge.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 0779b29f2c38de047b1fbf6685e0eafb' -> (Import Result ID: '7ed0916e3dcfb290dac5f761dae25e89') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f8a0d522370d728530f2c5b0fd0fdf32 DependenciesID=c15ce611666d7b04efb1b2e10b87ff0b StaticDependenciesID=416d2a2e5f287b51721591dad3446f2e 
+Importing 'GUID: 177dce6f63cf40c4da3a2a79095178a8 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-hack.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 177dce6f63cf40c4da3a2a79095178a8' -> (Import Result ID: '688a996724764ea3c076ae4a892d98ee') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e276f8a0e716f1a601b5a775a8309caa DependenciesID=4f79c2be076aa051d18e76dbdb495906 StaticDependenciesID=3a334f5a13a72e8b3df3e0ae6542687a 
+Importing 'GUID: c7d17e83640c93e498b57e07c9712e45 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-quiet.asset' with importer (NativeFormatImporter)
+Imported 'GUID: c7d17e83640c93e498b57e07c9712e45' -> (Import Result ID: '3c795304ba7a39430e6611b1d3cf6677') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e67f15d1222b57aac0afabd98fc48827 DependenciesID=c79a78120d9ee8ed782b2479f749e2f2 StaticDependenciesID=e98746b14a5d21dea11283015f51d1bf 
+Importing 'GUID: d79f1943ec685a0439531c3f3ff3649a - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-freelance-1.asset' with importer (NativeFormatImporter)
+Imported 'GUID: d79f1943ec685a0439531c3f3ff3649a' -> (Import Result ID: 'e9a380e1013263be427318cd18f7b831') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5550da16219694d3d1d6e4a82ac41f9c DependenciesID=286fad1e90191041fad46452e45d9309 StaticDependenciesID=91ad7a0cce53ee887ab749e4be260d71 
+Importing 'GUID: e7f690b62f503f149b195b2dab94bb6c - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/HardwareDefinition-cpu.asset' with importer (NativeFormatImporter)
+Imported 'GUID: e7f690b62f503f149b195b2dab94bb6c' -> (Import Result ID: '6f25a7d3e869ba1dce581605e3f6966f') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=62af5dd58858467eb49f1d99965f241b DependenciesID=502d80cbb3a8e0802a9ed3fcc699eb1c StaticDependenciesID=d2307d2b443fdac6175117ff2e91b5cc 
+Importing 'GUID: 78cd86f46ed44ac40a41074f1451dcef - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-decoy.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 78cd86f46ed44ac40a41074f1451dcef' -> (Import Result ID: '4642cc348f97a13b7fce828b3b090869') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=70bd8569f6f81e414eb8acf448db4b5d DependenciesID=684cfef040d807168d70afc549b4ff15 StaticDependenciesID=d0c090d34066ff32d099f35fdd3e7cd8 
+Importing 'GUID: 691c6d9369c0cc641b0565a55fc6beec - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/CompanyDefinition-company-2.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 691c6d9369c0cc641b0565a55fc6beec' -> (Import Result ID: 'e41d5b27eebee7c5c828bef874b4f843') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5836663d943a100c8be95fcd2918a5f2 DependenciesID=940d1527504a3157a24c90b551539aa4 StaticDependenciesID=37709021b351f10b231308bc69b7ad00 
+Importing 'GUID: f9fbb96296d1ea34f8661e8ccdb2c74d - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/Game.asset' with importer (NativeFormatImporter)
+Imported 'GUID: f9fbb96296d1ea34f8661e8ccdb2c74d' -> (Import Result ID: 'f16fcfcff83e992a079d912278be7f6c') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3d0ec3a5572e62aebcd72e41dc7ec44b DependenciesID=3d6dcc0f20dec84c9b48ff8276c0fb0c StaticDependenciesID=2294aef4281616221a2bc2d26cc2cd59 
+Importing 'GUID: 2a04afc385b497e409b8b519f9818abd - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NodeTypeDefinition-scanner.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 2a04afc385b497e409b8b519f9818abd' -> (Import Result ID: 'd3d64564c5f2515480351bb8c30a8c7e') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=485ff17516251d0349d90d4251a74829 DependenciesID=19f9f85cf8e775931c48bd3dea6cf0e2 StaticDependenciesID=445f6b7270438a5eb61e28d14e01a027 
+Importing 'GUID: 2afcc4432715e1849826aec4a86799f1 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-ghost-wire.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 2afcc4432715e1849826aec4a86799f1' -> (Import Result ID: 'f96f1227d7d573b27af553a155a1f54d') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e3b8a00d0b686550d78b2123f7c85fa2 DependenciesID=908fef34fccb6eb4ec98c314c4d3541b StaticDependenciesID=100aac30e1b9c7f0cc45e58c32896f5f 
+Importing 'GUID: 3abd4ca38c666894c988dfb2ba5e540c - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-buffer.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 3abd4ca38c666894c988dfb2ba5e540c' -> (Import Result ID: '6180ad5d1c6217e33ffd20a0a7883c93') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2f18e39ad890bb0dde63f45e3bbb9759 DependenciesID=11b059c434d49679d7932dad144c7128 StaticDependenciesID=f524436d6301b0b238fa98a8d29586e7 
+Importing 'GUID: 3aae9238875364e4abb0f2f7c9357dde - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/CompanyDefinition-company-0.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 3aae9238875364e4abb0f2f7c9357dde' -> (Import Result ID: '51459da0e3ff302892bf812822d489d8') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ecbb6917983b6fb51a5aa54a059ebefa DependenciesID=c8247033acba6971ac9966594aefed46 StaticDependenciesID=c288b12065538d63930f3f6f2fecf0e6 
+Importing 'GUID: 5a72b9cb472bcb9409c093fd383162f5 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/NodeTypeDefinition-workstation.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 5a72b9cb472bcb9409c093fd383162f5' -> (Import Result ID: '13d51a6f50df858b15511da433e76d19') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=62d361a9679122a284d812e63c70bf7c DependenciesID=250db647a7d904a5958626617c2d67a6 StaticDependenciesID=c3df421acca82812f8c95a4022684986 
+Importing 'GUID: fa6d3fc2de094524c96af7c6b7a165ce - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/HardwareDefinition-memory.asset' with importer (NativeFormatImporter)
+Imported 'GUID: fa6d3fc2de094524c96af7c6b7a165ce' -> (Import Result ID: 'b70b091cb31bb336e425fb5bc7eb5d29') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d62d973277657042ecec81739f417179 DependenciesID=c2fae7227f1c42a251bf33a946d14095 StaticDependenciesID=a9f1d392389f96d6d97fa037e1146f72 
+Importing 'GUID: 3b286a5c9c53d3948a40fc50375590d2 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-blackout.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 3b286a5c9c53d3948a40fc50375590d2' -> (Import Result ID: '44464e7064fd33b5c29c7581e267b2d7') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5d4e88a8ab2fecd6689269f701fe16e8 DependenciesID=9922401773c632723d25c98cc1a52765 StaticDependenciesID=7cc7a767f69ed1570904615098415195 
+Importing 'GUID: 4bb88fed2e9cc6642998428c564441b0 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-decoy.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 4bb88fed2e9cc6642998428c564441b0' -> (Import Result ID: 'efa269703b74085db8734b34a165f87d') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e63a6091f6c5a344e37e0ff34dc26787 DependenciesID=7345debb2fa5d03fe5aac83706c667c0 StaticDependenciesID=40b78d136dec638073ec21f3e9924da6 
+Importing 'GUID: 5b24b5617d3bf614084659f4a1ce163f - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-scan.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 5b24b5617d3bf614084659f4a1ce163f' -> (Import Result ID: 'db37d70002cdfcc82e80b0df22e1484b') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b998c1962278a37f08422f0aa1be7372 DependenciesID=47f3b79fc31ba750cb19d41e16858bba StaticDependenciesID=05d121a0ef7ea88bf0f189b5735ab227 
+Importing 'GUID: fb0482eb8f449b94e95255b0ed997995 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-dead-drop.asset' with importer (NativeFormatImporter)
+Imported 'GUID: fb0482eb8f449b94e95255b0ed997995' -> (Import Result ID: '7c30065510a2942983195bc00e415e9a') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ab38e83e7d80c97081ee3737ba84fdb3 DependenciesID=80783b24c35860c720100bd5e953b199 StaticDependenciesID=27dfc5c929fea9b7b5bc8aeab57f7697 
+Importing 'GUID: 2cc0c6474794aec4798feadf3c8f8b7c - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-signal.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 2cc0c6474794aec4798feadf3c8f8b7c' -> (Import Result ID: 'a57f0fd13c1a9af9bd41f42a3bb4cd4e') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=41054574e96a25638a89f218fbf2f1c5 DependenciesID=52986461876197fdca3e8a9714cf7fb6 StaticDependenciesID=aad3f51c46864a178281391416be61a1 
+Importing 'GUID: 9ca161f639be2e744b2c273c6f930556 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-glasshouse.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 9ca161f639be2e744b2c273c6f930556' -> (Import Result ID: '7427b490e81359033e899c35d28d1fd9') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b421f8cbcc2bb5451e20a5e680784abf DependenciesID=95cc4fb964e3c3253c1a6b97792cf665 StaticDependenciesID=9583ba56076ad654c9bb008135732209 
+Importing 'GUID: dceed3108aa9f9740a44d002bf543e2c - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/HardwareDefinition-bandwidth.asset' with importer (NativeFormatImporter)
+Imported 'GUID: dceed3108aa9f9740a44d002bf543e2c' -> (Import Result ID: '86e91aeb52738c74bc046ba217d95d2a') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d903b7f5f34f0430b0396f9c455170ba DependenciesID=a65b679ad4353a7166ea952b90584298 StaticDependenciesID=3aa9f03803030b25aa506b2821ffebff 
+Importing 'GUID: 1dc2980696f4c7846b3dd86e628d280d - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-cascade.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 1dc2980696f4c7846b3dd86e628d280d' -> (Import Result ID: '8d13729e0eb5a469700d4ca4d95adee6') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2ab41ae47a2dbf6a3ae276bcf48ac200 DependenciesID=fb918dd9793b694f75fc9bffd55ef3a6 StaticDependenciesID=3fa580781dc1046f38c1b412752f7037 
+Importing 'GUID: 4d40fc22f9b7ec3448660eb46962458b - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-blackout.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 4d40fc22f9b7ec3448660eb46962458b' -> (Import Result ID: '85ebff8226d5e74a66981563f6fc6737') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5a2a1e21f79c906e9c04592a7bd5b361 DependenciesID=e476d6c6fb52d30c8372a0acd8f57dca StaticDependenciesID=fc5b4bb7a2282ec254f8e2c6f586f5e5 
+Importing 'GUID: 8d16d46622e72e94ea419cfcd3122590 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ContractDefinition-freelance-2.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 8d16d46622e72e94ea419cfcd3122590' -> (Import Result ID: 'c76f71f43b800d8d7a0b646ecd385069') in 0.001 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=13c00ad0a47205eb37666861f3350faa DependenciesID=587f5bbff3be1d400e6c5b016c998cf8 StaticDependenciesID=28d0357961a2bf94d16f4bbcc878d1bd 
+Importing 'GUID: 9d51720e3acd87a4dabd3376f3f1796c - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-selective.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 9d51720e3acd87a4dabd3376f3f1796c' -> (Import Result ID: 'f7220fa6c8eb39bb907e77fd6ef245b0') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d1cf4220fac12e4de77076c9a18dbf9b DependenciesID=3fe202efc7656805fabd84f7c4d2ead0 StaticDependenciesID=f62ddb4344450377cb3d4ef2a4e0a441 
+Importing 'GUID: 9de54e01fba34d140a49ab03624b0fa7 - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-bridge.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 9de54e01fba34d140a49ab03624b0fa7' -> (Import Result ID: '679ef88da89a42ec4b5fb62c19c8dc7c') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=88bd7828bf60285f720722ae9bede397 DependenciesID=34defe3ac617c5b5659bffac57711981 StaticDependenciesID=aaa4fa8b7247285922a78d5f66b3349c 
+Importing 'GUID: 4f3323fcff2b56242af19fdfd864b9eb - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/TechnologyDefinition-wide.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 4f3323fcff2b56242af19fdfd864b9eb' -> (Import Result ID: '46231873aef4f7d71814312bff3dd994') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=00f0a7fc132e9b334b074411ca1f7e9c DependenciesID=5031c4cb026da387ffd8afb525a5d22e StaticDependenciesID=7473e6b482dc3c3aca1dfcfad7076c41 
+Importing 'GUID: 4fe544649661bc44595b63ddec95ca4b - Path: Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/ActionDefinition-download.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 4fe544649661bc44595b63ddec95ca4b' -> (Import Result ID: 'f3166be1f6918bad3e3552b24728bd91') in 0.002 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8400e92e00483c9b832f786b9d85e561 DependenciesID=0cff060d46163b2f5c925f4102860058 StaticDependenciesID=da7538cad23fb7f553d7d8310760ea0d 
+Asset Pipeline Refresh (id=41c765f2f9b8a0c4593dcd1a61a78b79): Total: 0.277 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Batchmode quit successfully invoked - shutting down!
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-cashg-1.19.0-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-cashg-1.19.0 channel disconnected successfully.
+Unity Data Store service was successfully shut down
+UDS shutting down local client system
+Shut down UDS service system complete
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup CoreCLR
+CodeReloadManager destroyed
+Exiting batchmode successfully now!
+[ExitDontLaunchBugReporter] Exiting without the bug reporter. Application will exit with return code 0

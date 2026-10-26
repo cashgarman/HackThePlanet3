@@ -91,7 +91,7 @@ namespace HackThePlanet
             int fieldWidth = Mathf.Clamp(Mathf.RoundToInt(width), 256, 1280), fieldHeight = Mathf.Clamp(Mathf.RoundToInt(height), 128, 800);
             resized |= fieldReady && (fieldTexture == null || fieldTexture.width != fieldWidth || fieldTexture.height != fieldHeight);
             bool live = state.Active && !research;
-            float trace = live ? state.Op.trace / 100f : 0;
+            float trace = live ? state.TraceFraction : 0;
             float working = live && !state.Op.paused && state.Op.task != null ? 1 : 0;
             var parameters = new Vector4(trace, working, research ? 1 : 0, Mode == SignalEffects.Reduced ? 0 : 1);
             // Reduced mode keeps the art direction but freezes every decorative animation.

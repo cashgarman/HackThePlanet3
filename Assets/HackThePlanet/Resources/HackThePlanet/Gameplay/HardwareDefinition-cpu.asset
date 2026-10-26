@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62601865bd13fb44892f496feaa5dfc, type: 3}
+  m_Name: HardwareDefinition-cpu
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.HardwareDefinition
+  id: cpu
+  title: Parallel processor
+  description: Improves performance for every operation.
+  category: PROCESSING
+  statLabel: HACK SPEED
+  displayedStat: hackSpeed
+  tiers:
+  - price: 400
+    modifiers:
+    - stat: hackSpeed
+      priority: 0
+      operation: 0
+      when:
+        rid: 213507065135235921
+      value:
+        rid: 213507065135235922
+  - price: 900
+    modifiers:
+    - stat: hackSpeed
+      priority: 0
+      operation: 0
+      when:
+        rid: 213507065135235923
+      value:
+        rid: 213507065135235924
+  - price: 1600
+    modifiers:
+    - stat: hackSpeed
+      priority: 0
+      operation: 0
+      when:
+        rid: 213507065135235925
+      value:
+        rid: 213507065135235926
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235921
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235922
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.2
+    - rid: 213507065135235923
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235924
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.2
+    - rid: 213507065135235925
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235926
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.2

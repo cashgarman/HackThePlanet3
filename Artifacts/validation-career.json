@@ -1,13 +1,17 @@
 {
-    "version": 1,
-    "credits": 7000,
-    "xp": 335,
+    "version": 2,
+    "credits": 7450,
+    "xp": 365,
     "day": 7,
-    "totalEarnedXp": 555,
-    "cpu": 2,
-    "bandwidth": 0,
-    "memory": 0,
+    "totalEarnedXp": 585,
     "jobs": 6,
+    "initialized": true,
+    "hardware": [
+        {
+            "id": "cpu",
+            "level": 2
+        }
+    ],
     "completed": [
         "quiet-copy",
         "paper-trail",
@@ -39,7 +43,7 @@
             "verdict": "CONTRACT COMPLETE",
             "narrative": "The surveillance grid goes dark. Lark opens the research, June publishes the records, and Null keeps the channels alive. You built more than a career. The planet is a little harder to own.",
             "success": true,
-            "trace": 55.12236022949219,
+            "trace": 60.27005386352539,
             "credits": 2150,
             "xp": 150,
             "day": 6,
@@ -47,21 +51,35 @@
             "log": [
                 "00:00  TUNNEL OPEN // AEGIS SYSTEMS. Gateway secured.",
                 "00:00  CLIENT // Control Security hub, then erase the index at Research vault.",
-                "00:00  RUN // HACK : Public relay",
+                "00:00  RUN // Hack system : Public relay",
                 "00:02  CONTROL ESTABLISHED // Public relay.",
-                "00:02  RUN // HACK : Staff terminal",
-                "00:05  CONTROL ESTABLISHED // Staff terminal.",
-                "00:05  RUN // HACK : Core firewall",
-                "00:15  CONTROL ESTABLISHED // Core firewall.",
-                "00:15  RUN // HACK : Security hub",
-                "00:19  CONTROL ESTABLISHED // Security hub.",
-                "00:19  RUN // HACK : Research wall",
-                "00:29  CONTROL ESTABLISHED // Research wall.",
-                "00:29  RUN // HACK : Research vault",
-                "00:34  CONTROL ESTABLISHED // Research vault.",
-                "00:34  RUN // DOWNLOAD : Research vault",
-                "00:39  OBJECTIVE SECURED // Research vault.",
-                "00:39  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
+                "00:02  RUN // Hack system : Maintenance 4.1",
+                "00:05  CONTROL ESTABLISHED // Maintenance 4.1.",
+                "00:05  RUN // Hack system : Maintenance 4.2",
+                "00:08  CONTROL ESTABLISHED // Maintenance 4.2.",
+                "00:08  RUN // Hack system : Maintenance 4.3",
+                "00:11  CONTROL ESTABLISHED // Maintenance 4.3.",
+                "00:11  RUN // Hack system : Maintenance 4.4",
+                "00:13  CONTROL ESTABLISHED // Maintenance 4.4.",
+                "00:13  RUN // Hack system : Maintenance 4.5",
+                "00:16  CONTROL ESTABLISHED // Maintenance 4.5.",
+                "00:16  RUN // Hack system : Maintenance 4.6",
+                "00:19  CONTROL ESTABLISHED // Maintenance 4.6.",
+                "00:19  RUN // Hack system : Maintenance 4.7",
+                "00:22  CONTROL ESTABLISHED // Maintenance 4.7.",
+                "00:22  RUN // Hack system : Maintenance 4.8",
+                "00:24  CONTROL ESTABLISHED // Maintenance 4.8.",
+                "00:24  RUN // Hack system : Maintenance 4.9",
+                "00:27  CONTROL ESTABLISHED // Maintenance 4.9.",
+                "00:27  RUN // Hack system : Research vault",
+                "00:32  CONTROL ESTABLISHED // Research vault.",
+                "00:32  RUN // Hack system : Research wall",
+                "00:40  CONTROL ESTABLISHED // Research wall.",
+                "00:40  RUN // Hack system : Security hub",
+                "00:44  CONTROL ESTABLISHED // Security hub.",
+                "00:44  RUN // Erase targeting index : Research vault",
+                "00:49  OBJECTIVE SECURED // Research vault.",
+                "00:49  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
             ]
         },
         {
@@ -70,37 +88,43 @@
             "verdict": "CONTRACT COMPLETE",
             "narrative": "The whistleblower escapes the financial dragnet and releases a list of surveillance contracts. Aegis starts taking systems offline.",
             "success": true,
-            "trace": 74.9682388305664,
-            "credits": 1450,
-            "xp": 100,
+            "trace": 55.440040588378906,
+            "credits": 1600,
+            "xp": 110,
             "day": 5,
             "bonusFiles": 0,
             "log": [
                 "00:00  TUNNEL OPEN // MORROW FINANCIAL. Gateway secured.",
                 "00:00  CLIENT // Replace the order at Research vault AND Backup mirror.",
-                "00:00  RUN // HACK : Public relay",
+                "00:00  RUN // Hack system : Public relay",
                 "00:02  CONTROL ESTABLISHED // Public relay.",
-                "00:02  RUN // HACK : Staff terminal",
-                "00:05  CONTROL ESTABLISHED // Staff terminal.",
-                "00:05  RUN // HACK : Core firewall",
-                "00:15  CONTROL ESTABLISHED // Core firewall.",
-                "00:15  RUN // HACK : Security hub",
-                "00:18  CONTROL ESTABLISHED // Security hub.",
-                "00:18  RUN // HACK : Research wall",
-                "00:28  CONTROL ESTABLISHED // Research wall.",
-                "00:28  RUN // HACK : Research vault",
+                "00:02  RUN // Hack system : Maintenance 4.1",
+                "00:05  CONTROL ESTABLISHED // Maintenance 4.1.",
+                "00:05  RUN // Hack system : Maintenance 4.2",
+                "00:08  CONTROL ESTABLISHED // Maintenance 4.2.",
+                "00:08  RUN // Hack system : Maintenance 4.3",
+                "00:11  CONTROL ESTABLISHED // Maintenance 4.3.",
+                "00:11  RUN // Hack system : Maintenance 4.4",
+                "00:13  CONTROL ESTABLISHED // Maintenance 4.4.",
+                "00:13  RUN // Hack system : Maintenance 4.5",
+                "00:16  CONTROL ESTABLISHED // Maintenance 4.5.",
+                "00:16  RUN // Hack system : Maintenance 4.6",
+                "00:19  CONTROL ESTABLISHED // Maintenance 4.6.",
+                "00:19  RUN // Hack system : Maintenance 4.7",
+                "00:22  CONTROL ESTABLISHED // Maintenance 4.7.",
+                "00:22  RUN // Hack system : Maintenance 4.8",
+                "00:24  CONTROL ESTABLISHED // Maintenance 4.8.",
+                "00:24  RUN // Hack system : Maintenance 4.9",
+                "00:27  CONTROL ESTABLISHED // Maintenance 4.9.",
+                "00:27  RUN // Hack system : Research vault",
                 "00:32  CONTROL ESTABLISHED // Research vault.",
-                "00:32  RUN // DOWNLOAD : Research vault",
-                "00:37  OBJECTIVE SECURED // Research vault.",
-                "00:37  RUN // HACK : Service relay",
-                "00:40  CONTROL ESTABLISHED // Service relay.",
-                "00:40  RUN // HACK : Backup relay",
-                "00:43  CONTROL ESTABLISHED // Backup relay.",
-                "00:43  RUN // HACK : Backup mirror",
-                "00:47  CONTROL ESTABLISHED // Backup mirror.",
-                "00:47  RUN // DOWNLOAD : Backup mirror",
-                "00:52  OBJECTIVE SECURED // Backup mirror.",
-                "00:52  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
+                "00:32  RUN // Hack system : Backup mirror",
+                "00:36  CONTROL ESTABLISHED // Backup mirror.",
+                "00:36  RUN // Correct record : Backup mirror",
+                "00:41  OBJECTIVE SECURED // Backup mirror.",
+                "00:41  RUN // Correct record : Research vault",
+                "00:46  OBJECTIVE SECURED // Research vault.",
+                "00:46  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
             ]
         },
         {
@@ -109,7 +133,7 @@
             "verdict": "CONTRACT COMPLETE",
             "narrative": "The shell company belongs to Aegis. A private security contract is turning public research into private leverage.",
             "success": true,
-            "trace": 55.77285385131836,
+            "trace": 40.87998962402344,
             "credits": 1400,
             "xp": 100,
             "day": 4,
@@ -117,21 +141,29 @@
             "log": [
                 "00:00  TUNNEL OPEN // HELIX DYNAMICS. Gateway secured.",
                 "00:00  CLIENT // Recover the ownership archive from Research vault.",
-                "00:00  RUN // HACK : Public relay",
+                "00:00  RUN // Hack system : Public relay",
                 "00:02  CONTROL ESTABLISHED // Public relay.",
-                "00:02  RUN // HACK : Staff terminal",
-                "00:05  CONTROL ESTABLISHED // Staff terminal.",
-                "00:05  RUN // HACK : Core firewall",
-                "00:14  CONTROL ESTABLISHED // Core firewall.",
-                "00:14  RUN // HACK : Security hub",
-                "00:17  CONTROL ESTABLISHED // Security hub.",
-                "00:17  RUN // HACK : Research wall",
-                "00:25  CONTROL ESTABLISHED // Research wall.",
-                "00:25  RUN // HACK : Research vault",
+                "00:02  RUN // Hack system : Maintenance 3.1",
+                "00:05  CONTROL ESTABLISHED // Maintenance 3.1.",
+                "00:05  RUN // Hack system : Maintenance 3.2",
+                "00:08  CONTROL ESTABLISHED // Maintenance 3.2.",
+                "00:08  RUN // Hack system : Maintenance 3.3",
+                "00:11  CONTROL ESTABLISHED // Maintenance 3.3.",
+                "00:11  RUN // Hack system : Maintenance 3.4",
+                "00:13  CONTROL ESTABLISHED // Maintenance 3.4.",
+                "00:13  RUN // Hack system : Maintenance 3.5",
+                "00:16  CONTROL ESTABLISHED // Maintenance 3.5.",
+                "00:16  RUN // Hack system : Maintenance 3.6",
+                "00:19  CONTROL ESTABLISHED // Maintenance 3.6.",
+                "00:19  RUN // Hack system : Maintenance 3.7",
+                "00:22  CONTROL ESTABLISHED // Maintenance 3.7.",
+                "00:22  RUN // Hack system : Maintenance 3.8",
+                "00:24  CONTROL ESTABLISHED // Maintenance 3.8.",
+                "00:24  RUN // Hack system : Research vault",
                 "00:29  CONTROL ESTABLISHED // Research vault.",
-                "00:29  RUN // DOWNLOAD : Research vault",
-                "00:38  OBJECTIVE SECURED // Research vault.",
-                "00:38  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
+                "00:29  RUN // Download files : Research vault",
+                "00:34  OBJECTIVE SECURED // Research vault.",
+                "00:34  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
             ]
         },
         {
@@ -140,39 +172,45 @@
             "verdict": "CONTRACT COMPLETE",
             "narrative": "The records link Aegis's contractor to Morrow's debt platform. Three unrelated jobs begin to look like one story.",
             "success": true,
-            "trace": 85.54254150390625,
-            "credits": 1050,
-            "xp": 80,
+            "trace": 67.04991149902344,
+            "credits": 1200,
+            "xp": 90,
             "day": 3,
             "bonusFiles": 0,
             "log": [
                 "00:00  TUNNEL OPEN // AEGIS SYSTEMS. Gateway secured.",
                 "00:00  CLIENT // Recover records at Dev terminal, Audit terminal, and Research vault.",
-                "00:00  RUN // HACK : Public relay",
+                "00:00  RUN // Hack system : Public relay",
                 "00:02  CONTROL ESTABLISHED // Public relay.",
-                "00:02  RUN // HACK : Staff terminal",
-                "00:06  CONTROL ESTABLISHED // Staff terminal.",
-                "00:06  RUN // HACK : Core firewall",
-                "00:14  CONTROL ESTABLISHED // Core firewall.",
-                "00:14  RUN // HACK : Dev terminal",
-                "00:17  CONTROL ESTABLISHED // Dev terminal.",
-                "00:17  RUN // DOWNLOAD : Dev terminal",
-                "00:26  OBJECTIVE SECURED // Dev terminal.",
-                "00:26  RUN // HACK : Security hub",
-                "00:29  CONTROL ESTABLISHED // Security hub.",
-                "00:29  RUN // HACK : Research wall",
-                "00:36  CONTROL ESTABLISHED // Research wall.",
-                "00:36  RUN // HACK : Research vault",
-                "00:40  CONTROL ESTABLISHED // Research vault.",
-                "00:40  RUN // DOWNLOAD : Research vault",
-                "00:49  OBJECTIVE SECURED // Research vault.",
-                "00:49  RUN // HACK : Service relay",
-                "00:52  CONTROL ESTABLISHED // Service relay.",
-                "00:52  RUN // HACK : Audit terminal",
-                "00:56  CONTROL ESTABLISHED // Audit terminal.",
-                "00:56  RUN // DOWNLOAD : Audit terminal",
-                "01:05  OBJECTIVE SECURED // Audit terminal.",
-                "01:05  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
+                "00:02  RUN // Hack system : Maintenance 3.1",
+                "00:05  CONTROL ESTABLISHED // Maintenance 3.1.",
+                "00:05  RUN // Hack system : Maintenance 3.2",
+                "00:08  CONTROL ESTABLISHED // Maintenance 3.2.",
+                "00:08  RUN // Hack system : Maintenance 3.3",
+                "00:11  CONTROL ESTABLISHED // Maintenance 3.3.",
+                "00:11  RUN // Hack system : Maintenance 3.4",
+                "00:13  CONTROL ESTABLISHED // Maintenance 3.4.",
+                "00:13  RUN // Hack system : Maintenance 3.5",
+                "00:16  CONTROL ESTABLISHED // Maintenance 3.5.",
+                "00:16  RUN // Hack system : Maintenance 3.6",
+                "00:19  CONTROL ESTABLISHED // Maintenance 3.6.",
+                "00:19  RUN // Hack system : Maintenance 3.7",
+                "00:22  CONTROL ESTABLISHED // Maintenance 3.7.",
+                "00:22  RUN // Hack system : Maintenance 3.8",
+                "00:24  CONTROL ESTABLISHED // Maintenance 3.8.",
+                "00:24  RUN // Hack system : Research vault",
+                "00:28  CONTROL ESTABLISHED // Research vault.",
+                "00:28  RUN // Hack system : Dev terminal",
+                "00:31  CONTROL ESTABLISHED // Dev terminal.",
+                "00:31  RUN // Recover evidence : Dev terminal",
+                "00:40  OBJECTIVE SECURED // Dev terminal.",
+                "00:40  RUN // Hack system : Audit terminal",
+                "00:44  CONTROL ESTABLISHED // Audit terminal.",
+                "00:44  RUN // Recover evidence : Audit terminal",
+                "00:53  OBJECTIVE SECURED // Audit terminal.",
+                "00:53  RUN // Recover evidence : Research vault",
+                "01:02  OBJECTIVE SECURED // Research vault.",
+                "01:02  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
             ]
         },
         {
@@ -181,37 +219,41 @@
             "verdict": "CONTRACT COMPLETE",
             "narrative": "Thousands of duplicate balances disappear. Morrow replaces a maintenance identity; its perimeter gets a little stronger.",
             "success": true,
-            "trace": 71.26505279541016,
-            "credits": 850,
-            "xp": 65,
+            "trace": 53.37984848022461,
+            "credits": 1000,
+            "xp": 75,
             "day": 2,
             "bonusFiles": 0,
             "log": [
                 "00:00  TUNNEL OPEN // MORROW FINANCIAL. Gateway secured.",
                 "00:00  CLIENT // Correct Research vault AND Backup mirror.",
-                "00:00  RUN // HACK : Public relay",
+                "00:00  RUN // Hack system : Public relay",
                 "00:04  CONTROL ESTABLISHED // Public relay.",
-                "00:04  RUN // HACK : Staff terminal",
-                "00:09  CONTROL ESTABLISHED // Staff terminal.",
-                "00:09  RUN // HACK : Core firewall",
-                "00:20  CONTROL ESTABLISHED // Core firewall.",
-                "00:20  RUN // HACK : Security hub",
-                "00:24  CONTROL ESTABLISHED // Security hub.",
-                "00:24  RUN // HACK : Research wall",
-                "00:32  CONTROL ESTABLISHED // Research wall.",
-                "00:32  RUN // HACK : Research vault",
-                "00:36  CONTROL ESTABLISHED // Research vault.",
-                "00:36  RUN // DOWNLOAD : Research vault",
-                "00:45  OBJECTIVE SECURED // Research vault.",
-                "00:45  RUN // HACK : Service relay",
-                "00:49  CONTROL ESTABLISHED // Service relay.",
-                "00:49  RUN // HACK : Backup relay",
-                "00:53  CONTROL ESTABLISHED // Backup relay.",
-                "00:53  RUN // HACK : Backup mirror",
-                "00:59  CONTROL ESTABLISHED // Backup mirror.",
-                "00:59  RUN // DOWNLOAD : Backup mirror",
-                "01:08  OBJECTIVE SECURED // Backup mirror.",
-                "01:08  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
+                "00:04  RUN // Hack system : Maintenance 2.1",
+                "00:08  CONTROL ESTABLISHED // Maintenance 2.1.",
+                "00:08  RUN // Hack system : Maintenance 2.2",
+                "00:12  CONTROL ESTABLISHED // Maintenance 2.2.",
+                "00:12  RUN // Hack system : Maintenance 2.3",
+                "00:16  CONTROL ESTABLISHED // Maintenance 2.3.",
+                "00:16  RUN // Hack system : Maintenance 2.4",
+                "00:20  CONTROL ESTABLISHED // Maintenance 2.4.",
+                "00:20  RUN // Hack system : Maintenance 2.5",
+                "00:24  CONTROL ESTABLISHED // Maintenance 2.5.",
+                "00:24  RUN // Hack system : Maintenance 2.6",
+                "00:28  CONTROL ESTABLISHED // Maintenance 2.6.",
+                "00:28  RUN // Hack system : Maintenance 2.7",
+                "00:32  CONTROL ESTABLISHED // Maintenance 2.7.",
+                "00:32  RUN // Hack system : Maintenance 2.8",
+                "00:36  CONTROL ESTABLISHED // Maintenance 2.8.",
+                "00:36  RUN // Hack system : Research vault",
+                "00:40  CONTROL ESTABLISHED // Research vault.",
+                "00:40  RUN // Hack system : Backup mirror",
+                "00:45  CONTROL ESTABLISHED // Backup mirror.",
+                "00:45  RUN // Correct record : Backup mirror",
+                "00:54  OBJECTIVE SECURED // Backup mirror.",
+                "00:54  RUN // Correct record : Research vault",
+                "01:03  OBJECTIVE SECURED // Research vault.",
+                "01:03  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
             ]
         },
         {
@@ -220,7 +262,7 @@
             "verdict": "CONTRACT COMPLETE",
             "narrative": "An anonymous prototype appears on the open net. Helix's demonstration goes ahead, but the technology is no longer theirs alone.",
             "success": true,
-            "trace": 58.951942443847656,
+            "trace": 54.99997329711914,
             "credits": 800,
             "xp": 60,
             "day": 1,
@@ -228,33 +270,45 @@
             "log": [
                 "00:00  TUNNEL OPEN // HELIX DYNAMICS. Gateway secured.",
                 "00:00  CLIENT // Recover the prototype from Research vault.",
-                "00:00  GUIDE // Select Public relay, then HACK. Control connected nodes to reach the gold objective.",
-                "00:00  RUN // HACK : Public relay",
+                "00:00  RUN // Hack system : Public relay",
                 "00:04  CONTROL ESTABLISHED // Public relay.",
-                "00:04  RUN // HACK : Staff terminal",
-                "00:11  CONTROL ESTABLISHED // Staff terminal.",
-                "00:11  RUN // HACK : Core firewall",
-                "00:24  CONTROL ESTABLISHED // Core firewall.",
-                "00:24  RUN // HACK : Security hub",
-                "00:29  CONTROL ESTABLISHED // Security hub.",
-                "00:29  RUN // HACK : Research wall",
-                "00:39  CONTROL ESTABLISHED // Research wall.",
-                "00:39  RUN // HACK : Research vault",
-                "00:44  CONTROL ESTABLISHED // Research vault.",
-                "00:44  RUN // DOWNLOAD : Research vault",
-                "00:53  OBJECTIVE SECURED // Research vault.",
-                "00:53  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
+                "00:04  RUN // Hack system : Maintenance 2.1",
+                "00:09  CONTROL ESTABLISHED // Maintenance 2.1.",
+                "00:09  RUN // Hack system : Maintenance 2.2",
+                "00:14  CONTROL ESTABLISHED // Maintenance 2.2.",
+                "00:14  RUN // Hack system : Maintenance 2.3",
+                "00:19  CONTROL ESTABLISHED // Maintenance 2.3.",
+                "00:19  RUN // Hack system : Maintenance 2.4",
+                "00:23  CONTROL ESTABLISHED // Maintenance 2.4.",
+                "00:23  RUN // Hack system : Maintenance 2.5",
+                "00:28  CONTROL ESTABLISHED // Maintenance 2.5.",
+                "00:28  RUN // Hack system : Maintenance 2.6",
+                "00:33  CONTROL ESTABLISHED // Maintenance 2.6.",
+                "00:33  RUN // Hack system : Maintenance 2.7",
+                "00:38  CONTROL ESTABLISHED // Maintenance 2.7.",
+                "00:38  RUN // Hack system : Maintenance 2.8",
+                "00:42  CONTROL ESTABLISHED // Maintenance 2.8.",
+                "00:42  RUN // Hack system : Research vault",
+                "00:47  CONTROL ESTABLISHED // Research vault.",
+                "00:47  RUN // Download files : Research vault",
+                "00:56  OBJECTIVE SECURED // Research vault.",
+                "00:56  ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available."
             ]
         }
     ],
+    "lore": [],
     "operation": {
         "contractId": "freelance-0",
+        "entryNode": "home",
+        "lastControlled": "home",
         "seed": 497,
+        "generationVersion": 3,
         "nodes": [
             {
                 "id": "home",
                 "label": "Your gateway",
                 "detail": "A secondhand rig. A private connection. A place to begin.",
+                "typeId": "gateway",
                 "kind": 0,
                 "security": 0,
                 "column": 0,
@@ -267,13 +321,26 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -19.0,
+                    "y": -1.0,
+                    "z": -2.0
+                },
+                "color": {
+                    "r": 0.6078431606292725,
+                    "g": 0.9803921580314636,
+                    "b": 0.7960784435272217,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n1",
-                "label": "Guest terminal",
-                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
-                "kind": 1,
+                "label": "Transit 2.3",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
                 "security": 1,
                 "column": 0,
                 "row": 0,
@@ -285,12 +352,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -1.5883134603500366,
+                    "y": 7.612933158874512,
+                    "z": 7.602402687072754
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n2",
                 "label": "Public relay",
                 "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
                 "kind": 2,
                 "security": 1,
                 "column": 0,
@@ -303,14 +383,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -14.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n3",
-                "label": "Office terminal",
-                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
-                "kind": 1,
-                "security": 2,
+                "label": "Maintenance 3.7",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 1,
                 "column": 0,
                 "row": 2,
                 "x": 205.0,
@@ -321,30 +414,56 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 7.519003868103027,
+                    "y": -5.6323394775390625,
+                    "z": 4.9914445877075195
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n4",
-                "label": "Campus relay",
+                "label": "Transit 1.4",
                 "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
                 "kind": 2,
-                "security": 1,
+                "security": 2,
                 "column": 0,
                 "row": 3,
                 "x": 205.0,
                 "y": 385.0,
                 "suppressed": 0.0,
-                "known": true,
+                "known": false,
                 "controlled": false,
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 5.035210609436035,
+                    "y": 5.780823230743408,
+                    "z": -5.331296920776367
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n5",
                 "label": "Edge scanner",
                 "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
                 "kind": 4,
                 "security": 1,
                 "column": 1,
@@ -357,14 +476,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -8.372564315795898,
+                    "y": -6.102946758270264,
+                    "z": -1.2548327445983887
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n6",
                 "label": "Staff terminal",
                 "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
                 "kind": 1,
-                "security": 2,
+                "security": 1,
                 "column": 1,
                 "row": 1,
                 "x": 350.0,
@@ -375,14 +507,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -8.107792854309082,
+                    "y": -3.2983086109161377,
+                    "z": -3.3318262100219727
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n7",
-                "label": "Perimeter wall",
-                "detail": "A hardened route barrier. Hack it, take a detour, or use Firewall bridge with two controlled neighbors.",
-                "kind": 3,
-                "security": 6,
+                "label": "Maintenance 3.6",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 1,
                 "column": 1,
                 "row": 2,
                 "x": 350.0,
@@ -393,13 +538,26 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 4.882297039031982,
+                    "y": -7.935463905334473,
+                    "z": 7.40033483505249
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n8",
-                "label": "Maintenance",
-                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
-                "kind": 2,
+                "label": "Maintenance 3.5",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
                 "security": 1,
                 "column": 1,
                 "row": 3,
@@ -411,12 +569,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 1.9620048999786377,
+                    "y": -9.075925827026367,
+                    "z": 8.190312385559082
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n9",
                 "label": "Dev terminal",
                 "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
                 "kind": 1,
                 "security": 2,
                 "column": 2,
@@ -429,14 +600,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 4.974146842956543,
+                    "y": -2.214879035949707,
+                    "z": -5.193384170532227
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n10",
                 "label": "Core firewall",
                 "detail": "A hardened route barrier. Hack it, take a detour, or use Firewall bridge with two controlled neighbors.",
+                "typeId": "firewall",
                 "kind": 3,
-                "security": 6,
+                "security": 4,
                 "column": 2,
                 "row": 1,
                 "x": 495.0,
@@ -447,12 +631,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -2.9201340675354004,
+                    "y": -5.42330265045166,
+                    "z": -5.682548999786377
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.7372549176216125,
+                    "b": 0.43921568989753723,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n11",
                 "label": "Traffic scanner",
                 "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
                 "kind": 4,
                 "security": 2,
                 "column": 2,
@@ -465,14 +662,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -10.408607482910156,
+                    "y": -1.137908697128296,
+                    "z": -4.844744682312012
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n12",
                 "label": "Build terminal",
                 "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
                 "kind": 1,
-                "security": 2,
+                "security": 1,
                 "column": 2,
                 "row": 3,
                 "x": 495.0,
@@ -483,12 +693,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -0.6115294694900513,
+                    "y": 8.655092239379883,
+                    "z": 4.407124996185303
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n13",
                 "label": "Cold archive",
                 "detail": "A store of valuable data. Control it first, then recover its files. Marked archives contain optional credits and XP.",
+                "typeId": "database",
                 "kind": 5,
                 "security": 2,
                 "column": 3,
@@ -501,14 +724,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": true
+                "bonus": true,
+                "position": {
+                    "x": -11.868236541748047,
+                    "y": 5.7554426193237305,
+                    "z": -1.2564175128936768
+                },
+                "color": {
+                    "r": 0.8509804010391235,
+                    "g": 0.8156862854957581,
+                    "b": 0.6941176652908325,
+                    "a": 1.0
+                },
+                "loreId": "freelance/0/0"
             },
             {
                 "id": "n14",
                 "label": "Security hub",
                 "detail": "Strengthens adjacent firewalls and databases by two security. Capturing or suppressing the hub removes that bonus.",
+                "typeId": "securityhub",
                 "kind": 6,
-                "security": 1,
+                "security": 2,
                 "column": 3,
                 "row": 1,
                 "x": 640.0,
@@ -519,12 +755,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 2.5160272121429443,
+                    "y": -5.2890448570251465,
+                    "z": -5.438328266143799
+                },
+                "color": {
+                    "r": 0.729411780834198,
+                    "g": 0.6313725709915161,
+                    "b": 0.929411768913269,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n15",
-                "label": "Service relay",
+                "label": "Maintenance 3.4",
                 "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
                 "kind": 2,
                 "security": 1,
                 "column": 3,
@@ -537,13 +786,26 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -1.166595458984375,
+                    "y": -8.745638847351074,
+                    "z": 7.993275165557861
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n16",
-                "label": "Backup relay",
-                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
-                "kind": 2,
+                "label": "Transit sensor 1.2",
+                "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
+                "kind": 4,
                 "security": 1,
                 "column": 3,
                 "row": 3,
@@ -555,14 +817,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -9.541428565979004,
+                    "y": 6.328864097595215,
+                    "z": -5.606945991516113
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n17",
-                "label": "Vault firewall",
-                "detail": "A hardened route barrier. Hack it, take a detour, or use Firewall bridge with two controlled neighbors.",
-                "kind": 3,
-                "security": 7,
+                "label": "Maintenance 3.1",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 1,
                 "column": 4,
                 "row": 0,
                 "x": 785.0,
@@ -573,14 +848,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -10.460868835449219,
+                    "y": -2.982236623764038,
+                    "z": 2.47503399848938
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n18",
                 "label": "Research wall",
                 "detail": "A hardened route barrier. Hack it, take a detour, or use Firewall bridge with two controlled neighbors.",
+                "typeId": "firewall",
                 "kind": 3,
-                "security": 7,
+                "security": 4,
                 "column": 4,
                 "row": 1,
                 "x": 785.0,
@@ -591,12 +879,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 8.027324676513672,
+                    "y": -3.198845863342285,
+                    "z": -3.793415069580078
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.7372549176216125,
+                    "b": 0.43921568989753723,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n19",
                 "label": "Audit terminal",
                 "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
                 "kind": 1,
                 "security": 3,
                 "column": 4,
@@ -609,12 +910,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 6.294492721557617,
+                    "y": -0.15987348556518555,
+                    "z": -3.9026970863342285
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n20",
                 "label": "Backup mirror",
                 "detail": "A store of valuable data. Control it first, then recover its files. Marked archives contain optional credits and XP.",
+                "typeId": "database",
                 "kind": 5,
                 "security": 2,
                 "column": 4,
@@ -627,12 +941,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": true
+                "bonus": false,
+                "position": {
+                    "x": 11.282285690307617,
+                    "y": -1.9473583698272705,
+                    "z": -4.091753005981445
+                },
+                "color": {
+                    "r": 0.8509804010391235,
+                    "g": 0.8156862854957581,
+                    "b": 0.6941176652908325,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n21",
                 "label": "Private archive",
                 "detail": "A store of valuable data. Control it first, then recover its files. Marked archives contain optional credits and XP.",
+                "typeId": "database",
                 "kind": 5,
                 "security": 2,
                 "column": 5,
@@ -645,12 +972,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": true
+                "bonus": true,
+                "position": {
+                    "x": -5.512674331665039,
+                    "y": 3.8771162033081055,
+                    "z": 9.406960487365723
+                },
+                "color": {
+                    "r": 0.8509804010391235,
+                    "g": 0.8156862854957581,
+                    "b": 0.6941176652908325,
+                    "a": 1.0
+                },
+                "loreId": "freelance/0/1"
             },
             {
                 "id": "n22",
                 "label": "Research vault",
                 "detail": "A store of valuable data. Control it first, then recover its files. Marked archives contain optional credits and XP.",
+                "typeId": "database",
                 "kind": 5,
                 "security": 2,
                 "column": 5,
@@ -663,14 +1003,27 @@
                 "scanned": false,
                 "collected": false,
                 "objective": true,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 14.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "color": {
+                    "r": 0.8509804010391235,
+                    "g": 0.8156862854957581,
+                    "b": 0.6941176652908325,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n23",
-                "label": "Test terminal",
-                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
-                "kind": 1,
-                "security": 2,
+                "label": "Maintenance 3.3",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 1,
                 "column": 5,
                 "row": 2,
                 "x": 930.0,
@@ -681,12 +1034,25 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": -4.274295330047607,
+                    "y": -7.784411430358887,
+                    "z": 7.71630334854126
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             },
             {
                 "id": "n24",
-                "label": "Export relay",
+                "label": "Transit 2.6",
                 "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
                 "kind": 2,
                 "security": 2,
                 "column": 5,
@@ -699,7 +1065,608 @@
                 "scanned": false,
                 "collected": false,
                 "objective": false,
-                "bonus": false
+                "bonus": false,
+                "position": {
+                    "x": 10.17752742767334,
+                    "y": 3.381387710571289,
+                    "z": 3.697326421737671
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "watch-a",
+                "label": "Ingress sensor",
+                "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
+                "kind": 4,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -6.059484481811523,
+                    "y": -1.1182920932769775,
+                    "z": -1.5146960020065308
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "watch-b",
+                "label": "Deep packet sensor",
+                "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
+                "kind": 4,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -10.597698211669922,
+                    "y": -2.4956870079040527,
+                    "z": -1.0067086219787598
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "archive-c",
+                "label": "Sealed correspondence",
+                "detail": "A store of valuable data. Control it first, then recover its files. Marked archives contain optional credits and XP.",
+                "typeId": "database",
+                "kind": 5,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": true,
+                "position": {
+                    "x": -2.9054150581359863,
+                    "y": -6.183785915374756,
+                    "z": 10.511686325073242
+                },
+                "color": {
+                    "r": 0.8509804010391235,
+                    "g": 0.8156862854957581,
+                    "b": 0.6941176652908325,
+                    "a": 1.0
+                },
+                "loreId": "freelance/0/2"
+            },
+            {
+                "id": "extra-28",
+                "label": "Maintenance 3.2",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -7.95370626449585,
+                    "y": -5.977912425994873,
+                    "z": 5.589958190917969
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-29",
+                "label": "Transit 2.2",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 2,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -6.242535591125488,
+                    "y": 5.692541599273682,
+                    "z": 6.504972457885742
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-30",
+                "label": "Transit 1.1",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -9.738320350646973,
+                    "y": 3.7837700843811035,
+                    "z": -3.2124252319335938
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-31",
+                "label": "Maintenance relay 7",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -6.439539909362793,
+                    "y": -6.879250526428223,
+                    "z": 2.565906047821045
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-32",
+                "label": "Transit 2.5",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": 6.312472343444824,
+                    "y": 6.093672275543213,
+                    "z": 6.43056058883667
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-33",
+                "label": "Transit sensor 2.2",
+                "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
+                "kind": 4,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -13.076337814331055,
+                    "y": 2.621253728866577,
+                    "z": 2.2215991020202637
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-34",
+                "label": "Transit 1.3",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -0.06555280834436417,
+                    "y": 6.806427001953125,
+                    "z": -6.200872421264648
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-35",
+                "label": "Transit 1.2",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 2,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -4.652302265167236,
+                    "y": 6.493767738342285,
+                    "z": -5.550931930541992
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-36",
+                "label": "Transit sensor 1.1",
+                "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
+                "kind": 4,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -9.162308692932129,
+                    "y": 2.8751230239868164,
+                    "z": 0.11812567710876465
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-37",
+                "label": "Maintenance relay 13",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": 2.1275627613067627,
+                    "y": 4.040210247039795,
+                    "z": 5.600898265838623
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-38",
+                "label": "Transit sensor 2.1",
+                "detail": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+                "typeId": "scanner",
+                "kind": 4,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -6.993214130401611,
+                    "y": 4.850842475891113,
+                    "z": 2.3420166969299316
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 0.47058823704719543,
+                    "b": 0.4274509847164154,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-39",
+                "label": "Maintenance relay 15",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -7.34821081161499,
+                    "y": 4.827113151550293,
+                    "z": -7.035633563995361
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-40",
+                "label": "Maintenance 3.8",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": 10.894915580749512,
+                    "y": -3.5337729454040527,
+                    "z": 3.177593231201172
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-41",
+                "label": "Transit 2.4",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 2,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": 2.3370840549468994,
+                    "y": 6.8261613845825195,
+                    "z": 7.791121482849121
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-42",
+                "label": "Transit 1.5",
+                "detail": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+                "typeId": "workstation",
+                "kind": 1,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": 9.619821548461914,
+                    "y": 3.735011577606201,
+                    "z": -3.0025556087493896
+                },
+                "color": {
+                    "r": 0.572549045085907,
+                    "g": 0.6509804129600525,
+                    "b": 0.7176470756530762,
+                    "a": 1.0
+                },
+                "loreId": ""
+            },
+            {
+                "id": "extra-43",
+                "label": "Transit 2.1",
+                "detail": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+                "typeId": "relay",
+                "kind": 2,
+                "security": 1,
+                "column": 0,
+                "row": 0,
+                "x": 0.0,
+                "y": 0.0,
+                "suppressed": 0.0,
+                "known": false,
+                "controlled": false,
+                "scanned": false,
+                "collected": false,
+                "objective": false,
+                "bonus": false,
+                "position": {
+                    "x": -9.917889595031738,
+                    "y": 3.3490564823150635,
+                    "z": 3.5423970222473145
+                },
+                "color": {
+                    "r": 0.3960784375667572,
+                    "g": 0.8509804010391235,
+                    "b": 0.9215686321258545,
+                    "a": 1.0
+                },
+                "loreId": ""
             }
         ],
         "links": [
@@ -708,179 +1675,243 @@
                 "b": "n2"
             },
             {
-                "a": "home",
-                "b": "n4"
-            },
-            {
-                "a": "n1",
-                "b": "n5"
-            },
-            {
                 "a": "n2",
                 "b": "n6"
             },
             {
-                "a": "n3",
-                "b": "n7"
-            },
-            {
-                "a": "n4",
-                "b": "n8"
-            },
-            {
-                "a": "n5",
-                "b": "n9"
-            },
-            {
                 "a": "n6",
                 "b": "n10"
-            },
-            {
-                "a": "n7",
-                "b": "n11"
-            },
-            {
-                "a": "n8",
-                "b": "n12"
-            },
-            {
-                "a": "n9",
-                "b": "n13"
             },
             {
                 "a": "n10",
                 "b": "n14"
             },
             {
-                "a": "n11",
-                "b": "n15"
-            },
-            {
-                "a": "n12",
-                "b": "n16"
-            },
-            {
-                "a": "n13",
-                "b": "n17"
-            },
-            {
                 "a": "n14",
                 "b": "n18"
             },
             {
-                "a": "n15",
-                "b": "n19"
-            },
-            {
-                "a": "n16",
-                "b": "n20"
-            },
-            {
-                "a": "n17",
-                "b": "n21"
-            },
-            {
                 "a": "n18",
                 "b": "n22"
-            },
-            {
-                "a": "n19",
-                "b": "n23"
-            },
-            {
-                "a": "n20",
-                "b": "n24"
-            },
-            {
-                "a": "n1",
-                "b": "n2"
-            },
-            {
-                "a": "n3",
-                "b": "n4"
             },
             {
                 "a": "n2",
-                "b": "n3"
+                "b": "extra-30"
             },
             {
-                "a": "n5",
-                "b": "n6"
+                "a": "extra-30",
+                "b": "extra-35"
             },
             {
-                "a": "n7",
-                "b": "n8"
+                "a": "extra-35",
+                "b": "extra-34"
             },
             {
-                "a": "n6",
-                "b": "n7"
+                "a": "extra-34",
+                "b": "n4"
             },
             {
-                "a": "n9",
-                "b": "n10"
+                "a": "n4",
+                "b": "extra-42"
             },
             {
-                "a": "n11",
-                "b": "n12"
+                "a": "extra-42",
+                "b": "n22"
             },
             {
-                "a": "n13",
-                "b": "n14"
+                "a": "n2",
+                "b": "extra-43"
             },
             {
-                "a": "n15",
-                "b": "n16"
+                "a": "extra-43",
+                "b": "extra-29"
             },
             {
-                "a": "n14",
-                "b": "n15"
+                "a": "extra-29",
+                "b": "n1"
+            },
+            {
+                "a": "n1",
+                "b": "extra-41"
+            },
+            {
+                "a": "extra-41",
+                "b": "extra-32"
+            },
+            {
+                "a": "extra-32",
+                "b": "n24"
+            },
+            {
+                "a": "n24",
+                "b": "n22"
+            },
+            {
+                "a": "n2",
+                "b": "n17"
             },
             {
                 "a": "n17",
-                "b": "n18"
+                "b": "extra-28"
             },
             {
-                "a": "n19",
-                "b": "n20"
+                "a": "extra-28",
+                "b": "n23"
+            },
+            {
+                "a": "n23",
+                "b": "n15"
+            },
+            {
+                "a": "n15",
+                "b": "n8"
+            },
+            {
+                "a": "n8",
+                "b": "n7"
+            },
+            {
+                "a": "n7",
+                "b": "n3"
+            },
+            {
+                "a": "n3",
+                "b": "extra-40"
+            },
+            {
+                "a": "extra-40",
+                "b": "n22"
+            },
+            {
+                "a": "n6",
+                "b": "n5"
+            },
+            {
+                "a": "n6",
+                "b": "n11"
+            },
+            {
+                "a": "n6",
+                "b": "watch-a"
+            },
+            {
+                "a": "n6",
+                "b": "watch-b"
+            },
+            {
+                "a": "n18",
+                "b": "n9"
+            },
+            {
+                "a": "extra-42",
+                "b": "n9"
+            },
+            {
+                "a": "n24",
+                "b": "n9"
+            },
+            {
+                "a": "extra-40",
+                "b": "n9"
             },
             {
                 "a": "n18",
                 "b": "n19"
             },
             {
-                "a": "n21",
-                "b": "n22"
+                "a": "extra-42",
+                "b": "n19"
+            },
+            {
+                "a": "n24",
+                "b": "n19"
+            },
+            {
+                "a": "extra-40",
+                "b": "n19"
+            },
+            {
+                "a": "n18",
+                "b": "n20"
+            },
+            {
+                "a": "extra-42",
+                "b": "n20"
+            },
+            {
+                "a": "n24",
+                "b": "n20"
+            },
+            {
+                "a": "extra-40",
+                "b": "n20"
+            },
+            {
+                "a": "extra-34",
+                "b": "n1"
+            },
+            {
+                "a": "extra-30",
+                "b": "extra-36"
+            },
+            {
+                "a": "extra-30",
+                "b": "n16"
+            },
+            {
+                "a": "extra-43",
+                "b": "extra-38"
+            },
+            {
+                "a": "extra-43",
+                "b": "extra-33"
+            },
+            {
+                "a": "extra-30",
+                "b": "n13"
+            },
+            {
+                "a": "extra-29",
+                "b": "n21"
             },
             {
                 "a": "n23",
-                "b": "n24"
+                "b": "archive-c"
             },
             {
-                "a": "n22",
-                "b": "n23"
+                "a": "extra-41",
+                "b": "extra-37"
+            },
+            {
+                "a": "extra-28",
+                "b": "extra-31"
+            },
+            {
+                "a": "n1",
+                "b": "n12"
+            },
+            {
+                "a": "extra-35",
+                "b": "extra-39"
             }
         ],
         "log": [
             "00:00  TUNNEL OPEN // HELIX DYNAMICS. Gateway secured.",
             "00:00  CLIENT // Recover the archive from Research vault.",
-            "00:00  RUN // HACK : Public relay"
+            "00:00  RUN // Hack system : Public relay"
         ],
         "queue": [],
+        "counters": [],
+        "statuses": [],
         "task": {
             "target": "n2",
-            "kind": 1,
-            "duration": 2.517857074737549,
+            "actionId": "hack",
+            "duration": 2.5178568363189697,
             "elapsed": 0.5,
             "trace": 3.2899997234344482
         },
-        "trace": 0.653333306312561,
+        "trace": 0.6533333659172058,
         "elapsed": 0.5,
-        "decoyRemaining": 0.0,
-        "paused": false,
-        "decoyUsed": false,
-        "backdoorUsed": false,
-        "firstRelayUsed": false,
-        "cascadeApplied": false,
-        "lastControlled": "home"
+        "paused": true
     }
 }

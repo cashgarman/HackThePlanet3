@@ -14,7 +14,8 @@ namespace HackThePlanet
         public float Distance = 30f;
         public float Yaw;
         public float Pitch = 28f;
-        public void Reset() { Center = Vector3.zero; Distance = 30f; Yaw = 0; Pitch = 28f; }
+        public bool Initialized;
+        public void Reset() { Center = Vector3.zero; Distance = 30f; Yaw = 0; Pitch = 28f; Initialized = false; }
     }
 
     // A workstation-sized view of the package's actual 3D renderer. The host owns
@@ -30,6 +31,7 @@ namespace HackThePlanet
         private readonly Camera camera;
         private readonly RenderTexture texture;
         private readonly GraphRenderingSession session;
+        private readonly GraphVisualSettings networkSettings;
         private readonly LinkOverlay links;
         private readonly VisualElement labels;
         private readonly Dictionary<string, Button> nodeButtons = new Dictionary<string, Button>();
@@ -46,6 +48,8 @@ namespace HackThePlanet
         private Vector3 centerStart;
         private float yawStart, pitchStart;
         private bool disposed;
+        private string hoveredId;
+        private readonly HashSet<string> objectives = new HashSet<string>();
 
         public int VisibleNodes => session.Renderer.VisibleCount;
         public int VisibleEdges => session.Renderer.VisibleEdges;
@@ -57,8 +61,8 @@ namespace HackThePlanet
         {
         }
 
-        public GraphViewport(Career career, string selected, Action<string> select, GraphCameraState cameraState = null)
-            : this(BuildResearch(career), selected, select, true, null, cameraState)
+        public GraphViewport(Career career, string selected, Action<string> select, GraphCameraState cameraState = null, GameCatalog catalog = null)
+            : this(BuildResearch(career,catalog??GameCatalog.Default), selected, select, true, null, cameraState)
         {
         }
 
@@ -85,7 +89,7 @@ namespace HackThePlanet
             camera.targetTexture = texture;
             camera.clearFlags = CameraClearFlags.SolidColor;
             camera.backgroundColor = Palette.Hex("071014");
-            camera.cullingMask = 0;
+            camera.cullingMask = 1; // GraphRenderer submits its camera-scoped instances on the default layer.
             camera.fieldOfView = 48;
             camera.nearClipPlane = .1f;
             camera.farClipPlane = 200;
@@ -95,16 +99,19 @@ namespace HackThePlanet
             yaw = savedCamera.Yaw;
             pitch = savedCamera.Pitch;
             PlaceCamera();
-            session = GraphRenderingSession.Initialize(camera, new GraphResourceConfiguration());
+            var resources = new GraphResourceConfiguration();
+            if (!research) resources = NetworkAppearance.Create(out networkSettings);
+            session = GraphRenderingSession.Initialize(camera, resources);
             session.Layout.Bind(scene);
             session.Layout.Paused = true;
             session.Renderer.Size = SizeMapping.Uniform;
             session.Renderer.EdgeWidthScale = 3f;
-            session.Renderer.ActivePath = route;
+            // The simulation stores both traversal directions; the visual graph draws each link once.
+            session.Renderer.ActivePath = route == null ? null : new GraphPathResult(route.StartId, route.EndId, route.NodeIds,
+                route.EdgeIds.Select(id => scene.Edges.ContainsKey(id) ? id : string.Join(">", id.Split('>').Reverse())));
             session.Renderer.UpdateMetrics(scene, edgeFilter);
 
-            links = new LinkOverlay(scene, camera, selected, route, research);
-            Add(links);
+            if (research) { links = new LinkOverlay(scene, camera, selected, route, true); Add(links); }
             labels = new VisualElement();
             labels.style.position = Position.Absolute;
             labels.style.left = labels.style.right = labels.style.top = labels.style.bottom = 0;
@@ -112,6 +119,7 @@ namespace HackThePlanet
             Add(labels);
             foreach (var node in scene.Nodes.Values)
             {
+                if (node.Record.Properties.TryGetValue("objective", out var objective) && objective.Boolean) objectives.Add(node.Id);
                 var button = new Button(() => select(node.Id)) { name = (research ? "tech-" : "node-") + node.Id,
                     text = node.Label, tooltip = node.Label };
                 button.style.position = Position.Absolute;
@@ -129,7 +137,18 @@ namespace HackThePlanet
                 labels.Add(button);
                 nodeButtons.Add(node.Id, button);
             }
-            RegisterCallback<GeometryChangedEvent>(_ => PositionLabels());
+            RegisterCallback<GeometryChangedEvent>(_ =>
+            {
+                if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
+                // Match the render target to the panel; projection and picking share this aspect.
+                int width = Mathf.Clamp(Mathf.RoundToInt(contentRect.width), 256, 2048);
+                int height = Mathf.Clamp(Mathf.RoundToInt(contentRect.height), 256, 2048);
+                if (texture.width != width || texture.height != height)
+                { texture.Release(); texture.width = width; texture.height = height; texture.Create(); }
+                camera.aspect = (float)width / height;
+                if (!savedCamera.Initialized) { ResetView(); savedCamera.Initialized = true; }
+                PositionLabels();
+            });
             RegisterCallback<WheelEvent>(evt =>
             {
                 Zoom(evt.delta.y > 0 ? 1.12f : .89f);
@@ -148,7 +167,18 @@ namespace HackThePlanet
             });
             RegisterCallback<PointerMoveEvent>(evt =>
             {
-                if (!dragging) return;
+                if (!dragging)
+                {
+                    var local = this.WorldToLocal(evt.position);
+                    var nextHoveredId = PickNode(local);
+                    if (hoveredId != nextHoveredId)
+                    {
+                        hoveredId = nextHoveredId;
+                        PositionLabels();
+                    }
+                    tooltip = hoveredId == null ? "Drag to pan / Right-drag to orbit / Wheel to zoom" : scene.Nodes[hoveredId].Label;
+                    return;
+                }
                 var delta = (Vector2)evt.position - dragStart;
                 if (orbiting)
                 {
@@ -162,8 +192,18 @@ namespace HackThePlanet
             RegisterCallback<PointerUpEvent>(evt =>
             {
                 if (!dragging) return;
+                if (!orbiting && Vector2.Distance(dragStart, evt.position) < 5)
+                {
+                    var hit = PickNode(this.WorldToLocal(evt.position));
+                    if (hit != null) select(hit);
+                }
                 dragging = false;
                 this.ReleasePointer(evt.pointerId);
+            });
+            RegisterCallback<PointerLeaveEvent>(_ =>
+            {
+                hoveredId = null;
+                PositionLabels();
             });
         }
 
@@ -171,44 +211,45 @@ namespace HackThePlanet
         {
             var document = new GraphDocument("workstation-network", "Live network");
             var schema = new GraphSchema();
-            foreach (NodeKind kind in Enum.GetValues(typeof(NodeKind)))
-                schema.Register(new GraphNodeTypeDefinition(kind.ToString(), kind.ToString(),
-                    "default", Palette.Kind(kind), .95f));
+            foreach(var group in nodes.GroupBy(n=>string.IsNullOrEmpty(n.typeId)?n.kind.ToString():n.typeId))
+            {
+                var node=group.First();string glyph=node.kind.ToString();var color=node.color.a>0?node.color:Palette.Kind(node.kind);
+                schema.Register(new GraphNodeTypeDefinition(group.Key,group.Key,glyph,color,.95f));
+                schema.Register(new GraphNodeTypeDefinition(group.Key+"-owned",group.Key,glyph,Palette.Lime,.95f));
+                schema.Register(new GraphNodeTypeDefinition(group.Key+"-objective",group.Key,glyph,Palette.Amber,1.1f));
+            }
             schema.Register(new GraphRelationDefinition("network", "Connection", Palette.Cyan));
             foreach (var node in nodes.Where(n => preview || n.known))
-                document.UpsertNode(new GraphNodeRecord(node.id, node.kind.ToString(), node.label));
+                document.UpsertNode(new GraphNodeRecord(node.id, (string.IsNullOrEmpty(node.typeId)?node.kind.ToString():node.typeId) + (node.controlled ? "-owned" : node.objective ? "-objective" : ""), node.label,
+                    new Dictionary<string, GraphValue> { ["objective"] = GraphValue.From(node.objective) }));
             foreach (var link in links.Where(l => document.Nodes.ContainsKey(l.a) && document.Nodes.ContainsKey(l.b)))
                 document.UpsertEdge(new GraphEdgeRecord(link.a + ">" + link.b, link.a, link.b, "network"));
             var scene = new GraphScene(document, schema);
             foreach (var node in nodes.Where(n => document.Nodes.ContainsKey(n.id)))
             {
                 var visual = scene.Nodes[node.id];
-                // Keep the contract's progression map readable in X/Y while distributing
-                // each row and column through depth so the camera sees a real 3D network.
-                var depth = node.kind == NodeKind.Gateway
-                    ? -5f
-                    : (node.column - 2f) * 2.2f + (node.row - 1f) * 1.4f;
-                visual.Position = new Vector3((node.x - 500) / 43f, (250 - node.y) / 43f, depth);
+                visual.Position = node.position;
                 visual.Pinned = true;
+                visual.Emphasis = node.objective && !node.collected ? ToolEmphasis.Next : ToolEmphasis.None;
             }
             return scene;
         }
 
-        private static GraphScene BuildResearch(Career career)
+        private static GraphScene BuildResearch(Career career,GameCatalog catalog)
         {
             var document = new GraphDocument("workstation-research", "Research network");
             var schema = new GraphSchema();
-            foreach (var branch in GameContent.Tech.Select(t => t.branch).Distinct())
+            foreach (var branch in catalog.Technologies.Select(t => t.branch).Distinct())
                 schema.Register(new GraphNodeTypeDefinition(branch, branch, "default",
                     Palette.Branch(branch), .95f));
             schema.Register(new GraphRelationDefinition("requires", "Requires", Palette.Cyan));
-            foreach (var tech in GameContent.Tech)
+            foreach (var tech in catalog.Technologies)
                 document.UpsertNode(new GraphNodeRecord(tech.id, tech.branch, tech.title));
-            foreach (var tech in GameContent.Tech)
+            foreach (var tech in catalog.Technologies)
                 foreach (var parent in tech.parents)
                     document.UpsertEdge(new GraphEdgeRecord(parent + ">" + tech.id, parent, tech.id, "requires"));
             var scene = new GraphScene(document, schema);
-            foreach (var tech in GameContent.Tech)
+            foreach (var tech in catalog.Technologies)
             {
                 var node = scene.Nodes[tech.id];
                 // Research branches occupy distinct depth bands, with individual nodes
@@ -230,42 +271,68 @@ namespace HackThePlanet
         {
             if (disposed) return;
             session.Renderer.ReducedMotion = effects != SignalEffects.Full;
-            if (state.Active && !research && state.Op.task != null)
+            if (state.Active && !research && state.Op.task != null && !string.IsNullOrEmpty(state.Op.task.target))
                 session.Renderer.NodeProgress = new Dictionary<string, GraphNodeProgressVisual>
                 { [state.Op.task.target] = new GraphNodeProgressVisual { Fraction = state.Progress } };
             else session.Renderer.NodeProgress = null;
             scene.Nodes.TryGetValue(selectedId, out var selected);
-            session.Renderer.Draw(scene, edgeFilter, camera, selected, null, null);
-            PositionLabels();
+            scene.Nodes.TryGetValue(hoveredId ?? "", out var hovered);
+            session.Renderer.Draw(scene, edgeFilter, camera, selected, hovered, null);
         }
 
         private void PositionLabels()
         {
             if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
-            links.MarkDirtyRepaint();
-            foreach (var pair in nodeButtons)
+            links?.MarkDirtyRepaint();
+            foreach (var pair in nodeButtons.OrderBy(p => p.Key == selectedId ? 0 : objectives.Contains(p.Key) ? 1 : 2)
+                         .ThenBy(p => Vector3.Distance(camera.transform.position, scene.Nodes[p.Key].Position)))
             {
                 var point = camera.WorldToScreenPoint(scene.Nodes[pair.Key].Position);
-                pair.Value.style.display = point.z > 0 ? DisplayStyle.Flex : DisplayStyle.None;
-                if (point.z <= 0) continue;
-                pair.Value.style.left = point.x / texture.width * contentRect.width - (research ? 59 : 52);
-                pair.Value.style.top = (1 - point.y / texture.height) * contentRect.height + 23;
+                // Keep small screen-space text on whole panel pixels while the camera moves.
+                // Fractional UI positions make glyph edges shimmer during orbit and zoom.
+                var rect = new Rect(Mathf.Round(point.x / texture.width * contentRect.width - (research ? 59 : 52)),
+                    Mathf.Round((1 - point.y / texture.height) * contentRect.height + 15), research ? 118 : 104, 26);
+                bool priority = pair.Key == selectedId;
+                bool active = pair.Key == selectedId || pair.Key == hoveredId;
+                bool show = active && point.z > 0 && rect.xMax > 0 && rect.xMin < contentRect.width && rect.yMin >= 0 && rect.yMax < contentRect.height;
+                var display = show ? DisplayStyle.Flex : DisplayStyle.None;
+                if (pair.Value.resolvedStyle.display != display) pair.Value.style.display = display;
+                if (!show) continue;
+                if (!Mathf.Approximately(pair.Value.resolvedStyle.left, rect.x)) pair.Value.style.left = rect.x;
+                if (!Mathf.Approximately(pair.Value.resolvedStyle.top, rect.y)) pair.Value.style.top = rect.y;
             }
+        }
+
+        private string PickNode(Vector2 local)
+        {
+            if (contentRect.width <= 0 || contentRect.height <= 0) return null;
+            return session.Renderer.Pick(scene, camera, new Vector2(local.x / contentRect.width * texture.width,
+                (1 - local.y / contentRect.height) * texture.height))?.Id;
         }
 
         public void Zoom(float factor)
         {
-            distance = Mathf.Clamp(distance * factor, 12, 58);
+            distance = Mathf.Clamp(distance * factor, 4, 180);
             PlaceCamera();
             PositionLabels();
         }
 
         public void ResetView()
         {
-            center = Vector3.zero;
-            distance = 30;
-            yaw = 0;
-            pitch = 28;
+            if (scene.Nodes.Count == 0) return;
+            var bounds = new Bounds(scene.Nodes.Values.First().Position, Vector3.one * 3);
+            foreach (var node in scene.Nodes.Values) bounds.Encapsulate(new Bounds(node.Position, Vector3.one * 3));
+            center = bounds.center;
+            var rotation = Quaternion.Inverse(Quaternion.Euler(pitch, yaw, 0));
+            float tangent = Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f);
+            distance = 4;
+            foreach (var node in scene.Nodes.Values)
+            {
+                var point = rotation * (node.Position - center);
+                distance = Mathf.Max(distance, Mathf.Max((Mathf.Abs(point.y) + 2) / tangent,
+                    (Mathf.Abs(point.x) + 2) / (tangent * camera.aspect)) - point.z);
+            }
+            distance *= 1.12f;
             PlaceCamera();
             PositionLabels();
         }
@@ -300,6 +367,7 @@ namespace HackThePlanet
 
             private void Draw(MeshGenerationContext context)
             {
+                if (camera == null) return;
                 var painter = context.painter2D;
                 foreach (var edge in scene.Edges.Values)
                 {
@@ -333,6 +401,7 @@ namespace HackThePlanet
             savedCamera.Yaw = yaw;
             savedCamera.Pitch = pitch;
             session.Dispose();
+            if (networkSettings != null) Object.Destroy(networkSettings);
             camera.targetTexture = null;
             texture.Release();
             Object.Destroy(texture);

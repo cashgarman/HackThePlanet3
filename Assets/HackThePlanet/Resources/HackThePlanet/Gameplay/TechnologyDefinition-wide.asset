@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: TechnologyDefinition-wide
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: wide
+  title: Wide scan
+  description: Scans reveal three network hops instead of two. Make a plan before making noise.
+  branch: RECON
+  cost: 50
+  special: 0
+  position: {x: 320, y: 155}
+  parents:
+  - {fileID: 11400000, guid: f5b66d540a4aeea488d75fe867d364aa, type: 2}
+  grants: []
+  modifiers:
+  - stat: scanRadius
+    priority: 0
+    operation: 6
+    when:
+      rid: 213507065135235804
+    value:
+      rid: 213507065135235805
+  triggers: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235804
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235805
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3

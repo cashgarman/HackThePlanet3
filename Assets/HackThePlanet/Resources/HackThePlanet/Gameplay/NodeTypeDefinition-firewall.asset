@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7777c426e369a459aa8cc577715505, type: 3}
+  m_Name: NodeTypeDefinition-firewall
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.NodeTypeDefinition
+  id: firewall
+  title: Firewall
+  description: A hardened route barrier. Hack it, take a detour, or use Firewall bridge with two controlled neighbors.
+  glyph: 3
+  color: {r: 1, g: 0.7372549, b: 0.4392157, a: 1}
+  tags:
+  - firewall
+  security:
+    rid: 213507065135235707
+  auras: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235707
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507065135235708
+        right:
+          rid: 213507065135235709
+    - rid: 213507065135235708
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507065135235709
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key: 
+        filter:
+          rid: 213507065135235710
+    - rid: 213507065135235710
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
