@@ -102,6 +102,12 @@ namespace HackThePlanet.Editor
             string path="Artifacts/invalid-reference-career.json";File.WriteAllText(path,JsonUtility.ToJson(saved));string before=File.ReadAllText(path);
             failed=false;try{CareerStorage.Load(path);}catch(InvalidDataException){failed=true;}Check(failed&&File.ReadAllText(path)==before,"invalid v2 save stays byte-for-byte intact");
             UnityEngine.Object.DestroyImmediate(root);UnityEngine.Object.DestroyImmediate(action);UnityEngine.Object.DestroyImmediate(tech);UnityEngine.Object.DestroyImmediate(contract);
+            GameplayRichText.ReloadPalette();
+            var scanner = new NetNode { label = "Traffic scanner", kind = NodeKind.Scanner, security = 2, known = true, detail = GameCatalog.Default.NodeTypes.First(t => t.glyph == NodeKind.Scanner).description };
+            var intel = GraphViewport.DescribeNode(scanner, ContractIntel.Full, false, GameCatalog.Default);
+            var rich = GameplayRichText.Format(intel);
+            Check(rich.Contains("<color=") && rich.Contains("<b>") && rich.Contains("DISCOVERED"), "gameplay text palette bolds and colors tooltip terms");
+            Check(GameplayRichText.Plain(rich) == intel, "gameplay rich text preserves readable copy");
         }
         public sealed class Fixture : IDisposable
         {

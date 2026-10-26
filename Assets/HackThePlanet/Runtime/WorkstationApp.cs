@@ -16,7 +16,9 @@ namespace HackThePlanet
         public SignalVisuals Visuals { get; private set; }
         public bool Testing { get; set; }
         public const string TextSizePreference = "HackThePlanet.TextSize";
+        public const string SelectWithoutCameraFocusPreference = "HackThePlanet.SelectWithoutCameraFocus";
         public int TextSizePercent { get; private set; } = 200;
+        public bool SelectWithoutCameraFocus { get; private set; } = true;
         private readonly Dictionary<TextElement, float> baseTextSizes = new Dictionary<TextElement, float>();
         private Label tooltipLabel;
         private VisualElement tooltipOwner;
@@ -30,7 +32,7 @@ namespace HackThePlanet
         private string selectedNode, selectedTech, view="network", modal;
         private readonly Dictionary<string, Action> uiActions=new Dictionary<string, Action>();
         private readonly GraphCameraState networkCamera=new GraphCameraState(), researchCamera=new GraphCameraState();
-        private bool dirty=true, muted, expandedBrief, expandedNetworkKey;
+        private bool dirty=true, muted, expandedBrief;
         private float speed=1, saveTimer;
         private AudioSource audioSource;
         private AudioClip clickSound, successSound, warningSound;
@@ -71,6 +73,7 @@ namespace HackThePlanet
             root.styleSheets.Add(Resources.Load<StyleSheet>("HackThePlanet/GhostFrequency"));
             root.styleSheets.Add(Resources.Load<StyleSheet>("HackThePlanet/Readability"));
             TextSizePercent=Mathf.Clamp(PlayerPrefs.GetInt(TextSizePreference,200),100,300);
+            SelectWithoutCameraFocus=PlayerPrefs.GetInt(SelectWithoutCameraFocusPreference,1)!=0;
             root.RegisterCallback<GeometryChangedEvent>(_=>UpdateReadableLayout());
             root.RegisterCallback<PointerMoveEvent>(evt=>{
                 pointerPosition=root.WorldToLocal(evt.position);
@@ -113,7 +116,7 @@ namespace HackThePlanet
             if(dirty)Build();
             if(tooltipOwner!=null&&tooltipLabel!=null&&Time.unscaledTime>=tooltipAt)
             {
-                tooltipLabel.text=tooltipOwner.tooltip;tooltipLabel.style.display=DisplayStyle.Flex;
+                tooltipLabel.text=GameplayRichText.Format(tooltipOwner.tooltip);tooltipLabel.style.display=DisplayStyle.Flex;
                 PositionTooltip();
             }
             UpdateMeters();
@@ -130,7 +133,8 @@ namespace HackThePlanet
             if(evt.keyCode==KeyCode.Escape)
             {
                 if(modal=="settings")ResumeFromSettings();
-                else if(modal=="reset-save"){modal="settings";settingsError=null;dirty=true;}
+                else if(modal=="reset-save")CancelResetSave();
+                else if(modal=="debug"){modal="settings";settingsError=null;dirty=true;}
                 else if(modal=="help"){modal=null;if(State.Active)State.SetPaused(pausedBeforeHelp);dirty=true;}
                 else ShowSettings();
             }
@@ -171,11 +175,11 @@ namespace HackThePlanet
             var footer=El(root,"footer");Text(footer,"GHOST FREQUENCY / HTP TERMINAL 1.0","footer-brand");
             Text(footer,State.Active?"ENCRYPTED SESSION  /  "+(State.Op.paused?"PAUSED":"LIVE"):"LOCAL SESSION  /  PRIVATE GATEWAY","footer-center");
             Text(footer,CareerStorage.Warning!=null?"SAVE UNAVAILABLE":"AUTOSAVE ACTIVE  /  LOCAL STORAGE","footer-save");
-            if(modal=="settings"||modal=="reset-save")
+            if(modal=="settings"||modal=="reset-save"||modal=="debug")
                 foreach(var child in root.Children())child.SetEnabled(false);
             if(modal!=null)BuildModal();
             Visuals.AttachGlass(root);
-            tooltipLabel=Text(root,"","readable-tooltip");tooltipLabel.pickingMode=PickingMode.Ignore;
+            tooltipLabel=Text(root,"","readable-tooltip");tooltipLabel.enableRichText=true;tooltipLabel.pickingMode=PickingMode.Ignore;
             tooltipLabel.RegisterCallback<GeometryChangedEvent>(_=>PositionTooltip());
             // Snapshot authored fonts after USS resolves, before assigning any scaled
             // fonts. This includes inline graph fonts and inherited control text.
@@ -185,7 +189,7 @@ namespace HackThePlanet
                 ApplyTextSize();
             });
             UpdateReadableLayout();
-            var modalFocus=modal=="settings"?root.Q<Button>("resume"):modal=="reset-save"?root.Q<Button>("cancel-reset"):null;
+            var modalFocus=modal=="settings"?root.Q<Button>("resume"):modal=="reset-save"?root.Q<Button>("cancel-reset"):modal=="debug"?root.Q<Button>("debug-back"):null;
             if(modalFocus!=null)modalFocus.Focus();else root.Focus();
         }
 
@@ -208,6 +212,13 @@ namespace HackThePlanet
             var value=root.Q<Label>("text-size-value");if(value!=null)value.text="TEXT SIZE / "+TextSizePercent+"%";
             root.Q<SliderInt>("text-size")?.SetValueWithoutNotify(TextSizePercent);
             ApplyTextSize();
+        }
+
+        public void SetSelectWithoutCameraFocus(bool value)
+        {
+            SelectWithoutCameraFocus=value;
+            if(!Testing){PlayerPrefs.SetInt(SelectWithoutCameraFocusPreference,value?1:0);PlayerPrefs.Save();}
+            root.Q<Toggle>("select-without-camera-focus")?.SetValueWithoutNotify(value);
         }
 
         private void ApplyTextSize()
@@ -294,16 +305,11 @@ namespace HackThePlanet
                 }
                 else Btn(loadout,tech.title+" / READY",()=>{selectedTech=id;Navigate("research");},"ability-"+id,"ability-button").SetEnabled(!State.Active);
             }
-            var mid=El(workspace,"network-panel");var map=Scroll(mid,"map-content");var mh=El(map,"map-heading");var title=El(mh,"map-title-block");
+            var mid=El(workspace,"network-panel");var map=El(mid,"map-content");var mh=El(map,"map-heading");var title=El(mh,"map-title-block");
             var intel=State.Active?ContractIntel.Full:selectedJob.Intel;
             Text(title,State.Active?"LIVE NETWORK":"NETWORK INTELLIGENCE","eyebrow cyan");Text(title,(State.Active?State.Job:selectedJob).company,"map-title");
             var state=El(mh,"map-status");Text(state,State.Active?(State.Op.paused?"||  SIMULATION PAUSED":"●  ENCRYPTED CONNECTION"):"○  "+selectedJob.DifficultyLabel+" / "+(intel==ContractIntel.Full?"FULL INTEL":intel==ContractIntel.Topology?"TOPOLOGY ONLY":"NO INTEL"),"micro "+(State.Active?"lime":"muted"));
             Text(state,State.Active?State.Op.nodes.Count(n=>n.known)+" / "+State.Op.nodes.Count+" SYSTEMS DISCOVERED":"SELECT A CONTRACT TO BEGIN","micro muted");
-            var networkKey=new Foldout{text="NETWORK KEY",value=expandedNetworkKey,name="network-key"};networkKey.AddToClassList("network-key");
-            networkKey.RegisterValueChangedCallback(evt=>expandedNetworkKey=evt.newValue);
-            var signal=El(networkKey,"signal-strip");Text(signal,"GHOST / FREQUENCY","micro");Text(signal,State.Active?"RX / ENCRYPTED UPLINK":"RX / PASSIVE INTERCEPT","micro");Text(signal,"CHANNEL 01.337","micro");
-            if(intel==ContractIntel.Full)
-            {var sectors=El(networkKey,"sectors");Text(sectors,"01 / PUBLIC EDGE","sector");Text(sectors,"02 / INTERNAL SERVICES","sector");Text(sectors,"03 / SECURE CORE","sector");}
             var nodes=new List<NetNode>();
             if(intel==ContractIntel.None)
             {
@@ -318,16 +324,18 @@ namespace HackThePlanet
                 nodes=State.Active?State.Op.nodes:preview.nodes;
                 var links=State.Active?State.Op.links:preview.links;
                 var route=State.Active?State.Route(selectedNode,true):null;
-                canvas=new GraphViewport(nodes,links,selectedNode,!State.Active,SelectNode,route,networkCamera,intel);map.Add(canvas);Visuals.AttachField(canvas);
+                var job=State.Active?State.Job:selectedJob;
+                var entryId=State.Active?State.Op.entryNode:State.Catalog.Network(job.networkId).entryNode;
+                var objectiveId=job.Intel!=ContractIntel.None?nodes.FirstOrDefault(n=>n.objective&&!n.collected)?.id:null;
+                canvas=new GraphViewport(nodes,links,selectedNode,!State.Active,SelectNode,route,networkCamera,intel,job.Intel,State.Catalog,entryId,objectiveId,State.Waypoints(job),State.WaypointTier);map.Add(canvas);Visuals.AttachField(canvas);Visuals.AttachIntelCard(canvas.IntelStatic);
             }
             var mapFooter=El(map,"map-footer");
-            mapFooter.Add(networkKey);
-            var legend=El(networkKey,"legend");foreach(var kind in State.Catalog.NodeTypes.Where(t=>intel==ContractIntel.Full&&nodes.Any(n=>n.typeId==t.id)&&t.glyph!=NodeKind.Gateway))
+            var legend=El(mapFooter,"legend");foreach(var kind in State.Catalog.NodeTypes.Where(t=>intel==ContractIntel.Full&&nodes.Any(n=>n.typeId==t.id)&&t.glyph!=NodeKind.Gateway))
             {var key=El(legend,"legend-key");var dot=El(key,"legend-dot");dot.style.backgroundColor=kind.color;Text(key,kind.title,"micro muted");}
             if(intel!=ContractIntel.Full)Text(legend,intel==ContractIntel.Topology?"UNKNOWN SYSTEMS / CONNECTIONS ONLY":"NETWORK SIGNAL UNAVAILABLE","micro muted");
             if(intel!=ContractIntel.None)
             {var controls=El(mapFooter,"map-controls");Btn(controls,"−",()=>canvas.Zoom(1.15f),"zoom-out","map-button");Btn(controls,"+",()=>canvas.Zoom(.85f),"zoom-in","map-button");Btn(controls,"FIT",()=>canvas.ResetView(),"fit","map-button");}
-            BuildTraceBar(mid);
+            if(State.Active)BuildTraceBar(mid);
             var right=El(workspace,"right-panel");
             if(State.Active)BuildTarget(right,State.Node(selectedNode)??State.Node(State.Op.entryNode));
             else BuildBrief(right);
@@ -338,11 +346,12 @@ namespace HackThePlanet
 
         private void BuildBrief(VisualElement right)
         {
-            var scroll=new ScrollView(ScrollViewMode.Vertical);scroll.AddToClassList("inspector-scroll");right.Add(scroll);
-            Text(scroll,"CONTRACT BRIEF","eyebrow");Text(scroll,selectedJob.tag,"micro cyan section-space");Text(scroll,selectedJob.title,"mission-title");
-            Text(scroll,selectedJob.client,"micro muted");Text(scroll,selectedJob.description,"body-copy");
+            var scroll=new ScrollView(ScrollViewMode.Vertical);scroll.AddToClassList("inspector-scroll");scroll.AddToClassList("contract-brief");right.Add(scroll);
+            Text(scroll,"CONTRACT BRIEF","eyebrow");Text(scroll,selectedJob.tag,"eyebrow cyan section-space");Text(scroll,selectedJob.title,"mission-title");
+            Text(scroll,selectedJob.client,"eyebrow muted");Text(scroll,selectedJob.description,"body-copy");
             Text(scroll,selectedJob.DifficultyLabel+" / NETWORK INTEL","eyebrow section-space");Text(scroll,selectedJob.IntelDescription,"body-copy");
             Text(scroll,"THE ASK","eyebrow section-space");Text(scroll,selectedJob.objective,"body-copy");
+            BuildWaypointPlanner(scroll);
             Text(scroll,"ESCROW PAYOUT","eyebrow section-space");Text(scroll,selectedJob.credits.ToString("N0")+" cr  /  "+selectedJob.xp+" XP","payout");
             Text(scroll,selectedJob.RewardMultiplier.ToString("0.#")+"× "+selectedJob.DifficultyLabel+" PAYOUT / CREDITS + XP","micro cyan");
             Text(scroll,selectedJob.condition,"small muted");Text(scroll,"OPTIONAL ARCHIVES","eyebrow section-space");Text(scroll,State.ArchiveDescription,"small muted");
@@ -350,6 +359,50 @@ namespace HackThePlanet
             var bottom=El(right,"inspector-bottom");bool done=State.Career.completed.Contains(selectedJob.id),locked=State.Career.completed.Count<selectedJob.requiredWins;
             var start=Btn(bottom,done?"CONTRACT DELIVERED":locked?"COMPLETE EARLIER CONTRACTS":"CONNECT TO NETWORK  →",StartSelected,"connect","primary-button");start.SetEnabled(!done&&!locked);
             Text(bottom,"No time limit. Plan freely. Disconnect to bank rewards.","micro muted center-text");
+        }
+
+        private void BuildWaypointPlanner(VisualElement parent)
+        {
+            int tier=State.WaypointTier;
+            Text(parent,"WAYPOINTS / "+tier+" SLOTS","eyebrow section-space");
+            if(tier==0){Text(parent,"Research Waypoints I in RECON to mark systems before connecting.","small muted");return;}
+            if(selectedJob.Intel==ContractIntel.None){Text(parent,"No network intel: waypoint placement is unavailable for this contract.","small muted");return;}
+            var network=NetworkGenerator.Generate(selectedJob,State.Career,State.Catalog);
+            var points=State.Waypoints(selectedJob);
+            var selected=network.nodes.FirstOrDefault(n=>n.id==selectedNode);
+            bool canPlan=!State.Career.completed.Contains(selectedJob.id)&&State.Career.completed.Count>=selectedJob.requiredWins;
+            Text(parent,"Select a system on the map, then place a marker. Markers stay visible during the run, even before discovery.","small muted");
+            var add=Btn(parent,"PLACE ON SELECTED SYSTEM ("+points.Count+" / "+tier+")",()=>State.PlaceWaypoint(selectedJob,selectedNode),"place-waypoint","secondary-button");
+            add.SetEnabled(canPlan&&selected!=null&&points.Count<tier&&!points.Any(w=>w.nodeId==selectedNode));
+            foreach(var waypoint in points)
+            {
+                int number=points.ToList().IndexOf(waypoint)+1;
+                var row=El(parent,"section-space");
+                var heading=Text(row,"W"+number+" / "+(selectedJob.Intel==ContractIntel.Full?network.nodes.First(n=>n.id==waypoint.nodeId).label:"UNKNOWN SYSTEM"),"small");
+                heading.style.color=GameSimulation.WaypointColors[tier>=2?waypoint.color:0];
+                Btn(row,"LOCATE",()=>SelectNode(waypoint.nodeId),"locate-waypoint-"+number,"secondary-button");
+                if(tier>=2)
+                {
+                    var colors=El(row,"row-between");
+                    string[] names={"CYAN","AMBER","VIOLET","PINK","WHITE"};
+                    for(int i=0;i<names.Length;i++)
+                    {
+                        int color=i;var button=Btn(colors,names[i].Substring(0,1),()=>State.EditWaypoint(selectedJob,waypoint.nodeId,color,waypoint.label,waypoint.showPath),"waypoint-"+number+"-color-"+i,"map-button");button.tooltip=names[i];
+                        button.style.color=GameSimulation.WaypointColors[i];button.SetEnabled(canPlan);
+                    }
+                }
+                if(tier>=3)
+                {
+                    var label=new TextField("Label (40 characters)"){name="waypoint-label-"+number,value=waypoint.label,maxLength=40,isDelayed=true};
+                    label.SetEnabled(canPlan);label.RegisterValueChangedCallback(evt=>State.EditWaypoint(selectedJob,waypoint.nodeId,waypoint.color,evt.newValue,waypoint.showPath));row.Add(label);
+                }
+                if(tier>=4)
+                {
+                    var route=Btn(row,waypoint.showPath?"HIDE GATEWAY ROUTE":"SHOW SHORTEST GATEWAY ROUTE",()=>State.EditWaypoint(selectedJob,waypoint.nodeId,waypoint.color,waypoint.label,!waypoint.showPath),"waypoint-route-"+number,"secondary-button");route.SetEnabled(canPlan);
+                }
+                Btn(row,"REMOVE",()=>State.RemoveWaypoint(selectedJob,waypoint.nodeId),"remove-waypoint-"+number,"secondary-button").SetEnabled(canPlan);
+            }
+            if(tier>=4)Text(parent,"One route at a time, from the gateway through discovered and undiscovered systems.","small muted");
         }
 
         public void StartSelected()
@@ -462,7 +515,7 @@ namespace HackThePlanet
             var refundArea=El(leftShell,"loadout");
             var refund=Btn(refundArea,"REFUND ALL RESEARCH",()=>{State.RefundResearch();Beep();},"refund","secondary-button");refund.SetEnabled(!State.Active&&State.ResearchCount>0);Text(refundArea,"Between contracts: "+(State.RefundFraction*100).ToString("0")+"% of research XP is returned.","micro muted");
             var mid=Scroll(workspace,"network-panel");var mh=El(mid,"map-heading");var titles=El(mh,"map-title-block");Text(titles,"CONNECTED KNOWLEDGE","eyebrow cyan");Text(titles,"RESEARCH NETWORK","map-title");Text(mh,(State.ResearchCount)+" / "+(State.ResearchTotal)+" TECHNOLOGIES UNLOCKED","micro muted");
-            canvas=new GraphViewport(State.Career,selectedTech,SelectTech,researchCamera,State.Catalog);mid.Add(canvas);Visuals.AttachField(canvas);
+            canvas=new GraphViewport(State.Career,selectedTech,SelectTech,researchCamera,State.Catalog);mid.Add(canvas);Visuals.AttachField(canvas);Visuals.AttachIntelCard(canvas.IntelStatic);
             var footer=El(mid,"map-footer");Text(footer,"SOLID / UNLOCKED    ·    DIM / PREREQUISITE REQUIRED    ·    SELECT A NODE TO INSPECT","micro muted");
             var controls=El(footer,"map-controls");Btn(controls,"−",()=>canvas.Zoom(1.15f),"zoom-out","map-button");Btn(controls,"+",()=>canvas.Zoom(.85f),"zoom-in","map-button");Btn(controls,"FIT",()=>canvas.ResetView(),"fit","map-button");
             var right=El(workspace,"right-panel");var info=Scroll(right,"tech-inspector");var tech=FindTech(selectedTech)??State.Catalog.Technologies.First();
@@ -539,10 +592,10 @@ namespace HackThePlanet
         private bool pausedBeforeHelp;
         private void ShowHelp(){pausedBeforeHelp=State.Active&&State.Op.paused;if(State.Active)State.SetPaused(true);modal="help";dirty=true;}
         private bool pausedBeforeSettings;
-        private string modalBeforeSettings, settingsError;
+        private string modalBeforeSettings, modalBeforeResetSave="settings", settingsError;
         private void ShowSettings()
         {
-            if(modal=="settings"||modal=="reset-save")return;
+            if(modal=="settings"||modal=="reset-save"||modal=="debug")return;
             modalBeforeSettings=modal;pausedBeforeSettings=State.Active&&State.Op.paused;
             if(State.Active)State.SetPaused(true);
             modal="settings";settingsError=null;dirty=true;
@@ -553,6 +606,14 @@ namespace HackThePlanet
             if(State.Active)State.SetPaused(pausedBeforeSettings);
             dirty=true;
         }
+        private void OpenResetSaveConfirm(string returnModal="settings")
+        {
+            modalBeforeResetSave=returnModal;modal="reset-save";settingsError=null;dirty=true;
+        }
+        private void CancelResetSave()
+        {
+            modal=modalBeforeResetSave;modalBeforeResetSave="settings";settingsError=null;dirty=true;
+        }
         private void ResetGameSave()
         {
             if(!Testing&&!CareerStorage.Reset())
@@ -561,7 +622,7 @@ namespace HackThePlanet
             State.Changed+=()=>{dirty=true;if(!Testing)CareerStorage.Save(State.Career);};
             selectedJob=State.Catalog.Contracts(State.Career).First(c=>!c.recurring);selectedNode=State.PreferredNode(selectedJob,true);selectedTech=State.Catalog.Technologies.FirstOrDefault(t=>!State.Has(t.id))?.id??State.Catalog.Technologies.First().id;view="network";
             canvas?.Dispose();networkCamera.Reset();researchCamera.Reset();
-            modal=modalBeforeSettings=settingsError=null;lastShownReport=reportToShow=null;
+            modal=modalBeforeSettings=settingsError=null;modalBeforeResetSave="settings";lastShownReport=reportToShow=null;
             speed=1;saveTimer=0;traceBand=0;dirty=true;
         }
         private void QuitGame()
@@ -586,18 +647,42 @@ namespace HackThePlanet
                 textSize.AddToClassList("text-size-slider");textSize.SetValueWithoutNotify(TextSizePercent);box.Add(textSize);
                 textSize.RegisterValueChangedCallback(evt=>SetTextSize(evt.newValue));
                 Text(box,"100%–300%. Default: 200% (double size). Applies immediately to every screen and is saved automatically.","small muted");
+                Text(box,"GRAPH","eyebrow cyan section-space");
+                var selectWithoutFocus=new Toggle("Single-click selection does not move the camera"){name="select-without-camera-focus"};
+                selectWithoutFocus.SetValueWithoutNotify(SelectWithoutCameraFocus);
+                selectWithoutFocus.RegisterValueChangedCallback(evt=>SetSelectWithoutCameraFocus(evt.newValue));
+                box.Add(selectWithoutFocus);
+                Text(box,"When on, single-click selects and opens detailed intel without moving the camera; double-click also frames the view. When off, single-click selects and frames immediately.","small muted");
                 Btn(box,"Resume",ResumeFromSettings,"resume","primary-button");
-                Btn(box,"Reset Game Save",()=>{modal="reset-save";settingsError=null;dirty=true;},"reset-save","secondary-button");
+                Btn(box,"Cheats / Debug",()=>{modal="debug";dirty=true;},"debug-menu","secondary-button");
+                Btn(box,"Reset Game Save",()=>OpenResetSaveConfirm(),"reset-save","secondary-button");
                 Btn(box,"Quit",QuitGame,"quit","danger-button");
                 if(settingsError!=null)Text(box,settingsError,"body-copy amber");
                 Text(box,"ESC / RESUME","micro muted section-space center-text");
+            }
+            else if(modal=="debug")
+            {
+                box.AddToClassList("settings-menu");
+                Text(box,"WORKSTATION / DEBUG","eyebrow amber");Text(box,"Cheats / Debug","large-heading");
+                Text(box,"Changes apply immediately and autosave to this career. An active operation stays paused while this menu is open.","body-copy muted");
+                Text(box,State.Career.credits.ToString("N0")+" CREDITS / "+State.Career.xp.ToString("N0")+" XP","eyebrow cyan section-space");
+                Text(box,State.ResearchCount+" / "+State.ResearchTotal+" TECHNOLOGIES UNLOCKED","small muted");
+                Btn(box,"Add 1,000,000 credits",()=>{State.DebugAddCredits();Beep();},"debug-credits","secondary-button");
+                Btn(box,"Add 1,000,000 XP",()=>{State.DebugAddXp();Beep();},"debug-xp","secondary-button");
+                var unlock=Btn(box,"Unlock whole tech tree",()=>{State.DebugUnlockAllTech();Beep();},"debug-unlock-tech","secondary-button");
+                unlock.SetEnabled(State.ResearchCount<State.ResearchTotal);
+                Text(box,"Technology unlocks are free. Equip special abilities in Research between contracts; loadout slots still apply.","small muted");
+                Btn(box,"Reset Game",()=>OpenResetSaveConfirm("debug"),"debug-reset-game","danger-button");
+                Text(box,"Same as Settings → Reset Game Save: wipes this career, clears any active operation, and writes a fresh save.","small muted");
+                Btn(box,"Back to Settings",()=>{modal="settings";dirty=true;},"debug-back","primary-button");
+                Text(box,"ESC / BACK TO SETTINGS","micro muted section-space center-text");
             }
             else if(modal=="reset-save")
             {
                 box.AddToClassList("settings-menu");
                 Text(box,"RESET GAME SAVE?","eyebrow amber");Text(box,"Start a new career?","large-heading");
                 Text(box,"This permanently resets all contracts, credits, research, hardware, reports, and your current operation. This cannot be undone.","body-copy muted");
-                Btn(box,"Cancel",()=>{modal="settings";settingsError=null;dirty=true;},"cancel-reset","primary-button");
+                Btn(box,"Cancel",CancelResetSave,"cancel-reset","primary-button");
                 Btn(box,"Reset Game Save",ResetGameSave,"confirm-reset","danger-button");
                 if(settingsError!=null)Text(box,settingsError,"body-copy amber");
             }
@@ -606,7 +691,7 @@ namespace HackThePlanet
                 Text(box,"OPERATOR FIELD GUIDE","eyebrow cyan");Text(box,"The planet is a network.\nFind your way through.","large-heading");
                 string[] guide={"01 / CONNECT — Pick a contract. Gold markers show required objectives. Green means a system is yours.","02 / EXPLORE — Select a reachable system. Scan [1] maps connections and prepares a faster, quieter intrusion. Hack [2] takes control and extends your route.","03 / RECOVER — Control each required target, then recover its files [3]. Record jobs need both copies; investigations need all three records.","04 / MANAGE TRACE — Tools create trace. Check the forecast before committing. STOP cancels a tool; existing trace stays. Planning is free. Space pauses; "+string.Join(" / ",State.SimulationSpeeds.Select(x=>x+"x"))+" changes speed.","05 / GET PAID — Extract & deliver after all objectives are secured. Optional archives pay extra. At "+State.TraceLimit+"% trace the attempt ends; gear and research stay yours.","06 / GROW — Credits buy hardware. XP purchases connected research. Crossovers require both parents. Equip abilities in limited slots. Research refunds are free between jobs."};
                 foreach(var line in guide)Text(box,line,"guide-line");
-                Text(box,"GRAPH CONTROLS / Click to inspect · Scroll to zoom · Drag empty space to pan · FIT to recenter\nDISPLAY / FX+ on the left rail cycles Full / Reduced (static) / Off. Display preference is saved locally.\nYour career and active operation autosave locally. Reopened operations start paused.","small muted section-space");
+                Text(box,"GRAPH CONTROLS / Click to select and inspect · Double-click to frame the camera (when single-click inspect is enabled) · Scroll to zoom · Left-drag to orbit · Right- or middle-drag to pan · FIT to recenter\nSETTINGS / Toggle whether single-click inspect moves the camera.\nDISPLAY / FX+ on the left rail cycles Full / Reduced (static) / Off. Display preference is saved locally.\nYour career and active operation autosave locally. Reopened operations start paused.","small muted section-space");
                 Btn(box,"BACK TO THE WORKSTATION  →",()=>{modal=null;if(State.Active)State.SetPaused(pausedBeforeHelp);dirty=true;},"close-help","primary-button");
             }
             else if(modal=="abort")

@@ -37,6 +37,12 @@ namespace HackThePlanet.Editor
             {
                 if(state==PlayModeStateChange.EnteredPlayMode&&SessionState.GetBool("HTP.Smoke",false))
                 {smokePhase=1;smokeFrames=0;}
+                if(state==PlayModeStateChange.EnteredEditMode&&smokePhase==144)
+                {
+                    File.WriteAllText(Path.Combine(Project,"Artifacts/waypoint-smoke.txt"),"PASS / Real UI placement, colour selection, custom label, shortest route selection, connection, and marker visibility over an undiscovered system. Discovered model count stays unchanged. Screenshots: 21-waypoint-planning.png, 22-waypoint-hidden-route.png.");
+                    if(smokeUiTexture!=null){smokeUiTexture.Release();UnityEngine.Object.DestroyImmediate(smokeUiTexture);smokeUiTexture=null;}
+                    SessionState.SetBool("HTP.Smoke",false);SessionState.SetBool("HTP.WaypointSmoke",false);smokePhase=0;Status("PASS / waypoint-smoke");
+                }
                 if(state==PlayModeStateChange.EnteredEditMode&&smokePhase==43)
                 {
                     File.WriteAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"PASS / Real player UI callbacks: connect, scan, hack, recover, deliver, research purchase, hardware upgrade. Both shaders compile and render nonblank GPU textures; display modes and GPU texture reuse passed. Settings button and Escape, exact menu choices, menu bounds, operation freeze, previous pause state, blocked background controls and shortcuts, reset confirmation, Cancel and Escape cancellation, confirmed fresh career, usable first contract, and Quit passed. Rendered screenshots captured. Asset-only contract, node variant, action button, shortcut, objective, technology and hardware extension rendered and exercised. Tactical queue, clear and stop controls exercised. Easy full intel, Medium anonymous topology and labels, Hard renderer-free centered message, animated GPU static, reduced/off effects, and connection back to discovered systems passed. Test career and effect preference isolated from user saves.");
@@ -70,7 +76,8 @@ namespace HackThePlanet.Editor
                     case "build-volumetric": BuildWindowsAt("Builds/Windows-Volumetric");break;
                     case "play": EditorApplication.isPlaying=true;break;
                     case "stop": EditorApplication.isPlaying=false;break;
-                    case "smoke": StartSmoke();return;
+                    case "smoke": SessionState.SetBool("HTP.WaypointSmoke",false);StartSmoke();return;
+                    case "waypoint-smoke": SessionState.SetBool("HTP.WaypointSmoke",true);StartSmoke();return;
                     case "capture": CaptureScreenshot(Path.Combine(Project,"Artifacts/live-capture.png"));break;
                     default: throw new InvalidOperationException("Unknown local editor command: "+command);
                 }
@@ -134,24 +141,52 @@ namespace HackThePlanet.Editor
                     case 1:
                         smokeUiTexture=new RenderTexture(1680,960,24,RenderTextureFormat.ARGB32);smokeUiTexture.Create();
                         app.GetComponent<UIDocument>().panelSettings.targetTexture=smokeUiTexture;
-                        previousEffects=app.Visuals.Mode;previousTextSize=app.TextSizePercent;app.UseTestCareer(new Career());app.SetTextSize(200);app.Visuals.SetMode(SignalEffects.Full);smokePhase++;return;
+                        previousEffects=app.Visuals.Mode;previousTextSize=app.TextSizePercent;app.UseTestCareer(new Career());app.SetTextSize(200);app.Visuals.SetMode(SignalEffects.Full);smokePhase=400;return;
+                    case 400:
+                        Check(app.State.Start(GameContent.Story[0]),"Debug UI fixture starts an operation.");
+                        Check(app.ActivateVisibleControl("settings"),"Debug fixture opens Settings.");smokePhase++;return;
+                    case 401:
+                        Check(app.ActivateVisibleControl("debug-menu"),"Settings opens Cheats / Debug.");smokePhase++;return;
+                    case 402:
+                        Check(app.State.Op.paused&&!app.ActivateVisibleControl("pause"),"Debug menu pauses the operation and blocks background controls.");
+                        Check(app.ActivateVisibleControl("debug-credits")&&app.ActivateVisibleControl("debug-xp")&&app.ActivateVisibleControl("debug-unlock-tech"),"All three debug buttons run their wired callbacks.");smokePhase++;return;
+                    case 403:
+                        Check(app.State.Career.credits==600+GameSimulation.DebugGrantAmount&&app.State.Career.xp==GameSimulation.DebugGrantAmount&&app.State.ResearchCount==app.State.ResearchTotal,"Debug buttons grant currencies and unlock the entire tree.");
+                        Check(!app.Root.Q<Button>("debug-unlock-tech").enabledInHierarchy,"Full-tree unlock disables after completion.");
+                        SendKey(app,KeyCode.Space);Check(app.State.Op.paused,"Debug menu blocks gameplay shortcuts.");
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/cheats-debug-menu.png"));
+                        Check(app.ActivateVisibleControl("debug-back"),"Debug Back button returns to Settings.");smokePhase++;return;
+                    case 404:
+                        Check(app.ActivateVisibleControl("debug-menu"),"Debug submenu can be reopened.");smokePhase=407;return;
+                    case 407:
+                        Check(app.ActivateVisibleControl("debug-reset-game"),"Debug menu opens reset confirmation.");
+                        Check(app.Root.Q<Button>("confirm-reset")!=null&&app.Root.Q<Button>("cancel-reset")!=null,"Debug reset confirmation exposes both choices.");
+                        Check(app.ActivateVisibleControl("cancel-reset")&&app.Root.Q<Button>("debug-back")!=null,"Cancel returns to Cheats / Debug without resetting.");
+                        Check(app.State.Career.credits==600+GameSimulation.DebugGrantAmount,"Cancel preserves debug-granted progress.");smokePhase=405;return;
+                    case 405:
+                        SendKey(app,KeyCode.Escape);smokePhase++;return;
+                    case 406:
+                        Check(app.ActivateVisibleControl("resume")&&!app.State.Op.paused,"Escape from Debug returns to Settings and Resume restores a running operation.");
+                        File.WriteAllText(Path.Combine(Project,"Artifacts/debug-menu-smoke.txt"),"PASS / Real UI callbacks grant 1,000,000 credits and XP, unlock every technology, disable completed unlock, expose Reset Game with confirmation that cancels back to debug, block background controls and shortcuts, return using Back and Escape, and restore the previous operation pause state. Test career isolated from player saves.");
+                        app.UseTestCareer(new Career());smokePhase=2;return;
                     case 2:
                         Check(app.Root.Q<UnityEngine.UIElements.Button>("connect")!=null,"Connect control exists.");
                         var preview=app.Root.Q<GraphViewport>();
                         Check(preview!=null&&preview.NodeCount==32&&preview.VisibleNodes==32&&preview.VisibleEdges>0,
                             "GraphExplorer renders all preview systems and their links in 3D: "+preview?.NodeCount+" nodes / "+preview?.VisibleNodes+" drawn / "+preview?.VisibleEdges+" links.");
                         Check(app.Root.Q<Button>("node-home")!=null,"Projected system labels remain selectable.");
-                        var mapBounds=preview.GetFirstAncestorOfType<ScrollView>().contentViewport.worldBound;
+                        var mapBounds=preview.parent.worldBound;
                         Check(mapBounds.Contains(preview.worldBound.min+Vector2.one)&&mapBounds.Contains(preview.worldBound.max-Vector2.one)&&mapBounds.Contains(app.Root.Q<Button>("fit").worldBound.center),"Default 200% layout keeps the full graph and its controls visible: viewport "+mapBounds+", graph "+preview.worldBound+", fit "+app.Root.Q<Button>("fit").worldBound);
                         ValidateSignalRendering(app);
                         NetworkVisualValidation.CheckViewport(preview);
-                        CaptureScreenshot(Path.Combine(Project,"Artifacts/01-contract-exchange.png"));smokePhase=100;return;
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/01-contract-exchange.png"));smokePhase=SessionState.GetBool("HTP.WaypointSmoke",false)?127:100;return;
                     case 100:
-                        app.Root.Q<Foldout>("network-key").value=true;
+                        NetworkVisualValidation.DoubleClickSelected(app.Root.Q<GraphViewport>());smokePhase=130;return;
+                    case 130:
+                        NetworkVisualValidation.CheckFocusedCard(app.Root.Q<GraphViewport>());
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/20-focused-node-intel.png"));
                         NetworkVisualValidation.Orbit(app.Root.Q<GraphViewport>(),55,15);smokePhase=101;return;
                     case 101:
-                        Check(Mathf.Approximately(app.Root.Q<Foldout>("network-key").Q<Label>(className:"micro").resolvedStyle.fontSize,14),"Expanded network key doubles its authored 7px telemetry text.");
-                        app.Root.Q<Foldout>("network-key").value=false;
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/network-orbit.png"));
                         smokePhase=102;return;
                     case 102:
@@ -190,7 +225,30 @@ namespace HackThePlanet.Editor
                         Check(app.Root.Q("no-intel-view")==null&&app.Root.Q<GraphViewport>()?.NodeCount==app.State.KnownGraph.Nodes.Count&&app.State.KnownGraph.Nodes.Count<app.State.Op.nodes.Count,"Hard connection replaces the static screen with discovered systems only.");
                         app.UseTestCareer(new Career());frozenField=null;smokePhase++;return;
                     case 127:
-                        Check(app.Root.Q<GraphViewport>()?.NodeCount==32&&app.Root.Q("no-intel-view")==null,"Returning to Easy restores the full preview.");smokePhase=3;return;
+                        Check(app.Root.Q<GraphViewport>()?.NodeCount==32&&app.Root.Q("no-intel-view")==null,"Returning to Easy restores the full preview.");
+                        app.State.Career.xp=1000;for(int tier=1;tier<=4;tier++)Check(app.State.BuyTech("waypoints-"+tier),"Waypoint smoke research tier "+tier);
+                        app.SelectNode("n22");smokePhase=140;return;
+                    case 140:
+                        Check(app.ActivateVisibleControl("place-waypoint"),"Contract planner places a waypoint on the selected system.");smokePhase++;return;
+                    case 141:
+                        Check(app.ActivateVisibleControl("waypoint-1-color-2"),"Waypoint colour control works.");
+                        app.Root.Q<TextField>("waypoint-label-1").value="Recovery target";
+                        Check(app.ActivateVisibleControl("waypoint-route-1"),"Waypoint route control works.");smokePhase++;return;
+                    case 142:
+                        Check(app.Root.Q<Label>("waypoint-marker-n22")?.text.Contains("Recovery target")==true,"Custom waypoint label appears above its system in the preview.");
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/21-waypoint-planning.png"));
+                        Check(app.ActivateVisibleControl("connect"),"Waypoint plan connects through the contract UI.");smokePhase++;return;
+                    case 143:
+                        var marker=app.Root.Q<Label>("waypoint-marker-n22");
+                        Check(!app.State.Node("n22").known&&marker!=null&&marker.resolvedStyle.display==DisplayStyle.Flex,"Waypoint stays visible over an undiscovered system during the run.");
+                        Check(app.Root.Q<GraphViewport>().NodeCount==app.State.Op.nodes.Count(n=>n.known),"Waypoint path does not reveal hidden system models.");
+                        Check(app.State.Waypoints(app.State.Job).Single().showPath,"Selected waypoint route survives connection.");
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/22-waypoint-hidden-route.png"));
+                        if(SessionState.GetBool("HTP.WaypointSmoke",false))
+                        {
+                            app.SetTextSize(previousTextSize);app.Visuals.SetMode(previousEffects);smokePhase=144;EditorApplication.isPlaying=false;return;
+                        }
+                        app.UseTestCareer(new Career());smokePhase=3;return;
                     case 3:
                         Check(app.ActivateVisibleControl("connect"),"Connect button works.");Check(app.State.Active,"Mission connected through UI.");smokePhase++;return;
                     case 4:
@@ -421,7 +479,7 @@ namespace HackThePlanet.Editor
             Check(field.Any(c=>c.g>c.r&&c.g>3)&&field.Select(c=>c.g).Distinct().Count()>5,"Signal-field GPU output contains a visible nonuniform image.");
             Check(glass.All(c=>c.a<65)&&glass.Any(c=>c.a>0),"Phosphor-glass GPU output has restrained nonzero transparency.");
             Check(app.Root.Q<Image>("signal-field").pickingMode==PickingMode.Ignore&&app.Root.Q<Image>("phosphor-glass").pickingMode==PickingMode.Ignore,"Shader decorations do not intercept input.");
-            Check(Resources.Load<Font>("HackThePlanet/Fonts/SpaceMono-Regular")!=null,"Telemetry font is bundled for standalone players.");
+            Check(AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/Oxanium-VariableFont_wght.ttf")!=null,"Oxanium UI font is available for standalone players.");
         }
         private static Color32[] ReadPixels(RenderTexture texture)
         {

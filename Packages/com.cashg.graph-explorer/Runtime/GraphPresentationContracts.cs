@@ -52,6 +52,15 @@ namespace Cashg.GraphExplorer
 		Next
 	}
 
+	/// <summary>Camera-facing guide arrow drawn above a node in world space.</summary>
+	public struct GraphGuideArrow
+	{
+		/// <summary>Node to mark.</summary>
+		public string NodeId;
+		/// <summary>Arrow color.</summary>
+		public Color Color;
+	}
+
 	/// <summary>A live projection, not a second semantic document. Hosts may implement richer facades.</summary>
 	public interface IGraphNode
 	{

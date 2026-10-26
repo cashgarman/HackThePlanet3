@@ -24,6 +24,7 @@ namespace HackThePlanet
         public List<string> completed=new List<string>(), unlocked=new List<string>(), equipped=new List<string>(), news=new List<string>();
         public List<OperationReport> reports=new List<OperationReport>();
         public List<LoreFragment> lore=new List<LoreFragment>();
+        public List<NetworkWaypoint> waypoints=new List<NetworkWaypoint>();
         public Operation operation;
         [NonSerialized] public bool saveBlocked;
         public int Level(string id)=>hardware?.FirstOrDefault(x=>x.id==id)?.level??0;
@@ -77,7 +78,7 @@ namespace HackThePlanet
         public float duration,trace,projectedTrace;
     }
 
-    public sealed class GameSimulation
+    public sealed partial class GameSimulation
     {
         public GameCatalog Catalog {get;}
         public Career Career {get;private set;}
@@ -136,6 +137,7 @@ namespace HackThePlanet
         {
             Career.completed??=new List<string>();Career.unlocked??=new List<string>();Career.equipped??=new List<string>();Career.news??=new List<string>();
             Career.reports??=new List<OperationReport>();Career.lore??=new List<LoreFragment>();Career.hardware??=new List<HardwareLevel>();
+            Career.waypoints??=new List<NetworkWaypoint>();
             if(!Career.initialized)
             {
                 var defaults=Catalog.Data.career;if(Career.credits<0)Career.credits=defaults.credits;if(Career.xp==0)Career.xp=defaults.xp;if(Career.day==1)Career.day=defaults.day;
@@ -163,6 +165,8 @@ namespace HackThePlanet
             Require(career.unlocked.All(id=>catalog.Technology(id)!=null)&&career.unlocked.Distinct().Count()==career.unlocked.Count,"unknown or duplicate technology");
             Require(career.equipped.All(id=>career.unlocked.Contains(id)&&catalog.Technology(id).special)&&career.equipped.Distinct().Count()==career.equipped.Count,"invalid equipped technology");
             Require(career.hardware.All(h=>catalog.Data.hardware.Any(d=>d.id==h.id&&h.level>=0&&h.level<=d.tiers.Length))&&career.hardware.Select(h=>h.id).Distinct().Count()==career.hardware.Count,"unknown hardware or invalid tier");
+            Require(career.waypoints!=null&&career.waypoints.All(w=>w!=null&&catalog.Contract(w.contractId)!=null&&!string.IsNullOrEmpty(w.nodeId)&&w.color>=0&&w.color<WaypointColors.Length&&(w.label?.Length??0)<=40),"invalid waypoint");
+            Require(career.waypoints.GroupBy(w=>(w.contractId,w.seed)).All(g=>g.Count()<=4&&g.Select(w=>w.nodeId).Distinct().Count()==g.Count()&&g.Count(w=>w.showPath)<=1),"invalid waypoint capacity or route");
             var op=career.operation;if(op==null)return;
             Require(catalog.Contract(op.contractId)!=null,"unknown active contract "+op.contractId);
             Require(op.nodes!=null&&op.nodes.Count>0&&op.links!=null,"missing active network");var ids=new HashSet<string>(op.nodes.Select(n=>n.id));
@@ -413,6 +417,18 @@ namespace HackThePlanet
             Career.reports.Insert(0,report);if(Career.reports.Count>Catalog.Data.career.reportLimit)Career.reports.RemoveRange(Catalog.Data.career.reportLimit,Career.reports.Count-Catalog.Data.career.reportLimit);
             LastReport=report;Career.operation=null;KnownGraph=null;Scene=null;Touch();return report;
         }
+        public const int DebugGrantAmount=1_000_000;
+        private static int DebugGrant(int current)=>(int)Math.Min(int.MaxValue,(long)current+DebugGrantAmount);
+        public void DebugAddCredits(){Career.credits=DebugGrant(Career.credits);Touch();}
+        public void DebugAddXp()
+        {
+            Career.xp=DebugGrant(Career.xp);Career.totalEarnedXp=DebugGrant(Career.totalEarnedXp);Touch();
+        }
+        public void DebugUnlockAllTech()
+        {
+            foreach(var tech in Catalog.Technologies)if(!Has(tech.id))Career.unlocked.Add(tech.id);
+            Touch();
+        }
         public bool BuyTech(string id)
         {
             var tech=Catalog.Technology(id);
@@ -427,7 +443,7 @@ namespace HackThePlanet
         public bool RefundResearch()
         {
             if(Active&&!Catalog.Data.career.researchDuringOperations)return false;var initial=Catalog.Data.career.initialTechnologies.Select(t=>t.id).ToArray();
-            Career.xp+=Mathf.FloorToInt(Career.researchSpent*Catalog.Data.career.refundFraction);Career.researchSpent=0;Career.unlocked=initial.ToList();Career.equipped.Clear();Touch();return true;
+            Career.xp+=Mathf.FloorToInt(Career.researchSpent*Catalog.Data.career.refundFraction);Career.researchSpent=0;Career.unlocked=initial.ToList();Career.equipped.Clear();Career.waypoints.Clear();Touch();return true;
         }
         public int UpgradePrice(string id){var h=Catalog.Data.hardware.FirstOrDefault(x=>x.id==id);var level=Career.Level(id);return h!=null&&level<h.tiers.Length?h.tiers[level].price:0;}
         public ToolPreview PreviewUpgrade(string id)

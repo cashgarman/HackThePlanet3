@@ -17,7 +17,9 @@ namespace HackThePlanet
         public bool Initialized;
         public bool UserAdjusted;
         public int NodeCount;
-        public void Reset() { Center = Vector3.zero; Distance = 30f; Yaw = 0; Pitch = 28f; Initialized = false;UserAdjusted=false;NodeCount=0; }
+        public string FocusedId, LastClickId;
+        public float LastClickAt = -1;
+        public void Reset() { Center = Vector3.zero; Distance = 30f; Yaw = 0; Pitch = 28f; Initialized = false;UserAdjusted=false;NodeCount=0;FocusedId=null;LastClickId=null;LastClickAt=-1; }
     }
 
     // A workstation-sized view of the package's actual 3D renderer. The host owns
@@ -35,12 +37,18 @@ namespace HackThePlanet
         private readonly GraphRenderingSession session;
         private readonly GraphVisualSettings networkSettings;
         private readonly LinkOverlay links;
+        private WaypointOverlay waypointOverlay;
         private readonly VisualElement labels;
         private readonly Dictionary<string, Button> nodeButtons = new Dictionary<string, Button>();
         private readonly IGraphEdgeFilter edgeFilter = new AllEdges();
         private readonly string selectedId;
         private readonly GraphCameraState savedCamera;
         private readonly bool research;
+        private readonly VisualElement focusedCard;
+        private readonly Label focusedTitle, focusedDetails;
+        private readonly ScrollView focusedScroll;
+        private readonly Dictionary<string, string> nodeIntel = new Dictionary<string, string>();
+        public Image IntelStatic { get; private set; }
         private Vector3 center;
         private float distance = 30f;
         private float yaw, pitch = 28f;
@@ -51,32 +59,52 @@ namespace HackThePlanet
         private float yawStart, pitchStart;
         private bool disposed;
         private bool fitPending;
+        private readonly string guideEntryId, guideObjectiveId;
+        private static readonly Color GuideObjectiveOrange = new(1f, .55f, .15f, 1f);
 
         public int VisibleNodes => session.Renderer.VisibleCount;
         public int VisibleEdges => session.Renderer.VisibleEdges;
         public int NodeCount => scene.Nodes.Count;
 
         public GraphViewport(List<NetNode> nodes, List<NetLink> links, string selected, bool preview,
-            Action<string> select, GraphPathResult route = null, GraphCameraState cameraState = null, ContractIntel intel = ContractIntel.Full)
-            : this(BuildNetwork(nodes, links, preview, intel), preview && intel != ContractIntel.Full ? "" : selected, select, false, route, cameraState)
+            Action<string> select, GraphPathResult route = null, GraphCameraState cameraState = null, ContractIntel intel = ContractIntel.Full, ContractIntel? focusIntel = null, GameCatalog catalog = null,
+            string guideEntryId = null, string guideObjectiveId = null, IReadOnlyList<NetworkWaypoint> waypoints = null, int waypointTier = 0)
+            : this(BuildNetwork(nodes, links, preview, intel), selected, select, false, route, cameraState)
         {
+            this.guideEntryId = guideEntryId;
+            this.guideObjectiveId = guideObjectiveId;
+            if(waypoints!=null&&waypoints.Count>0)
+            {
+                waypointOverlay=new WaypointOverlay(camera,nodes,links,waypoints,waypointTier,guideEntryId);
+                Add(waypointOverlay);
+            }
+            foreach (var node in nodes.Where(n => scene.Nodes.ContainsKey(n.id)))
+                nodeIntel[node.id] = DescribeNode(node, focusIntel ?? intel, preview, catalog ?? GameCatalog.Default);
+            UpdateFocusedCard();
         }
 
         public GraphViewport(Career career, string selected, Action<string> select, GraphCameraState cameraState = null, GameCatalog catalog = null)
             : this(BuildResearch(career,catalog??GameCatalog.Default), selected, select, true, null, cameraState)
         {
+            foreach (var tech in (catalog ?? GameCatalog.Default).Technologies)
+                nodeIntel[tech.id] = tech.branch + " / " + (career.unlocked.Contains(tech.id) ? "UNLOCKED" : tech.cost + " XP")
+                    + "\n" + tech.description;
+            UpdateFocusedCard();
         }
 
         private GraphViewport(GraphScene graph, string selected, Action<string> select, bool research,
             GraphPathResult route, GraphCameraState cameraState)
         {
             scene = graph;
-            selectedId = selected;
+            selectedId = selected ?? "";
             savedCamera = cameraState ?? new GraphCameraState();
             fitPending=!savedCamera.Initialized||(!savedCamera.UserAdjusted&&savedCamera.NodeCount!=graph.Nodes.Count);
             savedCamera.NodeCount=graph.Nodes.Count;
+            if (savedCamera.FocusedId != selectedId) savedCamera.FocusedId = null;
             this.research = research;
             AddToClassList("graph-viewport");
+            style.flexGrow = 1;
+            style.minHeight = 0;
 
             texture = new RenderTexture(1024, 640, 24, RenderTextureFormat.ARGB32)
             { name = "Workstation GraphExplorer", antiAliasing = 2 };
@@ -122,7 +150,7 @@ namespace HackThePlanet
             Add(labels);
             foreach (var node in scene.Nodes.Values)
             {
-                var button = new Button(() => select(node.Id)) { name = (research ? "tech-" : "node-") + node.Id,
+                var button = new Button(() => ClickNode(node.Id, select)) { name = (research ? "tech-" : "node-") + node.Id,
                     text = node.Label };
                 button.style.display = DisplayStyle.None;
                 button.style.position = Position.Absolute;
@@ -140,6 +168,45 @@ namespace HackThePlanet
                 labels.Add(button);
                 nodeButtons.Add(node.Id, button);
             }
+            focusedCard = new VisualElement { name = "focused-node-card" };
+            focusedCard.style.position = Position.Absolute;
+            focusedCard.style.display = DisplayStyle.None;
+            focusedCard.style.backgroundColor = Palette.Hex("102025");
+            focusedCard.style.borderTopWidth = focusedCard.style.borderBottomWidth = 1;
+            focusedCard.style.borderLeftWidth = focusedCard.style.borderRightWidth = 1;
+            focusedCard.style.borderTopColor = focusedCard.style.borderBottomColor = Palette.Lime;
+            focusedCard.style.borderLeftColor = focusedCard.style.borderRightColor = Palette.Lime;
+            IntelStatic = new Image { name = "node-intel-static", pickingMode = PickingMode.Ignore, scaleMode = ScaleMode.StretchToFill };
+            IntelStatic.style.position = Position.Absolute;
+            IntelStatic.style.left = IntelStatic.style.right = IntelStatic.style.top = IntelStatic.style.bottom = 0;
+            focusedCard.Add(IntelStatic);
+            var scroll = focusedScroll = new ScrollView(ScrollViewMode.Vertical);
+            scroll.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+            scroll.style.flexGrow = 1;
+            scroll.style.paddingLeft = scroll.style.paddingRight = 10;
+            scroll.style.paddingTop = scroll.style.paddingBottom = 8;
+            focusedTitle = new Label { name = "focused-node-title" };
+            focusedTitle.style.fontSize = 12;
+            focusedTitle.style.color = Palette.Lime;
+            focusedTitle.style.whiteSpace = WhiteSpace.Normal;
+            focusedDetails = new Label { name = "focused-node-intel", enableRichText = true };
+            focusedDetails.style.fontSize = 10;
+            focusedDetails.style.color = Palette.Hex("DCEAE4");
+            focusedDetails.style.whiteSpace = WhiteSpace.Normal;
+            foreach (var label in new[] { focusedTitle, focusedDetails })
+            {
+                label.style.marginLeft = label.style.marginRight = label.style.marginTop = label.style.marginBottom = 0;
+                label.style.paddingLeft = label.style.paddingRight = label.style.paddingTop = label.style.paddingBottom = 0;
+                label.style.flexShrink = 0;
+                label.RegisterCallback<GeometryChangedEvent>(_ => PositionLabels());
+            }
+            focusedTitle.style.marginBottom = 4;
+            scroll.Add(focusedTitle);
+            scroll.Add(focusedDetails);
+            focusedCard.Add(scroll);
+            focusedCard.RegisterCallback<PointerDownEvent>(evt => evt.StopPropagation());
+            focusedCard.RegisterCallback<WheelEvent>(evt => evt.StopPropagation());
+            labels.Add(focusedCard);
             RegisterCallback<GeometryChangedEvent>(_ =>
             {
                 if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
@@ -159,9 +226,10 @@ namespace HackThePlanet
             });
             RegisterCallback<PointerDownEvent>(evt =>
             {
-                if ((evt.button != 0 && evt.button != 1) || evt.target is Button) return;
+                if (evt.button is not (0 or 1 or 2) || evt.target is Button) return;
+                if (evt.button == 1) evt.PreventDefault();
                 dragging = true;
-                orbiting = evt.button == 1;
+                orbiting = evt.button == 0;
                 dragStart = evt.position;
                 centerStart = center;
                 yawStart = yaw;
@@ -185,15 +253,97 @@ namespace HackThePlanet
             RegisterCallback<PointerUpEvent>(evt =>
             {
                 if (!dragging) return;
-                if (!orbiting && Vector2.Distance(dragStart, evt.position) < 5)
-                {
-                    var hit = PickNode(this.WorldToLocal(evt.position));
-                    if (hit != null) select(hit);
-                }
+                var smallMove = Vector2.Distance(dragStart, evt.position) < 5;
+                var hit = evt.button == 0 && smallMove ? PickNode(this.WorldToLocal(evt.position)) : null;
                 dragging = false;
                 this.ReleasePointer(evt.pointerId);
+                if (hit != null) ClickNode(hit, select);
+                else if (evt.button == 0 && smallMove && !string.IsNullOrEmpty(selectedId))
+                    ClearSelection(select);
             });
 
+        }
+
+        private void ClickNode(string id, Action<string> select)
+        {
+            bool doubleClick = savedCamera.LastClickId == id && Time.unscaledTime - savedCamera.LastClickAt <= .4f;
+            savedCamera.LastClickId = doubleClick ? null : id;
+            savedCamera.LastClickAt = Time.unscaledTime;
+            if (SelectWithoutCameraFocus())
+            {
+                if (doubleClick) FocusNode(id);
+                else FocusIntel(id);
+            }
+            else FocusNode(id);
+            select(id);
+        }
+
+        private static bool SelectWithoutCameraFocus()
+        {
+            if (WorkstationApp.Instance != null) return WorkstationApp.Instance.SelectWithoutCameraFocus;
+            return PlayerPrefs.GetInt(WorkstationApp.SelectWithoutCameraFocusPreference, 1) != 0;
+        }
+
+        private void ClearSelection(Action<string> select)
+        {
+            savedCamera.FocusedId = null;
+            savedCamera.LastClickId = null;
+            select(null);
+        }
+
+        public void FocusNode(string id)
+        {
+            if (!scene.Nodes.TryGetValue(id, out var node)) return;
+            FocusIntel(id);
+            savedCamera.UserAdjusted = true;
+            fitPending = false;
+            distance = Mathf.Clamp(session.Renderer.Radius(node) * 10, 8, 18);
+            // Leave space to the right for the expanded intel card.
+            center = node.Position + camera.transform.right * (distance * Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f) * camera.aspect * .45f);
+            PlaceCamera();
+            PositionLabels();
+        }
+
+        private void FocusIntel(string id)
+        {
+            if (!scene.Nodes.ContainsKey(id)) return;
+            savedCamera.FocusedId = id;
+            UpdateFocusedCard();
+            PositionLabels();
+        }
+
+        private void UpdateFocusedCard()
+        {
+            bool focused = savedCamera.FocusedId == selectedId && scene.Nodes.ContainsKey(selectedId);
+            focusedCard.style.display = focused ? DisplayStyle.Flex : DisplayStyle.None;
+            if (!focused) return;
+            focusedTitle.text = scene.Nodes[selectedId].Label;
+            var intel = nodeIntel.TryGetValue(selectedId, out var detail) ? detail : "NO INTEL";
+            focusedDetails.text = GameplayRichText.Format(intel);
+        }
+
+        internal static string DescribeNode(NetNode node, ContractIntel intel, bool preview, GameCatalog catalog)
+        {
+            if (preview && intel != ContractIntel.Full) return "NO INTEL\nUnknown system. Connect to discover this network.";
+            string status = node.controlled ? "CONTROLLED" : "DISCOVERED / NOT CONTROLLED";
+            if (intel == ContractIntel.None) return "NO INTEL\n" + status;
+            var type = catalog.NodeTypes.FirstOrDefault(t => t.id == node.typeId)
+                ?? catalog.NodeTypes.FirstOrDefault(t => t.glyph == node.kind);
+            string role = type?.title ?? node.kind.ToString();
+            if (intel == ContractIntel.Topology) return "LIMITED INTEL / " + role + "\n" + status + "\nSecurity and internal details unavailable.";
+            string detail = "FULL INTEL / " + role + "\n" + status + " / SECURITY " + node.security
+                + "\n" + (string.IsNullOrEmpty(node.detail) ? type?.description : node.detail);
+            switch (node.kind)
+            {
+                case NodeKind.Gateway: detail += "\nEntry point / route traffic through controlled systems."; break;
+                case NodeKind.Workstation: detail += "\nEndpoint / control it to extend your route."; break;
+                case NodeKind.Relay: detail += "\nTransit / connects network branches."; break;
+                case NodeKind.Firewall: detail += "\nPerimeter defense / guards access to deeper systems."; break;
+                case NodeKind.Scanner: detail += "\nDetection / " + (node.suppressed > 0 ? "SUPPRESSED" : "ACTIVE SENSOR"); break;
+                case NodeKind.SecurityHub: detail += "\nSecurity coordination / " + (node.suppressed > 0 ? "SUPPRESSED" : "ACTIVE DEFENSE"); break;
+                case NodeKind.Database: detail += "\nData store / " + (node.collected ? "DATA COLLECTED" : node.objective ? "CONTRACT OBJECTIVE" : node.bonus ? "BONUS DATA" : "ARCHIVE"); break;
+            }
+            return detail;
         }
 
         private static GraphScene BuildNetwork(List<NetNode> nodes, List<NetLink> links, bool preview, ContractIntel intel)
@@ -278,19 +428,34 @@ namespace HackThePlanet
         public void Tick(GameSimulation state, SignalEffects effects)
         {
             if (disposed) return;
+            waypointOverlay?.Reposition(textScale);
             session.Renderer.ReducedMotion = effects != SignalEffects.Full;
             if (state.Active && !research && state.Op.task != null && !string.IsNullOrEmpty(state.Op.task.target))
                 session.Renderer.NodeProgress = new Dictionary<string, GraphNodeProgressVisual>
                 { [state.Op.task.target] = new GraphNodeProgressVisual { Fraction = state.Progress } };
             else session.Renderer.NodeProgress = null;
+            session.Renderer.GuideArrows = BuildGuideArrows();
             scene.Nodes.TryGetValue(selectedId, out var selected);
             session.Renderer.Draw(scene, edgeFilter, camera, selected, null, null);
+        }
+
+        private IReadOnlyList<GraphGuideArrow> BuildGuideArrows()
+        {
+            if (research) return null;
+            var arrows = new List<GraphGuideArrow>(2);
+            if (!string.IsNullOrEmpty(guideEntryId) && scene.Nodes.ContainsKey(guideEntryId))
+                arrows.Add(new GraphGuideArrow { NodeId = guideEntryId, Color = Palette.Lime });
+            if (!string.IsNullOrEmpty(guideObjectiveId) && scene.Nodes.ContainsKey(guideObjectiveId))
+                arrows.Add(new GraphGuideArrow { NodeId = guideObjectiveId, Color = GuideObjectiveOrange });
+            return arrows.Count == 0 ? null : arrows;
         }
 
         private void PositionLabels()
         {
             if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
+            waypointOverlay?.Reposition(textScale);
             links.SelectionVisible = false;
+            focusedCard.style.display = DisplayStyle.None;
             foreach (var pair in nodeButtons)
             {
                 var button = pair.Value;
@@ -306,21 +471,54 @@ namespace HackThePlanet
                 float halfSize = Mathf.Max(10, Mathf.Abs(edge.y - point.y) * contentRect.height + 4);
                 var nodeCenter = new Vector2(point.x * contentRect.width, (1 - point.y) * contentRect.height);
                 var reticle = new Rect(nodeCenter.x - halfSize, nodeCenter.y - halfSize, halfSize * 2, halfSize * 2);
-                float width = Mathf.Min((research ? 118 : 104) * textScale, contentRect.width);
-                float height = 26 * textScale;
+                bool focused = savedCamera.FocusedId == pair.Key;
+                float rightSpace = contentRect.width - reticle.xMax - 20;
+                float leftSpace = reticle.xMin - 20;
+                var focusedSize = focused ? MeasureFocusedCard(Mathf.Max(rightSpace, leftSpace)) : Vector2.zero;
+                float width = focused ? focusedSize.x : Mathf.Min((research ? 118 : 104) * textScale, contentRect.width - 16);
+                float height = focused ? focusedSize.y : 26 * textScale;
                 float top = reticle.yMax + 12;
                 if (top + height > contentRect.height) top = reticle.yMin - 12 - height;
                 var card = new Rect(Mathf.Round(Mathf.Clamp(nodeCenter.x - width / 2, 0, contentRect.width - width)),
                     Mathf.Round(Mathf.Clamp(top, 0, Mathf.Max(0, contentRect.height - height))), width, height);
-                button.style.display = DisplayStyle.Flex;
-                button.style.width = width;
-                button.style.left = card.x;
-                button.style.top = card.y;
+                VisualElement cardElement = button;
+                if (focused)
+                {
+                    float beside = rightSpace >= leftSpace || width <= rightSpace + 1 ? reticle.xMax + 12 : reticle.xMin - width - 12;
+                    card.x = Mathf.Clamp(beside, 8, Mathf.Max(8, contentRect.width - width - 8));
+                    card.y = Mathf.Clamp(nodeCenter.y - height / 2, 8, Mathf.Max(8, contentRect.height - height - 8));
+                    cardElement = focusedCard;
+                }
+                cardElement.style.display = DisplayStyle.Flex;
+                cardElement.style.width = width;
+                cardElement.style.height = height;
+                cardElement.style.left = card.x;
+                cardElement.style.top = card.y;
                 links.SelectionVisible = true;
                 links.SelectionRect = reticle;
                 links.CardRect = card;
             }
             links.MarkDirtyRepaint();
+        }
+
+        private Vector2 MeasureFocusedCard(float availableWidth)
+        {
+            // Measure explicit lines at the current font size before imposing viewport limits.
+            // Grow sideways first; wrap and scroll only when the graph cannot contain the text.
+            float NaturalWidth(Label label) => GameplayRichText.Plain(label.text).Split('\n').Max(line =>
+                label.MeasureTextSize(line, 0, MeasureMode.Undefined, 0, MeasureMode.Undefined).x);
+            float width = Mathf.Ceil(Mathf.Min(Mathf.Max(NaturalWidth(focusedTitle), NaturalWidth(focusedDetails)) + 24,
+                Mathf.Max(1, Mathf.Min(contentRect.width - 16, availableWidth))));
+            float textWidth = Mathf.Max(1, width - 22);
+            float TextHeight(Label label) => label.MeasureTextSize(GameplayRichText.Plain(label.text), textWidth, MeasureMode.Exactly,
+                0, MeasureMode.Undefined).y;
+            float height = Mathf.Ceil(TextHeight(focusedTitle) + TextHeight(focusedDetails) + 22);
+            float maxHeight = Mathf.Max(1, contentRect.height - 16);
+            bool scrolls = height > maxHeight;
+            focusedScroll.verticalScrollerVisibility = scrolls ? ScrollerVisibility.AlwaysVisible : ScrollerVisibility.Hidden;
+            if (scrolls) textWidth = Mathf.Max(1, textWidth - 18);
+            focusedScroll.contentContainer.style.width = textWidth;
+            return new Vector2(width, Mathf.Min(height, maxHeight));
         }
 
         private float textScale=1;
@@ -354,16 +552,18 @@ namespace HackThePlanet
         public void ResetView()
         {
             savedCamera.UserAdjusted=false;
+            savedCamera.FocusedId=null;
             if (scene.Nodes.Count == 0) return;
-            var bounds = new Bounds(scene.Nodes.Values.First().Position, Vector3.one * 3);
-            foreach (var node in scene.Nodes.Values) bounds.Encapsulate(new Bounds(node.Position, Vector3.one * 3));
+            var positions=scene.Nodes.Values.Select(n=>n.Position).Concat(waypointOverlay?.Anchors??Enumerable.Empty<Vector3>()).ToArray();
+            var bounds = new Bounds(positions[0], Vector3.one * 3);
+            foreach (var position in positions) bounds.Encapsulate(new Bounds(position, Vector3.one * 3));
             center = bounds.center;
             var rotation = Quaternion.Inverse(Quaternion.Euler(pitch, yaw, 0));
             float tangent = Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f);
             distance = 4;
-            foreach (var node in scene.Nodes.Values)
+            foreach (var position in positions)
             {
-                var point = rotation * (node.Position - center);
+                var point = rotation * (position - center);
                 distance = Mathf.Max(distance, Mathf.Max((Mathf.Abs(point.y) + 2) / tangent,
                     (Mathf.Abs(point.x) + 2) / (tangent * camera.aspect)) - point.z);
             }

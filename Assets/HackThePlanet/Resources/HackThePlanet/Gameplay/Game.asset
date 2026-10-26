@@ -48,6 +48,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1dc2980696f4c7846b3dd86e628d280d, type: 2}
   - {fileID: 11400000, guid: 0779b29f2c38de047b1fbf6685e0eafb, type: 2}
   - {fileID: 11400000, guid: 3abd4ca38c666894c988dfb2ba5e540c, type: 2}
+  - {fileID: 11400000, guid: 42f848e0a88d4c168db38a3ea7a0dd67, type: 2}
+  - {fileID: 11400000, guid: 195807a46dee44f79f78b46f8f344209, type: 2}
+  - {fileID: 11400000, guid: 4596c5e2413041f6b9527f1dcbf62ce1, type: 2}
+  - {fileID: 11400000, guid: 0ba69560e7484bb69e8d6a95a80558eb, type: 2}
   actions:
   - {fileID: 11400000, guid: 5b24b5617d3bf614084659f4a1ce163f, type: 2}
   - {fileID: 11400000, guid: 177dce6f63cf40c4da3a2a79095178a8, type: 2}

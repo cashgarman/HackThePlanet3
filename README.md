@@ -15,8 +15,8 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 | Space | Pause or resume the current operation |
 | 1x / 2x / 4x buttons | Simulation speed |
 | Mouse wheel over graph | Zoom |
-| Drag empty graph space | Pan |
-| Right-drag graph | Orbit in 3D |
+| Left-drag graph | Orbit in 3D |
+| Right- or middle-drag graph | Pan |
 | FIT | Recenter the graph |
 | F1 or ? | Operator field guide |
 | Escape or ESC button | Settings menu: text size, Resume, Reset Game Save, Quit |
@@ -44,6 +44,8 @@ Early branch roots cost 45 XP. Bridge has two prepared crossings per operation; 
 The game automatically saves your career and active operation every five seconds and at important transitions. Reopened operations start paused, including any running tool. Saves use atomic replacement and a previous-save backup.
 
 Open Settings with **Escape** or the **ESC** button on the left rail. The menu pauses an active operation; **Resume** restores its previous pause state. **Reset Game Save** asks for confirmation, then starts a fresh career and resets the recovery backup. **Quit** saves your career before closing the game.
+
+Open **Settings → Cheats / Debug** to add **1,000,000 credits**, add **1,000,000 XP**, or **unlock the whole tech tree** for free. **Reset Game** uses the same confirmation as **Reset Game Save** and starts a fresh career (clears contracts, research, hardware, reports, and any active operation). Credit and XP grants are repeatable and XP also counts toward total earned XP. Changes autosave to the current career. Special abilities still use the normal Research loadout and slot limits. Escape returns to Settings; Resume restores the operation's previous pause state.
 
 Text defaults to **200%**, twice the original size. In Settings, move **Text size** or enter a percentage from **100 to 300**. Changes apply immediately throughout the interface, including graph labels, tooltips, reports, and logs, and are remembered between launches independently of career resets. Panels wrap or scroll to keep larger text and controls accessible.
 

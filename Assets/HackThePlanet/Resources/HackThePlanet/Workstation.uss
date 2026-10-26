@@ -1,4 +1,7 @@
-:root { --ink: #d7e1e5; --muted: #738793; --line: #23323a; --lime: #c5f56b; --cyan: #60d8d0; }
+:root {
+    --ink: #d7e1e5; --muted: #738793; --line: #23323a; --lime: #c5f56b; --cyan: #60d8d0;
+    -unity-font-definition: url("project://database/Assets/Fonts/Oxanium-VariableFont_wght.ttf");
+}
 .workstation { flex-grow: 1; background-color: #080e13; color: #d7e1e5; font-size: 13px; }
 Label { white-space: normal; flex-shrink: 0; }
 Button { margin: 0; padding: 0; border-width: 0; border-radius: 0; background-color: transparent; color: #d7e1e5; -unity-text-align: middle-left; font-size: 13px; }
@@ -53,7 +56,8 @@ ScrollView { flex-grow: 1; min-height: 0; }
 .active-brief { flex-grow: 1; padding: 22px 20px; }
 .mission-title { font-size: 29px; -unity-font-style: bold; color: #e3eae7; margin-top: 12px; margin-bottom: 10px; }
 .objective-row { font-size: 12px; color: #b8c4ca; padding: 9px 0; border-bottom-width: 1px; border-bottom-color: #23323a; }
-.network-panel { flex-grow: 1; min-width: 0; background-color: #0a1218; }
+.network-panel { flex-grow: 1; min-width: 0; min-height: 0; flex-direction: column; background-color: #0a1218; }
+.map-content { flex-grow: 1; min-height: 0; flex-direction: column; }
 .map-heading { flex-direction: row; align-items: center; justify-content: space-between; padding: 23px 25px 17px 25px; flex-shrink: 0; }
 .map-title { font-size: 22px; letter-spacing: 2.1px; margin-top: 6px; }
 .map-status { align-items: flex-end; }

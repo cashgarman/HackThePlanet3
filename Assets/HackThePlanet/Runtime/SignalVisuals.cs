@@ -12,8 +12,8 @@ namespace HackThePlanet
     {
         private const string PreferenceKey = "HackThePlanet.SignalEffects";
         private readonly Material fieldMaterial, glassMaterial;
-        private RenderTexture fieldTexture, glassTexture;
-        private Image fieldImage, glassImage;
+        private RenderTexture fieldTexture, glassTexture, intelTexture;
+        private Image fieldImage, glassImage, intelImage;
         private float nextFrame;
         private bool invalidated = true;
         private bool noIntel;
@@ -56,6 +56,14 @@ namespace HackThePlanet
             UpdateVisibility();
         }
 
+        public void AttachIntelCard(Image image)
+        {
+            intelImage = image;
+            intelImage.image = intelTexture;
+            invalidated = true;
+            UpdateVisibility();
+        }
+
         public void AttachGlass(VisualElement root)
         {
             glassImage = Decoration("phosphor-glass");
@@ -78,6 +86,7 @@ namespace HackThePlanet
             var display = Available && Mode != SignalEffects.Off ? DisplayStyle.Flex : DisplayStyle.None;
             if (fieldImage != null) fieldImage.style.display = display;
             if (glassImage != null) glassImage.style.display = display;
+            if (intelImage != null) intelImage.style.display = display;
         }
 
         public void Tick(GameSimulation state, bool research)
@@ -116,6 +125,13 @@ namespace HackThePlanet
             fieldMaterial.SetFloat("_NoIntel", noIntel ? 1 : 0);
             if (fieldReady) Render(fieldMaterial, fieldTexture, parameters, clock);
             Render(glassMaterial, glassTexture, parameters, clock);
+            if (intelImage?.panel != null && intelImage.parent.resolvedStyle.display != DisplayStyle.None)
+            {
+                EnsureTexture(ref intelTexture, 384, 192, "Ghost Frequency / Node intel");
+                intelImage.image = intelTexture;
+                fieldMaterial.SetFloat("_NoIntel", 1);
+                Render(fieldMaterial, intelTexture, parameters, clock);
+            }
         }
 
         private static void Render(Material material, RenderTexture target, Vector4 state, float clock)
@@ -153,6 +169,7 @@ namespace HackThePlanet
         {
             Release(ref fieldTexture);
             Release(ref glassTexture);
+            Release(ref intelTexture);
             if (fieldMaterial != null) UnityEngine.Object.Destroy(fieldMaterial);
             if (glassMaterial != null) UnityEngine.Object.Destroy(glassMaterial);
         }

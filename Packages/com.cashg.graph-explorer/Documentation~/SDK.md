@@ -322,9 +322,8 @@ topology changes. Do not initialize or rebuild UI every frame.
 
 `GraphNavigation` provides `Tick`, `Focus`, `Overview`, `Frame`, `Follow`, `Retarget`,
 `StopTracking`, `Restore`, `Release`. The host blocks navigation while UI owns input.
-Navigation controls: hold right mouse to look/fly with WASD and Q/E, Shift to
-accelerate, wheel while looking to change speed; middle mouse pans, Alt+left mouse
-orbits, wheel otherwise zooms. Selection and other application shortcuts are host bindings.
+Navigation controls: left mouse orbits; right and middle mouse pan with inertial
+coast after release; the mouse wheel zooms. Selection and other application shortcuts are host bindings.
 `GraphRenderer.Pick`/`PickEdge` resolve pointer hits; the host updates selection/view,
 drag-to-pin and inspector state. Picking receives Unity screen-space coordinates;
 convert separately to UI Toolkit panel coordinates for overlays.

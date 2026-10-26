@@ -92,6 +92,27 @@ namespace HackThePlanet.Editor
         private static void OnPostprocessAllAssets(string[] imported,string[] deleted,string[] moved,string[] previous)
         {
             if(imported.Concat(deleted).Concat(moved).Concat(previous).Any(path=>path.StartsWith(DefaultGameplayAssets.Folder,StringComparison.Ordinal)&&path.EndsWith(".asset",StringComparison.Ordinal)))GameCatalog.InvalidateDefault();
+            if(imported.Concat(moved).Any(path=>path.EndsWith("GameplayTextPalette.asset",StringComparison.Ordinal)))GameplayRichText.ReloadPalette();
+        }
+    }
+
+    public static class GameplayTextPaletteTools
+    {
+        private const string Path = "Assets/HackThePlanet/Resources/HackThePlanet/GameplayTextPalette.asset";
+
+        [MenuItem("Hack The Planet/Initialize Gameplay Text Palette")]
+        public static void InitializePalette()
+        {
+            var palette = AssetDatabase.LoadAssetAtPath<GameplayTextPalette>(Path);
+            if (palette == null)
+            {
+                palette = ScriptableObject.CreateInstance<GameplayTextPalette>();
+                AssetDatabase.CreateAsset(palette, Path);
+            }
+            palette.terms = GameplayTextPalette.DefaultTerms();
+            EditorUtility.SetDirty(palette);
+            AssetDatabase.SaveAssets();
+            GameplayRichText.ReloadPalette();
         }
     }
 }

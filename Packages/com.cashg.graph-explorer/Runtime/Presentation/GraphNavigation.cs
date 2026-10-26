@@ -175,18 +175,8 @@ namespace Cashg.GraphExplorer
 			var keyboard = Keyboard.current;
 			if (mouse == null || keyboard == null) return;
 			if (frameSelected) Focus(selected);
-			// Locked nodes orbit under right-drag. Fly mode stays available once the lock is released.
-			var trackOrbit = Tracking && subject != null && mouse.rightButton.isPressed && !blocked;
-			if (!trackOrbit && mouse.rightButton.wasPressedThisFrame && !blocked)
-			{
-				looking = true;
-				framing = false;
-				panVelocity = Vector3.zero;
-				CaptureCursor();
-				SyncAngles();
-			}
-
-			if (looking && !mouse.rightButton.isPressed) Release();
+			// Locked nodes orbit under left-drag while tracking remains active.
+			var trackOrbit = Tracking && subject != null && mouse.leftButton.isPressed && !blocked;
 			var delta = mouse.delta.ReadValue();
 			var dt = Mathf.Min(Time.unscaledDeltaTime, .05f);
 			var coastFlight = true;
@@ -216,32 +206,16 @@ namespace Cashg.GraphExplorer
 				Release();
 			}
 
-			if (looking)
+			if (!orbiting && !blocked)
 			{
-				// Integrate camera-relative flight with bounded pitch and scroll-adjustable speed.
-				yaw += delta.x * .13f;
-				pitch = Mathf.Clamp(pitch - delta.y * .13f, -88, 88);
-				camera.transform.rotation = Quaternion.Euler(pitch, yaw, 0);
-				var movement = new Vector3((keyboard.dKey.isPressed ? 1 : 0) - (keyboard.aKey.isPressed ? 1 : 0),
-										   (keyboard.eKey.isPressed ? 1 : 0) - (keyboard.qKey.isPressed ? 1 : 0),
-										   (keyboard.wKey.isPressed ? 1 : 0) - (keyboard.sKey.isPressed ? 1 : 0));
-				var wish = camera.transform.TransformDirection(Vector3.ClampMagnitude(movement, 1)) * Speed *
-						   (keyboard.shiftKey.isPressed ? 3 : 1);
-				IntegrateFlight(dt, wish);
-				coastFlight = false;
-				var wheel = mouse.scroll.ReadValue().y;
-				if (wheel != 0) Speed = Mathf.Clamp(Speed * Mathf.Exp(wheel * .001f), 1, 300);
-				orbitCenter = camera.transform.position + camera.transform.forward * 20;
-			}
-			else if (!orbiting && !blocked)
-			{
-				if (mouse.middleButton.wasPressedThisFrame)
+				var panning = mouse.middleButton.isPressed || mouse.rightButton.isPressed;
+				if (mouse.middleButton.wasPressedThisFrame || mouse.rightButton.wasPressedThisFrame)
 				{
 					panVelocity = Vector3.zero;
 					flightVelocity = Vector3.zero;
 				}
 
-				if (mouse.middleButton.isPressed)
+				if (panning)
 				{
 					// Translate in the view plane and retain drag velocity for inertial panning after release.
 					coastFlight = false;
@@ -260,7 +234,7 @@ namespace Cashg.GraphExplorer
 					if (panVelocity.sqrMagnitude < 1e-4f) panVelocity = Vector3.zero;
 				}
 
-				if (keyboard.altKey.isPressed && mouse.leftButton.isPressed)
+				if (!trackOrbit && mouse.leftButton.isPressed)
 				{
 					// Orbit the current selection, or the existing orbit center when nothing is selected.
 					coastFlight = false;

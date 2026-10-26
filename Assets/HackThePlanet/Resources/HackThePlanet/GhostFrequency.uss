@@ -95,14 +95,6 @@
 .cyan { color: #65d9eb; }
 .amber { color: #ffbc70; }
 .violet { color: #baa1ed; }
-/* Monospaced telemetry is bundled; body copy retains the workstation's readable sans face. */
-.eyebrow, .micro, .sector, .node-code, .node-readout, .tech-meta, .tech-price,
-.terminal-line, .footer-brand, .footer-center, .footer-save, .signal-strip Label,
-.rail-button, .effects-button, .keycap, .trace-number, .task-title {
-    -unity-font-definition: initial;
-    -unity-font: resource("HackThePlanet/Fonts/SpaceMono-Regular");
-}
-
 /* Tactical controls keep their meaning without adding another dashboard. */
 .action-button { margin-top: 7px; padding: 9px 12px; }
 .action-button.suggested-action { border-left-color: #9bfacb; border-left-width: 3px; background-color: #18392f; }

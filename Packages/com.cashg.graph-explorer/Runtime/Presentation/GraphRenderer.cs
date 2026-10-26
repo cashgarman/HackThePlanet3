@@ -68,9 +68,13 @@ namespace Cashg.GraphExplorer
 		public Dictionary<string, GraphTaskVisual> TaskVisuals;
 		/// <summary>Gets or sets whether degree counts include only visible edges.</summary>
 		public bool VisibleDegree;
+		/// <summary>Gets or sets contract or tutorial arrows keyed by node identifier.</summary>
+		public IReadOnlyList<GraphGuideArrow> GuideArrows;
 		private bool disposed;
 		private Material progressMaterial;
 		private Mesh progressMesh;
+		private Mesh guideArrowMesh;
+		private Material guideArrowMaterial;
 		private IGraphScene scene;
 		private string selectedVisualId, hoveredVisualId;
 		private float selectionPulse = 1;
@@ -139,6 +143,8 @@ namespace Cashg.GraphExplorer
 			Release(edgeMaterial);
 			Release(progressMesh);
 			Release(progressMaterial);
+			Release(guideArrowMesh);
+			Release(guideArrowMaterial);
 		}
 
 		private void EnsureShape(IGraphNode node)
@@ -382,6 +388,7 @@ namespace Cashg.GraphExplorer
 				}
 
 				DrawTaskRings(graph, camera);
+				DrawGuideArrows(graph, camera);
 				edgeMesh.Clear();
 				if (edgeVertices.Count > 0)
 				{
@@ -509,6 +516,48 @@ namespace Cashg.GraphExplorer
 							 camera.transform.up * .5f;
 				Ribbon(origin, target.Position, new Color(.6f, .85f, 1), .04f, camera);
 			}
+		}
+
+		private void DrawGuideArrows(IGraphScene graph, Camera camera)
+		{
+			if (GuideArrows == null) return;
+			foreach (var guide in GuideArrows)
+			{
+				if (string.IsNullOrEmpty(guide.NodeId) || !graph.Nodes.TryGetValue(guide.NodeId, out var node) ||
+					!rendered.Contains(guide.NodeId)) continue;
+				DrawGuideArrow(node, camera, guide.Color, guide.NodeId);
+			}
+		}
+
+		private void DrawGuideArrow(IGraphNode node, Camera camera, Color color, string nodeId)
+		{
+			if (guideArrowMaterial == null)
+			{
+				var shader = resources.Load<Shader>("GraphGuideArrow");
+				if (shader == null) throw new InvalidOperationException("Missing Resources/GraphGuideArrow shader.");
+				guideArrowMaterial = new Material(shader) { name = "Graph guide arrows" };
+				guideArrowMesh = new Mesh { name = "Graph guide arrow quad" };
+				guideArrowMesh.vertices = new[] { new Vector3(-.5f, -.5f, 0), new Vector3(.5f, -.5f, 0),
+					new Vector3(.5f, .5f, 0), new Vector3(-.5f, .5f, 0) };
+				guideArrowMesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
+				guideArrowMesh.RecalculateBounds();
+			}
+
+			// Keep the filled silhouette legible at overview zoom and face it toward the viewer.
+			var depth = camera.WorldToScreenPoint(node.Position).z;
+			if (depth <= camera.nearClipPlane) return;
+			var unitsPerPixel = (camera.orthographic ? camera.orthographicSize * 2f :
+				2f * depth * Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f)) / Mathf.Max(1, camera.pixelHeight);
+			var height = unitsPerPixel * 34f;
+			var time = AnimationTimeOverride ?? Time.unscaledTime;
+			var phase = (nodeId.GetHashCode() & 1023) * (Mathf.PI * 2f / 1023f);
+			var bounce = ReducedMotion ? 0f : unitsPerPixel * 2f * Mathf.Sin(time * 2.8f + phase);
+			var center = node.Position + camera.transform.up * (Radius(node) * 1.85f + height * .5f + bounce);
+			selectionProperties.Clear();
+			selectionProperties.SetColor("_ArrowColor", color);
+			Graphics.DrawMesh(guideArrowMesh, Matrix4x4.TRS(center, camera.transform.rotation,
+				new Vector3(height, height, 1)), guideArrowMaterial, 0, camera, 0,
+				selectionProperties, ShadowCastingMode.Off, false);
 		}
 
 		private void DrawNodeProgress(IGraphScene graph, Camera camera)

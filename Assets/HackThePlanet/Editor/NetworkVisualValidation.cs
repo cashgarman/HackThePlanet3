@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Cashg.GraphExplorer;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace HackThePlanet.Editor
 {
@@ -14,6 +15,13 @@ namespace HackThePlanet.Editor
 
         public static void CheckIntel(Action<bool,string> check)
         {
+            var fixture = new NetNode { label = "Secret vault", kind = NodeKind.Database, security = 9, detail = "SECRET INTERNAL DATA", objective = true };
+            string Describe(ContractIntel intel, bool preview = false) => (string)typeof(GraphViewport)
+                .GetMethod("DescribeNode", BindingFlags.Static | BindingFlags.NonPublic).Invoke(null, new object[] { fixture, intel, preview, GameCatalog.Default });
+            check(Describe(ContractIntel.Full).Contains("SECURITY 9") && Describe(ContractIntel.Full).Contains("CONTRACT OBJECTIVE"), "Easy focused data stores expose security and objective intel.");
+            check(Describe(ContractIntel.Topology).Contains("LIMITED INTEL") && !Describe(ContractIntel.Topology).Contains("SECRET") && !Describe(ContractIntel.Topology).Contains("SECURITY 9"), "Medium focused cards redact internal details and metrics.");
+            check(Describe(ContractIntel.None).StartsWith("NO INTEL") && !Describe(ContractIntel.None).Contains("vault") && !Describe(ContractIntel.None).Contains("SECRET"), "Hard focused cards expose only observed state.");
+            check(Describe(ContractIntel.Topology, true).StartsWith("NO INTEL") && !Describe(ContractIntel.Topology, true).Contains("Database"), "Anonymous preview cards never disclose node types.");
             var network=NetworkGenerator.Generate(GameContent.Story[0],new Career());
             var before=JsonUtility.ToJson(new NodeSnapshot{nodes=network.nodes});
             GraphScene Project(bool preview,ContractIntel intel)=>(GraphScene)typeof(GraphViewport).GetMethod("BuildNetwork",BindingFlags.Static|BindingFlags.NonPublic)
@@ -31,6 +39,42 @@ namespace HackThePlanet.Editor
             check(before==JsonUtility.ToJson(new NodeSnapshot{nodes=network.nodes}),"Preview redaction never mutates the generated operation.");
         }
         [Serializable] private sealed class NodeSnapshot { public List<NetNode> nodes; }
+
+        public static void DoubleClickSelected(GraphViewport viewport)
+        {
+            var scene = Field<GraphScene>(viewport, "scene");
+            var camera = Field<Camera>(viewport, "camera");
+            var selected = Field<string>(viewport, "selectedId");
+            var point = camera.WorldToViewportPoint(scene.Nodes[selected].Position);
+            var local = new Vector2(point.x * viewport.contentRect.width, (1 - point.y) * viewport.contentRect.height);
+            var screen = viewport.LocalToWorld(local);
+            for (int i = 0; i < 2; i++)
+            {
+                using (var down = PointerDownEvent.GetPooled(new Event { type = EventType.MouseDown, button = 0, mousePosition = screen }))
+                { down.target = viewport; viewport.SendEvent(down); }
+                using (var up = PointerUpEvent.GetPooled(new Event { type = EventType.MouseUp, button = 0, mousePosition = screen }))
+                { up.target = viewport; viewport.SendEvent(up); }
+            }
+            if (Field<GraphCameraState>(viewport, "savedCamera").FocusedId != selected)
+                throw new InvalidOperationException("Double-click did not focus the picked system.");
+        }
+
+        public static void CheckFocusedCard(GraphViewport viewport)
+        {
+            var saved = Field<GraphCameraState>(viewport, "savedCamera");
+            if (saved.FocusedId != Field<string>(viewport, "selectedId") || !saved.UserAdjusted)
+                throw new InvalidOperationException("Node focus did not survive UI rebuild.");
+            var card = viewport.Q("focused-node-card");
+            if (card.resolvedStyle.display == DisplayStyle.None || !viewport.worldBound.Contains(card.worldBound.min) || !viewport.worldBound.Contains(card.worldBound.max))
+                throw new InvalidOperationException("Focused card is hidden or extends outside the graph.");
+            if (!GameplayRichText.Plain(viewport.Q<Label>("focused-node-intel").text).Contains("FULL INTEL") || viewport.IntelStatic.image == null)
+                throw new InvalidOperationException("Focused card lacks detailed intel or the static background.");
+            var camera = Field<Camera>(viewport, "camera");
+            var scene = Field<GraphScene>(viewport, "scene");
+            var point = camera.WorldToViewportPoint(scene.Nodes[saved.FocusedId].Position);
+            if (Mathf.Abs(point.x - .275f) > .01f || Mathf.Abs(point.y - .5f) > .01f)
+                throw new InvalidOperationException("Focused camera does not frame the selected system beside its card.");
+        }
 
         public static void CheckViewport(GraphViewport viewport)
         {
@@ -85,6 +129,11 @@ namespace HackThePlanet.Editor
             {
                 session.Layout.Bind(scene);session.Layout.Paused=true;
                 var filter=new EveryEdge();session.Renderer.UpdateMetrics(scene,filter);
+                session.Renderer.GuideArrows=new[]
+                {
+                    new GraphGuideArrow { NodeId="model-0", Color=Palette.Lime },
+                    new GraphGuideArrow { NodeId="model-5", Color=new Color(1f,.64f,.22f) }
+                };
                 for(int view=0;view<3;view++)
                 {
                     var rotation=Quaternion.Euler(view==0?8:20,view==0?0:view==1?25:155,0);

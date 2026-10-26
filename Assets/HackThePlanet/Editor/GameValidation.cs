@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Cashg.GraphExplorer;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace HackThePlanet.Editor
 {
@@ -77,14 +78,75 @@ namespace HackThePlanet.Editor
             finally{UnityEngine.Object.DestroyImmediate(definition);UnityEngine.Object.DestroyImmediate(root);}
         }
 
+        private static void ValidateWaypoints(string dir)
+        {
+            var sim=new GameSimulation();sim.Career.xp=1000;
+            var job=sim.Catalog.Contracts(sim.Career).First(c=>!c.recurring);
+            var network=NetworkGenerator.Generate(job,sim.Career,sim.Catalog);
+            var targets=network.nodes.Where(n=>!n.known&&GameSimulation.WaypointPath(network.nodes,network.links,sim.Catalog.Network(job.networkId).entryNode,n.id).Jumps>=3).Take(5).ToArray();
+            Check(!sim.PlaceWaypoint(job,targets[0].id)&&!sim.BuyTech("waypoints-2"),"Waypoints require research and sequential tier prerequisites.");
+            for(int tier=1;tier<=4;tier++)
+            {
+                Check(sim.BuyTech("waypoints-"+tier)&&sim.WaypointTier==tier,"Waypoints tier "+tier+" unlocks its capacity.");
+                Check(sim.PlaceWaypoint(job,targets[tier-1].id)&&!sim.PlaceWaypoint(job,targets[4].id),"Tier "+tier+" enforces its waypoint limit.");
+                Check(!sim.PlaceWaypoint(job,targets[0].id),"Tier "+tier+" rejects duplicate markers.");
+                if(tier==1)Check(!sim.EditWaypoint(job,targets[0].id,1,"",false),"Tier I cannot change waypoint colours.");
+                if(tier==2)Check(sim.EditWaypoint(job,targets[0].id,1,"",false)&&!sim.EditWaypoint(job,targets[0].id,1,"label",false),"Tier II changes colours but cannot add labels.");
+                if(tier==3)Check(sim.EditWaypoint(job,targets[0].id,1,"Meet here",false)&&!sim.EditWaypoint(job,targets[0].id,1,"Meet here",true),"Tier III adds labels but cannot enable routes.");
+            }
+            Check(sim.EditWaypoint(job,targets[0].id,1,"Meet here",true)&&sim.EditWaypoint(job,targets[1].id,2,"Next",true)&&sim.Waypoints(job).Count(w=>w.showPath)==1,"Tier IV allows exactly one selected route.");
+            var route=GameSimulation.WaypointPath(network.nodes,network.links,sim.Catalog.Network(job.networkId).entryNode,targets[1].id);
+            Check(route.IsReachable&&route.NodeIds.Last()==targets[1].id&&route.NodeIds.Any(id=>!network.nodes.First(n=>n.id==id).known),"Waypoint routing crosses undiscovered systems.");
+            var chain=new List<NetNode>{new NetNode{id="a"},new NetNode{id="b"},new NetNode{id="c"},new NetNode{id="d"}};
+            var edges=new List<NetLink>{new NetLink("b","a"),new NetLink("c","b"),new NetLink("d","c"),new NetLink("d","a")};
+            Check(GameSimulation.WaypointPath(chain,edges,"a","d").Jumps==1,"Waypoint routing finds the shortest path in either link direction.");
+            var other=sim.Catalog.Contracts(sim.Career).First(c=>c.id!=job.id);
+            Check(sim.Waypoints(other).Count==0,"Plans are isolated by contract.");
+            Check(sim.Start(job)&&sim.Waypoints(sim.Job).Count==4&&!sim.Node(targets[1].id).known,"Starting preserves markers without revealing their systems.");
+            Check(!sim.RemoveWaypoint(job,targets[0].id)&&!sim.EditWaypoint(job,targets[0].id,0,"",false),"Plans cannot be edited during operations.");
+            using(var viewport=new GraphViewport(sim.Op.nodes,sim.Op.links,sim.Op.entryNode,false,_=>{},guideEntryId:sim.Op.entryNode,waypoints:sim.Waypoints(sim.Job),waypointTier:sim.WaypointTier))
+            {
+                Check(viewport.Q<UnityEngine.UIElements.Label>("waypoint-marker-"+targets[1].id)!=null&&viewport.NodeCount==sim.Op.nodes.Count(n=>n.known),"Hidden-system markers exist without adding undiscovered models to the viewport.");
+            }
+            string save=Path.Combine(dir,"validation-waypoints.json");
+            Check(CareerStorage.Save(sim.Career,save),"Waypoint plans save with an active operation.");
+            var restored=new GameSimulation(CareerStorage.Load(save));
+            Check(restored.Waypoints(restored.Job).Count==4&&restored.Waypoints(restored.Job)[0].label=="Meet here"&&restored.Waypoints(restored.Job)[1].showPath&&restored.Waypoints(restored.Job)[1].color==2,"Waypoint positions, colours, labels and route selection survive save/load.");
+            var legacy=JsonUtility.FromJson<Career>(JsonUtility.ToJson(sim.Career));legacy.waypoints=null;
+            Check(new GameSimulation(legacy).Career.waypoints.Count==0,"Existing careers without waypoint data remain compatible.");
+            sim.Disconnect();Check(sim.RefundResearch()&&sim.WaypointTier==0&&sim.Career.waypoints.Count==0,"Research refunds clear waypoint plans and capacity.");
+        }
+
+        private static void ValidateDebugCheats(string dir)
+        {
+            var sim=new GameSimulation();int credits=sim.Career.credits,xp=sim.Career.xp,total=sim.Career.totalEarnedXp,changes=0;
+            sim.Changed+=()=>changes++;
+            sim.DebugAddCredits();sim.DebugAddCredits();sim.DebugAddXp();
+            Check(sim.Career.credits==credits+2*GameSimulation.DebugGrantAmount&&sim.Career.xp==xp+GameSimulation.DebugGrantAmount&&sim.Career.totalEarnedXp==total+GameSimulation.DebugGrantAmount&&changes==3,"Debug grants repeat, update earned XP, and notify autosave subscribers.");
+            Check(sim.Start(sim.Catalog.Contracts(sim.Career).First(c=>!c.recurring)),"Debug fixture starts an operation.");
+            sim.SetPaused(true);var operation=sim.Op;int spent=sim.Career.researchSpent;var equipped=sim.Career.equipped.ToArray();
+            sim.DebugUnlockAllTech();sim.DebugUnlockAllTech();
+            Check(sim.Catalog.Technologies.All(t=>sim.Has(t.id))&&sim.Career.unlocked.Count==sim.Career.unlocked.Distinct().Count(),"Debug unlock includes every catalog technology and is idempotent.");
+            Check(ReferenceEquals(operation,sim.Op)&&sim.Op.paused&&sim.Career.researchSpent==spent&&sim.Career.equipped.SequenceEqual(equipped),"Debug unlock preserves active operation, pause, paid research ledger, and loadout.");
+            string path=Path.Combine(dir,"validation-debug-career.json");
+            Check(CareerStorage.Save(sim.Career,path),"Debug career saves successfully.");
+            var restored=new GameSimulation(CareerStorage.Load(path));
+            Check(restored.Career.credits==sim.Career.credits&&restored.Career.xp==sim.Career.xp&&restored.Catalog.Technologies.All(t=>restored.Has(t.id)),"Debug currency and full tech tree survive save restoration.");
+            sim.Career.credits=sim.Career.xp=sim.Career.totalEarnedXp=int.MaxValue-10;
+            sim.DebugAddCredits();sim.DebugAddXp();
+            Check(sim.Career.credits==int.MaxValue&&sim.Career.xp==int.MaxValue&&sim.Career.totalEarnedXp==int.MaxValue,"Repeated debug grants saturate instead of overflowing.");
+        }
+
         public static void Run()
         {
             results.Clear();string dir=Path.Combine(Directory.GetParent(Application.dataPath).FullName,"Artifacts");Directory.CreateDirectory(dir);
             try
             {
                 NetworkValidation.Run(Check);
+                ValidateWaypoints(dir);
                 NetworkVisualValidation.CheckIntel(Check);
                 ValidateDifficultyRewards();
+                ValidateDebugCheats(dir);
                 var sim=new GameSimulation();
                 Check(!sim.Start(GameContent.Story[1]),"Locked contracts cannot start.");
                 Check(sim.Start(GameContent.Story[0]),"Starting contract connects.");

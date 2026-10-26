@@ -92,6 +92,15 @@ namespace HackThePlanet.Editor
             }).ToArray();
             TechnologyDefinition Tech(string id)=>root.technologies.First(t=>t.id==id);
             foreach(var t in baseline.technologies)Tech(t.id).parents=t.parents.Select(Tech).ToArray();
+            var waypointParent=Tech("base");
+            string[] waypointDescriptions={"Place one waypoint before connecting; its marker remains visible before discovery.","Place two waypoints and change their colours.","Place three waypoints and add text labels.","Place four waypoints and show one shortest gateway route through undiscovered systems."};
+            for(int tier=1;tier<=4;tier++)
+            {
+                var waypoint=Asset<TechnologyDefinition>("waypoints-"+tier,"Waypoints "+new[]{"I","II","III","IV"}[tier-1]);
+                waypoint.branch="RECON";waypoint.cost=tier*30;waypoint.waypointTier=tier;waypoint.position=new Vector2(220+(tier-1)*180,-75);
+                waypoint.description=waypointDescriptions[tier-1];waypoint.parents=new[]{waypointParent};waypointParent=waypoint;
+                root.technologies=root.technologies.Concat(new[]{waypoint}).ToArray();
+            }
             foreach(var pair in new (TechnologyDefinition tech,ActionDefinition action)[]{(Tech("disrupt"),disrupt),(Tech("blackout"),blackout),(Tech("bridge"),bridge),(Tech("backdoor"),backdoor),(Tech("decoy"),decoy)})pair.tech.grants=new[]{pair.action};
             bridge.visible=All(Tag("firewall"),new ResearchCondition{technology=Tech("bridge"),equipped=true});
             backdoor.visible=All(Any(Tag("workstation"),Tag("relay")),new ResearchCondition{technology=Tech("backdoor"),equipped=true});

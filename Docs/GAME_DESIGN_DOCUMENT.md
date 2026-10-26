@@ -1018,7 +1018,8 @@ All critical actions work with a mouse. Keyboard support improves comfort withou
 | Left click | Select node or interface element |
 | Double click controlled node | Focus and route there; no hack execution |
 | Right click node | Context menu |
-| Drag empty graph space / middle drag | Pan |
+| Left-drag graph | Orbit in 3D |
+| Right- or middle-drag graph | Pan |
 | Mouse wheel | Zoom centered on cursor |
 | Space | Pause or resume |
 | `1`, `2`, `3` | 0.5×, 1×, 2× speed |

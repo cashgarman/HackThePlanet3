@@ -81,6 +81,7 @@ namespace HackThePlanet
             void Tech(TechnologyDefinition t)
             {
                 if(t==null||done.Contains(t))return;if(!visiting.Add(t)){Error(t,"parents","research dependency cycle");return;}
+                if(t.waypointTier<0||t.waypointTier>4)Error(t,"waypointTier","waypoint tier must be between zero and four");
                 if(t.cost<0)Error(t,"cost","research cost cannot be negative");foreach(var parent in t.parents)Tech(parent);visiting.Remove(t);done.Add(t);
             }
             foreach(var t in root.technologies)Tech(t);

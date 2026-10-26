@@ -8,6 +8,7 @@ namespace HackThePlanet
     {
         public string branch;
         public int cost;
+        [Range(0,4)] public int waypointTier;
         public bool special;
         public Vector2 position;
         public TechnologyDefinition[] parents = Array.Empty<TechnologyDefinition>();
