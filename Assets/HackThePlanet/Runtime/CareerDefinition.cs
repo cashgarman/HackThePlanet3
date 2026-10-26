@@ -18,6 +18,7 @@ namespace HackThePlanet
     {
         public int credits = 600, xp, day = 1, reportLimit = 20, logLimit = 100;
         public bool researchDuringOperations, hardwareDuringOperations, equipDuringOperations;
+        public bool allowTaskCancellation = true;
         public float refundFraction = 1, traceLimit = 100, traceWarning = 60, traceDanger = 85, maxTick = .5f;
         public string welcome;
         public OutcomeRule[] outcomes = {

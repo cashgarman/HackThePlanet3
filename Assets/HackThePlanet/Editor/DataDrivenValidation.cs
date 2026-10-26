@@ -47,33 +47,37 @@ namespace HackThePlanet.Editor
         }
         private static void ValidateMechanics()
         {
-            var plain=Developed();var hack=plain.Preview("hack","n2");Near(hack.duration,4.7f,"baseline relay hack duration");Near(hack.trace,4.7f,"baseline relay hack trace");
-            var efficient=Developed("efficient","quiet");Near(efficient.Preview("hack","n2").duration,4.7f*.75f,"efficient hack duration");Near(efficient.Preview("hack","n2").trace,4.7f*.7f,"quiet hack trace");
+            var plain=Developed();var hack=plain.Preview("hack","n2");Near(hack.duration,3.35f,"baseline relay hack duration");Near(hack.trace,4.7f,"baseline relay hack trace");
+            var efficient=Developed("efficient","quiet");Near(efficient.Preview("hack","n2").duration,3.35f*.8f,"efficient hack duration");Near(efficient.Preview("hack","n2").trace,4.7f*.8f,"quiet hack trace");
             var ghost=Developed("quiet","ghost");Near(ghost.Preview("hack","n2").trace,0,"first relay fully trace free");ghost.Execute("hack","n2");Finish(ghost);Check(ghost.Counter("relay-controls")==1,"control trigger consumes first relay");
-            var scan=Developed("wide","signal");Near(scan.Preview("scan","n2").duration,1.5f,"signal halves scan duration");Near(scan.Preview("scan","n2").trace,0,"signal removes base scan trace");scan.Execute("scan","n2");Finish(scan);Near(scan.Stat("scanRadius"),3,"wide scan radius");
+            var scan=Developed("wide","signal");Near(scan.Preview("scan","n2").duration,.8f,"signal halves scan duration");Near(scan.Preview("scan","n2").trace,0,"signal removes base scan trace");scan.Execute("scan","n2");Finish(scan);Near(scan.Stat("scanRadius"),3,"wide scan radius");
             var passive=Developed("wide","quiet","passive");passive.Execute("hack","n2");Finish(passive);Check(passive.Node("n14").known,"passive mapping reveals three hops from relay");
             var blueprint=Developed("wide","blueprint");Check(blueprint.Node("n22").known&&blueprint.Neighbors(blueprint.Node("n22")).All(n=>n.known),"blueprint operation-start trigger");
-            var weak=Developed("wide","efficient","weakpoint","buffer");weak.Node("n2").scanned=true;Near(weak.Preview("hack","n2").trace,4.7f*.6f*.85f,"weak-point then global buffer order");
+            var weak=Developed("wide","efficient","weakpoint","buffer");weak.Node("n2").scanned=true;Near(weak.Preview("hack","n2").trace,4.7f*.8f*.75f*.9f,"scan preparation, weak-point and global buffer stack");
             var pressure=Developed("efficient","quiet","buffer");pressure.Node("n6").known=true;pressure.Node("n6").controlled=true;pressure.Node("n10").known=true;
             var p=pressure.Preview("hack","n10");float basis=3+pressure.EffectiveSecurity(pressure.Node("n10"))*1.7f;
-            Near(p.trace,(basis*.7f+p.duration*pressure.Scanners*.18f)*.85f,"scanner pressure follows duration modifiers and precedes global trace modifiers");
+            Near(p.trace,(basis*.8f+p.duration*pressure.Scanners*.18f)*.9f,"scanner pressure follows duration modifiers and precedes global trace modifiers");
             var selective=Developed("efficient","selective");selective.Node("n22").known=true;selective.Node("n22").controlled=true;
-            Near(selective.Preview("download","n22").duration,9*.55f,"selective main-objective duration");Near(selective.Preview("download","n22").trace,8*.7f,"selective main-objective trace");
+            Near(selective.Preview("download","n22").duration,5.5f*.7f,"selective main-objective duration");Near(selective.Preview("download","n22").trace,8*.7f,"selective main-objective trace");
             var chain=Developed("efficient","chain");chain.Execute("scan","n2");Finish(chain);Check(chain.Execute("hack","n2")&&chain.Execute("hack","n6"),"chain permits future neighboring action");Check(!chain.Execute("hack","n6"),"duplicate queue entries rejected");Finish(chain);Check(chain.Node("n6").controlled,"queued action executes after gaining reachability");
-            var invalid=Developed();invalid.Execute("hack","n2");Check(invalid.Execute("download","n2"),"queue defers authored execution requirements");Finish(invalid);Check(invalid.Op.queue.Count==0&&invalid.Op.log.Any(l=>l.Contains("SKIPPED")),"queued requirements rechecked and invalid recovery skipped");
-            var decoy=Developed("disrupt","decoy");decoy.Op.trace=30;Check(decoy.Execute("decoy"),"operator action executes");Near(decoy.Op.trace,15,"decoy subtracts authored trace");Check(!decoy.Execute("decoy"),"operator action use limit");
-            decoy.Execute("hack","n2");decoy.SetPaused(true);decoy.Tick(.5f);Near(decoy.Op.decoyRemaining,20,"pause freezes status timers");decoy.SetPaused(false);Finish(decoy);Near(decoy.Op.trace,15,"trace prevention status protects a running action");
+            var invalid=Developed();invalid.Execute("hack","n2");invalid.Node("n6").known=true;Check(invalid.Execute("scan","n6"),"queue defers future reachability");invalid.Node("n6").scanned=true;Finish(invalid);Check(invalid.Op.queue.Count==0&&invalid.Op.log.Any(l=>l.Contains("SKIPPED")),"queued requirements rechecked and completed action skipped");
+            var decoy=Developed("disrupt","decoy");decoy.Op.trace=30;Check(decoy.Execute("decoy"),"operator action executes");Near(decoy.Op.trace,18,"decoy subtracts authored trace");Check(!decoy.Execute("decoy"),"operator action use limit");
+            decoy.Execute("hack","n2");decoy.SetPaused(true);decoy.Tick(.5f);Near(decoy.Op.decoyRemaining,10,"pause freezes status timers");decoy.SetPaused(false);Finish(decoy);Near(decoy.Op.trace,18,"trace prevention status protects a running action");
             while(decoy.Op.decoyRemaining>0)decoy.Tick(.5f);Check(decoy.Op.statuses.Count==0,"operator status expires while idle");
             var suppression=Developed("disrupt","blackout","efficient","cascade");suppression.Node("n6").known=true;suppression.Node("n6").controlled=true;suppression.Node("n5").known=true;
-            Check(suppression.Execute("disrupt","n5"),"scanner suppression action available");Finish(suppression);Near(suppression.Node("n5").suppressed,60,"suppression uses authored duration");
+            Check(suppression.Execute("disrupt","n5"),"scanner suppression action available");Finish(suppression);Near(suppression.Node("n5").suppressed,45,"suppression uses authored duration");
             int count=suppression.Scanners;for(int i=0;i<121;i++)suppression.Tick(.5f);Check(suppression.Node("n5").suppressed==0&&suppression.Scanners>count,"expiration restores scanner pressure");
             suppression.Node("n10").known=true;suppression.Node("n10").controlled=true;suppression.Node("n14").known=true;int wall=suppression.Node("n18").security;
             Check(suppression.Execute("blackout","n14"),"hub suppression action available");Finish(suppression);Check(suppression.Node("n18").security==Mathf.Max(1,wall-2)&&suppression.Counter("cascade")==1,"cascade modifies all firewalls once");
             suppression.Op.trace=0;suppression.Execute("hack","n14");Finish(suppression);Check(suppression.Node("n18").security==Mathf.Max(1,wall-2),"capturing suppressed hub does not apply cascade twice");
             var bridge=Developed("wide","blueprint","efficient","chain","bridge");bridge.Node("n10").known=true;
-            foreach(var n in bridge.Neighbors(bridge.Node("n10")).Take(2)){n.known=true;n.controlled=true;}
-            Check(bridge.Preview("bridge","n10").allowed,"bridge accepts two controlled neighbors");Near(bridge.Preview("bridge","n10").trace,0,"bridge terminal override removes all trace");bridge.Execute("bridge","n10");Finish(bridge);Check(bridge.Node("n10").controlled,"bridge applies reusable control effect");
-            var backdoor=Developed("quiet","backdoor");var remote=backdoor.Op.nodes.First(n=>n.kind==NodeKind.Relay&&n.id!="n2");remote.known=true;Check(backdoor.Execute("backdoor",remote.id),"backdoor bypasses reachability");Finish(backdoor);Check(remote.controlled&&!backdoor.Preview("backdoor","n2").allowed,"backdoor one-use counter");
+            bridge.Node("n10").scanned=true;
+            foreach(var n in bridge.Neighbors(bridge.Node("n10")).Take(1)){n.known=true;n.controlled=true;}
+            Check(bridge.Preview("bridge","n10").allowed,"prepared bridge accepts one controlled neighbor");Near(bridge.Preview("bridge","n10").trace,0,"bridge terminal override removes all trace");bridge.Execute("bridge","n10");Finish(bridge);Check(bridge.Node("n10").controlled,"bridge applies reusable control effect");
+            var backdoor=Developed("quiet","backdoor");backdoor.Execute("scan","n2");Finish(backdoor);
+            var mappedRoute=NetworkGenerator.Generate(backdoor.Job,backdoor.Career).approaches.Last();var remote=backdoor.Node(mappedRoute[3]);
+            Check(!backdoor.Reachable(remote)&&backdoor.ControlledDistance(remote)==3,"backdoor finds a mapped three-hop shortcut");
+            Check(backdoor.Execute("backdoor",remote.id),"backdoor bypasses direct reachability within its range");Finish(backdoor);Check(remote.controlled&&!backdoor.Preview("backdoor","n2").allowed,"backdoor one-use counter");
             var saved=Developed("disrupt","decoy","efficient","chain");saved.Execute("decoy");saved.Execute("scan","n2");saved.Tick(.5f);saved.Execute("hack","n2");
             var restore=new GameSimulation(JsonUtility.FromJson<Career>(JsonUtility.ToJson(saved.Career)));
             Check(restore.Op.paused&&restore.Op.queue.Count==1&&restore.Op.task.actionId=="scan"&&restore.Op.task.elapsed==.5f&&restore.Counter("uses:decoy")==1&&restore.Op.decoyRemaining>0,"v2 round trip preserves task, queue, counters and timed statuses");

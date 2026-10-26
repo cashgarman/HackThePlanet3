@@ -16,14 +16,15 @@ MonoBehaviour:
   title: Wide scan
   description: Scans reveal three network hops instead of two. Make a plan before making noise.
   branch: RECON
-  cost: 50
+  cost: 45
   special: 0
   position: {x: 320, y: 155}
   parents:
   - {fileID: 11400000, guid: f5b66d540a4aeea488d75fe867d364aa, type: 2}
   grants: []
   modifiers:
-  - stat: scanRadius
+  - id: 
+    stat: scanRadius
     priority: 0
     operation: 6
     when:

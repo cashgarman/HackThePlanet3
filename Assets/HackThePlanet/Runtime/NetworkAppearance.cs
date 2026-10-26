@@ -16,11 +16,11 @@ namespace HackThePlanet
                 resources.Set("GraphNodeModels/" + kind, asset);
             }
             settings = UnityEngine.Object.Instantiate(resources.Load<GraphVisualSettings>("GraphVisualSettings"));
-            settings.ShadowBrightness = .6f;
-            settings.SurfaceEmission = .12f;
+            settings.ShadowBrightness = .7f;
+            settings.SurfaceEmission = .24f;
             settings.BloomIntensity = .04f;
-            settings.OutlinePixels = .75f;
-            settings.OutlineOpacity = .7f;
+            settings.OutlinePixels = 1f;
+            settings.OutlineOpacity = .8f;
             settings.SelectionGlowIntensity = .6f;
             settings.SelectionRimIntensity = .3f;
             resources.Set("GraphVisualSettings", settings);

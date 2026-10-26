@@ -19,6 +19,7 @@ namespace HackThePlanet
     {
         public int version=2, credits=-1, xp, day=1, totalEarnedXp, jobs;
         public bool initialized;
+        public int researchSpent = -1;
         public List<HardwareLevel> hardware=new List<HardwareLevel>();
         public List<string> completed=new List<string>(), unlocked=new List<string>(), equipped=new List<string>(), news=new List<string>();
         public List<OperationReport> reports=new List<OperationReport>();
@@ -69,7 +70,12 @@ namespace HackThePlanet
         public int credits,xp,day,bonusFiles;
         public List<string> log=new List<string>();
     }
-    public sealed class ToolPreview { public bool allowed;public string reason;public float duration,trace; }
+    public sealed class ToolPreview
+    {
+        public bool allowed, willIsolate, losesQuietBonus;
+        public string reason;
+        public float duration,trace,projectedTrace;
+    }
 
     public sealed class GameSimulation
     {
@@ -84,6 +90,7 @@ namespace HackThePlanet
         public event Action Changed;
         private int effectDepth,effectCount;
         public bool Active=>Op!=null;
+        public bool CanStopTask=>Active&&Op.task!=null&&Catalog.Data.career.allowTaskCancellation;
         public int ResearchCount=>Career.unlocked.Except(Catalog.Data.career.initialTechnologies.Select(t=>t.id)).Count();
         public int ResearchTotal=>Catalog.Data.technologies.Length-Catalog.Data.career.initialTechnologies.Length;
         public float RefundFraction=>Catalog.Data.career.refundFraction;
@@ -101,6 +108,17 @@ namespace HackThePlanet
         public NetNode Node(string id)=>Op?.nodes.FirstOrDefault(n=>n.id==id);
         public IEnumerable<NetNode> Neighbors(NetNode node)=>node==null||Op==null?Enumerable.Empty<NetNode>():Op.links.Where(l=>l.a==node.id||l.b==node.id).Select(l=>Node(l.a==node.id?l.b:l.a));
         public bool Reachable(NetNode node)=>node!=null&&node.known&&(node.controlled||Neighbors(node).Any(n=>n.controlled));
+        public int ControlledDistance(NetNode target)
+        {
+            if(!Active||target==null||!target.known)return int.MaxValue;
+            var visited=new HashSet<string>{target.id};var queue=new Queue<(NetNode node,int distance)>();queue.Enqueue((target,0));
+            while(queue.Count>0)
+            {
+                var item=queue.Dequeue();if(item.node.controlled)return item.distance;
+                foreach(var neighbor in Neighbors(item.node))if(neighbor.known&&visited.Add(neighbor.id))queue.Enqueue((neighbor,item.distance+1));
+            }
+            return int.MaxValue;
+        }
         private ContractDefinition Definition=>Catalog.Contract(Job?.id);
         public int ObjectiveCount=>!Active?0:Definition.objectives.Count(o=>o.complete.Test(Context(Node(o.nodeId))));
         public int ObjectiveTotal=>Active?Definition.objectives.Length:0;
@@ -124,6 +142,12 @@ namespace HackThePlanet
                 foreach(var tech in defaults.initialTechnologies)if(!Has(tech.id))Career.unlocked.Add(tech.id);
                 if(Career.news.Count==0)Career.news.Add(defaults.welcome);Career.initialized=true;
             }
+            if(Career.researchSpent<0)
+            {
+                var purchased=Career.unlocked.Except(Catalog.Data.career.initialTechnologies.Select(t=>t.id)).ToArray();
+                int earnedInvestment=Career.totalEarnedXp+Catalog.Data.career.xp-Career.xp;
+                Career.researchSpent=purchased.Length==0?0:earnedInvestment>0?earnedInvestment:purchased.Sum(id=>Catalog.Technology(id)?.cost??0);
+            }
             if(Op!=null&&string.IsNullOrEmpty(Op.contractId)&&(Op.nodes==null||Op.nodes.Count==0)&&(Op.links==null||Op.links.Count==0)&&Op.trace==0&&Op.elapsed==0)Career.operation=null;
             if(Active)
             {
@@ -134,7 +158,7 @@ namespace HackThePlanet
         public static void ValidateCareer(Career career,GameCatalog catalog)
         {
             void Require(bool pass,string message){if(!pass)throw new InvalidDataException("Career v2: "+message+". The save has not been overwritten.");}
-            Require(career.version==2,"unsupported save version");Require(career.credits>=0&&career.xp>=0&&career.day>=1,"invalid economy values");
+            Require(career.version==2,"unsupported save version");Require(career.credits>=0&&career.xp>=0&&career.day>=1&&career.researchSpent>=0,"invalid economy values");
             Require(career.completed.All(id=>catalog.Contract(id)!=null&&!catalog.Contract(id).recurring),"unknown completed contract");
             Require(career.unlocked.All(id=>catalog.Technology(id)!=null)&&career.unlocked.Distinct().Count()==career.unlocked.Count,"unknown or duplicate technology");
             Require(career.equipped.All(id=>career.unlocked.Contains(id)&&catalog.Technology(id).special)&&career.equipped.Distinct().Count()==career.equipped.Count,"invalid equipped technology");
@@ -188,7 +212,15 @@ namespace HackThePlanet
         public IReadOnlyList<ActionInfo> AvailableActions(string targetId=null)
         {
             if(!Active)return Array.Empty<ActionInfo>();var node=Node(targetId);
-            return Catalog.Actions.Where(a=>a.operatorTarget==(node==null)&&a.Definition.visible.Test(Context(node,a.Definition))).ToArray();
+            if(targetId!=null&&node==null)return Array.Empty<ActionInfo>();
+            return Catalog.Actions.Where(a=>a.operatorTarget==(node==null)&&Granted(a.Definition)&&a.Definition.visible.Test(Context(node,a.Definition))).OrderBy(a=>a.priority).ToArray();
+        }
+        public string ActionResearchHint(string targetId)
+        {
+            if(!Active)return null;var node=Node(targetId);
+            var locked=Catalog.Data.actions.Where(a=>!a.operatorTarget&&!Granted(a)&&a.visible.Test(Context(node,a))).ToArray();
+            var tech=Catalog.Data.technologies.FirstOrDefault(t=>t.grants.Any(a=>locked.Contains(a)));
+            return tech==null?null:(Has(tech.id)?"Equip ":"Research ")+tech.title+" between contracts for another approach.";
         }
         private IEnumerable<Requirement> Requirements(ActionDefinition action,NetNode node)
         {
@@ -214,14 +246,27 @@ namespace HackThePlanet
             float trace=ApplyModifiers("baseTrace",a.baseTrace.Evaluate(c),c);p.trace=ApplyModifiers("trace",trace+p.duration*Stat("tracePressure",c),c);
             if(a.traceFree||Stat("traceFree",c)>0)p.trace=0;
             if(!Finite(p.duration)||!Finite(p.trace)||p.duration<0||(!a.operatorTarget&&p.duration==0)||p.trace<0)throw new InvalidOperationException("Invalid duration/trace in action "+a.id);
+            // A conservative forecast: protection can lower this, never increase it.
+            float protectedSeconds=Mathf.Max(0,Op.decoyRemaining-Catalog.Data.career.maxTick);
+            float exposedFraction=p.duration<=0?1:Mathf.Clamp01((p.duration-protectedSeconds)/p.duration);
+            p.projectedTrace=Op.trace+p.trace*exposedFraction*Mathf.Max(0,Stat("traceGrowth"));
+            p.willIsolate=p.projectedTrace>=TraceLimit;p.losesQuietBonus=Op.trace<Job.quietLimit&&p.projectedTrace>=Job.quietLimit;
             p.allowed=true;p.reason=Op.task!=null&&a.queueable?"Queue after the current task.":"Ready to execute.";return p;
+        }
+        public int? UsesRemaining(string actionId,string targetId=null)
+        {
+            var action=Catalog.Action(actionId);if(!Active||action==null)return null;
+            float limit=action.useLimit.Evaluate(Context(Node(targetId),action));return limit<=0?(int?)null:Mathf.Max(0,Mathf.CeilToInt(limit)-Counter("uses:"+action.id));
         }
         public bool CanQueue(string actionId,string targetId)
         {
             var a=Catalog.Action(actionId);var n=Node(targetId);
             if(!Active||Op.task==null||a==null||!a.queueable||a.operatorTarget||n==null||Op.queue.Count>=QueueCapacity)return false;
             if(Op.queue.Any(q=>q.actionId==actionId&&q.target==targetId)||(Op.task.actionId==actionId&&Op.task.target==targetId))return false;
-            var c=Context(n,a);if(!a.queueRequirements.All(r=>r.condition.Test(c)))return false;
+            var c=Context(n,a);if(!Granted(a)||!a.visible.Test(c)||!a.queueRequirements.All(r=>r.condition.Test(c)))return false;
+            float limit=a.useLimit.Evaluate(c);
+            int reserved=(Op.task.actionId==actionId?1:0)+Op.queue.Count(q=>q.actionId==actionId);
+            if(limit>0&&Counter("uses:"+actionId)+reserved>=limit)return false;
             if(a.futureNeighborQueue&&!Reachable(n)&&!(Stat("futureQueue",c)>0&&Neighbors(Node(Op.task.target)).Any(x=>x.id==targetId)))return false;return true;
         }
         public bool Execute(string actionId,string targetId=null)
@@ -244,6 +289,12 @@ namespace HackThePlanet
         public bool Execute(ToolKind kind,string id)=>Execute(LegacyAction(kind,id),id);
         public bool Decoy()=>Execute("decoy");
         public void ClearQueue(){if(!Active)return;Op.queue.Clear();Touch();}
+        public bool StopTask()
+        {
+            if(!CanStopTask)return false;
+            Log("TOOL STOPPED // "+ActionTitle(Op.task.actionId,Op.task.target)+". Existing trace remains.");
+            Op.task=null;Op.queue.Clear();Touch();return true;
+        }
         public void Tick(float delta)
         {
             if(!Active||Op.paused||delta<=0||!Finite(delta))return;
@@ -366,7 +417,7 @@ namespace HackThePlanet
         {
             var tech=Catalog.Technology(id);
             if((Active&&!Catalog.Data.career.researchDuringOperations)||tech==null||Has(id)||Career.xp<tech.cost||!tech.parents.All(t=>Has(t.id)))return false;
-            Career.xp-=tech.cost;Career.unlocked.Add(id);if(tech.special&&Career.equipped.Count<Slots)Career.equipped.Add(id);Touch();return true;
+            Career.xp-=tech.cost;Career.researchSpent+=tech.cost;Career.unlocked.Add(id);if(tech.special&&Career.equipped.Count<Slots)Career.equipped.Add(id);Touch();return true;
         }
         public bool ToggleEquip(string id)
         {
@@ -376,13 +427,23 @@ namespace HackThePlanet
         public bool RefundResearch()
         {
             if(Active&&!Catalog.Data.career.researchDuringOperations)return false;var initial=Catalog.Data.career.initialTechnologies.Select(t=>t.id).ToArray();
-            Career.xp+=Mathf.FloorToInt(Career.unlocked.Except(initial).Sum(id=>Catalog.Technology(id).cost)*Catalog.Data.career.refundFraction);Career.unlocked=initial.ToList();Career.equipped.Clear();Touch();return true;
+            Career.xp+=Mathf.FloorToInt(Career.researchSpent*Catalog.Data.career.refundFraction);Career.researchSpent=0;Career.unlocked=initial.ToList();Career.equipped.Clear();Touch();return true;
         }
         public int UpgradePrice(string id){var h=Catalog.Data.hardware.FirstOrDefault(x=>x.id==id);var level=Career.Level(id);return h!=null&&level<h.tiers.Length?h.tiers[level].price:0;}
+        public ToolPreview PreviewUpgrade(string id)
+        {
+            var p=new ToolPreview();var h=Catalog.Data.hardware.FirstOrDefault(x=>x.id==id);
+            if(h==null){p.reason="Unknown hardware.";return p;}
+            if(Active&&!Catalog.Data.career.hardwareDuringOperations){p.reason="Install hardware between contracts.";return p;}
+            if(Career.Level(id)>=h.tiers.Length){p.reason="Maximum tier installed.";return p;}
+            foreach(var r in h.requirements)if(!r.condition.Test(Context())){p.reason=Catalog.Format(r.message,Context());return p;}
+            if(Career.credits<UpgradePrice(id)){p.reason="Need "+(UpgradePrice(id)-Career.credits)+" more credits.";return p;}
+            p.allowed=true;p.reason="Ready to install.";return p;
+        }
         public bool Upgrade(string id)
         {
             var h=Catalog.Data.hardware.FirstOrDefault(x=>x.id==id);
-            if((Active&&!Catalog.Data.career.hardwareDuringOperations)||h==null||Career.Level(id)>=h.tiers.Length||Career.credits<UpgradePrice(id))return false;
+            if(!PreviewUpgrade(id).allowed)return false;
             Career.credits-=UpgradePrice(id);Career.SetLevel(id,Career.Level(id)+1);Touch();return true;
         }
         public int UpgradePrice(int index)=>index>=0&&index<Catalog.Hardware.Count?UpgradePrice(Catalog.Hardware[index].id):0;

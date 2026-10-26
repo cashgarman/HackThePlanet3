@@ -98,3 +98,18 @@
     -unity-font-definition: initial;
     -unity-font: resource("HackThePlanet/Fonts/SpaceMono-Regular");
 }
+
+/* Tactical controls keep their meaning without adding another dashboard. */
+.action-button { margin-top: 7px; padding: 9px 12px; }
+.action-button.suggested-action { border-left-color: #9bfacb; border-left-width: 3px; background-color: #18392f; }
+.action-button.risky-action { border-color: #ffbc70; background-color: #30251e; }
+.action-forecast { font-size: 9px; margin-top: 4px; letter-spacing: 0.5px; }
+.queue-summary { font-size: 9px; color: #91b6ab; margin-top: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stop-tool { color: #ffbc70; border-color: #8d6550; margin-right: 5px; }
+.brief-toggle { background-color: transparent; color: #91b6ab; border-width: 0; padding: 5px 0; margin-top: 8px; -unity-text-align: middle-left; font-size: 10px; }
+.target-title { font-size: 23px; }
+.target-stats { margin-top: 8px; }
+.inspector-scroll { padding-top: 18px; }
+
+.stop-tool { width: 45px; font-size: 10px; }
+.clear-tools { width: 48px; font-size: 10px; }

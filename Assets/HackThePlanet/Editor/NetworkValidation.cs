@@ -111,7 +111,7 @@ namespace HackThePlanet.Editor
             var restored=new GameSimulation(JsonUtility.FromJson<Career>(JsonUtility.ToJson(sim.Career)));
             check(restored.Op.nodes.Select(n=>n.position).SequenceEqual(positions)&&restored.Op.paused&&restored.Op.generationVersion==NetworkGenerator.Version,"3D positions survive save/load exactly");
             restored.SetPaused(false);Download(restored,"n22");var report=restored.Disconnect();
-            check(report.success&&report.bonusFiles==3&&report.xp==job.xp+30+(report.trace<job.quietLimit?10:0)&&report.credits==job.credits+360+(report.trace<job.quietLimit?150:0),"Three archives retain existing credit reward and XP cap");
+            check(report.success&&report.bonusFiles==3&&report.xp==job.xp+45+(report.trace<job.quietLimit?20:0)&&report.credits==job.credits+300+(report.trace<job.quietLimit?100:0),"All three archives pay their authored credit and XP rewards");
             check(restored.Career.lore.Count==3,"Successful extraction banks three permanent fragments");
             var saved=new GameSimulation(JsonUtility.FromJson<Career>(JsonUtility.ToJson(restored.Career)));
             check(saved.Career.lore.Count==3&&saved.Career.lore.All(f=>!string.IsNullOrEmpty(f.contract)&&!string.IsNullOrEmpty(f.company)),"Lore content and provenance survive save/load");

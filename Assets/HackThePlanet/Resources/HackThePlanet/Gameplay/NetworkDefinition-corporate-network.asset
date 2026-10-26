@@ -48,14 +48,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235224
       value:
         rid: 213507065135235225
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -76,14 +78,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235228
       value:
         rid: 213507065135235229
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -104,14 +108,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235232
       value:
         rid: 213507065135235233
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -132,14 +138,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235236
       value:
         rid: 213507065135235237
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -160,14 +168,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235240
       value:
         rid: 213507065135235241
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -188,14 +198,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235244
       value:
         rid: 213507065135235245
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -216,14 +228,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235248
       value:
         rid: 213507065135235249
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -244,14 +258,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235252
       value:
         rid: 213507065135235253
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -272,14 +288,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235256
       value:
         rid: 213507065135235257
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -300,14 +318,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235260
       value:
         rid: 213507065135235261
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -328,14 +348,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235264
       value:
         rid: 213507065135235265
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -356,14 +378,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235268
       value:
         rid: 213507065135235269
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -384,14 +408,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235272
       value:
         rid: 213507065135235273
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -412,14 +438,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235276
       value:
         rid: 213507065135235277
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -440,14 +468,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235280
       value:
         rid: 213507065135235281
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -468,14 +498,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235284
       value:
         rid: 213507065135235285
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -496,14 +528,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235288
       value:
         rid: 213507065135235289
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -524,14 +558,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235292
       value:
         rid: 213507065135235293
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -552,14 +588,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235296
       value:
         rid: 213507065135235297
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -580,14 +618,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235300
       value:
         rid: 213507065135235301
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -608,14 +648,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235304
       value:
         rid: 213507065135235305
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -636,14 +678,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235308
       value:
         rid: 213507065135235309
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -664,14 +708,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235312
       value:
         rid: 213507065135235313
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
@@ -692,14 +738,16 @@ MonoBehaviour:
     bonus: 0
     loreIndex: -1
     securityModifiers:
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:
         rid: 213507065135235316
       value:
         rid: 213507065135235317
-    - stat: security
+    - id: 
+      stat: security
       priority: 0
       operation: 0
       when:

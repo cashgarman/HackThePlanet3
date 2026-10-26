@@ -12,6 +12,7 @@ namespace HackThePlanet
     public sealed class HardwareDefinition : GameplayDefinition
     {
         public string category, statLabel, displayedStat;
+        public Requirement[] requirements = Array.Empty<Requirement>();
         public HardwareTier[] tiers = Array.Empty<HardwareTier>();
     }
 }

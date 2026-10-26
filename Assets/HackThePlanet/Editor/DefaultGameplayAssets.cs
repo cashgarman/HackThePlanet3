@@ -159,7 +159,7 @@ namespace HackThePlanet.Editor
             root.career.stats=new[]{new NamedStat("slots",2),new NamedStat("queueCapacity",1),new NamedStat("hackSpeed",1),new NamedStat("transferSpeed",1),new NamedStat("scanRadius",2),new NamedStat("revealRadius",1),new NamedStat("traceGrowth",1),new NamedStat("minimumSecurity",1),new NamedStat("futureQueue",0),new NamedStat("traceFree",0),new NamedStat("tracePressure",0),new NamedStat("idleTracePerSecond",0)};
             root.career.ranks=new[]{new CareerRank{jobs=0,title="NEW SIGNAL"},new CareerRank{jobs=1,title="FREELANCER"},new CareerRank{jobs=3,title="TRUSTED OPERATOR"},new CareerRank{jobs=6,title="GHOST IN THE NETWORK"}};
             foreach(var asset in GameDefinitionValidator.Definitions(root))EditorUtility.SetDirty(asset);
-            GameDefinitionValidator.ThrowIfInvalid(root);AssetDatabase.SaveAssets();File.WriteAllText("Artifacts/gameplay-import.txt","PASS / All default gameplay definitions imported as Unity assets.");
+            GameDefinitionValidator.ThrowIfInvalid(root);AssetDatabase.SaveAssets();BalanceRefinement.Apply();File.WriteAllText("Artifacts/gameplay-import.txt","PASS / All gameplay definitions imported as Unity assets with current career tuning.");
         }
         public static void SaveCatalog()
         {

@@ -12,6 +12,7 @@ namespace HackThePlanet
     [Serializable] public sealed class Requirement { [SerializeReference] public Condition condition = new AlwaysCondition(); public string message; }
     [Serializable] public sealed class Modifier
     {
+        public string id;
         public string stat;
         public int priority;
         public Arithmetic operation = Arithmetic.Multiply;

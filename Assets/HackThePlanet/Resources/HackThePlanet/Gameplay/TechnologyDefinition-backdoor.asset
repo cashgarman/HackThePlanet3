@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: backdoor
   title: Backdoor
-  description: Once per contract, instantly reclaim any discovered workstation or relay without trace. This can open a new route.
+  description: Once per operation, reclaim a discovered workstation or relay within three mapped hops of controlled access. Takes 0.8 seconds and produces no trace.
   branch: STEALTH
-  cost: 150
+  cost: 100
   special: 1
   position: {x: 135, y: 545}
   parents:

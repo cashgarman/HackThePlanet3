@@ -16,20 +16,21 @@ MonoBehaviour:
   title: Quiet tools
   description: Standard hacks generate {modifier:0:reduction}% less trace. A quiet route leaves room for optional files.
   branch: STEALTH
-  cost: 50
+  cost: 45
   special: 0
   position: {x: 320, y: 460}
   parents:
   - {fileID: 11400000, guid: f5b66d540a4aeea488d75fe867d364aa, type: 2}
   grants: []
   modifiers:
-  - stat: baseTrace
+  - id: 
+    stat: baseTrace
     priority: 0
     operation: 2
     when:
       rid: 213507065135235795
     value:
-      rid: 213507065135235796
+      rid: 213507066652786754
   triggers: []
   references:
     version: 2
@@ -39,7 +40,7 @@ MonoBehaviour:
       data:
         action: {fileID: 11400000, guid: 177dce6f63cf40c4da3a2a79095178a8, type: 2}
         tag: 
-    - rid: 213507065135235796
+    - rid: 213507066652786754
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        value: 0.7
+        value: 0.8

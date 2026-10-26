@@ -20,13 +20,14 @@ MonoBehaviour:
   shortcut: 52
   shortcutLabel: 4
   legacyGroup: disrupt
+  presentationPriority: 15
   operatorTarget: 0
   queueable: 1
   initiallyAvailable: 0
   futureNeighborQueue: 0
   traceFree: 0
   visible:
-    rid: 213507065135235150
+    rid: 213507066652786688
   requirements:
   - condition:
       rid: 213507065135235151
@@ -42,9 +43,9 @@ MonoBehaviour:
       rid: 213507065135235154
     message: Discover this system first.
   duration:
-    rid: 213507065135235155
+    rid: 213507066652786689
   baseTrace:
-    rid: 213507065135235156
+    rid: 213507066652786690
   useLimit:
     rid: 213507065135235094
   effects:
@@ -57,10 +58,6 @@ MonoBehaviour:
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0
-    - rid: 213507065135235150
-      type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        tag: scanner
     - rid: 213507065135235151
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
@@ -77,14 +74,6 @@ MonoBehaviour:
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 0
-    - rid: 213507065135235155
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 2.5
-    - rid: 213507065135235156
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 2
     - rid: 213507065135235157
       type: {class: ApplyStatusEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
@@ -96,7 +85,7 @@ MonoBehaviour:
           filter:
             rid: 213507065135235159
         duration:
-          rid: 213507065135235160
+          rid: 213507066652786693
     - rid: 213507065135235158
       type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
@@ -104,7 +93,29 @@ MonoBehaviour:
     - rid: 213507065135235159
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507065135235160
+    - rid: 213507066652786688
+      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        conditions:
+        - rid: 213507066652786691
+        - rid: 213507066652786692
+    - rid: 213507066652786689
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        value: 60
+        value: 1.2
+    - rid: 213507066652786690
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507066652786691
+      type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        tag: scanner
+    - rid: 213507066652786692
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 6
+    - rid: 213507066652786693
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 45

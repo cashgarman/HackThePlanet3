@@ -8,7 +8,7 @@ namespace HackThePlanet
     public enum Arithmetic { Add, Subtract, Multiply, Divide, Minimum, Maximum, Override, Modulo, Floor }
     public enum Comparison { Equal, NotEqual, Less, LessOrEqual, Greater, GreaterOrEqual }
     public enum NodeState { Known, Controlled, Scanned, Collected, Objective, Bonus, DefenseActive, Reachable }
-    public enum NumberInput { Security, BaseSecurity, Day, Difficulty, Seed, Column, Row, CompletedContracts, CompanyWins, BonusFiles, Trace, QuietLimit, ContractCredits, ContractXp, Duration, NeighborCount, NodeCount, Counter, StatusRemaining, HardwareLevel, ArchiveCredits, ArchiveXp, ArchiveXpCap, QuietCredits, QuietXp, Step, Lane, SafeLane }
+    public enum NumberInput { Security, BaseSecurity, Day, Difficulty, Seed, Column, Row, CompletedContracts, CompanyWins, BonusFiles, Trace, QuietLimit, ContractCredits, ContractXp, Duration, NeighborCount, NodeCount, Counter, StatusRemaining, HardwareLevel, ArchiveCredits, ArchiveXp, ArchiveXpCap, QuietCredits, QuietXp, Step, Lane, SafeLane, ControlledDistance, UnlockedAbilities }
 
     public sealed class RuleContext
     {
@@ -79,6 +79,8 @@ namespace HackThePlanet
                 case NumberInput.Step:return c.Step;
                 case NumberInput.Lane:return c.Lane;
                 case NumberInput.SafeLane:return c.SafeLane?1:0;
+                case NumberInput.ControlledDistance:return c.Simulation?.ControlledDistance(c.Node)??int.MaxValue;
+                case NumberInput.UnlockedAbilities:return c.Career?.unlocked.Count(id=>c.Catalog.Technology(id)?.special==true)??0;
                 case NumberInput.Security:return c.Simulation?.EffectiveSecurity(c.Node)??c.Node?.security??0;
                 case NumberInput.BaseSecurity:return c.Node?.security??0;
                 case NumberInput.Day:return c.Career?.day??1;

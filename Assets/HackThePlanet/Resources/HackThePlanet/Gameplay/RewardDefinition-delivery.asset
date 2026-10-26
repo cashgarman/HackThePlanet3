@@ -15,11 +15,11 @@ MonoBehaviour:
   id: delivery
   title: Delivery rewards
   description: 
-  archiveCredits: 120
+  archiveCredits: 100
   archiveXp: 15
-  archiveXpCap: 30
-  quietCredits: 150
-  quietXp: 10
+  archiveXpCap: 45
+  quietCredits: 100
+  quietXp: 20
   rules:
   - when:
       rid: 213507065135235188

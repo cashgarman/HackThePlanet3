@@ -20,12 +20,12 @@ MonoBehaviour:
   client: NULL // everyone is listening
   tag: INFRASTRUCTURE DISRUPTION
   objective: Control Security hub, then erase the index at Research vault.
-  condition: 'Disable the hub before the vault. Below 75%: quiet bonus.'
+  condition: 'Below 70% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
   aftermath: The surveillance grid goes dark. Lark opens the research, June publishes the records, and Null keeps the channels alive. You built more than a career. The planet is a little harder to own.
   displayKind: 3
   recurring: 0
   requiredWins: 5
-  quietLimit: 75
+  quietLimit: 70
   credits:
     rid: 213507065135235690
   xp:

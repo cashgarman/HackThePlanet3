@@ -9,6 +9,7 @@ namespace HackThePlanet
         public string[] tags = Array.Empty<string>();
         public KeyCode shortcut;
         public string shortcutLabel, legacyGroup;
+        public int presentationPriority = 50;
         public bool operatorTarget, queueable = true, initiallyAvailable, futureNeighborQueue, traceFree;
         [SerializeReference] public Condition visible = new AlwaysCondition();
         public Requirement[] requirements = Array.Empty<Requirement>();

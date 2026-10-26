@@ -82,7 +82,7 @@ namespace HackThePlanet.Editor
                 Check(sim.BuyTech("quiet"),"One successful contract funds a starting technology.");
                 Check(!sim.BuyTech("quiet"),"Purchased technologies cannot charge twice.");
                 Check(!sim.BuyTech("passive"),"Crossover enforces both parents and price.");
-                int beforeRefund=sim.Career.xp;sim.RefundResearch();Check(sim.Career.xp==beforeRefund+50&&sim.Career.unlocked.Count==1,"Free refund returns the exact XP cost.");
+                int beforeRefund=sim.Career.xp;sim.RefundResearch();Check(sim.Career.xp==beforeRefund+45&&sim.Career.unlocked.Count==1,"Free refund returns the exact XP cost.");
                 sim.Career.xp=1000;sim.BuyTech("quiet");sim.BuyTech("wide");Check(sim.BuyTech("passive"),"Crossover accepts both unlocked parents.");
                 sim.BuyTech("disrupt");sim.BuyTech("backdoor");sim.BuyTech("decoy");
                 Check(sim.Career.equipped.Count==2,"Special abilities respect the two-slot starting loadout.");
@@ -104,7 +104,7 @@ namespace HackThePlanet.Editor
                 abilities.Execute(ToolKind.Scan,"n2");FinishTask(abilities);
                 abilities.Execute(ToolKind.Hack,"n2");Check(abilities.Execute(ToolKind.Hack,"n6"),"Chain hack queues a future neighbor.");FinishTask(abilities);
                 Check(abilities.Node("n2").controlled&&abilities.Node("n6").controlled,"Queued actions execute in order and recheck access.");
-                Check(!abilities.Execute(ToolKind.Bridge,"n10"),"Firewall bridge requires two controlled neighbors.");
+                Check(!abilities.Execute(ToolKind.Bridge,"n10"),"Firewall bridge requires a scanned target and controlled access.");
                 abilities.Disconnect();
 
                 // Play the full authored campaign with an earned-XP build, using only legal actions.

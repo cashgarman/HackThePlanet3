@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: ContractDefinition-freelance-0
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: freelance-0
+  title: Open Secrets
+  description: A verified exchange contract generated from today's network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.
+  company: {fileID: 11400000, guid: 3aae9238875364e4abb0f2f7c9357dde, type: 2}
+  network: {fileID: 11400000, guid: 91e48806285ad734ca698b8c5a18124a, type: 2}
+  client: EXCHANGE // verified escrow
+  tag: FREELANCE / REPEATABLE
+  objective: Recover the archive from Research vault.
+  condition: 'Main objective: base XP. Optional archives: +15 XP each (max 30). Below 75%: +10 XP.'
+  aftermath: A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.
+  displayKind: 0
+  recurring: 1
+  requiredWins: 3
+  quietLimit: 75
+  credits:
+    rid: 213507065135235806
+  xp:
+    rid: 213507065135235807
+  difficulty:
+    rid: 213507065135235808
+  seed:
+    rid: 213507065135235809
+  objectives:
+  - nodeId: n22
+    label: 
+    actionLabel: Download files
+    action: {fileID: 11400000, guid: 4fe544649661bc44595b63ddec95ca4b, type: 2}
+    complete:
+      rid: 213507065135235810
+    actionRequirements: []
+  actionRules: []
+  lore:
+  - id: freelance/0/0
+    title: Maintenance testimony
+    company: HELIX DYNAMICS
+    contract: Open Secrets
+    text: A Helix technician has hidden repair manuals inside routine compliance backups. The official service program charges a year's wages for the same instructions.
+  - id: freelance/0/1
+    title: An unofficial record
+    company: HELIX DYNAMICS
+    contract: Open Secrets
+    text: An abandoned Helix test site still transmits weather readings. Local growers use the open feed to protect their crops. An engineer keeps renewing the relay budget.
+  - id: freelance/0/2
+    title: What the archive kept
+    company: HELIX DYNAMICS
+    contract: Open Secrets
+    text: Helix's discarded patent register credits a community workshop with the original design. The attribution survived in the archive after it disappeared from the product page.
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235806
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507065135235811
+        right:
+          rid: 213507065135235812
+    - rid: 213507065135235807
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 55
+    - rid: 213507065135235808
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 4
+        left:
+          rid: 213507065135235813
+        right:
+          rid: 213507065135235814
+    - rid: 213507065135235809
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507065135235815
+        right:
+          rid: 213507065135235816
+    - rid: 213507065135235810
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507065135235811
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 600
+    - rid: 213507065135235812
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+        left:
+          rid: 213507065135235817
+        right:
+          rid: 213507065135235818
+    - rid: 213507065135235813
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507065135235814
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 5
+        left:
+          rid: 213507065135235819
+        right:
+          rid: 213507065135235820
+    - rid: 213507065135235815
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+        left:
+          rid: 213507065135235821
+        right:
+          rid: 213507065135235822
+    - rid: 213507065135235816
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507065135235817
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key: 
+        filter:
+          rid: 213507065135235823
+    - rid: 213507065135235818
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 35
+    - rid: 213507065135235819
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507065135235820
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507065135235824
+        right:
+          rid: 213507065135235825
+    - rid: 213507065135235821
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key: 
+        filter:
+          rid: 213507065135235826
+    - rid: 213507065135235822
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 71
+    - rid: 213507065135235823
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235824
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507065135235825
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 8
+        left:
+          rid: 213507065135235827
+        right:
+          rid: 213507065135235828
+    - rid: 213507065135235826
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235827
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 3
+        left:
+          rid: 213507065135235829
+        right:
+          rid: 213507065135235830
+    - rid: 213507065135235828
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507065135235829
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key: 
+        filter:
+          rid: 213507065135235831
+    - rid: 213507065135235830
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 5
+    - rid: 213507065135235831
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 

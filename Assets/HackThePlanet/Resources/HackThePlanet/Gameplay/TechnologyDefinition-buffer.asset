@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Trace buffer
   description: All trace generation is reduced by another {modifier:0:reduction}%. Requires both Stealth and Control roots.
   branch: CROSSOVER
-  cost: 200
+  cost: 135
   special: 0
   position: {x: 500, y: 565}
   parents:
@@ -24,13 +24,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1bb9f042b3cf72449a7ff19258f0b5f, type: 2}
   grants: []
   modifiers:
-  - stat: trace
+  - id: 
+    stat: trace
     priority: 0
     operation: 2
     when:
       rid: 213507065135235870
     value:
-      rid: 213507065135235871
+      rid: 213507066652786770
   triggers: []
   references:
     version: 2
@@ -38,7 +39,7 @@ MonoBehaviour:
     - rid: 213507065135235870
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507065135235871
+    - rid: 213507066652786770
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        value: 0.85
+        value: 0.9

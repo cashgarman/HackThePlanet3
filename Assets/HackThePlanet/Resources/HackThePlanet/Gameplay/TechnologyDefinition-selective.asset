@@ -16,21 +16,23 @@ MonoBehaviour:
   title: Selective download
   description: Secure the main objective in {modifier:0:percent}% of the usual recovery time, with {modifier:1:reduction}% less recovery trace.
   branch: INTRUSION
-  cost: 120
+  cost: 85
   special: 0
   position: {x: 865, y: 220}
   parents:
   - {fileID: 11400000, guid: d02b02e90af4a02459c84e2860eb416d, type: 2}
   grants: []
   modifiers:
-  - stat: duration
+  - id: 
+    stat: duration
     priority: 0
     operation: 2
     when:
       rid: 213507065135235682
     value:
-      rid: 213507065135235683
-  - stat: baseTrace
+      rid: 213507066652786731
+  - id: 
+    stat: baseTrace
     priority: 0
     operation: 2
     when:
@@ -47,10 +49,6 @@ MonoBehaviour:
         conditions:
         - rid: 213507065135235686
         - rid: 213507065135235687
-    - rid: 213507065135235683
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 0.55
     - rid: 213507065135235684
       type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
@@ -79,3 +77,7 @@ MonoBehaviour:
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 4
+    - rid: 213507066652786731
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.7

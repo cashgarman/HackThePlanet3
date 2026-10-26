@@ -20,6 +20,7 @@ namespace HackThePlanet
         public KeyCode shortcut=>Definition.shortcut;
         public string shortcutLabel=>Definition.shortcutLabel;
         public bool operatorTarget=>Definition.operatorTarget;
+        public int priority=>Definition.presentationPriority;
     }
     public sealed class HardwareInfo
     {
@@ -151,7 +152,7 @@ namespace HackThePlanet
         public Career CreateCareer()
         {
             var r=Data.career;
-            return new Career { initialized=true,credits=r.credits,xp=r.xp,day=r.day,unlocked=r.initialTechnologies.Select(x=>x.id).ToList(),news=new List<string>{r.welcome} };
+            return new Career { initialized=true,researchSpent=0,credits=r.credits,xp=r.xp,day=r.day,unlocked=r.initialTechnologies.Select(x=>x.id).ToList(),news=new List<string>{r.welcome} };
         }
         public void Dispose()
         {

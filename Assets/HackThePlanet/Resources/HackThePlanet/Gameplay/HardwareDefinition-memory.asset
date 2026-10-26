@@ -18,19 +18,25 @@ MonoBehaviour:
   category: ABILITY CAPACITY
   statLabel: ABILITY SLOTS
   displayedStat: slots
+  requirements:
+  - condition:
+      rid: 213507066652786746
+    message: Research an ability before expanding its loadout.
   tiers:
-  - price: 600
+  - price: 450
     modifiers:
-    - stat: slots
+    - id: 
+      stat: slots
       priority: 0
       operation: 0
       when:
         rid: 213507065135235750
       value:
         rid: 213507065135235751
-  - price: 1400
+  - price: 1000
     modifiers:
-    - stat: slots
+    - id: 
+      stat: slots
       priority: 0
       operation: 0
       when:
@@ -54,3 +60,25 @@ MonoBehaviour:
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1
+    - rid: 213507066652786746
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 4
+        left:
+          rid: 213507066652786747
+        right:
+          rid: 213507066652786748
+    - rid: 213507066652786747
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 29
+        key: 
+        filter:
+          rid: 213507066652786749
+    - rid: 213507066652786748
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507066652786749
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 

@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Weak-point analysis
   description: Scanned targets generate {modifier:0:reduction}% less hack trace. Requires both Recon and Intrusion roots.
   branch: CROSSOVER
-  cost: 200
+  cost: 130
   special: 0
   position: {x: 500, y: 65}
   parents:
@@ -24,13 +24,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d02b02e90af4a02459c84e2860eb416d, type: 2}
   grants: []
   modifiers:
-  - stat: baseTrace
+  - id: 
+    stat: baseTrace
     priority: 0
     operation: 2
     when:
       rid: 213507065135235866
     value:
-      rid: 213507065135235867
+      rid: 213507066652786769
   triggers: []
   references:
     version: 2
@@ -41,10 +42,6 @@ MonoBehaviour:
         conditions:
         - rid: 213507065135235868
         - rid: 213507065135235869
-    - rid: 213507065135235867
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 0.6
     - rid: 213507065135235868
       type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
@@ -54,3 +51,7 @@ MonoBehaviour:
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 2
+    - rid: 213507066652786769
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.75

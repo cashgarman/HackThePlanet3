@@ -12,7 +12,7 @@ Assets are compiled into a detached catalog. An existing simulation keeps that s
 
 ### Actions and research
 
-An action defines its target scope, display title, shortcut, visibility, requirements, queue requirements, duration, base trace, use limit, and effects. Zero uses means unlimited uses. Operator actions can have zero duration and run alongside a targeted tool. Actions marked initially available need no research grant; other actions are granted by technologies. A special technology must be unlocked **and equipped** to grant its actions or rules.
+An action defines its target scope, display title, presentation priority, shortcut, visibility, requirements, queue requirements, duration, base trace, use limit, and effects. The workstation prioritizes usable actions, hides completed ones through authored visibility, and shows remaining charges and conservative trace forecasts. Zero uses means unlimited uses. Operator actions can have zero duration and run alongside a targeted tool. Actions marked initially available need no research grant; other actions are granted by technologies. A special technology must be unlocked **and equipped** to grant its actions or rules.
 
 Use visibility for which targets should offer an action, requirements for execution, and queue requirements for prerequisites checked when enqueueing. Execution requirements are evaluated again when a queued action starts. Future-neighbor queueing is an authored action capability enabled by the `futureQueue` stat. Duplicate queued action/target pairs are rejected.
 
@@ -44,13 +44,13 @@ Node types select their glyph, color, tags, initial security formula, and auras.
 
 An **Authored** network contains arbitrary node IDs, positions, initial states, optional archives, and conditional links. Its entry node starts discovered and controlled. Contract objectives reference template-local node IDs and contain completion conditions, action labels, and optional prerequisites. Contract-wide action prerequisites are available for requirements such as controlling a hub before recovering files. A contract must have at least one objective.
 
-The **Parallel Routes** generator preserves the current seeded 3D networks. Its asset defines route tiers and lengths, node counts, role references, reserved identities, direct routes, secondary targets, sensors, archives, security expressions, and placement settings. `Step`, `Lane`, and `SafeLane` are available to its formulas. Changing seed retains deterministic generation for a fixed configuration. Use an Authored network when a different topology does not fit this generator.
+The **Parallel Routes** generator preserves the current seeded 3D networks. Its asset defines route tiers and lengths, node counts, role references, reserved identities, direct routes, secondary targets, sensors, archives, security expressions, and placement settings. `Step`, `Lane`, and `SafeLane` are available to its formulas. `ControlledDistance` counts hops along discovered routes to controlled access; hidden links never satisfy range requirements. Changing seed retains deterministic generation for a fixed configuration. Use an Authored network when a different topology does not fit this generator.
 
 Contract reward, XP, seed, and difficulty expressions can reference career day. Repeatable contracts use the same rule system as story contracts. Lore fragments live on contract assets and are assigned through archive indices.
 
 ### Hardware, rewards, and outcomes
 
-Hardware tiers specify prices and cumulative modifiers. Add another tier or another hardware definition to extend both progression and the rig UI. Hardware levels are stored by ID.
+Hardware definitions also have shared execution requirements; the shipped memory expansion requires an unlocked ability. `UnlockedAbilities` is a numeric condition input. Hardware tiers specify prices and cumulative modifiers. Add another tier or another hardware definition to extend both progression and the rig UI. Hardware levels are stored by ID.
 
 Rewards are conditional formulas over contract values, recovered archives, trace, and the quiet threshold. Archive and quiet bonus amounts are shared inputs, so payout text and settlement read the same values. Career Rules also define starting resources and research, refund fraction, rank thresholds, trace thresholds, simulation speeds, and retention limits.
 
@@ -60,7 +60,7 @@ Delivered, aborted, and caught outcomes each have an authored policy controlling
 
 Create `GameSimulation(catalog, career)` for an injected configuration. Use `AvailableActions(targetId)`, `Preview(actionId, targetId)`, `CanQueue(actionId, targetId)`, `Execute(actionId, targetId)`, and `Upgrade(hardwareId)`. Omit the target for operator actions. The older tool-enum and hardware-index overloads are compatibility adapters for existing fixtures; the workstation uses IDs and catalog metadata.
 
-New careers use **career-v2.json**. Existing **career-v1.json** files remain untouched. V2 saves contain runtime IDs, nodes, links, tasks, queues, hardware levels, counters, timers, reports, and recovered lore. Restored operations start paused. Unknown references are reported without overwriting the save. Corrupt JSON can recover from an atomic backup; if recovery fails, autosave is blocked until the player explicitly resets the save.
+Research records the XP actually spent, so future price changes do not reduce a free refund. Older v2 careers recover their invested XP from earned and available balances, with an authored-cost fallback for injected fixtures. New careers use **career-v2.json**. Existing **career-v1.json** files remain untouched. V2 saves contain runtime IDs, nodes, links, tasks, queues, hardware levels, counters, timers, reports, and recovered lore. Restored operations start paused. Unknown references are reported without overwriting the save. Corrupt JSON can recover from an atomic backup; if recovery fails, autosave is blocked until the player explicitly resets the save.
 
 ## Verification
 
@@ -70,4 +70,4 @@ New careers use **career-v2.json**. Existing **career-v1.json** files remain unt
 - **Run Workstation Smoke Test** exercises actual UI callbacks and authored shortcuts for shipped content and the injected configuration. Batch runs render the UI into a texture and verify nonblank pixels before writing captures.
 - **Build Windows Player** validates assets before compiling the player.
 
-Reports and captures are written to `Artifacts/`. The captured pre-refactor fixture is `Artifacts/gameplay-baseline.json`. The default import utility is an editor-only conversion aid: it refuses to overwrite an existing root and never supplies runtime fallback data.
+**Balance → Validate Refined Career** also measures 600 build/route/seed combinations and checks preparation, ability limits, cancellation, research refunds, and early build affordability. Reports and captures are written to `Artifacts/`. The captured pre-refactor fixture is `Artifacts/gameplay-baseline.json`. The default import utility is an editor-only conversion aid: it refuses to overwrite an existing root and never supplies runtime fallback data.

@@ -20,12 +20,12 @@ MonoBehaviour:
   client: NULL // network cooperative
   tag: FORENSIC RECOVERY
   objective: Recover records at Dev terminal, Audit terminal, and Research vault.
-  condition: 'Collect all three records. Below 75%: +10 XP / +150 cr.'
+  condition: 'Below 65% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
   aftermath: The records link Aegis's contractor to Morrow's debt platform. Three unrelated jobs begin to look like one story.
   displayKind: 2
   recurring: 0
   requiredWins: 2
-  quietLimit: 75
+  quietLimit: 65
   credits:
     rid: 213507065135235797
   xp:

@@ -18,28 +18,32 @@ MonoBehaviour:
   category: PROCESSING
   statLabel: HACK SPEED
   displayedStat: hackSpeed
+  requirements: []
   tiers:
-  - price: 400
+  - price: 350
     modifiers:
-    - stat: hackSpeed
+    - id: 
+      stat: hackSpeed
       priority: 0
       operation: 0
       when:
         rid: 213507065135235921
       value:
         rid: 213507065135235922
-  - price: 900
+  - price: 800
     modifiers:
-    - stat: hackSpeed
+    - id: 
+      stat: hackSpeed
       priority: 0
       operation: 0
       when:
         rid: 213507065135235923
       value:
         rid: 213507065135235924
-  - price: 1600
+  - price: 1450
     modifiers:
-    - stat: hackSpeed
+    - id: 
+      stat: hackSpeed
       priority: 0
       operation: 0
       when:

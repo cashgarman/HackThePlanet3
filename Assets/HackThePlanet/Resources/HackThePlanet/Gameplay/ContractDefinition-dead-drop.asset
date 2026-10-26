@@ -20,12 +20,12 @@ MonoBehaviour:
   client: JUNE // one-time address
   tag: RECORD ALTERATION
   objective: Replace the order at Research vault AND Backup mirror.
-  condition: 'Both copies must agree. Below 70%: +10 XP / +150 cr.'
+  condition: 'Below 65% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
   aftermath: The whistleblower escapes the financial dragnet and releases a list of surveillance contracts. Aegis starts taking systems offline.
   displayKind: 1
   recurring: 0
   requiredWins: 4
-  quietLimit: 70
+  quietLimit: 65
   credits:
     rid: 213507065135235161
   xp:

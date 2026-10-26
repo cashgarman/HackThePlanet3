@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: ContractDefinition-quiet-copy
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: quiet-copy
+  title: The Quiet Copy
+  description: Helix buried a clean-energy prototype. A researcher wants the original files before tomorrow's product demonstration. Find a way into their research vault. Leave the lights on.
+  company: {fileID: 11400000, guid: 3aae9238875364e4abb0f2f7c9357dde, type: 2}
+  network: {fileID: 11400000, guid: 91e48806285ad734ca698b8c5a18124a, type: 2}
+  client: LARK // independent researcher
+  tag: DATA ACQUISITION
+  objective: Recover the prototype from Research vault.
+  condition: Finish below 70% trace for +10 XP and +150 cr.
+  aftermath: An anonymous prototype appears on the open net. Helix's demonstration goes ahead, but the technology is no longer theirs alone.
+  displayKind: 0
+  recurring: 0
+  requiredWins: 0
+  quietLimit: 70
+  credits:
+    rid: 213507065135235677
+  xp:
+    rid: 213507065135235678
+  difficulty:
+    rid: 213507065135235679
+  seed:
+    rid: 213507065135235680
+  objectives:
+  - nodeId: n22
+    label: 
+    actionLabel: Download files
+    action: {fileID: 11400000, guid: 4fe544649661bc44595b63ddec95ca4b, type: 2}
+    complete:
+      rid: 213507065135235681
+    actionRequirements: []
+  actionRules: []
+  lore:
+  - id: quiet-copy/0
+    title: The missing appendix
+    company: HELIX DYNAMICS
+    contract: The Quiet Copy
+    text: 'HELIX / INTERNAL REVIEW: The prototype passes every efficiency benchmark. Publication remains suspended until the licensing team establishes which improvements can be removed from the public submission.'
+  - id: quiet-copy/1
+    title: Lab notebook, 03:17
+    company: HELIX DYNAMICS
+    contract: The Quiet Copy
+    text: 'Lark''s lab notes: We built the first working cell from scavenged parts. The technician who fixed the cooling loop still takes two buses home. Management says affordable energy would disrupt our market position.'
+  - id: quiet-copy/2
+    title: A public promise
+    company: HELIX DYNAMICS
+    contract: The Quiet Copy
+    text: 'Draft press release: Energy belongs to everyone. Revision note: Legal requests replacement of ''everyone'' with ''approved commercial partners''. The original author declined to initial the change.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235677
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 650
+    - rid: 213507065135235678
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 50
+    - rid: 213507065135235679
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507065135235680
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 114
+    - rid: 213507065135235681
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3

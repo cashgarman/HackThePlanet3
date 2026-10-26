@@ -15,7 +15,9 @@ namespace HackThePlanet
         public float Yaw;
         public float Pitch = 28f;
         public bool Initialized;
-        public void Reset() { Center = Vector3.zero; Distance = 30f; Yaw = 0; Pitch = 28f; Initialized = false; }
+        public bool UserAdjusted;
+        public int NodeCount;
+        public void Reset() { Center = Vector3.zero; Distance = 30f; Yaw = 0; Pitch = 28f; Initialized = false;UserAdjusted=false;NodeCount=0; }
     }
 
     // A workstation-sized view of the package's actual 3D renderer. The host owns
@@ -48,8 +50,11 @@ namespace HackThePlanet
         private Vector3 centerStart;
         private float yawStart, pitchStart;
         private bool disposed;
+        private bool fitPending;
         private string hoveredId;
         private readonly HashSet<string> objectives = new HashSet<string>();
+        private readonly HashSet<string> frontiers = new HashSet<string>();
+        private readonly List<Rect> occupiedLabels = new List<Rect>();
 
         public int VisibleNodes => session.Renderer.VisibleCount;
         public int VisibleEdges => session.Renderer.VisibleEdges;
@@ -72,6 +77,8 @@ namespace HackThePlanet
             scene = graph;
             selectedId = selected;
             savedCamera = cameraState ?? new GraphCameraState();
+            fitPending=!savedCamera.Initialized||(!savedCamera.UserAdjusted&&savedCamera.NodeCount!=graph.Nodes.Count);
+            savedCamera.NodeCount=graph.Nodes.Count;
             this.research = research;
             AddToClassList("graph-viewport");
 
@@ -111,7 +118,7 @@ namespace HackThePlanet
                 route.EdgeIds.Select(id => scene.Edges.ContainsKey(id) ? id : string.Join(">", id.Split('>').Reverse())));
             session.Renderer.UpdateMetrics(scene, edgeFilter);
 
-            if (research) { links = new LinkOverlay(scene, camera, selected, route, true); Add(links); }
+            links = new LinkOverlay(scene, camera, selected, route, research);Add(links);
             labels = new VisualElement();
             labels.style.position = Position.Absolute;
             labels.style.left = labels.style.right = labels.style.top = labels.style.bottom = 0;
@@ -120,6 +127,8 @@ namespace HackThePlanet
             foreach (var node in scene.Nodes.Values)
             {
                 if (node.Record.Properties.TryGetValue("objective", out var objective) && objective.Boolean) objectives.Add(node.Id);
+                if(node.Record.Properties.TryGetValue("frontier",out var frontier)&&frontier.Boolean)frontiers.Add(node.Id);
+                if(node.Record.Properties.TryGetValue("affordable",out var affordable)&&affordable.Boolean)frontiers.Add(node.Id);
                 var button = new Button(() => select(node.Id)) { name = (research ? "tech-" : "node-") + node.Id,
                     text = node.Label, tooltip = node.Label };
                 button.style.position = Position.Absolute;
@@ -146,7 +155,7 @@ namespace HackThePlanet
                 if (texture.width != width || texture.height != height)
                 { texture.Release(); texture.width = width; texture.height = height; texture.Create(); }
                 camera.aspect = (float)width / height;
-                if (!savedCamera.Initialized) { ResetView(); savedCamera.Initialized = true; }
+                if (fitPending) { ResetView(); savedCamera.Initialized = true;fitPending=false; }
                 PositionLabels();
             });
             RegisterCallback<WheelEvent>(evt =>
@@ -180,10 +189,11 @@ namespace HackThePlanet
                     return;
                 }
                 var delta = (Vector2)evt.position - dragStart;
+                if(delta.sqrMagnitude>25)savedCamera.UserAdjusted=true;
                 if (orbiting)
                 {
                     yaw = yawStart + delta.x * .35f;
-                    pitch = Mathf.Clamp(pitchStart - delta.y * .3f, -65, 65);
+                    pitch = Mathf.Clamp(pitchStart + delta.y * .3f, -65, 65);
                 }
                 else center = centerStart + (-camera.transform.right * delta.x + camera.transform.up * delta.y) * distance / 900f;
                 PlaceCamera();
@@ -221,7 +231,10 @@ namespace HackThePlanet
             schema.Register(new GraphRelationDefinition("network", "Connection", Palette.Cyan));
             foreach (var node in nodes.Where(n => preview || n.known))
                 document.UpsertNode(new GraphNodeRecord(node.id, (string.IsNullOrEmpty(node.typeId)?node.kind.ToString():node.typeId) + (node.controlled ? "-owned" : node.objective ? "-objective" : ""), node.label,
-                    new Dictionary<string, GraphValue> { ["objective"] = GraphValue.From(node.objective) }));
+                    new Dictionary<string, GraphValue> {
+                        ["objective"] = GraphValue.From(node.objective&&!node.collected),
+                        ["frontier"] = GraphValue.From(!preview&&node.known&&!node.controlled&&links.Any(l=>(l.a==node.id&&nodes.Any(n=>n.id==l.b&&n.controlled))||(l.b==node.id&&nodes.Any(n=>n.id==l.a&&n.controlled))))
+                    }));
             foreach (var link in links.Where(l => document.Nodes.ContainsKey(l.a) && document.Nodes.ContainsKey(l.b)))
                 document.UpsertEdge(new GraphEdgeRecord(link.a + ">" + link.b, link.a, link.b, "network"));
             var scene = new GraphScene(document, schema);
@@ -244,7 +257,7 @@ namespace HackThePlanet
                     Palette.Branch(branch), .95f));
             schema.Register(new GraphRelationDefinition("requires", "Requires", Palette.Cyan));
             foreach (var tech in catalog.Technologies)
-                document.UpsertNode(new GraphNodeRecord(tech.id, tech.branch, tech.title));
+                document.UpsertNode(new GraphNodeRecord(tech.id, tech.branch, tech.title,new Dictionary<string,GraphValue>{["affordable"]=GraphValue.From(!career.unlocked.Contains(tech.id)&&tech.cost<=career.xp&&tech.parents.All(career.unlocked.Contains))}));
             foreach (var tech in catalog.Technologies)
                 foreach (var parent in tech.parents)
                     document.UpsertEdge(new GraphEdgeRecord(parent + ">" + tech.id, parent, tech.id, "requires"));
@@ -284,7 +297,8 @@ namespace HackThePlanet
         {
             if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
             links?.MarkDirtyRepaint();
-            foreach (var pair in nodeButtons.OrderBy(p => p.Key == selectedId ? 0 : objectives.Contains(p.Key) ? 1 : 2)
+            occupiedLabels.Clear();
+            foreach (var pair in nodeButtons.OrderBy(p => p.Key == selectedId ? 0 : p.Key==hoveredId?1:objectives.Contains(p.Key) ? 2 : 3)
                          .ThenBy(p => Vector3.Distance(camera.transform.position, scene.Nodes[p.Key].Position)))
             {
                 var point = camera.WorldToScreenPoint(scene.Nodes[pair.Key].Position);
@@ -293,11 +307,13 @@ namespace HackThePlanet
                 var rect = new Rect(Mathf.Round(point.x / texture.width * contentRect.width - (research ? 59 : 52)),
                     Mathf.Round((1 - point.y / texture.height) * contentRect.height + 15), research ? 118 : 104, 26);
                 bool priority = pair.Key == selectedId;
-                bool active = pair.Key == selectedId || pair.Key == hoveredId;
+                bool active = priority || pair.Key == hoveredId || objectives.Contains(pair.Key) || frontiers.Contains(pair.Key);
                 bool show = active && point.z > 0 && rect.xMax > 0 && rect.xMin < contentRect.width && rect.yMin >= 0 && rect.yMax < contentRect.height;
+                if(show&&!priority&&occupiedLabels.Any(other=>other.Overlaps(rect)))show=false;
                 var display = show ? DisplayStyle.Flex : DisplayStyle.None;
                 if (pair.Value.resolvedStyle.display != display) pair.Value.style.display = display;
                 if (!show) continue;
+                occupiedLabels.Add(new Rect(rect.x-4,rect.y-3,rect.width+8,rect.height+6));
                 if (!Mathf.Approximately(pair.Value.resolvedStyle.left, rect.x)) pair.Value.style.left = rect.x;
                 if (!Mathf.Approximately(pair.Value.resolvedStyle.top, rect.y)) pair.Value.style.top = rect.y;
             }
@@ -312,6 +328,7 @@ namespace HackThePlanet
 
         public void Zoom(float factor)
         {
+            savedCamera.UserAdjusted=true;
             distance = Mathf.Clamp(distance * factor, 4, 180);
             PlaceCamera();
             PositionLabels();
@@ -319,6 +336,7 @@ namespace HackThePlanet
 
         public void ResetView()
         {
+            savedCamera.UserAdjusted=false;
             if (scene.Nodes.Count == 0) return;
             var bounds = new Bounds(scene.Nodes.Values.First().Position, Vector3.one * 3);
             foreach (var node in scene.Nodes.Values) bounds.Encapsulate(new Bounds(node.Position, Vector3.one * 3));
@@ -358,7 +376,7 @@ namespace HackThePlanet
                 this.camera = camera;
                 this.selected = selected;
                 this.research = research;
-                path = new HashSet<string>(route?.EdgeIds ?? Array.Empty<string>());
+                path = new HashSet<string>((route?.EdgeIds??Array.Empty<string>()).SelectMany(id=>new[]{id,string.Join(">",id.Split('>').Reverse())}));
                 style.position = Position.Absolute;
                 style.left = style.right = style.top = style.bottom = 0;
                 pickingMode = PickingMode.Ignore;
@@ -379,7 +397,7 @@ namespace HackThePlanet
                     var highlight = path.Contains(edge.Id);
                     var related = edge.From == selected || edge.To == selected;
                     var tint = research ? scene.Schema.NodeTypes[b.Record.TypeId].Color : Palette.Cyan;
-                    tint.a = highlight ? .9f : related ? .65f : .38f;
+                    tint.a = highlight ? .9f : related ? .65f : research ? .38f : .19f;
                     painter.strokeColor = tint;
                     painter.lineWidth = highlight ? 2 : related ? 1.5f : 1;
                     painter.BeginPath();
@@ -402,10 +420,9 @@ namespace HackThePlanet
             savedCamera.Pitch = pitch;
             session.Dispose();
             if (networkSettings != null) Object.Destroy(networkSettings);
-            camera.targetTexture = null;
-            texture.Release();
-            Object.Destroy(texture);
-            Object.Destroy(camera.gameObject);
+            if(camera!=null)camera.targetTexture = null;
+            if(texture!=null){texture.Release();Object.Destroy(texture);}
+            if(camera!=null)Object.Destroy(camera.gameObject);
         }
     }
 }

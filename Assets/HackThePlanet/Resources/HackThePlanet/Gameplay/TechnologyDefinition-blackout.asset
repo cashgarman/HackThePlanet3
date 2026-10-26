@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: blackout
   title: Blackout
-  description: Suppress a reachable security hub for 60 seconds. Its connected defenses lose their bonus.
+  description: Remotely suppress a discovered hub within three mapped hops for 45 seconds. Its protected defenses immediately lose their bonus.
   branch: CONTROL
-  cost: 130
+  cost: 85
   special: 1
   position: {x: 865, y: 400}
   parents:

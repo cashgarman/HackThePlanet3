@@ -37,7 +37,7 @@ namespace HackThePlanet.Editor
                 {smokePhase=1;smokeFrames=0;}
                 if(state==PlayModeStateChange.EnteredEditMode&&smokePhase==43)
                 {
-                    File.WriteAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"PASS / Real player UI callbacks: connect, scan, hack, recover, deliver, research purchase, hardware upgrade. Both shaders compile and render nonblank GPU textures; display modes and GPU texture reuse passed. Settings button and Escape, exact menu choices, menu bounds, operation freeze, previous pause state, blocked background controls and shortcuts, reset confirmation, Cancel and Escape cancellation, confirmed fresh career, usable first contract, and Quit passed. Rendered screenshots captured. Asset-only contract, node variant, action button, shortcut, objective, technology and hardware extension rendered and exercised. Test career and effect preference isolated from user saves.");
+                    File.WriteAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"PASS / Real player UI callbacks: connect, scan, hack, recover, deliver, research purchase, hardware upgrade. Both shaders compile and render nonblank GPU textures; display modes and GPU texture reuse passed. Settings button and Escape, exact menu choices, menu bounds, operation freeze, previous pause state, blocked background controls and shortcuts, reset confirmation, Cancel and Escape cancellation, confirmed fresh career, usable first contract, and Quit passed. Rendered screenshots captured. Asset-only contract, node variant, action button, shortcut, objective, technology and hardware extension rendered and exercised. Tactical queue, clear and stop controls exercised. Test career and effect preference isolated from user saves.");
                     if(smokeUiTexture!=null){smokeUiTexture.Release();UnityEngine.Object.DestroyImmediate(smokeUiTexture);smokeUiTexture=null;}
                     dataFixture?.Dispose();dataFixture=null;settingsCareer=null;SessionState.SetBool("HTP.Smoke",false);smokePhase=0;Status("PASS / smoke");if(Application.isBatchMode)EditorApplication.Exit(0);
                 }
@@ -57,6 +57,8 @@ namespace HackThePlanet.Editor
                 {
                     case "import-gameplay": DefaultGameplayAssets.Import();break;
                     case "refresh": AssetDatabase.Refresh();break;
+                    case "balance-before": BalanceLab.CaptureBefore();break;
+                    case "balance-after": BalanceLab.CaptureAfter();break;
                     case "data-validate": DataDrivenValidation.Run();break;
                     case "setup": Setup();break;
                     case "validate": GameValidation.Run();break;
@@ -155,8 +157,18 @@ namespace HackThePlanet.Editor
                         Check(app.ActivateVisibleControl("action-scan"),"Scan button is wired.");
                         GameValidation.FinishTask(app.State);app.SelectNode("n2");smokePhase++;return;
                     case 5:
-                        Check(app.ActivateVisibleControl("action-hack"),"Hack button is wired.");GameValidation.FinishTask(app.State);
-                        GameValidation.Hack(app.State,"n6");GameValidation.Hack(app.State,"n10");app.SelectNode("n14");smokePhase++;return;
+                        Check(app.ActivateVisibleControl("action-hack"),"Hack button is wired.");app.State.Tick(.25f);
+                        Check(app.State.Execute("scan","n6"),"A future reachable scan can be queued.");app.State.SetPaused(true);smokePhase=110;return;
+                    case 110:
+                        Check(app.Root.Q<Button>("stop-tool")!=null&&app.Root.Query<Button>("clear-queue").ToList().Count==1&&app.Root.Q<Label>(className:"queue-summary").text.Contains("NEXT"),"Running tools expose Stop and a readable next-action summary.");
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/15-tactical-queue.png"));
+                        Check(app.ActivateVisibleControl("clear-queue")&&app.State.Op.task!=null&&app.State.Op.queue.Count==0,"Clear removes queued work without cancelling the current tool.");
+                        Check(app.State.Execute("scan","n6"),"Queue can be rebuilt after clearing.");float beforeStop=app.State.Op.trace;
+                        Check(app.ActivateVisibleControl("stop-tool")&&app.State.Op.task==null&&app.State.Op.queue.Count==0&&app.State.Op.trace==beforeStop,"Stop cancels work without refunding generated trace.");smokePhase=111;return;
+                    case 111:
+                        Check(app.ActivateVisibleControl("pause")&&!app.State.Op.paused,"Paused cancellation resumes through the pause control.");
+                        Check(app.Root.Q<Button>("action-hack").enabledInHierarchy&&app.ActivateVisibleControl("action-hack"),"A stopped tool can be restarted through the clean action list.");GameValidation.FinishTask(app.State);
+                        GameValidation.Hack(app.State,"n6");GameValidation.Hack(app.State,"n10");app.SelectNode("n14");smokePhase=6;return;
                     case 6:
                         var operationGraph=app.Root.Q<GraphViewport>();
                         Check(operationGraph!=null&&operationGraph.NodeCount>2&&operationGraph.NodeCount<app.State.Op.nodes.Count&&operationGraph.VisibleEdges>0,

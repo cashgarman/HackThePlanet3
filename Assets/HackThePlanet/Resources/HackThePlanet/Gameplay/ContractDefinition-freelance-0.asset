@@ -20,7 +20,7 @@ MonoBehaviour:
   client: EXCHANGE // verified escrow
   tag: FREELANCE / REPEATABLE
   objective: Recover the archive from Research vault.
-  condition: 'Main objective: base XP. Optional archives: +15 XP each (max 30). Below 75%: +10 XP.'
+  condition: 'Below 75% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
   aftermath: A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.
   displayKind: 0
   recurring: 1

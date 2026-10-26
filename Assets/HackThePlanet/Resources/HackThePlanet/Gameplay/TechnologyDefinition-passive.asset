@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Passive mapping
   description: Hacking a relay automatically scans three hops. Requires both Recon and Stealth roots.
   branch: CROSSOVER
-  cost: 200
+  cost: 120
   special: 0
   position: {x: 300, y: 310}
   parents:
@@ -24,7 +24,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c7d17e83640c93e498b57e07c9712e45, type: 2}
   grants: []
   modifiers:
-  - stat: revealRadius
+  - id: 
+    stat: revealRadius
     priority: 0
     operation: 6
     when:

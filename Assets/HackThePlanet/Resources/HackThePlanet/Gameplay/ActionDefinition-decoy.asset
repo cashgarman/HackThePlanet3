@@ -20,6 +20,7 @@ MonoBehaviour:
   shortcut: 0
   shortcutLabel: 
   legacyGroup: decoy
+  presentationPriority: 50
   operatorTarget: 1
   queueable: 0
   initiallyAvailable: 0
@@ -70,7 +71,7 @@ MonoBehaviour:
       type: {class: TraceEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         amount:
-          rid: 213507065135235733
+          rid: 213507066652786736
     - rid: 213507065135235731
       type: {class: ApplyStatusEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
@@ -82,19 +83,19 @@ MonoBehaviour:
           filter:
             rid: 213507065135235734
         duration:
-          rid: 213507065135235735
+          rid: 213507066652786737
     - rid: 213507065135235732
       type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         message: DECOY ACTIVE // Trace reduced. Trace growth suspended.
-    - rid: 213507065135235733
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: -15
     - rid: 213507065135235734
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507065135235735
+    - rid: 213507066652786736
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        value: 20
+        value: -12
+    - rid: 213507066652786737
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 10

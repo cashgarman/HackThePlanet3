@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: TechnologyDefinition-blueprint
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: blueprint
+  title: Blueprint
+  description: Start every contract with the objective and all its neighboring systems revealed.
+  branch: RECON
+  cost: 120
+  special: 0
+  position: {x: 135, y: 85}
+  parents:
+  - {fileID: 11400000, guid: 4f3323fcff2b56242af19fdfd864b9eb, type: 2}
+  grants: []
+  modifiers: []
+  triggers:
+  - on: 0
+    onceKey: 
+    when:
+      rid: 213507065135235917
+    effects:
+    - rid: 213507065135235918
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507065135235917
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507065135235918
+      type: {class: RevealEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        targets:
+          scope: 1
+          nodeId: 
+          filter:
+            rid: 213507065135235919
+        radius:
+          rid: 213507065135235920
+    - rid: 213507065135235919
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 4
+    - rid: 213507065135235920
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1

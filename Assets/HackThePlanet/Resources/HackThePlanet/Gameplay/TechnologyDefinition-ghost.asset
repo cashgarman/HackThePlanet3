@@ -16,14 +16,15 @@ MonoBehaviour:
   title: Ghost relay
   description: The first relay hack in every contract generates no trace, including scanner pressure.
   branch: STEALTH
-  cost: 100
+  cost: 70
   special: 0
   position: {x: 135, y: 400}
   parents:
   - {fileID: 11400000, guid: c7d17e83640c93e498b57e07c9712e45, type: 2}
   grants: []
   modifiers:
-  - stat: traceFree
+  - id: 
+    stat: traceFree
     priority: 0
     operation: 6
     when:

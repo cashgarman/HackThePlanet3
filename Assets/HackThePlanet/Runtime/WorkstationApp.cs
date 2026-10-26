@@ -16,14 +16,14 @@ namespace HackThePlanet
         public SignalVisuals Visuals { get; private set; }
         public bool Testing { get; set; }
         private VisualElement root, overlay;
-        private Label traceNumber, runningLabel, traceState, timeLabel;
+        private Label traceNumber, runningLabel, traceState, timeLabel, queueLabel;
         private VisualElement traceFill, taskFill;
         private GraphViewport canvas;
         private Contract selectedJob;
         private string selectedNode, selectedTech, view="network", modal;
         private readonly Dictionary<string, Action> uiActions=new Dictionary<string, Action>();
         private readonly GraphCameraState networkCamera=new GraphCameraState(), researchCamera=new GraphCameraState();
-        private bool dirty=true, muted;
+        private bool dirty=true, muted, expandedBrief;
         private float speed=1, saveTimer;
         private AudioSource audioSource;
         private AudioClip clickSound, successSound, warningSound;
@@ -129,7 +129,7 @@ namespace HackThePlanet
 
         private void Build()
         {
-            dirty=false;canvas?.Dispose();uiActions.Clear();root.Clear();traceFill=null;taskFill=null;traceNumber=null;runningLabel=null;traceState=null;timeLabel=null;canvas=null;
+            dirty=false;canvas?.Dispose();uiActions.Clear();root.Clear();traceFill=null;taskFill=null;traceNumber=null;runningLabel=null;traceState=null;timeLabel=null;queueLabel=null;canvas=null;
             BuildHeader();
             var body=El(root,"desktop-body");
             BuildRail(body);
@@ -201,15 +201,15 @@ namespace HackThePlanet
             else
             {
                 var brief=El(left,"active-brief");Text(brief,State.Job.tag,"micro cyan");Text(brief,State.Job.title,"mission-title");Text(brief,State.Job.client,"micro muted");
-                Text(brief,State.Job.description,"body-copy");Text(brief,"OBJECTIVES","eyebrow section-space");
+                Btn(brief,expandedBrief?"HIDE BRIEF ▴":"READ BRIEF ▾",()=>{expandedBrief=!expandedBrief;dirty=true;},"toggle-brief","brief-toggle");if(expandedBrief)Text(brief,State.Job.description,"body-copy");Text(brief,"OBJECTIVES","eyebrow section-space");
                 foreach(var n in State.Op.nodes.Where(n=>n.objective))
                 {var b=Btn(brief,(State.ObjectiveDone(n)?"[+] ":"[ ] ")+n.label,()=>SelectNode(n.id),"objective-"+n.id,"objective-row");if(State.ObjectiveDone(n))b.AddToClassList("lime");}
                 Text(brief,"REWARD CONDITIONS","eyebrow section-space");Text(brief,State.Job.credits+" cr + "+State.Job.xp+" XP on delivery","small lime");
                 Text(brief,State.RewardDescription,"small muted");
-                El(brief,"flex-spacer");Text(brief,"YOUR APPROACH","eyebrow section-space");Text(brief,"Front door: hardened defenses.\nMaintenance lane: easier systems, longer route.\nScan to find the connections.","body-copy muted");
+
             }
             var loadout=El(left,"loadout");Text(loadout,"EQUIPPED ABILITIES  /  "+State.Career.equipped.Count+" OF "+State.Slots,"eyebrow");
-            if(State.Career.equipped.Count==0)Text(loadout,"No special abilities yet. Earn XP to build your toolkit.","small muted");
+            if(State.Career.equipped.Count==0)Text(loadout,"Research passives for lasting upgrades, or equip an ability for a new approach.","small muted");
             foreach(var id in State.Career.equipped)
             {
                 var tech=FindTech(id);
@@ -277,35 +277,55 @@ namespace HackThePlanet
             var type=El(scroll,"target-type");type.Add(new DeviceGlyph(node.kind,nodeType.color,42));
             var status=El(type,"target-status");Text(status,nodeType.title.ToUpperInvariant(),"micro cyan");Text(status,node.controlled?"ACCESS ESTABLISHED":State.Reachable(node)?"WITHIN REACH":"ROUTE REQUIRED","micro "+(node.controlled?"lime":"muted"));
             Text(scroll,node.label,"target-title");Text(scroll,"ADDR / "+node.id.ToUpperInvariant(),"micro muted");
-            Text(scroll,node.detail,"body-copy muted");
-            if(node.bonus && node.collected)
-            {
-                var fragment=LoreContent.Find(State.Job,node.loreId);
-                if(fragment!=null){Text(scroll,fragment.title,"eyebrow lime section-space");Text(scroll,fragment.text,"body-copy");Text(scroll,"Deliver this contract to preserve the fragment in Intelligence.","small muted");}
-            }
             var stats=El(scroll,"target-stats");Text(stats,"SECURITY","eyebrow");Text(stats,State.EffectiveSecurity(node).ToString("00")+" / 10","small");
             var bars=El(scroll,"security-bars");for(int i=0;i<10;i++){var bar=El(bars,"security-bar");if(i<State.EffectiveSecurity(node))bar.style.backgroundColor=nodeType.color;}
             if(node.objective)Text(scroll,State.ObjectiveDone(node)?"[+] CONTRACT OBJECTIVE SECURED":"[*] CONTRACT OBJECTIVE","objective-tag");
             if(node.bonus)Text(scroll,node.collected?"[+] OPTIONAL FILES SECURED":"[+] OPTIONAL ARCHIVE / "+State.ArchiveDescription,"micro lime section-space");
             if(node.suppressed>0)Text(scroll,"SUPPRESSED / "+Mathf.CeilToInt(node.suppressed)+"s remaining","micro lime section-space");
-            Text(scroll,"AVAILABLE ACTIONS","eyebrow section-space");
-            foreach(var action in State.AvailableActions(node.id))ActionButton(scroll,action);
-            Text(scroll,"CONNECTION ROUTE","eyebrow section-space");
+            if(node.scanned)Text(scroll,"INTEL VERIFIED / INTRUSION PREPARED","micro cyan section-space");
+            Text(scroll,"ACTIONS","eyebrow section-space");
+            var options=State.AvailableActions(node.id).OrderByDescending(action=>State.Preview(action.id,node.id).allowed||State.CanQueue(action.id,node.id)).ThenBy(action=>action.priority).ToArray();
+            bool hasAccess=State.Reachable(node)||options.Any(action=>State.Preview(action.id,node.id).allowed||State.CanQueue(action.id,node.id));
+            if(!hasAccess)Text(scroll,"Secure a connected system to reach this target.","body-copy muted");
+            else
+            {
+                bool primary=true;
+                foreach(var action in options){ActionButton(scroll,action,primary);if(State.Preview(action.id,node.id).allowed)primary=false;}
+                if(options.Length==0)Text(scroll,"This system is secured. Choose a connected target.","body-copy muted");
+            }
+            var researchHint=State.ActionResearchHint(node.id);if(researchHint!=null)Text(scroll,researchHint,"small muted section-space");
+            Text(scroll,node.detail,"body-copy muted");
+            if(node.bonus&&node.collected)
+            {
+                var fragment=LoreContent.Find(State.Job,node.loreId);
+                if(fragment!=null){Text(scroll,fragment.title,"eyebrow lime section-space");Text(scroll,fragment.text,"body-copy");Text(scroll,"Extract to preserve this fragment.","small muted");}
+            }
             var route=State.Route(node.id,true);
-            Text(scroll,route!=null&&route.IsReachable?string.Join(" > ",route.NodeIds.Select(id=>id==State.Op.entryNode?"LOCAL":State.Node(id).label)):"No controlled route. Hack a neighboring system to extend your access.","small muted");
-
+            Text(scroll,"ACCESS ROUTE","eyebrow section-space");
+            Text(scroll,route!=null&&route.IsReachable?string.Join(" > ",route.NodeIds.Select(id=>id==State.Op.entryNode?"LOCAL":State.Node(id).label)):"Extend your controlled route to this system.","small muted");
             var bottom=El(right,"inspector-bottom");
             Btn(bottom,State.ObjectiveComplete?"EXTRACT & DELIVER  →":"DISCONNECT",DisconnectClicked,"disconnect",State.ObjectiveComplete?"primary-button":"danger-button");
             Text(bottom,State.ObjectiveCount+" / "+State.ObjectiveTotal+" objectives secured","micro muted center-text");
         }
 
-        private void ActionButton(VisualElement parent,ActionInfo action)
+        private void ActionButton(VisualElement parent,ActionInfo action,bool primary)
         {
             var preview=State.Preview(action.id,selectedNode);bool queue=State.Op.task!=null;
             var button=Btn(parent,"",()=>Run(action.id,selectedNode),"action-"+action.id,"action-button");
+            bool enabled=queue?State.CanQueue(action.id,selectedNode):preview.allowed;
+            button.EnableInClassList("suggested-action",primary&&enabled);button.EnableInClassList("risky-action",!queue&&preview.allowed&&preview.willIsolate);
             var row=El(button,"row-between");Text(row,State.ActionTitle(action.id,selectedNode),"action-title");Text(row,action.shortcutLabel,"keycap");
-            Text(button,preview.allowed?preview.duration.ToString("0.0")+"s  /  +"+preview.trace.ToString("0.0")+" trace"+(queue?"  / QUEUE":""):preview.reason,"action-estimate");
-            button.tooltip=preview.reason;button.SetEnabled(queue?State.CanQueue(action.id,selectedNode):preview.allowed);
+            var remaining=State.UsesRemaining(action.id,selectedNode);
+            float displayedTrace=queue?preview.trace:Mathf.Max(0,preview.projectedTrace-State.Op.trace);
+            string estimate=preview.allowed?preview.duration.ToString("0.0")+"s  /  +"+displayedTrace.ToString("0.0")+" trace":preview.reason;
+            if(remaining.HasValue)estimate+="  /  "+remaining.Value+" left";
+            Text(button,estimate,"action-estimate");
+            if(!queue&&preview.allowed)
+            {
+                string forecast=preview.willIsolate?"RISK / TRACE LIMIT":preview.losesQuietBonus?"CROSSES QUIET BONUS": "UP TO "+Mathf.Min(State.TraceLimit,preview.projectedTrace).ToString("0.0")+"% TRACE";
+                Text(button,forecast,"action-forecast "+(preview.willIsolate?"amber":preview.losesQuietBonus?"amber":"muted"));
+            }
+            button.tooltip=action.description+Environment.NewLine+preview.reason;button.SetEnabled(enabled);
         }
         private void Run(string actionId,string targetId){if(State.Execute(actionId,targetId)){Beep();dirty=true;}}
         private Technology FindTech(string id)=>State.Catalog.Technologies.FirstOrDefault(t=>t.id==id);
@@ -317,14 +337,18 @@ namespace HackThePlanet
             var trace=El(bar,"trace-block");var heading=El(trace,"row-between");Text(heading,"TRACE LEVEL","eyebrow");traceNumber=Text(heading,"00.0%","trace-number");
             var track=El(trace,"meter-track");traceFill=El(track,"meter-fill");traceState=Text(trace,"No active connection","micro muted");
             var task=El(bar,"task-block");runningLabel=Text(task,"YOUR NEXT CONNECTION STARTS HERE","task-title");var taskTrack=El(task,"task-track");taskFill=El(taskTrack,"task-fill");
+            queueLabel=Text(task,"","queue-summary");
             var controls=El(bar,"time-controls");
             var pause=Btn(controls,State.Active&&State.Op.paused?"▶":"Ⅱ",()=>{if(State.Active)State.SetPaused(!State.Op.paused);},"pause","time-button");pause.SetEnabled(State.Active);pause.tooltip="Pause / Space";
+            if(State.CanStopTask)Btn(controls,"STOP",()=>State.StopTask(),"stop-tool","time-button stop-tool").tooltip="Stop the current tool and clear its queue. Existing trace remains.";
+            if(State.Active&&State.Op.queue.Count>0)Btn(controls,"CLEAR",()=>State.ClearQueue(),"clear-queue","time-button clear-tools").tooltip="Clear queued tools.";
             foreach(float rate in State.SimulationSpeeds){float captured=rate;var b=Btn(controls,rate+"x",()=>{speed=captured;dirty=true;},"speed-"+rate,"speed-button");if(Mathf.Approximately(speed,rate))b.AddToClassList("active");}
         }
 
         private void UpdateMeters()
         {
             if(traceNumber==null)return;
+            if(queueLabel!=null)queueLabel.text=!State.Active||State.Op.queue.Count==0?"PLANNING IS FREE / SPACE TO PAUSE":"NEXT / "+string.Join(" → ",State.Op.queue.Take(2).Select(q=>State.ActionTitle(q.actionId,q.target)+" · "+State.Node(q.target).label))+(State.Op.queue.Count>2?"  +"+(State.Op.queue.Count-2):"");
             float trace=State.Active?State.Op.trace:0;Color color=trace>=State.TraceDanger?Palette.Red:trace>=State.TraceWarning?Palette.Amber:Palette.Lime;
             traceNumber.text=trace.ToString("00.0")+"%";traceNumber.style.color=color;traceFill.style.width=Length.Percent(State.TraceFraction*100);traceFill.style.backgroundColor=color;
             traceState.text=!State.Active?"DISCONNECTED / NO EXPOSURE":State.Op.decoyRemaining>0?"DECOY ACTIVE / "+Mathf.CeilToInt(State.Op.decoyRemaining)+"s":trace>=State.TraceDanger?"LOCKDOWN IMMINENT / FINISH OR DISCONNECT":State.Scanners>0?State.Scanners+" ACTIVE SCANNER"+(State.Scanners>1?"S":"")+" / EXTRA TRACE WHILE TOOLS RUN":"STABLE / PLANNING DOES NOT RAISE TRACE";
@@ -379,7 +403,8 @@ namespace HackThePlanet
                 int level=State.Career.Level(hardware.id),max=hardware.maxLevel;
                 var card=El(upgrades,"upgrade-card");card.style.flexShrink=0;var summary=El(card,"upgrade-summary");Text(summary,hardware.category+" / TIER "+level+" OF "+max,"eyebrow cyan");Text(summary,hardware.title,"upgrade-name");Text(summary,hardware.description,"body-copy muted");
                 var purchase=El(card,"upgrade-purchase");Text(purchase,level==max?"MAXIMUM":State.UpgradePrice(hardware.id).ToString("N0")+" cr","payout");
-                var button=Btn(purchase,level==max?"INSTALLED":"INSTALL UPGRADE",()=>{if(State.Upgrade(hardware.id))Beep(true);},"upgrade-"+index++,"primary-button");button.SetEnabled(!State.Active&&level<max&&State.Career.credits>=State.UpgradePrice(hardware.id));
+                var button=Btn(purchase,level==max?"INSTALLED":"INSTALL UPGRADE",()=>{if(State.Upgrade(hardware.id))Beep(true);},"upgrade-"+index++,"primary-button");var upgradePreview=State.PreviewUpgrade(hardware.id);button.SetEnabled(upgradePreview.allowed);button.tooltip=upgradePreview.reason;
+                if(!upgradePreview.allowed&&level<max)Text(summary,upgradePreview.reason,"small muted");
             }
             Text(page,State.Active?"The operation is paused. Hardware can be installed after you disconnect.":"Hardware persists through failed contracts. Every upgrade is immediately available on your next connection.","small muted section-space");
         }
@@ -412,7 +437,7 @@ namespace HackThePlanet
             else foreach(var line in lines.Skip(Math.Max(0,lines.Count-3)))Text(left,line,"terminal-line"+(line.Contains("OBJECTIVE")?" lime":line.Contains("RUN //")?" cyan":" muted"));
             var side=El(console,"console-side");Text(side,"OPERATOR STATUS","eyebrow");
             timeLabel=Text(side,State.Active?"SESSION / "+TimeText(State.Op.elapsed):"STANDING / "+Rank(),"small cyan");
-            if(State.Active){Text(side,"QUEUE / "+State.Op.queue.Count+" ACTIONS","small muted");if(State.Op.queue.Count>0)Btn(side,"CLEAR QUEUE",()=>State.ClearQueue(),"clear-queue","text-button");}
+            if(State.Active){Text(side,"QUEUE / "+State.Op.queue.Count+" ACTIONS","small muted");}
             else Text(side,"UPLINK / STANDBY","small muted");
         }
 
@@ -480,7 +505,7 @@ namespace HackThePlanet
             else if(modal=="help")
             {
                 Text(box,"OPERATOR FIELD GUIDE","eyebrow cyan");Text(box,"The planet is a network.\nFind your way through.","large-heading");
-                string[] guide={"01 / CONNECT — Pick a contract. Gold markers show required objectives. Green means a system is yours.","02 / EXPLORE — Select a reachable system. Scan [1] reveals nearby connections. Hack [2] takes control and extends your route.","03 / RECOVER — Control each required target, then recover its files [3]. Record jobs need both copies; investigations need all three records.","04 / MANAGE TRACE — Tools create trace. Scanners add pressure and hubs strengthen neighbors. Planning is free. Space pauses; "+string.Join(" / ",State.SimulationSpeeds.Select(x=>x+"x"))+" changes speed.","05 / GET PAID — Extract & deliver after all objectives are secured. Optional archives pay extra. At "+State.TraceLimit+"% trace the attempt ends; gear and research stay yours.","06 / GROW — Credits buy hardware. XP purchases connected research. Crossovers require both parents. Equip abilities in limited slots. Research refunds are free between jobs."};
+                string[] guide={"01 / CONNECT — Pick a contract. Gold markers show required objectives. Green means a system is yours.","02 / EXPLORE — Select a reachable system. Scan [1] maps connections and prepares a faster, quieter intrusion. Hack [2] takes control and extends your route.","03 / RECOVER — Control each required target, then recover its files [3]. Record jobs need both copies; investigations need all three records.","04 / MANAGE TRACE — Tools create trace. Check the forecast before committing. STOP cancels a tool; existing trace stays. Planning is free. Space pauses; "+string.Join(" / ",State.SimulationSpeeds.Select(x=>x+"x"))+" changes speed.","05 / GET PAID — Extract & deliver after all objectives are secured. Optional archives pay extra. At "+State.TraceLimit+"% trace the attempt ends; gear and research stay yours.","06 / GROW — Credits buy hardware. XP purchases connected research. Crossovers require both parents. Equip abilities in limited slots. Research refunds are free between jobs."};
                 foreach(var line in guide)Text(box,line,"guide-line");
                 Text(box,"GRAPH CONTROLS / Click to inspect · Scroll to zoom · Drag empty space to pan · FIT to recenter\nDISPLAY / FX+ on the left rail cycles Full / Reduced (static) / Off. Display preference is saved locally.\nYour career and active operation autosave locally. Reopened operations start paused.","small muted section-space");
                 Btn(box,"BACK TO THE WORKSTATION  →",()=>{modal=null;if(State.Active)State.SetPaused(pausedBeforeHelp);dirty=true;},"close-help","primary-button");

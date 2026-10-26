@@ -16,7 +16,7 @@ MonoBehaviour:
   title: System cascade
   description: Disabling or capturing the hub reduces every firewall's security by two for the rest of the contract.
   branch: CROSSOVER
-  cost: 220
+  cost: 140
   special: 0
   position: {x: 715, y: 310}
   parents:

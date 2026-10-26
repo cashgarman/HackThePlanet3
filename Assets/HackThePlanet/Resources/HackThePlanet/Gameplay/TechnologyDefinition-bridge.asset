@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: bridge
   title: Firewall bridge
-  description: Bypass a firewall in two seconds for zero trace when at least two neighboring systems are controlled. Requires an ability slot.
+  description: Two charges per operation. Scan a reachable firewall, then cross it in 1.2 seconds with zero trace. Requires Wide scan and Efficient hack.
   branch: CROSSOVER
-  cost: 230
+  cost: 140
   special: 1
   position: {x: 500, y: 200}
   parents:
-  - {fileID: 11400000, guid: 569fd3aeaca330f47b18aba677a3dc9e, type: 2}
-  - {fileID: 11400000, guid: 8571fa92309420a41a3245b9bc9e6957, type: 2}
+  - {fileID: 11400000, guid: 4f3323fcff2b56242af19fdfd864b9eb, type: 2}
+  - {fileID: 11400000, guid: d02b02e90af4a02459c84e2860eb416d, type: 2}
   grants:
   - {fileID: 11400000, guid: 9de54e01fba34d140a49ab03624b0fa7, type: 2}
   modifiers: []

@@ -18,28 +18,32 @@ MonoBehaviour:
   category: BANDWIDTH
   statLabel: TRANSFER SPEED
   displayedStat: transferSpeed
+  requirements: []
   tiers:
-  - price: 400
+  - price: 350
     modifiers:
-    - stat: transferSpeed
+    - id: 
+      stat: transferSpeed
       priority: 0
       operation: 0
       when:
         rid: 213507065135235759
       value:
         rid: 213507065135235760
-  - price: 900
+  - price: 800
     modifiers:
-    - stat: transferSpeed
+    - id: 
+      stat: transferSpeed
       priority: 0
       operation: 0
       when:
         rid: 213507065135235761
       value:
         rid: 213507065135235762
-  - price: 1600
+  - price: 1450
     modifiers:
-    - stat: transferSpeed
+    - id: 
+      stat: transferSpeed
       priority: 0
       operation: 0
       when:

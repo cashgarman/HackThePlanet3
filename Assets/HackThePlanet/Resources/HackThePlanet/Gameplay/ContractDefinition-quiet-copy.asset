@@ -20,12 +20,12 @@ MonoBehaviour:
   client: LARK // independent researcher
   tag: DATA ACQUISITION
   objective: Recover the prototype from Research vault.
-  condition: Finish below 70% trace for +10 XP and +150 cr.
+  condition: 'Below 60% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
   aftermath: An anonymous prototype appears on the open net. Helix's demonstration goes ahead, but the technology is no longer theirs alone.
   displayKind: 0
   recurring: 0
   requiredWins: 0
-  quietLimit: 70
+  quietLimit: 60
   credits:
     rid: 213507065135235677
   xp:

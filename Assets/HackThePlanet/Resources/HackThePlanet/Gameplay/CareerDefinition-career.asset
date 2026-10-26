@@ -23,6 +23,7 @@ MonoBehaviour:
   researchDuringOperations: 0
   hardwareDuringOperations: 0
   equipDuringOperations: 0
+  allowTaskCancellation: 1
   refundFraction: 1
   traceLimit: 100
   traceWarning: 60

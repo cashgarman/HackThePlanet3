@@ -11,7 +11,7 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 | Control | Action |
 | --- | --- |
 | Click a system | Inspect it and preview actions |
-| 1 / 2 / 3 / 4 | Scan / Hack / Recover / Disrupt selected target |
+| 1 / 2 / 3 / 4 | Scan and prepare / Hack / Recover / Disrupt selected target |
 | Space | Pause or resume the current operation |
 | 1x / 2x / 4x buttons | Simulation speed |
 | Mouse wheel over graph | Zoom |
@@ -27,13 +27,15 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 
 - Six linked story contracts across Helix Dynamics, Morrow Financial, and Aegis Systems: theft, synchronized record edits, evidence recovery, and a final disruption.
 - 32, 44, or 56 systems per operation by difficulty, with three to five approaches through a volumetric 3D network. Short ingress routes expose you to scanners; longer maintenance routes trade time for lower trace. Three optional archive detours contain bonus rewards and authored lore. Hubs strengthen connected targets; scanners add trace while tools run nearby.
-- No idle trace, unlimited pause, action previews, a queue, and retryable failures. Disconnect after completing every objective to deliver. A 100% trace ends the attempt and loses its unbanked rewards; hardware and purchased research persist.
+- No idle trace, unlimited pause, trace forecasts, a visible queue, tool cancellation, and retryable failures. Scanning prepares targets for 15% faster hacks and 20% less hack trace. Disconnect after completing every objective to deliver. A 100% trace ends the attempt and loses its unbanked rewards; hardware and purchased research persist.
 - Eighteen connected research nodes including the starting toolkit, four branches, and crossover technologies requiring both parents. XP is spent directly. Refund all research for free between contracts. Passives are always active; special abilities occupy a limited loadout.
 - Credits upgrade CPU, bandwidth, and ability capacity. Research and rig changes happen between operations.
 - Success changes corporate defenses and publishes a world bulletin. Three repeatable freelance templates unlock after the third story contract, with defenses, connections, and rewards changing as your career advances.
 - The Intelligence tab preserves the last twenty operation reports, including action timelines and trace at disconnect. Successfully extracted lore stays in a permanent collection independently of report retention.
 
-All bonus conditions are shown before connecting. Optional archives pay +120 credits and +15 XP each, with optional XP capped at +30 per contract. Finishing below the contract's trace threshold adds +150 credits and +10 XP.
+All bonus conditions are shown before connecting. Optional archives pay +100 credits and +15 XP each; all three award XP, up to +45 per contract. Finishing below the contract's trace threshold adds +100 credits and +20 XP.
+
+Early branch roots cost 45 XP. Bridge has two prepared crossings per operation; Backdoor and remote Blackout use discovered routes within three hops. Use **STOP** to cancel a running tool and clear its queue; trace already generated remains. **CLEAR** removes queued tools only.
 
 ## Saves
 
@@ -51,7 +53,7 @@ Open this folder in **Unity 7000.0.0a11**. Enter Play mode in the included scene
 
 The included Graph Explorer package supplies the discovered graph document, controlled-route shortest paths, and the 3D node and edge renderer for both operations and research. Hidden world state stays in the game simulation. The workstation hosts the 3D views in its UI Toolkit layout and keeps its own inspectors and action controls.
 
-Source files are under `Assets/HackThePlanet/Runtime/`. the gameplay definitions under `Resources/HackThePlanet/Gameplay/` contain contracts, networks, technologies, and mechanics; `GameCatalog.cs` compiles immutable runtime catalogs; `GameSimulation.cs` owns tools, trace, progression, and persistence; `WorkstationApp.cs` and `GraphViewport.cs` present the workstation. Styles are under `Assets/HackThePlanet/Resources/HackThePlanet/`.
+Source files are under `Assets/HackThePlanet/Runtime/`. The gameplay definitions under `Resources/HackThePlanet/Gameplay/` contain contracts, networks, technologies, and mechanics; `GameCatalog.cs` compiles immutable runtime catalogs; `GameSimulation.cs` owns tools, trace, progression, and persistence; `WorkstationApp.cs` and `GraphViewport.cs` present the workstation. Styles are under `Assets/HackThePlanet/Resources/HackThePlanet/`.
 
 `NetworkGenerator` builds seeded topology and stable XYZ positions together for previews and live operations. V2 active saves preserve their topology, positions, tools, queues, counters, and timed statuses. The seven original low-poly hardware meshes are game-owned resources; regenerate them with `scripts/generate_network_models.py` using Python 3. The importer keeps meshes readable for player-side instancing. Lore includes eighteen story fragments and nine reusable company fragments for freelance work.
 
@@ -59,4 +61,4 @@ The **Ghost Frequency** graphics style uses mint phosphor, bracketed instrument 
 
 The **Hack The Planet** editor menu provides scene setup, gameplay asset validation, simulation and data-driven validation, a rendered workstation smoke test, and Windows builds. Builds reject invalid gameplay assets. See the [gameplay authoring guide](Docs/DATA_DRIVEN_GAMEPLAY.md) for asset types, composable rules, extension examples, and runtime APIs. The smoke test uses an isolated in-memory career and does not write to the player's career save.
 
-Validation reports and screenshots are in `Artifacts/`. Expanded persistent footholds, independent extraction endpoints, and long-running investigations remain outside this career loop. Mission approaches branch through the network; entry and delivery still use your gateway.
+The [balance refinement notes](Docs/BALANCE_REFINEMENT.md) explain the tuning, measured route trade-offs, and compatibility. Validation reports and screenshots are in `Artifacts/`. Expanded persistent footholds, independent extraction endpoints, and long-running investigations remain outside this career loop. Mission approaches branch through the network; entry and delivery still use your gateway.

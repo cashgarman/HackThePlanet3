@@ -20,12 +20,12 @@ MonoBehaviour:
   client: JUNE // public-interest archivist
   tag: RECORD ALTERATION
   objective: Correct Research vault AND Backup mirror.
-  condition: 'Synchronize both records. Below 65% trace: +10 XP / +150 cr.'
+  condition: 'Below 60% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
   aftermath: Thousands of duplicate balances disappear. Morrow replaces a maintenance identity; its perimeter gets a little stronger.
   displayKind: 1
   recurring: 0
   requiredWins: 1
-  quietLimit: 65
+  quietLimit: 60
   credits:
     rid: 213507065135235671
   xp:

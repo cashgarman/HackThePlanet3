@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: decoy
   title: Decoy process
-  description: Once per contract, remove 15 trace and prevent all trace growth for 20 seconds. Activate from your loadout.
+  description: Once per operation, remove 12 trace and prevent trace growth for 10 seconds. Best used before committing to a noisy tool.
   branch: CONTROL
-  cost: 150
+  cost: 95
   special: 1
   position: {x: 865, y: 545}
   parents:

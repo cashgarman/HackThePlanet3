@@ -20,12 +20,12 @@ MonoBehaviour:
   client: LARK // encrypted channel
   tag: CORPORATE INTELLIGENCE
   objective: Recover the ownership archive from Research vault.
-  condition: 'Recover an optional archive for +15 XP. Below 65%: quiet bonus.'
+  condition: 'Below 60% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
   aftermath: The shell company belongs to Aegis. A private security contract is turning public research into private leverage.
   displayKind: 0
   recurring: 0
   requiredWins: 3
-  quietLimit: 65
+  quietLimit: 60
   credits:
     rid: 213507065135235928
   xp:

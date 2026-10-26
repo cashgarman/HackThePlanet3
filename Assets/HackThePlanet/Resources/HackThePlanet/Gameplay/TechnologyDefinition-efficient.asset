@@ -16,20 +16,21 @@ MonoBehaviour:
   title: Efficient hack
   description: All standard hacks finish {modifier:0:reduction}% faster. Hardware speed stacks with this benefit.
   branch: INTRUSION
-  cost: 50
+  cost: 45
   special: 0
   position: {x: 680, y: 155}
   parents:
   - {fileID: 11400000, guid: f5b66d540a4aeea488d75fe867d364aa, type: 2}
   grants: []
   modifiers:
-  - stat: duration
+  - id: 
+    stat: duration
     priority: 0
     operation: 2
     when:
       rid: 213507065135235900
     value:
-      rid: 213507065135235901
+      rid: 213507066652786771
   triggers: []
   references:
     version: 2
@@ -39,7 +40,7 @@ MonoBehaviour:
       data:
         action: {fileID: 11400000, guid: 177dce6f63cf40c4da3a2a79095178a8, type: 2}
         tag: 
-    - rid: 213507065135235901
+    - rid: 213507066652786771
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        value: 0.75
+        value: 0.8

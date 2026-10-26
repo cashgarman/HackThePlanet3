@@ -6,6 +6,7 @@
     "totalEarnedXp": 0,
     "jobs": 0,
     "initialized": true,
+    "researchSpent": 0,
     "hardware": [
         {
             "id": "expansion",
@@ -177,12 +178,12 @@
             "00:00  TUNNEL OPEN // HELIX DYNAMICS. Gateway secured.",
             "00:00  CLIENT // Verify the sample.",
             "00:00  RUN // Hack system : Access terminal",
-            "00:02  CONTROL ESTABLISHED // Access terminal.",
-            "00:02  RUN // Hack system : Sample terminal",
-            "00:04  CONTROL ESTABLISHED // Sample terminal.",
-            "00:04  RUN // Verify sample : Sample terminal",
-            "00:05  STATUS EXPIRED // Trace protection : operator",
-            "00:05  QUEUED // Scan connections : Sample terminal"
+            "00:01  CONTROL ESTABLISHED // Access terminal.",
+            "00:01  RUN // Hack system : Sample terminal",
+            "00:03  CONTROL ESTABLISHED // Sample terminal.",
+            "00:03  RUN // Verify sample : Sample terminal",
+            "00:04  STATUS EXPIRED // Trace protection : operator",
+            "00:04  QUEUED // Scan connections : Sample terminal"
         ],
         "queue": [
             {
@@ -217,7 +218,7 @@
             "trace": 1.0
         },
         "trace": 9.649999618530273,
-        "elapsed": 5.0,
+        "elapsed": 4.0,
         "paused": false
     }
 }

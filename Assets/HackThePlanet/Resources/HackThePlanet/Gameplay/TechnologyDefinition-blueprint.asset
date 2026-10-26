@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Blueprint
   description: Start every contract with the objective and all its neighboring systems revealed.
   branch: RECON
-  cost: 120
+  cost: 90
   special: 0
   position: {x: 135, y: 85}
   parents:

@@ -599,53 +599,55 @@ PASS / exact network parity / 98 / difficulty 3 / hardened False
 PASS / exact network parity / 98 / difficulty 3 / hardened True
 PASS / exact network parity / 99 / difficulty 3 / hardened False
 PASS / exact network parity / 99 / difficulty 3 / hardened True
-PASS / baseline relay hack duration / 4.7
+PASS / baseline relay hack duration / 3.35
 PASS / baseline relay hack trace / 4.7
-PASS / efficient hack duration / 3.525
-PASS / quiet hack trace / 3.29
+PASS / efficient hack duration / 2.68
+PASS / quiet hack trace / 3.76
 PASS / first relay fully trace free / 0
 PASS / action remains within trace budget
 PASS / control trigger consumes first relay
-PASS / signal halves scan duration / 1.5
+PASS / signal halves scan duration / 0.8
 PASS / signal removes base scan trace / 0
 PASS / action remains within trace budget
 PASS / wide scan radius / 3
 PASS / action remains within trace budget
 PASS / passive mapping reveals three hops from relay
 PASS / blueprint operation-start trigger
-PASS / weak-point then global buffer order / 2.397
-PASS / scanner pressure follows duration modifiers and precedes global trace modifiers / 10.3292
-PASS / selective main-objective duration / 4.95
+PASS / scan preparation, weak-point and global buffer stack / 2.538
+PASS / scanner pressure follows duration modifiers and precedes global trace modifiers / 10.5811
+PASS / selective main-objective duration / 3.85
 PASS / selective main-objective trace / 5.6
 PASS / action remains within trace budget
 PASS / chain permits future neighboring action
 PASS / duplicate queue entries rejected
 PASS / action remains within trace budget
 PASS / queued action executes after gaining reachability
-PASS / queue defers authored execution requirements
+PASS / queue defers future reachability
 PASS / action remains within trace budget
-PASS / queued requirements rechecked and invalid recovery skipped
+PASS / queued requirements rechecked and completed action skipped
 PASS / operator action executes
-PASS / decoy subtracts authored trace / 15
+PASS / decoy subtracts authored trace / 18
 PASS / operator action use limit
-PASS / pause freezes status timers / 20
+PASS / pause freezes status timers / 10
 PASS / action remains within trace budget
-PASS / trace prevention status protects a running action / 15
+PASS / trace prevention status protects a running action / 18
 PASS / operator status expires while idle
 PASS / scanner suppression action available
 PASS / action remains within trace budget
-PASS / suppression uses authored duration / 60
+PASS / suppression uses authored duration / 45
 PASS / expiration restores scanner pressure
 PASS / hub suppression action available
 PASS / action remains within trace budget
 PASS / cascade modifies all firewalls once
 PASS / action remains within trace budget
 PASS / capturing suppressed hub does not apply cascade twice
-PASS / bridge accepts two controlled neighbors
+PASS / prepared bridge accepts one controlled neighbor
 PASS / bridge terminal override removes all trace / 0
 PASS / action remains within trace budget
 PASS / bridge applies reusable control effect
-PASS / backdoor bypasses reachability
+PASS / action remains within trace budget
+PASS / backdoor finds a mapped three-hop shortcut
+PASS / backdoor bypasses direct reachability within its range
 PASS / action remains within trace budget
 PASS / backdoor one-use counter
 PASS / v2 round trip preserves task, queue, counters and timed statuses
@@ -676,4 +678,4 @@ PASS / action remains within trace budget
 PASS / new action satisfies authored completion condition
 PASS / new objective and contract deliver through the generic career flow
 PASS / existing simulation, full campaign, network, lore, settings-save validation passes
-TOTAL / 678 assertions passed.
+TOTAL / 680 assertions passed.
