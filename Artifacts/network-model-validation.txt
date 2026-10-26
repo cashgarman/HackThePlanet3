@@ -1,1 +1,0 @@
-PASS / Seven original readable normalized meshes, actual graph shader pixels and picking from front, three-quarter and rear views. Reduced motion exercised. Gallery order: Gateway, Workstation, Relay, Firewall, Scanner, Database, SecurityHub.

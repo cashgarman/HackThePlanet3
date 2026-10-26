@@ -1,7 +1,0 @@
-{
-  "name": "HackThePlanet.Editor",
-  "rootNamespace": "HackThePlanet.Editor",
-  "references": ["HackThePlanet", "Cashg.GraphExplorer", "Cashg.GraphExplorer.Presentation"],
-  "includePlatforms": ["Editor"],
-  "autoReferenced": true
-}
