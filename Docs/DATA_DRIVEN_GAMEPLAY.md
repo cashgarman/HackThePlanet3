@@ -1,5 +1,7 @@
 # Gameplay authoring
 
+For setup, step-by-step balance and custom-mission tutorials, building, and save compatibility, start with the [modding guide](MODDING.md). This document is the rules and runtime reference.
+
 The shipped rules live in `Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/Game.asset`. Its 54 assets contain the current companies, contracts, lore, network generation, node roles, tools, research, hardware, statuses, rewards, and career policies. Runtime code supplies reusable operations; these assets select and compose them.
 
 ## Edit or add content

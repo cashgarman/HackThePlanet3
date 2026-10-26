@@ -65,4 +65,6 @@ The **Ghost Frequency** graphics style uses mint phosphor, bracketed instrument 
 
 The **Hack The Planet** editor menu provides scene setup, gameplay asset validation, simulation and data-driven validation, a rendered workstation smoke test, and Windows builds. Builds reject invalid gameplay assets. See the [gameplay authoring guide](Docs/DATA_DRIVEN_GAMEPLAY.md) for asset types, composable rules, extension examples, and runtime APIs. The smoke test uses an isolated in-memory career and does not write to the player's career save.
 
+To change balance or add content, follow the [modding guide](Docs/MODDING.md): it walks through a research modifier and a custom mission with a new tool, then explains validation, builds, and save compatibility. Mods currently require the Unity source project and a rebuilt player.
+
 The [balance refinement notes](Docs/BALANCE_REFINEMENT.md) explain the tuning, measured route trade-offs, and compatibility. Validation reports and screenshots are in `Artifacts/`. Expanded persistent footholds, independent extraction endpoints, and long-running investigations remain outside this career loop. Mission approaches branch through the network; entry and delivery still use your gateway.

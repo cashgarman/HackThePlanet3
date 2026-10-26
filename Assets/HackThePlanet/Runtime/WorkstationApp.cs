@@ -275,12 +275,10 @@ namespace HackThePlanet
 
         private void BuildRail(VisualElement body)
         {
-            var rail=El(body,"rail");Text(rail,"H/P","rail-logo");
-            foreach(var item in new[]{("network","01"),("research","02"),("rig","03"),("intel","04")})
-            {var b=Btn(rail,item.Item2,()=>Navigate(item.Item1),"rail-"+item.Item1,"rail-button");b.tooltip=item.Item1.ToUpperInvariant();if(view==item.Item1)b.AddToClassList("active");}
+            var rail=El(body,"rail");
             El(rail,"flex-spacer");
-            RailIconBtn(rail,"\u2699",ShowSettings,"settings","rail-help settings-button").tooltip="Settings / Escape";
-            RailIconBtn(rail,"?",ShowHelp,"help","rail-help").tooltip="Field guide / F1";
+            RailCircleButton(rail,"\u2699",ShowSettings,"settings","rail-help settings-button").tooltip="Settings / Escape";
+            RailCircleButton(rail,"?",ShowHelp,"help","rail-help").tooltip="Field guide / F1";
         }
 
         private void Tab(VisualElement parent,string target,string label)
@@ -762,14 +760,11 @@ namespace HackThePlanet
         {
             var button=new Button(action){text=text,name=name};foreach(var c in classes.Split(' '))if(c.Length>0)button.AddToClassList(c);parent.Add(button);uiActions[name]=action;return button;
         }
-        private Button RailIconBtn(VisualElement parent,string glyph,Action action,string name,string classes)
+        private Button RailCircleButton(VisualElement parent,string glyph,Action action,string name,string classes)
         {
-            var button=new Button(action){text=string.Empty,name=name};
-            foreach(var c in classes.Split(' '))if(c.Length>0)button.AddToClassList(c);
-            var label=new Label(glyph);label.AddToClassList("rail-help-glyph");label.pickingMode=PickingMode.Ignore;
-            button.Add(label);parent.Add(button);uiActions[name]=action;return button;
+            var button=new Button(action){text="",name=name};foreach(var c in classes.Split(' '))if(c.Length>0)button.AddToClassList(c);
+            var icon=Text(button,glyph,"rail-help-glyph");icon.pickingMode=PickingMode.Ignore;parent.Add(button);uiActions[name]=action;return button;
         }
-
         // Used by the editor's in-player smoke test to exercise the actual wired UI callbacks.
         public bool ActivateVisibleControl(string name)
         {

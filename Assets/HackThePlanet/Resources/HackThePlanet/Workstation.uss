@@ -37,9 +37,8 @@ ScrollView { flex-grow: 1; min-height: 0; }
 .rail-button { width: 42px; height: 42px; margin-bottom: 15px; border-width: 1px; border-color: #23323a; -unity-text-align: middle-center; color: #647d87; font-size: 13px; }
 .rail-button.active { background-color: #1c2d24; border-color: #769948; color: #c5f56b; }
 .rail-small { font-size: 9px; -unity-text-align: middle-center; color: #738793; padding: 8px; margin-bottom: 12px; }
-.rail-help { width: 32px; height: 32px; border-width: 1px; border-color: #36494f; border-radius: 16px; align-items: center; justify-content: center; color: #8babb2; }
-.rail-help-glyph { margin: 0; padding: 0; -unity-text-align: middle-center; color: inherit; font-size: 13px; }
-.settings-button .rail-help-glyph { font-size: 15px; translate: 0.5px -1px; }
+.rail-help { width: 32px; height: 32px; padding: 0; border-width: 1px; border-color: #36494f; border-radius: 16px; flex-direction: row; align-items: center; justify-content: center; -unity-text-align: middle-center; color: #8babb2; font-size: 13px; }
+.rail-help-glyph { margin: 0; padding: 0; -unity-text-align: middle-center; color: #8babb2; }
 .desktop-content { flex-grow: 1; min-width: 0; }
 .workspace-row { flex-grow: 1; flex-direction: row; min-height: 0; }
 .left-panel { width: 258px; flex-shrink: 0; border-right-width: 1px; border-right-color: #23323a; background-color: #0d151c; }
@@ -172,7 +171,8 @@ ScrollView { flex-grow: 1; min-height: 0; }
 .modal-box { width: 730px; max-height: 92%; padding: 33px 38px; border-width: 1px; border-color: #47655d; border-top-width: 3px; border-top-color: #c5f56b; background-color: #111f26; }
 .settings-menu { width: 460px; max-width: 92%; }
 .settings-menu Button { flex-shrink: 0; font-size: 13px; }
-.settings-button { margin-bottom: 12px; color: #8babb2; }
+.settings-button { margin-bottom: 12px; }
+.settings-button .rail-help-glyph { font-size: 15px; translate: 1px 1px; }
 .guide-line { font-size: 12px; color: #a8bfc3; margin-top: 16px; }
 .modal-box .primary-button { margin-top: 22px; }
 .modal-actions { flex-direction: row; justify-content: flex-end; margin-top: 14px; flex-shrink: 0; }
