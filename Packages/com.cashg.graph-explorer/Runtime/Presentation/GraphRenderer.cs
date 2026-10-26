@@ -56,6 +56,8 @@ namespace Cashg.GraphExplorer
 		public float FlashUntil;
 		/// <summary>Gets or sets the maximum number of visible nodes.</summary>
 		public int MaximumVisible = 8000;
+		/// <summary>Scales relationship ribbon width for compact or high resolution hosts.</summary>
+		public float EdgeWidthScale = 1f;
 		/// <summary>Gets or sets progress visuals keyed by node identifier.</summary>
 		public IReadOnlyDictionary<string, GraphNodeProgressVisual> NodeProgress;
 		/// <summary>Gets or sets whether reduced motion is active.</summary>
@@ -358,7 +360,7 @@ namespace Cashg.GraphExplorer
 						width = EdgeWidth;
 					}
 
-					Ribbon(start, end, color, width * .5f, camera);
+					Ribbon(start, end, color, width * .5f * Mathf.Clamp(EdgeWidthScale, .1f, 8f), camera);
 					if (pathEdge || directHover || (hoveredEdge == null && emphasized))
 					{
 						// Add an arrowhead at the destination for emphasized directed relationships.

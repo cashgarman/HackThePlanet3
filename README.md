@@ -46,9 +46,9 @@ Windows save location: `%USERPROFILE%/AppData/LocalLow/Independent Operator/Hack
 
 Open this folder in **Unity 7000.0.0a11**. Enter Play mode in the included scene; the workstation bootstraps automatically. The dedicated scene is `Assets/HackThePlanet/Scenes/Workstation.unity`.
 
-The included Graph Explorer package supplies the discovered graph document, graph scenes, and controlled-route shortest paths. Hidden world state stays in the game simulation. The game uses a custom stable 2D UI Toolkit presentation for mission and research graphs.
+The included Graph Explorer package supplies the discovered graph document, controlled-route shortest paths, and the 3D node and edge renderer for both operations and research. Hidden world state stays in the game simulation. The workstation hosts the 3D views in its UI Toolkit layout and keeps its own inspectors and action controls.
 
-Source files are under `Assets/HackThePlanet/Runtime/`. `GameContent.cs` contains contracts, networks, and technologies; `GameSimulation.cs` owns tools, trace, progression, and persistence; `WorkstationApp.cs` and `NetworkCanvas.cs` present the workstation. Styles are under `Assets/HackThePlanet/Resources/HackThePlanet/`.
+Source files are under `Assets/HackThePlanet/Runtime/`. `GameContent.cs` contains contracts, networks, and technologies; `GameSimulation.cs` owns tools, trace, progression, and persistence; `WorkstationApp.cs` and `GraphViewport.cs` present the workstation. Styles are under `Assets/HackThePlanet/Resources/HackThePlanet/`.
 
 The **Ghost Frequency** graphics style uses mint phosphor, bracketed instrument cards, circuit routes with packet flow, a procedural signal field, and subtle phosphor glass. Display effects can be reduced to a static treatment or disabled from the left rail. The [art-direction guide](Docs/GHOST_FREQUENCY_ART_DIRECTION.md) covers the palette, shader stack, motion settings, and rendering budget.
 

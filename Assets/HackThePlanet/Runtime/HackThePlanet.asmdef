@@ -1,6 +1,6 @@
 {
   "name": "HackThePlanet",
   "rootNamespace": "HackThePlanet",
-  "references": ["Cashg.GraphExplorer", "Unity.InputSystem"],
+  "references": ["Cashg.GraphExplorer", "Cashg.GraphExplorer.Presentation", "Unity.InputSystem"],
   "autoReferenced": true
 }

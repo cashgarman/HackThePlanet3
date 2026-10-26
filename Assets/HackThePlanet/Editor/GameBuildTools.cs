@@ -116,7 +116,10 @@ namespace HackThePlanet.Editor
                         previousEffects=app.Visuals.Mode;app.UseTestCareer(new Career());app.Visuals.SetMode(SignalEffects.Full);smokePhase++;return;
                     case 2:
                         Check(app.Root.Q<UnityEngine.UIElements.Button>("connect")!=null,"Connect control exists.");
-                        Check(app.Root.Query<Button>(className:"net-node").ToList().All(n=>n.worldBound.width>=60),"Graph nodes remain legible at the current render size.");
+                        var preview=app.Root.Q<GraphViewport>();
+                        Check(preview!=null&&preview.NodeCount==25&&preview.VisibleNodes==25&&preview.VisibleEdges>0,
+                            "GraphExplorer renders all preview systems and their links in 3D.");
+                        Check(app.Root.Q<Button>("node-home")!=null,"Projected system labels remain selectable.");
                         ValidateSignalRendering(app);
                         ScreenCapture.CaptureScreenshot(Path.Combine(Project,"Artifacts/01-contract-exchange.png"));smokePhase++;return;
                     case 3:
@@ -128,6 +131,9 @@ namespace HackThePlanet.Editor
                         Check(app.ActivateVisibleControl("action-hack"),"Hack button is wired.");GameValidation.FinishTask(app.State);
                         GameValidation.Hack(app.State,"n6");GameValidation.Hack(app.State,"n10");app.SelectNode("n14");smokePhase++;return;
                     case 6:
+                        var operationGraph=app.Root.Q<GraphViewport>();
+                        Check(operationGraph!=null&&operationGraph.NodeCount>2&&operationGraph.NodeCount<25&&operationGraph.VisibleEdges>0,
+                            "Live GraphExplorer view shows discovered systems and connections only.");
                         ScreenCapture.CaptureScreenshot(Path.Combine(Project,"Artifacts/02-live-operation.png"));
                         GameValidation.Hack(app.State,"n14");GameValidation.Hack(app.State,"n18");GameValidation.Hack(app.State,"n22");app.SelectNode("n22");smokePhase++;return;
                     case 7:
@@ -139,6 +145,8 @@ namespace HackThePlanet.Editor
                     case 10:
                         Check(app.ActivateVisibleControl("report-research"),"Research result link works.");smokePhase++;return;
                     case 11:
+                        Check(app.Root.Q<GraphViewport>()?.NodeCount==GameContent.Tech.Length&&app.Root.Q<Button>("tech-wide")!=null,
+                            "GraphExplorer renders selectable research technologies.");
                         Check(app.ActivateVisibleControl("unlock"),"Research purchase works.");Check(app.State.Has("wide"),"Tech purchased using earned XP.");
                         // Preview a developed build for the research screenshot without touching the real career.
                         app.State.Career.xp=360;app.State.BuyTech("quiet");app.State.BuyTech("efficient");app.SelectTech("passive");smokePhase++;return;

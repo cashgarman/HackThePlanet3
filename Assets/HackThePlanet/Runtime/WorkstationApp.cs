@@ -18,11 +18,11 @@ namespace HackThePlanet
         private VisualElement root, overlay;
         private Label traceNumber, runningLabel, traceState, timeLabel;
         private VisualElement traceFill, taskFill;
-        private NetworkCanvas canvas;
+        private GraphViewport canvas;
         private Contract selectedJob;
         private string selectedNode="n22", selectedTech="wide", view="network", modal;
-        private readonly CanvasCamera networkCamera=new CanvasCamera(), researchCamera=new CanvasCamera();
         private readonly Dictionary<string, Action> uiActions=new Dictionary<string, Action>();
+        private readonly GraphCameraState networkCamera=new GraphCameraState(), researchCamera=new GraphCameraState();
         private bool dirty=true, muted;
         private float speed=1, saveTimer;
         private AudioSource audioSource;
@@ -84,7 +84,7 @@ namespace HackThePlanet
             {lastShownReport=State.LastReport;modal="report";dirty=true;Beep(State.LastReport.success);}
             if(dirty)Build();
             UpdateMeters();
-            canvas?.UpdateSignal(State,Visuals.Mode);
+            canvas?.Tick(State,Visuals.Mode);
             Visuals.Tick(State,view=="research");
             root.EnableInClassList("trace-alert",State.Active&&State.Op.trace>=60);
             saveTimer+=Time.unscaledDeltaTime;
@@ -126,11 +126,11 @@ namespace HackThePlanet
         }
         private void OnApplicationQuit(){if(State!=null&&!Testing)CareerStorage.Save(State.Career);}
         private void OnApplicationPause(bool paused){if(paused&&State!=null&&!Testing)CareerStorage.Save(State.Career);}
-        private void OnDestroy(){Visuals?.Dispose();if(Instance==this)Instance=null;}
+        private void OnDestroy(){canvas?.Dispose();Visuals?.Dispose();if(Instance==this)Instance=null;}
 
         private void Build()
         {
-            dirty=false;uiActions.Clear();root.Clear();traceFill=null;taskFill=null;traceNumber=null;runningLabel=null;traceState=null;timeLabel=null;canvas=null;
+            dirty=false;canvas?.Dispose();uiActions.Clear();root.Clear();traceFill=null;taskFill=null;traceNumber=null;runningLabel=null;traceState=null;timeLabel=null;canvas=null;
             BuildHeader();
             var body=El(root,"desktop-body");
             BuildRail(body);
@@ -192,7 +192,7 @@ namespace HackThePlanet
                 foreach(var job in GameContent.Contracts(State.Career))
                 {
                     bool done=State.Career.completed.Contains(job.id),locked=State.Career.completed.Count<job.requiredWins;
-                    var card=Btn(list,"",()=>{selectedJob=job;selectedNode="n22";networkCamera.pan=Vector2.zero;networkCamera.zoom=1;dirty=true;Beep();},"contract-"+job.id,"contract-card");
+                    var card=Btn(list,"",()=>{canvas?.Dispose();selectedJob=job;selectedNode="n22";networkCamera.Reset();dirty=true;Beep();},"contract-"+job.id,"contract-card");
                     if(selectedJob.id==job.id)card.AddToClassList("active");if(locked)card.AddToClassList("locked");
                     var meta=El(card,"row-between");Text(meta,done?"DELIVERED":locked?"ENCRYPTED":"AVAILABLE","contract-state"+(done?" lime":locked?" muted":" cyan"));Text(meta,job.recurring?"R":"0"+(Array.IndexOf(GameContent.Story,job)+1),"micro muted");
                     Text(card,job.title,"contract-title");Text(card,job.company,"micro muted");
@@ -226,7 +226,7 @@ namespace HackThePlanet
             var nodes=State.Active?State.Op.nodes:GameContent.Network(selectedJob,State.Career);
             var links=State.Active?State.Op.links:GameContent.Links(selectedJob.seed);
             var route=State.Active?State.Route(selectedNode,true):null;
-            canvas=new NetworkCanvas(networkCamera,nodes,links,selectedNode,!State.Active,SelectNode,route?.NodeIds);mid.Add(canvas);Visuals.AttachField(canvas);
+            canvas=new GraphViewport(nodes,links,selectedNode,!State.Active,SelectNode,route,networkCamera);mid.Add(canvas);Visuals.AttachField(canvas);
             var mapFooter=El(mid,"map-footer");
             var legend=El(mapFooter,"legend");foreach(var kind in new[]{NodeKind.Workstation,NodeKind.Relay,NodeKind.Firewall,NodeKind.Scanner,NodeKind.Database,NodeKind.SecurityHub})
             {var key=El(legend,"legend-key");var dot=El(key,"legend-dot");dot.style.backgroundColor=Palette.Kind(kind);Text(key,kind==NodeKind.SecurityHub?"Hub":kind.ToString(),"micro muted");}
@@ -256,7 +256,7 @@ namespace HackThePlanet
 
         public void StartSelected()
         {
-            if(State.Start(selectedJob)){selectedNode="n2";view="network";networkCamera.zoom=1;networkCamera.pan=Vector2.zero;Beep();dirty=true;}
+            if(State.Start(selectedJob)){canvas?.Dispose();selectedNode="n2";view="network";networkCamera.Reset();Beep();dirty=true;}
         }
 
         private void BuildTarget(VisualElement right,NetNode node)
@@ -341,7 +341,7 @@ namespace HackThePlanet
             var refundArea=El(leftShell,"loadout");
             var refund=Btn(refundArea,"REFUND ALL RESEARCH",()=>{State.RefundResearch();Beep();},"refund","secondary-button");refund.SetEnabled(!State.Active&&State.Career.unlocked.Count>1);Text(refundArea,"Free between contracts. Every XP is returned.","micro muted");
             var mid=El(workspace,"network-panel");var mh=El(mid,"map-heading");var titles=El(mh,"map-title-block");Text(titles,"CONNECTED KNOWLEDGE","eyebrow cyan");Text(titles,"RESEARCH NETWORK","map-title");Text(mh,(State.Career.unlocked.Count-1)+" / "+(GameContent.Tech.Length-1)+" TECHNOLOGIES UNLOCKED","micro muted");
-            canvas=new NetworkCanvas(researchCamera,State.Career,selectedTech,SelectTech);mid.Add(canvas);Visuals.AttachField(canvas);
+            canvas=new GraphViewport(State.Career,selectedTech,SelectTech,researchCamera);mid.Add(canvas);Visuals.AttachField(canvas);
             var footer=El(mid,"map-footer");Text(footer,"SOLID / UNLOCKED    ·    DIM / PREREQUISITE REQUIRED    ·    SELECT A NODE TO INSPECT","micro muted");
             var controls=El(footer,"map-controls");Btn(controls,"−",()=>canvas.Zoom(.85f),"zoom-out","map-button");Btn(controls,"+",()=>canvas.Zoom(1.15f),"zoom-in","map-button");Btn(controls,"FIT",()=>canvas.ResetView(),"fit","map-button");
             var right=El(workspace,"right-panel");var info=El(right,"tech-inspector");var tech=GameContent.FindTech(selectedTech)??GameContent.Tech[0];
@@ -431,7 +431,7 @@ namespace HackThePlanet
             State=new GameSimulation(new Career());
             State.Changed+=()=>{dirty=true;if(!Testing)CareerStorage.Save(State.Career);};
             selectedJob=GameContent.Story[0];selectedNode="n22";selectedTech="wide";view="network";
-            networkCamera.pan=researchCamera.pan=Vector2.zero;networkCamera.zoom=researchCamera.zoom=1;
+            canvas?.Dispose();networkCamera.Reset();researchCamera.Reset();
             modal=modalBeforeSettings=settingsError=null;lastShownReport=reportToShow=null;
             speed=1;saveTimer=0;traceBand=0;dirty=true;
         }
