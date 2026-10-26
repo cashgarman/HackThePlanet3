@@ -1,0 +1,55 @@
+{
+  "CelShading": true,
+  "LightBands": 3,
+  "ShadowBrightness": 0.38,
+  "BandSoftness": 0.015,
+  "LightDirection": {
+    "x": -0.4,
+    "y": 0.8,
+    "z": -0.5
+  },
+  "SurfaceEmission": 0.08,
+  "Outlines": true,
+  "OutlineColor": {
+    "r": 0.012,
+    "g": 0.018,
+    "b": 0.028,
+    "a": 1
+  },
+  "OutlinePixels": 1.25,
+  "OutlineOpacity": 0.95,
+  "CreaseAngle": 48,
+  "DepthThreshold": 0.025,
+  "Bloom": true,
+  "BloomIntensity": 0.16,
+  "BloomRadius": 3.5,
+  "SelectionGlow": true,
+  "SelectionColor": {
+    "r": 0.4,
+    "g": 0.85,
+    "b": 1,
+    "a": 1
+  },
+  "SelectionGlowIntensity": 1.7,
+  "SelectionRimIntensity": 0.65,
+  "SelectionGlowRadius": 18,
+  "PulseHz": 0.8,
+  "PulseAmount": 0.22,
+  "ShowSelectionRing": false,
+  "ShowNodeProgress": true,
+  "ProgressColor": {
+    "r": 0.25,
+    "g": 0.95,
+    "b": 0.48,
+    "a": 1
+  },
+  "ProgressTrackColor": {
+    "r": 0.16,
+    "g": 0.23,
+    "b": 0.2,
+    "a": 1
+  },
+  "ProgressWidth": 0.07,
+  "ProgressRadiusScale": 2.45,
+  "CompletionBadgeSize": 0.4
+}

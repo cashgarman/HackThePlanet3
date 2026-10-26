@@ -1,0 +1,35 @@
+{
+  "id": "efficient",
+  "title": "Efficient hack",
+  "description": "All standard hacks finish {modifier:0:reduction}% faster. Hardware speed stacks with this benefit.",
+  "branch": "INTRUSION",
+  "cost": 45,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 680,
+    "y": 155
+  },
+  "parents": [
+    "base"
+  ],
+  "grants": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "duration",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "ActionCondition",
+        "action": "hack",
+        "tag": ""
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.8
+      }
+    }
+  ],
+  "triggers": []
+}

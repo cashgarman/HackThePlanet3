@@ -1,0 +1,103 @@
+{
+  "id": "scan",
+  "title": "Scan connections",
+  "description": "Reveal nearby routes and prepare this target: scanned systems take 15% less hack time and 20% less hack trace.",
+  "tags": [
+    "scan"
+  ],
+  "shortcut": "Alpha1",
+  "shortcutLabel": "1",
+  "legacyGroup": "scan",
+  "presentationPriority": 30,
+  "operatorTarget": false,
+  "queueable": true,
+  "initiallyAvailable": true,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "NotCondition",
+    "condition": {
+      "type": "NodeStateCondition",
+      "state": "Scanned"
+    }
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Scan to discover this system."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Reachable"
+      },
+      "message": "Control a connected neighbor first."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Scanned"
+        }
+      },
+      "message": "Already scanned. Its surrounding connections are known."
+    }
+  ],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    }
+  ],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 1.6
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 0.6
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "SetStateEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "state": "Scanned",
+      "value": true
+    },
+    {
+      "type": "RevealEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "radius": {
+        "type": "StatNumber",
+        "stat": "scanRadius"
+      }
+    },
+    {
+      "type": "LogEffect",
+      "message": "SCAN COMPLETE // New routes mapped around {target}."
+    }
+  ]
+}

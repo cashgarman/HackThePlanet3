@@ -1,0 +1,164 @@
+{
+  "id": "freelance-1",
+  "title": "Friendly Correction",
+  "description": "A verified exchange contract generated from today\u0027s network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
+  "company": "company-1",
+  "network": "corporate-network",
+  "client": "EXCHANGE // verified escrow",
+  "tag": "FREELANCE / REPEATABLE",
+  "objective": "Correct Research vault AND Backup mirror.",
+  "condition": "Below 75% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "aftermath": "A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.",
+  "displayKind": "Alter",
+  "recurring": true,
+  "requiredWins": 3,
+  "quietLimit": 75,
+  "credits": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 600
+    },
+    "right": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Day",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 35
+      }
+    }
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 60
+  },
+  "difficulty": {
+    "type": "BinaryNumber",
+    "operation": "Minimum",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 3
+    },
+    "right": {
+      "type": "BinaryNumber",
+      "operation": "Maximum",
+      "left": {
+        "type": "ConstantNumber",
+        "value": 1
+      },
+      "right": {
+        "type": "BinaryNumber",
+        "operation": "Add",
+        "left": {
+          "type": "ConstantNumber",
+          "value": 1
+        },
+        "right": {
+          "type": "BinaryNumber",
+          "operation": "Floor",
+          "left": {
+            "type": "BinaryNumber",
+            "operation": "Divide",
+            "left": {
+              "type": "InputNumber",
+              "input": "Day",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 5
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 0
+          }
+        }
+      }
+    }
+  },
+  "seed": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Day",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 71
+      }
+    },
+    "right": {
+      "type": "ConstantNumber",
+      "value": 37
+    }
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "",
+      "actionLabel": "Correct record",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": []
+    },
+    {
+      "nodeId": "n20",
+      "label": "",
+      "actionLabel": "Correct record",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": []
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "freelance/1/0",
+      "title": "Maintenance testimony",
+      "company": "MORROW FINANCIAL",
+      "contract": "Friendly Correction",
+      "text": "Morrow\u0027s reconciliation team keeps a private tally of corrected accounts. Each entry is a household that no longer has to call the help line."
+    },
+    {
+      "id": "freelance/1/1",
+      "title": "An unofficial record",
+      "company": "MORROW FINANCIAL",
+      "contract": "Friendly Correction",
+      "text": "A branch manager quietly waived fees during the outage. Central accounting demanded an explanation. The response was a photograph of the flooded street."
+    },
+    {
+      "id": "freelance/1/2",
+      "title": "What the archive kept",
+      "company": "MORROW FINANCIAL",
+      "contract": "Friendly Correction",
+      "text": "An old Morrow training guide says a ledger is a promise to remember accurately. Someone has highlighted that sentence on every surviving copy."
+    }
+  ]
+}

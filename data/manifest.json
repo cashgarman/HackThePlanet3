@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "key": "1c10f3b69e4448e1bcfbca1868f1effe",
+      "category": "Game",
+      "file": "game/game.json",
+      "type": "GameDefinition"
+    },
+    {
+      "key": "a6d80eb6bd7447bbacabdeea1304b4e3",
+      "category": "Career",
+      "file": "career/career.json",
+      "type": "CareerDefinition"
+    },
+    {
+      "key": "f5d84cbadf6d457392d571d04ee6b9a2",
+      "category": "Rewards",
+      "file": "rewards/delivery.json",
+      "type": "RewardDefinition"
+    },
+    {
+      "key": "27cd2ba455b9402289fe1518262b1a82",
+      "category": "Companies",
+      "file": "companies/company-0.json",
+      "type": "CompanyDefinition"
+    },
+    {
+      "key": "fbb32beecebd40cbad7562e4c84244e5",
+      "category": "Companies",
+      "file": "companies/company-1.json",
+      "type": "CompanyDefinition"
+    },
+    {
+      "key": "43d127df2f114550adfa46656d413258",
+      "category": "Companies",
+      "file": "companies/company-2.json",
+      "type": "CompanyDefinition"
+    },
+    {
+      "key": "c061f0257dbc447a8fb8afa41869fa9f",
+      "category": "Contracts",
+      "file": "contracts/quiet-copy.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "0a183564d09e4256ae5504b6a5dfd720",
+      "category": "Contracts",
+      "file": "contracts/paper-trail.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "7a1f93f718ff4a288c3ee192c9e7946f",
+      "category": "Contracts",
+      "file": "contracts/ghost-wire.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "7d05dceb0af94cb99cdf93fe95d306f9",
+      "category": "Contracts",
+      "file": "contracts/glasshouse.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "9835a7e5244540e888412012a397ed52",
+      "category": "Contracts",
+      "file": "contracts/dead-drop.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "c157a4b9fbad4b95afb1696635cff0b0",
+      "category": "Contracts",
+      "file": "contracts/last-light.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "cbfac0610e3045e6ba9cac9fb7a615e2",
+      "category": "Contracts",
+      "file": "contracts/freelance-0.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "0288a435130440358509ee40594ee0a3",
+      "category": "Contracts",
+      "file": "contracts/freelance-1.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "20bba83af25c4f9c85faa9470f128c4b",
+      "category": "Contracts",
+      "file": "contracts/freelance-2.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "7037a2949808452585fa79d9304479da",
+      "category": "Technologies",
+      "file": "technologies/base.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "d13354bb2b97403c957965ba2a182423",
+      "category": "Technologies",
+      "file": "technologies/wide.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "5c46ece93fe346a4b79f896f7ca18e7b",
+      "category": "Technologies",
+      "file": "technologies/blueprint.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "d18de6e8f0fe4a2e824ce05e1e4de4a9",
+      "category": "Technologies",
+      "file": "technologies/signal.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "ee5114c51aa148408e0a2ef95bd1d2a2",
+      "category": "Technologies",
+      "file": "technologies/efficient.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "e54100ba8d994cd5ab4a260afbb26096",
+      "category": "Technologies",
+      "file": "technologies/chain.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "966d619cd99f45e084917ab0375e12d6",
+      "category": "Technologies",
+      "file": "technologies/selective.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "be50e6ce94dc4f17a9585972717a06ee",
+      "category": "Technologies",
+      "file": "technologies/quiet.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "a0f13f8d23a14ef8880368ed269bd676",
+      "category": "Technologies",
+      "file": "technologies/ghost.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "fd5d828f77504ffe869c19a4f25c3bc4",
+      "category": "Technologies",
+      "file": "technologies/backdoor.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "59bbaa76b64c4ca8a586457768b6bda5",
+      "category": "Technologies",
+      "file": "technologies/disrupt.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "34be64622d624b63afeb3b442f558177",
+      "category": "Technologies",
+      "file": "technologies/blackout.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "6027865109f7461a86994e12a0d123d7",
+      "category": "Technologies",
+      "file": "technologies/decoy.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "6fa6ef88e07e44ec90c2c10a16fe7948",
+      "category": "Technologies",
+      "file": "technologies/passive.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "f1f54cc7b1934d0085f12e4a4bcc88d4",
+      "category": "Technologies",
+      "file": "technologies/weakpoint.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "67daf3009f5346679e8f8a63d444938e",
+      "category": "Technologies",
+      "file": "technologies/cascade.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "f15f1585a2f8448192e8373ee5e764ec",
+      "category": "Technologies",
+      "file": "technologies/bridge.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "87649f3c3bd6435ab47e25965c72176c",
+      "category": "Technologies",
+      "file": "technologies/buffer.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "1f7720cb56b847e2aeb98cb78cecf9be",
+      "category": "Technologies",
+      "file": "technologies/waypoints-1.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "365f531d95a741f98c484b9cb0dddbc2",
+      "category": "Technologies",
+      "file": "technologies/waypoints-2.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "2f5228fa1de14d0bb91247205a9dd5fe",
+      "category": "Technologies",
+      "file": "technologies/waypoints-3.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "33367345f1584dedaee9dffaad11f956",
+      "category": "Technologies",
+      "file": "technologies/waypoints-4.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "b3fb60fc52a84ab59396a32b5e15d51a",
+      "category": "Actions",
+      "file": "actions/scan.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "f46d04b63a794390af9449002bbb4e22",
+      "category": "Actions",
+      "file": "actions/hack.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "f7c7f2e2e8ca4e0990ebe7b248715172",
+      "category": "Actions",
+      "file": "actions/download.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "af9d78eb0d1a44079b099ed7f6b0c693",
+      "category": "Actions",
+      "file": "actions/disrupt.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "d4e29c7fcbf747889ea63f0f99a5b09d",
+      "category": "Actions",
+      "file": "actions/blackout.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "4b35452869414310a9d93ffb40fac35d",
+      "category": "Actions",
+      "file": "actions/bridge.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "620fb53aa9c64d3e861a97cb099d7d41",
+      "category": "Actions",
+      "file": "actions/backdoor.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "928e6772cd474d7fa47ffb7deb14c38a",
+      "category": "Actions",
+      "file": "actions/decoy.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "4fe3803ef1e4422a8fbaf4b9c8ef9dc7",
+      "category": "Node Types",
+      "file": "node-types/gateway.json",
+      "type": "NodeTypeDefinition"
+    },
+    {
+      "key": "5ad61fea81b54b849e56fc2a0e1f0075",
+      "category": "Node Types",
+      "file": "node-types/workstation.json",
+      "type": "NodeTypeDefinition"
+    },
+    {
+      "key": "544c392138ca44ec886c99be3d25055b",
+      "category": "Node Types",
+      "file": "node-types/relay.json",
+      "type": "NodeTypeDefinition"
+    },
+    {
+      "key": "127cfaa82fb6478bb10f95d7fb68c0c0",
+      "category": "Node Types",
+      "file": "node-types/firewall.json",
+      "type": "NodeTypeDefinition"
+    },
+    {
+      "key": "d0ace192490544e99e15c2fb870b5b54",
+      "category": "Node Types",
+      "file": "node-types/scanner.json",
+      "type": "NodeTypeDefinition"
+    },
+    {
+      "key": "6293cb59fc3a4396b73614d6aaf0d181",
+      "category": "Node Types",
+      "file": "node-types/database.json",
+      "type": "NodeTypeDefinition"
+    },
+    {
+      "key": "cd2a65ea525b47c3bbf9952086dbbaf0",
+      "category": "Node Types",
+      "file": "node-types/securityhub.json",
+      "type": "NodeTypeDefinition"
+    },
+    {
+      "key": "3d587f2d1cec4dd6a0f68954ab244009",
+      "category": "Networks",
+      "file": "networks/corporate-network.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "829ba12fc05d44c8916a99371d837bc4",
+      "category": "Hardware",
+      "file": "hardware/cpu.json",
+      "type": "HardwareDefinition"
+    },
+    {
+      "key": "6daefb8f2ffd4aed80c37ae92eb49e19",
+      "category": "Hardware",
+      "file": "hardware/bandwidth.json",
+      "type": "HardwareDefinition"
+    },
+    {
+      "key": "5b794a46559043578ca43583bd65f786",
+      "category": "Hardware",
+      "file": "hardware/memory.json",
+      "type": "HardwareDefinition"
+    },
+    {
+      "key": "07f1ab73a29d4edf99b5f1b5167dbc6b",
+      "category": "Statuses",
+      "file": "statuses/suppression.json",
+      "type": "StatusDefinition"
+    },
+    {
+      "key": "75ad4ce4991f4fbfbfe2bfe6e091ac1e",
+      "category": "Statuses",
+      "file": "statuses/trace-protection.json",
+      "type": "StatusDefinition"
+    },
+    {
+      "key": "efa5279ca8e44cd8ad7a8bc81e6cadc2",
+      "category": "Text Palette",
+      "file": "text-palette/text-palette.json",
+      "type": "GameplayTextPalette"
+    },
+    {
+      "key": "81132f52cf1f49f69ac076a50f8e1fd7",
+      "category": "Graph Visuals",
+      "file": "graph-visuals/research.json",
+      "type": "GraphVisualSettings"
+    },
+    {
+      "key": "89fff0854135440a9801a486c1c065bb",
+      "category": "Network Visuals",
+      "file": "network-visuals/network.json",
+      "type": "GraphVisualSettings"
+    },
+    {
+      "key": "2f7290ecd3134ea881b84d0fa1ac5adf",
+      "category": "Graph Labels",
+      "file": "graph-labels/labels.json",
+      "type": "GraphNodeLabelSettings"
+    }
+  ]
+}

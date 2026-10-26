@@ -1,0 +1,65 @@
+{
+  "id": "bandwidth",
+  "title": "Fiber uplink",
+  "description": "Improves performance for every operation.",
+  "category": "BANDWIDTH",
+  "statLabel": "TRANSFER SPEED",
+  "displayedStat": "transferSpeed",
+  "requirements": [],
+  "tiers": [
+    {
+      "price": 350,
+      "modifiers": [
+        {
+          "id": "",
+          "stat": "transferSpeed",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "price": 800,
+      "modifiers": [
+        {
+          "id": "",
+          "stat": "transferSpeed",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "price": 1450,
+      "modifiers": [
+        {
+          "id": "",
+          "stat": "transferSpeed",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 0.3
+          }
+        }
+      ]
+    }
+  ]
+}

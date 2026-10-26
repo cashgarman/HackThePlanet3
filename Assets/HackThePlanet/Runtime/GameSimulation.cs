@@ -22,6 +22,8 @@ namespace HackThePlanet
         public int researchSpent = -1;
         public List<HardwareLevel> hardware=new List<HardwareLevel>();
         public List<string> completed=new List<string>(), unlocked=new List<string>(), equipped=new List<string>(), news=new List<string>();
+        // Technologies the player has discovered on the research graph. Persists across refunds.
+        public List<string> researchRevealed=new List<string>();
         public List<OperationReport> reports=new List<OperationReport>();
         public List<LoreFragment> lore=new List<LoreFragment>();
         public List<NetworkWaypoint> waypoints=new List<NetworkWaypoint>();
@@ -69,6 +71,9 @@ namespace HackThePlanet
         public bool success;
         public float trace;
         public int credits,xp,day,bonusFiles;
+        public int bonusArchivesTotal;
+        public float quietLimit;
+        public bool quietBonusEarned;
         public List<string> log=new List<string>();
     }
     public sealed class ToolPreview
@@ -137,13 +142,14 @@ namespace HackThePlanet
         {
             Career.completed??=new List<string>();Career.unlocked??=new List<string>();Career.equipped??=new List<string>();Career.news??=new List<string>();
             Career.reports??=new List<OperationReport>();Career.lore??=new List<LoreFragment>();Career.hardware??=new List<HardwareLevel>();
-            Career.waypoints??=new List<NetworkWaypoint>();
+            Career.waypoints??=new List<NetworkWaypoint>();Career.researchRevealed??=new List<string>();
             if(!Career.initialized)
             {
                 var defaults=Catalog.Data.career;if(Career.credits<0)Career.credits=defaults.credits;if(Career.xp==0)Career.xp=defaults.xp;if(Career.day==1)Career.day=defaults.day;
                 foreach(var tech in defaults.initialTechnologies)if(!Has(tech.id))Career.unlocked.Add(tech.id);
                 if(Career.news.Count==0)Career.news.Add(defaults.welcome);Career.initialized=true;
             }
+            EnsureResearchReveal();
             if(Career.researchSpent<0)
             {
                 var purchased=Career.unlocked.Except(Catalog.Data.career.initialTechnologies.Select(t=>t.id)).ToArray();
@@ -400,10 +406,13 @@ namespace HackThePlanet
             if(!Active)return null;bool success=!caught&&ObjectiveComplete;
             var outcome=caught?OperationOutcome.Caught:success?OperationOutcome.Delivered:OperationOutcome.Aborted;
             var policy=Catalog.Data.career.outcomes.Single(p=>p.outcome==outcome);
-            var report=new OperationReport{title=Job.title,company=Job.company,trace=Op.trace,success=success,day=Career.day,verdict=policy.verdict,narrative=Catalog.Format(policy.narrative,Context()),log=new List<string>(Op.log),bonusFiles=Op.nodes.Count(n=>n.bonus&&n.collected)};
+            int bonusTotal=Op.nodes.Count(n=>n.bonus);
+            int bonusCollected=Op.nodes.Count(n=>n.bonus&&n.collected);
+            var report=new OperationReport{title=Job.title,company=Job.company,trace=Op.trace,success=success,day=Career.day,verdict=policy.verdict,narrative=Catalog.Format(policy.narrative,Context()),log=new List<string>(Op.log),bonusFiles=bonusCollected,bonusArchivesTotal=bonusTotal,quietLimit=Job.quietLimit};
             if(policy.bankRewards)
             {
                 var c=Context();foreach(var reward in Catalog.Data.rewards.rules)if(reward.when.Test(c)){report.credits+=Mathf.RoundToInt(reward.credits.Evaluate(c));report.xp+=Mathf.RoundToInt(reward.xp.Evaluate(c));}
+                report.quietBonusEarned=report.trace<Job.quietLimit;
                 Career.credits+=report.credits;Career.xp+=report.xp;Career.totalEarnedXp+=report.xp;
             }
             if(policy.bankLore)foreach(var n in Op.nodes.Where(n=>n.bonus&&n.collected)){var fragment=LoreContent.Find(Job,n.loreId);if(fragment!=null&&!Career.lore.Any(f=>f.id==fragment.id))Career.lore.Add(fragment);}
@@ -427,13 +436,30 @@ namespace HackThePlanet
         public void DebugUnlockAllTech()
         {
             foreach(var tech in Catalog.Technologies)if(!Has(tech.id))Career.unlocked.Add(tech.id);
+            EnsureResearchReveal();
             Touch();
+        }
+        public bool ResearchVisible(string id)=>!string.IsNullOrEmpty(id)&&Career.researchRevealed.Contains(id);
+        // Reveals a technology and its direct children. Only these nodes enter the research graph.
+        public void RevealResearch(string id)
+        {
+            if(Catalog.Technology(id)==null)return;
+            if(!Career.researchRevealed.Contains(id))Career.researchRevealed.Add(id);
+            foreach(var child in Catalog.Technologies.Where(t=>t.parents.Contains(id)).Select(t=>t.id))
+                if(!Career.researchRevealed.Contains(child))Career.researchRevealed.Add(child);
+        }
+        // Idempotent: migrates older saves and keeps the reveal set consistent with unlocked research.
+        public void EnsureResearchReveal()
+        {
+            Career.researchRevealed??=new List<string>();
+            Career.researchRevealed.RemoveAll(id=>Catalog.Technology(id)==null);
+            foreach(var id in Career.unlocked.ToList())RevealResearch(id);
         }
         public bool BuyTech(string id)
         {
             var tech=Catalog.Technology(id);
             if((Active&&!Catalog.Data.career.researchDuringOperations)||tech==null||Has(id)||Career.xp<tech.cost||!tech.parents.All(t=>Has(t.id)))return false;
-            Career.xp-=tech.cost;Career.researchSpent+=tech.cost;Career.unlocked.Add(id);if(tech.special&&Career.equipped.Count<Slots)Career.equipped.Add(id);Touch();return true;
+            Career.xp-=tech.cost;Career.researchSpent+=tech.cost;Career.unlocked.Add(id);RevealResearch(id);if(tech.special&&Career.equipped.Count<Slots)Career.equipped.Add(id);Touch();return true;
         }
         public bool ToggleEquip(string id)
         {

@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace HackThePlanet
 {
+    [Unity.Scripting.LifecycleManagement.NoAutoStaticsCleanup]
     public static class GameplayRichText
     {
         private static GameplayTextPalette palette;
@@ -68,14 +69,15 @@ namespace HackThePlanet
                 {
                     int found = text.IndexOf(rule.Phrase, index, StringComparison.OrdinalIgnoreCase);
                     if (found < 0) break;
-                    if (Overlaps(covered, found, rule.Phrase.Length))
+                    int matchLength = MatchLength(text, found, rule.Phrase.Length);
+                    if (Overlaps(covered, found, matchLength))
                     {
                         index = found + 1;
                         continue;
                     }
-                    Mark(covered, found, rule.Phrase.Length);
-                    hits.Add((found, rule.Phrase.Length, text.Substring(found, rule.Phrase.Length), rule));
-                    index = found + rule.Phrase.Length;
+                    Mark(covered, found, matchLength);
+                    hits.Add((found, matchLength, text.Substring(found, matchLength), rule));
+                    index = found + matchLength;
                 }
             }
 
@@ -99,19 +101,13 @@ namespace HackThePlanet
 
         private static GameplayTextPalette LoadPalette()
         {
-            var loaded = Resources.Load<GameplayTextPalette>("HackThePlanet/GameplayTextPalette");
-            if (loaded != null) return loaded;
-            var fallback = ScriptableObject.CreateInstance<GameplayTextPalette>();
-            fallback.terms = GameplayTextPalette.DefaultTerms();
-            fallback.hideFlags = HideFlags.HideAndDontSave;
-            return fallback;
+            return GameData.Current.Get<GameplayTextPalette>("Text Palette");
         }
 
         private static TermRule[] BuildRules(GameplayTextPalette source)
         {
             var configured = source?.terms;
-            if (configured == null || configured.Length == 0)
-                configured = GameplayTextPalette.DefaultTerms();
+            configured ??= Array.Empty<GameplayTextPalette.TermStyle>();
             var list = new List<TermRule>(configured.Length);
             foreach (var term in configured)
                 if (!string.IsNullOrWhiteSpace(term?.phrase))
@@ -143,6 +139,48 @@ namespace HackThePlanet
             return rule.Bold
                 ? "<color=#" + hex + "><b>" + value + "</b></color>"
                 : "<color=#" + hex + ">" + value + "</color>";
+        }
+
+        private static int MatchLength(string text, int start, int phraseLength)
+        {
+            if (phraseLength <= 0) return phraseLength;
+            return ExtendForPlural(text, start, phraseLength);
+        }
+
+        private static int ExtendForPlural(string text, int start, int length)
+        {
+            int end = start + length;
+            if (end >= text.Length) return length;
+
+            char last = text[start + length - 1];
+            if (!char.IsLetter(last) || last is 's' or 'S') return length;
+
+            if (EndsWithSibilant(text, start, length))
+            {
+                if (end + 1 < text.Length && text[end] is 's' or 'S' && text[end + 1] is 'e' or 'E')
+                {
+                    int extended = length + 2;
+                    return end + 2 >= text.Length || !char.IsLetter(text[end + 2]) ? extended : length;
+                }
+                return length;
+            }
+
+            if (text[end] is not ('s' or 'S')) return length;
+            int withS = length + 1;
+            return end + 1 >= text.Length || !char.IsLetter(text[end + 1]) ? withS : length;
+        }
+
+        private static bool EndsWithSibilant(string text, int start, int length)
+        {
+            if (length <= 0) return false;
+            char last = char.ToLowerInvariant(text[start + length - 1]);
+            if (last is 's' or 'x' or 'z') return true;
+            if (length >= 2)
+            {
+                char prev = char.ToLowerInvariant(text[start + length - 2]);
+                return last == 'h' && prev is 's' or 'c';
+            }
+            return false;
         }
     }
 }

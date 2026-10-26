@@ -1,0 +1,21 @@
+{
+  "id": "blackout",
+  "title": "Blackout",
+  "description": "Remotely suppress a discovered hub within three mapped hops for 45 seconds. Its protected defenses immediately lose their bonus.",
+  "branch": "CONTROL",
+  "cost": 85,
+  "waypointTier": 0,
+  "special": true,
+  "position": {
+    "x": 865,
+    "y": 400
+  },
+  "parents": [
+    "disrupt"
+  ],
+  "grants": [
+    "blackout"
+  ],
+  "modifiers": [],
+  "triggers": []
+}

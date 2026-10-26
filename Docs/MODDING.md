@@ -1,122 +1,120 @@
 # Modding Hack The Planet
 
-Hack The Planet supports content authoring through Unity ScriptableObject assets: you can change balance, add contracts and networks, and compose tools and research from existing rules without editing C#. This guide walks through that workflow. The [gameplay authoring reference](DATA_DRIVEN_GAMEPLAY.md) explains formulas, stats, effects, saves, and runtime APIs in more detail.
+Gameplay and presentation settings are loaded from editable JSON at launch. You can change balance, add contracts, tools, research and networks, and adjust graph presentation without rebuilding the game. ScriptableObjects still exist as runtime containers; the original Unity assets are retained as historical migration sources and are not runtime defaults.
 
-## What you need
+## Data locations
 
-Use the source project in **Unity 7000.0.0a11** (the version in `ProjectSettings/ProjectVersion.txt`). Open the folder containing `Assets`, `Packages`, and `ProjectSettings`.
+- **Unity:** `data/` beside `Assets`, `Packages`, and `ProjectSettings` in the Unity project root.
+- **Windows player:** `data/` beside `Hack The Planet.exe`, alongside (not inside) `Hack The Planet_Data/`.
 
-The current player loads `Resources/HackThePlanet/Gameplay/Game` through `GameCatalog.Default`. There is no runtime mod-folder loader or external JSON content import. To distribute asset changes to players, build a player containing them. Editing a loose `.asset` file beside an existing executable does not load it into the game. Career JSON files store saves, not content definitions.
+The game uses the application location, independently of its working directory. Keep the entire `data/` tree with a distributed player. Files are read once per launch or Play session. Restart to apply changes; there is no hot reload, asset fallback, or automatic reset of broken data. Missing or invalid data produces an initialization error with the directory, filename and property information. Gameplay and saving remain blocked until the files are fixed.
 
-Before editing, commit or copy the assets you intend to change. Back up your `career-v2.json` and its recovery backup before testing incompatible content; the [README](../README.md#saves) gives the save location. Prefer a fresh test career when changing IDs or topology. Reset Game Save clears the current career and recovery backup, so back them up first.
+Back up `career-v2.json` and its recovery backup before changing content identities or topology; see [Saves](../README.md#saves). Renaming/removing referenced IDs can make an existing save incompatible. JSON content and career save JSON have separate purposes. This migration preserves the shipped IDs and save format; it does not migrate saves after arbitrary mod changes.
 
-## Find and register content
+## Edit with Unity
 
-The shipped catalog root is:
+Open the project in **Unity 7000.0.0a11**, then choose **Hack The Planet → Content Editor**.
 
-`Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/Game.asset`
+The top tabs cover Game, Companies, Contracts, Networks, Node Types, Actions, Technologies, Hardware, Statuses, Career, Rewards, Text Palette, Graph Visuals, and Graph Labels. Graph Visuals contains both the research/default and network profiles. Search the left list by title, ID or filename. Select an entry to edit its properties on the right; drag the divider to resize the panes. Category selection, search and pane width are remembered with the editor window.
 
-Select it in the Project window to see the content arrays and the Career and Rewards references. Create assets with **Create → Hack The Planet → …** or duplicate a similar asset in Unity. Keep new assets under the gameplay folder so its asset-change hooks invalidate the default catalog cache.
+Every property has an explanation. Reference pickers show the definition title and stable ID, filtered to the required type. Rule pickers choose among supported formulas, conditions and effects. Colors preserve HDR channels; positions use vector fields; enum, boolean, numeric and multiline-text fields use their corresponding controls. Existing stats, tags and local network IDs are offered where applicable, and text fields permit custom values. Expand array and rule foldouts to edit their children. Arrays support add, duplicate, remove and move controls. Changing a rule type replaces that subtree with the new type's defaults and supports Undo.
 
-| Definition | What to author | Registration in Game.asset |
-| --- | --- | --- |
-| Company | Identity and company presentation | Companies |
-| Contract | Brief, company, network, objectives, rewards, lore | Contracts |
-| Network | Authored topology or Parallel Routes settings | Networks |
-| Node Type | Glyph, color, tags, security, defense auras | Node Types |
-| Action | Targeting, requirements, timing, trace, effects | Actions |
-| Technology | Research parents, cost, grants, modifiers, placement | Technologies |
-| Hardware | Upgrade prices, tiers, requirements, stat modifiers | Hardware |
-| Status | Timed behavior and modifiers | Statuses |
-| Career Rules / Rewards | Starting resources, baseline stats, outcomes / settlement formulas | Career / Rewards references |
+### Drafts, validation and saving
 
-Every definition needs a stable, unique `Id`. Duplicating an asset also duplicates this field: immediately replace it for new content, for example `my-mod-field-contract`. Register each new definition in its corresponding root array, including definitions referenced by another asset. Merely creating an asset does not register it. Existing assets that you edit in place retain their registration.
+Edits are isolated working copies. Switching entries keeps drafts; Unity Undo/Redo operates on draft changes. Unsaved drafts are cached under `Library/ContentEditor/` for domain reload and editor restart recovery. This cache never updates authoritative JSON automatically and does not replace persistent history.
 
-Use Unity object fields for references between definitions. Network node IDs are local to the network and are strings used by links and objectives. Keep Unity `.meta` files with assets when sharing changes; those GUIDs preserve object references. Avoid hand-editing managed-reference YAML; use the Inspector's rule type picker and expand the rule to edit its fields.
+- **Save** writes the selected entry. **Save All** writes all changed entries, including structural changes to registrations and references.
+- The **Revision name** field optionally names the revisions created by the next save. An unchanged save creates no revision.
+- **Validate All** checks the proposed complete catalog and property-description coverage. Click an error to navigate to its entry/property where identifiable.
+- **Revert Unsaved** restores the selected entry from the loaded baseline. For structural changes spanning entries, use **Reload Disk** to discard all drafts and reload the complete catalog.
+- Closing a dirty window or entering Play mode offers Save All, Discard or Cancel. Stop Play mode before editing content. Saved content is picked up on the next Play session.
 
-## First edit: make Efficient hack stronger
+All saves validate the complete candidate catalog first. Invalid drafts cannot replace valid files. Malformed files remain listed with errors and an Open file button; fix those externally and reload. They are never silently regenerated from defaults.
 
-1. Exit Play mode. Select `TechnologyDefinition-efficient.asset` in the gameplay folder.
-2. Expand **Modifiers → Element 0**. The shipped modifier targets `duration`, uses `Multiply`, and applies only to the Hack action through an `ActionCondition`.
-3. Expand **Value**, keep its `ConstantNumber` type, and change `0.8` to `0.7`. This changes the duration reduction from 20% to 30%. Keep its condition so the reduction continues to apply only to hacks.
-4. Keep the description placeholder `{modifier:0:reduction}`; it displays the value from that modifier. Save the asset.
-5. Run **Hack The Planet → Validate Gameplay Assets**, then restart Play mode. Purchase Efficient hack and compare a hack forecast before and after purchase on the same target with the same hardware. A running action keeps the costs captured when it started.
+If an external tool changes a file after the window loaded it, saving reports a conflict and presents the disk changes for review. Reload Disk to accept external changes and discard drafts, or explicitly choose the reviewed overwrite. Overwriting still captures the previous disk version in history.
 
-This modifies an existing technology, so do not add a second root entry or change its ID. Undo the value change to restore the shipped tuning.
+### Create and manage entries
 
-## Add a small mission and a new tool
+**New** creates a definition with a unique ID and filename. **Duplicate** copies the selected definition, retaining outgoing references and assigning a new ID and independent history. Complete required fields and validate before Save All. Singleton categories cannot be duplicated or deleted.
 
-This example reuses Hack for access and adds an Audit action that collects a sample. It follows the asset-only extension pattern in `Assets/HackThePlanet/Editor/DataDrivenValidation.cs` (`CreateFixture`). All assets below are created in Unity and registered in `Game.asset`.
+The editor updates `manifest.json` and the Game root's registrations for new or removed definitions. Move up/down changes authored category order. **Rename ID** changes the ID and its object references together; use Save All. **Rename file** changes the relative JSON path while keeping gameplay identity and history. IDs and filenames are separate concepts.
 
-### 1. Create a node type
+**Delete** lists incoming references and blocks deletion until they have been removed or reassigned. Save All records a recoverable deletion revision. Merely changing descriptive copy does not implement a mechanic: actions, conditions, formulas and effects determine behavior.
 
-Create **Node Type**, set Id to `my-mod-audit-terminal`, Title to `Audit terminal`, Glyph to `Workstation`, and choose a color. Add the tag `my-mod-audit-target`. Set Security to `ConstantNumber` with Value `1`; leave Auras empty.
+## Revision history
 
-### 2. Create the Audit action
+Choose **History** to inspect entry revisions, including deleted entries. History is a built-in local snapshot store; it does not require Git or make commits in your project repository.
 
-Create **Action** with Id `my-mod-audit` and Title `Verify sample`. Configure:
+The first changed save records the original disk version plus the new version. Each subsequent changed save records a revision with its timestamp, ID, parent, operation, content hash and transaction ID. Name a revision when saving, or edit its name in History afterward. Content snapshots remain available when a label changes.
 
-| Field | Value |
+Select a revision to see property-level changes against the previous revision; toggle **Raw JSON comparison** for the complete before/after JSON. A marker identifies snapshots matching the current draft content. **Restore entry to draft** loads a snapshot for review. Validate and Save All to make that restore authoritative; this creates another revision and preserves all later history. To recover a deleted entry, select it in the entry dropdown and restore a revision from before deletion.
+
+**Restore transaction to draft** restores the affected entries from a multi-entry operation, such as an ID rename. It does not replace the entire project with an old manifest. Restoring one entry does not automatically restore dependencies: use their histories to resolve missing references or ID/path collisions, then validate the combined draft.
+
+Persistent history lives in **`.data-history/` beside `data/`**, outside Unity's `Library/` directory. It contains before/after transaction journals and revision snapshots. It is not shipped in player builds and is never automatically pruned. Include `.data-history/` in project backups or version control if history should travel to another machine. Save transactions are journaled before data replacement; reopening the editor rolls back an interrupted save to its previous files.
+
+## Edit JSON directly
+
+`data/manifest.json` has `schemaVersion: 1` and an ordered `entries` array. Every entry contains:
+
+| Field | Purpose |
 | --- | --- |
-| Operator Target | Off (this action targets a node) |
-| Queueable | On |
-| Initially Available | On for this tutorial |
-| Shortcut / Shortcut Label | `V` / `V`; choose another unused key if necessary |
-| Duration / Base Trace / Use Limit | `ConstantNumber`: `2` / `1` / `0` (unlimited uses) |
-| Visible | `AllCondition` containing `NodeTagCondition` with tag `my-mod-audit-target`, and `NotCondition` wrapping `NodeStateCondition` with State `Collected` |
-| Requirements | Two entries: `NodeStateCondition` for `Known`, message `Discover the target.`; and `NodeStateCondition` for `Controlled`, message `Control this terminal first.` |
-| Queue Requirements | One entry: `NodeStateCondition` for `Known`, message `Discover the target.` |
-| Effects | One `SetStateEffect`: Targets Scope `Target`, Filter `AlwaysCondition`, State `Collected`, Value on |
+| `key` | Immutable authoring identity: a 32-character UUID without hyphens; retained across ID/file renames |
+| `category` | Category name, such as `Actions` or `Technologies` |
+| `file` | Relative JSON path inside `data/`, using forward slashes |
+| `type` | Registered definition type, such as `ActionDefinition` |
 
-Requirements guard execution; visibility controls whether the tool is offered. The collected-state visibility check removes the completed action from the target. The effect assigns the same state the contract will check for completion.
+Definitions live in category folders, one file per definition. The Game file contains ordered ID lists and references for registration. When adding a file manually, add its manifest entry **and** its corresponding Game registration. Unlisted files are ignored. Do not put backup copies in the manifest. Manifest and root ordering are meaningful; modifier arrays retain their order for equal priorities.
 
-To unlock the tool through research instead, turn Initially Available off, create a Technology with its own ID, cost, title, graph Position and a parent reference to the starting `base` technology, and add Audit to its Grants. Register the technology too. Keep Special off for a passive unlock; Special on requires the player to equip the technology in a loadout slot before its grants apply.
+All properties emitted in the shipped files are required, including empty arrays and null optional references. Keep them when editing. Unknown properties, duplicate JSON properties, unsupported schema/type names, missing references and invalid rule graphs fail validation. Paths must remain inside `data/`; linked directories and traversal paths are rejected.
 
-### 3. Create an authored network
+Definition references are ID strings, not Unity GUIDs. IDs must be unique within their definition type. Network node IDs are local to the template. Enums use their exact names; vectors use `x`, `y`, `z` components; colors use numeric `r`, `g`, `b`, `a`, including HDR values where appropriate.
 
-Create **Network** with Id `my-mod-field-network`, Layout `Authored`, Entry Node `entry`, Preferred Node `alpha`, and Preview Node `beta`. Populate Nodes:
+Numeric, condition and effect subtrees use registered rule names, for example:
 
-| Id | Label | Type | Position (X, Y, Z) | Known | Controlled |
-| --- | --- | --- | --- | --- | --- |
-| `entry` | Entry relay | Existing `gateway` node type | `(-6, 0, 0)` | On | On |
-| `alpha` | Access terminal | Your Audit terminal | `(0, 0, 0)` | On | Off |
-| `beta` | Sample terminal | Your Audit terminal | `(6, 0, 0)` | On | Off |
+```json
+{
+  "type": "BinaryNumber",
+  "operation": "Multiply",
+  "left": { "type": "InputNumber", "input": "Security", "key": null, "filter": { "type": "AlwaysCondition" } },
+  "right": { "type": "ConstantNumber", "value": 0.7 }
+}
+```
 
-Leave Bonus off and Lore Index at `-1` on each node. Add two Links: A `entry`, B `alpha`; and A `alpha`, B `beta`. Keep each link's When rule as `AlwaysCondition`. These connections allow progression from controlled access to the sample. Parallel Routes fields are unused for an Authored layout.
+This is a numeric subtree, not a complete definition file. Use the populated files as templates for complete definitions. New mechanics requiring an additional rule operation, runtime input, procedural generator or UI layout still require C# and a new player build. External JSON cannot instantiate arbitrary CLR types or execute scripts.
 
-### 4. Create the contract
+## First edit: stronger Efficient hack
 
-Create **Contract**, set Id to `my-mod-field-contract`, Title to `Field investigation`, Company to an existing company, and Network to your new network. Fill in the client and brief text. Set Recurring off and Required Wins to `0` so it is available in a fresh career. Use `ConstantNumber` formulas for Credits `111`, XP `7`, Difficulty `1`, and Seed `99`. Difficulty 1 gives full pre-operation intel and a ×1 base reward multiplier.
+In the Content Editor, select **Technologies → Efficient hack**. Expand Modifiers, then Element 0. Keep Stat `duration`, Operation `Multiply`, and the Hack-only `ActionCondition`. Change its ConstantNumber Value from `0.8` to `0.7`: the duration reduction changes from 20% to 30%.
 
-Add one Objectives entry:
+Keep `{modifier:0:reduction}` in its description so the displayed percentage follows the actual modifier. Save with a revision name such as `30 percent efficient hack`. Restart Play mode, purchase the technology, and compare hack forecasts for the same target and hardware. Use History to restore the previous tuning.
 
-- Node Id: `beta`.
-- Label: `Verify the sample`; Action Label: `Verify sample`.
-- Action: your Audit action.
-- Complete: `NodeStateCondition` with State `Collected`.
-- Leave Action Requirements empty; the action already requires control.
+Without Unity, edit the same value in `data/technologies/efficient.json` beside the built executable, then restart the player. No rebuild is required.
 
-Leave Action Rules and Lore empty for this tutorial. Write Condition text that matches the bonus policy if you describe bonuses: settlement still uses the catalog's shared Rewards definition. The displayed brief text does not implement a reward rule.
+## Add a small mission and Audit tool
 
-Register the new node type, action, network and contract in their root arrays, then validate. Restart Play mode with a fresh test career, find Field investigation, connect, hack `alpha`, hack `beta`, select Verify sample, and extract after it finishes. Confirm the report and settlement. If you chose research gating, purchase (and equip, if Special) the technology before connecting. Reload a saved attempt with the same catalog to check persistence too.
+Use these settings in the Content Editor; keep other defaults unless specified. Save All after the complete set passes validation.
 
-## Validate, build, and share
+1. **Node Types → New:** set ID through Rename ID to `my-mod-audit-terminal`, Title `Audit terminal`, Glyph `Workstation`, Security `ConstantNumber` value `1`, and Tags containing `my-mod-audit-target`. Choose a color; leave Auras empty.
+2. **Actions → New:** use ID `my-mod-audit`, Title `Verify sample`, Initially Available on, Operator Target off, Queueable on, Duration `2`, Base Trace `1`, Use Limit `0` (unlimited), using ConstantNumber rules. Optionally assign an unused shortcut such as `V`.
+3. Set action Visible to AllCondition containing a NodeTagCondition for `my-mod-audit-target` and a NotCondition around NodeStateCondition `Collected`. Add execution Requirements for Known and Controlled, with useful messages. Add a queue requirement for Known. Add a SetStateEffect with Targets Scope `Target`, Filter AlwaysCondition, State `Collected`, Value on.
+4. **Networks → New:** use ID `my-mod-field-network`, Layout `Authored`, Entry Node `entry`, Preferred Node `alpha`, Preview Node `beta`. Add the nodes below. Leave Lore Index `-1` and Bonus off. Add links `entry`–`alpha` and `alpha`–`beta`, both with AlwaysCondition.
+5. **Contracts → New:** use ID `my-mod-field-contract`, Title `Field investigation`, an existing Company, and your new Network. Leave Recurring off and Required Wins `0`. Set ConstantNumber formulas Credits `111`, XP `7`, Difficulty `1`, Seed `99`. Fill in client and brief text.
+6. Add one objective: Node ID `beta`, Label `Verify the sample`, Action Label `Verify sample`, Action your Audit tool, Complete NodeStateCondition `Collected`. Leave Action Requirements, Action Rules and Lore empty. Describe bonuses consistently with the shared Rewards policy.
 
-Start with **Hack The Planet → Validate Gameplay Assets** and a manual playthrough of your content. The validator catches missing registrations, duplicate IDs, invalid references, research cycles, and many invalid formulas; it does not establish that every mission is reachable or enjoyable.
+| Node ID | Label | Type | Position | Known / Controlled |
+| --- | --- | --- | --- | --- |
+| `entry` | Entry relay | Existing gateway | `(-6, 0, 0)` | On / On |
+| `alpha` | Access terminal | Your Audit terminal | `(0, 0, 0)` | On / Off |
+| `beta` | Sample terminal | Your Audit terminal | `(6, 0, 0)` | On / Off |
 
-The existing **Run Simulation Validation**, **Run Data Driven Validation**, and **Run Workstation Smoke Test** commands cover campaign behavior, rule composition, and UI integration. Some checks assert shipped values and captured baseline network hashes, so intentional balance or topology changes can fail those expectations. Inspect the failures and adapt the relevant fixtures to the intended design; keep checks for unrelated regressions. See [Verification](DATA_DRIVEN_GAMEPLAY.md#verification) and the [balance notes](BALANCE_REFINEMENT.md) for their scope.
+Restart with a fresh test career. Connect to Field investigation, hack alpha and beta, verify the sample, then extract. Check settlement, report and save/reload. To gate Audit behind research, disable Initially Available and create a technology granting it; Special technologies must also be equipped.
 
-Use **Hack The Planet → Build Windows Player** to create a player; invalid gameplay assets stop the build. Test the built player as well as Play mode. Distribute the executable with its generated `_Data` folder and accompanying DLLs. To share source changes, include the changed assets and their `.meta` files, the updated root registrations, any new C# rule types, and a short list of required base-project versions and save compatibility expectations.
+## Verification and distribution
 
-## Troubleshooting and extension limits
+- **Hack The Planet → JSON → Validate Data** validates the files on disk.
+- **Run Content and History Validation** checks asset parity, rule round trips, descriptions, reference changes, revisions, conflicts and recovery using an isolated `Artifacts/` sandbox.
+- Existing Simulation, Data Driven, Balance and Workstation Smoke validations now use JSON-backed defaults. Intentional balance/topology mods can fail shipped baseline expectations; investigate and update relevant fixtures rather than removing unrelated checks.
+- Windows build callbacks validate and copy the manifest-listed data tree beside the executable, replacing stale output data. Distribute the executable, generated `_Data` directory, DLLs and **data/** together. History and editor drafts are not packaged. Test a relocated player as well as Play mode.
 
-| Symptom | Check |
-| --- | --- |
-| New content does not appear | Root registration, required wins, action visibility, research grants/equipment, then restart Play mode. Existing simulations retain a detached catalog snapshot. |
-| Missing reference or unique-ID validation error | Register every referenced definition, replace IDs copied by duplication, and remove null root entries. |
-| Action is visible but disabled | Execution and queue requirements, target control/discovery, charges, objective prerequisites, and loadout. |
-| Objective never completes | Exact local node ID, assigned action, matching completion state/effect, and a traversable route to the target. |
-| New save cannot load | Restore the matching content version. Saves reference definition IDs and active network state; renaming/removing IDs or changing topology may require a fresh career. |
-| Formula fails | Check stat names, available context inputs, zero divisors, and rule/stat cycles. RandomNumber is for seeded generation, not action costs. |
-
-Data can compose the existing `Number`, `Condition`, and `Effect` types in `GameplayRules.cs`. A mechanic requiring a new operation or input needs C# support, corresponding validation, and a rebuilt player. New glyph shapes, UI layouts, and another procedural network algorithm likewise require presentation or generator code. For a different fixed topology, use Authored networks before adding a generator.
+The [gameplay rules reference](DATA_DRIVEN_GAMEPLAY.md) explains formulas, stats, progression and saves. The [balance notes](BALANCE_REFINEMENT.md) explain the shipped tuning. Meshes, shaders, stylesheets and Unity rendering configuration remain project assets; player accessibility/preferences remain separate from mod content.

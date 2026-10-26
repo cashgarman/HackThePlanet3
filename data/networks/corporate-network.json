@@ -1,0 +1,2579 @@
+{
+  "id": "corporate-network",
+  "title": "Corporate infrastructure",
+  "description": "",
+  "entryNode": "home",
+  "preferredNode": "n2",
+  "previewNode": "n22",
+  "layout": "ParallelRoutes",
+  "nodes": [
+    {
+      "id": "home",
+      "label": "Your gateway",
+      "detail": "A secondhand rig. A private connection. A place to begin.",
+      "type": "gateway",
+      "column": 0,
+      "row": 0,
+      "x": 60,
+      "y": 228,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": true,
+      "controlled": true,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": []
+    },
+    {
+      "id": "n1",
+      "label": "Guest terminal",
+      "detail": "",
+      "type": "workstation",
+      "column": 0,
+      "row": 0,
+      "x": 205,
+      "y": 70,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "label": "Public relay",
+      "detail": "",
+      "type": "relay",
+      "column": 0,
+      "row": 1,
+      "x": 205,
+      "y": 175,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "label": "Office terminal",
+      "detail": "",
+      "type": "workstation",
+      "column": 0,
+      "row": 2,
+      "x": 205,
+      "y": 280,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "label": "Campus relay",
+      "detail": "",
+      "type": "relay",
+      "column": 0,
+      "row": 3,
+      "x": 205,
+      "y": 385,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "label": "Edge scanner",
+      "detail": "",
+      "type": "scanner",
+      "column": 1,
+      "row": 0,
+      "x": 350,
+      "y": 70,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "label": "Staff terminal",
+      "detail": "",
+      "type": "workstation",
+      "column": 1,
+      "row": 1,
+      "x": 350,
+      "y": 175,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "label": "Perimeter wall",
+      "detail": "",
+      "type": "firewall",
+      "column": 1,
+      "row": 2,
+      "x": 350,
+      "y": 280,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "label": "Maintenance",
+      "detail": "",
+      "type": "relay",
+      "column": 1,
+      "row": 3,
+      "x": 350,
+      "y": 385,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "label": "Dev terminal",
+      "detail": "",
+      "type": "workstation",
+      "column": 2,
+      "row": 0,
+      "x": 495,
+      "y": 70,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "label": "Core firewall",
+      "detail": "",
+      "type": "firewall",
+      "column": 2,
+      "row": 1,
+      "x": 495,
+      "y": 175,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n11",
+      "label": "Traffic scanner",
+      "detail": "",
+      "type": "scanner",
+      "column": 2,
+      "row": 2,
+      "x": 495,
+      "y": 280,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n12",
+      "label": "Build terminal",
+      "detail": "",
+      "type": "workstation",
+      "column": 2,
+      "row": 3,
+      "x": 495,
+      "y": 385,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n13",
+      "label": "Cold archive",
+      "detail": "",
+      "type": "database",
+      "column": 3,
+      "row": 0,
+      "x": 640,
+      "y": 70,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n14",
+      "label": "Security hub",
+      "detail": "",
+      "type": "securityhub",
+      "column": 3,
+      "row": 1,
+      "x": 640,
+      "y": 175,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n15",
+      "label": "Service relay",
+      "detail": "",
+      "type": "relay",
+      "column": 3,
+      "row": 2,
+      "x": 640,
+      "y": 280,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n16",
+      "label": "Backup relay",
+      "detail": "",
+      "type": "relay",
+      "column": 3,
+      "row": 3,
+      "x": 640,
+      "y": 385,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n17",
+      "label": "Vault firewall",
+      "detail": "",
+      "type": "firewall",
+      "column": 4,
+      "row": 0,
+      "x": 785,
+      "y": 70,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n18",
+      "label": "Research wall",
+      "detail": "",
+      "type": "firewall",
+      "column": 4,
+      "row": 1,
+      "x": 785,
+      "y": 175,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n19",
+      "label": "Audit terminal",
+      "detail": "",
+      "type": "workstation",
+      "column": 4,
+      "row": 2,
+      "x": 785,
+      "y": 280,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n20",
+      "label": "Backup mirror",
+      "detail": "",
+      "type": "database",
+      "column": 4,
+      "row": 3,
+      "x": 785,
+      "y": 385,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n21",
+      "label": "Private archive",
+      "detail": "",
+      "type": "database",
+      "column": 5,
+      "row": 0,
+      "x": 930,
+      "y": 70,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n22",
+      "label": "Research vault",
+      "detail": "",
+      "type": "database",
+      "column": 5,
+      "row": 1,
+      "x": 930,
+      "y": 175,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n23",
+      "label": "Test terminal",
+      "detail": "",
+      "type": "workstation",
+      "column": 5,
+      "row": 2,
+      "x": 930,
+      "y": 280,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n24",
+      "label": "Export relay",
+      "detail": "",
+      "type": "relay",
+      "column": 5,
+      "row": 3,
+      "x": 930,
+      "y": 385,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Column",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 4
+            }
+          },
+          "value": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AllCondition",
+            "conditions": [
+              {
+                "type": "NodeTagCondition",
+                "tag": "firewall"
+              },
+              {
+                "type": "CompareCondition",
+                "comparison": "Greater",
+                "left": {
+                  "type": "InputNumber",
+                  "input": "CompanyWins",
+                  "key": "",
+                  "filter": {
+                    "type": "AlwaysCondition"
+                  }
+                },
+                "right": {
+                  "type": "ConstantNumber",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    }
+  ],
+  "links": [],
+  "routes": {
+    "entrance": "n2",
+    "destination": "n22",
+    "sensorAttachment": "n6",
+    "directRoute": [
+      "n6",
+      "n10",
+      "n14",
+      "n18"
+    ],
+    "sensors": [
+      "n5",
+      "n11",
+      "watch-a",
+      "watch-b"
+    ],
+    "secondaryTargets": [
+      "n9",
+      "n19",
+      "n20"
+    ],
+    "archives": [
+      "n13",
+      "n21",
+      "archive-c"
+    ],
+    "reserved": [
+      "home",
+      "n2",
+      "n22",
+      "n9",
+      "n19",
+      "n20",
+      "n6",
+      "n10",
+      "n14",
+      "n18",
+      "n5",
+      "n11",
+      "watch-a",
+      "watch-b",
+      "n13",
+      "n21",
+      "archive-c"
+    ],
+    "tiers": [
+      {
+        "nodeCount": 32,
+        "lengths": [
+          4,
+          6,
+          8
+        ],
+        "sensorsPerLane": 1
+      },
+      {
+        "nodeCount": 44,
+        "lengths": [
+          4,
+          5,
+          6,
+          8
+        ],
+        "sensorsPerLane": 2
+      },
+      {
+        "nodeCount": 56,
+        "lengths": [
+          4,
+          5,
+          6,
+          7,
+          9
+        ],
+        "sensorsPerLane": 2
+      }
+    ],
+    "relay": "relay",
+    "workstation": "workstation",
+    "scanner": "scanner",
+    "archive": "database",
+    "extraIds": [
+      "watch-a",
+      "watch-b",
+      "archive-c"
+    ],
+    "extraLabels": [
+      "Ingress sensor",
+      "Deep packet sensor",
+      "Sealed correspondence"
+    ],
+    "extraTypes": [
+      "scanner",
+      "scanner",
+      "database"
+    ],
+    "fillerPrefix": "extra-",
+    "fillerLabel": "Maintenance relay ",
+    "safeLaneLabel": "Maintenance",
+    "transitLabel": "Transit",
+    "sensorLabel": "Transit sensor",
+    "fillerLabelOffset": 24,
+    "entryPosition": {
+      "x": -19,
+      "y": -1,
+      "z": -2
+    },
+    "entrancePosition": {
+      "x": -14,
+      "y": 0,
+      "z": 0
+    },
+    "destinationPosition": {
+      "x": 14,
+      "y": 0,
+      "z": 0
+    },
+    "radius": 8,
+    "laneRadius": 1.5,
+    "jitter": 0.45,
+    "satelliteRadius": 3.5,
+    "satelliteGrowth": 0.025,
+    "minimumSpacing": 2.6,
+    "separationSpacing": 2.65,
+    "separationForce": 0.51,
+    "placementAttempts": 1000,
+    "separationPasses": 80,
+    "crossoverFromLane": 1,
+    "crossoverToLane": 2,
+    "crossoverStep": 4,
+    "directSecurity": {
+      "type": "BinaryNumber",
+      "operation": "Add",
+      "left": {
+        "type": "ConditionalNumber",
+        "when": {
+          "type": "CompareCondition",
+          "comparison": "Equal",
+          "left": {
+            "type": "InputNumber",
+            "input": "Step",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 0
+          }
+        },
+        "yes": {
+          "type": "ConstantNumber",
+          "value": 1
+        },
+        "no": {
+          "type": "ConstantNumber",
+          "value": 2
+        }
+      },
+      "right": {
+        "type": "ConditionalNumber",
+        "when": {
+          "type": "NodeTagCondition",
+          "tag": "firewall"
+        },
+        "yes": {
+          "type": "BinaryNumber",
+          "operation": "Add",
+          "left": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          },
+          "right": {
+            "type": "ConditionalNumber",
+            "when": {
+              "type": "CompareCondition",
+              "comparison": "Greater",
+              "left": {
+                "type": "InputNumber",
+                "input": "CompanyWins",
+                "key": "",
+                "filter": {
+                  "type": "AlwaysCondition"
+                }
+              },
+              "right": {
+                "type": "ConstantNumber",
+                "value": 0
+              }
+            },
+            "yes": {
+              "type": "ConstantNumber",
+              "value": 1
+            },
+            "no": {
+              "type": "ConstantNumber",
+              "value": 0
+            }
+          }
+        },
+        "no": {
+          "type": "ConstantNumber",
+          "value": 0
+        }
+      }
+    },
+    "routeSecurity": {
+      "type": "ConditionalNumber",
+      "when": {
+        "type": "CompareCondition",
+        "comparison": "Equal",
+        "left": {
+          "type": "InputNumber",
+          "input": "SafeLane",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 1
+        }
+      },
+      "yes": {
+        "type": "ConstantNumber",
+        "value": 1
+      },
+      "no": {
+        "type": "BinaryNumber",
+        "operation": "Add",
+        "left": {
+          "type": "ConstantNumber",
+          "value": 1
+        },
+        "right": {
+          "type": "BinaryNumber",
+          "operation": "Modulo",
+          "left": {
+            "type": "InputNumber",
+            "input": "Step",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 2
+          }
+        }
+      }
+    },
+    "workstationWhen": {
+      "type": "CompareCondition",
+      "comparison": "Equal",
+      "left": {
+        "type": "BinaryNumber",
+        "operation": "Modulo",
+        "left": {
+          "type": "InputNumber",
+          "input": "Step",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 3
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 1
+      }
+    }
+  }
+}

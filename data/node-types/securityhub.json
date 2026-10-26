@@ -1,0 +1,54 @@
+{
+  "id": "securityhub",
+  "title": "SecurityHub",
+  "description": "Strengthens adjacent firewalls and databases by two security. Capturing or suppressing the hub removes that bonus.",
+  "glyph": "SecurityHub",
+  "color": {
+    "r": 0.7294118,
+    "g": 0.6313726,
+    "b": 0.92941177,
+    "a": 1
+  },
+  "tags": [
+    "securityhub"
+  ],
+  "security": {
+    "type": "RandomNumber",
+    "minimum": 1,
+    "maximum": 2
+  },
+  "auras": [
+    {
+      "id": "hub-protection",
+      "adjacentOnly": true,
+      "stack": false,
+      "source": {
+        "type": "NodeStateCondition",
+        "state": "DefenseActive"
+      },
+      "modifier": {
+        "id": "",
+        "stat": "security",
+        "priority": 0,
+        "operation": "Add",
+        "when": {
+          "type": "AnyCondition",
+          "conditions": [
+            {
+              "type": "NodeTagCondition",
+              "tag": "firewall"
+            },
+            {
+              "type": "NodeTagCondition",
+              "tag": "database"
+            }
+          ]
+        },
+        "value": {
+          "type": "ConstantNumber",
+          "value": 2
+        }
+      }
+    }
+  ]
+}

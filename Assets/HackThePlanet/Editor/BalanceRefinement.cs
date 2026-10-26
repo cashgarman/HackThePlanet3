@@ -9,7 +9,6 @@ namespace HackThePlanet.Editor
 {
     public static class BalanceRefinement
     {
-        [MenuItem("Hack The Planet/Balance/Apply Career Refinement")]
         public static void Apply()
         {
             var root=Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game");

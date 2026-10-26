@@ -1,0 +1,138 @@
+{
+  "id": "backdoor",
+  "title": "Use backdoor",
+  "description": "",
+  "tags": [
+    "backdoor"
+  ],
+  "shortcut": "R",
+  "shortcutLabel": "R",
+  "legacyGroup": "backdoor",
+  "presentationPriority": 10,
+  "operatorTarget": false,
+  "queueable": true,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": true,
+  "visible": {
+    "type": "AllCondition",
+    "conditions": [
+      {
+        "type": "AnyCondition",
+        "conditions": [
+          {
+            "type": "NodeTagCondition",
+            "tag": "workstation"
+          },
+          {
+            "type": "NodeTagCondition",
+            "tag": "relay"
+          }
+        ]
+      },
+      {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Controlled"
+        }
+      },
+      {
+        "type": "ResearchCondition",
+        "technology": "backdoor",
+        "equipped": true
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Controlled"
+        }
+      },
+      "message": "You already control this system."
+    },
+    {
+      "condition": {
+        "type": "CompareCondition",
+        "comparison": "LessOrEqual",
+        "left": {
+          "type": "InputNumber",
+          "input": "ControlledDistance",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 3
+        }
+      },
+      "message": "Requires a discovered route within three hops of controlled access."
+    }
+  ],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    }
+  ],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 0.8
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "effects": [
+    {
+      "type": "SetStateEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "state": "Controlled",
+      "value": true
+    },
+    {
+      "type": "RevealEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "radius": {
+        "type": "StatNumber",
+        "stat": "revealRadius"
+      }
+    },
+    {
+      "type": "LogEffect",
+      "message": "CONTROL ESTABLISHED // {target}."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "database",
+  "title": "Database",
+  "description": "A store of valuable data. Control it first, then recover its files. Marked archives contain optional credits and XP.",
+  "glyph": "Database",
+  "color": {
+    "r": 0.8509804,
+    "g": 0.8156863,
+    "b": 0.69411767,
+    "a": 1
+  },
+  "tags": [
+    "database"
+  ],
+  "security": {
+    "type": "RandomNumber",
+    "minimum": 1,
+    "maximum": 2
+  },
+  "auras": []
+}

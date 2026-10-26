@@ -1,0 +1,96 @@
+{
+  "id": "disrupt",
+  "title": "Disrupt scanner",
+  "description": "",
+  "tags": [
+    "disrupt"
+  ],
+  "shortcut": "Alpha4",
+  "shortcutLabel": "4",
+  "legacyGroup": "disrupt",
+  "presentationPriority": 15,
+  "operatorTarget": false,
+  "queueable": true,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "AllCondition",
+    "conditions": [
+      {
+        "type": "NodeTagCondition",
+        "tag": "scanner"
+      },
+      {
+        "type": "NodeStateCondition",
+        "state": "DefenseActive"
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Scan to discover this system."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Reachable"
+      },
+      "message": "Control a connected neighbor first."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "DefenseActive"
+      },
+      "message": "This defense is already offline."
+    }
+  ],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    }
+  ],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 1.2
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "ApplyStatusEffect",
+      "status": "suppression",
+      "operatorStatus": false,
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "duration": {
+        "type": "ConstantNumber",
+        "value": 45
+      }
+    },
+    {
+      "type": "LogEffect",
+      "message": "DEFENSE SUPPRESSED // {target}."
+    }
+  ]
+}

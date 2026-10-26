@@ -1,0 +1,35 @@
+{
+  "id": "quiet",
+  "title": "Quiet tools",
+  "description": "Standard hacks generate {modifier:0:reduction}% less trace. A quiet route leaves room for optional files.",
+  "branch": "STEALTH",
+  "cost": 45,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 320,
+    "y": 460
+  },
+  "parents": [
+    "base"
+  ],
+  "grants": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "baseTrace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "ActionCondition",
+        "action": "hack",
+        "tag": ""
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.8
+      }
+    }
+  ],
+  "triggers": []
+}

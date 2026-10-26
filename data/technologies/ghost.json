@@ -1,0 +1,60 @@
+{
+  "id": "ghost",
+  "title": "Ghost relay",
+  "description": "The first relay hack in every contract generates no trace, including scanner pressure.",
+  "branch": "STEALTH",
+  "cost": 70,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 135,
+    "y": 400
+  },
+  "parents": [
+    "quiet"
+  ],
+  "grants": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "traceFree",
+      "priority": 0,
+      "operation": "Override",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "ActionCondition",
+            "action": "hack",
+            "tag": ""
+          },
+          {
+            "type": "NodeTagCondition",
+            "tag": "relay"
+          },
+          {
+            "type": "CompareCondition",
+            "comparison": "Equal",
+            "left": {
+              "type": "InputNumber",
+              "input": "Counter",
+              "key": "relay-controls",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 1
+      }
+    }
+  ],
+  "triggers": []
+}

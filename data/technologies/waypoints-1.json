@@ -1,0 +1,19 @@
+{
+  "id": "waypoints-1",
+  "title": "Waypoints I",
+  "description": "Place one waypoint on a contract preview. Its marker stays visible over its system during the run, even before discovery.",
+  "branch": "RECON",
+  "cost": 30,
+  "waypointTier": 1,
+  "special": false,
+  "position": {
+    "x": 220,
+    "y": -75
+  },
+  "parents": [
+    "base"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": []
+}

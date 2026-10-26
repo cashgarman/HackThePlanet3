@@ -1,0 +1,32 @@
+{
+  "id": "firewall",
+  "title": "Firewall",
+  "description": "A hardened route barrier. Hack it, take a detour, or use Firewall bridge with two controlled neighbors.",
+  "glyph": "Firewall",
+  "color": {
+    "r": 1,
+    "g": 0.7372549,
+    "b": 0.4392157,
+    "a": 1
+  },
+  "tags": [
+    "firewall"
+  ],
+  "security": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 3
+    },
+    "right": {
+      "type": "InputNumber",
+      "input": "Difficulty",
+      "key": "",
+      "filter": {
+        "type": "AlwaysCondition"
+      }
+    }
+  },
+  "auras": []
+}

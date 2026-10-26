@@ -1,0 +1,17 @@
+{
+  "id": "base",
+  "title": "Basic toolkit",
+  "description": "Your starting tools: scan, hack, recover data, and disconnect. Every unlocked passive is always active.",
+  "branch": "CORE",
+  "cost": 0,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 500,
+    "y": 310
+  },
+  "parents": [],
+  "grants": [],
+  "modifiers": [],
+  "triggers": []
+}

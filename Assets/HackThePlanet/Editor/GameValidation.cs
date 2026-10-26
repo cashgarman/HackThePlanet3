@@ -51,7 +51,7 @@ namespace HackThePlanet.Editor
 
         private static void ValidateDifficultyRewards()
         {
-            var source=Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game");
+            var source=GameData.Current.Game;
             var root=UnityEngine.Object.Instantiate(source);var definition=UnityEngine.Object.Instantiate(source.contracts[0]);
             root.contracts=root.contracts.Select(d=>d.id==definition.id?definition:d).ToArray();
             definition.credits=new ConstantNumber(600);definition.xp=new ConstantNumber(50);

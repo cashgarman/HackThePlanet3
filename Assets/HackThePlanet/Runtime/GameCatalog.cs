@@ -52,7 +52,7 @@ namespace HackThePlanet
     {
         private static GameCatalog defaultCatalog;
         private static readonly List<GameCatalog> retiredCatalogs=new List<GameCatalog>();
-        public static GameCatalog Default => defaultCatalog??=new GameCatalog(Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game"));
+        public static GameCatalog Default => defaultCatalog??=new GameCatalog(GameData.Current.Game);
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetDefault(){defaultCatalog?.Dispose();defaultCatalog=null;foreach(var old in retiredCatalogs)old.Dispose();retiredCatalogs.Clear();}
         internal static void InvalidateDefault()
@@ -76,7 +76,7 @@ namespace HackThePlanet
 
         public GameCatalog(GameDefinition root)
         {
-            if(root==null)throw new InvalidOperationException("Missing gameplay root asset: Resources/HackThePlanet/Gameplay/Game.asset");
+            if(root==null)throw new InvalidOperationException("Missing JSON-populated gameplay root definition.");
             GameDefinitionValidator.ThrowIfInvalid(root);
             var map=new Dictionary<GameplayDefinition,GameplayDefinition>();
             GameplayDefinition Copy(GameplayDefinition source)

@@ -1,0 +1,68 @@
+{
+  "id": "selective",
+  "title": "Selective download",
+  "description": "Secure the main objective in {modifier:0:percent}% of the usual recovery time, with {modifier:1:reduction}% less recovery trace.",
+  "branch": "INTRUSION",
+  "cost": 85,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 865,
+    "y": 220
+  },
+  "parents": [
+    "efficient"
+  ],
+  "grants": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "duration",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "ActionCondition",
+            "action": "download",
+            "tag": ""
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Objective"
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.7
+      }
+    },
+    {
+      "id": "",
+      "stat": "baseTrace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "ActionCondition",
+            "action": "download",
+            "tag": ""
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Objective"
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.7
+      }
+    }
+  ],
+  "triggers": []
+}

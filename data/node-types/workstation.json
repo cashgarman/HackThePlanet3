@@ -1,0 +1,21 @@
+{
+  "id": "workstation",
+  "title": "Workstation",
+  "description": "An everyday terminal. Low defenses make this a useful foothold. Some contain signed evidence.",
+  "glyph": "Workstation",
+  "color": {
+    "r": 0.57254905,
+    "g": 0.6509804,
+    "b": 0.7176471,
+    "a": 1
+  },
+  "tags": [
+    "workstation"
+  ],
+  "security": {
+    "type": "RandomNumber",
+    "minimum": 1,
+    "maximum": 2
+  },
+  "auras": []
+}

@@ -33,7 +33,6 @@ namespace HackThePlanet.Editor
         public static Effect Log(string message)=>new LogEffect{message=message};
         public static NodeSelector Select(SelectionScope scope,Condition filter=null)=>new NodeSelector{scope=scope,filter=filter??new AlwaysCondition()};
 
-        [MenuItem("Hack The Planet/Import Captured Gameplay Assets")]
         public static void Import()
         {
             if(AssetDatabase.LoadAssetAtPath<GameDefinition>(Folder+"/Game.asset")!=null)throw new InvalidOperationException("Game.asset already exists. Edit the existing assets; importing must never overwrite authored content.");

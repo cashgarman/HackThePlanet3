@@ -1,0 +1,46 @@
+{
+  "id": "chain",
+  "title": "Chain hack",
+  "description": "Queue up to three actions. Queue a hack on the next discovered system before the current hack finishes.",
+  "branch": "INTRUSION",
+  "cost": 85,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 865,
+    "y": 85
+  },
+  "parents": [
+    "efficient"
+  ],
+  "grants": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "queueCapacity",
+      "priority": 0,
+      "operation": "Override",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 3
+      }
+    },
+    {
+      "id": "",
+      "stat": "futureQueue",
+      "priority": 0,
+      "operation": "Override",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 1
+      }
+    }
+  ],
+  "triggers": []
+}

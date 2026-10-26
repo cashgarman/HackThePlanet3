@@ -1,0 +1,175 @@
+{
+  "id": "freelance-2",
+  "title": "Signal Lost",
+  "description": "A verified exchange contract generated from today\u0027s network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
+  "company": "company-2",
+  "network": "corporate-network",
+  "client": "EXCHANGE // verified escrow",
+  "tag": "FREELANCE / REPEATABLE",
+  "objective": "Recover records at Dev terminal, Audit terminal, and Research vault.",
+  "condition": "Below 75% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "aftermath": "A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.",
+  "displayKind": "Investigate",
+  "recurring": true,
+  "requiredWins": 3,
+  "quietLimit": 75,
+  "credits": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 600
+    },
+    "right": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Day",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 35
+      }
+    }
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 65
+  },
+  "difficulty": {
+    "type": "BinaryNumber",
+    "operation": "Minimum",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 3
+    },
+    "right": {
+      "type": "BinaryNumber",
+      "operation": "Maximum",
+      "left": {
+        "type": "ConstantNumber",
+        "value": 1
+      },
+      "right": {
+        "type": "BinaryNumber",
+        "operation": "Add",
+        "left": {
+          "type": "ConstantNumber",
+          "value": 1
+        },
+        "right": {
+          "type": "BinaryNumber",
+          "operation": "Floor",
+          "left": {
+            "type": "BinaryNumber",
+            "operation": "Divide",
+            "left": {
+              "type": "InputNumber",
+              "input": "Day",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 5
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 0
+          }
+        }
+      }
+    }
+  },
+  "seed": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Day",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 71
+      }
+    },
+    "right": {
+      "type": "ConstantNumber",
+      "value": 74
+    }
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": []
+    },
+    {
+      "nodeId": "n9",
+      "label": "",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": []
+    },
+    {
+      "nodeId": "n19",
+      "label": "",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": []
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "freelance/2/0",
+      "title": "Maintenance testimony",
+      "company": "AEGIS SYSTEMS",
+      "contract": "Signal Lost",
+      "text": "An Aegis contractor logged an objection to a surveillance request. The objection was denied, but the timestamp proves someone knew before deployment."
+    },
+    {
+      "id": "freelance/2/1",
+      "title": "An unofficial record",
+      "company": "AEGIS SYSTEMS",
+      "contract": "Signal Lost",
+      "text": "Aegis lists this relay as retired. Its maintenance channel now carries volunteer dispatches, clinic appointments, and messages home."
+    },
+    {
+      "id": "freelance/2/2",
+      "title": "What the archive kept",
+      "company": "AEGIS SYSTEMS",
+      "contract": "Signal Lost",
+      "text": "A security analyst left a note in the archive: Protection means giving people somewhere safe to go. It does not mean following them there."
+    }
+  ]
+}

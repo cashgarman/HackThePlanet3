@@ -1,0 +1,128 @@
+{
+  "id": "delivery",
+  "title": "Delivery rewards",
+  "description": "",
+  "archiveCredits": 100,
+  "archiveXp": 15,
+  "archiveXpCap": 45,
+  "quietCredits": 100,
+  "quietXp": 20,
+  "rules": [
+    {
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "credits": {
+        "type": "InputNumber",
+        "input": "ContractCredits",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "xp": {
+        "type": "InputNumber",
+        "input": "ContractXp",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      }
+    },
+    {
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "credits": {
+        "type": "BinaryNumber",
+        "operation": "Multiply",
+        "left": {
+          "type": "InputNumber",
+          "input": "BonusFiles",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "InputNumber",
+          "input": "ArchiveCredits",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        }
+      },
+      "xp": {
+        "type": "BinaryNumber",
+        "operation": "Minimum",
+        "left": {
+          "type": "InputNumber",
+          "input": "ArchiveXpCap",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "BinaryNumber",
+          "operation": "Multiply",
+          "left": {
+            "type": "InputNumber",
+            "input": "BonusFiles",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "InputNumber",
+            "input": "ArchiveXp",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          }
+        }
+      }
+    },
+    {
+      "when": {
+        "type": "CompareCondition",
+        "comparison": "Less",
+        "left": {
+          "type": "InputNumber",
+          "input": "Trace",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "InputNumber",
+          "input": "QuietLimit",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        }
+      },
+      "credits": {
+        "type": "InputNumber",
+        "input": "QuietCredits",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "xp": {
+        "type": "InputNumber",
+        "input": "QuietXp",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      }
+    }
+  ]
+}

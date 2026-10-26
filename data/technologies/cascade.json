@@ -1,0 +1,63 @@
+{
+  "id": "cascade",
+  "title": "System cascade",
+  "description": "Disabling or capturing the hub reduces every firewall\u0027s security by two for the rest of the contract.",
+  "branch": "CROSSOVER",
+  "cost": 140,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 715,
+    "y": 310
+  },
+  "parents": [
+    "efficient",
+    "disrupt"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": [
+    {
+      "on": "ActionCompleted",
+      "onceKey": "cascade",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "NodeTagCondition",
+            "tag": "securityhub"
+          },
+          {
+            "type": "NotCondition",
+            "condition": {
+              "type": "NodeStateCondition",
+              "state": "DefenseActive"
+            }
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "SecurityEffect",
+          "targets": {
+            "scope": "All",
+            "nodeId": "",
+            "filter": {
+              "type": "NodeTagCondition",
+              "tag": "firewall"
+            }
+          },
+          "minimum": 1,
+          "amount": {
+            "type": "ConstantNumber",
+            "value": -2
+          }
+        },
+        {
+          "type": "LogEffect",
+          "message": "SYSTEM CASCADE // Firewall security reduced across the network."
+        }
+      ]
+    }
+  ]
+}

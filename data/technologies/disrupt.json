@@ -1,0 +1,21 @@
+{
+  "id": "disrupt",
+  "title": "Disrupt scanner",
+  "description": "Suppress a reachable scanner for 45 seconds. Takes 1.2 seconds with 1 base trace. Reusable while equipped.",
+  "branch": "CONTROL",
+  "cost": 45,
+  "waypointTier": 0,
+  "special": true,
+  "position": {
+    "x": 680,
+    "y": 460
+  },
+  "parents": [
+    "base"
+  ],
+  "grants": [
+    "disrupt"
+  ],
+  "modifiers": [],
+  "triggers": []
+}

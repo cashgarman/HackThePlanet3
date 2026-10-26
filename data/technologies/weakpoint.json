@@ -1,0 +1,45 @@
+{
+  "id": "weakpoint",
+  "title": "Weak-point analysis",
+  "description": "Scanned targets generate {modifier:0:reduction}% less hack trace. Requires both Recon and Intrusion roots.",
+  "branch": "CROSSOVER",
+  "cost": 130,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 500,
+    "y": 65
+  },
+  "parents": [
+    "wide",
+    "efficient"
+  ],
+  "grants": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "baseTrace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "ActionCondition",
+            "action": "hack",
+            "tag": ""
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Scanned"
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.75
+      }
+    }
+  ],
+  "triggers": []
+}

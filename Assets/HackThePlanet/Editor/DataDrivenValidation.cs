@@ -14,7 +14,7 @@ namespace HackThePlanet.Editor
         private static readonly List<string> results=new List<string>();
         private static void Check(bool pass,string message){if(!pass)throw new InvalidOperationException("FAILED / "+message);results.Add("PASS / "+message);}
         private static void Near(float actual,float expected,string message)=>Check(Mathf.Abs(actual-expected)<.0002f,message+" / "+actual.ToString("0.####"));
-        private static GameDefinition Root=>Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game");
+        private static GameDefinition Root=>GameData.Current.Game;
         private static void Finish(GameSimulation sim){GameValidation.FinishTask(sim);Check(sim.Active,"action remains within trace budget");}
         private static GameSimulation Developed(params string[] technologies)
         {
@@ -108,6 +108,8 @@ namespace HackThePlanet.Editor
             var rich = GameplayRichText.Format(intel);
             Check(rich.Contains("<color=") && rich.Contains("<b>") && rich.Contains("DISCOVERED"), "gameplay text palette bolds and colors tooltip terms");
             Check(GameplayRichText.Plain(rich) == intel, "gameplay rich text preserves readable copy");
+            var plural = GameplayRichText.Format("Scanners add pressure.");
+            Check(GameplayRichText.Plain(plural) == "Scanners add pressure." && plural.IndexOf("<color=", StringComparison.Ordinal) < plural.IndexOf("Scanners", StringComparison.Ordinal) && plural.LastIndexOf("Scanners", StringComparison.Ordinal) < plural.IndexOf("</color>", StringComparison.Ordinal), "gameplay rich text colors common plurals with the base term");
         }
         public sealed class Fixture : IDisposable
         {

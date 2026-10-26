@@ -1,0 +1,161 @@
+{
+  "id": "hack",
+  "title": "Hack system",
+  "description": "Take control to extend your access. Scan first for a cleaner, faster intrusion.",
+  "tags": [
+    "hack"
+  ],
+  "shortcut": "Alpha2",
+  "shortcutLabel": "2",
+  "legacyGroup": "hack",
+  "presentationPriority": 20,
+  "operatorTarget": false,
+  "queueable": true,
+  "initiallyAvailable": true,
+  "futureNeighborQueue": true,
+  "traceFree": false,
+  "visible": {
+    "type": "NotCondition",
+    "condition": {
+      "type": "NodeStateCondition",
+      "state": "Controlled"
+    }
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Scan to discover this system."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Reachable"
+      },
+      "message": "Control a connected neighbor first."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Controlled"
+        }
+      },
+      "message": "You already control this system."
+    }
+  ],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Controlled"
+        }
+      },
+      "message": "You already control this system."
+    }
+  ],
+  "duration": {
+    "type": "BinaryNumber",
+    "operation": "Divide",
+    "left": {
+      "type": "BinaryNumber",
+      "operation": "Add",
+      "left": {
+        "type": "ConstantNumber",
+        "value": 2.2
+      },
+      "right": {
+        "type": "BinaryNumber",
+        "operation": "Multiply",
+        "left": {
+          "type": "InputNumber",
+          "input": "Security",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 1.15
+        }
+      }
+    },
+    "right": {
+      "type": "StatNumber",
+      "stat": "hackSpeed"
+    }
+  },
+  "baseTrace": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 3
+    },
+    "right": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Security",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 1.7
+      }
+    }
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "SetStateEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "state": "Controlled",
+      "value": true
+    },
+    {
+      "type": "RevealEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "radius": {
+        "type": "StatNumber",
+        "stat": "revealRadius"
+      }
+    },
+    {
+      "type": "LogEffect",
+      "message": "CONTROL ESTABLISHED // {target}."
+    }
+  ]
+}

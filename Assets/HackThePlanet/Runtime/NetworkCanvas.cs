@@ -24,7 +24,8 @@ namespace HackThePlanet
                 default: return Hex("92A6B7");
             }
         }
-        public static Color Branch(string branch) => branch == "RECON" ? Cyan : branch == "INTRUSION" ? Amber : branch == "STEALTH" ? Violet : branch == "CONTROL" ? Red : Lime;
+        public static Color Branch(string branch) => branch == "RECON" ? Cyan : branch == "INTRUSION" ? Amber : branch == "STEALTH" ? Violet : branch == "CONTROL" ? Red
+            : branch == "CROSSOVER" ? Hex("F59BD0") : branch == "CORE" ? Hex("DCEAE4") : Lime;
     }
 
     // Small vector glyphs remain crisp at every workstation scale.

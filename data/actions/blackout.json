@@ -1,0 +1,108 @@
+{
+  "id": "blackout",
+  "title": "Blackout hub",
+  "description": "",
+  "tags": [
+    "blackout"
+  ],
+  "shortcut": "Alpha4",
+  "shortcutLabel": "4",
+  "legacyGroup": "disrupt",
+  "presentationPriority": 15,
+  "operatorTarget": false,
+  "queueable": true,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "AllCondition",
+    "conditions": [
+      {
+        "type": "NodeTagCondition",
+        "tag": "securityhub"
+      },
+      {
+        "type": "NodeStateCondition",
+        "state": "DefenseActive"
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Scan to discover this hub."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "DefenseActive"
+      },
+      "message": "This defense is already offline."
+    },
+    {
+      "condition": {
+        "type": "CompareCondition",
+        "comparison": "LessOrEqual",
+        "left": {
+          "type": "InputNumber",
+          "input": "ControlledDistance",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 3
+        }
+      },
+      "message": "Requires a discovered route within three hops of controlled access."
+    }
+  ],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    }
+  ],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 1.2
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "ApplyStatusEffect",
+      "status": "suppression",
+      "operatorStatus": false,
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "duration": {
+        "type": "ConstantNumber",
+        "value": 45
+      }
+    },
+    {
+      "type": "LogEffect",
+      "message": "DEFENSE SUPPRESSED // {target}."
+    }
+  ]
+}

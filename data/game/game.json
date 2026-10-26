@@ -1,0 +1,168 @@
+{
+  "id": "game",
+  "title": "Hack The Planet",
+  "description": "",
+  "companies": [
+    "company-0",
+    "company-1",
+    "company-2"
+  ],
+  "contracts": [
+    "quiet-copy",
+    "paper-trail",
+    "ghost-wire",
+    "glasshouse",
+    "dead-drop",
+    "last-light",
+    "freelance-0",
+    "freelance-1",
+    "freelance-2"
+  ],
+  "technologies": [
+    "base",
+    "wide",
+    "blueprint",
+    "signal",
+    "efficient",
+    "chain",
+    "selective",
+    "quiet",
+    "ghost",
+    "backdoor",
+    "disrupt",
+    "blackout",
+    "decoy",
+    "passive",
+    "weakpoint",
+    "cascade",
+    "bridge",
+    "buffer",
+    "waypoints-1",
+    "waypoints-2",
+    "waypoints-3",
+    "waypoints-4"
+  ],
+  "actions": [
+    "scan",
+    "hack",
+    "download",
+    "disrupt",
+    "blackout",
+    "bridge",
+    "backdoor",
+    "decoy"
+  ],
+  "nodeTypes": [
+    "gateway",
+    "workstation",
+    "relay",
+    "firewall",
+    "scanner",
+    "database",
+    "securityhub"
+  ],
+  "networks": [
+    "corporate-network"
+  ],
+  "hardware": [
+    "cpu",
+    "bandwidth",
+    "memory"
+  ],
+  "statuses": [
+    "suppression",
+    "trace-protection"
+  ],
+  "rewards": "delivery",
+  "career": "career",
+  "modifiers": [
+    {
+      "id": "scan-preparation-time",
+      "stat": "duration",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "ActionCondition",
+            "action": "hack",
+            "tag": ""
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Scanned"
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.85
+      }
+    },
+    {
+      "id": "scan-preparation-trace",
+      "stat": "baseTrace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "ActionCondition",
+            "action": "hack",
+            "tag": ""
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Scanned"
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.8
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "on": "OperationStarted",
+      "onceKey": "",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "effects": [
+        {
+          "type": "RevealEffect",
+          "targets": {
+            "scope": "Entry",
+            "nodeId": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "radius": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "on": "ControlEstablished",
+      "onceKey": "",
+      "when": {
+        "type": "NodeTagCondition",
+        "tag": "relay"
+      },
+      "effects": [
+        {
+          "type": "CounterEffect",
+          "key": "relay-controls",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

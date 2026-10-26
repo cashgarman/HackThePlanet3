@@ -1,0 +1,290 @@
+{
+  "terms": [
+    {
+      "phrase": "FULL INTEL",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "LIMITED INTEL",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "TOPOLOGY ONLY",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "NO INTEL",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.7372549,
+        "b": 0.4392157,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "DISCOVERED",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "NOT CONTROLLED",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.7372549,
+        "b": 0.4392157,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "CONTROLLED",
+      "regex": false,
+      "color": {
+        "r": 0.60784316,
+        "g": 0.98039216,
+        "b": 0.79607844,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "SECURITY \\d\u002B",
+      "regex": true,
+      "color": {
+        "r": 1,
+        "g": 0.7372549,
+        "b": 0.4392157,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "Detection",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.47058824,
+        "b": 0.42745098,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "ACTIVE SENSOR",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.47058824,
+        "b": 0.42745098,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "ACTIVE DEFENSE",
+      "regex": false,
+      "color": {
+        "r": 0.7294118,
+        "g": 0.6313726,
+        "b": 0.92941177,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "SUPPRESSED",
+      "regex": false,
+      "color": {
+        "r": 0.60784316,
+        "g": 0.98039216,
+        "b": 0.79607844,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "CONTRACT OBJECTIVE",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.7372549,
+        "b": 0.4392157,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "BONUS DATA",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": false
+    },
+    {
+      "phrase": "DATA COLLECTED",
+      "regex": false,
+      "color": {
+        "r": 0.60784316,
+        "g": 0.98039216,
+        "b": 0.79607844,
+        "a": 1
+      },
+      "bold": false
+    },
+    {
+      "phrase": "ARCHIVE",
+      "regex": false,
+      "color": {
+        "r": 0.8509804,
+        "g": 0.8156863,
+        "b": 0.69411767,
+        "a": 1
+      },
+      "bold": false
+    },
+    {
+      "phrase": "Scanner",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.47058824,
+        "b": 0.42745098,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "Gateway",
+      "regex": false,
+      "color": {
+        "r": 0.60784316,
+        "g": 0.98039216,
+        "b": 0.79607844,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "Workstation",
+      "regex": false,
+      "color": {
+        "r": 0.57254905,
+        "g": 0.6509804,
+        "b": 0.7176471,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "Relay",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "Firewall",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.7372549,
+        "b": 0.4392157,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "Security hub",
+      "regex": false,
+      "color": {
+        "r": 0.7294118,
+        "g": 0.6313726,
+        "b": 0.92941177,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "Database",
+      "regex": false,
+      "color": {
+        "r": 0.8509804,
+        "g": 0.8156863,
+        "b": 0.69411767,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "trace",
+      "regex": false,
+      "color": {
+        "r": 0.60784316,
+        "g": 0.98039216,
+        "b": 0.79607844,
+        "a": 1
+      },
+      "bold": false
+    },
+    {
+      "phrase": "Hack",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.7372549,
+        "b": 0.4392157,
+        "a": 1
+      },
+      "bold": false
+    },
+    {
+      "phrase": "Control tools",
+      "regex": false,
+      "color": {
+        "r": 1,
+        "g": 0.47058824,
+        "b": 0.42745098,
+        "a": 1
+      },
+      "bold": false
+    }
+  ]
+}

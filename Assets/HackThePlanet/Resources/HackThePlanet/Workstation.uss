@@ -181,6 +181,9 @@ ScrollView { flex-grow: 1; min-height: 0; }
 .result-credit { font-size: 29px; color: #c5f56b; }
 .result-xp { font-size: 29px; color: #60d8d0; }
 .result-trace { font-size: 17px; color: #e0b675; -unity-text-align: middle-right; }
+.result-bonus { font-size: 11px; letter-spacing: 0.6px; margin-top: 10px; color: #9eb4bc; }
+.result-bonus.lime { color: #c5f56b; }
+.result-bonus.amber { color: #e0b675; }
 .result-timeline { height: 168px; flex-grow: 0; flex-shrink: 0; margin-top: 13px; padding: 0; border-width: 1px; border-color: #2b414b; background-color: #0a151b; overflow: hidden; }
 .result-timeline .unity-scroll-view__content-viewport { flex-grow: 1; min-height: 0; }
 .result-timeline .unity-scroll-view__content-container { padding: 12px 4px 12px 12px; }

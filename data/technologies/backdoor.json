@@ -1,0 +1,21 @@
+{
+  "id": "backdoor",
+  "title": "Backdoor",
+  "description": "Once per operation, reclaim a discovered workstation or relay within three mapped hops of controlled access. Takes 0.8 seconds and produces no trace.",
+  "branch": "STEALTH",
+  "cost": 100,
+  "waypointTier": 0,
+  "special": true,
+  "position": {
+    "x": 135,
+    "y": 545
+  },
+  "parents": [
+    "quiet"
+  ],
+  "grants": [
+    "backdoor"
+  ],
+  "modifiers": [],
+  "triggers": []
+}

@@ -64,11 +64,16 @@ namespace HackThePlanet.Editor
                 Status("RUNNING / "+command);
                 switch(command)
                 {
-                    case "import-gameplay": DefaultGameplayAssets.Import();break;
+                    case "export-json": ContentMigration.Export();break;
+                    case "validate-json": ContentMigration.Validate();break;
+                    case "content-validate": ContentValidation.Run();break;
+                    case "content-editor": ContentEditorWindow.Open();break;
+                    case "import-gameplay": throw new InvalidOperationException("Legacy asset import is disabled. Use Content Editor to author JSON.");
                     case "refresh": AssetDatabase.Refresh();break;
                     case "balance-before": BalanceLab.CaptureBefore();break;
                     case "balance-after": BalanceLab.CaptureAfter();break;
                     case "data-validate": DataDrivenValidation.Run();break;
+                    case "balance-validate": BalanceValidation.Run();break;
                     case "setup": Setup();break;
                     case "validate": GameValidation.Run();break;
                     case "models": NetworkVisualValidation.Run();break;
@@ -108,12 +113,16 @@ namespace HackThePlanet.Editor
         public static void BuildWindows()
         {
             BuildWindowsAt("Builds/Windows");
+            string archive=Path.Combine(Project,"Builds/Hack-The-Planet-Windows.zip"), staged=archive+".writing";
+            if(File.Exists(staged))File.Delete(staged);
+            System.IO.Compression.ZipFile.CreateFromDirectory(Path.Combine(Project,"Builds/Windows"),staged,System.IO.Compression.CompressionLevel.Optimal,false);
+            if(File.Exists(archive))File.Replace(staged,archive,null);else File.Move(staged,archive);
         }
 
         private static void BuildWindowsAt(string output)
         {
             if(EditorApplication.isPlaying)throw new InvalidOperationException("Stop play mode before building.");
-            GameDefinitionValidator.ThrowIfInvalid(Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game"));
+            ContentMigration.Validate();
             Setup();Directory.CreateDirectory(Path.Combine(Project,output));Directory.CreateDirectory(Path.Combine(Project,"Artifacts"));
             var result=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName=Path.Combine(Project,output,"Hack The Planet.exe"),target=BuildTarget.StandaloneWindows64,options=BuildOptions.None});
             File.WriteAllText(Path.Combine(Project,"Artifacts/build-report.txt"),result.summary.result+"\nErrors: "+result.summary.totalErrors+"\nWarnings: "+result.summary.totalWarnings+"\nBytes: "+result.summary.totalSize+"\nTime: "+result.summary.totalTime);
@@ -160,8 +169,12 @@ namespace HackThePlanet.Editor
                         Check(app.ActivateVisibleControl("debug-menu"),"Debug submenu can be reopened.");smokePhase=407;return;
                     case 407:
                         Check(app.ActivateVisibleControl("debug-reset-game"),"Debug menu opens reset confirmation.");
+                        smokePhase=408;return;
+                    case 408:
                         Check(app.Root.Q<Button>("confirm-reset")!=null&&app.Root.Q<Button>("cancel-reset")!=null,"Debug reset confirmation exposes both choices.");
-                        Check(app.ActivateVisibleControl("cancel-reset")&&app.Root.Q<Button>("debug-back")!=null,"Cancel returns to Cheats / Debug without resetting.");
+                        Check(app.ActivateVisibleControl("cancel-reset"),"Cancel reset callback runs.");smokePhase=409;return;
+                    case 409:
+                        Check(app.Root.Q<Button>("debug-back")!=null,"Cancel returns to Cheats / Debug without resetting.");
                         Check(app.State.Career.credits==600+GameSimulation.DebugGrantAmount,"Cancel preserves debug-granted progress.");smokePhase=405;return;
                     case 405:
                         SendKey(app,KeyCode.Escape);smokePhase++;return;
@@ -181,6 +194,8 @@ namespace HackThePlanet.Editor
                         NetworkVisualValidation.CheckViewport(preview);
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/01-contract-exchange.png"));smokePhase=SessionState.GetBool("HTP.WaypointSmoke",false)?127:100;return;
                     case 100:
+                        app.SelectNode(app.State.PreferredNode(GameContent.Story[0],true));smokePhase=131;return;
+                    case 131:
                         NetworkVisualValidation.DoubleClickSelected(app.Root.Q<GraphViewport>());smokePhase=130;return;
                     case 130:
                         NetworkVisualValidation.CheckFocusedCard(app.Root.Q<GraphViewport>());
@@ -282,9 +297,12 @@ namespace HackThePlanet.Editor
                     case 10:
                         Check(app.ActivateVisibleControl("report-research"),"Research result link works.");smokePhase++;return;
                     case 11:
-                        Check(app.Root.Q<GraphViewport>()?.NodeCount==GameContent.Tech.Length&&app.Root.Q<Button>("tech-wide")!=null,
-                            "GraphExplorer renders selectable research technologies.");
+                        // Progressive reveal: only discovered technologies (and their direct children) are drawn.
+                        Check(app.Root.Q<GraphViewport>()?.NodeCount==app.State.Career.researchRevealed.Count&&app.State.Career.researchRevealed.Count<GameContent.Tech.Length&&app.Root.Q<Button>("tech-wide")!=null&&app.Root.Q("tech-signal")==null&&!app.State.ResearchVisible("signal"),
+                            "GraphExplorer reveals only connected research: "+app.Root.Q<GraphViewport>()?.NodeCount+" of "+GameContent.Tech.Length+" technologies drawn.");
+                        Check(app.ActivateVisibleControl("tech-wide"),"Research node selection works.");
                         Check(app.ActivateVisibleControl("unlock"),"Research purchase works.");Check(app.State.Has("wide"),"Tech purchased using earned XP.");
+                        Check(app.State.ResearchVisible("signal"),"Purchasing Wide Scan reveals its connected research.");
                         // Preview a developed build for the research screenshot without touching the real career.
                         app.State.Career.xp=360;app.State.BuyTech("quiet");app.State.BuyTech("efficient");app.SelectTech("passive");smokePhase++;return;
                     case 12:

@@ -1,0 +1,44 @@
+{
+  "id": "blueprint",
+  "title": "Blueprint",
+  "description": "Start every contract with the objective and all its neighboring systems revealed.",
+  "branch": "RECON",
+  "cost": 90,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 135,
+    "y": 85
+  },
+  "parents": [
+    "wide"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": [
+    {
+      "on": "OperationStarted",
+      "onceKey": "",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "effects": [
+        {
+          "type": "RevealEffect",
+          "targets": {
+            "scope": "All",
+            "nodeId": "",
+            "filter": {
+              "type": "NodeStateCondition",
+              "state": "Objective"
+            }
+          },
+          "radius": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    }
+  ]
+}

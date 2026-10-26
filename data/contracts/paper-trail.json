@@ -1,0 +1,80 @@
+{
+  "id": "paper-trail",
+  "title": "Paper Trail",
+  "description": "Morrow\u0027s automated debt system has been charging a neighborhood twice. Correct the ledger and its backup mirror so the change survives the next sync.",
+  "company": "company-1",
+  "network": "corporate-network",
+  "client": "JUNE // public-interest archivist",
+  "tag": "RECORD ALTERATION",
+  "objective": "Correct Research vault AND Backup mirror.",
+  "condition": "Below 60% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "aftermath": "Thousands of duplicate balances disappear. Morrow replaces a maintenance identity; its perimeter gets a little stronger.",
+  "displayKind": "Alter",
+  "recurring": false,
+  "requiredWins": 1,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 850
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 65
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 222
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "",
+      "actionLabel": "Correct record",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": []
+    },
+    {
+      "nodeId": "n20",
+      "label": "",
+      "actionLabel": "Correct record",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": []
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "paper-trail/0",
+      "title": "Rounding errors",
+      "company": "MORROW FINANCIAL",
+      "contract": "Paper Trail",
+      "text": "MORROW / INCIDENT 441: Duplicate balances correlate exactly with the migration date. Customer support has filed nineteen matching reports. The classification remains \u0027individual payment dispute\u0027."
+    },
+    {
+      "id": "paper-trail/1",
+      "title": "The second signature",
+      "company": "MORROW FINANCIAL",
+      "contract": "Paper Trail",
+      "text": "Ledger maintenance memo: Both primary and mirror require correction. An automated reconciliation job restores whichever record carries the older authorization stamp. A single correction will disappear overnight."
+    },
+    {
+      "id": "paper-trail/2",
+      "title": "A letter never sent",
+      "company": "MORROW FINANCIAL",
+      "contract": "Paper Trail",
+      "text": "Unsent message from a collections clerk: I can see the charge twice. I can see the payment once. The script tells me to say the account is accurate. I am keeping copies of everything."
+    }
+  ]
+}

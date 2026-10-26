@@ -1,0 +1,20 @@
+{
+  "id": "gateway",
+  "title": "Gateway",
+  "description": "A secondhand rig. A private connection. A place to begin.",
+  "glyph": "Gateway",
+  "color": {
+    "r": 0.60784316,
+    "g": 0.98039216,
+    "b": 0.79607844,
+    "a": 1
+  },
+  "tags": [
+    "gateway"
+  ],
+  "security": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "auras": []
+}

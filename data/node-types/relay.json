@@ -1,0 +1,20 @@
+{
+  "id": "relay",
+  "title": "Relay",
+  "description": "A stepping stone to another part of the network. Maintenance paths are often quieter than the front door.",
+  "glyph": "Relay",
+  "color": {
+    "r": 0.39607844,
+    "g": 0.8509804,
+    "b": 0.92156863,
+    "a": 1
+  },
+  "tags": [
+    "relay"
+  ],
+  "security": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "auras": []
+}

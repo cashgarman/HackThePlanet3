@@ -2,15 +2,15 @@
 
 For setup, step-by-step balance and custom-mission tutorials, building, and save compatibility, start with the [modding guide](MODDING.md). This document is the rules and runtime reference.
 
-The shipped rules live in `Assets/HackThePlanet/Resources/HackThePlanet/Gameplay/Game.asset`. Its 54 assets contain the current companies, contracts, lore, network generation, node roles, tools, research, hardware, statuses, rewards, and career policies. Runtime code supplies reusable operations; these assets select and compose them.
+The shipped rules live in the project-root `data/` directory, or beside the executable in a built player's `data/` directory. The versioned manifest registers one JSON file per definition. JSON includes companies, contracts, lore, networks, node roles, tools, research, hardware, statuses, rewards, career policies and presentation profiles. Runtime code supplies reusable operations; JSON selects and composes them into temporary ScriptableObjects. Historical `.asset` files remain as migration sources and do not supply runtime defaults.
 
 ## Edit or add content
 
-Use **Create → Hack The Planet** in the Project window. Give a definition a stable ID and add its reference to the corresponding array in **Game.asset**. References between assets use Unity object fields; saves use IDs. Changing a filename or display title does not change identity. Renaming or deleting an ID can invalidate a v2 save.
+Use **Hack The Planet → Content Editor** for typed editing, descriptions, references, validation and named per-entry revisions. New and Duplicate update manifest and root registrations; Save All commits structural changes together. You can also edit JSON directly. Definition references and saves use stable IDs; changing a filename or title does not change identity. Renaming or deleting an ID can invalidate a v2 save.
 
-Rule fields have a type picker. Expand the selected rule to edit its operands, conditions, selectors, or effects. Inspectors show catalog errors and provide **Validate Gameplay Catalog**. The same validation runs before a player build; missing references and invalid rule graphs stop the build.
+Rule fields have a type picker. Expand the selected rule to edit operands, conditions, selectors or effects. JSON uses explicit rule `type` discriminators, enum names and ID references. Validate All checks drafts; **JSON → Validate Data** checks disk files. The same shared validation runs before a player build; missing references and invalid rule graphs stop the build.
 
-Assets are compiled into a detached catalog. An existing simulation keeps that snapshot. Inspector edits and asset imports invalidate the default cache for the next simulation; restart Play mode to apply a full content change to the workstation. Inject `new GameCatalog(gameDefinition)` to run an independent configuration.
+JSON loads once per launch or Play session and populates an owned graph of ScriptableObjects. These compile into a detached catalog; existing simulations retain their snapshot. Restart Play mode to apply saved changes. Missing/invalid data blocks initialization and saving instead of falling back to assets. Inject `new GameCatalog(gameDefinition)` to run an independent configuration.
 
 ### Actions and research
 
@@ -48,7 +48,7 @@ An **Authored** network contains arbitrary node IDs, positions, initial states, 
 
 The **Parallel Routes** generator preserves the current seeded 3D networks. Its asset defines route tiers and lengths, node counts, role references, reserved identities, direct routes, secondary targets, sensors, archives, security expressions, and placement settings. `Step`, `Lane`, and `SafeLane` are available to its formulas. `ControlledDistance` counts hops along discovered routes to controlled access; hidden links never satisfy range requirements. Changing seed retains deterministic generation for a fixed configuration. Use an Authored network when a different topology does not fit this generator.
 
-Contract reward, XP, seed, and difficulty expressions can reference career day. Repeatable contracts use the same rule system as story contracts. Lore fragments live on contract assets and are assigned through archive indices.
+Contract reward, XP, seed, and difficulty expressions can reference career day. Repeatable contracts use the same rule system as story contracts. Lore fragments live in contract definitions and are assigned through archive indices.
 
 Difficulty values map to **Easy** (1 or below), **Medium** (2), and **Hard** (3 or above). These tiers control both offline intel and base delivery rewards. Easy previews expose all systems, types and objectives; Medium previews preserve geometry and connections but use one anonymous node type without ownership, objective emphasis, system names or a type legend; Hard previews instantiate no network renderer and display `NO INTEL AVAILABLE` over procedural static. Live operations always use normal discovered-node presentation and research reveal rules.
 
@@ -70,10 +70,11 @@ Research records the XP actually spent, so future price changes do not reduce a 
 
 ## Verification
 
-- **Hack The Planet → Validate Gameplay Assets** checks the authored catalog.
+- **Hack The Planet → Validate Gameplay Assets** and **JSON → Validate Data** check the JSON catalog.
+- **JSON → Run Content and History Validation** checks original-asset parity, property descriptions, codecs, references, history, conflicts and interrupted-save recovery in an isolated sandbox.
 - **Run Simulation Validation** checks the campaign, network seed sweep, lore, economy, saves, and reset behavior.
 - **Run Data Driven Validation** additionally compares 600 captured network hashes, checks all existing research effects, rejects invalid rule graphs, and exercises an injected configuration with a new action, technology, node type, hardware and tier, and four-node contract.
 - **Run Workstation Smoke Test** exercises actual UI callbacks and authored shortcuts for shipped content and the injected configuration. Batch runs render the UI into a texture and verify nonblank pixels before writing captures.
-- **Build Windows Player** validates assets before compiling the player.
+- **Build Windows Player** validates JSON before compiling and packages `data/` beside the executable; standard Windows builds use the same callbacks.
 
 **Balance → Validate Refined Career** also measures 600 build/route/seed combinations and checks preparation, ability limits, cancellation, research refunds, and early build affordability. Reports and captures are written to `Artifacts/`. The captured pre-refactor fixture is `Artifacts/gameplay-baseline.json`. The default import utility is an editor-only conversion aid: it refuses to overwrite an existing root and never supplies runtime fallback data.

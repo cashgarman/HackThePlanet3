@@ -1,0 +1,7 @@
+{
+  "id": "suppression",
+  "title": "Defense suppression",
+  "description": "",
+  "disablesDefense": true,
+  "preventsTrace": false
+}

@@ -62,12 +62,13 @@ namespace HackThePlanet.Editor
         private void OnEnable()=>RefreshErrors();
         private void RefreshErrors()
         {
-            var root=AssetDatabase.LoadAssetAtPath<GameDefinition>(DefaultGameplayAssets.Folder+"/Game.asset");
-            errors=root==null?Array.Empty<string>():GameDefinitionValidator.Validate(root).ToArray();
+            try { using(var data=ContentJson.Load(GameData.DirectoryPath)) errors=Array.Empty<string>(); }
+            catch(Exception ex) { errors=new[]{ex.Message}; }
         }
         public override void OnInspectorGUI()
         {
-            if(DrawDefaultInspector()){GameCatalog.InvalidateDefault();RefreshErrors();}
+            EditorGUILayout.HelpBox("Historical asset. Authoritative content is JSON in /data. Use Hack The Planet > Content Editor.",MessageType.Info);
+            using(new EditorGUI.DisabledScope(true)) DrawDefaultInspector();
             if(GUILayout.Button("Validate Gameplay Catalog"))RefreshErrors();
             foreach(var error in errors.Take(12))EditorGUILayout.HelpBox(error,MessageType.Error);
             if(errors.Length>12)EditorGUILayout.HelpBox((errors.Length-12)+" more catalog errors.",MessageType.Error);
@@ -75,7 +76,7 @@ namespace HackThePlanet.Editor
         [MenuItem("Hack The Planet/Validate Gameplay Assets")]
         public static void ValidateAssets()
         {
-            GameDefinitionValidator.ThrowIfInvalid(Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game"));Debug.Log("Gameplay asset validation passed.");
+            ContentMigration.Validate();
         }
     }
     public sealed class GameplayBuildValidation : IPreprocessBuildWithReport
@@ -83,7 +84,7 @@ namespace HackThePlanet.Editor
         public int callbackOrder=>0;
         public void OnPreprocessBuild(BuildReport report)
         {
-            try{GameDefinitionValidator.ThrowIfInvalid(Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game"));}
+            try{using(var data=ContentJson.Load(GameData.DirectoryPath)) { }}
             catch(Exception ex){throw new BuildFailedException(ex.Message);}
         }
     }
@@ -91,8 +92,7 @@ namespace HackThePlanet.Editor
     {
         private static void OnPostprocessAllAssets(string[] imported,string[] deleted,string[] moved,string[] previous)
         {
-            if(imported.Concat(deleted).Concat(moved).Concat(previous).Any(path=>path.StartsWith(DefaultGameplayAssets.Folder,StringComparison.Ordinal)&&path.EndsWith(".asset",StringComparison.Ordinal)))GameCatalog.InvalidateDefault();
-            if(imported.Concat(moved).Any(path=>path.EndsWith("GameplayTextPalette.asset",StringComparison.Ordinal)))GameplayRichText.ReloadPalette();
+            // Historical assets no longer invalidate a launch-loaded content snapshot.
         }
     }
 
@@ -100,7 +100,6 @@ namespace HackThePlanet.Editor
     {
         private const string Path = "Assets/HackThePlanet/Resources/HackThePlanet/GameplayTextPalette.asset";
 
-        [MenuItem("Hack The Planet/Initialize Gameplay Text Palette")]
         public static void InitializePalette()
         {
             var palette = AssetDatabase.LoadAssetAtPath<GameplayTextPalette>(Path);

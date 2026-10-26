@@ -1,0 +1,65 @@
+{
+  "id": "cpu",
+  "title": "Parallel processor",
+  "description": "Improves performance for every operation.",
+  "category": "PROCESSING",
+  "statLabel": "HACK SPEED",
+  "displayedStat": "hackSpeed",
+  "requirements": [],
+  "tiers": [
+    {
+      "price": 350,
+      "modifiers": [
+        {
+          "id": "",
+          "stat": "hackSpeed",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "price": 800,
+      "modifiers": [
+        {
+          "id": "",
+          "stat": "hackSpeed",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "price": 1450,
+      "modifiers": [
+        {
+          "id": "",
+          "stat": "hackSpeed",
+          "priority": 0,
+          "operation": "Add",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 0.2
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "decoy",
+  "title": "Decoy process",
+  "description": "",
+  "tags": [
+    "decoy"
+  ],
+  "shortcut": "None",
+  "shortcutLabel": "",
+  "legacyGroup": "decoy",
+  "presentationPriority": 50,
+  "operatorTarget": true,
+  "queueable": false,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": true,
+  "visible": {
+    "type": "ResearchCondition",
+    "technology": "decoy",
+    "equipped": true
+  },
+  "requirements": [],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    }
+  ],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "effects": [
+    {
+      "type": "TraceEffect",
+      "amount": {
+        "type": "ConstantNumber",
+        "value": -12
+      }
+    },
+    {
+      "type": "ApplyStatusEffect",
+      "status": "trace-protection",
+      "operatorStatus": true,
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "duration": {
+        "type": "ConstantNumber",
+        "value": 10
+      }
+    },
+    {
+      "type": "LogEffect",
+      "message": "DECOY ACTIVE // Trace reduced. Trace growth suspended."
+    }
+  ]
+}

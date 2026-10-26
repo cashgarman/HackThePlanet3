@@ -1,0 +1,74 @@
+{
+  "id": "signal",
+  "title": "Signal analysis",
+  "description": "Scans take half the usual time and produce no base trace. Prepared hacks generate another {modifier:2:reduction}% less trace. Active sensors can still detect the scan.",
+  "branch": "RECON",
+  "cost": 60,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 135,
+    "y": 220
+  },
+  "parents": [
+    "wide"
+  ],
+  "grants": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "duration",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "ActionCondition",
+        "action": "scan",
+        "tag": ""
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.5
+      }
+    },
+    {
+      "id": "",
+      "stat": "baseTrace",
+      "priority": 0,
+      "operation": "Override",
+      "when": {
+        "type": "ActionCondition",
+        "action": "scan",
+        "tag": ""
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0
+      }
+    },
+    {
+      "id": "signal-prepared-trace",
+      "stat": "baseTrace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "ActionCondition",
+            "action": "hack",
+            "tag": ""
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Scanned"
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.85
+      }
+    }
+  ],
+  "triggers": []
+}

@@ -1,0 +1,7 @@
+{
+  "id": "trace-protection",
+  "title": "Trace protection",
+  "description": "",
+  "disablesDefense": false,
+  "preventsTrace": true
+}

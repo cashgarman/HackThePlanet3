@@ -1,0 +1,23 @@
+{
+  "MouseProximityReveal": true,
+  "RevealInnerRadius": 40,
+  "RevealOuterRadius": 180,
+  "RevealFadeSeconds": 0.15,
+  "KeepSelectedLabelVisible": true,
+  "TypeFontSize": 9,
+  "NameFontSize": 10,
+  "MetaFontSize": 8,
+  "BackgroundColor": {
+    "r": 0.02,
+    "g": 0.03,
+    "b": 0.05,
+    "a": 0.5
+  },
+  "Padding": 3,
+  "CornerRadius": 3,
+  "MinWidth": 56,
+  "MaxWidth": 160,
+  "AboveNodeGap": 4,
+  "LabelSpacing": 8,
+  "StackRows": 4
+}

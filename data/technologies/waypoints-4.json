@@ -1,0 +1,19 @@
+{
+  "id": "waypoints-4",
+  "title": "Waypoints IV",
+  "description": "Place four waypoints. Select one to continuously show the shortest route from the gateway, including undiscovered systems.",
+  "branch": "RECON",
+  "cost": 120,
+  "waypointTier": 4,
+  "special": false,
+  "position": {
+    "x": 760,
+    "y": -75
+  },
+  "parents": [
+    "waypoints-3"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": []
+}

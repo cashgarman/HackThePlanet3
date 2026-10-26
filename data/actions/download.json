@@ -1,0 +1,205 @@
+{
+  "id": "download",
+  "title": "Download files",
+  "description": "Secure the selected objective or optional archive, then extract to bank its rewards.",
+  "tags": [
+    "download"
+  ],
+  "shortcut": "Alpha3",
+  "shortcutLabel": "3",
+  "legacyGroup": "download",
+  "presentationPriority": 0,
+  "operatorTarget": false,
+  "queueable": true,
+  "initiallyAvailable": true,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "AllCondition",
+    "conditions": [
+      {
+        "type": "AnyCondition",
+        "conditions": [
+          {
+            "type": "NodeStateCondition",
+            "state": "Objective"
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Bonus"
+          }
+        ]
+      },
+      {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Collected"
+        }
+      },
+      {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeTagCondition",
+          "tag": "securityhub"
+        }
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Scan to discover this system."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Reachable"
+      },
+      "message": "Control a connected neighbor first."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "message": "Hack this system before recovering its files."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Collected"
+        }
+      },
+      "message": "Files already secured."
+    },
+    {
+      "condition": {
+        "type": "AnyCondition",
+        "conditions": [
+          {
+            "type": "NodeStateCondition",
+            "state": "Objective"
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Bonus"
+          }
+        ]
+      },
+      "message": "No contract files or optional archives on this node."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeTagCondition",
+          "tag": "securityhub"
+        }
+      },
+      "message": "Control the hub to satisfy this objective."
+    }
+  ],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    }
+  ],
+  "duration": {
+    "type": "BinaryNumber",
+    "operation": "Divide",
+    "left": {
+      "type": "ConditionalNumber",
+      "when": {
+        "type": "NodeStateCondition",
+        "state": "Objective"
+      },
+      "yes": {
+        "type": "ConstantNumber",
+        "value": 5.5
+      },
+      "no": {
+        "type": "ConstantNumber",
+        "value": 4
+      }
+    },
+    "right": {
+      "type": "StatNumber",
+      "stat": "transferSpeed"
+    }
+  },
+  "baseTrace": {
+    "type": "ConditionalNumber",
+    "when": {
+      "type": "NodeStateCondition",
+      "state": "Objective"
+    },
+    "yes": {
+      "type": "ConstantNumber",
+      "value": 8
+    },
+    "no": {
+      "type": "ConstantNumber",
+      "value": 6
+    }
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "SetStateEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "state": "Collected",
+      "value": true
+    },
+    {
+      "type": "ConditionalEffect",
+      "when": {
+        "type": "NodeStateCondition",
+        "state": "Objective"
+      },
+      "effects": [
+        {
+          "type": "LogEffect",
+          "message": "OBJECTIVE SECURED // {target}."
+        }
+      ]
+    },
+    {
+      "type": "ConditionalEffect",
+      "when": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Objective"
+        }
+      },
+      "effects": [
+        {
+          "type": "LogEffect",
+          "message": "OPTIONAL ARCHIVE // \u002B{archiveCredits} cr / \u002B{archiveXp} XP on successful extraction."
+        }
+      ]
+    },
+    {
+      "type": "RecoverLoreEffect"
+    }
+  ]
+}

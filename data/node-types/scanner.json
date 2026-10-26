@@ -1,0 +1,66 @@
+{
+  "id": "scanner",
+  "title": "Scanner",
+  "description": "Adds trace to every active task while any adjacent node is controlled. Hack it to switch it off permanently, or suppress it with Control tools.",
+  "glyph": "Scanner",
+  "color": {
+    "r": 1,
+    "g": 0.47058824,
+    "b": 0.42745098,
+    "a": 1
+  },
+  "tags": [
+    "scanner"
+  ],
+  "security": {
+    "type": "RandomNumber",
+    "minimum": 1,
+    "maximum": 2
+  },
+  "auras": [
+    {
+      "id": "scanner-pressure",
+      "adjacentOnly": false,
+      "stack": true,
+      "source": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "NodeStateCondition",
+            "state": "DefenseActive"
+          },
+          {
+            "type": "CompareCondition",
+            "comparison": "Greater",
+            "left": {
+              "type": "InputNumber",
+              "input": "NeighborCount",
+              "key": "",
+              "filter": {
+                "type": "NodeStateCondition",
+                "state": "Controlled"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "modifier": {
+        "id": "",
+        "stat": "tracePressure",
+        "priority": 0,
+        "operation": "Add",
+        "when": {
+          "type": "AlwaysCondition"
+        },
+        "value": {
+          "type": "ConstantNumber",
+          "value": 0.18
+        }
+      }
+    }
+  ]
+}

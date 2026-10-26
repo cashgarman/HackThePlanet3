@@ -86,9 +86,11 @@ namespace HackThePlanet
         public GraphViewport(Career career, string selected, Action<string> select, GraphCameraState cameraState = null, GameCatalog catalog = null)
             : this(BuildResearch(career,catalog??GameCatalog.Default), selected, select, true, null, cameraState)
         {
-            foreach (var tech in (catalog ?? GameCatalog.Default).Technologies)
-                nodeIntel[tech.id] = tech.branch + " / " + (career.unlocked.Contains(tech.id) ? "UNLOCKED" : tech.cost + " XP")
-                    + "\n" + tech.description;
+            var technologies = (catalog ?? GameCatalog.Default).Technologies.ToDictionary(t => t.id);
+            foreach (var id in scene.Nodes.Keys)
+                nodeIntel[id] = DescribeTechnology(technologies[id], career, technologies);
+            foreach (var pair in nodeButtons)
+                if (nodeIntel.TryGetValue(pair.Key, out var intel)) pair.Value.tooltip = intel;
             UpdateFocusedCard();
         }
 
@@ -130,7 +132,7 @@ namespace HackThePlanet
             yaw = savedCamera.Yaw;
             pitch = savedCamera.Pitch;
             PlaceCamera();
-            var resources = new GraphResourceConfiguration();
+            var resources = GameData.Presentation(false);
             if (!research) resources = NetworkAppearance.Create(out networkSettings);
             session = GraphRenderingSession.Initialize(camera, resources);
             session.Layout.Bind(scene);
@@ -393,21 +395,44 @@ namespace HackThePlanet
             return scene;
         }
 
+        internal static string DescribeTechnology(Technology tech, Career career, IReadOnlyDictionary<string, Technology> all)
+        {
+            string Title(string id) => all.TryGetValue(id, out var parent) ? parent.title : id;
+            bool owned = career.unlocked.Contains(tech.id);
+            bool ready = tech.parents.All(career.unlocked.Contains);
+            string status = owned ? "UNLOCKED"
+                : !ready ? "LOCKED / REQUIRES " + string.Join(" + ", tech.parents.Select(Title))
+                : career.xp >= tech.cost ? "AVAILABLE / " + tech.cost + " XP"
+                : tech.cost + " XP / NEED " + (tech.cost - career.xp) + " MORE";
+            var lines = new List<string> { tech.branch + (tech.special ? " / ABILITY" : " / PASSIVE"), status, tech.description };
+            if (!owned && tech.parents.Length > 1) lines.Add("BOTH parent technologies required.");
+            return string.Join("\n", lines);
+        }
+
         private static GraphScene BuildResearch(Career career,GameCatalog catalog)
         {
             var document = new GraphDocument("workstation-research", "Research network");
             var schema = new GraphSchema();
+            // Each branch has a bright type for owned nodes and a dimmed twin for revealed but locked nodes.
             foreach (var branch in catalog.Technologies.Select(t => t.branch).Distinct())
+            {
                 schema.Register(new GraphNodeTypeDefinition(branch, branch, "default",
                     Palette.Branch(branch), .95f));
+                schema.Register(new GraphNodeTypeDefinition(LockedType(branch), branch, "default",
+                    LockedColor(Palette.Branch(branch)), .95f));
+            }
             schema.Register(new GraphRelationDefinition("requires", "Requires", Palette.Cyan));
-            foreach (var tech in catalog.Technologies)
-                document.UpsertNode(new GraphNodeRecord(tech.id, tech.branch, tech.title,new Dictionary<string,GraphValue>{["affordable"]=GraphValue.From(!career.unlocked.Contains(tech.id)&&tech.cost<=career.xp&&tech.parents.All(career.unlocked.Contains))}));
-            foreach (var tech in catalog.Technologies)
-                foreach (var parent in tech.parents)
+            // Progressive reveal: only discovered technologies (root, owned nodes and their direct
+            // children) enter the document. An edge is drawn only when both of its ends are visible.
+            var visible = catalog.Technologies.Where(t => career.researchRevealed.Contains(t.id)).ToArray();
+            var visibleIds = new HashSet<string>(visible.Select(t => t.id));
+            foreach (var tech in visible)
+                document.UpsertNode(new GraphNodeRecord(tech.id, career.unlocked.Contains(tech.id) ? tech.branch : LockedType(tech.branch), tech.title,new Dictionary<string,GraphValue>{["affordable"]=GraphValue.From(!career.unlocked.Contains(tech.id)&&tech.cost<=career.xp&&tech.parents.All(career.unlocked.Contains))}));
+            foreach (var tech in visible)
+                foreach (var parent in tech.parents.Where(visibleIds.Contains))
                     document.UpsertEdge(new GraphEdgeRecord(parent + ">" + tech.id, parent, tech.id, "requires"));
             var scene = new GraphScene(document, schema);
-            foreach (var tech in catalog.Technologies)
+            foreach (var tech in visible)
             {
                 var node = scene.Nodes[tech.id];
                 // Research branches occupy distinct depth bands, with individual nodes
@@ -420,10 +445,13 @@ namespace HackThePlanet
                 node.Position = new Vector3((tech.position.x - 500) / 43f,
                     (310 - tech.position.y) / 43f, nodeDepth);
                 node.Pinned = true;
-                node.Emphasis = career.unlocked.Contains(tech.id) ? ToolEmphasis.None : ToolEmphasis.Done;
             }
             return scene;
         }
+
+        // Locked research keeps its branch hue, muted toward the background so ownership still reads at a glance.
+        private static string LockedType(string branch) => branch + "-locked";
+        private static Color LockedColor(Color branch) => Color.Lerp(branch, new Color(.07f, .1f, .12f, 1f), .62f);
 
         public void Tick(GameSimulation state, SignalEffects effects)
         {
@@ -657,10 +685,11 @@ namespace HackThePlanet
             savedCamera.Yaw = yaw;
             savedCamera.Pitch = pitch;
             session.Dispose();
-            if (networkSettings != null) Object.Destroy(networkSettings);
+            if (networkSettings != null) DestroyOwned(networkSettings);
             if(camera!=null)camera.targetTexture = null;
-            if(texture!=null){texture.Release();Object.Destroy(texture);}
-            if(camera!=null)Object.Destroy(camera.gameObject);
+            if(texture!=null){texture.Release();DestroyOwned(texture);}
+            if(camera!=null)DestroyOwned(camera.gameObject);
         }
+        private static void DestroyOwned(Object obj) { if (Application.isPlaying) Object.Destroy(obj); else Object.DestroyImmediate(obj); }
     }
 }
