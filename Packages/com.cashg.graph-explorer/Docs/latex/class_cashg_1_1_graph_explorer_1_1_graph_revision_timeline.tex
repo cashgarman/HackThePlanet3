@@ -1,0 +1,219 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+
+
+Revision ordering and branch lanes; snapshot loading is owned by the host.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ad689b3ec902b3a7b1fadd142ac6fe607}{Replace}} (IEnumerable$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}} $>$ ordered)
+\begin{DoxyCompactList}\small\item\em Replaces the revisions in timeline order. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a55f9659f84b8af95f4dd46898fbfb9ca}{Try\+Get}} (string id, out \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}} revision)
+\begin{DoxyCompactList}\small\item\em Attempts to find a revision by identifier. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a3bf7fba90fff42aca3ae85a457c1be1d}{Mark\+Ready}} (string id, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_change_summary}{Graph\+Revision\+Change\+Summary}} changes)
+\begin{DoxyCompactList}\small\item\em Marks a revision ready and assigns its change summary. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_af93f9a075872a397bff6bdc113ad33e1}{Request\+Selection}} (string id)
+\begin{DoxyCompactList}\small\item\em Requests selection of the revision with the supplied identifier. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a455d67d12d572bb84bdd27930f5f2dbc}{Confirm\+Selection}} (string id)
+\begin{DoxyCompactList}\small\item\em Confirms the selection of a revision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ae8b3447c846bae233a5c57e781ffba8e}{Revisions}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the ordered revisions in the timeline. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ab52d5e3d0d92cd9f12debf9e1620dc6e}{Selected}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the currently selected revision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a4805583bc5a45bfe0fc657febf22aafa}{Changed}}
+\begin{DoxyCompactList}\small\item\em Occurs when timeline content or selection changes. \end{DoxyCompactList}\item 
+Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a5eec7a7bff3f4d2e57ac6c2d1e7d0b03}{Selection\+Requested}}
+\begin{DoxyCompactList}\small\item\em Occurs when a revision selection is requested. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Revision ordering and branch lanes; snapshot loading is owned by the host. 
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00174}{174}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a455d67d12d572bb84bdd27930f5f2dbc}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!ConfirmSelection@{ConfirmSelection}}
+\index{ConfirmSelection@{ConfirmSelection}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{ConfirmSelection()}{ConfirmSelection()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a455d67d12d572bb84bdd27930f5f2dbc} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Confirm\+Selection (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Confirms the selection of a revision. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Revision identifier.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00241}{241}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a3bf7fba90fff42aca3ae85a457c1be1d}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!MarkReady@{MarkReady}}
+\index{MarkReady@{MarkReady}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{MarkReady()}{MarkReady()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a3bf7fba90fff42aca3ae85a457c1be1d} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Mark\+Ready (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_change_summary}{Graph\+Revision\+Change\+Summary}}}]{changes}{}\end{DoxyParamCaption})}
+
+
+
+Marks a revision ready and assigns its change summary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Revision identifier.\\
+\hline
+{\em changes} & Computed change summary.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00222}{222}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ad689b3ec902b3a7b1fadd142ac6fe607}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!Replace@{Replace}}
+\index{Replace@{Replace}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{Replace()}{Replace()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ad689b3ec902b3a7b1fadd142ac6fe607} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Replace (\begin{DoxyParamCaption}\item[{IEnumerable$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}} $>$}]{ordered}{}\end{DoxyParamCaption})}
+
+
+
+Replaces the revisions in timeline order. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ordered} & Revisions to install.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00189}{189}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_af93f9a075872a397bff6bdc113ad33e1}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!RequestSelection@{RequestSelection}}
+\index{RequestSelection@{RequestSelection}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{RequestSelection()}{RequestSelection()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_af93f9a075872a397bff6bdc113ad33e1} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Request\+Selection (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Requests selection of the revision with the supplied identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Revision identifier.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00232}{232}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a55f9659f84b8af95f4dd46898fbfb9ca}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a55f9659f84b8af95f4dd46898fbfb9ca} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Try\+Get (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{out \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}}}]{revision}{}\end{DoxyParamCaption})}
+
+
+
+Attempts to find a revision by identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Revision identifier.\\
+\hline
+{\em revision} & Receives the revision when found.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the identifier exists.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00214}{214}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ae8b3447c846bae233a5c57e781ffba8e}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!Revisions@{Revisions}}
+\index{Revisions@{Revisions}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{Revisions}{Revisions}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ae8b3447c846bae233a5c57e781ffba8e} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Revisions\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the ordered revisions in the timeline. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00179}{179}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ab52d5e3d0d92cd9f12debf9e1620dc6e}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!Selected@{Selected}}
+\index{Selected@{Selected}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{Selected}{Selected}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_ab52d5e3d0d92cd9f12debf9e1620dc6e} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}} Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Selected\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the currently selected revision. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00181}{181}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_doc-event-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a4805583bc5a45bfe0fc657febf22aafa}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!Changed@{Changed}}
+\index{Changed@{Changed}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{Changed}{Changed}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a4805583bc5a45bfe0fc657febf22aafa} 
+Action Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Changed}
+
+
+
+Occurs when timeline content or selection changes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00183}{183}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a5eec7a7bff3f4d2e57ac6c2d1e7d0b03}\index{Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}!SelectionRequested@{SelectionRequested}}
+\index{SelectionRequested@{SelectionRequested}!Cashg.GraphExplorer.GraphRevisionTimeline@{Cashg.GraphExplorer.GraphRevisionTimeline}}
+\doxysubsubsection{\texorpdfstring{SelectionRequested}{SelectionRequested}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_timeline_a5eec7a7bff3f4d2e57ac6c2d1e7d0b03} 
+Action$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision}{Graph\+Revision}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Revision\+Timeline.\+Selection\+Requested}
+
+
+
+Occurs when a revision selection is requested. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00185}{185}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Revision\+Timeline.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,101 @@
+\doxysection{Graph\+Queue\+Coordinator.\+cs}
+\hypertarget{_graph_queue_coordinator_8cs_source}{}\label{_graph_queue_coordinator_8cs_source}\index{Runtime/GraphQueueCoordinator.cs@{Runtime/GraphQueueCoordinator.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Collections;}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }System.Linq;}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }System.Threading;}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00007}00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{Cashg.GraphExplorer}}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00009}00009\ \ \ \ \ \textcolor{comment}{//\ The\ host\ owns\ durable\ drafts\ and\ pending\ identities;\ the\ provider\ owns\ execution.}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00010}00010\ \ \ \ \ \textcolor{comment}{//\ No\ submission\ may\ leave\ this\ boundary\ before\ the\ identity\ has\ been\ persisted.}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00012}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator}{00012}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a1e439ca346516e82eaffa3fd65feb3a7}{GraphQueueCoordinator}}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider}{IGraphActionProvider}}\ provider;}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00018}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a1e439ca346516e82eaffa3fd65feb3a7}{00018}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a1e439ca346516e82eaffa3fd65feb3a7}{GraphQueueCoordinator}}(\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider}{IGraphActionProvider}}\ provider)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ this.provider\ =\ provider\ ??\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(provider));}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00024}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e}{00024}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e}{Busy}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ IEnumerator\ Perform(Func<IEnumerator>\ operation,\ Action<Exception>\ failed)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serialize\ provider\ operations\ and\ release\ the\ busy\ flag\ even\ when\ a\ coroutine\ fails\ or\ is\ disposed.}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e}{Busy}})}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed(\textcolor{keyword}{new}\ InvalidOperationException(\textcolor{stringliteral}{"{}A\ queue\ operation\ is\ already\ in\ progress."{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ yield\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e}{Busy}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ yield\ \textcolor{keywordflow}{return}\ operation();}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e}{Busy}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00052}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a69dac0a6362b9454df1a5db411cd686e}{00052}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IEnumerator\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a69dac0a6362b9454df1a5db411cd686e}{Review}}(IReadOnlyList<GraphActionRequest>\ draft,\ CancellationToken\ cancellation,}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Action<GraphActionRun>\ completed,\ Action<Exception>\ failed)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Snapshot\ ordering\ before\ yielding:\ edits\ cannot\ reorder\ an\ in-\/flight\ review.}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ var\ ordered\ =\ draft.ToArray();}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Perform(()\ =>\ provider.Review(ordered,\ cancellation,\ completed,\ failed),\ failed);}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00067}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_ad602779d8d50fbf9fa327e5a632875ec}{00067}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IEnumerator\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_ad602779d8d50fbf9fa327e5a632875ec}{Submit}}(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{GraphActionRun}}\ review,\ Func<bool>\ persistPending,\ CancellationToken\ cancellation,}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Action<GraphActionRun>\ completed,\ Action<Exception>\ failed)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Perform(()\ =>\ SubmitCore(review,\ persistPending,\ cancellation,\ completed,\ failed),\ failed);}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ IEnumerator\ SubmitCore(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{GraphActionRun}}\ review,\ Func<bool>\ persistPending,\ CancellationToken\ cancellation,}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Action<GraphActionRun>\ completed,\ Action<Exception>\ failed)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cancellation.IsCancellationRequested)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed(\textcolor{keyword}{new}\ OperationCanceledException());}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ yield\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (review\ ==\ \textcolor{keyword}{null}\ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(review.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run_aa0fd435c53658e2a0d7d3055712c93bb}{Id}})\ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(review.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run_a9518ba79a7d4590bd644880b08e49710}{ReviewToken}})\ ||}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ review.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run_a09a23e71ae6fa7c17f6b7e2351e4c6de}{Entries}}.Any(entry\ =>\ entry.Errors.Count\ >\ 0))}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reject\ missing\ review\ authority\ or\ entry\ errors\ before\ saving\ or\ sending\ a\ request.}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed(\textcolor{keyword}{new}\ InvalidOperationException(\textcolor{stringliteral}{"{}A\ valid\ reviewed\ queue\ is\ required."{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ yield\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Persist\ the\ exact\ request\ identity\ before\ the\ provider\ can\ begin\ external\ execution.}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!persistPending())}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed(\textcolor{keyword}{new}\ InvalidOperationException(\textcolor{stringliteral}{"{}Pending\ submission\ could\ not\ be\ saved."{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ yield\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ yield\ \textcolor{keywordflow}{return}\ provider.Execute(review.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run_aa0fd435c53658e2a0d7d3055712c93bb}{Id}},\ review,\ cancellation,\ completed,\ failed);}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00106}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a42a595e6169408b9f9d5c6721650a982}{00106}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IEnumerator\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a42a595e6169408b9f9d5c6721650a982}{Recover}}(\textcolor{keywordtype}{string}\ requestId,\ CancellationToken\ cancellation,\ Action<GraphActionRun>\ completed,}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Action<Exception>\ failed)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Perform(()\ =>\ provider.Recover(requestId,\ cancellation,\ completed,\ failed),\ failed);}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00120}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a60c4e4a032669ebff06cc27b7c2b26fc}{00120}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IEnumerator\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a60c4e4a032669ebff06cc27b7c2b26fc}{Control}}(\textcolor{keywordtype}{string}\ runId,\ \textcolor{keywordtype}{string}\ operation,\ \textcolor{keywordtype}{string}\ entryId,\ CancellationToken\ cancellation,}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Action<GraphActionRun>\ completed,\ Action<Exception>\ failed)}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Perform(()\ =>\ provider.Control(runId,\ operation,\ entryId,\ cancellation,\ completed,\ failed),\ failed);}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00125}00125\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_queue_coordinator_8cs_source_l00126}00126\ \}}
+
+\end{DoxyCode}

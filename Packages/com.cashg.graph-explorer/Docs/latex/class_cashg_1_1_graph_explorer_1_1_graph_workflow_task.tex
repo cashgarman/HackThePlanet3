@@ -1,0 +1,299 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+
+
+Represents graph workflow task.  
+
+
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aadbc37ac53930210687133ccd642bbfa}{Id}} = Guid.\+New\+Guid().To\+String("{}N"{})\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the stable task identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a0c21157873f015697422d317dccc3238}{Source\+Node\+Id}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the node that initiated the task. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a99d3a222a68c02a5fff8698cb629a9c8}{Include\+Descendants}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether descendant nodes are included as targets. \end{DoxyCompactList}\item 
+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_target}{Graph\+Workflow\+Target}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa0cec75377cc27b80d891dfd453a1710}{Targets}} = new()\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the task\textquotesingle{}s target nodes and requested steps. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5e}{Graph\+Workflow\+State}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ab2495ea3e1eb505eff28dcd0bdf02f21}{State}} = \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5ea7b2f31b90fe1c2cc33a52233c1925df3}{Graph\+Workflow\+State.\+Queued}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the task\textquotesingle{}s current state. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a8222b5c97cb4788380bb505eba48bcd9}{Prompt}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the prompt sent to the external task provider. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ae262d320e09b0bc802ce9de3f4ee1a74}{External\+Thread\+Id}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the external thread identifier, when handed off. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ac8490d09c84aa2917f690ab89257e828}{External\+Turn\+Id}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the external turn identifier, when available. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_acc57da389d9b5f279b72ae724bd985e8}{Message}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the latest status or error message. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a084732495892b0a06ff82ef9a5d50a93}{Output}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the output returned by the external task. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a19006094ac2a9a8387baf3fdf4e33389}{Automatic}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the task was dispatched automatically. \end{DoxyCompactList}\item 
+long \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a047d5ca91afd20e8657aef65e4eb93fd}{Dispatch\+Generation}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the dispatch generation used to reject stale callbacks. \end{DoxyCompactList}\item 
+Date\+Time\+Offset? \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ad9f33e148fd9af781c556e12bd9aafef}{Dispatched\+Utc}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets when the task was dispatched. \end{DoxyCompactList}\item 
+Date\+Time\+Offset? \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aad872f998f0cfe105415e8284c768c16}{Finished\+Utc}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets when the task finished. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa3489b1dc62a2d91af993b93e316d2c9}{Accepted}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether every requested target step has been accepted. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ab248f0173da090206238d1796782279c}{Unresolved}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether the task remains open for resolution. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa58108aa1954b269cbf8d858f2ff6805}{Key}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets a stable key derived from the source and ordered targets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph workflow task. 
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00094}{94}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa3489b1dc62a2d91af993b93e316d2c9}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Accepted@{Accepted}}
+\index{Accepted@{Accepted}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Accepted}{Accepted}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa3489b1dc62a2d91af993b93e316d2c9} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Accepted\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether every requested target step has been accepted. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00125}{125}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a19006094ac2a9a8387baf3fdf4e33389}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Automatic@{Automatic}}
+\index{Automatic@{Automatic}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Automatic}{Automatic}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a19006094ac2a9a8387baf3fdf4e33389} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Automatic\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether the task was dispatched automatically. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00117}{117}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ad9f33e148fd9af781c556e12bd9aafef}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!DispatchedUtc@{DispatchedUtc}}
+\index{DispatchedUtc@{DispatchedUtc}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{DispatchedUtc}{DispatchedUtc}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ad9f33e148fd9af781c556e12bd9aafef} 
+Date\+Time\+Offset? Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Dispatched\+Utc\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets when the task was dispatched. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00121}{121}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a047d5ca91afd20e8657aef65e4eb93fd}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!DispatchGeneration@{DispatchGeneration}}
+\index{DispatchGeneration@{DispatchGeneration}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{DispatchGeneration}{DispatchGeneration}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a047d5ca91afd20e8657aef65e4eb93fd} 
+long Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Dispatch\+Generation\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the dispatch generation used to reject stale callbacks. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00119}{119}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ae262d320e09b0bc802ce9de3f4ee1a74}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!ExternalThreadId@{ExternalThreadId}}
+\index{ExternalThreadId@{ExternalThreadId}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{ExternalThreadId}{ExternalThreadId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ae262d320e09b0bc802ce9de3f4ee1a74} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+External\+Thread\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the external thread identifier, when handed off. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00109}{109}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ac8490d09c84aa2917f690ab89257e828}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!ExternalTurnId@{ExternalTurnId}}
+\index{ExternalTurnId@{ExternalTurnId}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{ExternalTurnId}{ExternalTurnId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ac8490d09c84aa2917f690ab89257e828} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+External\+Turn\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the external turn identifier, when available. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00111}{111}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aad872f998f0cfe105415e8284c768c16}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!FinishedUtc@{FinishedUtc}}
+\index{FinishedUtc@{FinishedUtc}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{FinishedUtc}{FinishedUtc}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aad872f998f0cfe105415e8284c768c16} 
+Date\+Time\+Offset? Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Finished\+Utc\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets when the task finished. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00123}{123}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aadbc37ac53930210687133ccd642bbfa}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Id@{Id}}
+\index{Id@{Id}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aadbc37ac53930210687133ccd642bbfa} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Id = Guid.\+New\+Guid().To\+String("{}N"{})\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the stable task identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00097}{97}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a99d3a222a68c02a5fff8698cb629a9c8}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!IncludeDescendants@{IncludeDescendants}}
+\index{IncludeDescendants@{IncludeDescendants}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{IncludeDescendants}{IncludeDescendants}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a99d3a222a68c02a5fff8698cb629a9c8} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Include\+Descendants\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether descendant nodes are included as targets. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00101}{101}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa58108aa1954b269cbf8d858f2ff6805}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Key@{Key}}
+\index{Key@{Key}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Key}{Key}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa58108aa1954b269cbf8d858f2ff6805} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Key\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets a stable key derived from the source and ordered targets. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00130}{130}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_acc57da389d9b5f279b72ae724bd985e8}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Message@{Message}}
+\index{Message@{Message}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Message}{Message}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_acc57da389d9b5f279b72ae724bd985e8} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Message\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the latest status or error message. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00113}{113}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a084732495892b0a06ff82ef9a5d50a93}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Output@{Output}}
+\index{Output@{Output}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Output}{Output}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a084732495892b0a06ff82ef9a5d50a93} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Output\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the output returned by the external task. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00115}{115}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a8222b5c97cb4788380bb505eba48bcd9}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Prompt@{Prompt}}
+\index{Prompt@{Prompt}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Prompt}{Prompt}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a8222b5c97cb4788380bb505eba48bcd9} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Prompt\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the prompt sent to the external task provider. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00107}{107}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a0c21157873f015697422d317dccc3238}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!SourceNodeId@{SourceNodeId}}
+\index{SourceNodeId@{SourceNodeId}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{SourceNodeId}{SourceNodeId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_a0c21157873f015697422d317dccc3238} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Source\+Node\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the node that initiated the task. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00099}{99}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ab2495ea3e1eb505eff28dcd0bdf02f21}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!State@{State}}
+\index{State@{State}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ab2495ea3e1eb505eff28dcd0bdf02f21} 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5e}{Graph\+Workflow\+State}} Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+State = \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5ea7b2f31b90fe1c2cc33a52233c1925df3}{Graph\+Workflow\+State.\+Queued}}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the task\textquotesingle{}s current state. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00105}{105}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa0cec75377cc27b80d891dfd453a1710}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Targets@{Targets}}
+\index{Targets@{Targets}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Targets}{Targets}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_aa0cec75377cc27b80d891dfd453a1710} 
+List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_workflow_target}{Graph\+Workflow\+Target}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Targets = new()\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the task\textquotesingle{}s target nodes and requested steps. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00103}{103}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ab248f0173da090206238d1796782279c}\index{Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}!Unresolved@{Unresolved}}
+\index{Unresolved@{Unresolved}!Cashg.GraphExplorer.GraphWorkflowTask@{Cashg.GraphExplorer.GraphWorkflowTask}}
+\doxysubsubsection{\texorpdfstring{Unresolved}{Unresolved}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_workflow_task_ab248f0173da090206238d1796782279c} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Workflow\+Task.\+Unresolved\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether the task remains open for resolution. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00127}{127}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Workflow.\+cs\end{DoxyCompactItemize}

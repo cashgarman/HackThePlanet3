@@ -1,0 +1,272 @@
+\doxysection{Codex\+Integration.\+cs}
+\hypertarget{_codex_integration_8cs_source}{}\label{_codex_integration_8cs_source}\index{Runtime/CodexIntegration.cs@{Runtime/CodexIntegration.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Collections.Concurrent;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }System.Diagnostics;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }System.IO;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }System.Linq;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }System.Text.Json;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00009}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex}{00009}}\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex}{Cashg.GraphExplorer.Codex}}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00012}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex_aae08f44540bbc4b22f1803831fdb924e}{00012}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex_aae08f44540bbc4b22f1803831fdb924e}{CodexLaunchMode}}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00015}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex_aae08f44540bbc4b22f1803831fdb924eab63096a61834ab9d9a9005b947b2bbf3}{00015}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex_aae08f44540bbc4b22f1803831fdb924eab63096a61834ab9d9a9005b947b2bbf3}{PrefilledChat}},}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00017}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex_aae08f44540bbc4b22f1803831fdb924ea711887ee7631f97c9ba9b1b68396a9cc}{00017}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex_aae08f44540bbc4b22f1803831fdb924ea711887ee7631f97c9ba9b1b68396a9cc}{AutomaticTask}}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }CodexLinks}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ NewChat(\textcolor{keywordtype}{string}\ workspace,\ \textcolor{keywordtype}{string}\ prompt)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!Path.IsPathRooted(workspace)\ ||\ !Directory.Exists(workspace))}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}An\ existing\ absolute\ workspace\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}codex://new?path="{}}\ +\ Uri.EscapeDataString(Path.GetFullPath(workspace))\ +\ \textcolor{stringliteral}{"{}\&prompt="{}}\ +}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Uri.EscapeDataString(prompt\ ??\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ Thread(\textcolor{keywordtype}{string}\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(\textcolor{keywordtype}{id}))\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}A\ thread\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}codex://threads/"{}}\ +\ Uri.EscapeDataString(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00046}\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{00046}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{ICodexTransport}}\ :\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00049}\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9e8cabba8e37d12cdcb8f6177736c3f5}{00049}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{event}\ Action<string>\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9e8cabba8e37d12cdcb8f6177736c3f5}{Line}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00051}\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9951c92e2ccda3bf6c841e38a6ab804c}{00051}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{event}\ Action<string>\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9951c92e2ccda3bf6c841e38a6ab804c}{Closed}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00053}\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_ab0daed295eb958dde86342cede07c1dd}{00053}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_ab0daed295eb958dde86342cede07c1dd}{Start}}();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00056}\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_afcd9bd49ac1380f039c173da5ddb47ab}{00056}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_afcd9bd49ac1380f039c173da5ddb47ab}{Send}}(\textcolor{keywordtype}{string}\ line);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00060}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport}{00060}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_afefad7e98d376ab7fdf4748d9b277b09}{CodexProcessTransport}}\ :\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{ICodexTransport}}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00061}00061\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{string}\ executable;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ disposed;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ Process\ process;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00068}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_afefad7e98d376ab7fdf4748d9b277b09}{00068}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_afefad7e98d376ab7fdf4748d9b277b09}{CodexProcessTransport}}(\textcolor{keywordtype}{string}\ executable)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ this.executable\ =\ executable;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00074}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_a65d0d37d7cf0e79c66fe2d8188b3fbf4}{00074}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<string>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_a65d0d37d7cf0e79c66fe2d8188b3fbf4}{Line}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00076}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ac77cc0b265acff245d8bc43feb667e19}{00076}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<string>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ac77cc0b265acff245d8bc43feb667e19}{Closed}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00079}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ade609e4de6cb57da17255c28d5c44c1f}{00079}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ade609e4de6cb57da17255c28d5c44c1f}{Start}}()}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Launch\ an\ isolated\ stdio\ process\ and\ deliver\ complete\ output\ lines\ through\ transport\ events.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ var\ info\ =\ \textcolor{keyword}{new}\ ProcessStartInfo}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FileName\ =\ executable,\ Arguments\ =\ \textcolor{stringliteral}{"{}app-\/server\ -\/-\/stdio"{}},\ UseShellExecute\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RedirectStandardInput\ =\ \textcolor{keyword}{true},\ RedirectStandardOutput\ =\ \textcolor{keyword}{true},\ RedirectStandardError\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CreateNoWindow\ =\ \textcolor{keyword}{true}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ process\ =\ \textcolor{keyword}{new}\ Process\ \{\ StartInfo\ =\ info,\ EnableRaisingEvents\ =\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ process.OutputDataReceived\ +=\ (\_,\ e)\ =>}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e.Data\ !=\ \textcolor{keyword}{null})\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_a65d0d37d7cf0e79c66fe2d8188b3fbf4}{Line}}?.Invoke(e.Data);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!disposed)\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ac77cc0b265acff245d8bc43feb667e19}{Closed}}?.Invoke(\textcolor{stringliteral}{"{}Codex\ output\ closed."{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Always\ drain\ stderr\ so\ a\ full\ pipe\ cannot\ stall\ the\ server.\ Protocol\ errors\ arrive\ on\ stdout.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ process.ErrorDataReceived\ +=\ (\_,\ e)\ =>\ \{\ \};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ process.Start();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ process.BeginOutputReadLine();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ process.BeginErrorReadLine();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00103}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_aaa6c4bae7c52f0d455a6bb67451e7903}{00103}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_aaa6c4bae7c52f0d455a6bb67451e7903}{Send}}(\textcolor{keywordtype}{string}\ line)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ process.StandardInput.WriteLine(line);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ process.StandardInput.Flush();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00110}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ae3cb4ebfa95d133ece54bd65e602861e}{00110}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ae3cb4ebfa95d133ece54bd65e602861e}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ disposed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (process\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ process\ may\ exit\ between\ the\ state\ check\ and\ Kill;\ either\ way,\ release\ its\ handles\ afterward.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!process.HasExited)\ process.Kill();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (InvalidOperationException)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ process.Dispose();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ process\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00127}00127\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00130}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client}{00130}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a9a1869bb462eb2fea12068ddb12eb23a}{CodexAppServerClient}}\ :\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00131}00131\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ ConcurrentQueue<string>\ closures\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ ConcurrentQueue<string>\ lines\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Dictionary<long,\ Pending>\ pending\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{ICodexTransport}}\ transport;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ disposed,\ closed;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{long}\ nextId;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00141}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a9a1869bb462eb2fea12068ddb12eb23a}{00141}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a9a1869bb462eb2fea12068ddb12eb23a}{CodexAppServerClient}}(\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{ICodexTransport}}\ transport)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ this.transport\ =\ transport;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Line\ +=\ OnLine;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Closed\ +=\ OnClosed;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00149}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a616cfa5162d33e7950d0badbc7b29163}{00149}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a616cfa5162d33e7950d0badbc7b29163}{Ready}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00152}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a6ce52d804d948ad9694ea3f985638672}{00152}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a6ce52d804d948ad9694ea3f985638672}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (disposed)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ disposed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a616cfa5162d33e7950d0badbc7b29163}{Ready}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Line\ -\/=\ OnLine;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Closed\ -\/=\ OnClosed;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Dispose();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ pending.Clear();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00164}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_ac9186197c75e1b6f2bd781141f127ef6}{00164}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<string,\ JsonElement,\ JsonElement?>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_ac9186197c75e1b6f2bd781141f127ef6}{Message}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00166}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_ad6844e695bca063531ccadeed9c73741}{00166}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<string>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_ad6844e695bca063531ccadeed9c73741}{Disconnected}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ OnLine(\textcolor{keywordtype}{string}\ line)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ lines.Enqueue(line);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ OnClosed(\textcolor{keywordtype}{string}\ reason)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ closures.Enqueue(reason);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00181}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a58dad0eb947fd5bab1eaee3fae175e6a}{00181}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a58dad0eb947fd5bab1eaee3fae175e6a}{Start}}(Action\ ready,\ Action<string>\ failed)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Complete\ the\ initialize/initialized\ handshake\ before\ exposing\ the\ client\ as\ ready.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transport.Start();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a348e96a8920e85b6b6ef0a4c07b9195a}{Request}}(\textcolor{stringliteral}{"{}initialize"{}},\ \textcolor{keyword}{new}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clientInfo\ =\ \textcolor{keyword}{new}\ \{\ name\ =\ \textcolor{stringliteral}{"{}graph\_explorer"{}},\ title\ =\ \textcolor{stringliteral}{"{}Graph\ Explorer"{}},\ version\ =\ \textcolor{stringliteral}{"{}1.0.0"{}}\ \},}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ capabilities\ =\ \textcolor{keyword}{new}\ \{\ experimentalApi\ =\ \textcolor{keyword}{false}\ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},\ \_\ =>}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_aea707bba06ce00b1ceef775620c3138f}{Notify}}(\textcolor{stringliteral}{"{}initialized"{}},\ \textcolor{keyword}{new}\ \{\ \});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a616cfa5162d33e7950d0badbc7b29163}{Ready}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ready();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},\ failed);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed(e.Message);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00209}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a348e96a8920e85b6b6ef0a4c07b9195a}{00209}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a348e96a8920e85b6b6ef0a4c07b9195a}{Request}}(\textcolor{keywordtype}{string}\ method,\ \textcolor{keywordtype}{object}\ parameters,\ Action<JsonElement>\ done,\ Action<string>\ failed)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (disposed\ ||\ closed)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed(\textcolor{stringliteral}{"{}Codex\ connection\ is\ closed."{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \textcolor{keywordtype}{id}\ =\ ++nextId;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Register\ the\ response\ callbacks\ before\ sending\ so\ synchronous\ transport\ replies\ can\ be\ matched.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ pending[id]\ =\ \textcolor{keyword}{new}\ Pending\ \{\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a041b3fb3eeb5bfad71225ee5976819caaf92965e2c8a7afb3c1b9a5c09a263636}{Done}}\ =\ done,\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5ead7c8c85bf79bbe1b7188497c32c3b0ca}{Failed}}\ =\ failed,\ Deadline\ =\ DateTime.UtcNow.AddMinutes(2)\ \};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transport.Send(JsonSerializer.Serialize(\textcolor{keyword}{new}\ \{\ jsonrpc\ =\ \textcolor{stringliteral}{"{}2.0"{}},\ id,\ method,\ @params\ =\ parameters\ \}));}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pending.Remove(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed(e.Message);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00235}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_aea707bba06ce00b1ceef775620c3138f}{00235}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_aea707bba06ce00b1ceef775620c3138f}{Notify}}(\textcolor{keywordtype}{string}\ method,\ \textcolor{keywordtype}{object}\ parameters)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Send(JsonSerializer.Serialize(\textcolor{keyword}{new}\ \{\ jsonrpc\ =\ \textcolor{stringliteral}{"{}2.0"{}},\ method,\ @params\ =\ parameters\ \}));}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00243}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a6bed0d0fd9055beb7510a6799cfd96d8}{00243}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a6bed0d0fd9055beb7510a6799cfd96d8}{Respond}}(JsonElement\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{object}\ result)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Send(JsonSerializer.Serialize(\textcolor{keyword}{new}\ \{\ jsonrpc\ =\ \textcolor{stringliteral}{"{}2.0"{}},\ id,\ result\ \}));}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00251}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a63a61608756fa24a360c073f29690b72}{00251}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a63a61608756fa24a360c073f29690b72}{Reject}}(JsonElement\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{string}\ reason)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ transport.Send(JsonSerializer.Serialize(\textcolor{keyword}{new}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ jsonrpc\ =\ \textcolor{stringliteral}{"{}2.0"{}},\ id,}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\ =\ new\ \{\ code\ =\ -\/32601,\ message\ =\ reason\ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00261}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_aa9cc81b39bfd6cb6dcb2f4e675de1c03}{00261}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_aa9cc81b39bfd6cb6dcb2f4e675de1c03}{Pump}}()}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (disposed)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bound\ each\ frame's\ work;\ remaining\ messages\ stay\ queued.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (var\ i\ =\ 0;\ i\ <\ 200\ \&\&\ lines.TryDequeue(out\ var\ line);\ i++)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ doc\ =\ JsonDocument.Parse(line);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ root\ =\ doc.RootElement;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ hasId\ =\ root.TryGetProperty(\textcolor{stringliteral}{"{}id"{}},\ out\ var\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (root.TryGetProperty(\textcolor{stringliteral}{"{}method"{}},\ out\ var\ method))}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clone\ JSON\ values\ that\ must\ outlive\ the\ document\ disposed\ at\ the\ end\ of\ this\ iteration.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ parameters\ =\ root.TryGetProperty(\textcolor{stringliteral}{"{}params"{}},\ out\ var\ p)\ ?\ p.Clone()\ :\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_ac9186197c75e1b6f2bd781141f127ef6}{Message}}?.Invoke(method.GetString(),\ parameters,\ hasId\ ?\ \textcolor{keywordtype}{id}.Clone()\ :\ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (hasId\ \&\&\ \textcolor{keywordtype}{id}.ValueKind\ ==\ JsonValueKind.Number\ \&\&\ \textcolor{keywordtype}{id}.TryGetInt64(out\ var\ number)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pending.TryGetValue(number,\ out\ var\ request))}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pending.Remove(number);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (root.TryGetProperty(\textcolor{stringliteral}{"{}error"{}},\ out\ var\ error))\ request.Failed(error.ToString());}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (root.TryGetProperty(\textcolor{stringliteral}{"{}result"{}},\ out\ var\ result))\ request.Done(result.Clone());}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ request.Failed(\textcolor{stringliteral}{"{}Codex\ response\ has\ no\ result."{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (JsonException)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ closures.Enqueue(\textcolor{stringliteral}{"{}Invalid\ JSON\ from\ Codex\ app-\/server."{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Expire\ requests\ without\ retrying\ operations\ whose\ external\ outcome\ may\ already\ have\ changed.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ pair\ \textcolor{keywordflow}{in}\ pending.Where(p\ =>\ p.Value.Deadline\ <\ DateTime.UtcNow).ToArray())}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pending.Remove(pair.Key);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pair.Value.Failed(\textcolor{stringliteral}{"{}Codex\ response\ timed\ out;\ reconcile\ before\ retrying."{}});}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (closures.TryDequeue(out\ var\ reason)\ \&\&\ !closed)}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Fail\ all\ outstanding\ callbacks\ once\ and\ publish\ the\ disconnected\ state\ on\ the\ host\ thread.}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ closed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a616cfa5162d33e7950d0badbc7b29163}{Ready}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ requests\ =\ pending.Values.ToArray();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pending.Clear();}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ request\ \textcolor{keywordflow}{in}\ requests)\ request.Failed(reason);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_ad6844e695bca063531ccadeed9c73741}{Disconnected}}?.Invoke(reason);}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5ea2d13df6f8b5e4c5af9f87e0dc39df69d}{Pending}}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ DateTime\ Deadline;}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Action<JsonElement>\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a041b3fb3eeb5bfad71225ee5976819caaf92965e2c8a7afb3c1b9a5c09a263636}{Done}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Action<string>\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5ead7c8c85bf79bbe1b7188497c32c3b0ca}{Failed}};}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00316}00316\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_codex_integration_8cs_source_l00317}00317\ \}}
+
+\end{DoxyCode}

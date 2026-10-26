@@ -1,0 +1,48 @@
+\doxysection{Graph\+Resource\+Validation.\+cs}
+\hypertarget{_graph_resource_validation_8cs_source}{}\label{_graph_resource_validation_8cs_source}\index{Editor/GraphResourceValidation.cs@{Editor/GraphResourceValidation.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }UnityEditor;}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }UnityEngine;}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }UnityEngine.UIElements;}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }Object\ =\ UnityEngine.Object;}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00007}00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_editor}{Cashg.GraphExplorer.Editor}}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }GraphResourceValidation}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ [MenuItem(\textcolor{stringliteral}{"{}Graph\ Explorer/Validate\ package\ resources"{}})]}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Validate()}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Require\ the\ settings\ and\ styles\ used\ by\ the\ graph\ interface.}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ Require(GraphResources.Load<PanelSettings>(\textcolor{stringliteral}{"{}GraphPanelSettings"{}}),\ \textcolor{stringliteral}{"{}serialized\ panel/text\ resources"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ Require(GraphResources.Load<GraphVisualSettings>(\textcolor{stringliteral}{"{}GraphVisualSettings"{}}),\ \textcolor{stringliteral}{"{}visual\ settings"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ Require(GraphResources.Load<GraphNodeLabelSettings>(\textcolor{stringliteral}{"{}GraphNodeLabelSettings"{}}),\ \textcolor{stringliteral}{"{}label\ settings"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ Require(GraphResources.Load<StyleSheet>(\textcolor{stringliteral}{"{}GraphExplorer"{}}),\ \textcolor{stringliteral}{"{}explorer\ stylesheet"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ Require(GraphResources.Load<StyleSheet>(\textcolor{stringliteral}{"{}GraphShell"{}}),\ \textcolor{stringliteral}{"{}shell\ stylesheet"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ name\ \textcolor{keywordflow}{in}\ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}GraphNodeToon"{}},\ \textcolor{stringliteral}{"{}GraphNodeMask"{}},\ \textcolor{stringliteral}{"{}GraphNodePost"{}},\ \textcolor{stringliteral}{"{}GraphEdge"{}},\ \textcolor{stringliteral}{"{}GraphSky"{}},\ \textcolor{stringliteral}{"{}GraphFog"{}}\ \})}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Confirm\ each\ required\ shader\ loads\ and\ compiles\ successfully.}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ shader\ =\ GraphResources.Load<Shader>(name);}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Require(shader,\ name);}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ShaderUtil.ShaderHasError(shader))}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ InvalidOperationException(\textcolor{stringliteral}{"{}Shader\ import\ failed:\ "{}}\ +\ name);}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Confirm\ the\ materials\ used\ by\ the\ renderer\ are\ present.}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ name\ \textcolor{keywordflow}{in}\ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}GraphNodeMaterial"{}},\ \textcolor{stringliteral}{"{}GraphNodeMaskMaterial"{}},\ \textcolor{stringliteral}{"{}GraphSkyMaterial"{}},\ \textcolor{stringliteral}{"{}GraphFogMaterial"{}}\ \})}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Require(GraphResources.Load<Material>(name),\ name);}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Require(Object\ asset,\ \textcolor{keywordtype}{string}\ description)}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (asset\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ InvalidOperationException(\textcolor{stringliteral}{"{}Missing\ Graph\ Explorer\ package\ resource:\ "{}}\ +\ description);}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_resource_validation_8cs_source_l00044}00044\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,91 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Batch Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_batch}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_batch}\index{Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}}
+
+
+One atomic update: upserts replace facts; node removal also removes incident edges.  
+
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{Graph\+Edge\+Record}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch_a1f3cbd81ad5912ffd06e44a874e23681}{Edges}} = new()
+\begin{DoxyCompactList}\small\item\em Contains edge records to add or update. \end{DoxyCompactList}\item 
+readonly List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{Graph\+Node\+Record}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch_a6dd268f1625e9fba40605d6c3dfc0c53}{Nodes}} = new()
+\begin{DoxyCompactList}\small\item\em Contains node records to add or update. \end{DoxyCompactList}\item 
+readonly List$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch_a3e7b85f441401c4fe0b1d2b22b049f50}{Remove\+Edges}} = new()
+\begin{DoxyCompactList}\small\item\em Contains edge identifiers to remove. \end{DoxyCompactList}\item 
+readonly List$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch_a799d60c8ae6b13b7ec2e0a8162ce4501}{Remove\+Nodes}} = new()
+\begin{DoxyCompactList}\small\item\em Contains node identifiers to remove. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+One atomic update: upserts replace facts; node removal also removes incident edges. 
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00287}{287}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_batch_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_batch_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_batch_a1f3cbd81ad5912ffd06e44a874e23681}\index{Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}!Edges@{Edges}}
+\index{Edges@{Edges}!Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}}
+\doxysubsubsection{\texorpdfstring{Edges}{Edges}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_batch_a1f3cbd81ad5912ffd06e44a874e23681} 
+readonly List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{Graph\+Edge\+Record}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Batch.\+Edges = new()}
+
+
+
+Contains edge records to add or update. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00290}{290}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_batch_a6dd268f1625e9fba40605d6c3dfc0c53}\index{Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_batch_a6dd268f1625e9fba40605d6c3dfc0c53} 
+readonly List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{Graph\+Node\+Record}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Batch.\+Nodes = new()}
+
+
+
+Contains node records to add or update. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00292}{292}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_batch_a3e7b85f441401c4fe0b1d2b22b049f50}\index{Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}!RemoveEdges@{RemoveEdges}}
+\index{RemoveEdges@{RemoveEdges}!Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}}
+\doxysubsubsection{\texorpdfstring{RemoveEdges}{RemoveEdges}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_batch_a3e7b85f441401c4fe0b1d2b22b049f50} 
+readonly List$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Batch.\+Remove\+Edges = new()}
+
+
+
+Contains edge identifiers to remove. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00294}{294}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_batch_a799d60c8ae6b13b7ec2e0a8162ce4501}\index{Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}!RemoveNodes@{RemoveNodes}}
+\index{RemoveNodes@{RemoveNodes}!Cashg.GraphExplorer.GraphBatch@{Cashg.GraphExplorer.GraphBatch}}
+\doxysubsubsection{\texorpdfstring{RemoveNodes}{RemoveNodes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_batch_a799d60c8ae6b13b7ec2e0a8162ce4501} 
+readonly List$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Batch.\+Remove\+Nodes = new()}
+
+
+
+Contains node identifiers to remove. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00296}{296}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Records.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,639 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options\texorpdfstring{$<$}{<} TNode, TLabel \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+
+
+Represents graph world labels options.  
+
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Func$<$ Camera $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_abda99de466467ce4381bdc5a08530d3f}{Camera}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the camera used to project nodes. \end{DoxyCompactList}\item 
+Graph\+Label\+Composer$<$ TNode $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ac7867765a1e12b93b5ab2807fa438bcf}{Compose}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that composes label text. \end{DoxyCompactList}\item 
+Action \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a7ce1ea1578e097b3ef5a8896641983ea}{Create\+Label}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that creates a label model and its UI. \end{DoxyCompactList}\item 
+Func$<$ float $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a95523b9c1d268af650ac97454fa8c8c5}{Detail\+Distance}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the distance threshold for detailed labels. \end{DoxyCompactList}\item 
+Func$<$ float $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0daa57e296de47f8f400fa2190f6a5b3}{Max\+Distance}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the maximum distance at which labels appear. \end{DoxyCompactList}\item 
+Func$<$ TNode, bool, bool, float $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0a885741a4837050160cecca8924d976}{Extra\+Label\+Width}}
+\begin{DoxyCompactList}\small\item\em When set, adds horizontal space during label width measurement (e.\+g. a type icon). \end{DoxyCompactList}\item 
+Action$<$ TNode, string\+[$\,$]\+$>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a168c9cd86f3523b228a30c244fc58900}{Fill\+Steps}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that fills workflow step states. \end{DoxyCompactList}\item 
+Action$<$ TNode, TLabel, bool, bool $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a19a243ef049492d63261390783c37fa7}{Finalize\+Label}}
+\begin{DoxyCompactList}\small\item\em Host hook after default label fields are bound (featured hover/\+selection styling, icons, etc.). \end{DoxyCompactList}\item 
+Func$<$ TNode, bool, bool $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aaff0f667a53dd63c43e66fb053c81d62}{Has\+Steps}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the predicate indicating whether a node has workflow steps. \end{DoxyCompactList}\item 
+Func$<$ TNode, bool, bool, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_label_settings}{Graph\+Node\+Label\+Settings}}, float $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a1ef2954ef0bfdf988de147b0fb490fc5}{Name\+Font\+Size}}
+\begin{DoxyCompactList}\small\item\em When set, overrides name font size for label measurement and placement. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab5a67c67f7e06c2325adbfb382c8a7c1}{Node\+Label\+Cap}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the maximum number of label models to create. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a761fa47245bfb27b8c262758d5ddfb67}{Node\+Step\+Row\+Height}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the height reserved for a step row. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2d5fc5e224f097533bf3a65bece17cdf}{Node\+Step\+Row\+Width}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the width reserved for a step row. \end{DoxyCompactList}\item 
+Func$<$ IRead\+Only\+Dictionary$<$ string, TNode $>$ $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a134f61489fdabb57759ea7ad4fff517b}{Nodes}}
+\begin{DoxyCompactList}\small\item\em Gets or sets a callback that returns nodes keyed by identifier. \end{DoxyCompactList}\item 
+Func$<$ float, bool, float $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a5d055119d1d63b3e87abaf74a7c967f7}{Opacity}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the function that calculates opacity by distance and focus state. \end{DoxyCompactList}\item 
+Action$<$ TLabel, string\+[$\,$]\+$>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aa552f01f0f3ec6f3d6e4a15181e3bc84}{Paint\+Steps}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that paints workflow step states. \end{DoxyCompactList}\item 
+Func$<$ Rect $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2f0c13c8fe2a08b80e22d172cbecde7c}{Safe\+Area}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the safe area available for label placement. \end{DoxyCompactList}\item 
+Func$<$ TNode $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_acc6bc69b60cd586d473fa518b8f92533}{Selected}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that returns the selected node. \end{DoxyCompactList}\item 
+Func$<$ TNode $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a37c7de06c3edfabc8d120b60384e4ad6}{Hovered}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that returns the hovered node. \end{DoxyCompactList}\item 
+Func$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_label_settings}{Graph\+Node\+Label\+Settings}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a7a89ffd32011e224abd2d210697774c5}{Settings}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that returns label settings. \end{DoxyCompactList}\item 
+Func$<$ TNode, bool, bool, string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a93cba67623417b2094fdcb8023ea41ee}{Type\+Caption}}
+\begin{DoxyCompactList}\small\item\em When set, supplies the type caption line and layout height. Return empty to omit the type line. \end{DoxyCompactList}\item 
+Func$<$ TNode, Color $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab7e9f8737e4c266b7b579392096a0ef9}{Type\+Color}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the function that returns a node\textquotesingle{}s type color. \end{DoxyCompactList}\item 
+Func$<$ TNode, string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2b59fcfb64ef6efe256238d0e4e93d69}{Type\+Label}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the function that returns a node\textquotesingle{}s type label. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer}{Graph\+Renderer}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aa5f58c565c56ce43331e475841f6ec72}{graph\+Renderer}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the renderer used to measure and cull node labels. \end{DoxyCompactList}\item 
+string\+[$\,$] \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a73dffeeb3367cac68e581597d1c6e68e}{job\+Step\+States}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the reusable workflow step state buffer. \end{DoxyCompactList}\item 
+List$<$ TNode $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a51e9387d7e7d26c52b9bd8c76caf9a42}{label\+Candidates}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the nodes considered for label placement. \end{DoxyCompactList}\item 
+Dictionary$<$ string, int $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_afcaed03adde5b32a730323a2b9f5fbd6}{label\+Offsets}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the last assigned vertical offset for each node label. \end{DoxyCompactList}\item 
+List$<$ TNode $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a1ffd01769a9efe077a2ad9f060f38238}{label\+Placement\+Order}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the node placement order for the current frame. \end{DoxyCompactList}\item 
+List$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a30eb627f2b59320635db819beaf4f770}{label\+Prune}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the reusable list of identifiers to prune. \end{DoxyCompactList}\item 
+Hash\+Set$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a230c21d7bb1bc00f62dd4ac5fe853e97}{label\+Queued}}
+\begin{DoxyCompactList}\small\item\em Gets or sets identifiers already queued for label placement. \end{DoxyCompactList}\item 
+Dictionary$<$ string, Vector2 $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab3f70e804148f36cca3e475fc0732939}{label\+Smooth\+Position}}
+\begin{DoxyCompactList}\small\item\em Gets or sets smoothed panel positions keyed by node identifier. \end{DoxyCompactList}\item 
+List$<$ TLabel $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0afc1311bdcc06362db3aaf03daf1195}{labels}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the reusable label models. \end{DoxyCompactList}\item 
+Hash\+Set$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a9ddedbd11c2592999edea317e2fc2295}{last\+Frame\+Label\+Nodes}}
+\begin{DoxyCompactList}\small\item\em Gets or sets nodes labeled during the previous frame. \end{DoxyCompactList}\item 
+Dictionary$<$ string, int $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_af39ef855e68ff6fd58708ebfa48c4a58}{node\+Label\+Slots}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the assigned label slot for each node. \end{DoxyCompactList}\item 
+List$<$ Rect $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a89c00e8f274c873b2e0b7835b05e47d9}{occupied\+Labels}}
+\begin{DoxyCompactList}\small\item\em Gets or sets panel bounds occupied during the current frame. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a591960fb606bd8d026b828f36f54b349}{root}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the root panel element. \end{DoxyCompactList}\item 
+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_task_visual}{Graph\+Task\+Visual}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ac869e0eef20c2dfde75a865c3afb0aa3}{task\+Visuals}}
+\begin{DoxyCompactList}\small\item\em Gets or sets task presentation data keyed by node identifier. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a45ac1bba9ff832a88e62c3b7c9e90ba5}{world\+Labels}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the container for world-\/space label elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph world labels options. \begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TNode} : {\em class}]\item[{\em TNode} : {\em \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]\item[{\em TLabel} : {\em \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_world_node_label}{Graph\+World\+Node\+Label}}}]\end{description}
+\end{Desc}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00021}{21}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_abda99de466467ce4381bdc5a08530d3f}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!Camera@{Camera}}
+\index{Camera@{Camera}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{Camera}{Camera}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_abda99de466467ce4381bdc5a08530d3f} 
+Func$<$Camera$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Camera}
+
+
+
+Gets or sets the camera used to project nodes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00025}{25}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ac7867765a1e12b93b5ab2807fa438bcf}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!Compose@{Compose}}
+\index{Compose@{Compose}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{Compose}{Compose}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ac7867765a1e12b93b5ab2807fa438bcf} 
+Graph\+Label\+Composer$<$TNode$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Compose}
+
+
+
+Gets or sets the callback that composes label text. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00027}{27}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a7ce1ea1578e097b3ef5a8896641983ea}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!CreateLabel@{CreateLabel}}
+\index{CreateLabel@{CreateLabel}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{CreateLabel}{CreateLabel}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a7ce1ea1578e097b3ef5a8896641983ea} 
+Action Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Create\+Label}
+
+
+
+Gets or sets the callback that creates a label model and its UI. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00029}{29}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a95523b9c1d268af650ac97454fa8c8c5}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!DetailDistance@{DetailDistance}}
+\index{DetailDistance@{DetailDistance}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{DetailDistance}{DetailDistance}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a95523b9c1d268af650ac97454fa8c8c5} 
+Func$<$float$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Detail\+Distance}
+
+
+
+Gets or sets the distance threshold for detailed labels. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00031}{31}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0a885741a4837050160cecca8924d976}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!ExtraLabelWidth@{ExtraLabelWidth}}
+\index{ExtraLabelWidth@{ExtraLabelWidth}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{ExtraLabelWidth}{ExtraLabelWidth}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0a885741a4837050160cecca8924d976} 
+Func$<$TNode, bool, bool, float$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Extra\+Label\+Width}
+
+
+
+When set, adds horizontal space during label width measurement (e.\+g. a type icon). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00036}{36}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a168c9cd86f3523b228a30c244fc58900}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!FillSteps@{FillSteps}}
+\index{FillSteps@{FillSteps}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{FillSteps}{FillSteps}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a168c9cd86f3523b228a30c244fc58900} 
+Action$<$TNode, string\+[$\,$]\+$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Fill\+Steps}
+
+
+
+Gets or sets the callback that fills workflow step states. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00039}{39}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a19a243ef049492d63261390783c37fa7}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!FinalizeLabel@{FinalizeLabel}}
+\index{FinalizeLabel@{FinalizeLabel}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{FinalizeLabel}{FinalizeLabel}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a19a243ef049492d63261390783c37fa7} 
+Action$<$TNode, TLabel, bool, bool$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Finalize\+Label}
+
+
+
+Host hook after default label fields are bound (featured hover/\+selection styling, icons, etc.). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00042}{42}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aa5f58c565c56ce43331e475841f6ec72}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!graphRenderer@{graphRenderer}}
+\index{graphRenderer@{graphRenderer}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{graphRenderer}{graphRenderer}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aa5f58c565c56ce43331e475841f6ec72} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer}{Graph\+Renderer}} Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.graph\+Renderer}
+
+
+
+Gets or sets the renderer used to measure and cull node labels. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00080}{80}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aaff0f667a53dd63c43e66fb053c81d62}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!HasSteps@{HasSteps}}
+\index{HasSteps@{HasSteps}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{HasSteps}{HasSteps}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aaff0f667a53dd63c43e66fb053c81d62} 
+Func$<$TNode, bool, bool$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Has\+Steps}
+
+
+
+Gets or sets the predicate indicating whether a node has workflow steps. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00045}{45}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a37c7de06c3edfabc8d120b60384e4ad6}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!Hovered@{Hovered}}
+\index{Hovered@{Hovered}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{Hovered}{Hovered}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a37c7de06c3edfabc8d120b60384e4ad6} 
+Func$<$TNode$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Hovered}
+
+
+
+Gets or sets the callback that returns the hovered node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a73dffeeb3367cac68e581597d1c6e68e}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!jobStepStates@{jobStepStates}}
+\index{jobStepStates@{jobStepStates}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{jobStepStates}{jobStepStates}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a73dffeeb3367cac68e581597d1c6e68e} 
+string \+[$\,$]\+ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.job\+Step\+States}
+
+
+
+Gets or sets the reusable workflow step state buffer. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00082}{82}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a51e9387d7e7d26c52b9bd8c76caf9a42}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!labelCandidates@{labelCandidates}}
+\index{labelCandidates@{labelCandidates}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{labelCandidates}{labelCandidates}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a51e9387d7e7d26c52b9bd8c76caf9a42} 
+List$<$TNode$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.label\+Candidates}
+
+
+
+Gets or sets the nodes considered for label placement. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00084}{84}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_afcaed03adde5b32a730323a2b9f5fbd6}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!labelOffsets@{labelOffsets}}
+\index{labelOffsets@{labelOffsets}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{labelOffsets}{labelOffsets}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_afcaed03adde5b32a730323a2b9f5fbd6} 
+Dictionary$<$string, int$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.label\+Offsets}
+
+
+
+Gets or sets the last assigned vertical offset for each node label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00086}{86}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a1ffd01769a9efe077a2ad9f060f38238}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!labelPlacementOrder@{labelPlacementOrder}}
+\index{labelPlacementOrder@{labelPlacementOrder}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{labelPlacementOrder}{labelPlacementOrder}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a1ffd01769a9efe077a2ad9f060f38238} 
+List$<$TNode$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.label\+Placement\+Order}
+
+
+
+Gets or sets the node placement order for the current frame. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00088}{88}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a30eb627f2b59320635db819beaf4f770}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!labelPrune@{labelPrune}}
+\index{labelPrune@{labelPrune}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{labelPrune}{labelPrune}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a30eb627f2b59320635db819beaf4f770} 
+List$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.label\+Prune}
+
+
+
+Gets or sets the reusable list of identifiers to prune. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00090}{90}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a230c21d7bb1bc00f62dd4ac5fe853e97}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!labelQueued@{labelQueued}}
+\index{labelQueued@{labelQueued}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{labelQueued}{labelQueued}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a230c21d7bb1bc00f62dd4ac5fe853e97} 
+Hash\+Set$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.label\+Queued}
+
+
+
+Gets or sets identifiers already queued for label placement. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00092}{92}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0afc1311bdcc06362db3aaf03daf1195}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!labels@{labels}}
+\index{labels@{labels}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{labels}{labels}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0afc1311bdcc06362db3aaf03daf1195} 
+List$<$TLabel$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.labels}
+
+
+
+Gets or sets the reusable label models. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00096}{96}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab3f70e804148f36cca3e475fc0732939}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!labelSmoothPosition@{labelSmoothPosition}}
+\index{labelSmoothPosition@{labelSmoothPosition}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{labelSmoothPosition}{labelSmoothPosition}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab3f70e804148f36cca3e475fc0732939} 
+Dictionary$<$string, Vector2$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.label\+Smooth\+Position}
+
+
+
+Gets or sets smoothed panel positions keyed by node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00094}{94}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a9ddedbd11c2592999edea317e2fc2295}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!lastFrameLabelNodes@{lastFrameLabelNodes}}
+\index{lastFrameLabelNodes@{lastFrameLabelNodes}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{lastFrameLabelNodes}{lastFrameLabelNodes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a9ddedbd11c2592999edea317e2fc2295} 
+Hash\+Set$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.last\+Frame\+Label\+Nodes}
+
+
+
+Gets or sets nodes labeled during the previous frame. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00098}{98}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0daa57e296de47f8f400fa2190f6a5b3}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!MaxDistance@{MaxDistance}}
+\index{MaxDistance@{MaxDistance}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{MaxDistance}{MaxDistance}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a0daa57e296de47f8f400fa2190f6a5b3} 
+Func$<$float$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Max\+Distance}
+
+
+
+Gets or sets the maximum distance at which labels appear. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00033}{33}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a1ef2954ef0bfdf988de147b0fb490fc5}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!NameFontSize@{NameFontSize}}
+\index{NameFontSize@{NameFontSize}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{NameFontSize}{NameFontSize}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a1ef2954ef0bfdf988de147b0fb490fc5} 
+Func$<$TNode, bool, bool, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_label_settings}{Graph\+Node\+Label\+Settings}}, float$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Name\+Font\+Size}
+
+
+
+When set, overrides name font size for label measurement and placement. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00048}{48}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab5a67c67f7e06c2325adbfb382c8a7c1}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!NodeLabelCap@{NodeLabelCap}}
+\index{NodeLabelCap@{NodeLabelCap}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{NodeLabelCap}{NodeLabelCap}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab5a67c67f7e06c2325adbfb382c8a7c1} 
+int Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Node\+Label\+Cap}
+
+
+
+Gets or sets the maximum number of label models to create. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00051}{51}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_af39ef855e68ff6fd58708ebfa48c4a58}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!nodeLabelSlots@{nodeLabelSlots}}
+\index{nodeLabelSlots@{nodeLabelSlots}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{nodeLabelSlots}{nodeLabelSlots}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_af39ef855e68ff6fd58708ebfa48c4a58} 
+Dictionary$<$string, int$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.node\+Label\+Slots}
+
+
+
+Gets or sets the assigned label slot for each node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00100}{100}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a134f61489fdabb57759ea7ad4fff517b}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a134f61489fdabb57759ea7ad4fff517b} 
+Func$<$IRead\+Only\+Dictionary$<$string, TNode$>$ $>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Nodes}
+
+
+
+Gets or sets a callback that returns nodes keyed by identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00058}{58}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a761fa47245bfb27b8c262758d5ddfb67}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!NodeStepRowHeight@{NodeStepRowHeight}}
+\index{NodeStepRowHeight@{NodeStepRowHeight}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{NodeStepRowHeight}{NodeStepRowHeight}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a761fa47245bfb27b8c262758d5ddfb67} 
+float Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Node\+Step\+Row\+Height}
+
+
+
+Gets or sets the height reserved for a step row. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00053}{53}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2d5fc5e224f097533bf3a65bece17cdf}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!NodeStepRowWidth@{NodeStepRowWidth}}
+\index{NodeStepRowWidth@{NodeStepRowWidth}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{NodeStepRowWidth}{NodeStepRowWidth}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2d5fc5e224f097533bf3a65bece17cdf} 
+float Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Node\+Step\+Row\+Width}
+
+
+
+Gets or sets the width reserved for a step row. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00055}{55}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a89c00e8f274c873b2e0b7835b05e47d9}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!occupiedLabels@{occupiedLabels}}
+\index{occupiedLabels@{occupiedLabels}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{occupiedLabels}{occupiedLabels}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a89c00e8f274c873b2e0b7835b05e47d9} 
+List$<$Rect$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.occupied\+Labels}
+
+
+
+Gets or sets panel bounds occupied during the current frame. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00102}{102}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a5d055119d1d63b3e87abaf74a7c967f7}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!Opacity@{Opacity}}
+\index{Opacity@{Opacity}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{Opacity}{Opacity}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a5d055119d1d63b3e87abaf74a7c967f7} 
+Func$<$float, bool, float$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Opacity}
+
+
+
+Gets or sets the function that calculates opacity by distance and focus state. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00060}{60}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aa552f01f0f3ec6f3d6e4a15181e3bc84}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!PaintSteps@{PaintSteps}}
+\index{PaintSteps@{PaintSteps}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{PaintSteps}{PaintSteps}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_aa552f01f0f3ec6f3d6e4a15181e3bc84} 
+Action$<$TLabel, string\+[$\,$]\+$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Paint\+Steps}
+
+
+
+Gets or sets the callback that paints workflow step states. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00062}{62}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a591960fb606bd8d026b828f36f54b349}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!root@{root}}
+\index{root@{root}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a591960fb606bd8d026b828f36f54b349} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.root}
+
+
+
+Gets or sets the root panel element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00104}{104}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2f0c13c8fe2a08b80e22d172cbecde7c}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!SafeArea@{SafeArea}}
+\index{SafeArea@{SafeArea}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{SafeArea}{SafeArea}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2f0c13c8fe2a08b80e22d172cbecde7c} 
+Func$<$Rect$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Safe\+Area}
+
+
+
+Gets or sets the safe area available for label placement. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00064}{64}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_acc6bc69b60cd586d473fa518b8f92533}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!Selected@{Selected}}
+\index{Selected@{Selected}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{Selected}{Selected}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_acc6bc69b60cd586d473fa518b8f92533} 
+Func$<$TNode$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Selected}
+
+
+
+Gets or sets the callback that returns the selected node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00066}{66}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a7a89ffd32011e224abd2d210697774c5}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!Settings@{Settings}}
+\index{Settings@{Settings}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{Settings}{Settings}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a7a89ffd32011e224abd2d210697774c5} 
+Func$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_label_settings}{Graph\+Node\+Label\+Settings}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Settings}
+
+
+
+Gets or sets the callback that returns label settings. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00070}{70}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ac869e0eef20c2dfde75a865c3afb0aa3}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!taskVisuals@{taskVisuals}}
+\index{taskVisuals@{taskVisuals}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{taskVisuals}{taskVisuals}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ac869e0eef20c2dfde75a865c3afb0aa3} 
+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_task_visual}{Graph\+Task\+Visual}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.task\+Visuals}
+
+
+
+Gets or sets task presentation data keyed by node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00106}{106}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a93cba67623417b2094fdcb8023ea41ee}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!TypeCaption@{TypeCaption}}
+\index{TypeCaption@{TypeCaption}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{TypeCaption}{TypeCaption}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a93cba67623417b2094fdcb8023ea41ee} 
+Func$<$TNode, bool, bool, string$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Type\+Caption}
+
+
+
+When set, supplies the type caption line and layout height. Return empty to omit the type line. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00073}{73}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab7e9f8737e4c266b7b579392096a0ef9}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!TypeColor@{TypeColor}}
+\index{TypeColor@{TypeColor}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{TypeColor}{TypeColor}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_ab7e9f8737e4c266b7b579392096a0ef9} 
+Func$<$TNode, Color$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Type\+Color}
+
+
+
+Gets or sets the function that returns a node\textquotesingle{}s type color. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00076}{76}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2b59fcfb64ef6efe256238d0e4e93d69}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!TypeLabel@{TypeLabel}}
+\index{TypeLabel@{TypeLabel}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{TypeLabel}{TypeLabel}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a2b59fcfb64ef6efe256238d0e4e93d69} 
+Func$<$TNode, string$>$ Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.Type\+Label}
+
+
+
+Gets or sets the function that returns a node\textquotesingle{}s type label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00078}{78}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a45ac1bba9ff832a88e62c3b7c9e90ba5}\index{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}!worldLabels@{worldLabels}}
+\index{worldLabels@{worldLabels}!Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$@{Cashg.GraphExplorer.GraphWorldLabelsOptions$<$ TNode, TLabel $>$}}
+\doxysubsubsection{\texorpdfstring{worldLabels}{worldLabels}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_world_labels_options-2-g_a45ac1bba9ff832a88e62c3b7c9e90ba5} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+Graph\+World\+Labels\+Options$<$ TNode, TLabel $>$.world\+Labels}
+
+
+
+Gets or sets the container for world-\/space label elements. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source_l00108}{108}} of file \doxymbox{\hyperlink{_graph_world_labels_presenter_8cs_source}{Graph\+World\+Labels\+Presenter.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+World\+Labels\+Presenter.\+cs\end{DoxyCompactItemize}

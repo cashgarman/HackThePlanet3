@@ -1,0 +1,229 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+
+
+Represents graph edge record.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{Graph\+Edge\+Record}} (string id, string from, string to, string type\+Id, string status="{}observed"{}, double? confidence=null, IEnumerable$<$ Key\+Value\+Pair$<$ string, \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{Graph\+Value}} $>$ $>$ properties=null, IEnumerable$<$ string $>$ sources=null)
+\begin{DoxyCompactList}\small\item\em Creates an immutable edge record. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{Graph\+Edge\+Record}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a65fb4d1f88fc54ccfef644846ade0f84}{With\+Evidence}} (double? confidence, IEnumerable$<$ string $>$ sources)
+\begin{DoxyCompactList}\small\item\em Creates a copy with updated confidence and source evidence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a1b00197581038bca1b5a4e9e6263be57}{Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the stable edge identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8b950b5763bf3913c10af940f9bde99b}{From}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the source node identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_ad9c372e8b132ffa8ca4ef70ee37798d2}{To}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the destination node identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8994a82fb386d24db2aa6ec12a75af05}{Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the relationship type identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a24ac1814f7d62369a6d0ff424cf4577d}{Status}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the relationship status. \end{DoxyCompactList}\item 
+double? \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a24da6c9e863cb4da0a37b672f750006f}{Confidence}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the optional confidence value. \end{DoxyCompactList}\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{Graph\+Value}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a56ec7596b38f93ce62c609361ac491c6}{Properties}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the edge\textquotesingle{}s immutable property map. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8d0b2dd4ef1ad0a9dee2fd877c32824d}{Sources}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the source identifiers associated with the edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph edge record. 
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00203}{203}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!GraphEdgeRecord@{GraphEdgeRecord}}
+\index{GraphEdgeRecord@{GraphEdgeRecord}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{GraphEdgeRecord()}{GraphEdgeRecord()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756} 
+Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+Graph\+Edge\+Record (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{string}]{from}{, }\item[{string}]{to}{, }\item[{string}]{type\+Id}{, }\item[{string}]{status}{ = {\ttfamily "{}observed"{}}, }\item[{double?}]{confidence}{ = {\ttfamily null}, }\item[{IEnumerable$<$ Key\+Value\+Pair$<$ string, \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{Graph\+Value}} $>$ $>$}]{properties}{ = {\ttfamily null}, }\item[{IEnumerable$<$ string $>$}]{sources}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Creates an immutable edge record. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Stable edge identifier.\\
+\hline
+{\em from} & Identifier of the source node.\\
+\hline
+{\em to} & Identifier of the destination node.\\
+\hline
+{\em type\+Id} & Relationship type identifier.\\
+\hline
+{\em status} & Relationship status.\\
+\hline
+{\em confidence} & Optional confidence value.\\
+\hline
+{\em properties} & Edge property values.\\
+\hline
+{\em sources} & Source identifiers associated with the edge.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00214}{214}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a65fb4d1f88fc54ccfef644846ade0f84}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!WithEvidence@{WithEvidence}}
+\index{WithEvidence@{WithEvidence}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{WithEvidence()}{WithEvidence()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a65fb4d1f88fc54ccfef644846ade0f84} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{Graph\+Edge\+Record}} Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+With\+Evidence (\begin{DoxyParamCaption}\item[{double?}]{confidence}{, }\item[{IEnumerable$<$ string $>$}]{sources}{}\end{DoxyParamCaption})}
+
+
+
+Creates a copy with updated confidence and source evidence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em confidence} & Replacement confidence value.\\
+\hline
+{\em sources} & Replacement source identifiers.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new edge record with the supplied evidence.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00253}{253}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a24da6c9e863cb4da0a37b672f750006f}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!Confidence@{Confidence}}
+\index{Confidence@{Confidence}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{Confidence}{Confidence}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a24da6c9e863cb4da0a37b672f750006f} 
+double? Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+Confidence\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the optional confidence value. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00243}{243}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8b950b5763bf3913c10af940f9bde99b}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!From@{From}}
+\index{From@{From}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{From}{From}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8b950b5763bf3913c10af940f9bde99b} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+From\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the source node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00235}{235}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a1b00197581038bca1b5a4e9e6263be57}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!Id@{Id}}
+\index{Id@{Id}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a1b00197581038bca1b5a4e9e6263be57} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the stable edge identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00233}{233}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a56ec7596b38f93ce62c609361ac491c6}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!Properties@{Properties}}
+\index{Properties@{Properties}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{Properties}{Properties}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a56ec7596b38f93ce62c609361ac491c6} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{Graph\+Value}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+Properties\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the edge\textquotesingle{}s immutable property map. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00245}{245}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8d0b2dd4ef1ad0a9dee2fd877c32824d}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!Sources@{Sources}}
+\index{Sources@{Sources}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{Sources}{Sources}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8d0b2dd4ef1ad0a9dee2fd877c32824d} 
+IRead\+Only\+List$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+Sources\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the source identifiers associated with the edge. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00247}{247}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a24ac1814f7d62369a6d0ff424cf4577d}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!Status@{Status}}
+\index{Status@{Status}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{Status}{Status}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a24ac1814f7d62369a6d0ff424cf4577d} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+Status\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the relationship status. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00241}{241}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_ad9c372e8b132ffa8ca4ef70ee37798d2}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!To@{To}}
+\index{To@{To}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{To}{To}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_ad9c372e8b132ffa8ca4ef70ee37798d2} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+To\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the destination node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00237}{237}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8994a82fb386d24db2aa6ec12a75af05}\index{Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}!TypeId@{TypeId}}
+\index{TypeId@{TypeId}!Cashg.GraphExplorer.GraphEdgeRecord@{Cashg.GraphExplorer.GraphEdgeRecord}}
+\doxysubsubsection{\texorpdfstring{TypeId}{TypeId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a8994a82fb386d24db2aa6ec12a75af05} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Edge\+Record.\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the relationship type identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00239}{239}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Records.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,383 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+
+
+Host-\/owned descriptors and asynchronous selection state. No snapshots are retained here.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a800e41c5b90e7ee71a6fc5483a21e2cf}{Load\+Event}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document}{Graph\+Document}} document, string id, Cancellation\+Token token, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Loads a portable cached snapshot first, otherwise delegates to the attached provider. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aafc3a722aef2f4e3eede582ae10c902a}{Restore\+Cached\+Events}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_workspace}{Graph\+Timeline\+Workspace}} workspace, string context=null)
+\begin{DoxyCompactList}\small\item\em Restores saved descriptors before provider discovery, including when the source is unavailable. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a312fa20a98675fcdbebc7a68061a4b2c}{Replace}} (IEnumerable$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}} $>$ incoming)
+\begin{DoxyCompactList}\small\item\em Replaces the available event descriptors and clears selection state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aedae44b0c3a7749c20057757bd951318}{Request\+Selection}} (string id, bool stop\+Playback=true)
+\begin{DoxyCompactList}\small\item\em Requests selection of an event descriptor. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a4e557f08488bb03114520050291e8a20}{Confirm\+Selection}} (string id)
+\begin{DoxyCompactList}\small\item\em Confirms the event currently selected by the host. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aef38e2719ac8b8b6852a242da3830c83}{Fail\+Selection}} (string id, string error)
+\begin{DoxyCompactList}\small\item\em Finishes a pending selection with an error. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a5ae1f8d36dc176fac9cb1b5858b4679a}{Select\+Session}} ()
+\begin{DoxyCompactList}\small\item\em Clears event selection to return to the live session. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aaae0ccd173a87417686eb5768a9accbf}{Cancel\+Pending}} (bool stop\+Playback=false)
+\begin{DoxyCompactList}\small\item\em Cancels pending selection state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ab9dc8260b3f0e59e48fccdbd153d8c7a}{Events}} = Array.\+Empty$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}}$>$()\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the ordered event descriptors. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider}{IGraph\+Timeline\+Event\+Provider}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ab4c73b22a326971fbbc3d908bf50ece2}{Provider}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the provider used to load selected events. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a6bc37dd4c1fefb2f4c8603f6e0ca66e4}{Selected\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the selected event identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a2533fdecf87c73378170e364b9c1b8e5}{Pending\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the event identifier whose selection is pending. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_addda525e4cac98870f49656299034d14}{Error}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the latest selection error. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a2ced5e027341df84fbb548b333d45366}{Revision}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the event-\/list revision. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ade2757754da56671764c7df867ebf039}{Selected}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the selected event descriptor, when present. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a49d41dd3b0c0491bfd77a98e835973db}{Changed}}
+\begin{DoxyCompactList}\small\item\em Occurs when event descriptors or selection state changes. \end{DoxyCompactList}\item 
+Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a410aceb3e5301386e1c6d2853fd755c2}{Selection\+Requested}}
+\begin{DoxyCompactList}\small\item\em Occurs when an event selection is requested. \end{DoxyCompactList}\item 
+Action \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ac11724e1507e9a1b7e0099b40f6d0d28}{Selection\+Starting}}
+\begin{DoxyCompactList}\small\item\em Occurs before selection starts, allowing playback to stop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Host-\/owned descriptors and asynchronous selection state. No snapshots are retained here. 
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00043}{43}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aaae0ccd173a87417686eb5768a9accbf}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!CancelPending@{CancelPending}}
+\index{CancelPending@{CancelPending}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{CancelPending()}{CancelPending()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aaae0ccd173a87417686eb5768a9accbf} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Cancel\+Pending (\begin{DoxyParamCaption}\item[{bool}]{stop\+Playback}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Cancels pending selection state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stop\+Playback} & Whether to notify listeners that selection is starting.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00200}{200}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a4e557f08488bb03114520050291e8a20}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!ConfirmSelection@{ConfirmSelection}}
+\index{ConfirmSelection@{ConfirmSelection}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{ConfirmSelection()}{ConfirmSelection()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a4e557f08488bb03114520050291e8a20} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Confirm\+Selection (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Confirms the event currently selected by the host. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Selected event identifier.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00170}{170}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aef38e2719ac8b8b6852a242da3830c83}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!FailSelection@{FailSelection}}
+\index{FailSelection@{FailSelection}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{FailSelection()}{FailSelection()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aef38e2719ac8b8b6852a242da3830c83} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Fail\+Selection (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{string}]{error}{}\end{DoxyParamCaption})}
+
+
+
+Finishes a pending selection with an error. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identifier of the pending event.\\
+\hline
+{\em error} & Failure message.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00181}{181}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a800e41c5b90e7ee71a6fc5483a21e2cf}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!LoadEvent@{LoadEvent}}
+\index{LoadEvent@{LoadEvent}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{LoadEvent()}{LoadEvent()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a800e41c5b90e7ee71a6fc5483a21e2cf} 
+IEnumerator Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Load\+Event (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document}{Graph\+Document}}}]{document}{, }\item[{string}]{id}{, }\item[{Cancellation\+Token}]{token}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Loads a portable cached snapshot first, otherwise delegates to the attached provider. 
+
+Loads an event snapshot from cache or the attached provider. 
+\begin{DoxyParams}{Parameters}
+{\em document} & Document containing the timeline workspace cache.\\
+\hline
+{\em id} & Event identifier to load.\\
+\hline
+{\em token} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the loaded snapshot.\\
+\hline
+{\em failed} & Receives a load failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that loads the event.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00075}{75}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a312fa20a98675fcdbebc7a68061a4b2c}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!Replace@{Replace}}
+\index{Replace@{Replace}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{Replace()}{Replace()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a312fa20a98675fcdbebc7a68061a4b2c} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Replace (\begin{DoxyParamCaption}\item[{IEnumerable$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}} $>$}]{incoming}{}\end{DoxyParamCaption})}
+
+
+
+Replaces the available event descriptors and clears selection state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em incoming} & Descriptors to install.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00136}{136}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aedae44b0c3a7749c20057757bd951318}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!RequestSelection@{RequestSelection}}
+\index{RequestSelection@{RequestSelection}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{RequestSelection()}{RequestSelection()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aedae44b0c3a7749c20057757bd951318} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Request\+Selection (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{bool}]{stop\+Playback}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Requests selection of an event descriptor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Event identifier.\\
+\hline
+{\em stop\+Playback} & Whether to notify listeners that selection is starting.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00155}{155}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aafc3a722aef2f4e3eede582ae10c902a}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!RestoreCachedEvents@{RestoreCachedEvents}}
+\index{RestoreCachedEvents@{RestoreCachedEvents}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{RestoreCachedEvents()}{RestoreCachedEvents()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_aafc3a722aef2f4e3eede582ae10c902a} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Restore\+Cached\+Events (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_workspace}{Graph\+Timeline\+Workspace}}}]{workspace}{, }\item[{string}]{context}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Restores saved descriptors before provider discovery, including when the source is unavailable. 
+
+Restores event descriptors from the workspace\textquotesingle{}s saved cache. 
+\begin{DoxyParams}{Parameters}
+{\em workspace} & Workspace containing cached descriptors.\\
+\hline
+{\em context} & Optional provider context to select.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00125}{125}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a5ae1f8d36dc176fac9cb1b5858b4679a}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!SelectSession@{SelectSession}}
+\index{SelectSession@{SelectSession}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{SelectSession()}{SelectSession()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a5ae1f8d36dc176fac9cb1b5858b4679a} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Select\+Session (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears event selection to return to the live session. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00192}{192}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_addda525e4cac98870f49656299034d14}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!Error@{Error}}
+\index{Error@{Error}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{Error}{Error}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_addda525e4cac98870f49656299034d14} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Error\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the latest selection error. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00055}{55}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ab9dc8260b3f0e59e48fccdbd153d8c7a}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!Events@{Events}}
+\index{Events@{Events}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{Events}{Events}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ab9dc8260b3f0e59e48fccdbd153d8c7a} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Events = Array.\+Empty$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}}$>$()\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the ordered event descriptors. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00046}{46}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a2533fdecf87c73378170e364b9c1b8e5}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!PendingId@{PendingId}}
+\index{PendingId@{PendingId}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{PendingId}{PendingId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a2533fdecf87c73378170e364b9c1b8e5} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Pending\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the event identifier whose selection is pending. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00053}{53}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ab4c73b22a326971fbbc3d908bf50ece2}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!Provider@{Provider}}
+\index{Provider@{Provider}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{Provider}{Provider}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ab4c73b22a326971fbbc3d908bf50ece2} 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider}{IGraph\+Timeline\+Event\+Provider}} Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Provider\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the provider used to load selected events. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00049}{49}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a2ced5e027341df84fbb548b333d45366}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!Revision@{Revision}}
+\index{Revision@{Revision}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{Revision}{Revision}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a2ced5e027341df84fbb548b333d45366} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Revision\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the event-\/list revision. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00057}{57}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ade2757754da56671764c7df867ebf039}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!Selected@{Selected}}
+\index{Selected@{Selected}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{Selected}{Selected}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ade2757754da56671764c7df867ebf039} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}} Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Selected\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the selected event descriptor, when present. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00059}{59}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a6bc37dd4c1fefb2f4c8603f6e0ca66e4}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!SelectedId@{SelectedId}}
+\index{SelectedId@{SelectedId}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{SelectedId}{SelectedId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a6bc37dd4c1fefb2f4c8603f6e0ca66e4} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Selected\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the selected event identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00051}{51}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_doc-event-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a49d41dd3b0c0491bfd77a98e835973db}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!Changed@{Changed}}
+\index{Changed@{Changed}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{Changed}{Changed}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a49d41dd3b0c0491bfd77a98e835973db} 
+Action Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Changed}
+
+
+
+Occurs when event descriptors or selection state changes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00061}{61}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a410aceb3e5301386e1c6d2853fd755c2}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!SelectionRequested@{SelectionRequested}}
+\index{SelectionRequested@{SelectionRequested}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{SelectionRequested}{SelectionRequested}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_a410aceb3e5301386e1c6d2853fd755c2} 
+Action$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event}{Graph\+Timeline\+Event}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Selection\+Requested}
+
+
+
+Occurs when an event selection is requested. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00063}{63}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ac11724e1507e9a1b7e0099b40f6d0d28}\index{Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}!SelectionStarting@{SelectionStarting}}
+\index{SelectionStarting@{SelectionStarting}!Cashg.GraphExplorer.GraphTimelineEventTrack@{Cashg.GraphExplorer.GraphTimelineEventTrack}}
+\doxysubsubsection{\texorpdfstring{SelectionStarting}{SelectionStarting}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_event_track_ac11724e1507e9a1b7e0099b40f6d0d28} 
+Action Cashg.\+Graph\+Explorer.\+Graph\+Timeline\+Event\+Track.\+Selection\+Starting}
+
+
+
+Occurs before selection starts, allowing playback to stop. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source_l00065}{65}} of file \doxymbox{\hyperlink{_graph_timeline_event_track_8cs_source}{Graph\+Timeline\+Event\+Track.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Timeline\+Event\+Track.\+cs\end{DoxyCompactItemize}

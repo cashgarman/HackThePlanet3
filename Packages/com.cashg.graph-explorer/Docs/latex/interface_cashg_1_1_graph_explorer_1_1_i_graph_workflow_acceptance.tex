@@ -1,0 +1,74 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+IGraph\+Workflow\+Acceptance Interface Reference}
+\hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance}{}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance}\index{Cashg.GraphExplorer.IGraphWorkflowAcceptance@{Cashg.GraphExplorer.IGraphWorkflowAcceptance}}
+
+
+Optional host capability; acceptance is separate from external execution success.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_a9b8694a94b9e32138f13e6b7f0fdfcd2}{Can\+Accept}} (string task\+Id, string node\+Id, string step\+Id, out string reason)
+\begin{DoxyCompactList}\small\item\em Determines whether a task step can be accepted. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_a9e094b7af906a21968b38d6516ddb7d9}{Accept}} (string task\+Id, string node\+Id, string step\+Id)
+\begin{DoxyCompactList}\small\item\em Accepts a task step previously approved by Can\+Accept(string, string, string, out string). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Optional host capability; acceptance is separate from external execution success. 
+
+Definition at line \doxymbox{\hyperlink{_graph_workflow_8cs_source_l00136}{136}} of file \doxymbox{\hyperlink{_graph_workflow_8cs_source}{Graph\+Workflow.\+cs}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_doc-func-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_a9e094b7af906a21968b38d6516ddb7d9}\index{Cashg.GraphExplorer.IGraphWorkflowAcceptance@{Cashg.GraphExplorer.IGraphWorkflowAcceptance}!Accept@{Accept}}
+\index{Accept@{Accept}!Cashg.GraphExplorer.IGraphWorkflowAcceptance@{Cashg.GraphExplorer.IGraphWorkflowAcceptance}}
+\doxysubsubsection{\texorpdfstring{Accept()}{Accept()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_a9e094b7af906a21968b38d6516ddb7d9} 
+void Cashg.\+Graph\+Explorer.\+IGraph\+Workflow\+Acceptance.\+Accept (\begin{DoxyParamCaption}\item[{string}]{task\+Id}{, }\item[{string}]{node\+Id}{, }\item[{string}]{step\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Accepts a task step previously approved by Can\+Accept(string, string, string, out string). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Id} & Task identifier.\\
+\hline
+{\em node\+Id} & Target node identifier.\\
+\hline
+{\em step\+Id} & Step identifier.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_a9b8694a94b9e32138f13e6b7f0fdfcd2}\index{Cashg.GraphExplorer.IGraphWorkflowAcceptance@{Cashg.GraphExplorer.IGraphWorkflowAcceptance}!CanAccept@{CanAccept}}
+\index{CanAccept@{CanAccept}!Cashg.GraphExplorer.IGraphWorkflowAcceptance@{Cashg.GraphExplorer.IGraphWorkflowAcceptance}}
+\doxysubsubsection{\texorpdfstring{CanAccept()}{CanAccept()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_workflow_acceptance_a9b8694a94b9e32138f13e6b7f0fdfcd2} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Workflow\+Acceptance.\+Can\+Accept (\begin{DoxyParamCaption}\item[{string}]{task\+Id}{, }\item[{string}]{node\+Id}{, }\item[{string}]{step\+Id}{, }\item[{out string}]{reason}{}\end{DoxyParamCaption})}
+
+
+
+Determines whether a task step can be accepted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Id} & Task identifier.\\
+\hline
+{\em node\+Id} & Target node identifier.\\
+\hline
+{\em step\+Id} & Step identifier.\\
+\hline
+{\em reason} & Receives the reason acceptance is unavailable.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the step can be accepted.
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Workflow.\+cs\end{DoxyCompactItemize}

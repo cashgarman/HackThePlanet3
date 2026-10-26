@@ -1,0 +1,44 @@
+{
+    "version": 1,
+    "credits": 600,
+    "xp": 0,
+    "day": 1,
+    "totalEarnedXp": 0,
+    "cpu": 0,
+    "bandwidth": 0,
+    "memory": 0,
+    "jobs": 0,
+    "completed": [],
+    "unlocked": [
+        "base"
+    ],
+    "equipped": [],
+    "news": [
+        "EXCHANGE ONLINE // A new operator has entered the network. Your first contract is waiting."
+    ],
+    "reports": [],
+    "operation": {
+        "contractId": "",
+        "seed": 0,
+        "nodes": [],
+        "links": [],
+        "log": [],
+        "queue": [],
+        "task": {
+            "target": "",
+            "kind": 0,
+            "duration": 0.0,
+            "elapsed": 0.0,
+            "trace": 0.0
+        },
+        "trace": 0.0,
+        "elapsed": 0.0,
+        "decoyRemaining": 0.0,
+        "paused": false,
+        "decoyUsed": false,
+        "backdoorUsed": false,
+        "firstRelayUsed": false,
+        "cascadeApplied": false,
+        "lastControlled": "home"
+    }
+}

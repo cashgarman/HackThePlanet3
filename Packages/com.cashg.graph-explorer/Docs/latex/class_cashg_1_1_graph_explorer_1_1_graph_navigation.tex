@@ -1,0 +1,366 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Navigation Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_navigation}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+
+
+Represents graph navigation.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Graph\+Navigation:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cashg_1_1_graph_explorer_1_1_graph_navigation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5ecd584a4e09911ed9a2d5cc82dc4d88}{Graph\+Navigation}} (Camera value)
+\begin{DoxyCompactList}\small\item\em Creates navigation controls for a camera. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a85b793d93830eedcf7bbd052df34bbc5}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Releases cursor capture and stops camera tracking. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a489d4710108a41e120105ff0768b8eae}{Focus}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} node, float radius=12)
+\begin{DoxyCompactList}\small\item\em Moves the camera to frame and track a node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5cafe312a5b3a01e65b265c278952561}{Stop\+Tracking}} ()
+\begin{DoxyCompactList}\small\item\em Stops tracking the current node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4095149515e085b8a1849a80b3c8c76c}{Retarget}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} node)
+\begin{DoxyCompactList}\small\item\em Changes the tracked node while preserving the current camera framing. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a0fc579b930d6c45e81bb0336b450180b}{Frame}} (Vector3 center, float radius=12)
+\begin{DoxyCompactList}\small\item\em Frames a world-\/space point with the requested approximate radius. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a60a1409c6792a6cca411cf1a8b8057a6}{Overview}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} graph)
+\begin{DoxyCompactList}\small\item\em Frames all visible nodes in a scene. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a7de095befb5fbd1906594ae5f78b9316}{Follow}} (bool hold)
+\begin{DoxyCompactList}\small\item\em Updates the tracked camera target, optionally holding the current offset. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a214dbff6f27151c3e1f61c2503a7ca32}{Tick}} (bool blocked, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} selected, bool frame\+Selected=false)
+\begin{DoxyCompactList}\small\item\em Processes camera movement and pointer controls for the current frame. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a088ae5afc556b77181c64cecf8d7ff04}{Release}} ()
+\begin{DoxyCompactList}\small\item\em Stops camera interaction and restores the cursor state captured by this controller. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a9ec7f33db2708541fe40bac6e68774bd}{Restore}} (Vector3 position, Quaternion rotation)
+\begin{DoxyCompactList}\small\item\em Restores the camera transform and resets navigation motion and tracking state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4dc71d42457144e0a97eade19aebda46}{Frame\+Key\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Plain F frames the selection. Ctrl/\+\+Cmd+F stays reserved for search. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_aa9dfd23640d96860cb21bcefba577148}{Speed}} = 22
+\begin{DoxyCompactList}\small\item\em Gets or sets the movement speed used for camera navigation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4ade8393ce9bf4fa8ee1c1b8988de2c9}{Looking}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether the camera is in look or orbit mode. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a3b6298790d0b5d55079aa35464b6cba1}{Tracking}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether the camera tracks a node. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_aed2dfcd8da372dc870c4b45e503c8595}{Tracked}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the tracked node, or null when tracking is inactive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph navigation. 
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00008}{8}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5ecd584a4e09911ed9a2d5cc82dc4d88}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!GraphNavigation@{GraphNavigation}}
+\index{GraphNavigation@{GraphNavigation}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{GraphNavigation()}{GraphNavigation()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5ecd584a4e09911ed9a2d5cc82dc4d88} 
+Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Graph\+Navigation (\begin{DoxyParamCaption}\item[{Camera}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Creates navigation controls for a camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Camera to control.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00027}{27}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a85b793d93830eedcf7bbd052df34bbc5}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a85b793d93830eedcf7bbd052df34bbc5} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Releases cursor capture and stops camera tracking. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00042}{42}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a489d4710108a41e120105ff0768b8eae}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Focus@{Focus}}
+\index{Focus@{Focus}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Focus()}{Focus()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a489d4710108a41e120105ff0768b8eae} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Focus (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{node}{, }\item[{float}]{radius}{ = {\ttfamily 12}}\end{DoxyParamCaption})}
+
+
+
+Moves the camera to frame and track a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to focus, or null to do nothing.\\
+\hline
+{\em radius} & Approximate node radius used to choose a viewing distance.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a7de095befb5fbd1906594ae5f78b9316}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Follow@{Follow}}
+\index{Follow@{Follow}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Follow()}{Follow()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a7de095befb5fbd1906594ae5f78b9316} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Follow (\begin{DoxyParamCaption}\item[{bool}]{hold}{}\end{DoxyParamCaption})}
+
+
+
+Updates the tracked camera target, optionally holding the current offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hold} & When true, updates the tracking origin without moving the camera.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00147}{147}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a0fc579b930d6c45e81bb0336b450180b}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Frame@{Frame}}
+\index{Frame@{Frame}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Frame()}{Frame()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a0fc579b930d6c45e81bb0336b450180b} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Frame (\begin{DoxyParamCaption}\item[{Vector3}]{center}{, }\item[{float}]{radius}{ = {\ttfamily 12}}\end{DoxyParamCaption})}
+
+
+
+Frames a world-\/space point with the requested approximate radius. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & Center point to frame.\\
+\hline
+{\em radius} & Approximate radius of the content.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00104}{104}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4dc71d42457144e0a97eade19aebda46}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!FrameKeyPressed@{FrameKeyPressed}}
+\index{FrameKeyPressed@{FrameKeyPressed}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{FrameKeyPressed()}{FrameKeyPressed()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4dc71d42457144e0a97eade19aebda46} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Frame\+Key\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Plain F frames the selection. Ctrl/\+\+Cmd+F stays reserved for search. 
+
+Determines whether the plain F key requests framing the selection. \begin{DoxyReturn}{Returns}
+{\ttfamily true} when F was pressed without Ctrl or Command.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00051}{51}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a60a1409c6792a6cca411cf1a8b8057a6}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Overview@{Overview}}
+\index{Overview@{Overview}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Overview()}{Overview()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a60a1409c6792a6cca411cf1a8b8057a6} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Overview (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{graph}{}\end{DoxyParamCaption})}
+
+
+
+Frames all visible nodes in a scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Scene whose visible nodes are framed.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00121}{121}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a088ae5afc556b77181c64cecf8d7ff04}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Release@{Release}}
+\index{Release@{Release}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Release()}{Release()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a088ae5afc556b77181c64cecf8d7ff04} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Release (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops camera interaction and restores the cursor state captured by this controller. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00313}{313}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a9ec7f33db2708541fe40bac6e68774bd}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Restore@{Restore}}
+\index{Restore@{Restore}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Restore()}{Restore()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a9ec7f33db2708541fe40bac6e68774bd} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Restore (\begin{DoxyParamCaption}\item[{Vector3}]{position}{, }\item[{Quaternion}]{rotation}{}\end{DoxyParamCaption})}
+
+
+
+Restores the camera transform and resets navigation motion and tracking state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & World-\/space camera position.\\
+\hline
+{\em rotation} & Camera rotation.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00351}{351}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4095149515e085b8a1849a80b3c8c76c}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Retarget@{Retarget}}
+\index{Retarget@{Retarget}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Retarget()}{Retarget()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4095149515e085b8a1849a80b3c8c76c} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Retarget (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Changes the tracked node while preserving the current camera framing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to track.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00093}{93}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5cafe312a5b3a01e65b265c278952561}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!StopTracking@{StopTracking}}
+\index{StopTracking@{StopTracking}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{StopTracking()}{StopTracking()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5cafe312a5b3a01e65b265c278952561} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Stop\+Tracking (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops tracking the current node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00084}{84}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a214dbff6f27151c3e1f61c2503a7ca32}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Tick@{Tick}}
+\index{Tick@{Tick}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Tick()}{Tick()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a214dbff6f27151c3e1f61c2503a7ca32} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Tick (\begin{DoxyParamCaption}\item[{bool}]{blocked}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{selected}{, }\item[{bool}]{frame\+Selected}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Processes camera movement and pointer controls for the current frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blocked} & Whether UI currently blocks graph interaction.\\
+\hline
+{\em selected} & Currently selected node.\\
+\hline
+{\em frame\+Selected} & Whether to frame the selected node this frame.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00171}{171}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_aa9dfd23640d96860cb21bcefba577148}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Speed@{Speed}}
+\index{Speed@{Speed}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Speed}{Speed}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_aa9dfd23640d96860cb21bcefba577148} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Speed = 22}
+
+
+
+Gets or sets the movement speed used for camera navigation. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00016}{16}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4ade8393ce9bf4fa8ee1c1b8988de2c9}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Looking@{Looking}}
+\index{Looking@{Looking}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Looking}{Looking}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a4ade8393ce9bf4fa8ee1c1b8988de2c9} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Looking\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether the camera is in look or orbit mode. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00034}{34}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_aed2dfcd8da372dc870c4b45e503c8595}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Tracked@{Tracked}}
+\index{Tracked@{Tracked}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Tracked}{Tracked}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_aed2dfcd8da372dc870c4b45e503c8595} 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Tracked\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the tracked node, or null when tracking is inactive. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00039}{39}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a3b6298790d0b5d55079aa35464b6cba1}\index{Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}!Tracking@{Tracking}}
+\index{Tracking@{Tracking}!Cashg.GraphExplorer.GraphNavigation@{Cashg.GraphExplorer.GraphNavigation}}
+\doxysubsubsection{\texorpdfstring{Tracking}{Tracking}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a3b6298790d0b5d55079aa35464b6cba1} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Navigation.\+Tracking\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether the camera tracks a node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_navigation_8cs_source_l00036}{36}} of file \doxymbox{\hyperlink{_graph_navigation_8cs_source}{Graph\+Navigation.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Navigation.\+cs\end{DoxyCompactItemize}

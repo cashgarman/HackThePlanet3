@@ -1,0 +1,149 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Node\+Type\+Definition Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition}\index{Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}}
+
+
+Presentation and default sizing for a node Graph\+Node\+Record.\+Type\+Id. Unknown types may still render via Graph\+Presentation\+Profile.\+Type fallbacks.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4303a95e626f32d06bf0550e0287d1c1}{Graph\+Node\+Type\+Definition}} (string id, string label, string shape\+Id="{}default"{}, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4b32d9655d04f60568722489e247e048}{Color}}? color=null, float default\+Radius=.\+65f)
+\begin{DoxyCompactList}\small\item\em Creates a node type definition for schema registration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_aa278cdf88af681790d69df84953731d3}{Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Stable type id stored on each node record. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_adb845a60775782d5044d38fd3ec886a2}{Label}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Human-\/readable type name; defaults to Id when omitted. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_abd0a763f8a8a4a5fbc49017b93a9ed36}{Shape\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Built-\/in mesh id for instanced rendering (for example {\ttfamily Building}, {\ttfamily Person}); unknown ids fall back at draw time. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4b32d9655d04f60568722489e247e048}{Color}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Node color when Color\+Mapping.\+Type is active. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_ab66020cb8e94e12b0e2183af49752c35}{Default\+Radius}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Default world-\/space radius multiplier before metric or degree sizing overrides. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Presentation and default sizing for a node Graph\+Node\+Record.\+Type\+Id. Unknown types may still render via Graph\+Presentation\+Profile.\+Type fallbacks. 
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00108}{108}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4303a95e626f32d06bf0550e0287d1c1}\index{Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}!GraphNodeTypeDefinition@{GraphNodeTypeDefinition}}
+\index{GraphNodeTypeDefinition@{GraphNodeTypeDefinition}!Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}}
+\doxysubsubsection{\texorpdfstring{GraphNodeTypeDefinition()}{GraphNodeTypeDefinition()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4303a95e626f32d06bf0550e0287d1c1} 
+Cashg.\+Graph\+Explorer.\+Graph\+Node\+Type\+Definition.\+Graph\+Node\+Type\+Definition (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{string}]{label}{, }\item[{string}]{shape\+Id}{ = {\ttfamily "{}default"{}}, }\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4b32d9655d04f60568722489e247e048}{Color}}?}]{color}{ = {\ttfamily null}, }\item[{float}]{default\+Radius}{ = {\ttfamily ::65f}}\end{DoxyParamCaption})}
+
+
+
+Creates a node type definition for schema registration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Non-\/empty type id.\\
+\hline
+{\em label} & Display label; null falls back to {\itshape id} .\\
+\hline
+{\em shape\+Id} & Renderer shape id; null becomes {\ttfamily default}.\\
+\hline
+{\em color} & Type color; null becomes gray.\\
+\hline
+{\em default\+Radius} & Positive default radius; NaN, infinity, or non-\/positive values throw.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Out\+Of\+Range\+Exception} & {\itshape default\+Radius}  is not finite and positive.\\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00117}{117}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4b32d9655d04f60568722489e247e048}\index{Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}!Color@{Color}}
+\index{Color@{Color}!Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}}
+\doxysubsubsection{\texorpdfstring{Color}{Color}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4b32d9655d04f60568722489e247e048} 
+Color Cashg.\+Graph\+Explorer.\+Graph\+Node\+Type\+Definition.\+Color\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Node color when Color\+Mapping.\+Type is active. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00142}{142}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_ab66020cb8e94e12b0e2183af49752c35}\index{Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}!DefaultRadius@{DefaultRadius}}
+\index{DefaultRadius@{DefaultRadius}!Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}}
+\doxysubsubsection{\texorpdfstring{DefaultRadius}{DefaultRadius}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_ab66020cb8e94e12b0e2183af49752c35} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Node\+Type\+Definition.\+Default\+Radius\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Default world-\/space radius multiplier before metric or degree sizing overrides. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00145}{145}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_aa278cdf88af681790d69df84953731d3}\index{Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}!Id@{Id}}
+\index{Id@{Id}!Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_aa278cdf88af681790d69df84953731d3} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Node\+Type\+Definition.\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Stable type id stored on each node record. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00130}{130}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_adb845a60775782d5044d38fd3ec886a2}\index{Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}!Label@{Label}}
+\index{Label@{Label}!Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}}
+\doxysubsubsection{\texorpdfstring{Label}{Label}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_adb845a60775782d5044d38fd3ec886a2} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Node\+Type\+Definition.\+Label\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Human-\/readable type name; defaults to Id when omitted. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00133}{133}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_abd0a763f8a8a4a5fbc49017b93a9ed36}\index{Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}!ShapeId@{ShapeId}}
+\index{ShapeId@{ShapeId}!Cashg.GraphExplorer.GraphNodeTypeDefinition@{Cashg.GraphExplorer.GraphNodeTypeDefinition}}
+\doxysubsubsection{\texorpdfstring{ShapeId}{ShapeId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_abd0a763f8a8a4a5fbc49017b93a9ed36} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Node\+Type\+Definition.\+Shape\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Built-\/in mesh id for instanced rendering (for example {\ttfamily Building}, {\ttfamily Person}); unknown ids fall back at draw time. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00139}{139}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Schema.\+cs\end{DoxyCompactItemize}

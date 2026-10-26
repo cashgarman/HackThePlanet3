@@ -1,0 +1,207 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View\texorpdfstring{$<$}{<} TSource, T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+
+
+Covariant dictionary view. Identity and ownership stay with the source.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View\texorpdfstring{$<$}{<} TSource, T \texorpdfstring{$>$}{>}:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_ac34926c97c6f529d794cd8b445b5bc7c}{Graph\+Dictionary\+View}} (IRead\+Only\+Dictionary$<$ string, TSource $>$ source)
+\begin{DoxyCompactList}\small\item\em Creates a read-\/only view that exposes source values through a base type. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a6ef43d640d9ed5e650ea69f3d9c03ca6}{Contains\+Key}} (string id)
+\begin{DoxyCompactList}\small\item\em Determines whether the source contains the specified key. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_abde3c1465a59ba400fc1c1209f38090b}{Try\+Get\+Value}} (string id, out T value)
+\begin{DoxyCompactList}\small\item\em Attempts to get the value associated with a key. \end{DoxyCompactList}\item 
+IEnumerator$<$ Key\+Value\+Pair$<$ string, T $>$ $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_aed0d8025ba3fa5fbb7bd9ec3e3338500}{Get\+Enumerator}} ()
+\begin{DoxyCompactList}\small\item\em Enumerates the key and value pairs in the view. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+T \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a5e330a881fb81c887b422c4450705e40}{this\+[string id]}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the value associated with the specified identifier. \end{DoxyCompactList}\item 
+IEnumerable$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a227499638f9cf9574204109a2f7a177e}{Keys}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the keys in the source dictionary. \end{DoxyCompactList}\item 
+IEnumerable$<$ T $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_adf6c688aa0f93138fd2f7fb883087024}{Values}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the source values as the view\textquotesingle{}s value type. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a4724578f6240582d30f003e7ba22ca8b}{Count}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the number of entries in the source dictionary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Covariant dictionary view. Identity and ownership stay with the source. \begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TSource} : {\em T}]\end{description}
+\end{Desc}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00011}{11}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a6ef43d640d9ed5e650ea69f3d9c03ca6}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!ContainsKey@{ContainsKey}}
+\index{ContainsKey@{ContainsKey}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{ContainsKey()}{ContainsKey()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a6ef43d640d9ed5e650ea69f3d9c03ca6} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.Contains\+Key (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Determines whether the source contains the specified key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Key to find.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the key exists.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00044}{44}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_aed0d8025ba3fa5fbb7bd9ec3e3338500}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!GetEnumerator@{GetEnumerator}}
+\index{GetEnumerator@{GetEnumerator}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{GetEnumerator()}{GetEnumerator()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_aed0d8025ba3fa5fbb7bd9ec3e3338500} 
+IEnumerator$<$ Key\+Value\+Pair$<$ string, T $>$ $>$ Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.Get\+Enumerator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Enumerates the key and value pairs in the view. 
+
+\begin{DoxyReturn}{Returns}
+An enumerator over the key and value pairs.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00067}{67}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_ac34926c97c6f529d794cd8b445b5bc7c}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!GraphDictionaryView@{GraphDictionaryView}}
+\index{GraphDictionaryView@{GraphDictionaryView}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{GraphDictionaryView()}{GraphDictionaryView()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_ac34926c97c6f529d794cd8b445b5bc7c} 
+Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.Graph\+Dictionary\+View (\begin{DoxyParamCaption}\item[{IRead\+Only\+Dictionary$<$ string, TSource $>$}]{source}{}\end{DoxyParamCaption})}
+
+
+
+Creates a read-\/only view that exposes source values through a base type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & Dictionary to wrap.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00017}{17}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_abde3c1465a59ba400fc1c1209f38090b}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!TryGetValue@{TryGetValue}}
+\index{TryGetValue@{TryGetValue}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{TryGetValue()}{TryGetValue()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_abde3c1465a59ba400fc1c1209f38090b} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.Try\+Get\+Value (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{out T}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Attempts to get the value associated with a key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Key to look up.\\
+\hline
+{\em value} & Receives the value when the key exists.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the key exists.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00053}{53}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a4724578f6240582d30f003e7ba22ca8b}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!Count@{Count}}
+\index{Count@{Count}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a4724578f6240582d30f003e7ba22ca8b} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the number of entries in the source dictionary. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00039}{39}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a227499638f9cf9574204109a2f7a177e}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!Keys@{Keys}}
+\index{Keys@{Keys}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{Keys}{Keys}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a227499638f9cf9574204109a2f7a177e} 
+IEnumerable$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.Keys\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the keys in the source dictionary. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00027}{27}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a5e330a881fb81c887b422c4450705e40}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!this\+[string id]@{this[string id]}}
+\index{this\+[string id]@{this[string id]}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{this[string id]}{this[string id]}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_a5e330a881fb81c887b422c4450705e40} 
+T Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.this\+[string id]\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the value associated with the specified identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Key to look up.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value associated with the key.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00025}{25}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_adf6c688aa0f93138fd2f7fb883087024}\index{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}!Values@{Values}}
+\index{Values@{Values}!Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$@{Cashg.GraphExplorer.GraphDictionaryView$<$ TSource, T $>$}}
+\doxysubsubsection{\texorpdfstring{Values}{Values}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_dictionary_view-2-g_adf6c688aa0f93138fd2f7fb883087024} 
+IEnumerable$<$T$>$ Cashg.\+Graph\+Explorer.\+Graph\+Dictionary\+View$<$ TSource, T $>$.Values\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the source values as the view\textquotesingle{}s value type. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_scene_8cs_source_l00030}{30}} of file \doxymbox{\hyperlink{_graph_scene_8cs_source}{Graph\+Scene.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Scene.\+cs\end{DoxyCompactItemize}

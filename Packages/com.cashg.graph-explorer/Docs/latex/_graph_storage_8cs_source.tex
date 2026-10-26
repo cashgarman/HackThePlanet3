@@ -1,0 +1,100 @@
+\doxysection{Graph\+Storage.\+cs}
+\hypertarget{_graph_storage_8cs_source}{}\label{_graph_storage_8cs_source}\index{Runtime/GraphStorage.cs@{Runtime/GraphStorage.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.IO;}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }System.Security.Cryptography;}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }System.Text.Json;}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00007}00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{Cashg.GraphExplorer}}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00010}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage}{00010}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_afe10243efefc687586976f107660f433}{GraphStorage}}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{string}\ directory;}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00019}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_afe10243efefc687586976f107660f433}{00019}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_afe10243efefc687586976f107660f433}{GraphStorage}}(\textcolor{keywordtype}{string}\ root,\ \textcolor{keywordtype}{string}\ hostId,\ \textcolor{keywordtype}{string}\ datasetId,\ \textcolor{keywordtype}{string}\ providerId)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(root))}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}An\ explicit\ storage\ root\ is\ required."{}},\ nameof(root));}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ directory\ =\ Path.Combine(Path.GetFullPath(root),\ Key(hostId),\ Key(datasetId),\ Key(providerId));}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ Key(\textcolor{keywordtype}{string}\ identity)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(identity))\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}A\ storage\ identity\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ hash\ =\ SHA256.Create();}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(identity))).Replace(\textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToLowerInvariant();}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00037}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71}{00037}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71}{PathFor}}(\textcolor{keywordtype}{string}\ name)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Path.Combine(directory,\ Key(name)\ +\ \textcolor{stringliteral}{"{}.json"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ Version(\textcolor{keywordtype}{string}\ json)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ document\ =\ JsonDocument.Parse(json);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ document.RootElement.TryGetProperty(\textcolor{stringliteral}{"{}version"{}},\ out\ var\ version)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ version.TryGetInt32(out\ var\ number)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ number}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00055}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_ab8c9064293d35359c33c7e80ec9a8456}{00055}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_ab8c9064293d35359c33c7e80ec9a8456}{Read}}(\textcolor{keywordtype}{string}\ name,\ \textcolor{keywordtype}{int}\ supportedVersion)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ var\ path\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71}{PathFor}}(name);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!File.Exists(path))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ contents\ only\ when\ their\ stored\ format\ matches\ the\ caller's\ supported\ version.}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ var\ json\ =\ File.ReadAllText(path,\ Encoding.UTF8);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Version(json)\ ==\ supportedVersion\ ?\ json\ :\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00070}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a1a3fb83f78a561f88a7326b1ec8ef5be}{00070}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a1a3fb83f78a561f88a7326b1ec8ef5be}{Write}}(\textcolor{keywordtype}{string}\ name,\ \textcolor{keywordtype}{int}\ supportedVersion,\ \textcolor{keywordtype}{string}\ json)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Validate\ the\ new\ payload\ before\ inspecting\ or\ replacing\ any\ existing\ file.}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Version(json)\ !=\ supportedVersion)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}Document\ version\ does\ not\ match\ the\ writer."{}},\ nameof(json));}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ var\ path\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71}{PathFor}}(name);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (File.Exists(path))}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Version(File.ReadAllText(path,\ Encoding.UTF8))\ !=\ supportedVersion)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (JsonException)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ Directory.CreateDirectory(directory);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ var\ temporary\ =\ path\ +\ \textcolor{stringliteral}{"{}."{}}\ +\ Guid.NewGuid().ToString(\textcolor{stringliteral}{"{}N"{}})\ +\ \textcolor{stringliteral}{"{}.tmp"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Stage\ the\ complete\ file\ before\ replacing\ the\ destination.}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ File.WriteAllText(temporary,\ json,\ \textcolor{keyword}{new}\ UTF8Encoding(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (File.Exists(path))\ File.Replace(temporary,\ path,\ path\ +\ \textcolor{stringliteral}{"{}.bak"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ File.Move(temporary,\ path);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (File.Exists(temporary))\ File.Delete(temporary);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00104}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_aba9a9675db0bd0102413bd3b1342596d}{00104}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_aba9a9675db0bd0102413bd3b1342596d}{ImportLegacy}}(\textcolor{keywordtype}{string}\ name,\ \textcolor{keywordtype}{string}\ legacyPath)}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ var\ destination\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71}{PathFor}}(name);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!File.Exists(legacyPath)\ ||\ File.Exists(destination))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ Directory.CreateDirectory(directory);}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ File.Copy(legacyPath,\ destination,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_storage_8cs_source_l00113}00113\ \}}
+
+\end{DoxyCode}

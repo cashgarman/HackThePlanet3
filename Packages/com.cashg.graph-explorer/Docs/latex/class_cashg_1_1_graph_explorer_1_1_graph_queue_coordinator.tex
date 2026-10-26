@@ -1,0 +1,203 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Queue\+Coordinator Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator}\index{Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}}
+
+
+Represents graph queue coordinator.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a1e439ca346516e82eaffa3fd65feb3a7}{Graph\+Queue\+Coordinator}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider}{IGraph\+Action\+Provider}} provider)
+\begin{DoxyCompactList}\small\item\em Creates a coordinator for serialized action operations. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a69dac0a6362b9454df1a5db411cd686e}{Review}} (IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_request}{Graph\+Action\+Request}} $>$ draft, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Reviews a stable copy of a draft action queue. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_ad602779d8d50fbf9fa327e5a632875ec}{Submit}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} review, Func$<$ bool $>$ persist\+Pending, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Persists a pending identity before submitting the reviewed queue. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a42a595e6169408b9f9d5c6721650a982}{Recover}} (string request\+Id, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Recovers a request whose execution result is uncertain. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a60c4e4a032669ebff06cc27b7c2b26fc}{Control}} (string run\+Id, string operation, string entry\+Id, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Applies a provider control operation to a run entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e}{Busy}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether an operation is currently running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph queue coordinator. 
+
+Definition at line \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source_l00012}{12}} of file \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source}{Graph\+Queue\+Coordinator.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a1e439ca346516e82eaffa3fd65feb3a7}\index{Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}!GraphQueueCoordinator@{GraphQueueCoordinator}}
+\index{GraphQueueCoordinator@{GraphQueueCoordinator}!Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}}
+\doxysubsubsection{\texorpdfstring{GraphQueueCoordinator()}{GraphQueueCoordinator()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a1e439ca346516e82eaffa3fd65feb3a7} 
+Cashg.\+Graph\+Explorer.\+Graph\+Queue\+Coordinator.\+Graph\+Queue\+Coordinator (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider}{IGraph\+Action\+Provider}}}]{provider}{}\end{DoxyParamCaption})}
+
+
+
+Creates a coordinator for serialized action operations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em provider} & Provider that performs action requests.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source_l00018}{18}} of file \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source}{Graph\+Queue\+Coordinator.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a60c4e4a032669ebff06cc27b7c2b26fc}\index{Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}!Control@{Control}}
+\index{Control@{Control}!Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}}
+\doxysubsubsection{\texorpdfstring{Control()}{Control()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a60c4e4a032669ebff06cc27b7c2b26fc} 
+IEnumerator Cashg.\+Graph\+Explorer.\+Graph\+Queue\+Coordinator.\+Control (\begin{DoxyParamCaption}\item[{string}]{run\+Id}{, }\item[{string}]{operation}{, }\item[{string}]{entry\+Id}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Applies a provider control operation to a run entry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em run\+Id} & Run to control.\\
+\hline
+{\em operation} & Provider-\/defined operation name.\\
+\hline
+{\em entry\+Id} & Entry affected by the operation.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the updated run state.\\
+\hline
+{\em failed} & Receives a control failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that applies the operation.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source_l00120}{120}} of file \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source}{Graph\+Queue\+Coordinator.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a42a595e6169408b9f9d5c6721650a982}\index{Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}!Recover@{Recover}}
+\index{Recover@{Recover}!Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}}
+\doxysubsubsection{\texorpdfstring{Recover()}{Recover()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a42a595e6169408b9f9d5c6721650a982} 
+IEnumerator Cashg.\+Graph\+Explorer.\+Graph\+Queue\+Coordinator.\+Recover (\begin{DoxyParamCaption}\item[{string}]{request\+Id}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Recovers a request whose execution result is uncertain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request\+Id} & Stable request identifier.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the recovered run state.\\
+\hline
+{\em failed} & Receives a recovery failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that recovers the request.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source_l00106}{106}} of file \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source}{Graph\+Queue\+Coordinator.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a69dac0a6362b9454df1a5db411cd686e}\index{Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}!Review@{Review}}
+\index{Review@{Review}!Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}}
+\doxysubsubsection{\texorpdfstring{Review()}{Review()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a69dac0a6362b9454df1a5db411cd686e} 
+IEnumerator Cashg.\+Graph\+Explorer.\+Graph\+Queue\+Coordinator.\+Review (\begin{DoxyParamCaption}\item[{IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_request}{Graph\+Action\+Request}} $>$}]{draft}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Reviews a stable copy of a draft action queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em draft} & Requests to review, in proposed execution order.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the review result.\\
+\hline
+{\em failed} & Receives an operation failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs the review.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source_l00052}{52}} of file \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source}{Graph\+Queue\+Coordinator.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_ad602779d8d50fbf9fa327e5a632875ec}\index{Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}!Submit@{Submit}}
+\index{Submit@{Submit}!Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}}
+\doxysubsubsection{\texorpdfstring{Submit()}{Submit()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_ad602779d8d50fbf9fa327e5a632875ec} 
+IEnumerator Cashg.\+Graph\+Explorer.\+Graph\+Queue\+Coordinator.\+Submit (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}}}]{review}{, }\item[{Func$<$ bool $>$}]{persist\+Pending}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Persists a pending identity before submitting the reviewed queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em review} & Review authorizing execution.\\
+\hline
+{\em persist\+Pending} & Persists the pending submission identity.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the updated run state.\\
+\hline
+{\em failed} & Receives a persistence or execution failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that submits the queue.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source_l00067}{67}} of file \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source}{Graph\+Queue\+Coordinator.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e}\index{Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}!Busy@{Busy}}
+\index{Busy@{Busy}!Cashg.GraphExplorer.GraphQueueCoordinator@{Cashg.GraphExplorer.GraphQueueCoordinator}}
+\doxysubsubsection{\texorpdfstring{Busy}{Busy}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_queue_coordinator_a5695c02bdfac5b812e6ee4523fd1b32e} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Queue\+Coordinator.\+Busy\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether an operation is currently running. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source_l00024}{24}} of file \doxymbox{\hyperlink{_graph_queue_coordinator_8cs_source}{Graph\+Queue\+Coordinator.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Queue\+Coordinator.\+cs\end{DoxyCompactItemize}

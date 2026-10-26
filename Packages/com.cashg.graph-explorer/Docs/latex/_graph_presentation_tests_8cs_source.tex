@@ -1,0 +1,407 @@
+\doxysection{Graph\+Presentation\+Tests.\+cs}
+\hypertarget{_graph_presentation_tests_8cs_source}{}\label{_graph_presentation_tests_8cs_source}\index{Tests/Editor/GraphPresentationTests.cs@{Tests/Editor/GraphPresentationTests.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }System.Linq;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }NUnit.Framework;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }UnityEditor;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }UnityEngine;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }Object\ =\ UnityEngine.Object;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00009}00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_tests}{Cashg.GraphExplorer.Tests}}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00012}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests}{00012}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests}{GraphPresentationTests}}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00016}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a660eb9cfd422243d9021c2ee8f899d68}{00016}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a660eb9cfd422243d9021c2ee8f899d68}{LabelRevealUsesScreenDistanceWithSmoothFalloff}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ var\ settings\ =\ ScriptableObject.CreateInstance<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_label_settings}{GraphNodeLabelSettings}}>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.RevealInnerRadius\ =\ 40f;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.RevealOuterRadius\ =\ 180f;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ the\ fully\ visible\ radius,\ smooth\ midpoint,\ and\ fully\ hidden\ outer\ boundary.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(0f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.EqualTo(1f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(40f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.EqualTo(1f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(110f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.EqualTo(.5f).Within(.0001f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(180f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(1000f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(settings);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00039}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a0c8267edc21234cf4511078126cb7922}{00039}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a0c8267edc21234cf4511078126cb7922}{LabelRevealHandlesPointerExitSelectionAndDisabledMode}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ var\ settings\ =\ ScriptableObject.CreateInstance<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_label_settings}{GraphNodeLabelSettings}}>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(0f,\ \textcolor{keyword}{false},\ \textcolor{keyword}{false}),\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(1000f,\ \textcolor{keyword}{false},\ \textcolor{keyword}{true}),\ Is.EqualTo(1f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.KeepSelectedLabelVisible\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Disabling\ the\ selection\ exemption\ restores\ normal\ pointer\ and\ distance\ gating.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(1000f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{true}),\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(0f,\ \textcolor{keyword}{false},\ \textcolor{keyword}{true}),\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.MouseProximityReveal\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(1000f,\ \textcolor{keyword}{false},\ \textcolor{keyword}{false}),\ Is.EqualTo(1f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(settings);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00062}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a7337a2be633ab9d8fb139c8c9353b8b8}{00062}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a7337a2be633ab9d8fb139c8c9353b8b8}{LabelRevealHandlesCollapsedAndInvalidRadiusRanges}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ var\ settings\ =\ ScriptableObject.CreateInstance<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_label_settings}{GraphNodeLabelSettings}}>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.RevealInnerRadius\ =\ 40f;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.RevealOuterRadius\ =\ 10f;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(40f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.EqualTo(1f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(41f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.RevealInnerRadius\ =\ -\/40f;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Invalid\ negative\ radii\ collapse\ to\ a\ zero-\/distance\ step\ rather\ than\ producing\ an\ inverted\ fade.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings.RevealOuterRadius\ =\ -\/10f;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(0f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.EqualTo(1f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(settings.ProximityOpacity(1f,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}),\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(settings);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_scene}{GraphScene}}\ Scene()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ domain-\/specific\ type\ names\ and\ metric\ partitions\ to\ expose\ accidental\ built-\/in\ assumptions.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ var\ document\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_afe5479f3f97831fdbe8a83e53c8ff8ca}{GraphDocument}}(\textcolor{stringliteral}{"{}fictional:arbitrary"{}},\ \textcolor{stringliteral}{"{}Arbitrary\ types"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ document.UpsertNode(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record_ade992ac35f260a426bed7463bbe29df1}{GraphNodeRecord}}(\textcolor{stringliteral}{"{}opaque:a"{}},\ \textcolor{stringliteral}{"{}division"{}},\ \textcolor{stringliteral}{"{}A"{}},\ \textcolor{keyword}{new}\ Dictionary<string,\ GraphValue>}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}headcount"{}}]\ =\ \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{GraphValue}}.\doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0}{From}}(10d),\ [\textcolor{stringliteral}{"{}unit"{}}]\ =\ \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{GraphValue}}.\doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0}{From}}(\textcolor{stringliteral}{"{}people"{}}),}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}state"{}}]\ =\ \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{GraphValue}}.\doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0}{From}}(\textcolor{stringliteral}{"{}open"{}})}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ document.UpsertNode(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record_ade992ac35f260a426bed7463bbe29df1}{GraphNodeRecord}}(\textcolor{stringliteral}{"{}opaque:b"{}},\ \textcolor{stringliteral}{"{}employee"{}},\ \textcolor{stringliteral}{"{}B"{}},\ \textcolor{keyword}{new}\ Dictionary<string,\ GraphValue>}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}headcount"{}}]\ =\ \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{GraphValue}}.\doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0}{From}}(50d),\ [\textcolor{stringliteral}{"{}unit"{}}]\ =\ \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value}{GraphValue}}.\doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0}{From}}(\textcolor{stringliteral}{"{}people"{}})}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ document.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}opaque:edge"{}},\ \textcolor{stringliteral}{"{}opaque:a"{}},\ \textcolor{stringliteral}{"{}opaque:b"{}},\ \textcolor{stringliteral}{"{}reports-\/to"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ var\ schema\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_a88e5c2672e449af62db14d2347d18946}{GraphSchema}}();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ schema.Register(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4303a95e626f32d06bf0550e0287d1c1}{GraphNodeTypeDefinition}}(\textcolor{stringliteral}{"{}division"{}},\ \textcolor{stringliteral}{"{}Division"{}},\ \textcolor{stringliteral}{"{}Building"{}},\ Color.cyan,\ 1));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ schema.Register(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition_a4303a95e626f32d06bf0550e0287d1c1}{GraphNodeTypeDefinition}}(\textcolor{stringliteral}{"{}employee"{}},\ \textcolor{stringliteral}{"{}Employee"{}},\ \textcolor{stringliteral}{"{}Person"{}},\ Color.magenta));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ schema.Register(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_relation_definition_a7a61a1e027e4e11392ec7559ed61c61f}{GraphRelationDefinition}}(\textcolor{stringliteral}{"{}reports-\/to"{}},\ \textcolor{stringliteral}{"{}Reports\ to"{}},\ Color.yellow,\ springStrength:\ .9f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ schema.Register(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_field_definition_aaf4b199396349d4e4140c49f84b79753}{GraphFieldDefinition}}(\textcolor{stringliteral}{"{}headcount"{}},\ \textcolor{stringliteral}{"{}Headcount"{}},\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_ae7405c60ff458bdc167956dfc7275e59}{GraphValueType}}.Number,}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ partitionBy:\ \textcolor{stringliteral}{"{}unit"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ schema.Register(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_field_definition_aaf4b199396349d4e4140c49f84b79753}{GraphFieldDefinition}}(\textcolor{stringliteral}{"{}state"{}},\ \textcolor{stringliteral}{"{}State"{}},}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ categories:\ \textcolor{keyword}{new}\ Dictionary<string,\ GraphCategoryDefinition>}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}open"{}}]\ =\ \textcolor{keyword}{new}(\textcolor{stringliteral}{"{}Open"{}},\ Color.green)}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_scene_ab6897a076bf35cb71f0c6ceca25b2368}{GraphScene}}(document,\ schema);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00114}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a7c139e45a9e158c12101a6d3c9bfe827}{00114}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a7c139e45a9e158c12101a6d3c9bfe827}{ProjectionKeepsFactsAndViewSeparate}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ var\ node\ =\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ var\ before\ =\ GraphJson.Serialize(scene.Document);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ node.Position\ =\ Vector3.one;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ node.Pinned\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ node.Favorite\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphJson.Serialize(scene.Document),\ Is.EqualTo(before));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(scene.View.Nodes[node.Id].Position,\ Is.EqualTo(Vector3.one));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(node.Edges[0],\ Is.SameAs(scene.Edges[\textcolor{stringliteral}{"{}opaque:edge"{}}]));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00129}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ab667cb3e77107262edae68eb6a43c5d7}{00129}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ab667cb3e77107262edae68eb6a43c5d7}{ProjectionSynchronizesAdditionsUpdatesAndRemovalsWithoutReplacingSurvivingViews}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ var\ survivor\ =\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ scene.Document.UpsertNode(survivor.Record.WithIdentity(\textcolor{stringliteral}{"{}division"{}},\ \textcolor{stringliteral}{"{}Renamed"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ scene.Document.RemoveNode(\textcolor{stringliteral}{"{}opaque:b"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ scene.Synchronize();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}],\ Is.SameAs(survivor));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(survivor.Label,\ Is.EqualTo(\textcolor{stringliteral}{"{}Renamed"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(scene.Edges,\ Is.Empty);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(survivor.Neighbors,\ Is.Empty);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00144}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ae25569f3cb5e5ecaf9770c42416ee5c2}{00144}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ae25569f3cb5e5ecaf9770c42416ee5c2}{ProjectionRejectsViewFromAnotherDataset}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Throws<ArgumentException>(()\ =>\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_scene_ab6897a076bf35cb71f0c6ceca25b2368}{GraphScene}}(scene.Document,\ scene.Schema,}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state}{GraphViewState}}(\textcolor{stringliteral}{"{}other"{}})));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00153}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a3f76814da4bc788972be00295588e69a}{00153}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a3f76814da4bc788972be00295588e69a}{PresentationUsesSchemaTypesCategoriesAndNumericPartitions}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ var\ profile\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_presentation_profile}{GraphPresentationProfile}}\ \{\ MetricField\ =\ \textcolor{stringliteral}{"{}headcount"{}},\ CategoryField\ =\ \textcolor{stringliteral}{"{}state"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(profile.Type(scene,\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}]).ShapeId,\ Is.EqualTo(\textcolor{stringliteral}{"{}Building"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(profile.CategoryColor(scene,\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}],\ Color.gray),\ Is.EqualTo(Color.green));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(profile.TryMetric(scene,\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}],\ out\ var\ value,\ out\ var\ partition),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(value,\ Is.EqualTo(10));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(partition,\ Is.EqualTo(\textcolor{stringliteral}{"{}people"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00166}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a06785fc2a22f8233ecf19ad16d3aabb5}{00166}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a06785fc2a22f8233ecf19ad16d3aabb5}{UnknownTypeFallbackIsStableAndDoesNotInventDomainMeaning}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ scene.Document.UpsertNode(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record_ade992ac35f260a426bed7463bbe29df1}{GraphNodeRecord}}(\textcolor{stringliteral}{"{}new"{}},\ \textcolor{stringliteral}{"{}custom:type"{}},\ \textcolor{stringliteral}{"{}New"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ scene.Synchronize();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ var\ profile\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_presentation_profile}{GraphPresentationProfile}}();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(profile.Type(scene,\ scene.Nodes[\textcolor{stringliteral}{"{}new"{}}]),\ Is.SameAs(profile.Type(scene,\ scene.Nodes[\textcolor{stringliteral}{"{}new"{}}])));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(profile.Type(scene,\ scene.Nodes[\textcolor{stringliteral}{"{}new"{}}]).ShapeId,\ Is.EqualTo(\textcolor{stringliteral}{"{}default"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(profile.TryMetric(scene,\ scene.Nodes[\textcolor{stringliteral}{"{}new"{}}],\ out\ \_,\ out\ \_),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00179}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ac9343ccb9c52e3be2fc0e941ca1e3f88}{00179}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ac9343ccb9c52e3be2fc0e941ca1e3f88}{LayoutSupportsArbitraryTypesAndPinnedNodes}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ var\ pinned\ =\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ pinned.Pinned\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ var\ position\ =\ pinned.Position;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ var\ layout\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_ac5a21a52a98bb2fb7b395b8a39f72b6a}{ForceLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ layout.Bind(scene);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (var\ i\ =\ 0;\ i\ <\ 120;\ i++)\ layout.Step(1f\ /\ 60);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(pinned.Position,\ Is.EqualTo(position));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(scene.Nodes.Values.All(node\ =>\ \textcolor{keywordtype}{float}.IsFinite(node.Position.sqrMagnitude)),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00194}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_adf7631e412a3654012adf3f33d3d00e5}{00194}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_adf7631e412a3654012adf3f33d3d00e5}{FlatLayoutConvergesToPlane}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ var\ layout\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout}{ForceLayout}}\ \{\ Mode\ =\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a4bef9cafe0d86ad4ab557b9e0f5d6f01a745e3db6a7ffd50e1a72b39482f0882d}{LayoutMode.Flat}}\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ layout.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_ac4ddb3e23241757b51d7e438ca7fc4dc}{Bind}}(scene);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (var\ i\ =\ 0;\ i\ <\ 600;\ i++)\ layout.Step(1f\ /\ 60);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(scene.Nodes.Values.All(node\ =>\ Mathf.Abs(node.Position.z)\ <\ .03f),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00205}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ad27544e6db604ac1b629f046aed53dde}{00205}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ad27544e6db604ac1b629f046aed53dde}{LayoutReadsExternalPositionEditsOnEveryStep}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ var\ layout\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_ac5a21a52a98bb2fb7b395b8a39f72b6a}{ForceLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ layout.Bind(scene);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ layout.Step(1f\ /\ 60);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ var\ node\ =\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ var\ draggedTo\ =\ \textcolor{keyword}{new}\ Vector3(500,\ 500,\ 500);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ node.Position\ =\ draggedTo;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ node.Velocity\ =\ Vector3.zero;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ var\ topology\ =\ scene.Revision;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Rename\ without\ a\ topology\ revision\ to\ prove\ the\ next\ step\ reads\ the\ externally\ dragged\ view\ position.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ scene.Document.UpsertNode(node.Record.WithIdentity(node.Record.TypeId,\ \textcolor{stringliteral}{"{}Renamed\ during\ drag"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(scene.Revision,\ Is.EqualTo(topology));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ layout.Step(1f\ /\ 60);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(Vector3.Distance(node.Position,\ draggedTo),\ Is.LessThan(1),}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}A\ cached\ solver\ must\ use\ the\ latest\ view\ position,\ including\ without\ a\ topology\ change."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00227}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a5ab27a48fa6d29d3c8c4f6ce918d5877}{00227}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a5ab27a48fa6d29d3c8c4f6ce918d5877}{RendererUsesConfiguredMetricAndDefaultBudgets}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ var\ profile\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_presentation_profile}{GraphPresentationProfile}}\ \{\ MetricField\ =\ \textcolor{stringliteral}{"{}headcount"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ renderer\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a2a040baf10b36683f26930a4018ad7f4}{GraphRenderer}}(profile);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ renderer.UpdateMetrics(scene,\ \textcolor{keyword}{new}\ AllEdges());}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ renderer.Size\ =\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a7c471fc9e7aa95c3ab3ea6c57cb222dc}{SizeMapping}}.Metric;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(renderer.MaximumVisible,\ Is.EqualTo(8000));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(renderer.Radius(scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}]),\ Is.EqualTo(.65f).Within(.0001f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(renderer.Radius(scene.Nodes[\textcolor{stringliteral}{"{}opaque:b"{}}]),\ Is.EqualTo(1.3f).Within(.0001f));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ renderer.Dispose();\ \textcolor{comment}{//\ Repeated\ disposal\ is\ supported.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00242}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a856690e76384d2ecb52e219d836f6767}{00242}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a856690e76384d2ecb52e219d836f6767}{RegisterPrimaryClickRequiresSameNodeWithinWindow}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ var\ state\ =\ \textcolor{keyword}{new}\ GraphSceneInput.PrimaryClickState();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ var\ nodeA\ =\ Scene().Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ var\ nodeB\ =\ Scene().Nodes[\textcolor{stringliteral}{"{}opaque:b"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphSceneInput.RegisterPrimaryClick(ref\ state,\ nodeA,\ 1f),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphSceneInput.RegisterPrimaryClick(ref\ state,\ nodeB,\ 1.1f),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphSceneInput.RegisterPrimaryClick(ref\ state,\ nodeA,\ 1.2f),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphSceneInput.RegisterPrimaryClick(ref\ state,\ nodeA,\ 1.25f),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Consuming\ a\ double\ click\ resets\ the\ sequence\ so\ the\ third\ click\ is\ not\ another\ double\ click.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphSceneInput.RegisterPrimaryClick(ref\ state,\ nodeA,\ 1.3f),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00258}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_aa59d7fc2aca9745134e5ebda40e012b4}{00258}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_aa59d7fc2aca9745134e5ebda40e012b4}{ReleaseCameraFocusStopsTrackingAndClearsSelectedId}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ var\ go\ =\ \textcolor{keyword}{new}\ GameObject(\textcolor{stringliteral}{"{}Graph\ scene\ input\ test"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ camera\ =\ go.AddComponent<Camera>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ navigation\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5ecd584a4e09911ed9a2d5cc82dc4d88}{GraphNavigation}}(camera);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ scene\ =\ Scene();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ node\ =\ scene.Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ navigation.Focus(node);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scene.View.SelectedId\ =\ node.Id;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Releasing\ camera\ focus\ must\ clear\ both\ the\ navigation\ subject\ and\ persisted\ selected\ ID.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GraphSceneInput.ReleaseCameraFocus(scene.View,\ navigation);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(navigation.Tracking,\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(scene.View.SelectedId,\ Is.Empty);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(go);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00283}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a74e8259518e1619f4be55420400a1d85}{00283}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a74e8259518e1619f4be55420400a1d85}{FocusFollowKeepsTheCameraLockedToNodeMotion}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ var\ go\ =\ \textcolor{keyword}{new}\ GameObject(\textcolor{stringliteral}{"{}Graph\ focus\ follow\ test"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ camera\ =\ go.AddComponent<Camera>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ camera.transform.SetPositionAndRotation(\textcolor{keyword}{new}\ Vector3(0,\ 0,\ -\/30),\ Quaternion.identity);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ navigation\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5ecd584a4e09911ed9a2d5cc82dc4d88}{GraphNavigation}}(camera);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ node\ =\ Scene().Nodes[\textcolor{stringliteral}{"{}opaque:a"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ node.Position\ =\ Vector3.zero;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ navigation.Focus(node);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(navigation.Tracking,\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(navigation.Tracked,\ Is.SameAs(node));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ origin\ =\ camera.transform.position;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ node.Position\ =\ \textcolor{keyword}{new}\ Vector3(4,\ -\/2,\ 1);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Following\ carries\ the\ camera\ with\ the\ subject;\ holding\ updates\ the\ target\ without\ a\ catch-\/up\ jump.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ navigation.Follow(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(camera.transform.position,\ Is.EqualTo(origin\ +\ \textcolor{keyword}{new}\ Vector3(4,\ -\/2,\ 1)));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ node.Position\ =\ \textcolor{keyword}{new}\ Vector3(9,\ -\/2,\ 1);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ navigation.Follow(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(camera.transform.position,\ Is.EqualTo(origin\ +\ \textcolor{keyword}{new}\ Vector3(4,\ -\/2,\ 1)));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ navigation.Follow(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(camera.transform.position,\ Is.EqualTo(origin\ +\ \textcolor{keyword}{new}\ Vector3(4,\ -\/2,\ 1)));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(go);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00316}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_adc3db1bc9fa36bb26f33034a61bbe772}{00316}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_adc3db1bc9fa36bb26f33034a61bbe772}{NavigationDoesNotChangeSuppliedCameraOnConstruction}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ var\ go\ =\ \textcolor{keyword}{new}\ GameObject(\textcolor{stringliteral}{"{}Graph\ navigation\ test"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ camera\ =\ go.AddComponent<Camera>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ camera.transform.SetPositionAndRotation(\textcolor{keyword}{new}\ Vector3(8,\ 9,\ 10),\ Quaternion.Euler(12,\ 34,\ 56));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ position\ =\ camera.transform.position;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ rotation\ =\ camera.transform.rotation;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Constructing\ navigation\ must\ observe\ the\ borrowed\ camera\ pose\ without\ reframing\ it.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ navigation\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_navigation_a5ecd584a4e09911ed9a2d5cc82dc4d88}{GraphNavigation}}(camera);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(camera.transform.position,\ Is.EqualTo(position));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(camera.transform.rotation,\ Is.EqualTo(rotation));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(go);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00339}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a80fe0d67ee305453979765ab0184fb38}{00339}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_a80fe0d67ee305453979765ab0184fb38}{RenderingSessionReleasesOwnedResourcesAndCanInitializeAgain}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ var\ go\ =\ \textcolor{keyword}{new}\ GameObject(\textcolor{stringliteral}{"{}Graph\ rendering\ lifecycle\ test"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ camera\ =\ go.AddComponent<Camera>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ camera.enabled\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ position\ =\ camera.transform.position;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ clear\ =\ camera.clearFlags;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ rate\ =\ Application.targetFrameRate;}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (var\ i\ =\ 0;\ i\ <\ 3;\ i++)}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Compare\ native\ allocations\ across\ repeated\ sessions\ and\ reject\ simultaneous\ ownership\ of\ one\ camera.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ ownedBefore\ =\ NativeResources();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ session\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_rendering_session}{GraphRenderingSession}}.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_rendering_session_a034baa28838561270c3f1aba13ee7265}{Initialize}}(camera,\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_resource_configuration}{GraphResourceConfiguration}}());}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(camera.transform.position,\ Is.EqualTo(position));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(camera.clearFlags,\ Is.EqualTo(clear));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(Application.targetFrameRate,\ Is.EqualTo(rate));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ effects\ =\ session.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_rendering_session_ac33f131e9ff698f975f23b34ce7f391b}{Effects}};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Throws<InvalidOperationException>(()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_rendering_session}{GraphRenderingSession}}.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_rendering_session_a034baa28838561270c3f1aba13ee7265}{Initialize}}(}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ camera,\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_resource_configuration}{GraphResourceConfiguration}}()));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ session.Dispose();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ session.Dispose();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(effects\ ==\ \textcolor{keyword}{null},\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.FindObjectsByType<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_effects}{GraphNodeEffects}}>(FindObjectsSortMode.None)}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Any(item\ =>\ item.gameObject\ ==\ go),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(NativeResources().SetEquals(ownedBefore),\ Is.True,}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Initialization/disposal\ must\ release\ its\ transient\ materials\ and\ meshes."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(go);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00378}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ae73b627c6d5ffb6ce49b999cf47e8c06}{00378}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_presentation_tests_ae73b627c6d5ffb6ce49b999cf47e8c06}{RenderingSessionRestoresBorrowedEffects}}()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ var\ go\ =\ \textcolor{keyword}{new}\ GameObject(\textcolor{stringliteral}{"{}Graph\ borrowed\ effects\ test"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ camera\ =\ go.AddComponent<Camera>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ camera.enabled\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ effects\ =\ go.AddComponent<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_effects}{GraphNodeEffects}}>();}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ effects.enabled\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ resources\ =\ effects.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_effects_ab1caf095fbddd93194563eeddb02f9cb}{Resources}};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using}\ (var\ session\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_rendering_session}{GraphRenderingSession}}.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_rendering_session_a034baa28838561270c3f1aba13ee7265}{Initialize}}(camera,\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_resource_configuration}{GraphResourceConfiguration}}()))}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Borrow\ the\ existing\ disabled\ component\ instead\ of\ creating\ a\ replacement.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(session.Effects,\ Is.SameAs(effects));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(effects\ !=\ \textcolor{keyword}{null}\ \&\&\ !effects.enabled\ \&\&\ effects.Renderer\ ==\ \textcolor{keyword}{null},\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(effects.Resources,\ Is.SameAs(resources));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Object.DestroyImmediate(go);}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ HashSet<Object>\ NativeResources()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Exclude\ imported\ assets\ so\ the\ lifecycle\ check\ compares\ only\ transient\ meshes\ and\ materials.}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ HashSet<Object>(}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Resources.FindObjectsOfTypeAll<Material>().Cast<Object>()}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Concat(Resources.FindObjectsOfTypeAll<Mesh>())}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(item\ =>\ !EditorUtility.IsPersistent(item)));}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }AllEdges\ :\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge_filter}{IGraphEdgeFilter}}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00413}00413\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ EdgeMatches(\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraphEdge}}\ edge)}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00418}00418\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00419}00419\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_presentation_tests_8cs_source_l00420}00420\ \}}
+
+\end{DoxyCode}

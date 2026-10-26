@@ -1,0 +1,110 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport Interface Reference}
+\hypertarget{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{}\label{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}\index{Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}}
+
+
+Injectable line transport. No Unity objects are touched by IO threads.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_ab0daed295eb958dde86342cede07c1dd}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the transport. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_afcd9bd49ac1380f039c173da5ddb47ab}{Send}} (string line)
+\begin{DoxyCompactList}\small\item\em Sends one protocol line. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ string $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9e8cabba8e37d12cdcb8f6177736c3f5}{Line}}
+\begin{DoxyCompactList}\small\item\em Occurs when a complete protocol line is received. \end{DoxyCompactList}\item 
+Action$<$ string $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9951c92e2ccda3bf6c841e38a6ab804c}{Closed}}
+\begin{DoxyCompactList}\small\item\em Occurs when the transport closes, with a reason. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Injectable line transport. No Unity objects are touched by IO threads. 
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00046}{46}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_doc-func-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_afcd9bd49ac1380f039c173da5ddb47ab}\index{Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}!Send@{Send}}
+\index{Send@{Send}!Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_afcd9bd49ac1380f039c173da5ddb47ab} 
+void Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport.\+Send (\begin{DoxyParamCaption}\item[{string}]{line}{}\end{DoxyParamCaption})}
+
+
+
+Sends one protocol line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & Line to send.\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_aaa6c4bae7c52f0d455a6bb67451e7903}{Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_ab0daed295eb958dde86342cede07c1dd}\index{Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}!Start@{Start}}
+\index{Start@{Start}!Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_ab0daed295eb958dde86342cede07c1dd} 
+void Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport.\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the transport. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ade609e4de6cb57da17255c28d5c44c1f}{Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_doc-event-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9951c92e2ccda3bf6c841e38a6ab804c}\index{Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}!Closed@{Closed}}
+\index{Closed@{Closed}!Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}}
+\doxysubsubsection{\texorpdfstring{Closed}{Closed}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9951c92e2ccda3bf6c841e38a6ab804c} 
+Action$<$string$>$ Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport.\+Closed}
+
+
+
+Occurs when the transport closes, with a reason. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00051}{51}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9e8cabba8e37d12cdcb8f6177736c3f5}\index{Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}!Line@{Line}}
+\index{Line@{Line}!Cashg.GraphExplorer.Codex.ICodexTransport@{Cashg.GraphExplorer.Codex.ICodexTransport}}
+\doxysubsubsection{\texorpdfstring{Line}{Line}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9e8cabba8e37d12cdcb8f6177736c3f5} 
+Action$<$string$>$ Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport.\+Line}
+
+
+
+Occurs when a complete protocol line is received. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00049}{49}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+
+
+The documentation for this interface was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Codex\+Integration.\+cs\end{DoxyCompactItemize}

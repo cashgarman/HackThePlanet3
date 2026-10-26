@@ -1,0 +1,19 @@
+{
+  "name": "com.cashg.graph-explorer",
+  "version": "0.1.0",
+  "displayName": "Graph Explorer",
+  "description": "Dataset-neutral graph documents, schemas and Unity view state. Explorer presentation is being extracted incrementally.",
+  "unity": "7000.0",
+  "author": {
+    "name": "cashg"
+  },
+  "keywords": [
+    "graph",
+    "visualization",
+    "exploration"
+  ],
+  "dependencies": {
+    "com.unity.inputsystem": "7.0.0",
+    "com.unity.render-pipelines.universal": "17.7.0"
+  }
+}

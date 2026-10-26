@@ -1,0 +1,117 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+IGraph\+Position\+History\+Shell\+Host Interface Reference}
+\hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host}{}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host}\index{Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}}
+
+
+Defines graph position history shell host.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+IGraph\+Position\+History\+Shell\+Host:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a837438908497522b5818d9bc5c5662a5}{Seek\+Timeline\+Time}} (Date\+Time\+Offset time\+Utc)
+\begin{DoxyCompactList}\small\item\em Seeks event and position history to a timestamp. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a4aa46f595a9d9d743af6e81f0e4d2276}{Set\+Simulation\+Paused}} (bool paused)
+\begin{DoxyCompactList}\small\item\em Pauses or resumes the host simulation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_shell_host}{Cashg.\+Graph\+Explorer.\+IGraph\+Timeline\+Shell\+Host}}}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_shell_host_a0d0bb6c740d57b864d1e9bf4923451ed}{Seek\+Timeline}} (int entry\+Index)
+\begin{DoxyCompactList}\small\item\em Seeks to an event-\/history entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a6876f7f1dcee603fb87ff123ce0ec632}{Position\+History\+Available}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether position history can be recorded by the host. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_aaa7b81541e49b766beff577a7496a1e8}{Simulation\+Paused}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether the host\textquotesingle{}s simulation is paused. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_shell_host}{Cashg.\+Graph\+Explorer.\+IGraph\+Timeline\+Shell\+Host}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document}{Graph\+Document}} \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_shell_host_a5e0f25f6ade5fb2db60557dd836bb755}{Timeline\+Document}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the document whose event history is presented. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines graph position history shell host. 
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00082}{82}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_doc-func-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a837438908497522b5818d9bc5c5662a5}\index{Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}!SeekTimelineTime@{SeekTimelineTime}}
+\index{SeekTimelineTime@{SeekTimelineTime}!Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}}
+\doxysubsubsection{\texorpdfstring{SeekTimelineTime()}{SeekTimelineTime()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a837438908497522b5818d9bc5c5662a5} 
+void Cashg.\+Graph\+Explorer.\+IGraph\+Position\+History\+Shell\+Host.\+Seek\+Timeline\+Time (\begin{DoxyParamCaption}\item[{Date\+Time\+Offset}]{time\+Utc}{}\end{DoxyParamCaption})}
+
+
+
+Seeks event and position history to a timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Utc} & Timestamp to seek to.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a4aa46f595a9d9d743af6e81f0e4d2276}\index{Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}!SetSimulationPaused@{SetSimulationPaused}}
+\index{SetSimulationPaused@{SetSimulationPaused}!Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}}
+\doxysubsubsection{\texorpdfstring{SetSimulationPaused()}{SetSimulationPaused()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a4aa46f595a9d9d743af6e81f0e4d2276} 
+void Cashg.\+Graph\+Explorer.\+IGraph\+Position\+History\+Shell\+Host.\+Set\+Simulation\+Paused (\begin{DoxyParamCaption}\item[{bool}]{paused}{}\end{DoxyParamCaption})}
+
+
+
+Pauses or resumes the host simulation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em paused} & Whether simulation should be paused.\\
+\hline
+\end{DoxyParams}
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_doc-property-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a6876f7f1dcee603fb87ff123ce0ec632}\index{Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}!PositionHistoryAvailable@{PositionHistoryAvailable}}
+\index{PositionHistoryAvailable@{PositionHistoryAvailable}!Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}}
+\doxysubsubsection{\texorpdfstring{PositionHistoryAvailable}{PositionHistoryAvailable}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_a6876f7f1dcee603fb87ff123ce0ec632} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Position\+History\+Shell\+Host.\+Position\+History\+Available\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether position history can be recorded by the host. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00085}{85}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_aaa7b81541e49b766beff577a7496a1e8}\index{Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}!SimulationPaused@{SimulationPaused}}
+\index{SimulationPaused@{SimulationPaused}!Cashg.GraphExplorer.IGraphPositionHistoryShellHost@{Cashg.GraphExplorer.IGraphPositionHistoryShellHost}}
+\doxysubsubsection{\texorpdfstring{SimulationPaused}{SimulationPaused}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_position_history_shell_host_aaa7b81541e49b766beff577a7496a1e8} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Position\+History\+Shell\+Host.\+Simulation\+Paused\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether the host\textquotesingle{}s simulation is paused. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00087}{87}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+
+
+The documentation for this interface was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Shell\+Host.\+cs\end{DoxyCompactItemize}

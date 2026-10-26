@@ -1,0 +1,228 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Revision Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_revision}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+
+
+A discrete revision from a source control DAG. Timestamps are descriptive, not seek coordinates.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_aed00611588bc8d6646089a0793f6ab40}{Graph\+Revision}} (string id, IEnumerable$<$ string $>$ parent\+Ids, Date\+Time\+Offset? timestamp\+Utc, string label)
+\begin{DoxyCompactList}\small\item\em Creates a revision node in a revision history. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_ab64b2c1609bb9180f7d934cabd602493}{Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the revision identifier. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_a00d8a382b7f069afc6d4ba6ed230d1c6}{Parent\+Ids}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the parent revision identifiers. \end{DoxyCompactList}\item 
+Date\+Time\+Offset? \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_a1b4556007241e188acb1449222f602da}{Timestamp\+Utc}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the optional revision timestamp. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_afadef3eb7b9c6db0b992f3fc64ec8ec3}{Label}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the display label. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_a46a498c2bb39a3871d3a7bab9fb4a428}{Lane}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets the assigned lane in the revision visualization. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_a3836fda8f72654206199f660e6da6927}{Lane\+Glyphs}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets lane glyphs used to draw revision links. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_a1e48d72acee4c453bd8cc5cde16997a6}{Lane\+Count}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets the number of lanes occupied by this revision\textquotesingle{}s links. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_revision_lane_link}{Graph\+Revision\+Lane\+Link}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_a06e75e8e397189590521f324380ef929}{Lane\+Links}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets the links between this revision and its parent lanes. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_a7ed0d1832f3ee970bc5a24e48be30d4a}{Ready}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets whether revision changes have been computed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_change_summary}{Graph\+Revision\+Change\+Summary}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_ae3e7fb52214c9b311a6189caf2a81677}{Changes}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets the summary of changes from the parent revision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A discrete revision from a source control DAG. Timestamps are descriptive, not seek coordinates. 
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00008}{8}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_revision_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_aed00611588bc8d6646089a0793f6ab40}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!GraphRevision@{GraphRevision}}
+\index{GraphRevision@{GraphRevision}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{GraphRevision()}{GraphRevision()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_aed00611588bc8d6646089a0793f6ab40} 
+Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Graph\+Revision (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{IEnumerable$<$ string $>$}]{parent\+Ids}{, }\item[{Date\+Time\+Offset?}]{timestamp\+Utc}{, }\item[{string}]{label}{}\end{DoxyParamCaption})}
+
+
+
+Creates a revision node in a revision history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Stable revision identifier.\\
+\hline
+{\em parent\+Ids} & Identifiers of the revisions this revision follows.\\
+\hline
+{\em timestamp\+Utc} & Optional revision timestamp.\\
+\hline
+{\em label} & Display label for the revision.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00015}{15}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_revision_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_ae3e7fb52214c9b311a6189caf2a81677}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!Changes@{Changes}}
+\index{Changes@{Changes}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{Changes}{Changes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_ae3e7fb52214c9b311a6189caf2a81677} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_revision_change_summary}{Graph\+Revision\+Change\+Summary}} Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Changes\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets the summary of changes from the parent revision. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00047}{47}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_ab64b2c1609bb9180f7d934cabd602493}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!Id@{Id}}
+\index{Id@{Id}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_ab64b2c1609bb9180f7d934cabd602493} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the revision identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00026}{26}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_afadef3eb7b9c6db0b992f3fc64ec8ec3}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!Label@{Label}}
+\index{Label@{Label}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{Label}{Label}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_afadef3eb7b9c6db0b992f3fc64ec8ec3} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Label\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the display label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00032}{32}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_a46a498c2bb39a3871d3a7bab9fb4a428}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!Lane@{Lane}}
+\index{Lane@{Lane}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{Lane}{Lane}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_a46a498c2bb39a3871d3a7bab9fb4a428} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Lane\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets the assigned lane in the revision visualization. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00034}{34}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_a1e48d72acee4c453bd8cc5cde16997a6}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!LaneCount@{LaneCount}}
+\index{LaneCount@{LaneCount}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{LaneCount}{LaneCount}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_a1e48d72acee4c453bd8cc5cde16997a6} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Lane\+Count\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets the number of lanes occupied by this revision\textquotesingle{}s links. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00038}{38}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_a3836fda8f72654206199f660e6da6927}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!LaneGlyphs@{LaneGlyphs}}
+\index{LaneGlyphs@{LaneGlyphs}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{LaneGlyphs}{LaneGlyphs}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_a3836fda8f72654206199f660e6da6927} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Lane\+Glyphs\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets lane glyphs used to draw revision links. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00036}{36}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_a06e75e8e397189590521f324380ef929}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!LaneLinks@{LaneLinks}}
+\index{LaneLinks@{LaneLinks}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{LaneLinks}{LaneLinks}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_a06e75e8e397189590521f324380ef929} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_revision_lane_link}{Graph\+Revision\+Lane\+Link}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Lane\+Links\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Array.Empty<\doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_revision_lane_link}{GraphRevisionLaneLink}}>()}
+
+\end{DoxyCode}
+
+
+Gets the links between this revision and its parent lanes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00041}{41}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_a00d8a382b7f069afc6d4ba6ed230d1c6}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!ParentIds@{ParentIds}}
+\index{ParentIds@{ParentIds}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{ParentIds}{ParentIds}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_a00d8a382b7f069afc6d4ba6ed230d1c6} 
+IRead\+Only\+List$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Parent\+Ids\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the parent revision identifiers. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00028}{28}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_a7ed0d1832f3ee970bc5a24e48be30d4a}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!Ready@{Ready}}
+\index{Ready@{Ready}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{Ready}{Ready}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_a7ed0d1832f3ee970bc5a24e48be30d4a} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Ready\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets whether revision changes have been computed. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00045}{45}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_revision_a1b4556007241e188acb1449222f602da}\index{Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}!TimestampUtc@{TimestampUtc}}
+\index{TimestampUtc@{TimestampUtc}!Cashg.GraphExplorer.GraphRevision@{Cashg.GraphExplorer.GraphRevision}}
+\doxysubsubsection{\texorpdfstring{TimestampUtc}{TimestampUtc}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_revision_a1b4556007241e188acb1449222f602da} 
+Date\+Time\+Offset? Cashg.\+Graph\+Explorer.\+Graph\+Revision.\+Timestamp\+Utc\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the optional revision timestamp. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source_l00030}{30}} of file \doxymbox{\hyperlink{_graph_revision_timeline_8cs_source}{Graph\+Revision\+Timeline.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Revision\+Timeline.\+cs\end{DoxyCompactItemize}

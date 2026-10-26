@@ -1,0 +1,221 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+View\+State Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_view_state}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+
+
+Represents graph view state.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_af72d6b441e63831bd3790e384235ad67}{Graph\+View\+State}} (string dataset\+Id)
+\begin{DoxyCompactList}\small\item\em Creates view state scoped to a dataset. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_view_state}{Graph\+Node\+View\+State}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_a6a01897cf59b6946d421d81b7c35c362}{Get\+Or\+Create}} (string id)
+\begin{DoxyCompactList}\small\item\em Gets existing view state or creates an initial state for a node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_a4467999cd9d5e7d447fd8eedf88f7497}{Synchronize}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document}{Graph\+Document}} document)
+\begin{DoxyCompactList}\small\item\em Removes state for nodes absent from a document and clears stale selection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Vector3 \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_ac0b86522efb431b2552776ab0f5c6ac3}{Initial\+Position}} (string id)
+\begin{DoxyCompactList}\small\item\em Computes a stable initial position from a node identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly Hash\+Set$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_afedd1c0bbb25a53954423df3ab880878}{Folded\+Node\+Ids}} = new(String\+Comparer.\+Ordinal)
+\begin{DoxyCompactList}\small\item\em Gets the identifiers of collapsed nodes. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_aa1bd3fe804d9db95b21b9ca889454525}{Selected\+Id}} = "{}"{}
+\begin{DoxyCompactList}\small\item\em Gets or sets the selected node identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_af3c5cf0ace644632c71b90207c202441}{Focus\+Id}} = "{}"{}
+\begin{DoxyCompactList}\small\item\em Gets or sets the focused node identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_view_state}{Graph\+Node\+View\+State}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_aa98d520bae95ba9e4aa0c562435f4866}{Nodes}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets mutable view state for nodes keyed by identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_view_state_ae6030895fe86af90ffe8129dfccf10d1}{Dataset\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the dataset identifier that owns this state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph view state. 
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00031}{31}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_af72d6b441e63831bd3790e384235ad67}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!GraphViewState@{GraphViewState}}
+\index{GraphViewState@{GraphViewState}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{GraphViewState()}{GraphViewState()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_af72d6b441e63831bd3790e384235ad67} 
+Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Graph\+View\+State (\begin{DoxyParamCaption}\item[{string}]{dataset\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Creates view state scoped to a dataset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+Id} & Dataset identifier.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00043}{43}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_a6a01897cf59b6946d421d81b7c35c362}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!GetOrCreate@{GetOrCreate}}
+\index{GetOrCreate@{GetOrCreate}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{GetOrCreate()}{GetOrCreate()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_a6a01897cf59b6946d421d81b7c35c362} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_view_state}{Graph\+Node\+View\+State}} Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Get\+Or\+Create (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Gets existing view state or creates an initial state for a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mutable view state for the node.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00057}{57}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_ac0b86522efb431b2552776ab0f5c6ac3}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!InitialPosition@{InitialPosition}}
+\index{InitialPosition@{InitialPosition}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{InitialPosition()}{InitialPosition()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_ac0b86522efb431b2552776ab0f5c6ac3} 
+Vector3 Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Initial\+Position (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes a stable initial position from a node identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Node identifier used to seed the position.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deterministic initial world position.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00084}{84}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_a4467999cd9d5e7d447fd8eedf88f7497}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!Synchronize@{Synchronize}}
+\index{Synchronize@{Synchronize}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{Synchronize()}{Synchronize()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_a4467999cd9d5e7d447fd8eedf88f7497} 
+void Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Synchronize (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document}{Graph\+Document}}}]{document}{}\end{DoxyParamCaption})}
+
+
+
+Removes state for nodes absent from a document and clears stale selection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em document} & Document whose nodes remain valid.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00069}{69}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_af3c5cf0ace644632c71b90207c202441}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!FocusId@{FocusId}}
+\index{FocusId@{FocusId}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{FocusId}{FocusId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_af3c5cf0ace644632c71b90207c202441} 
+string Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Focus\+Id = "{}"{}}
+
+
+
+Gets or sets the focused node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00039}{39}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_afedd1c0bbb25a53954423df3ab880878}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!FoldedNodeIds@{FoldedNodeIds}}
+\index{FoldedNodeIds@{FoldedNodeIds}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{FoldedNodeIds}{FoldedNodeIds}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_afedd1c0bbb25a53954423df3ab880878} 
+readonly Hash\+Set$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Folded\+Node\+Ids = new(String\+Comparer.\+Ordinal)}
+
+
+
+Gets the identifiers of collapsed nodes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00034}{34}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_aa1bd3fe804d9db95b21b9ca889454525}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!SelectedId@{SelectedId}}
+\index{SelectedId@{SelectedId}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{SelectedId}{SelectedId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_aa1bd3fe804d9db95b21b9ca889454525} 
+string Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Selected\+Id = "{}"{}}
+
+
+
+Gets or sets the selected node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00037}{37}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_ae6030895fe86af90ffe8129dfccf10d1}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!DatasetId@{DatasetId}}
+\index{DatasetId@{DatasetId}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{DatasetId}{DatasetId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_ae6030895fe86af90ffe8129dfccf10d1} 
+string Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Dataset\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the dataset identifier that owns this state. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00052}{52}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_view_state_aa98d520bae95ba9e4aa0c562435f4866}\index{Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!Cashg.GraphExplorer.GraphViewState@{Cashg.GraphExplorer.GraphViewState}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_view_state_aa98d520bae95ba9e4aa0c562435f4866} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_view_state}{Graph\+Node\+View\+State}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+View\+State.\+Nodes\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets mutable view state for nodes keyed by identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_view_state_8cs_source_l00050}{50}} of file \doxymbox{\hyperlink{_graph_view_state_8cs_source}{Graph\+View\+State.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+View\+State.\+cs\end{DoxyCompactItemize}

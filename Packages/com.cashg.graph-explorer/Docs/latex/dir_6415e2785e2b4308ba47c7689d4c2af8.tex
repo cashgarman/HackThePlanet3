@@ -1,0 +1,40 @@
+\doxysection{Runtime/\+\+Resources/\+\+Cashg\+Graph\+Explorer/\+\+Graph\+Node\+Models Directory Reference}
+\hypertarget{dir_6415e2785e2b4308ba47c7689d4c2af8}{}\label{dir_6415e2785e2b4308ba47c7689d4c2af8}\index{Runtime/Resources/CashgGraphExplorer/GraphNodeModels Directory Reference@{Runtime/Resources/CashgGraphExplorer/GraphNodeModels Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_6415e2785e2b4308ba47c7689d4c2af8_autotoc_md183}{}\doxysubsection{\texorpdfstring{Graph node models}{Graph node models}}\label{dir_6415e2785e2b4308ba47c7689d4c2af8_autotoc_md183}
+Original low-\/poly OBJ meshes, with geometry on both sides and no texture or material dependencies.
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Shape ID  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Triangles  \\
+Briefcase  &Briefcase with open handle and clasp  &\SetCell{r}108  \\
+Building  &Office building with windows  &\SetCell{r}216  \\
+Badge  &ID badge with portrait and text bars  &\SetCell{r}228  \\
+Factory  &Factory with sawtooth roof and chimneys  &\SetCell{r}132  \\
+Gear  &Eight-\/tooth gear with center hole  &\SetCell{r}256  \\
+Person  &Faceted head and shoulders  &\SetCell{r}180  \\
+Map\+Pin  &Map pin with center hole  &\SetCell{r}144  \\
+Globe  &Wire globe with meridians and latitude rings  &\SetCell{r}576  \\
+Document  &Document with folded corner and text bars  &\SetCell{r}128  \\
+Gem  &Faceted gem  &\SetCell{r}32  \\
+\end{DoxyTable}
+
+
+All meshes use Y up, a centered bounding-\/box pivot, and a maximum vertex distance of 0.\+5 from the pivot. The graph scales them by {\ttfamily 2 \texorpdfstring{$\ast$}{*} Radius(node)}, so geometry fits the existing node radius. The selection halo has its own mesh. Picking uses a slightly larger sphere, making thin shapes and holes easy to select.
+
+{\ttfamily Graph\+Node\+Models.\+Create} loads one imported mesh per shape and clones it once for the renderer to own. The renderer supplies white vertex colors and the existing instance tint. Each model has one submesh, so the existing batches remain one instanced draw per shape per 1,023 nodes. Models are not regenerated per frame and need no per-\/node Game\+Objects or colliders. The importer keeps CPU mesh access enabled for assigning vertex colors in player builds.
+
+Regenerate from the repository root:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{.\(\backslash\).venv\(\backslash\)Scripts\(\backslash\)python.exe\ scripts/generate\_graph\_node\_models.py}
+
+\end{DoxyCode}
+
+
+The generator uses only Python\textquotesingle{}s standard library. Its small geometry helpers expose extrusion, surfaces of revolution, and tubes directly. Edit these source dimensions to revise the set; the final normalization preserves consistent graph scale. Keep schema shape IDs aligned with the OBJ filenames and retain their {\ttfamily .meta} files. The OBJ object names remain unchanged to preserve imported subasset IDs.
+
+In Unity, run {\bfseries{Job Harvester \texorpdfstring{$>$}{>} Validate and preview node models}}. It checks every imported mesh, renders front / three-\/quarter / rear views with the actual graph shader, and checks submission and picking through {\ttfamily Graph\+Renderer}. Results are written under the project directory\textquotesingle{}s {\ttfamily node-\/model-\/validation} folder. These checks do not measure large-\/graph frame time. 

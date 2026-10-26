@@ -1,0 +1,207 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options\texorpdfstring{$<$}{<} TNode \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+
+
+Represents graph favorites options.  
+
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ TNode $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae829178fe03b6c401364400df158eded}{Activate}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that activates a favorite node. \end{DoxyCompactList}\item 
+Func$<$ TNode, Color $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a084074c35317e1195631ba3a514ac052}{Color}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that returns a node\textquotesingle{}s color. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a084074c35317e1195631ba3a514ac052}{Color}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae46cd20fe61b3e5ba6f68cbfd143ad67}{Favorite\+Color}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the favorite star color. \end{DoxyCompactList}\item 
+Hash\+Set$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a6ddf22ab9c1ec647b9a554c95e1a0e71}{Favorite\+Ids}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the persisted favorite node identifiers. \end{DoxyCompactList}\item 
+Func$<$ bool $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a24a5f7d8f9127fd55da0ad6bffc910a8}{Favorites\+Only}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that reports whether only favorites are shown. \end{DoxyCompactList}\item 
+Func$<$ IRead\+Only\+Dictionary$<$ string, TNode $>$ $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ad86b885ebabe3a532a2d23225f0f4a1b}{Nodes}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that returns nodes keyed by identifier. \end{DoxyCompactList}\item 
+Scroll\+View \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a12a864b136dc19c7e30ed81a815cdcd1}{Parent}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the scroll view that hosts the favorites drawer. \end{DoxyCompactList}\item 
+Action \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_afcf03a24f5396a6239b35270080d6109}{Reset\+Filters}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that clears filters before activating a hidden favorite. \end{DoxyCompactList}\item 
+List$<$ TNode $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ac602c70de7beaed5974c6932ded45d00}{Results}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the mutable favorite result list. \end{DoxyCompactList}\item 
+Action$<$ bool $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae7e885a1b9e874e23c8986820bd5b492}{Set\+Favorites\+Only}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that changes favorite-\/only filtering. \end{DoxyCompactList}\item 
+Func$<$ TNode, string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a2e85fb633471e14c0f90aebe4f424afb}{Type\+Label}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback that returns a node\textquotesingle{}s type label. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph favorites options. \begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TNode} : {\em class}]\item[{\em TNode} : {\em \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]\end{description}
+\end{Desc}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00011}{11}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae829178fe03b6c401364400df158eded}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!Activate@{Activate}}
+\index{Activate@{Activate}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{Activate}{Activate}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae829178fe03b6c401364400df158eded} 
+Action$<$TNode$>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Activate}
+
+
+
+Gets or sets the callback that activates a favorite node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00014}{14}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a084074c35317e1195631ba3a514ac052}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!Color@{Color}}
+\index{Color@{Color}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{Color}{Color}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a084074c35317e1195631ba3a514ac052} 
+Func$<$TNode, Color$>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Color}
+
+
+
+Gets or sets the callback that returns a node\textquotesingle{}s color. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00016}{16}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae46cd20fe61b3e5ba6f68cbfd143ad67}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!FavoriteColor@{FavoriteColor}}
+\index{FavoriteColor@{FavoriteColor}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{FavoriteColor}{FavoriteColor}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae46cd20fe61b3e5ba6f68cbfd143ad67} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a084074c35317e1195631ba3a514ac052}{Color}} Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Favorite\+Color}
+
+
+
+Gets or sets the favorite star color. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00018}{18}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a6ddf22ab9c1ec647b9a554c95e1a0e71}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!FavoriteIds@{FavoriteIds}}
+\index{FavoriteIds@{FavoriteIds}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{FavoriteIds}{FavoriteIds}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a6ddf22ab9c1ec647b9a554c95e1a0e71} 
+Hash\+Set$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Favorite\+Ids}
+
+
+
+Gets or sets the persisted favorite node identifiers. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00020}{20}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a24a5f7d8f9127fd55da0ad6bffc910a8}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!FavoritesOnly@{FavoritesOnly}}
+\index{FavoritesOnly@{FavoritesOnly}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{FavoritesOnly}{FavoritesOnly}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a24a5f7d8f9127fd55da0ad6bffc910a8} 
+Func$<$bool$>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Favorites\+Only}
+
+
+
+Gets or sets the callback that reports whether only favorites are shown. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00022}{22}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ad86b885ebabe3a532a2d23225f0f4a1b}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ad86b885ebabe3a532a2d23225f0f4a1b} 
+Func$<$IRead\+Only\+Dictionary$<$string, TNode$>$ $>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Nodes}
+
+
+
+Gets or sets the callback that returns nodes keyed by identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00024}{24}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a12a864b136dc19c7e30ed81a815cdcd1}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!Parent@{Parent}}
+\index{Parent@{Parent}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{Parent}{Parent}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a12a864b136dc19c7e30ed81a815cdcd1} 
+Scroll\+View Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Parent}
+
+
+
+Gets or sets the scroll view that hosts the favorites drawer. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00026}{26}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_afcf03a24f5396a6239b35270080d6109}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!ResetFilters@{ResetFilters}}
+\index{ResetFilters@{ResetFilters}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{ResetFilters}{ResetFilters}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_afcf03a24f5396a6239b35270080d6109} 
+Action Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Reset\+Filters}
+
+
+
+Gets or sets the callback that clears filters before activating a hidden favorite. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00028}{28}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ac602c70de7beaed5974c6932ded45d00}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!Results@{Results}}
+\index{Results@{Results}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{Results}{Results}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ac602c70de7beaed5974c6932ded45d00} 
+List$<$TNode$>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Results}
+
+
+
+Gets or sets the mutable favorite result list. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00030}{30}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae7e885a1b9e874e23c8986820bd5b492}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!SetFavoritesOnly@{SetFavoritesOnly}}
+\index{SetFavoritesOnly@{SetFavoritesOnly}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{SetFavoritesOnly}{SetFavoritesOnly}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_ae7e885a1b9e874e23c8986820bd5b492} 
+Action$<$bool$>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Set\+Favorites\+Only}
+
+
+
+Gets or sets the callback that changes favorite-\/only filtering. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00032}{32}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a2e85fb633471e14c0f90aebe4f424afb}\index{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}!TypeLabel@{TypeLabel}}
+\index{TypeLabel@{TypeLabel}!Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$@{Cashg.GraphExplorer.GraphFavoritesOptions$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{TypeLabel}{TypeLabel}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_favorites_options-1-g_a2e85fb633471e14c0f90aebe4f424afb} 
+Func$<$TNode, string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Favorites\+Options$<$ TNode $>$.Type\+Label}
+
+
+
+Gets or sets the callback that returns a node\textquotesingle{}s type label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source_l00034}{34}} of file \doxymbox{\hyperlink{_graph_favorites_presenter_8cs_source}{Graph\+Favorites\+Presenter.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Favorites\+Presenter.\+cs\end{DoxyCompactItemize}

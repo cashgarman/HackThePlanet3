@@ -1,0 +1,153 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Storage Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_storage}\index{Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}}
+
+
+Versioned JSON storage. Unknown/\+corrupt existing documents are never overwritten.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_afe10243efefc687586976f107660f433}{Graph\+Storage}} (string root, string host\+Id, string dataset\+Id, string provider\+Id)
+\begin{DoxyCompactList}\small\item\em Creates versioned storage scoped to a host, dataset, and provider. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71}{Path\+For}} (string name)
+\begin{DoxyCompactList}\small\item\em Gets the hashed storage path for a document name. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_ab8c9064293d35359c33c7e80ec9a8456}{Read}} (string name, int supported\+Version)
+\begin{DoxyCompactList}\small\item\em Reads a document when its stored version matches the supported version. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_a1a3fb83f78a561f88a7326b1ec8ef5be}{Write}} (string name, int supported\+Version, string json)
+\begin{DoxyCompactList}\small\item\em Writes JSON without overwriting an existing corrupt or unsupported document. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_storage_aba9a9675db0bd0102413bd3b1342596d}{Import\+Legacy}} (string name, string legacy\+Path)
+\begin{DoxyCompactList}\small\item\em Host-\/invoked, copy-\/only migration. Original and already migrated documents survive untouched. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Versioned JSON storage. Unknown/\+corrupt existing documents are never overwritten. 
+
+Definition at line \doxymbox{\hyperlink{_graph_storage_8cs_source_l00010}{10}} of file \doxymbox{\hyperlink{_graph_storage_8cs_source}{Graph\+Storage.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_storage_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage_afe10243efefc687586976f107660f433}\index{Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}!GraphStorage@{GraphStorage}}
+\index{GraphStorage@{GraphStorage}!Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}}
+\doxysubsubsection{\texorpdfstring{GraphStorage()}{GraphStorage()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_storage_afe10243efefc687586976f107660f433} 
+Cashg.\+Graph\+Explorer.\+Graph\+Storage.\+Graph\+Storage (\begin{DoxyParamCaption}\item[{string}]{root}{, }\item[{string}]{host\+Id}{, }\item[{string}]{dataset\+Id}{, }\item[{string}]{provider\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Creates versioned storage scoped to a host, dataset, and provider. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & Absolute root directory for stored data.\\
+\hline
+{\em host\+Id} & Host identity.\\
+\hline
+{\em dataset\+Id} & Dataset identity.\\
+\hline
+{\em provider\+Id} & Provider identity.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_storage_8cs_source_l00019}{19}} of file \doxymbox{\hyperlink{_graph_storage_8cs_source}{Graph\+Storage.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_storage_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage_aba9a9675db0bd0102413bd3b1342596d}\index{Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}!ImportLegacy@{ImportLegacy}}
+\index{ImportLegacy@{ImportLegacy}!Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}}
+\doxysubsubsection{\texorpdfstring{ImportLegacy()}{ImportLegacy()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_storage_aba9a9675db0bd0102413bd3b1342596d} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Storage.\+Import\+Legacy (\begin{DoxyParamCaption}\item[{string}]{name}{, }\item[{string}]{legacy\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Host-\/invoked, copy-\/only migration. Original and already migrated documents survive untouched. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_storage_8cs_source_l00104}{104}} of file \doxymbox{\hyperlink{_graph_storage_8cs_source}{Graph\+Storage.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71}\index{Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}!PathFor@{PathFor}}
+\index{PathFor@{PathFor}!Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}}
+\doxysubsubsection{\texorpdfstring{PathFor()}{PathFor()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_storage_a90ad2fe3791a8be7ba067644cc9a6f71} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Storage.\+Path\+For (\begin{DoxyParamCaption}\item[{string}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Gets the hashed storage path for a document name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Document name to scope.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Full path to the versioned JSON file.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_storage_8cs_source_l00037}{37}} of file \doxymbox{\hyperlink{_graph_storage_8cs_source}{Graph\+Storage.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage_ab8c9064293d35359c33c7e80ec9a8456}\index{Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}!Read@{Read}}
+\index{Read@{Read}!Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_storage_ab8c9064293d35359c33c7e80ec9a8456} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Storage.\+Read (\begin{DoxyParamCaption}\item[{string}]{name}{, }\item[{int}]{supported\+Version}{}\end{DoxyParamCaption})}
+
+
+
+Reads a document when its stored version matches the supported version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Document name.\\
+\hline
+{\em supported\+Version} & Version accepted by the caller.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stored JSON, or null when missing or unsupported.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_storage_8cs_source_l00055}{55}} of file \doxymbox{\hyperlink{_graph_storage_8cs_source}{Graph\+Storage.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_storage_a1a3fb83f78a561f88a7326b1ec8ef5be}\index{Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}!Write@{Write}}
+\index{Write@{Write}!Cashg.GraphExplorer.GraphStorage@{Cashg.GraphExplorer.GraphStorage}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_storage_a1a3fb83f78a561f88a7326b1ec8ef5be} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Storage.\+Write (\begin{DoxyParamCaption}\item[{string}]{name}{, }\item[{int}]{supported\+Version}{, }\item[{string}]{json}{}\end{DoxyParamCaption})}
+
+
+
+Writes JSON without overwriting an existing corrupt or unsupported document. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Document name.\\
+\hline
+{\em supported\+Version} & Version required in the JSON document.\\
+\hline
+{\em json} & Document content to write.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the document was written.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_storage_8cs_source_l00070}{70}} of file \doxymbox{\hyperlink{_graph_storage_8cs_source}{Graph\+Storage.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Storage.\+cs\end{DoxyCompactItemize}

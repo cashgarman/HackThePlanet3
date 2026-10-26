@@ -1,0 +1,207 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Force\+Layout Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout}{}\label{class_cashg_1_1_graph_explorer_1_1_force_layout}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+
+
+Bounded, semi-\/implicit Euler integration with Barnes-\/\+Hut octree repulsion.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_ac5a21a52a98bb2fb7b395b8a39f72b6a}{Force\+Layout}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_presentation_profile}{Graph\+Presentation\+Profile}} profile=null)
+\begin{DoxyCompactList}\small\item\em Creates a force layout using optional domain presentation policies. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_a809cca3813455956966981cae99a74ca}{Reheat}} ()
+\begin{DoxyCompactList}\small\item\em Restores the integration temperature to its initial value. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_ad1f47b26fbe95fa7e12d1388de38c771}{Reset\+Positions}} ()
+\begin{DoxyCompactList}\small\item\em Start a fresh deterministic layout for a historical graph state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_ac4ddb3e23241757b51d7e438ca7fc4dc}{Bind}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} value)
+\begin{DoxyCompactList}\small\item\em Rebinds cached layout structures when the scene revision changes. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_a4b2a1a8ba1bb912414d1f51db6c1244b}{Step}} (float timestep)
+\begin{DoxyCompactList}\small\item\em Advances force integration by a bounded timestep. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a4bef9cafe0d86ad4ab557b9e0f5d6f01}{Layout\+Mode}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_a94f635862f7969daf458e83d40f6af55}{Mode}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the layout arrangement mode. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_a225e0ee8897681932e93751cb51f2359}{Paused}}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether force integration is paused. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_a92706ee4434ff0cf251e13084b355658}{Energy}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the current total layout energy. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_force_layout_acf8e5e6237594d12d663302bb97bc419}{Temperature}} = 1\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the current integration temperature. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Bounded, semi-\/implicit Euler integration with Barnes-\/\+Hut octree repulsion. 
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00008}{8}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_ac5a21a52a98bb2fb7b395b8a39f72b6a}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!ForceLayout@{ForceLayout}}
+\index{ForceLayout@{ForceLayout}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{ForceLayout()}{ForceLayout()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_ac5a21a52a98bb2fb7b395b8a39f72b6a} 
+Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Force\+Layout (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_presentation_profile}{Graph\+Presentation\+Profile}}}]{profile}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Creates a force layout using optional domain presentation policies. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em profile} & Profile supplying grouping and lane policies.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00031}{31}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_ac4ddb3e23241757b51d7e438ca7fc4dc}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!Bind@{Bind}}
+\index{Bind@{Bind}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{Bind()}{Bind()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_ac4ddb3e23241757b51d7e438ca7fc4dc} 
+void Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Bind (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Rebinds cached layout structures when the scene revision changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Scene to lay out.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_a809cca3813455956966981cae99a74ca}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!Reheat@{Reheat}}
+\index{Reheat@{Reheat}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{Reheat()}{Reheat()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_a809cca3813455956966981cae99a74ca} 
+void Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Reheat (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Restores the integration temperature to its initial value. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00042}{42}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_ad1f47b26fbe95fa7e12d1388de38c771}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!ResetPositions@{ResetPositions}}
+\index{ResetPositions@{ResetPositions}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{ResetPositions()}{ResetPositions()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_ad1f47b26fbe95fa7e12d1388de38c771} 
+void Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Reset\+Positions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start a fresh deterministic layout for a historical graph state. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00048}{48}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_a4b2a1a8ba1bb912414d1f51db6c1244b}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!Step@{Step}}
+\index{Step@{Step}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{Step()}{Step()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_a4b2a1a8ba1bb912414d1f51db6c1244b} 
+void Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Step (\begin{DoxyParamCaption}\item[{float}]{timestep}{}\end{DoxyParamCaption})}
+
+
+
+Advances force integration by a bounded timestep. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestep} & Elapsed time for the integration step.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00172}{172}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_a94f635862f7969daf458e83d40f6af55}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!Mode@{Mode}}
+\index{Mode@{Mode}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_a94f635862f7969daf458e83d40f6af55} 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a4bef9cafe0d86ad4ab557b9e0f5d6f01}{Layout\+Mode}} Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Mode}
+
+
+
+Gets or sets the layout arrangement mode. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00014}{14}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_a225e0ee8897681932e93751cb51f2359}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!Paused@{Paused}}
+\index{Paused@{Paused}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{Paused}{Paused}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_a225e0ee8897681932e93751cb51f2359} 
+bool Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Paused}
+
+
+
+Gets or sets whether force integration is paused. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00016}{16}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_a92706ee4434ff0cf251e13084b355658}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!Energy@{Energy}}
+\index{Energy@{Energy}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{Energy}{Energy}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_a92706ee4434ff0cf251e13084b355658} 
+float Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Energy\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the current total layout energy. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00037}{37}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_force_layout_acf8e5e6237594d12d663302bb97bc419}\index{Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}!Temperature@{Temperature}}
+\index{Temperature@{Temperature}!Cashg.GraphExplorer.ForceLayout@{Cashg.GraphExplorer.ForceLayout}}
+\doxysubsubsection{\texorpdfstring{Temperature}{Temperature}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_force_layout_acf8e5e6237594d12d663302bb97bc419} 
+float Cashg.\+Graph\+Explorer.\+Force\+Layout.\+Temperature = 1\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the current integration temperature. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_force_layout_8cs_source_l00039}{39}} of file \doxymbox{\hyperlink{_force_layout_8cs_source}{Force\+Layout.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Force\+Layout.\+cs\end{DoxyCompactItemize}

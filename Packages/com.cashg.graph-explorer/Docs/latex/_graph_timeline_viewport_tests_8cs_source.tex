@@ -1,0 +1,67 @@
+\doxysection{Graph\+Timeline\+Viewport\+Tests.\+cs}
+\hypertarget{_graph_timeline_viewport_tests_8cs_source}{}\label{_graph_timeline_viewport_tests_8cs_source}\index{Tests/Editor/GraphTimelineViewportTests.cs@{Tests/Editor/GraphTimelineViewportTests.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }NUnit.Framework;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00003}00003\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_tests}{Cashg.GraphExplorer.Tests}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00004}00004\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00006}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests}{00006}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests}{GraphTimelineViewportTests}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00007}00007\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00009}00009\ \ \ \ \ \ \ \ \ [TestCase(0d)]}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00010}00010\ \ \ \ \ \ \ \ \ [TestCase(.25d)]}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00011}00011\ \ \ \ \ \ \ \ \ [TestCase(1d)]}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00012}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_ab0f5cb4d86b29e0e794762fdce882b77}{00012}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_ab0f5cb4d86b29e0e794762fdce882b77}{ZoomKeepsTimeUnderCursor}}(\textcolor{keywordtype}{double}\ anchor)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_viewport}{GraphTimelineViewport}}();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ var\ time\ =\ view.FromVisible(anchor);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ view.Zoom(anchor,\ .5);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.End\ -\/\ view.Start,\ Is.EqualTo(.5).Within(1e-\/12));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.FromVisible(anchor),\ Is.EqualTo(time).Within(1e-\/12));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.ToVisible(time),\ Is.EqualTo(anchor).Within(1e-\/12));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00024}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_ad7d1d17617d70f99b3cd7154f9a16071}{00024}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_ad7d1d17617d70f99b3cd7154f9a16071}{MarkersAndScrubbingUseVisibleWindow}}()}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_viewport}{GraphTimelineViewport}}();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ view.Zoom(.75,\ .2);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.ToVisible(.5),\ Is.LessThan(0));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.ToVisible(.7),\ Is.EqualTo(.5).Within(1e-\/12));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.ToVisible(.9),\ Is.GreaterThan(1));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.FromVisible(.5),\ Is.EqualTo(.7).Within(1e-\/12));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00036}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_a110c240aed32b36d5e234c6a73644cd3}{00036}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_a110c240aed32b36d5e234c6a73644cd3}{ZoomOutClampsToHistoryAndRestoresFullRange}}()}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_viewport}{GraphTimelineViewport}}();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ view.Zoom(1,\ .1);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ view.Zoom(0,\ 2);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Start,\ Is.EqualTo(.8).Within(1e-\/12));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.End,\ Is.EqualTo(1));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ view.Zoom(.4,\ 100);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.IsZoomed,\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Start,\ Is.Zero);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.End,\ Is.EqualTo(1));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00051}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_a0a4a002add2b03c2f4dc12d29ac815a2}{00051}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_timeline_viewport_tests_a0a4a002add2b03c2f4dc12d29ac815a2}{DeepZoomPreservesPrecisionAndHasFiniteLimit}}()}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_viewport}{GraphTimelineViewport}}();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (var\ i\ =\ 0;\ i\ <\ 200;\ i++)\ view.Zoom(.987,\ .5);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Repeated\ zoom\ reaches\ a\ finite\ minimum\ span\ and\ invalid\ input\ cannot\ corrupt\ its\ coordinates.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.End\ -\/\ view.Start,\ Is.EqualTo(1e-\/9).Within(1e-\/15));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.FromVisible(.5),\ Is.GreaterThan(view.Start).And.LessThan(view.End));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ view.Zoom(\textcolor{keywordtype}{double}.NaN,\ .5);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ view.Zoom(.5,\ \textcolor{keywordtype}{double}.PositiveInfinity);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(\textcolor{keywordtype}{double}.IsNaN(view.Start),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ view.Reset();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.IsZoomed,\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_viewport_tests_8cs_source_l00066}00066\ \}}
+
+\end{DoxyCode}

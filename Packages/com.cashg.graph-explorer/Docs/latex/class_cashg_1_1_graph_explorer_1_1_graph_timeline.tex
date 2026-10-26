@@ -1,0 +1,425 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Timeline Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+
+
+Persistent, dataset-\/scoped change history. Baseline facts have no invented creation time.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ac9cd413944f801505b47f2151fd67ad8}{Establish\+Baseline}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} snapshot, Date\+Time\+Offset? timestamp\+Utc=null)
+\begin{DoxyCompactList}\small\item\em Establishes a new baseline and clears existing event and position history. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a7c54cbecfca8e0d20a5557ebbb2d06ca}{Record\+Position\+Frame}} (IEnumerable$<$ Key\+Value\+Pair$<$ string, Vector3 $>$ $>$ positions, Date\+Time\+Offset? timestamp\+Utc=null)
+\begin{DoxyCompactList}\small\item\em Records a position frame when recording is enabled and the playhead is live. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a4cba23fceccdfef66f0c662d05eca3ba}{Entry\+Index\+At}} (Date\+Time\+Offset time\+Utc)
+\begin{DoxyCompactList}\small\item\em Finds the latest event entry at or before a timestamp. \end{DoxyCompactList}\item 
+IRead\+Only\+Dictionary$<$ string, Vector3 $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a5f86ee2211b6bac562c1f986d02845da}{Positions\+At}} (Date\+Time\+Offset time\+Utc)
+\begin{DoxyCompactList}\small\item\em Interpolates recorded positions at a timestamp. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0fb110e121fe9ef9c3daa3c917b664a4}{Clear\+Position\+History}} ()
+\begin{DoxyCompactList}\small\item\em Removes recorded position frames. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_workspace}{Graph\+Timeline\+Workspace}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0eb9f0b815067e0bf5ffb88e1ef2c6a4}{Workspace}} = new()\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the workspace for cached external timeline events. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}{Baseline}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the baseline snapshot for event history. \end{DoxyCompactList}\item 
+Date\+Time\+Offset \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{Baseline\+Time\+Utc}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the baseline timestamp in UTC. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry}{Graph\+Timeline\+Entry}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a698f1f3de03c67df5278e203713566ef}{Entries}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the ordered event history entries. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame}{Graph\+Position\+Frame}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0e9585e81f66e052c985de688c737d7a}{Position\+Frames}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the recorded node-\/position frames. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a00e7afc26c7c58c4933fd44f5041b159}{Enabled}} = true\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether event and position history recording is enabled. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a93e90f78419b8c2081a605f8ceedbda2}{Position\+Recording\+Available}} = true\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Host capability gate. False hides and pauses capture without removing stored frames. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a58359887e68a77e1fb6ee78a4fbd4ace}{Position\+Recording\+Enabled}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether node-\/position frames are recorded. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a89afd6c4a92e684cdff442f081432832}{Position\+Sample\+Interval\+Seconds}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the minimum interval between position samples. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}} = -\/1\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets the selected event-\/history entry index. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28}{Has\+Baseline}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether an event-\/history baseline is available. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa1e2bb8e3a8eb972966d0ac24e42cce0}{Has\+Position\+History}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether any position frames have been recorded. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa2adb61264e7a604b2e035096ac08ae9}{Is\+Historical}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether the playhead is earlier than the latest recorded time. \end{DoxyCompactList}\item 
+Date\+Time\+Offset \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a3256de03644dd6ebca2ad7337c01ec50}{Current\+Time\+Utc}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the current playhead time in UTC. \end{DoxyCompactList}\item 
+Date\+Time\+Offset \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{Latest\+Time\+Utc}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the latest timestamp in the event and position history. \end{DoxyCompactList}\item 
+Date\+Time\+Offset \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_abdcc4bfec3d57acd45af0073c58aab98}{Earliest\+Time\+Utc}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the earliest timestamp available for position history. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{Changed}}
+\begin{DoxyCompactList}\small\item\em Occurs when timeline state changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Persistent, dataset-\/scoped change history. Baseline facts have no invented creation time. 
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00104}{104}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0fb110e121fe9ef9c3daa3c917b664a4}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!ClearPositionHistory@{ClearPositionHistory}}
+\index{ClearPositionHistory@{ClearPositionHistory}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{ClearPositionHistory()}{ClearPositionHistory()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0fb110e121fe9ef9c3daa3c917b664a4} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Clear\+Position\+History (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Removes recorded position frames. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00313}{313}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a4cba23fceccdfef66f0c662d05eca3ba}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!EntryIndexAt@{EntryIndexAt}}
+\index{EntryIndexAt@{EntryIndexAt}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{EntryIndexAt()}{EntryIndexAt()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a4cba23fceccdfef66f0c662d05eca3ba} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Entry\+Index\+At (\begin{DoxyParamCaption}\item[{Date\+Time\+Offset}]{time\+Utc}{}\end{DoxyParamCaption})}
+
+
+
+Finds the latest event entry at or before a timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Utc} & Timestamp to query.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The matching entry index, or -\/1 when none precedes the timestamp.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00258}{258}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ac9cd413944f801505b47f2151fd67ad8}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!EstablishBaseline@{EstablishBaseline}}
+\index{EstablishBaseline@{EstablishBaseline}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{EstablishBaseline()}{EstablishBaseline()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ac9cd413944f801505b47f2151fd67ad8} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Establish\+Baseline (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}}}]{snapshot}{, }\item[{Date\+Time\+Offset?}]{timestamp\+Utc}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Establishes a new baseline and clears existing event and position history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & Snapshot to use as the baseline.\\
+\hline
+{\em timestamp\+Utc} & Optional baseline timestamp.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00206}{206}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a5f86ee2211b6bac562c1f986d02845da}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!PositionsAt@{PositionsAt}}
+\index{PositionsAt@{PositionsAt}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{PositionsAt()}{PositionsAt()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a5f86ee2211b6bac562c1f986d02845da} 
+IRead\+Only\+Dictionary$<$ string, Vector3 $>$ Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Positions\+At (\begin{DoxyParamCaption}\item[{Date\+Time\+Offset}]{time\+Utc}{}\end{DoxyParamCaption})}
+
+
+
+Interpolates recorded positions at a timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Utc} & Timestamp to query.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Positions keyed by node identifier.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00283}{283}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a7c54cbecfca8e0d20a5557ebbb2d06ca}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!RecordPositionFrame@{RecordPositionFrame}}
+\index{RecordPositionFrame@{RecordPositionFrame}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{RecordPositionFrame()}{RecordPositionFrame()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a7c54cbecfca8e0d20a5557ebbb2d06ca} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Record\+Position\+Frame (\begin{DoxyParamCaption}\item[{IEnumerable$<$ Key\+Value\+Pair$<$ string, Vector3 $>$ $>$}]{positions}{, }\item[{Date\+Time\+Offset?}]{timestamp\+Utc}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Records a position frame when recording is enabled and the playhead is live. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em positions} & Positions keyed by node identifier.\\
+\hline
+{\em timestamp\+Utc} & Optional frame timestamp.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00235}{235}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!Baseline@{Baseline}}
+\index{Baseline@{Baseline}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{Baseline}{Baseline}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Baseline\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the baseline snapshot for event history. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00115}{115}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!BaselineTimeUtc@{BaselineTimeUtc}}
+\index{BaselineTimeUtc@{BaselineTimeUtc}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{BaselineTimeUtc}{BaselineTimeUtc}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671} 
+Date\+Time\+Offset Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Baseline\+Time\+Utc\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the baseline timestamp in UTC. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00117}{117}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a3256de03644dd6ebca2ad7337c01ec50}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!CurrentTimeUtc@{CurrentTimeUtc}}
+\index{CurrentTimeUtc@{CurrentTimeUtc}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{CurrentTimeUtc}{CurrentTimeUtc}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a3256de03644dd6ebca2ad7337c01ec50} 
+Date\+Time\+Offset Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Current\+Time\+Utc\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the current playhead time in UTC. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00165}{165}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!Cursor@{Cursor}}
+\index{Cursor@{Cursor}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{Cursor}{Cursor}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Cursor = -\/1\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets the selected event-\/history entry index. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00157}{157}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_abdcc4bfec3d57acd45af0073c58aab98}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!EarliestTimeUtc@{EarliestTimeUtc}}
+\index{EarliestTimeUtc@{EarliestTimeUtc}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{EarliestTimeUtc}{EarliestTimeUtc}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_abdcc4bfec3d57acd45af0073c58aab98} 
+Date\+Time\+Offset Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Earliest\+Time\+Utc\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the earliest timestamp available for position history. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00182}{182}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a00e7afc26c7c58c4933fd44f5041b159}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!Enabled@{Enabled}}
+\index{Enabled@{Enabled}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{Enabled}{Enabled}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a00e7afc26c7c58c4933fd44f5041b159} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Enabled = true\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether event and position history recording is enabled. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00123}{123}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a698f1f3de03c67df5278e203713566ef}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!Entries@{Entries}}
+\index{Entries@{Entries}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{Entries}{Entries}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a698f1f3de03c67df5278e203713566ef} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry}{Graph\+Timeline\+Entry}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Entries\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the ordered event history entries. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00119}{119}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!HasBaseline@{HasBaseline}}
+\index{HasBaseline@{HasBaseline}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{HasBaseline}{HasBaseline}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Has\+Baseline\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether an event-\/history baseline is available. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00159}{159}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa1e2bb8e3a8eb972966d0ac24e42cce0}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!HasPositionHistory@{HasPositionHistory}}
+\index{HasPositionHistory@{HasPositionHistory}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{HasPositionHistory}{HasPositionHistory}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa1e2bb8e3a8eb972966d0ac24e42cce0} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Has\+Position\+History\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether any position frames have been recorded. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00161}{161}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa2adb61264e7a604b2e035096ac08ae9}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!IsHistorical@{IsHistorical}}
+\index{IsHistorical@{IsHistorical}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{IsHistorical}{IsHistorical}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa2adb61264e7a604b2e035096ac08ae9} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Is\+Historical\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether the playhead is earlier than the latest recorded time. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00163}{163}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!LatestTimeUtc@{LatestTimeUtc}}
+\index{LatestTimeUtc@{LatestTimeUtc}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{LatestTimeUtc}{LatestTimeUtc}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32} 
+Date\+Time\+Offset Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Latest\+Time\+Utc\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the latest timestamp in the event and position history. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00168}{168}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0e9585e81f66e052c985de688c737d7a}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!PositionFrames@{PositionFrames}}
+\index{PositionFrames@{PositionFrames}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{PositionFrames}{PositionFrames}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0e9585e81f66e052c985de688c737d7a} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame}{Graph\+Position\+Frame}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Position\+Frames\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the recorded node-\/position frames. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00121}{121}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a93e90f78419b8c2081a605f8ceedbda2}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!PositionRecordingAvailable@{PositionRecordingAvailable}}
+\index{PositionRecordingAvailable@{PositionRecordingAvailable}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{PositionRecordingAvailable}{PositionRecordingAvailable}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a93e90f78419b8c2081a605f8ceedbda2} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Position\+Recording\+Available = true\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Host capability gate. False hides and pauses capture without removing stored frames. 
+
+Gets or sets whether the host permits position history recording. 
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00127}{127}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a58359887e68a77e1fb6ee78a4fbd4ace}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!PositionRecordingEnabled@{PositionRecordingEnabled}}
+\index{PositionRecordingEnabled@{PositionRecordingEnabled}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{PositionRecordingEnabled}{PositionRecordingEnabled}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a58359887e68a77e1fb6ee78a4fbd4ace} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Position\+Recording\+Enabled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether node-\/position frames are recorded. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00130}{130}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a89afd6c4a92e684cdff442f081432832}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!PositionSampleIntervalSeconds@{PositionSampleIntervalSeconds}}
+\index{PositionSampleIntervalSeconds@{PositionSampleIntervalSeconds}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{PositionSampleIntervalSeconds}{PositionSampleIntervalSeconds}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a89afd6c4a92e684cdff442f081432832} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Position\+Sample\+Interval\+Seconds\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the minimum interval between position samples. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00142}{142}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0eb9f0b815067e0bf5ffb88e1ef2c6a4}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!Workspace@{Workspace}}
+\index{Workspace@{Workspace}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{Workspace}{Workspace}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0eb9f0b815067e0bf5ffb88e1ef2c6a4} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_workspace}{Graph\+Timeline\+Workspace}} Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Workspace = new()\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the workspace for cached external timeline events. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00113}{113}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_doc-event-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}\index{Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}!Changed@{Changed}}
+\index{Changed@{Changed}!Cashg.GraphExplorer.GraphTimeline@{Cashg.GraphExplorer.GraphTimeline}}
+\doxysubsubsection{\texorpdfstring{Changed}{Changed}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566} 
+Action Cashg.\+Graph\+Explorer.\+Graph\+Timeline.\+Changed}
+
+
+
+Occurs when timeline state changes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_8cs_source_l00201}{201}} of file \doxymbox{\hyperlink{_graph_timeline_8cs_source}{Graph\+Timeline.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Timeline.\+cs\end{DoxyCompactItemize}

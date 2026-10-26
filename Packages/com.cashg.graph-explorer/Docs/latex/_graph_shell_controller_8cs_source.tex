@@ -1,0 +1,637 @@
+\doxysection{Graph\+Shell\+Controller.\+cs}
+\hypertarget{_graph_shell_controller_8cs_source}{}\label{_graph_shell_controller_8cs_source}\index{Runtime/Presentation/GraphShellController.cs@{Runtime/Presentation/GraphShellController.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }UnityEngine;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }UnityEngine.InputSystem;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }UnityEngine.UIElements;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }static\ \doxymbox{\hyperlink{namespace_cashg}{Cashg}}.\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{GraphExplorer}}.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_ui}{GraphUi}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00008}00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{Cashg.GraphExplorer}}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00011}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller}{00011}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9ef5cba13dee3da3dace0dea74b6dad7}{GraphShellController}}\ :\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<GraphShellDrawer>\ customDrawers\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<Action>\ detach\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host}{IGraphShellHost}}\ host;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<VisualElement>\ owned\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ disposed;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ Toggle\ timelineEnabledToggle;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00022}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9ef5cba13dee3da3dace0dea74b6dad7}{00022}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9ef5cba13dee3da3dace0dea74b6dad7}{GraphShellController}}(\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host}{IGraphShellHost}}\ host)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ this.host\ =\ host\ ??\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(host));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00028}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{00028}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_controls}{GraphTimelineControls}}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{TimelineControls}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00031}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a78a3fcd6dd3d64c7e2ee25cf15d1f102}{00031}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a78a3fcd6dd3d64c7e2ee25cf15d1f102}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Stop\ scheduled\ interactions\ and\ remove\ only\ UI\ elements\ and\ callbacks\ owned\ by\ this\ controller.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (disposed)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ disposed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9829248c963e855496889976b873863f}{EndShellResize}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellSearchSchedule?.Pause();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{TimelineControls}}?.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_controls_ae548585b9807b3b43a2d7ccffccedeea}{Dispose}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ action\ \textcolor{keywordflow}{in}\ detach)\ action();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ detach.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ element\ \textcolor{keywordflow}{in}\ owned)\ element.RemoveFromHierarchy();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellReady\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ RegisterOn<T>(VisualElement\ target,\ EventCallback<T>\ callback,}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TrickleDown\ phase\ =\ TrickleDown.NoTrickleDown)\ where\ T\ :\ EventBase<T>,\ new()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ target.RegisterCallback(callback,\ phase);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ detach.Add(()\ =>\ target.UnregisterCallback(callback,\ phase));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ RegisterRoot<T>(EventCallback<T>\ callback,\ TrickleDown\ phase\ =\ TrickleDown.NoTrickleDown)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ where\ T\ :\ EventBase<T>,\ new()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn(host.root,\ callback,\ phase);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00060}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a57e0fc05e9316bc404108641f98c3262}{00060}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a57e0fc05e9316bc404108641f98c3262}{BuildShellHeader}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Register\ the\ header\ as\ owned\ UI,\ then\ compose\ navigation,\ search,\ and\ workspace\ controls.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellHeader\ =\ Element(\textcolor{stringliteral}{"{}header"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellHeader.name\ =\ \textcolor{stringliteral}{"{}shell-\/header"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ host.root.Add(host.shellHeader);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(host.shellHeader);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ var\ brand\ =\ Element(\textcolor{stringliteral}{"{}brand"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ brand.Add(Label(host.BrandMark,\ \textcolor{stringliteral}{"{}brand-\/mark"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ brand.Add(Label(host.Title,\ \textcolor{stringliteral}{"{}app-\/title"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellHeader.Add(brand);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ var\ historyControls\ =\ Element(\textcolor{stringliteral}{"{}header-\/actions"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellHeader.Add(historyControls);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ direction\ \textcolor{keywordflow}{in}\ \textcolor{keyword}{new}[]\ \{\ -\/1,\ 1\ \})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ step\ =\ direction;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ button\ =\ HeaderButton(step\ <\ 0\ ?\ \textcolor{stringliteral}{"{}Back"{}}\ :\ \textcolor{stringliteral}{"{}Forward"{}},\ step\ <\ 0\ ?\ \textcolor{stringliteral}{"{}back"{}}\ :\ \textcolor{stringliteral}{"{}forward"{}},}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>\ host.History(step));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ button.AddToClassList(\textcolor{stringliteral}{"{}shell-\/icon-\/only"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ historyControls.Add(button);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ var\ overview\ =\ HeaderButton(\textcolor{stringliteral}{"{}Overview"{}},\ \textcolor{stringliteral}{"{}overview"{}},\ ()\ =>\ host.Overview());}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ overview.name\ =\ \textcolor{stringliteral}{"{}shell-\/overview"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellHeader.Add(overview);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellSearchHost\ =\ Element(\textcolor{stringliteral}{"{}shell-\/search-\/host"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellHeader.Add(host.shellSearchHost);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ var\ headerRight\ =\ Element(\textcolor{stringliteral}{"{}shell-\/header-\/right"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellHeader.Add(headerRight);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ var\ progress\ =\ Element(\textcolor{stringliteral}{"{}shell-\/header-\/progress"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ progress.name\ =\ \textcolor{stringliteral}{"{}shell-\/header-\/progress"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ var\ progressFill\ =\ Element(\textcolor{stringliteral}{"{}shell-\/header-\/progress-\/fill"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ progressFill.name\ =\ \textcolor{stringliteral}{"{}shell-\/header-\/progress-\/fill"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ progress.Add(progressFill);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ headerRight.Add(progress);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellSourceStatus\ =\ Label(\textcolor{stringliteral}{"{}Connecting"{}},\ \textcolor{stringliteral}{"{}shell-\/source-\/status"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ headerRight.Add(host.shellSourceStatus);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ var\ source\ =\ HeaderButton(\textcolor{stringliteral}{"{}Source"{}},\ \textcolor{stringliteral}{"{}web"{}},\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a88988ae72937a1caec2266ea0b20c6d5}{ShowShellDrawer}}(\textcolor{stringliteral}{"{}Source"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ source.name\ =\ \textcolor{stringliteral}{"{}shell-\/source-\/button"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ headerRight.Add(source);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceButton\ =\ HeaderButton(\textcolor{stringliteral}{"{}Workspace"{}},\ \textcolor{stringliteral}{"{}save"{}},\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a09393c1f2ab1e8cd4bffb8c81c8f236e}{ToggleShellWorkspace}}());}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceButton.name\ =\ \textcolor{stringliteral}{"{}shell-\/workspace-\/button"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ headerRight.Add(host.shellWorkspaceButton);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00106}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a48a321dc3e4ee08110b392193d18d803}{00106}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a48a321dc3e4ee08110b392193d18d803}{CompleteShell}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Attach\ navigation\ rail\ controls\ to\ the\ host's\ existing\ drawer\ content.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ host.BuildNodeSearch();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ var\ drawerHead\ =\ Element(\textcolor{stringliteral}{"{}shell-\/drawer-\/head"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDrawerTitle\ =\ Label(\textcolor{stringliteral}{"{}Filters"{}},\ \textcolor{stringliteral}{"{}shell-\/drawer-\/title"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ drawerHead.Add(host.shellDrawerTitle);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ var\ closeDrawer\ =\ Button(\textcolor{stringliteral}{"{}Close"{}},\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a88988ae72937a1caec2266ea0b20c6d5}{ShowShellDrawer}}(\textcolor{stringliteral}{"{}"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ closeDrawer.name\ =\ \textcolor{stringliteral}{"{}shell-\/close-\/drawer"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ drawerHead.Add(closeDrawer);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ host.sidebar.Insert(0,\ drawerHead);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(drawerHead);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRail\ =\ Element(\textcolor{stringliteral}{"{}shell-\/rail"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRail.name\ =\ \textcolor{stringliteral}{"{}shell-\/rail"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ host.root.Add(host.shellRail);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(host.shellRail);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ entry\ \textcolor{keywordflow}{in}\ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}Browse"{}},\ \textcolor{stringliteral}{"{}list"{}}\ \},\ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}Filters"{}},\ \textcolor{stringliteral}{"{}filter"{}}\ \},\ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}Favorites"{}},\ \textcolor{stringliteral}{"{}star"{}}\ \},}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}View"{}},\ \textcolor{stringliteral}{"{}eye"{}}\ \},\ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}Source"{}},\ \textcolor{stringliteral}{"{}web"{}}\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ name\ =\ entry[0];}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ button\ =\ HeaderButton(name,\ entry[1],\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a88988ae72937a1caec2266ea0b20c6d5}{ShowShellDrawer}}(name));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ button.name\ =\ \textcolor{stringliteral}{"{}shell-\/rail-\/"{}}\ +\ name.ToLowerInvariant();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ button.AddToClassList(\textcolor{stringliteral}{"{}shell-\/rail-\/button"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRail.Add(button);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRailButtons[name]\ =\ button;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Insert\ host-\/provided\ drawers\ beside\ built-\/ins\ while\ enforcing\ unique\ rail\ identities.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host\ is\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_custom_drawer_shell_host}{IGraphCustomDrawerShellHost}}\ customHost)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ drawer\ \textcolor{keywordflow}{in}\ customHost.CustomDrawers)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellRailButtons.ContainsKey(drawer.Id))}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}Duplicate\ drawer\ ID:\ "{}}\ +\ drawer.Id);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ customDrawers.Add(drawer);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (drawer.Content.parent\ ==\ \textcolor{keyword}{null})\ host.shellViewBody.parent.Add(drawer.Content);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ button\ =\ HeaderButton(drawer.Title,\ drawer.Icon,\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a88988ae72937a1caec2266ea0b20c6d5}{ShowShellDrawer}}(drawer.Id));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ button.name\ =\ \textcolor{stringliteral}{"{}shell-\/rail-\/"{}}\ +\ drawer.Id.ToLowerInvariant();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ button.AddToClassList(\textcolor{stringliteral}{"{}shell-\/rail-\/button"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRail.Insert(}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRail.IndexOf(host.shellRailButtons[\textcolor{stringliteral}{"{}View"{}}])\ +\ 1\ +\ customDrawers.Count\ -\/\ 1,\ button);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRailButtons[drawer.Id]\ =\ button;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ var\ help\ =\ HeaderButton(\textcolor{stringliteral}{"{}Help"{}},\ \textcolor{stringliteral}{"{}help"{}},\ host.ShowHelp);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Compose\ the\ shared\ inspect/queue\ dock\ before\ applying\ persisted\ view\ preferences.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ help.AddToClassList(\textcolor{stringliteral}{"{}shell-\/rail-\/button"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ help.AddToClassList(\textcolor{stringliteral}{"{}shell-\/rail-\/help"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRail.Add(help);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDockHeader\ =\ Element(\textcolor{stringliteral}{"{}shell-\/dock-\/head"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ host.rightColumn.Insert(0,\ host.shellDockHeader);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(host.shellDockHeader);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellInspectTab\ =\ host.LabeledIcon(\textcolor{stringliteral}{"{}search"{}},\ \textcolor{stringliteral}{"{}Inspect"{}},\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a2e0a0fb712a7dcd947d63f2acee2b43c}{ShowShellDock}}(\textcolor{stringliteral}{"{}Inspect"{}}),}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Inspect.\ Details\ and\ relationships\ for\ the\ selected\ entity."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellInspectTab.AddToClassList(\textcolor{stringliteral}{"{}icon-\/tab"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellInspectTab.name\ =\ \textcolor{stringliteral}{"{}shell-\/inspect-\/tab"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueTab\ =\ host.LabeledIcon(\textcolor{stringliteral}{"{}list"{}},\ \textcolor{stringliteral}{"{}Queue"{}},\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a2e0a0fb712a7dcd947d63f2acee2b43c}{ShowShellDock}}(\textcolor{stringliteral}{"{}Queue"{}}),}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Task\ queue.\ Draft\ tasks,\ run\ progress,\ and\ history."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueTab.AddToClassList(\textcolor{stringliteral}{"{}icon-\/tab"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueTab.name\ =\ \textcolor{stringliteral}{"{}shell-\/queue-\/tab"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueBadge\ =\ Label(\textcolor{stringliteral}{"{}0"{}},\ \textcolor{stringliteral}{"{}tab-\/badge"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueBadge.pickingMode\ =\ PickingMode.Ignore;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueTab.Add(host.shellQueueBadge);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ var\ closeDock\ =\ host.IconButton(\textcolor{stringliteral}{"{}close"{}},\ ()\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a2e0a0fb712a7dcd947d63f2acee2b43c}{ShowShellDock}}(\textcolor{stringliteral}{"{}"{}}),\ \textcolor{stringliteral}{"{}Close\ the\ dock."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ closeDock.name\ =\ \textcolor{stringliteral}{"{}shell-\/close-\/dock"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDockHeader.Add(host.shellInspectTab);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDockHeader.Add(host.shellQueueTab);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDockHeader.Add(closeDock);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_aa7ef90611784cb04d0de1c29a49dd40f}{AddShellDockResize}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellScaleField\ =\ \textcolor{keyword}{new}\ DropdownField(\textcolor{stringliteral}{"{}UI\ scale"{}},\ \textcolor{keyword}{new}\ List<string>\ \{\ \textcolor{stringliteral}{"{}100\%"{}},\ \textcolor{stringliteral}{"{}125\%"{}},\ \textcolor{stringliteral}{"{}150\%"{}}\ \},}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mathf.RoundToInt((host.shellPreferences.uiScale\ -\/\ 1)\ *\ 4));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellScaleField.name\ =\ \textcolor{stringliteral}{"{}shell-\/ui-\/scale"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellViewBody.Add(host.shellScaleField);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(host.shellScaleField);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<ChangeEvent<string>>(host.shellScaleField,}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_af36ccb78ae1256e6fede0cb03d634ba9}{SetShellScale}}(}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.newValue\ ==\ \textcolor{stringliteral}{"{}150\%"{}}\ ?\ 1.5f\ :\ e.newValue\ ==\ \textcolor{stringliteral}{"{}125\%"{}}\ ?\ 1.25f\ :\ 1));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellPreferencesLoaded)\ host.reducedMotion\ =\ host.shellPreferences.reducedMotion;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ host.shellPreferences.reducedMotion\ =\ host.reducedMotion;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ host.ApplyReducedMotion(host.reducedMotion);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ var\ motion\ =\ \textcolor{keyword}{new}\ Toggle(\textcolor{stringliteral}{"{}Reduced\ motion"{}})\ \{\ value\ =\ host.reducedMotion,\ name\ =\ \textcolor{stringliteral}{"{}shell-\/reduced-\/motion"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ UseShellCheckbox(motion);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellViewBody.Add(motion);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(motion);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<ChangeEvent<bool>>(motion,\ e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.reducedMotion\ =\ host.shellPreferences.reducedMotion\ =\ e.newValue;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.ApplyReducedMotion(host.reducedMotion);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.root.EnableInClassList(\textcolor{stringliteral}{"{}reduced-\/motion"{}},\ host.reducedMotion);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.SaveShellPreferences();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.ActionsAvailable)\ host.SaveCommandWorkspace();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ var\ scaleNote\ =}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Label(\textcolor{stringliteral}{"{}Scale\ changes\ the\ whole\ interface.\ Larger\ scales\ use\ the\ compact\ layout\ when\ needed."{}},\ \textcolor{stringliteral}{"{}note"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellViewBody.Add(scaleNote);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(scaleNote);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host\ is\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_shell_host}{IGraphTimelineShellHost}}\ timelineHost)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ timeline\ controls\ only\ for\ hosts\ that\ expose\ history\ operations.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timelineEnabledToggle\ =\ \textcolor{keyword}{new}\ Toggle(\textcolor{stringliteral}{"{}Graph\ change\ timeline"{}})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ value\ =\ host.shellPreferences.timelineEnabled,\ name\ =\ \textcolor{stringliteral}{"{}shell-\/timeline-\/enabled"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UseShellCheckbox(timelineEnabledToggle);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellViewBody.Add(timelineEnabledToggle);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(timelineEnabledToggle);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<ChangeEvent<bool>>(timelineEnabledToggle,\ e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{TimelineControls}}?.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_controls_ac0a0ed38657e4762f4338c44db8f7bd4}{SetEnabled}}(e.newValue);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellPreferences.timelineEnabled\ =\ e.newValue;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{TimelineControls}}\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_controls_ad6007fa99a74ff8c79317f43a3e41309}{GraphTimelineControls}}(host,\ timelineHost);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{TimelineControls}}.Refresh();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.ActionsAvailable)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Supply\ a\ compact\ tool\ selector\ when\ the\ command\ belt\ cannot\ show\ its\ full\ hotbar.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ beltRow\ =\ host.commandBelt.Q(className:\ \textcolor{stringliteral}{"{}hotbar-\/row"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ beltRow.pickingMode\ =\ PickingMode.Position;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.taskNowLabel.parent.pickingMode\ =\ PickingMode.Position;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellToolField\ =\ \textcolor{keyword}{new}\ DropdownField\ \{\ name\ =\ \textcolor{stringliteral}{"{}shell-\/compact-\/tool"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellToolField.AddToClassList(\textcolor{stringliteral}{"{}shell-\/tool-\/field"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellToolField.tooltip\ =\ \textcolor{stringliteral}{"{}Equipped\ tool.\ Keys\ 1–8\ also\ equip\ tools;\ 0\ returns\ to\ Inspect."{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ beltRow.Insert(1,\ host.shellToolField);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(host.shellToolField);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<ChangeEvent<string>>(host.shellToolField,\ e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellUpdatingTools)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ index\ =\ host.shellToolLabels.IndexOf(e.newValue);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.EquipToolAt(index);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ queue\ and\ host.inspector\ share\ one\ dock.\ Old\ floating-\/queue\ saves\ remain\ readable.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ host.commandFloating\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceMenu\ =\ Element(\textcolor{stringliteral}{"{}shell-\/workspace-\/menu"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ host.root.Add(host.shellWorkspaceMenu);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(host.shellWorkspaceMenu);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ item\ \textcolor{keywordflow}{in}\ host.WorkspaceActions)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ action\ =\ item.Value;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceMenu.Add(Button(item.Key,\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CloseShellWorkspace();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ action();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterRoot<GeometryChangedEvent>(\_\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}());}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterRoot<KeyDownEvent>(e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((e.ctrlKey\ ||\ e.commandKey)\ \&\&\ e.keyCode\ ==\ KeyCode.F)\ ||}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (e.keyCode\ ==\ KeyCode.Slash\ \&\&\ !host.IsEditingText()))}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.nodeSearchField.Focus();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopImmediatePropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.PreventDefault();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \},\ TrickleDown.TrickleDown);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ DisableWasdUiNavigation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterRoot<PointerDownEvent>(e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellWorkspaceOpen)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ hit\ =\ e.target\ as\ VisualElement;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hit\ !=\ \textcolor{keyword}{null}\ \&\&}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (host.shellWorkspaceMenu.Contains(hit)\ ||\ host.shellWorkspaceButton.Contains(hit)))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a44019ccc6cfff9ac9489294aab56497f}{CloseShellWorkspace}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellConsumedPointerFrame\ =\ Time.frameCount;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopImmediatePropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \},\ TrickleDown.TrickleDown);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellReady\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.ActionsAvailable)\ host.RefreshShellToolChoice();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ host.RefreshShellSource();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ modal\ surfaces\ above\ the\ shell;\ world\ labels\ never\ receive\ empty-\/area\ input.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ host.tooltip.BringToFront();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ host.uiTip.BringToFront();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ host.hotbarTip?.BringToFront();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ host.loadingOverlay.BringToFront();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00291}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a88988ae72937a1caec2266ea0b20c6d5}{00291}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a88988ae72937a1caec2266ea0b20c6d5}{ShowShellDrawer}}(\textcolor{keywordtype}{string}\ name)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Toggle\ the\ requested\ drawer\ and\ release\ competing\ dock\ focus\ on\ narrower\ layouts.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellReady)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9829248c963e855496889976b873863f}{EndShellResize}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a44019ccc6cfff9ac9489294aab56497f}{CloseShellWorkspace}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ var\ next\ =\ host.shellDrawer\ ==\ name\ ?\ \textcolor{stringliteral}{"{}"{}}\ :\ name;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (next.Length\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.root.resolvedStyle.width\ <\ 1400)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.rightColumn);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.commandPanelOpen\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellInspectorOpen\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.sidebar);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDrawer\ =\ next;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00315}00315\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00318}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a2e0a0fb712a7dcd947d63f2acee2b43c}{00318}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a2e0a0fb712a7dcd947d63f2acee2b43c}{ShowShellDock}}(\textcolor{keywordtype}{string}\ tab)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Transfer\ focus\ away\ from\ hidden\ panels\ before\ activating\ the\ inspect\ or\ queue\ tab.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tab\ ==\ \textcolor{stringliteral}{"{}Queue"{}}\ \&\&\ !host.ActionsAvailable)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellReady)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9829248c963e855496889976b873863f}{EndShellResize}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a44019ccc6cfff9ac9489294aab56497f}{CloseShellWorkspace}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.commandPanelOpen\ \&\&\ tab\ !=\ \textcolor{stringliteral}{"{}Queue"{}})\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.commandPanel);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellInspectorOpen\ \&\&\ tab\ !=\ \textcolor{stringliteral}{"{}Inspect"{}})\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.inspector);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tab.Length\ >\ 0\ \&\&\ host.root.resolvedStyle.width\ <\ 1400)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.sidebar);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDrawer\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tab.Length\ ==\ 0)\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.rightColumn);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellInspectorOpen\ =\ tab\ ==\ \textcolor{stringliteral}{"{}Inspect"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ host.commandPanelOpen\ =\ tab\ ==\ \textcolor{stringliteral}{"{}Queue"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.commandPanelOpen)\ host.RefreshCommandPanel();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Hosts\ rebuild\ queue\ contents;\ the\ shell\ owns\ dock\ visibility\ and\ tab\ state.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00344}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a86afa686903475336a5dd07d786c26f6}{00344}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a86afa686903475336a5dd07d786c26f6}{SetHeaderProgress}}(\textcolor{keywordtype}{float}?\ fraction,\ \textcolor{keywordtype}{bool}\ indeterminate\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Switch\ between\ hidden,\ animated\ indeterminate,\ and\ bounded\ percentage\ progress\ states.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ var\ bar\ =\ host.root?.Q(\textcolor{stringliteral}{"{}shell-\/header-\/progress"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ var\ fill\ =\ bar?.Q(\textcolor{stringliteral}{"{}shell-\/header-\/progress-\/fill"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bar\ ==\ \textcolor{keyword}{null}\ ||\ fill\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ var\ active\ =\ indeterminate\ ||\ fraction.HasValue;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ bar.EnableInClassList(\textcolor{stringliteral}{"{}is-\/active"{}},\ active);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ bar.EnableInClassList(\textcolor{stringliteral}{"{}is-\/indeterminate"{}},\ indeterminate);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!active)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (indeterminate)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fill.style.width\ =\ StyleKeyword.Null;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bar.tooltip\ =\ \textcolor{stringliteral}{"{}Working"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ var\ clamped\ =\ Mathf.Clamp01(fraction.Value);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ fill.style.width\ =\ Length.Percent(clamped\ *\ 100f);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ bar.tooltip\ =\ Mathf.RoundToInt(clamped\ *\ 100f)\ +\ \textcolor{stringliteral}{"{}\%"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00367}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a4558fe65e79220fe4a7624ae14e8aefa}{00367}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a4558fe65e79220fe4a7624ae14e8aefa}{ToggleShellQueue}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a2e0a0fb712a7dcd947d63f2acee2b43c}{ShowShellDock}}(host.commandPanelOpen\ ?\ \textcolor{stringliteral}{"{}"{}}\ :\ \textcolor{stringliteral}{"{}Queue"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00374}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a73683fd72f00dd5a98bbe24b723bcce9}{00374}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a73683fd72f00dd5a98bbe24b723bcce9}{CloseShellSurface}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dismiss\ the\ most\ immediate\ open\ surface\ first\ so\ repeated\ escape\ actions\ unwind\ the\ shell.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellWorkspaceOpen)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a44019ccc6cfff9ac9489294aab56497f}{CloseShellWorkspace}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellDrawer.Length\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a88988ae72937a1caec2266ea0b20c6d5}{ShowShellDrawer}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00388}00388\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.commandPanelOpen\ ||\ host.shellInspectorOpen)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a2e0a0fb712a7dcd947d63f2acee2b43c}{ShowShellDock}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00396}00396\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00397}00397\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00400}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{00400}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(VisualElement\ container)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ var\ focused\ =\ host.root.focusController?.focusedElement\ as\ VisualElement;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (focused\ ==\ \textcolor{keyword}{null}\ ||\ !(focused\ ==\ container\ ||\ container.Contains(focused)))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ focused.Blur();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ to\ a\ visible\ rail\ control\ instead\ of\ trapping\ focus\ inside\ a\ hidden\ panel.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellRailButtons[\textcolor{stringliteral}{"{}Browse"{}}].Focus();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00410}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a09393c1f2ab1e8cd4bffb8c81c8f236e}{00410}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a09393c1f2ab1e8cd4bffb8c81c8f236e}{ToggleShellWorkspace}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Place\ keyboard\ focus\ on\ the\ first\ workspace\ action\ when\ opening\ the\ menu.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceOpen\ =\ !host.shellWorkspaceOpen;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellWorkspaceOpen)\ host.shellWorkspaceMenu.Q<Button>()?.Focus();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00419}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a44019ccc6cfff9ac9489294aab56497f}{00419}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a44019ccc6cfff9ac9489294aab56497f}{CloseShellWorkspace}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00420}00420\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellWorkspaceOpen)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceOpen\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.shellWorkspaceMenu);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceMenu.style.display\ =\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00425}00425\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00429}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_af36ccb78ae1256e6fede0cb03d634ba9}{00429}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_af36ccb78ae1256e6fede0cb03d634ba9}{SetShellScale}}(\textcolor{keywordtype}{float}\ scale)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00430}00430\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Apply\ a\ finite\ supported\ panel\ scale\ and\ synchronize\ its\ field\ without\ recursive\ change\ events.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellPreferences.uiScale\ =\ \textcolor{keywordtype}{float}.IsFinite(scale)\ ?\ Mathf.Clamp(scale,\ 1,\ 1.5f)\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ host.runtimePanelSettings.scale\ =\ host.shellPreferences.uiScale;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellScaleField?.SetValueWithoutNotify(Mathf.RoundToInt(host.shellPreferences.uiScale\ *\ 100)\ +\ \textcolor{stringliteral}{"{}\%"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ host.SaveShellPreferences();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00437}00437\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00440}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_adebc82380ff7a9b8bd0aa29b71cae4e0}{00440}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_adebc82380ff7a9b8bd0aa29b71cae4e0}{RefreshTimeline}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00441}00441\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (timelineEnabledToggle\ !=\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timelineEnabledToggle.SetValueWithoutNotify(host.shellPreferences.timelineEnabled);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{TimelineControls}}?.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_controls_a41ae9ca1d5c67b9e8a07fd0a691f72e3}{Refresh}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00445}00445\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00448}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_aa7ef90611784cb04d0de1c29a49dd40f}{00448}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_aa7ef90611784cb04d0de1c29a49dd40f}{AddShellDockResize}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Capture\ the\ initial\ width\ for\ dragging\ and\ provide\ equivalent\ bounded\ keyboard\ resizing.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ var\ handle\ =\ Element(\textcolor{stringliteral}{"{}shell-\/resize"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ handle.name\ =\ \textcolor{stringliteral}{"{}shell-\/dock-\/resize"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ handle.focusable\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ handle.tabIndex\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ handle.tooltip\ =}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Resize\ dock:\ drag,\ or\ focus\ and\ use\ Left/Right\ arrows.\ Home\ resets\ to\ 360.\ Range\ 320–480."{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ host.rightColumn.Add(handle);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ owned.Add(handle);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ origin\ =\ 0,\ width\ =\ 360;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<PointerDownEvent>(handle,\ e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e.button\ !=\ 0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellResizing\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ origin\ =\ e.position.x;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ width\ =\ host.shellPreferences.dockWidth;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle.CapturePointer(e.pointerId);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle.Focus();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopPropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<PointerMoveEvent>(handle,\ e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellResizing)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellPreferences.dockWidth\ =\ Mathf.Clamp(width\ +\ origin\ -\/\ e.position.x,\ 320,\ 480);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopPropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<PointerUpEvent>(handle,\ e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellResizing)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellResizing\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle.ReleasePointer(e.pointerId);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.SaveShellPreferences();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopPropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<PointerCaptureOutEvent>(handle,\ \_\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellResizing)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellResizing\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.SaveShellPreferences();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterOn<KeyDownEvent>(handle,\ e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e.keyCode\ !=\ KeyCode.LeftArrow\ \&\&\ e.keyCode\ !=\ KeyCode.RightArrow\ \&\&}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.keyCode\ !=\ KeyCode.Home)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellPreferences.dockWidth\ =\ e.keyCode\ ==\ KeyCode.Home}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ 360}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ Mathf.Clamp(host.shellPreferences.dockWidth\ +\ (e.keyCode\ ==\ KeyCode.LeftArrow\ ?\ 16\ :\ -\/16),\ 320,}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 480);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.SaveShellPreferences();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopImmediatePropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.PreventDefault();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00506}00506\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00509}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9829248c963e855496889976b873863f}{00509}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a9829248c963e855496889976b873863f}{EndShellResize}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00510}00510\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Release\ any\ active\ drag\ before\ hiding\ or\ switching\ the\ dock\ and\ persist\ its\ final\ width.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00512}00512\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellResizing)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellResizing\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ var\ handle\ =\ host.root?.Q<VisualElement>(\textcolor{stringliteral}{"{}shell-\/dock-\/resize"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ !=\ \textcolor{keyword}{null}\ \&\&\ handle.HasPointerCapture(PointerId.mousePointerId))}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle.ReleasePointer(PointerId.mousePointerId);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ host.SaveShellPreferences();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00518}00518\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00519}00519\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00521}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{00521}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a0bfbba13d46d00cff9b8ce5f795a1682}{RefreshShellLayout}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00522}00522\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Recalculate\ reserved\ regions\ after\ dock,\ drawer,\ or\ scale\ changes.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.shellReady\ ||\ host.root.panel\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ width\ =\ host.root.resolvedStyle.width,\ height\ =\ host.root.resolvedStyle.height;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\textcolor{keywordtype}{float}.IsFinite(width)\ ||\ width\ <\ 100\ ||\ !\textcolor{keywordtype}{float}.IsFinite(height))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!host.ActionsAvailable)\ host.commandPanelOpen\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00528}00528\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ drawers\ and\ the\ dock\ mutually\ exclusive\ when\ both\ would\ crowd\ the\ graph\ viewport.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ var\ dockOpen\ =\ host.commandPanelOpen\ ||\ host.shellInspectorOpen;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (width\ <\ 1400\ \&\&\ dockOpen\ \&\&\ host.shellDrawer.Length\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00532}00532\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a7000a3ae58480fa8140ee43f17c3231e}{ReleaseShellFocus}}(host.sidebar);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDrawer\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00536}00536\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ host.root.EnableInClassList(\textcolor{stringliteral}{"{}shell-\/compact"{}},\ width\ <\ 1000);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ host.root.EnableInClassList(\textcolor{stringliteral}{"{}reduced-\/motion"{}},\ host.reducedMotion);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Refresh\ drawer\ visibility\ and\ active\ rail\ state\ independently\ from\ the\ dock\ tab\ contents.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a8c912c217489f184811065a4e26e1631}{TimelineControls}}?.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_controls_a41ae9ca1d5c67b9e8a07fd0a691f72e3}{Refresh}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ host.sidebar.style.display\ =\ host.shellDrawer.Length\ >\ 0\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDrawerTitle.text\ =\ host.shellDrawer;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ drawer\ \textcolor{keywordflow}{in}\ customDrawers)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ drawer.Content.style.display\ =\ host.shellDrawer\ ==\ drawer.Id\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellDrawer\ ==\ drawer.Id)\ host.shellDrawerTitle.text\ =\ drawer.Title;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00549}00549\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellSourceBody.style.display\ =\ host.shellDrawer\ ==\ \textcolor{stringliteral}{"{}Source"{}}\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellFiltersBody.style.display\ =\ host.shellDrawer\ ==\ \textcolor{stringliteral}{"{}Filters"{}}\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellViewBody.style.display\ =\ host.shellDrawer\ ==\ \textcolor{stringliteral}{"{}View"{}}\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellBrowseBody.style.display\ =\ host.shellDrawer\ ==\ \textcolor{stringliteral}{"{}Browse"{}}\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellFavoritesBody.style.display\ =}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellDrawer\ ==\ \textcolor{stringliteral}{"{}Favorites"{}}\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.favoritesList\ !=\ \textcolor{keyword}{null})\ host.favoritesList.style.height\ =\ Mathf.Max(140,\ height\ -\/\ 190);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ host.resultList.style.height\ =\ Mathf.Max(140,\ height\ -\/\ 190);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ entry\ \textcolor{keywordflow}{in}\ host.shellRailButtons)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00559}00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry.Value.EnableInClassList(\textcolor{stringliteral}{"{}is-\/active"{}},\ entry.Key\ ==\ host.shellDrawer);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ host.rightColumn.style.display\ =\ dockOpen\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ host.rightColumn.style.width\ =\ host.shellPreferences.dockWidth;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ host.inspector.style.display\ =\ host.shellInspectorOpen\ \&\&\ !host.commandPanelOpen}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ DisplayStyle.Flex}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.commandPanel\ !=\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.commandPanel.style.display\ =\ host.commandPanelOpen\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueTab.style.display\ =\ host.ActionsAvailable\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellInspectTab.EnableInClassList(\textcolor{stringliteral}{"{}is-\/active"{}},\ !host.commandPanelOpen);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellQueueTab.EnableInClassList(\textcolor{stringliteral}{"{}is-\/active"{}},\ host.commandPanelOpen);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellQueueBadge\ !=\ \textcolor{keyword}{null})\ host.shellQueueBadge.text\ =\ host.DraftCount.ToString();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellWorkspaceMenu.style.display\ =\ host.shellWorkspaceOpen\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellWorkspaceOpen)\ host.shellWorkspaceMenu.BringToFront();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ var\ area\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a837217d884bdedfd032a12ffb8da1a54}{ShellGraphRect}}();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Align\ command\ and\ count\ overlays\ with\ the\ graph\ area\ left\ after\ visible\ side\ panels.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.commandBelt\ !=\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.commandBelt.style.display\ =\ host.ActionsAvailable\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.ActionsAvailable)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.commandBelt.style.left\ =\ area.xMin;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.commandBelt.style.right\ =\ Mathf.Max(12,\ width\ -\/\ area.xMax);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ compactTools\ =\ area.width\ <\ 600;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.hotbar.style.display\ =\ compactTools\ ?\ DisplayStyle.None\ :\ DisplayStyle.Flex;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellToolField.style.display\ =\ compactTools\ \&\&\ host.shellToolLabels.Count\ >\ 1}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ DisplayStyle.Flex}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00588}00588\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellCounts.style.left\ =\ area.xMin;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellCounts.style.right\ =\ Mathf.Max(12,\ width\ -\/\ area.xMax);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.ActionsAvailable)\ host.RefreshShellTaskHud();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00592}00592\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00593}00593\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00596}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a837217d884bdedfd032a12ffb8da1a54}{00596}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Rect\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a837217d884bdedfd032a12ffb8da1a54}{ShellGraphRect}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00597}00597\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00598}00598\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reserve\ side-\/panel\ widths\ with\ screen-\/size\ fallbacks\ before\ root\ geometry\ becomes\ available.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00599}00599\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ width\ =\ host.root?.resolvedStyle.width\ ??\ Screen.width,}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00600}00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ height\ =\ host.root?.resolvedStyle.height\ ??\ Screen.height;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00601}00601\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\textcolor{keywordtype}{float}.IsFinite(width)\ ||\ width\ <\ 1)\ width\ =\ Screen.width;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\textcolor{keywordtype}{float}.IsFinite(height)\ ||\ height\ <\ 1)\ height\ =\ Screen.height;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ left\ =\ host.shellReady\ \&\&\ host.shellDrawer.Length\ >\ 0\ ?\ 392\ :\ 84;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ var\ right\ =\ width\ -\/\ (host.shellReady\ \&\&\ (host.commandPanelOpen\ ||\ host.shellInspectorOpen)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ host.shellPreferences.dockWidth\ +\ 32}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00606}00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 20);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00607}00607\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Rect.MinMaxRect(left,\ 100,\ Mathf.Max(left\ +\ 160,\ right),\ Mathf.Max(180,\ height\ -\/\ 116));}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00608}00608\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00609}00609\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00612}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_aea8ee1aeebe242a493f6880927d38b52}{00612}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_aea8ee1aeebe242a493f6880927d38b52}{QueueShellSearch}}(\textcolor{keywordtype}{string}\ query)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00613}00613\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00614}00614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Debounce\ filter\ application\ while\ retaining\ only\ the\ latest\ pending\ query.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellPendingSearch\ =\ query;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.root\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00617}00617\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.shellSearchSchedule\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00618}00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.shellSearchSchedule\ =\ host.root.schedule.Execute(()\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00619}00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00620}00620\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.Query\ =\ host.shellPendingSearch;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00621}00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host.ApplyFilters();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}).StartingIn(150);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00623}00623\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ host.shellSearchSchedule.ExecuteLater(150);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00624}00624\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00625}00625\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00627}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a3ad7523e0c69ba547ebfb5f274e18a33}{00627}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_controller_a3ad7523e0c69ba547ebfb5f274e18a33}{CancelShellSearch}}()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00628}00628\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00629}00629\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellSearchSchedule?.Pause();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00630}00630\ \ \ \ \ \ \ \ \ \ \ \ \ host.shellPendingSearch\ =\ host.Query\ ??\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00631}00631\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00633}00633\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ DisableWasdUiNavigation()}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00634}00634\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00635}00635\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WASD\ is\ reserved\ for\ RMB\ flight.\ Arrow\ keys\ step\ the\ timeline\ and\ must\ not\ move\ UI\ focus.}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00636}00636\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterRoot<KeyDownEvent>(e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00637}00637\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00638}00638\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e.keyCode\ is\ not\ (KeyCode.W\ or\ KeyCode.A\ or\ KeyCode.S\ or\ KeyCode.D))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00639}00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.IsEditingText())\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00640}00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopImmediatePropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00641}00641\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.PreventDefault();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00642}00642\ \ \ \ \ \ \ \ \ \ \ \ \ \},\ TrickleDown.TrickleDown);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00643}00643\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterRoot<NavigationMoveEvent>(e\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00644}00644\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00645}00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e.direction\ is\ NavigationMoveEvent.Direction.Left\ or\ NavigationMoveEvent.Direction.Right}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00646}00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ or\ NavigationMoveEvent.Direction.Up\ or\ NavigationMoveEvent.Direction.Down)}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00647}00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopImmediatePropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00649}00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.PreventDefault();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00650}00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00651}00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00652}00652\ }
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00653}00653\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (host.IsEditingText())\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ keyboard\ =\ Keyboard.current;}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00655}00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (keyboard\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00656}00656\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!keyboard.wKey.isPressed\ \&\&\ !keyboard.aKey.isPressed\ \&\&\ !keyboard.sKey.isPressed\ \&\&}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00657}00657\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ !keyboard.dKey.isPressed)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.StopImmediatePropagation();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00659}00659\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.PreventDefault();}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00660}00660\ \ \ \ \ \ \ \ \ \ \ \ \ \},\ TrickleDown.TrickleDown);}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00661}00661\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00662}00662\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_shell_controller_8cs_source_l00663}00663\ \}}
+
+\end{DoxyCode}

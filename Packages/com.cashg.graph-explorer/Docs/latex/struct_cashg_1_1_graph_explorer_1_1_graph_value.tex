@@ -1,0 +1,282 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Value Struct Reference}
+\hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value}{}\label{struct_cashg_1_1_graph_explorer_1_1_graph_value}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+
+
+Portable scalar metadata. Numbers are finite; null differs from missing.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Graph\+Value:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_cashg_1_1_graph_explorer_1_1_graph_value}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override string \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a672bfdc25356222c2dcfced7a6df26fb}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Formats the stored payload as text. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a06187c7ce804db4c40db6598b36e3b99}{Equals}} (Graph\+Value other)
+\begin{DoxyCompactList}\small\item\em Determines whether another value has the same kind and payload. \end{DoxyCompactList}\item 
+override bool \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a5a0dc29a0a28cd2d19bb6c66a0881a8f}{Equals}} (object obj)
+\begin{DoxyCompactList}\small\item\em Determines whether the specified object is an equal Graph\+Value. \end{DoxyCompactList}\item 
+override int \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a8040762a500e5f7e192b45aac58955ff}{Get\+Hash\+Code}} ()
+\begin{DoxyCompactList}\small\item\em Returns a hash code for this value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Graph\+Value \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0}{From}} (string value)
+\begin{DoxyCompactList}\small\item\em Creates a text value, treating null as an empty string. \end{DoxyCompactList}\item 
+static Graph\+Value \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a089dbaaf879f92b4f2c837c2dc807fcf}{From}} (bool value)
+\begin{DoxyCompactList}\small\item\em Creates a Boolean value. \end{DoxyCompactList}\item 
+static Graph\+Value \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae7225a588ad076a9717256d14948a2cb}{From}} (double value)
+\begin{DoxyCompactList}\small\item\em Creates a numeric value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_ae7405c60ff458bdc167956dfc7275e59}{Graph\+Value\+Type}} \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a708915365daf8a9ccd7f751a626e2bc4}{Type}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the representation kind stored by this value. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a78c30c81b8e7fed6fada8f7eb49ed62b}{Text}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the text payload when Type is Graph\+Value\+Type.\+Text. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae61834f0de94ebef8af41c797ad421a6}{Number}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the numeric payload when Type is Graph\+Value\+Type.\+Number. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_acf0ae0b61fa0b997ed803653d0391646}{Boolean}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the Boolean payload when Type is Graph\+Value\+Type.\+Boolean. \end{DoxyCompactList}\item 
+static Graph\+Value \doxymbox{\hyperlink{struct_cashg_1_1_graph_explorer_1_1_graph_value_a20382eeef5ff129aacce5e017f92e560}{Null}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the default null value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Portable scalar metadata. Numbers are finite; null differs from missing. 
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00023}{23}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+\label{struct_cashg_1_1_graph_explorer_1_1_graph_value_doc-func-members}
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a06187c7ce804db4c40db6598b36e3b99}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!Equals@{Equals}}
+\index{Equals@{Equals}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a06187c7ce804db4c40db6598b36e3b99} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Equals (\begin{DoxyParamCaption}\item[{Graph\+Value}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Determines whether another value has the same kind and payload. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Value to compare.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when both values are equal.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00082}{82}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a5a0dc29a0a28cd2d19bb6c66a0881a8f}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!Equals@{Equals}}
+\index{Equals@{Equals}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a5a0dc29a0a28cd2d19bb6c66a0881a8f} 
+override bool Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Equals (\begin{DoxyParamCaption}\item[{object}]{obj}{}\end{DoxyParamCaption})}
+
+
+
+Determines whether the specified object is an equal Graph\+Value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Object to compare.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when {\itshape obj}  is an equal value.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00090}{90}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a089dbaaf879f92b4f2c837c2dc807fcf}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!From@{From}}
+\index{From@{From}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{From()}{From()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a089dbaaf879f92b4f2c837c2dc807fcf} 
+Graph\+Value Cashg.\+Graph\+Explorer.\+Graph\+Value.\+From (\begin{DoxyParamCaption}\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a Boolean value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Boolean to store.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A value containing the supplied Boolean.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00056}{56}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae7225a588ad076a9717256d14948a2cb}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!From@{From}}
+\index{From@{From}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{From()}{From()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae7225a588ad076a9717256d14948a2cb} 
+Graph\+Value Cashg.\+Graph\+Explorer.\+Graph\+Value.\+From (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a numeric value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Number to store.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A value containing the supplied number.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00064}{64}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!From@{From}}
+\index{From@{From}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{From()}{From()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae3367ec75ecb2aaa80feadf18ee9d7e0} 
+Graph\+Value Cashg.\+Graph\+Explorer.\+Graph\+Value.\+From (\begin{DoxyParamCaption}\item[{string}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a text value, treating null as an empty string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Text to store.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A value containing the supplied text.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00048}{48}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a8040762a500e5f7e192b45aac58955ff}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a8040762a500e5f7e192b45aac58955ff} 
+override int Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Get\+Hash\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns a hash code for this value. 
+
+\begin{DoxyReturn}{Returns}
+A hash code consistent with Equals(\+Graph\+Value).
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00097}{97}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a672bfdc25356222c2dcfced7a6df26fb}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!ToString@{ToString}}
+\index{ToString@{ToString}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a672bfdc25356222c2dcfced7a6df26fb} 
+override string Cashg.\+Graph\+Explorer.\+Graph\+Value.\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Formats the stored payload as text. 
+
+\begin{DoxyReturn}{Returns}
+The payload formatted for display.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00072}{72}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+\label{struct_cashg_1_1_graph_explorer_1_1_graph_value_doc-property-members}
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_acf0ae0b61fa0b997ed803653d0391646}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!Boolean@{Boolean}}
+\index{Boolean@{Boolean}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{Boolean}{Boolean}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_acf0ae0b61fa0b997ed803653d0391646} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Boolean\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the Boolean payload when Type is Graph\+Value\+Type.\+Boolean. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00032}{32}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a20382eeef5ff129aacce5e017f92e560}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!Null@{Null}}
+\index{Null@{Null}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{Null}{Null}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a20382eeef5ff129aacce5e017f92e560} 
+Graph\+Value Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Null\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}}
+
+
+
+Gets the default null value. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00043}{43}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae61834f0de94ebef8af41c797ad421a6}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!Number@{Number}}
+\index{Number@{Number}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{Number}{Number}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_ae61834f0de94ebef8af41c797ad421a6} 
+double Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Number\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the numeric payload when Type is Graph\+Value\+Type.\+Number. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00030}{30}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a78c30c81b8e7fed6fada8f7eb49ed62b}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!Text@{Text}}
+\index{Text@{Text}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{Text}{Text}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a78c30c81b8e7fed6fada8f7eb49ed62b} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Text\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the text payload when Type is Graph\+Value\+Type.\+Text. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00028}{28}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+\Hypertarget{struct_cashg_1_1_graph_explorer_1_1_graph_value_a708915365daf8a9ccd7f751a626e2bc4}\index{Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}!Type@{Type}}
+\index{Type@{Type}!Cashg.GraphExplorer.GraphValue@{Cashg.GraphExplorer.GraphValue}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily \label{struct_cashg_1_1_graph_explorer_1_1_graph_value_a708915365daf8a9ccd7f751a626e2bc4} 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_ae7405c60ff458bdc167956dfc7275e59}{Graph\+Value\+Type}} Cashg.\+Graph\+Explorer.\+Graph\+Value.\+Type\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the representation kind stored by this value. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_records_8cs_source_l00026}{26}} of file \doxymbox{\hyperlink{_graph_records_8cs_source}{Graph\+Records.\+cs}}.
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Records.\+cs\end{DoxyCompactItemize}

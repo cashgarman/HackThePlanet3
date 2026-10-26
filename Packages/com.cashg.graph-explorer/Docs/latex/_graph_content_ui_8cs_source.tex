@@ -1,0 +1,80 @@
+\doxysection{Graph\+Content\+Ui.\+cs}
+\hypertarget{_graph_content_ui_8cs_source}{}\label{_graph_content_ui_8cs_source}\index{Runtime/Presentation/GraphContentUi.cs@{Runtime/Presentation/GraphContentUi.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Globalization;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }UnityEngine;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }UnityEngine.UIElements;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }static\ \doxymbox{\hyperlink{namespace_cashg}{Cashg}}.\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{GraphExplorer}}.\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_ui}{GraphUi}};}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00007}00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{Cashg.GraphExplorer}}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }GraphContentUi}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddProperty(VisualElement\ parent,\ \textcolor{keywordtype}{string}\ key,\ \textcolor{keywordtype}{string}\ value,\ Action<Foldout>\ decorate,}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Action<VisualElement,\ string>\ bindTip)}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ var\ original\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ var\ timestampKey\ =\ key.IndexOf(\textcolor{stringliteral}{"{}date"{}},\ StringComparison.OrdinalIgnoreCase)\ >=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ key.IndexOf(\textcolor{stringliteral}{"{}time"{}},\ StringComparison.OrdinalIgnoreCase)\ >=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ key\ ==\ \textcolor{stringliteral}{"{}discovered"{}}\ ||\ key\ ==\ \textcolor{stringliteral}{"{}created"{}}\ ||\ key\ ==\ \textcolor{stringliteral}{"{}updated"{}}\ ||}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ key.EndsWith(\textcolor{stringliteral}{"{}\_at"{}},\ StringComparison.OrdinalIgnoreCase);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ An\ offset-\/free\ backend\ timestamp\ is\ a\ wall-\/clock\ value;\ do\ not\ invent\ a\ timezone.}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (timestampKey\ \&\&\ DateTime.TryParse(value,\ CultureInfo.InvariantCulture,\ DateTimeStyles.RoundtripKind,}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ timestamp))}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ timestamp.ToString(\textcolor{stringliteral}{"{}MMM\ d,\ yyyy\ ·\ HH:mm:ss"{}},\ CultureInfo.InvariantCulture)\ +}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (timestamp.Kind\ ==\ DateTimeKind.Utc}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \textcolor{stringliteral}{"{}\ UTC"{}}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timestamp.Kind\ ==\ DateTimeKind.Local}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timestamp.ToString(\textcolor{stringliteral}{"{}\ zzz"{}},\ CultureInfo.InvariantCulture)}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ var\ caption\ =\ key.Replace(\textcolor{charliteral}{'\_'},\ \textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (caption.Length\ >\ 0)\ caption\ =\ \textcolor{keywordtype}{char}.ToUpperInvariant(caption[0])\ +\ caption.Substring(1);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ multiline\ or\ long\ values\ into\ a\ disclosure\ so\ the\ property\ list\ remains\ scannable.}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value.Length\ >\ 160\ ||\ value.Contains(\textcolor{charliteral}{'\(\backslash\)n'}))}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ disclosure\ =\ \textcolor{keyword}{new}\ Foldout\ \{\ text\ =\ caption,\ value\ =\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disclosure.AddToClassList(\textcolor{stringliteral}{"{}inspector-\/disclosure"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ decorate(disclosure);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disclosure.Add(Label(value,\ \textcolor{stringliteral}{"{}property-\/value"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parent.Add(disclosure);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ var\ row\ =\ Element(\textcolor{stringliteral}{"{}inspector-\/property"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ row.Add(Label(caption,\ \textcolor{stringliteral}{"{}inspector-\/property-\/key"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ var\ content\ =\ Label(value,\ \textcolor{stringliteral}{"{}inspector-\/property-\/value"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Preserve\ the\ raw\ timestamp\ as\ hover\ text\ whenever\ its\ displayed\ value\ was\ reformatted.}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ !=\ original)\ bindTip(content,\ original);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ row.Add(content);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ parent.Add(row);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ VisualElement\ FavoriteStar(\textcolor{keywordtype}{float}\ size,\ Color\ color)}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ var\ star\ =\ \textcolor{keyword}{new}\ VisualElement\ \{\ pickingMode\ =\ PickingMode.Ignore\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ star.AddToClassList(\textcolor{stringliteral}{"{}favorite-\/star"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ star.style.width\ =\ size;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ star.style.height\ =\ size;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ star.style.flexShrink\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ star.generateVisualContent\ +=\ ctx\ =>\ HeaderIcons.Paint(ctx.painter2D,\ \textcolor{stringliteral}{"{}star"{}},\ star.contentRect,\ color);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ star.RegisterCallback<GeometryChangedEvent>(\_\ =>\ star.MarkDirtyRepaint());}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ star;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ BindFavoriteRow(VisualElement\ row,\ IGraphNode\ node)}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ row.EnableInClassList(\textcolor{stringliteral}{"{}is-\/favorite"{}},\ node.Favorite);}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ var\ star\ =\ row.Q(className:\ \textcolor{stringliteral}{"{}favorite-\/star"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (star\ !=\ \textcolor{keyword}{null})\ star.style.display\ =\ node.Favorite\ ?\ DisplayStyle.Flex\ :\ DisplayStyle.None;}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_content_ui_8cs_source_l00088}00088\ \}}
+
+\end{DoxyCode}

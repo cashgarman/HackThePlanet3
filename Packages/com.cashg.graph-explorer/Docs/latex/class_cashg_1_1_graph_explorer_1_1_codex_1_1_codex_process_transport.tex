@@ -1,0 +1,167 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport}{}\label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport}\index{Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}}
+
+
+Represents codex process transport.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_afefad7e98d376ab7fdf4748d9b277b09}{Codex\+Process\+Transport}} (string executable)
+\begin{DoxyCompactList}\small\item\em Creates a standard input and output transport for the \doxylink{namespace_cashg_1_1_graph_explorer_1_1_codex}{Codex} app server. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ade609e4de6cb57da17255c28d5c44c1f}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the app server process and begins reading its output. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_aaa6c4bae7c52f0d455a6bb67451e7903}{Send}} (string line)
+\begin{DoxyCompactList}\small\item\em Sends a line to the app server\textquotesingle{}s standard input. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ae3cb4ebfa95d133ece54bd65e602861e}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Stops the process and releases its resources. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_a65d0d37d7cf0e79c66fe2d8188b3fbf4}{Line}}
+\begin{DoxyCompactList}\small\item\em Occurs when the process writes a protocol line. \end{DoxyCompactList}\item 
+Action$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ac77cc0b265acff245d8bc43feb667e19}{Closed}}
+\begin{DoxyCompactList}\small\item\em Occurs when the process output closes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Events inherited from \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport}}}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ string $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9e8cabba8e37d12cdcb8f6177736c3f5}{Line}}
+\begin{DoxyCompactList}\small\item\em Occurs when a complete protocol line is received. \end{DoxyCompactList}\item 
+Action$<$ string $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_a9951c92e2ccda3bf6c841e38a6ab804c}{Closed}}
+\begin{DoxyCompactList}\small\item\em Occurs when the transport closes, with a reason. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents codex process transport. 
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00060}{60}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_afefad7e98d376ab7fdf4748d9b277b09}\index{Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}!CodexProcessTransport@{CodexProcessTransport}}
+\index{CodexProcessTransport@{CodexProcessTransport}!Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}}
+\doxysubsubsection{\texorpdfstring{CodexProcessTransport()}{CodexProcessTransport()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_afefad7e98d376ab7fdf4748d9b277b09} 
+Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport.\+Codex\+Process\+Transport (\begin{DoxyParamCaption}\item[{string}]{executable}{}\end{DoxyParamCaption})}
+
+
+
+Creates a standard input and output transport for the \doxylink{namespace_cashg_1_1_graph_explorer_1_1_codex}{Codex} app server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em executable} & Path or command name for the \doxylink{namespace_cashg_1_1_graph_explorer_1_1_codex}{Codex} executable.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ae3cb4ebfa95d133ece54bd65e602861e}\index{Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ae3cb4ebfa95d133ece54bd65e602861e} 
+void Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport.\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the process and releases its resources. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00110}{110}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_aaa6c4bae7c52f0d455a6bb67451e7903}\index{Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}!Send@{Send}}
+\index{Send@{Send}!Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_aaa6c4bae7c52f0d455a6bb67451e7903} 
+void Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport.\+Send (\begin{DoxyParamCaption}\item[{string}]{line}{}\end{DoxyParamCaption})}
+
+
+
+Sends a line to the app server\textquotesingle{}s standard input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & Protocol line to send.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_afcd9bd49ac1380f039c173da5ddb47ab}{Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00103}{103}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ade609e4de6cb57da17255c28d5c44c1f}\index{Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}!Start@{Start}}
+\index{Start@{Start}!Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ade609e4de6cb57da17255c28d5c44c1f} 
+void Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport.\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the app server process and begins reading its output. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport_ab0daed295eb958dde86342cede07c1dd}{Cashg.\+Graph\+Explorer.\+Codex.\+ICodex\+Transport}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00079}{79}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_doc-event-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ac77cc0b265acff245d8bc43feb667e19}\index{Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}!Closed@{Closed}}
+\index{Closed@{Closed}!Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}}
+\doxysubsubsection{\texorpdfstring{Closed}{Closed}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_ac77cc0b265acff245d8bc43feb667e19} 
+Action$<$string$>$ Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport.\+Closed}
+
+
+
+Occurs when the process output closes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00076}{76}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_a65d0d37d7cf0e79c66fe2d8188b3fbf4}\index{Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}!Line@{Line}}
+\index{Line@{Line}!Cashg.GraphExplorer.Codex.CodexProcessTransport@{Cashg.GraphExplorer.Codex.CodexProcessTransport}}
+\doxysubsubsection{\texorpdfstring{Line}{Line}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_process_transport_a65d0d37d7cf0e79c66fe2d8188b3fbf4} 
+Action$<$string$>$ Cashg.\+Graph\+Explorer.\+Codex.\+Codex\+Process\+Transport.\+Line}
+
+
+
+Occurs when the process writes a protocol line. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_codex_integration_8cs_source_l00074}{74}} of file \doxymbox{\hyperlink{_codex_integration_8cs_source}{Codex\+Integration.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Codex\+Integration.\+cs\end{DoxyCompactItemize}

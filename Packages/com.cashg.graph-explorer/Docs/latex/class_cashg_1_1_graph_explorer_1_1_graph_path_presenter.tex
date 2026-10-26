@@ -1,0 +1,131 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Path\+Presenter Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter}\index{Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}}
+
+
+Compact reusable UI Toolkit path panel. Hosts route pick requests into their graph input.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Graph\+Path\+Presenter:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_a24aff72de905cc2beb7d611630406027}{Graph\+Path\+Presenter}} (Visual\+Element parent, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} scene, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state}{Graph\+Path\+State}} state, Action$<$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} $>$ navigate, Action$<$ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}} $>$ begin\+Graph\+Pick, Func$<$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}, string $>$ node\+Label=null)
+\begin{DoxyCompactList}\small\item\em Creates a path panel bound to graph state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_ab2ab4e93e857978fc2f83b2a39a331a1}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Removes the path panel and its state subscription. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_a2791ab755adb8cfa679c7cc5d317d534}{Select}} (\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}} endpoint, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} node)
+\begin{DoxyCompactList}\small\item\em Sets a path endpoint from a node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_ae49a200fbe74f3488c237741362033c8}{Set\+Endpoint}} (\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}} endpoint, string node\+Id)
+\begin{DoxyCompactList}\small\item\em Sets a path endpoint when the node exists in the scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Compact reusable UI Toolkit path panel. Hosts route pick requests into their graph input. 
+
+Definition at line \doxymbox{\hyperlink{_graph_path_presenter_8cs_source_l00056}{56}} of file \doxymbox{\hyperlink{_graph_path_presenter_8cs_source}{Graph\+Path\+Presenter.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_a24aff72de905cc2beb7d611630406027}\index{Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}!GraphPathPresenter@{GraphPathPresenter}}
+\index{GraphPathPresenter@{GraphPathPresenter}!Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}}
+\doxysubsubsection{\texorpdfstring{GraphPathPresenter()}{GraphPathPresenter()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_a24aff72de905cc2beb7d611630406027} 
+Cashg.\+Graph\+Explorer.\+Graph\+Path\+Presenter.\+Graph\+Path\+Presenter (\begin{DoxyParamCaption}\item[{Visual\+Element}]{parent}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{scene}{, }\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state}{Graph\+Path\+State}}}]{state}{, }\item[{Action$<$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} $>$}]{navigate}{, }\item[{Action$<$ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}} $>$}]{begin\+Graph\+Pick}{, }\item[{Func$<$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}, string $>$}]{node\+Label}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Creates a path panel bound to graph state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent element for the panel.\\
+\hline
+{\em scene} & Scene used to resolve path nodes.\\
+\hline
+{\em state} & Path state presented by the panel.\\
+\hline
+{\em navigate} & Callback that navigates to a selected node.\\
+\hline
+{\em begin\+Graph\+Pick} & Callback that begins picking a path endpoint in the graph.\\
+\hline
+{\em node\+Label} & Optional function that formats node labels.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_path_presenter_8cs_source_l00076}{76}} of file \doxymbox{\hyperlink{_graph_path_presenter_8cs_source}{Graph\+Path\+Presenter.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_ab2ab4e93e857978fc2f83b2a39a331a1}\index{Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_ab2ab4e93e857978fc2f83b2a39a331a1} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+Presenter.\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Removes the path panel and its state subscription. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_path_presenter_8cs_source_l00111}{111}} of file \doxymbox{\hyperlink{_graph_path_presenter_8cs_source}{Graph\+Path\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_a2791ab755adb8cfa679c7cc5d317d534}\index{Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}!Select@{Select}}
+\index{Select@{Select}!Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}}
+\doxysubsubsection{\texorpdfstring{Select()}{Select()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_a2791ab755adb8cfa679c7cc5d317d534} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+Presenter.\+Select (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}}}]{endpoint}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Sets a path endpoint from a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & Path endpoint to assign.\\
+\hline
+{\em node} & Node to use for the endpoint.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_path_presenter_8cs_source_l00158}{158}} of file \doxymbox{\hyperlink{_graph_path_presenter_8cs_source}{Graph\+Path\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_ae49a200fbe74f3488c237741362033c8}\index{Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}!SetEndpoint@{SetEndpoint}}
+\index{SetEndpoint@{SetEndpoint}!Cashg.GraphExplorer.GraphPathPresenter@{Cashg.GraphExplorer.GraphPathPresenter}}
+\doxysubsubsection{\texorpdfstring{SetEndpoint()}{SetEndpoint()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_presenter_ae49a200fbe74f3488c237741362033c8} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+Presenter.\+Set\+Endpoint (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}}}]{endpoint}{, }\item[{string}]{node\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Sets a path endpoint when the node exists in the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & Path endpoint to assign.\\
+\hline
+{\em node\+Id} & Identifier of the node to select.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_path_presenter_8cs_source_l00169}{169}} of file \doxymbox{\hyperlink{_graph_path_presenter_8cs_source}{Graph\+Path\+Presenter.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Path\+Presenter.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,258 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter\texorpdfstring{$<$}{<} TNode \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+
+
+Represents graph search presenter.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter\texorpdfstring{$<$}{<} TNode \texorpdfstring{$>$}{>}:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a41f6f0dba910b884a13b8623be87d753}{Graph\+Search\+Presenter}} (Graph\+Search\+Options$<$ TNode $>$ options)
+\begin{DoxyCompactList}\small\item\em Creates a node search presenter with host-\/provided callbacks. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a508f2580f5a559f49160654903856dd6}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Detaches registered callbacks and removes search UI elements. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_ab5221f10396cd0ac9a7c4de14bddc84d}{Build\+Node\+Search}} ()
+\begin{DoxyCompactList}\small\item\em Builds the search field, popup, results list, and interaction callbacks. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_af56c5d27c240fccc37fef9ae82759622}{Position\+Node\+Search}} ()
+\begin{DoxyCompactList}\small\item\em Positions and sizes the result popup under the search field. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_aecfe675bf7a8bc50d6d32e8ba0799a5c}{Refresh\+Node\+Search}} ()
+\begin{DoxyCompactList}\small\item\em Rebuilds search results for the current query. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a0e24ea76b81fd95682f419bf65ba4d85}{Close\+Node\+Search}} ()
+\begin{DoxyCompactList}\small\item\em Closes the search popup. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a00ae783620f8396de111ddd7a3637ff8}{Activate\+Node\+Search}} ()
+\begin{DoxyCompactList}\small\item\em Activates the selected search result. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_ab7d6ad41d2014288f50e535a0fb697a8}{Node\+Search\+Score}} (string query, TNode node)
+\begin{DoxyCompactList}\small\item\em Scores a node against a query for result ranking. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Text\+Field \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a53cb72717cc9b99a0173d42b1e0dbaf6}{node\+Search\+Field}}
+\begin{DoxyCompactList}\small\item\em Gets the node search text field. \end{DoxyCompactList}\item 
+List\+View \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_abf9add4c0b9a4a168b1cfa73504daf47}{node\+Search\+List}}
+\begin{DoxyCompactList}\small\item\em Gets the node search results list. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_aac534866996d1adb0703efc874476bda}{node\+Search\+Popup}}
+\begin{DoxyCompactList}\small\item\em Gets the node search popup element. \end{DoxyCompactList}\item 
+Label \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_abbc8b476d2cebe7fccefc9ee8e2e5c60}{node\+Search\+Status}}
+\begin{DoxyCompactList}\small\item\em Gets the node search status label. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph search presenter. \begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TNode} : {\em class}]\item[{\em TNode} : {\em \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]\end{description}
+\end{Desc}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00042}{42}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a00ae783620f8396de111ddd7a3637ff8}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!ActivateNodeSearch@{ActivateNodeSearch}}
+\index{ActivateNodeSearch@{ActivateNodeSearch}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{ActivateNodeSearch()}{ActivateNodeSearch()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a00ae783620f8396de111ddd7a3637ff8} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Activate\+Node\+Search (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Activates the selected search result. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00265}{265}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_ab5221f10396cd0ac9a7c4de14bddc84d}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!BuildNodeSearch@{BuildNodeSearch}}
+\index{BuildNodeSearch@{BuildNodeSearch}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{BuildNodeSearch()}{BuildNodeSearch()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_ab5221f10396cd0ac9a7c4de14bddc84d} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Build\+Node\+Search (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Builds the search field, popup, results list, and interaction callbacks. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00092}{92}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a0e24ea76b81fd95682f419bf65ba4d85}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!CloseNodeSearch@{CloseNodeSearch}}
+\index{CloseNodeSearch@{CloseNodeSearch}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{CloseNodeSearch()}{CloseNodeSearch()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a0e24ea76b81fd95682f419bf65ba4d85} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Close\+Node\+Search (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Closes the search popup. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the popup was open.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00256}{256}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a508f2580f5a559f49160654903856dd6}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a508f2580f5a559f49160654903856dd6} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Detaches registered callbacks and removes search UI elements. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a41f6f0dba910b884a13b8623be87d753}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!GraphSearchPresenter@{GraphSearchPresenter}}
+\index{GraphSearchPresenter@{GraphSearchPresenter}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{GraphSearchPresenter()}{GraphSearchPresenter()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a41f6f0dba910b884a13b8623be87d753} 
+Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Graph\+Search\+Presenter (\begin{DoxyParamCaption}\item[{Graph\+Search\+Options$<$ TNode $>$}]{options}{}\end{DoxyParamCaption})}
+
+
+
+Creates a node search presenter with host-\/provided callbacks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Callbacks and elements used by node search.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00058}{58}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_ab7d6ad41d2014288f50e535a0fb697a8}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!NodeSearchScore@{NodeSearchScore}}
+\index{NodeSearchScore@{NodeSearchScore}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{NodeSearchScore()}{NodeSearchScore()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_ab7d6ad41d2014288f50e535a0fb697a8} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Node\+Search\+Score (\begin{DoxyParamCaption}\item[{string}]{query}{, }\item[{TNode}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Scores a node against a query for result ranking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & Normalized search query.\\
+\hline
+{\em node} & Node to score.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Non-\/negative relevance score, or -\/1 when unmatched.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00279}{279}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_af56c5d27c240fccc37fef9ae82759622}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!PositionNodeSearch@{PositionNodeSearch}}
+\index{PositionNodeSearch@{PositionNodeSearch}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{PositionNodeSearch()}{PositionNodeSearch()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_af56c5d27c240fccc37fef9ae82759622} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Position\+Node\+Search (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Positions and sizes the result popup under the search field. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00210}{210}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_aecfe675bf7a8bc50d6d32e8ba0799a5c}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!RefreshNodeSearch@{RefreshNodeSearch}}
+\index{RefreshNodeSearch@{RefreshNodeSearch}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{RefreshNodeSearch()}{RefreshNodeSearch()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_aecfe675bf7a8bc50d6d32e8ba0799a5c} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.Refresh\+Node\+Search (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Rebuilds search results for the current query. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00224}{224}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a53cb72717cc9b99a0173d42b1e0dbaf6}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!nodeSearchField@{nodeSearchField}}
+\index{nodeSearchField@{nodeSearchField}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{nodeSearchField}{nodeSearchField}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_a53cb72717cc9b99a0173d42b1e0dbaf6} 
+Text\+Field Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.node\+Search\+Field}
+
+
+
+Gets the node search text field. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00047}{47}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_abf9add4c0b9a4a168b1cfa73504daf47}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!nodeSearchList@{nodeSearchList}}
+\index{nodeSearchList@{nodeSearchList}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{nodeSearchList}{nodeSearchList}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_abf9add4c0b9a4a168b1cfa73504daf47} 
+List\+View Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.node\+Search\+List}
+
+
+
+Gets the node search results list. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00049}{49}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_aac534866996d1adb0703efc874476bda}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!nodeSearchPopup@{nodeSearchPopup}}
+\index{nodeSearchPopup@{nodeSearchPopup}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{nodeSearchPopup}{nodeSearchPopup}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_aac534866996d1adb0703efc874476bda} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.node\+Search\+Popup}
+
+
+
+Gets the node search popup element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00051}{51}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_abbc8b476d2cebe7fccefc9ee8e2e5c60}\index{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}!nodeSearchStatus@{nodeSearchStatus}}
+\index{nodeSearchStatus@{nodeSearchStatus}!Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$@{Cashg.GraphExplorer.GraphSearchPresenter$<$ TNode $>$}}
+\doxysubsubsection{\texorpdfstring{nodeSearchStatus}{nodeSearchStatus}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_search_presenter-1-g_abbc8b476d2cebe7fccefc9ee8e2e5c60} 
+Label Cashg.\+Graph\+Explorer.\+Graph\+Search\+Presenter$<$ TNode $>$.node\+Search\+Status}
+
+
+
+Gets the node search status label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_search_presenter_8cs_source_l00053}{53}} of file \doxymbox{\hyperlink{_graph_search_presenter_8cs_source}{Graph\+Search\+Presenter.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Search\+Presenter.\+cs\end{DoxyCompactItemize}

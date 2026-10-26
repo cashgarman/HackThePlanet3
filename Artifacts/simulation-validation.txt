@@ -1,0 +1,70 @@
+PASS / Locked contracts cannot start.
+PASS / Starting contract connects.
+PASS / Every operation has 25 stable systems.
+PASS / Known Graph Explorer document excludes undiscovered systems.
+PASS / Shortest-path queries cannot reveal unknown routes.
+PASS / Remote unknown targets cannot be hacked.
+PASS / Recovery requires ownership and an eligible file.
+PASS / Idle planning never raises trace.
+PASS / Reachable system can be scanned.
+PASS / Pause freezes tool work and trace.
+PASS / Recon reveals and projects additional graph facts.
+PASS / Controlled-route reachability uses Graph Explorer.
+PASS / Uncontrolled intermediates do not provide access.
+PASS / A scanner observes activity adjacent to a foothold.
+PASS / Taking a hub removes connected defense bonuses.
+PASS / Main copy objective is secured by recovery.
+PASS / Delivery banks credits and XP.
+PASS / Delivery persists story progress and a world consequence.
+PASS / A delivered story contract cannot be farmed.
+PASS / One successful contract funds a starting technology.
+PASS / Purchased technologies cannot charge twice.
+PASS / Crossover enforces both parents and price.
+PASS / Free refund returns the exact XP cost.
+PASS / Crossover accepts both unlocked parents.
+PASS / Special abilities respect the two-slot starting loadout.
+PASS / A full loadout rejects another equipped ability.
+PASS / Unequipping frees a slot.
+PASS / Credits buy persistent hardware.
+PASS / Invalid hardware choices cannot mutate the career.
+PASS / Research, refunds, and hardware changes are locked during operations.
+PASS / Decoy is usable only once per operation.
+PASS / Abort preserves equipment and purchased technology.
+PASS / Uncompleted work remains retryable.
+PASS / 100% trace closes the connection without rewards.
+PASS / Ghost relay makes the first relay fully trace-free.
+PASS / Chain hack queues a future neighbor.
+PASS / Queued actions execute in order and recheck access.
+PASS / Firewall bridge requires two controlled neighbors.
+PASS / Campaign unlock / The Quiet Copy
+PASS / All required objectives viable / The Quiet Copy
+PASS / Career delivery / The Quiet Copy / 59.0% trace
+PASS / Campaign unlock / Paper Trail
+PASS / All required objectives viable / Paper Trail
+PASS / Career delivery / Paper Trail / 71.3% trace
+PASS / Campaign unlock / Ghost in the Wire
+PASS / All required objectives viable / Ghost in the Wire
+PASS / Career delivery / Ghost in the Wire / 85.5% trace
+PASS / Campaign unlock / Glasshouse
+PASS / All required objectives viable / Glasshouse
+PASS / Career delivery / Glasshouse / 55.8% trace
+PASS / Campaign unlock / Dead Drop
+PASS / All required objectives viable / Dead Drop
+PASS / Career delivery / Dead Drop / 75.0% trace
+PASS / Campaign unlock / Last Light
+PASS / All required objectives viable / Last Light
+PASS / Career delivery / Last Light / 55.1% trace
+PASS / All six authored contracts form a complete career loop.
+PASS / Procedural freelance work unlocks after story progress.
+PASS / Generated networks have valid security and link endpoints.
+PASS / Atomic career save succeeds.
+PASS / Active tool work resumes from save in a paused operation.
+PASS / Research, hardware, story, and economy survive a round trip.
+PASS / Known graph projection is rebuilt correctly after load.
+PASS / A corrupt save recovers from its previous atomic backup.
+PASS / Reset replaces an existing save and recovery backup.
+PASS / Reset clears economy, story statistics, and the active operation.
+PASS / Reset clears contracts, reports, research, loadout, and hardware.
+PASS / Reset also removes old progress from recovery.
+PASS / Recovery after reset cannot resurrect the previous career.
+TOTAL / 69 assertions passed.

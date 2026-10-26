@@ -1,0 +1,173 @@
+\doxysection{Graph\+Workflow\+Tests.\+cs}
+\hypertarget{_graph_workflow_tests_8cs_source}{}\label{_graph_workflow_tests_8cs_source}\index{Tests/Editor/GraphWorkflowTests.cs@{Tests/Editor/GraphWorkflowTests.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }System.IO;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }System.Linq;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }System.Text.Json;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_codex}{Cashg.GraphExplorer.Codex}};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }NUnit.Framework;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }UnityEngine;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00010}00010\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_tests}{Cashg.GraphExplorer.Tests}}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00013}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests}{00013}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests}{GraphWorkflowTests}}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00014}00014\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00017}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a743ed5c5f18dbcabdfcbf6d5213e0302}{00017}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a743ed5c5f18dbcabdfcbf6d5213e0302}{ProgressMaterialPreservesPlayerInstancingVariants}}()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ var\ material\ =\ GraphResources.Load<Material>(\textcolor{stringliteral}{"{}GraphNodeProgressMaterial"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(material,\ Is.Not.Null);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(material.enableInstancing,\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(material.shader.name,\ Is.EqualTo(\textcolor{stringliteral}{"{}Cashg/GraphExplorer/GraphNodeProgress"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ [TestCase(-\/1,\ 0)]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ [TestCase(.4f,\ .4f)]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ [TestCase(2,\ 1)]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00029}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a0328f9b21b8dec87fa8decbcf39f89d3}{00029}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a0328f9b21b8dec87fa8decbcf39f89d3}{FractionsAreClampedWithoutInferringCompletion}}(\textcolor{keywordtype}{float}\ input,\ \textcolor{keywordtype}{float}\ expected)}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ var\ progress\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_progress_visual}{GraphNodeProgressVisual}}\ \{\ Fraction\ =\ input\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(progress.TryFraction(out\ var\ value),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(value,\ Is.EqualTo(expected));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(progress.Complete,\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00039}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a261e73ef8a473f25fdc4c94625d253a9}{00039}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a261e73ef8a473f25fdc4c94625d253a9}{NonfiniteValuesAreIgnoredUnlessHostExplicitlyCompletes}}()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ input\ \textcolor{keywordflow}{in}\ \textcolor{keyword}{new}[]\ \{\ \textcolor{keywordtype}{float}.NaN,\ \textcolor{keywordtype}{float}.PositiveInfinity,\ float.NegativeInfinity\ \})}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ progress\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_progress_visual}{GraphNodeProgressVisual}}\ \{\ Fraction\ =\ input\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(progress.TryFraction(out\ \_),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progress.Complete\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(progress.TryFraction(out\ var\ value),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(value,\ Is.EqualTo(1));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00053}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_af2ce9fce37ce61c414cdbda6ceab11b0}{00053}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_af2ce9fce37ce61c414cdbda6ceab11b0}{ProgressCountsOnlyValidatedApplicableSteps}}()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Exclude\ nonapplicable\ steps\ from\ the\ denominator\ while\ queued\ or\ changed\ work\ remains\ incomplete.}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphWorkflow.Progress(\textcolor{keyword}{new}[]\ \{\ GraphWorkflowState.NotApplicable\ \}),\ Is.Null);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ var\ progress\ =\ GraphWorkflow.Progress(\textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5e}{GraphWorkflowState}}.Complete,\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5e}{GraphWorkflowState}}.NeedsReview,\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5e}{GraphWorkflowState}}.Queued,}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a951a1926a14a65bad1b7e7f81fe20e5ea7599922e28b6009660de5e67f8ce210c}{GraphWorkflowState.NotApplicable}}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(progress.Fraction,\ Is.EqualTo(1f\ /\ 3));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(progress.Complete,\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GraphWorkflow.Progress(\textcolor{keyword}{new}[]\ \{\ GraphWorkflowState.Complete,\ GraphWorkflowState.NotApplicable\ \})}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Complete,\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00071}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a32e72f87aa949743c607fee29c19434a}{00071}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a32e72f87aa949743c607fee29c19434a}{DesktopLinksEncodeWorkspaceAndPrompt}}()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ var\ root\ =\ Path.GetTempPath();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ var\ prompt\ =\ \textcolor{stringliteral}{"{}Unicode\ ✓\ \&\ ?\ \#\(\backslash\)nsecond\ line"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ var\ link\ =\ CodexLinks.NewChat(root,\ prompt);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(link,\ Does.Contain(\textcolor{stringliteral}{"{}\&prompt="{}}\ +\ Uri.EscapeDataString(prompt)));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(link,\ Does.Contain(\textcolor{stringliteral}{"{}path="{}}\ +\ Uri.EscapeDataString(Path.GetFullPath(root))));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Throws<ArgumentException>(()\ =>\ CodexLinks.NewChat(\textcolor{stringliteral}{"{}relative"{}},\ prompt));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(CodexLinks.Thread(\textcolor{stringliteral}{"{}id/other"{}}),\ Does.EndWith(\textcolor{stringliteral}{"{}id\%2Fother"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00084}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a6d954b0093d0e4b45679f4080de9ebf3}{00084}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_a6d954b0093d0e4b45679f4080de9ebf3}{ProtocolHandshakeRequestsApprovalsQuestionsAndDisconnectArePumped}}()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ var\ wire\ =\ \textcolor{keyword}{new}\ FakeTransport();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ client\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a9a1869bb462eb2fea12068ddb12eb23a}{CodexAppServerClient}}(wire);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ var\ ready\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ error\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ client.Start(()\ =>\ ready\ =\ \textcolor{keyword}{true},\ e\ =>\ error\ =\ e);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ wire.Receive(\textcolor{keyword}{new}\ \{\ \textcolor{keywordtype}{id}\ =\ 1,\ result\ =\ \textcolor{keyword}{new}\ \{\ \}\ \});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Transport\ callbacks\ queue\ messages;\ readiness\ must\ change\ only\ when\ the\ host\ pumps\ them.}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(ready,\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ client.Pump();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(ready,\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(wire.Sent[1],\ Does.Contain(\textcolor{stringliteral}{"{}initialized"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ client.Request(\textcolor{stringliteral}{"{}thread/start"{}},\ \textcolor{keyword}{new}\ \{\ cwd\ =\ \textcolor{stringliteral}{"{}fixture"{}}\ \},\ r\ =>\ result\ =\ \textcolor{keyword}{true},\ e\ =>\ error\ =\ e);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ wire.Receive(\textcolor{keyword}{new}\ \{\ \textcolor{keywordtype}{id}\ =\ 2,\ result\ =\ \textcolor{keyword}{new}\ \{\ thread\ =\ \textcolor{keyword}{new}\ \{\ \textcolor{keywordtype}{id}\ =\ \textcolor{stringliteral}{"{}thread"{}}\ \}\ \}\ \});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ client.Pump();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(result,\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ var\ methods\ =\ \textcolor{keyword}{new}\ List<string>();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Exercise\ server\ requests\ and\ notifications,\ then\ fail\ outstanding\ work\ when\ the\ connection\ closes.}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ client.Message\ +=\ (method,\ p,\ id)\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ methods.Add(method);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{id}.HasValue)\ client.Respond(\textcolor{keywordtype}{id}.Value,\ \textcolor{keyword}{new}\ \{\ decision\ =\ \textcolor{stringliteral}{"{}decline"{}}\ \});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ method\ \textcolor{keywordflow}{in}\ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}item/commandExecution/requestApproval"{}},\ \textcolor{stringliteral}{"{}item/tool/requestUserInput"{}},\ \textcolor{stringliteral}{"{}turn/completed"{}}\ \})}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wire.Receive(\textcolor{keyword}{new}\ \{\ method,\ id\ =\ 90,\ @params\ =\ new\ \{\ threadId\ =\ \textcolor{stringliteral}{"{}thread"{}}\ \}\ \});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ client.Pump();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(methods.Count,\ Is.EqualTo(3));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(wire.Sent.Last(),\ Does.Contain(\textcolor{stringliteral}{"{}decline"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ client.Request(\textcolor{stringliteral}{"{}thread/resume"{}},\ \textcolor{keyword}{new}\ \{\ threadId\ =\ \textcolor{stringliteral}{"{}thread"{}}\ \},\ \_\ =>\ Assert.Fail(),\ e\ =>\ error\ =\ e);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ wire.Close();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ client.Pump();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(error,\ Is.EqualTo(\textcolor{stringliteral}{"{}offline"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(client.Ready,\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00126}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_ae5f51533fab2e794152ef49414dd2782}{00126}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_workflow_tests_ae5f51533fab2e794152ef49414dd2782}{ProtocolReportsErrorsAndDoesNotRetryMutatingRequests}}()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ transport\ failures\ visible\ and\ require\ explicit\ reconciliation\ before\ retry.}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ var\ wire\ =\ \textcolor{keyword}{new}\ FakeTransport();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }var\ client\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_codex_1_1_codex_app_server_client_a9a1869bb462eb2fea12068ddb12eb23a}{CodexAppServerClient}}(wire);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ error\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ client.Start(()\ =>\ \{\ \},\ e\ =>\ error\ =\ e);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ wire.Receive(\textcolor{keyword}{new}\ \{\ \textcolor{keywordtype}{id}\ =\ 1,\ result\ =\ \textcolor{keyword}{new}\ \{\ \}\ \});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ client.Pump();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ client.Request(\textcolor{stringliteral}{"{}turn/start"{}},\ \textcolor{keyword}{new}\ \{\ threadId\ =\ \textcolor{stringliteral}{"{}thread"{}}\ \},\ \_\ =>\ Assert.Fail(),\ e\ =>\ error\ =\ e);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ wire.Receive(\textcolor{keyword}{new}\ \{\ \textcolor{keywordtype}{id}\ =\ 2,\ error\ =\ \textcolor{keyword}{new}\ \{\ message\ =\ \textcolor{stringliteral}{"{}denied"{}}\ \}\ \});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ client.Pump();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(error,\ Does.Contain(\textcolor{stringliteral}{"{}denied"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pumping\ again\ must\ not\ resend\ a\ mutating\ request\ after\ a\ protocol\ failure.}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ client.Pump();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(wire.Sent.Count(s\ =>\ s.Contains(\textcolor{stringliteral}{"{}turn/start"{}})),\ Is.EqualTo(1));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }FakeTransport\ :\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_codex_1_1_i_codex_transport}{ICodexTransport}}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ readonly\ List<string>\ Sent\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<string>\ Line;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<string>\ Closed;}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465aa6122a65eaa676f700ae68d393054a37}{Start}}()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ Send(\textcolor{keywordtype}{string}\ line)}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Sent.Add(line);}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ Dispose()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ Receive(\textcolor{keywordtype}{object}\ message)}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Line?.Invoke(JsonSerializer.Serialize(message));}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ Close()}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Closed?.Invoke(\textcolor{stringliteral}{"{}offline"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00174}00174\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_workflow_tests_8cs_source_l00175}00175\ \}}
+
+\end{DoxyCode}

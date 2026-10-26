@@ -1,0 +1,100 @@
+/* Ghost Frequency: an intercepted instrument feed, with quiet phosphor and warm security ink. */
+.workstation { background-color: #070b10; color: #dce8e5; }
+.header { background-color: #0a1015; border-bottom-color: #3b5d55; border-top-width: 2px; border-top-color: #9bfacb; }
+.brand-name { color: #d9f5e6; font-size: 22px; letter-spacing: 3px; }
+.brand-sub { color: #79a598; letter-spacing: 1.6px; font-size: 7px; }
+.tab.active { color: #9bfacb; border-bottom-color: #9bfacb; background-color: #14231f; }
+.wallet { border-left-color: #2c453f; }
+.credit-amount, .research-balance { color: #9bfacb; }
+.xp-amount, .research-price { color: #65d9eb; }
+.rail { background-color: #090f13; border-right-color: #294139; }
+.rail-logo { color: #9bfacb; }
+.rail-button { border-color: #284139; color: #809e94; }
+.rail-button.active { background-color: #132b23; border-color: #73b697; color: #9bfacb; border-left-width: 3px; }
+.rail-small { margin-bottom: 5px; }
+.effects-button { border-width: 1px; border-color: #2a4840; color: #9bfacb; padding: 6px; margin-bottom: 12px; font-size: 8px; }
+.left-panel, .right-panel { background-color: #0b1318; border-color: #293d38; }
+.panel-heading { border-bottom-color: #294139; }
+.contract-card { background-color: #101b20; border-color: #293b38; }
+.contract-card.active { background-color: #15271f; border-color: #527b64; border-left-color: #9bfacb; border-left-width: 3px; }
+.contract-title { color: #dce9e4; }
+.contract-state { letter-spacing: 1px; }
+.loadout { background-color: #0a1316; border-top-color: #2c423b; }
+.network-panel { background-color: #080f14; }
+.map-heading { background-color: #0a1217; padding-top: 19px; padding-bottom: 15px; border-bottom-width: 1px; border-bottom-color: #1b302c; }
+.map-title { color: #deeee7; font-size: 26px; letter-spacing: 3px; }
+.signal-strip { flex-direction: row; align-items: center; justify-content: space-between; height: 22px; padding: 0 25px; background-color: #11241e; border-bottom-width: 1px; border-bottom-color: #2d4a3f; flex-shrink: 0; }
+.signal-strip Label { font-size: 7px; letter-spacing: 1.5px; color: #80b99c; white-space: nowrap; margin: 0; padding: 0; height: 14px; min-height: 0; }
+.sectors { background-color: #0d191c; border-color: #263b35; padding-top: 8px; padding-bottom: 8px; }
+.sector { color: #83a79b; font-size: 7px; letter-spacing: 1.5px; }
+.graph-viewport { background-color: #071014; }
+.net-node { background-color: rgba(12,26,30,0.97); border-color: #345048; padding: 5px 9px; border-left-width: 2px; }
+.net-node:hover { background-color: #1a3434; border-color: #93d7c0; }
+.net-node.controlled { background-color: #112c25; border-color: #477e66; }
+.net-node.objective { background-color: #30251a; border-color: #937044; }
+.net-node.selected { background-color: #1c382c; border-color: #9bfacb; }
+.net-node.objective.selected { background-color: #3b2e1e; border-color: #ffbc70; }
+.net-node.collected { background-color: #1c3929; border-color: #9bfacb; }
+.node-top { height: 21px; min-height: 21px; }
+.node-code { font-size: 7px; color: #94b6a9; letter-spacing: 0; margin-left: 5px; }
+.node-title { color: #d7e9e0; font-size: 12.5px; margin-top: 1px; }
+.node-readout { color: #72978c; font-size: 6px; letter-spacing: 1px; height: 9px; margin-top: 2px; white-space: nowrap; }
+.net-node.controlled .node-readout { color: #9bfacb; }
+.net-node.objective .node-readout { color: #e4b778; }
+.node-mark { color: #ffbc70; }
+.map-footer { background-color: #0a1418; border-top-color: #2a453a; }
+.map-button { border-color: #375d4d; color: #a0c1ad; }
+.operation-bar { background-color: #0d1b1c; border-top-color: #3c6451; }
+.trace-alert .operation-bar { border-top-color: #ffbc70; }
+.trace-alert .signal-strip { background-color: #2d2118; border-bottom-color: #76503b; }
+.trace-alert .signal-strip Label { color: #ffbc70; }
+.meter-track, .task-track { background-color: #243d35; }
+.task-fill { background-color: #65d9eb; }
+.speed-button.active { color: #9bfacb; background-color: #213e2e; }
+.inspector-bottom { background-color: #0e1d1d; border-top-color: #314d40; }
+.action-button { background-color: #102321; border-color: #385249; border-left-width: 2px; }
+.action-button:hover { background-color: #1b352c; border-color: #82b89a; }
+.keycap { color: #a7d9bb; border-color: #446b55; }
+.payout { color: #9bfacb; }
+.note { background-color: #152823; border-left-color: #79b39a; }
+.console { background-color: #080f12; border-top-color: #3a5c4b; }
+.console-heading .eyebrow { color: #9bfacb; }
+.terminal-line { font-size: 9px; color: #91b7a4; }
+.console-side { border-left-color: #2a4037; }
+.footer { background-color: #0d1a18; border-top-color: #294338; }
+.footer-brand { color: #89b79d; font-size: 7px; }
+.footer-center, .footer-save { color: #83a795; font-size: 7px; }
+.tech-node { background-color: #10201f; border-color: #34534b; }
+.tech-node.owned { background-color: #193426; border-left-color: #609473; border-right-color: #609473; border-bottom-color: #609473; }
+.tech-node.selected { background-color: #213f2e; border-left-color: #9bfacb; border-right-color: #9bfacb; border-bottom-color: #9bfacb; }
+.tech-meta { font-size: 6px; letter-spacing: 0; }
+.tech-price { font-size: 8px; color: #99bea9; }
+.full-page { background-color: #0a1417; }
+.rig-art { background-color: #0d211c; border-color: #47755b; border-top-width: 3px; border-top-color: #9bfacb; }
+.rig-name { color: #9bfacb; font-size: 20px; }
+.upgrade-card, .news-card, .report-card { background-color: #0f211f; border-color: #345146; border-left-width: 2px; }
+.reports-feed { border-left-color: #345146; }
+.primary-button { background-color: #9bfacb; color: #0c2319; letter-spacing: 1px; }
+.primary-button:hover { background-color: #c1ffde; color: #0c2319; }
+.secondary-button { border-color: #547e66; color: #bbd8c7; }
+.danger-button { border-color: #8f5145; color: #ffad93; }
+.modal-box { background-color: #10201d; border-color: #547e66; border-top-color: #9bfacb; }
+.result-credit { color: #9bfacb; }
+.result-xp { color: #65d9eb; }
+.result-timeline { background-color: #091512; border-color: #345146; }
+.result-timeline .unity-base-slider__tracker { background-color: #12241e; }
+.result-timeline .unity-base-slider__dragger { background-color: #4a7a66; }
+.result-timeline .terminal-line { font-size: 12px; color: #a8c9b8; }
+.eyebrow { color: #9cb8ab; font-size: 8px; letter-spacing: 1px; }
+.muted { color: #8ba69d; }
+.lime { color: #9bfacb; }
+.cyan { color: #65d9eb; }
+.amber { color: #ffbc70; }
+.violet { color: #baa1ed; }
+/* Monospaced telemetry is bundled; body copy retains the workstation's readable sans face. */
+.eyebrow, .micro, .sector, .node-code, .node-readout, .tech-meta, .tech-price,
+.terminal-line, .footer-brand, .footer-center, .footer-save, .signal-strip Label,
+.rail-button, .effects-button, .keycap, .trace-number, .task-title {
+    -unity-font-definition: initial;
+    -unity-font: resource("HackThePlanet/Fonts/SpaceMono-Regular");
+}

@@ -1,0 +1,13 @@
+PASS / Hack The Planet standalone Windows player
+
+Built and launched the Windows x64 player from Builds/Windows.
+Verified the rendered workstation, native window, and F1 field-guide shortcut.
+Mouse navigation to the research graph was verified in the standalone player.
+No game exceptions were recorded in standalone-final.log.
+
+Simulation: 64 assertions passed, including all six contracts, earned-XP upgrades,
+trace failure, retries, prerequisite enforcement, loadouts, and atomic save recovery.
+In-player UI and visual-effects smoke test: passed; see workstation-smoke.txt.
+Build: succeeded; see build-report.txt.
+
+The game is ready to play. UI automation stopped after user input was detected.

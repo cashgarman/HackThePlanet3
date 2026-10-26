@@ -1,0 +1,626 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Document Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_document}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+
+
+Dataset-\/neutral facts and indexes. Single-\/threaded; apply provider results on the owner thread.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_afe5479f3f97831fdbe8a83e53c8ff8ca}{Graph\+Document}} (string dataset\+Id, string display\+Name="{}"{})
+\begin{DoxyCompactList}\small\item\em Creates an empty document for a dataset. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_ab4a961cb548cba5b7a1e394f5869582f}{Rename}} (string display\+Name)
+\begin{DoxyCompactList}\small\item\em Changes the display name and records the rename in the timeline. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_id_set}{Graph\+Id\+Set}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a83b4335fcba47f9d55fe314004aa1252}{Neighbors}} (string id)
+\begin{DoxyCompactList}\small\item\em Gets the node identifiers adjacent to a node. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_id_set}{Graph\+Id\+Set}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a23e79868136758630f66ad955476430f}{Incident\+Edges}} (string id)
+\begin{DoxyCompactList}\small\item\em Gets the edge identifiers incident to a node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a5fd7438eba40a9d5c69f1eba1365cea9}{Upsert\+Node}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{Graph\+Node\+Record}} node)
+\begin{DoxyCompactList}\small\item\em Adds or replaces a node record and updates document history. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_ae1e88a561e71edf2918c9da9f2e58098}{Upsert\+Edge}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{Graph\+Edge\+Record}} edge)
+\begin{DoxyCompactList}\small\item\em Adds or replaces an edge record and updates document history. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_adb801495bc7d4b0a5a3cdd08595f7a4a}{Remove\+Edge}} (string id)
+\begin{DoxyCompactList}\small\item\em Removes an edge and updates the document when it exists. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_ae66255dc435865fa6651a2fa6c85892b}{Remove\+Node}} (string id)
+\begin{DoxyCompactList}\small\item\em Removes a node and its incident edges when it exists. \end{DoxyCompactList}\item 
+Hash\+Set$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_aa892c83e174d294825dea79b46a6ad7a}{Neighborhood}} (string id, int depth)
+\begin{DoxyCompactList}\small\item\em Collects nodes reachable within the requested number of hops. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_aafab3c63196bae84689a4edc9a3d3ff9}{Snapshot}} ()
+\begin{DoxyCompactList}\small\item\em Creates a snapshot of the current document contents. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a6ebeda61ceebfcf091bf1d1b6ad26b4f}{Replace\+Snapshot}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} snapshot)
+\begin{DoxyCompactList}\small\item\em Replaces document contents with a snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a9bc1db5fd4f59b8314d8d7732cb23db5}{Apply}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch}{Graph\+Batch}} batch)
+\begin{DoxyCompactList}\small\item\em Applies node and edge additions, updates, and removals as one batch. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_aa63e8b9113819b720d1b049fd8260acd}{Establish\+Baseline}} (Date\+Time\+Offset? timestamp\+Utc=null)
+\begin{DoxyCompactList}\small\item\em Records the current state as the baseline for timeline history. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a608434adc2f7ccb7d19b5353f67d91cc}{Record\+Position\+Frame}} (IEnumerable$<$ Key\+Value\+Pair$<$ string, Vector3 $>$ $>$ positions, Date\+Time\+Offset? timestamp\+Utc=null)
+\begin{DoxyCompactList}\small\item\em Record a timestamped sample of canonical graph-\/node positions. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_aa06ac1e89d7ef31b3d3d13ba57417dbf}{Seek}} (Date\+Time\+Offset time\+Utc)
+\begin{DoxyCompactList}\small\item\em Seek graph facts to the latest recorded event at or before the requested time. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a0799707d3aadd7cc5d92b06089ecdd5a}{Clear\+Position\+History}} ()
+\begin{DoxyCompactList}\small\item\em Discard position frames while preserving semantic event history. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a75a7e1622aeb57f8b00825b2a28b5bd3}{Clear\+Event\+History}} (Date\+Time\+Offset? timestamp\+Utc=null)
+\begin{DoxyCompactList}\small\item\em Discard event history and establish the current graph as a fresh baseline. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a901b55136bc45a38658aa31f000b4dc9}{Clear\+History}} (Date\+Time\+Offset? timestamp\+Utc=null)
+\begin{DoxyCompactList}\small\item\em Discard both history streams and establish the current graph as a fresh baseline. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a848afca902acd7ef2af47a4c6d1df588}{Seek}} (int entry\+Index)
+\begin{DoxyCompactList}\small\item\em Moves the event timeline to an entry by index. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a5d519e70eaf6c4b397f3f1dbf93d73b4}{Return\+To\+Live}} ()
+\begin{DoxyCompactList}\small\item\em Returns the document to its live state after timeline inspection. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a287a9f2d8ef212b97eb24b1755de6914}{Restore\+Timeline\+From}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_afe5479f3f97831fdbe8a83e53c8ff8ca}{Graph\+Document}} source)
+\begin{DoxyCompactList}\small\item\em Copies a compatible document\textquotesingle{}s recorded history into this document. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{Graph\+Node\+Record}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_ad18c04ddcd36d56e8082393ae0b591f7}{Nodes}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the current node records keyed by identifier. \end{DoxyCompactList}\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{Graph\+Edge\+Record}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a96b64cbdb760bca4111e85f696ac47b7}{Edges}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the current edge records keyed by identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a588a5f08d4360e29c3449eb74db24bfd}{Dataset\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the stable identifier of this dataset. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a4b9a0fb203a08390570b1a5a0b2f9be0}{Display\+Name}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the display name of this dataset. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a2d95644c27548ad66db47143fe613a34}{Revision}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the document revision, including non-\/topology changes. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_aea771782af340180e588169cac5bb8c5}{Topology\+Revision}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the revision that changes when graph topology changes. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline}{Graph\+Timeline}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_aae92fb3f0fc6bc66d25eb6c829c06afa}{Timeline}} = new()\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the document\textquotesingle{}s event and position timeline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_a9e7d831272164aac60bf6e0184816f31}{Changed}}
+\begin{DoxyCompactList}\small\item\em Occurs when document content or timeline state changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Dataset-\/neutral facts and indexes. Single-\/threaded; apply provider results on the owner thread. 
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00039}{39}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_afe5479f3f97831fdbe8a83e53c8ff8ca}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!GraphDocument@{GraphDocument}}
+\index{GraphDocument@{GraphDocument}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{GraphDocument()}{GraphDocument()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_afe5479f3f97831fdbe8a83e53c8ff8ca} 
+Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Graph\+Document (\begin{DoxyParamCaption}\item[{string}]{dataset\+Id}{, }\item[{string}]{display\+Name}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Creates an empty document for a dataset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+Id} & Stable identifier of the dataset.\\
+\hline
+{\em display\+Name} & Optional human-\/readable dataset name.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00049}{49}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a9bc1db5fd4f59b8314d8d7732cb23db5}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Apply@{Apply}}
+\index{Apply@{Apply}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Apply()}{Apply()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a9bc1db5fd4f59b8314d8d7732cb23db5} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Apply (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch}{Graph\+Batch}}}]{batch}{}\end{DoxyParamCaption})}
+
+
+
+Applies node and edge additions, updates, and removals as one batch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch} & Changes to apply.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00357}{357}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a75a7e1622aeb57f8b00825b2a28b5bd3}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!ClearEventHistory@{ClearEventHistory}}
+\index{ClearEventHistory@{ClearEventHistory}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{ClearEventHistory()}{ClearEventHistory()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a75a7e1622aeb57f8b00825b2a28b5bd3} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Clear\+Event\+History (\begin{DoxyParamCaption}\item[{Date\+Time\+Offset?}]{timestamp\+Utc}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Discard event history and establish the current graph as a fresh baseline. 
+
+Removes event history and optionally records the current state as a baseline. 
+\begin{DoxyParams}{Parameters}
+{\em timestamp\+Utc} & Optional timestamp for the new baseline.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00464}{464}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a901b55136bc45a38658aa31f000b4dc9}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!ClearHistory@{ClearHistory}}
+\index{ClearHistory@{ClearHistory}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{ClearHistory()}{ClearHistory()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a901b55136bc45a38658aa31f000b4dc9} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Clear\+History (\begin{DoxyParamCaption}\item[{Date\+Time\+Offset?}]{timestamp\+Utc}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Discard both history streams and establish the current graph as a fresh baseline. 
+
+Clears both event history and recorded position frames. 
+\begin{DoxyParams}{Parameters}
+{\em timestamp\+Utc} & Optional timestamp for the new baseline.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00472}{472}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a0799707d3aadd7cc5d92b06089ecdd5a}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!ClearPositionHistory@{ClearPositionHistory}}
+\index{ClearPositionHistory@{ClearPositionHistory}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{ClearPositionHistory()}{ClearPositionHistory()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a0799707d3aadd7cc5d92b06089ecdd5a} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Clear\+Position\+History (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Discard position frames while preserving semantic event history. 
+
+Removes recorded position frames. 
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00456}{456}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_aa63e8b9113819b720d1b049fd8260acd}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!EstablishBaseline@{EstablishBaseline}}
+\index{EstablishBaseline@{EstablishBaseline}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{EstablishBaseline()}{EstablishBaseline()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_aa63e8b9113819b720d1b049fd8260acd} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Establish\+Baseline (\begin{DoxyParamCaption}\item[{Date\+Time\+Offset?}]{timestamp\+Utc}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Records the current state as the baseline for timeline history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp\+Utc} & Optional timestamp for the baseline.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00414}{414}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a23e79868136758630f66ad955476430f}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!IncidentEdges@{IncidentEdges}}
+\index{IncidentEdges@{IncidentEdges}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{IncidentEdges()}{IncidentEdges()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a23e79868136758630f66ad955476430f} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_id_set}{Graph\+Id\+Set}} Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Incident\+Edges (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Gets the edge identifiers incident to a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The set of incident edge identifiers.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00107}{107}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_aa892c83e174d294825dea79b46a6ad7a}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Neighborhood@{Neighborhood}}
+\index{Neighborhood@{Neighborhood}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Neighborhood()}{Neighborhood()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_aa892c83e174d294825dea79b46a6ad7a} 
+Hash\+Set$<$ string $>$ Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Neighborhood (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{int}]{depth}{}\end{DoxyParamCaption})}
+
+
+
+Collects nodes reachable within the requested number of hops. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Starting node identifier.\\
+\hline
+{\em depth} & Maximum number of hops to traverse.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Identifiers in the bounded neighborhood.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00289}{289}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a83b4335fcba47f9d55fe314004aa1252}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Neighbors@{Neighbors}}
+\index{Neighbors@{Neighbors}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Neighbors()}{Neighbors()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a83b4335fcba47f9d55fe314004aa1252} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_id_set}{Graph\+Id\+Set}} Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Neighbors (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Gets the node identifiers adjacent to a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The set of neighboring node identifiers.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00099}{99}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a608434adc2f7ccb7d19b5353f67d91cc}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!RecordPositionFrame@{RecordPositionFrame}}
+\index{RecordPositionFrame@{RecordPositionFrame}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{RecordPositionFrame()}{RecordPositionFrame()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a608434adc2f7ccb7d19b5353f67d91cc} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Record\+Position\+Frame (\begin{DoxyParamCaption}\item[{IEnumerable$<$ Key\+Value\+Pair$<$ string, Vector3 $>$ $>$}]{positions}{, }\item[{Date\+Time\+Offset?}]{timestamp\+Utc}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Record a timestamped sample of canonical graph-\/node positions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em positions} & Node positions to record.\\
+\hline
+{\em timestamp\+Utc} & Optional timestamp for the frame.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00422}{422}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_adb801495bc7d4b0a5a3cdd08595f7a4a}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!RemoveEdge@{RemoveEdge}}
+\index{RemoveEdge@{RemoveEdge}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{RemoveEdge()}{RemoveEdge()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_adb801495bc7d4b0a5a3cdd08595f7a4a} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Remove\+Edge (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Removes an edge and updates the document when it exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Edge identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when an edge was removed.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00238}{238}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_ae66255dc435865fa6651a2fa6c85892b}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!RemoveNode@{RemoveNode}}
+\index{RemoveNode@{RemoveNode}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{RemoveNode()}{RemoveNode()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_ae66255dc435865fa6651a2fa6c85892b} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Remove\+Node (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Removes a node and its incident edges when it exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when a node was removed.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00260}{260}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_ab4a961cb548cba5b7a1e394f5869582f}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Rename@{Rename}}
+\index{Rename@{Rename}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Rename()}{Rename()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_ab4a961cb548cba5b7a1e394f5869582f} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Rename (\begin{DoxyParamCaption}\item[{string}]{display\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Changes the display name and records the rename in the timeline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em display\+Name} & New display name.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00083}{83}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a6ebeda61ceebfcf091bf1d1b6ad26b4f}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!ReplaceSnapshot@{ReplaceSnapshot}}
+\index{ReplaceSnapshot@{ReplaceSnapshot}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{ReplaceSnapshot()}{ReplaceSnapshot()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a6ebeda61ceebfcf091bf1d1b6ad26b4f} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Replace\+Snapshot (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}}}]{snapshot}{}\end{DoxyParamCaption})}
+
+
+
+Replaces document contents with a snapshot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & Snapshot to apply.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00320}{320}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a287a9f2d8ef212b97eb24b1755de6914}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!RestoreTimelineFrom@{RestoreTimelineFrom}}
+\index{RestoreTimelineFrom@{RestoreTimelineFrom}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{RestoreTimelineFrom()}{RestoreTimelineFrom()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a287a9f2d8ef212b97eb24b1755de6914} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Restore\+Timeline\+From (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_afe5479f3f97831fdbe8a83e53c8ff8ca}{Graph\+Document}}}]{source}{}\end{DoxyParamCaption})}
+
+
+
+Copies a compatible document\textquotesingle{}s recorded history into this document. 
+
+Restores timeline state from another document. 
+\begin{DoxyParams}{Parameters}
+{\em source} & Document whose timeline state is copied.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00514}{514}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a5d519e70eaf6c4b397f3f1dbf93d73b4}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!ReturnToLive@{ReturnToLive}}
+\index{ReturnToLive@{ReturnToLive}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{ReturnToLive()}{ReturnToLive()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a5d519e70eaf6c4b397f3f1dbf93d73b4} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Return\+To\+Live (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the document to its live state after timeline inspection. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00494}{494}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_aa06ac1e89d7ef31b3d3d13ba57417dbf}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Seek@{Seek}}
+\index{Seek@{Seek}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Seek()}{Seek()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_aa06ac1e89d7ef31b3d3d13ba57417dbf} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Seek (\begin{DoxyParamCaption}\item[{Date\+Time\+Offset}]{time\+Utc}{}\end{DoxyParamCaption})}
+
+
+
+Seek graph facts to the latest recorded event at or before the requested time. 
+
+Moves the document timeline to the state at a timestamp. 
+\begin{DoxyParams}{Parameters}
+{\em time\+Utc} & Timestamp to seek to.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00439}{439}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a848afca902acd7ef2af47a4c6d1df588}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Seek@{Seek}}
+\index{Seek@{Seek}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Seek()}{Seek()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a848afca902acd7ef2af47a4c6d1df588} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Seek (\begin{DoxyParamCaption}\item[{int}]{entry\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Moves the event timeline to an entry by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry\+Index} & Index of the timeline entry to seek to.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00479}{479}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_aafab3c63196bae84689a4edc9a3d3ff9}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Snapshot@{Snapshot}}
+\index{Snapshot@{Snapshot}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Snapshot()}{Snapshot()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_aafab3c63196bae84689a4edc9a3d3ff9} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Snapshot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates a snapshot of the current document contents. 
+
+\begin{DoxyReturn}{Returns}
+A snapshot containing the current nodes and edges.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00313}{313}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_ae1e88a561e71edf2918c9da9f2e58098}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!UpsertEdge@{UpsertEdge}}
+\index{UpsertEdge@{UpsertEdge}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{UpsertEdge()}{UpsertEdge()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_ae1e88a561e71edf2918c9da9f2e58098} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Upsert\+Edge (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{Graph\+Edge\+Record}}}]{edge}{}\end{DoxyParamCaption})}
+
+
+
+Adds or replaces an edge record and updates document history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & Edge record to apply.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00149}{149}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a5fd7438eba40a9d5c69f1eba1365cea9}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!UpsertNode@{UpsertNode}}
+\index{UpsertNode@{UpsertNode}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{UpsertNode()}{UpsertNode()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a5fd7438eba40a9d5c69f1eba1365cea9} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Upsert\+Node (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{Graph\+Node\+Record}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Adds or replaces a node record and updates document history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node record to apply.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00114}{114}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a588a5f08d4360e29c3449eb74db24bfd}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!DatasetId@{DatasetId}}
+\index{DatasetId@{DatasetId}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{DatasetId}{DatasetId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a588a5f08d4360e29c3449eb74db24bfd} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Dataset\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the stable identifier of this dataset. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00064}{64}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a4b9a0fb203a08390570b1a5a0b2f9be0}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!DisplayName@{DisplayName}}
+\index{DisplayName@{DisplayName}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{DisplayName}{DisplayName}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a4b9a0fb203a08390570b1a5a0b2f9be0} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Display\+Name\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the display name of this dataset. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00066}{66}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a96b64cbdb760bca4111e85f696ac47b7}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Edges@{Edges}}
+\index{Edges@{Edges}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Edges}{Edges}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a96b64cbdb760bca4111e85f696ac47b7} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{Graph\+Edge\+Record}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Edges\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the current edge records keyed by identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00062}{62}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_ad18c04ddcd36d56e8082393ae0b591f7}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_ad18c04ddcd36d56e8082393ae0b591f7} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{Graph\+Node\+Record}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Nodes\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the current node records keyed by identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00060}{60}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a2d95644c27548ad66db47143fe613a34}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Revision@{Revision}}
+\index{Revision@{Revision}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Revision}{Revision}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a2d95644c27548ad66db47143fe613a34} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Revision\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the document revision, including non-\/topology changes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_aae92fb3f0fc6bc66d25eb6c829c06afa}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Timeline@{Timeline}}
+\index{Timeline@{Timeline}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Timeline}{Timeline}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_aae92fb3f0fc6bc66d25eb6c829c06afa} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline}{Graph\+Timeline}} Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Timeline = new()\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the document\textquotesingle{}s event and position timeline. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00072}{72}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_aea771782af340180e588169cac5bb8c5}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!TopologyRevision@{TopologyRevision}}
+\index{TopologyRevision@{TopologyRevision}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{TopologyRevision}{TopologyRevision}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_aea771782af340180e588169cac5bb8c5} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Topology\+Revision\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the revision that changes when graph topology changes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00070}{70}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-event-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_document_a9e7d831272164aac60bf6e0184816f31}\index{Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}!Changed@{Changed}}
+\index{Changed@{Changed}!Cashg.GraphExplorer.GraphDocument@{Cashg.GraphExplorer.GraphDocument}}
+\doxysubsubsection{\texorpdfstring{Changed}{Changed}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_document_a9e7d831272164aac60bf6e0184816f31} 
+Action Cashg.\+Graph\+Explorer.\+Graph\+Document.\+Changed}
+
+
+
+Occurs when document content or timeline state changes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_document_8cs_source_l00074}{74}} of file \doxymbox{\hyperlink{_graph_document_8cs_source}{Graph\+Document.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Document.\+cs\end{DoxyCompactItemize}

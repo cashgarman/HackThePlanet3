@@ -1,0 +1,227 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider Interface Reference}
+\hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider}{}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+
+
+Defines graph action provider.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_request}{Graph\+Action\+Request}} $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a9663c3a20d52240a15483cf7dac48602}{Resolve\+Targets}} (string action\+Id, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} scene, string source\+Node\+Id)
+\begin{DoxyCompactList}\small\item\em Resolves eligible targets for an action and source node. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a08f16cb489b2eca4a4832825e81181c3}{Review}} (IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_request}{Graph\+Action\+Request}} $>$ ordered\+Draft, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Reviews an ordered draft before execution. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ad95982f2ea9ea5d32bf9d7ef0907ad0d}{Execute}} (string request\+Id, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} review, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Executes a request accepted by the supplied review. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ab57ea3b49d50612f17df8223b5147e92}{Recover}} (string request\+Id, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Recovers the state of a request whose execution result is uncertain. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_add8f6894079b091d1d0e453fafa77dc1}{Refresh}} (string run\+Id, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Refreshes the latest state of a run. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ad9a47597420ac2f0a7755345a6b96d10}{Control}} (string run\+Id, string operation, string entry\+Id, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Applies a control operation to a run entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a711b02161bf9285c0e1e0aceada1a5d7}{Identity}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the provider\textquotesingle{}s stable identity. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_definition}{Graph\+Action\+Definition}} $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a902682f63fb4cd4c9944b0c9f69adfe2}{Actions}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the actions currently supported by the provider. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines graph action provider. 
+
+Definition at line \doxymbox{\hyperlink{_graph_providers_8cs_source_l00168}{168}} of file \doxymbox{\hyperlink{_graph_providers_8cs_source}{Graph\+Providers.\+cs}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_doc-func-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ad9a47597420ac2f0a7755345a6b96d10}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!Control@{Control}}
+\index{Control@{Control}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{Control()}{Control()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ad9a47597420ac2f0a7755345a6b96d10} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Control (\begin{DoxyParamCaption}\item[{string}]{run\+Id}{, }\item[{string}]{operation}{, }\item[{string}]{entry\+Id}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Applies a control operation to a run entry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em run\+Id} & Run to control.\\
+\hline
+{\em operation} & Provider-\/defined control operation.\\
+\hline
+{\em entry\+Id} & Entry affected by the operation, when applicable.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the updated run state.\\
+\hline
+{\em failed} & Receives a control failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs the operation.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ad95982f2ea9ea5d32bf9d7ef0907ad0d}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!Execute@{Execute}}
+\index{Execute@{Execute}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ad95982f2ea9ea5d32bf9d7ef0907ad0d} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Execute (\begin{DoxyParamCaption}\item[{string}]{request\+Id}{, }\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}}}]{review}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Executes a request accepted by the supplied review. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request\+Id} & Stable identifier used to make execution idempotent.\\
+\hline
+{\em review} & Provider review authorizing this execution.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the run state after execution.\\
+\hline
+{\em failed} & Receives an execution failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs the execution.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ab57ea3b49d50612f17df8223b5147e92}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!Recover@{Recover}}
+\index{Recover@{Recover}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{Recover()}{Recover()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_ab57ea3b49d50612f17df8223b5147e92} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Recover (\begin{DoxyParamCaption}\item[{string}]{request\+Id}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Recovers the state of a request whose execution result is uncertain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request\+Id} & Stable identifier of the request to recover.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the recovered run state.\\
+\hline
+{\em failed} & Receives a recovery failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs recovery.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_add8f6894079b091d1d0e453fafa77dc1}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!Refresh@{Refresh}}
+\index{Refresh@{Refresh}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{Refresh()}{Refresh()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_add8f6894079b091d1d0e453fafa77dc1} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Refresh (\begin{DoxyParamCaption}\item[{string}]{run\+Id}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Refreshes the latest state of a run. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em run\+Id} & Run to refresh.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the refreshed run state.\\
+\hline
+{\em failed} & Receives a refresh failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs the refresh.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a9663c3a20d52240a15483cf7dac48602}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!ResolveTargets@{ResolveTargets}}
+\index{ResolveTargets@{ResolveTargets}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{ResolveTargets()}{ResolveTargets()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a9663c3a20d52240a15483cf7dac48602} 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_request}{Graph\+Action\+Request}} $>$ Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Resolve\+Targets (\begin{DoxyParamCaption}\item[{string}]{action\+Id}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{scene}{, }\item[{string}]{source\+Node\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Resolves eligible targets for an action and source node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action\+Id} & Action to resolve.\\
+\hline
+{\em scene} & Scene containing candidate nodes.\\
+\hline
+{\em source\+Node\+Id} & Node from which the action is initiated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Requests representing the eligible targets.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a08f16cb489b2eca4a4832825e81181c3}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!Review@{Review}}
+\index{Review@{Review}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{Review()}{Review()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a08f16cb489b2eca4a4832825e81181c3} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Review (\begin{DoxyParamCaption}\item[{IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_request}{Graph\+Action\+Request}} $>$}]{ordered\+Draft}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_run}{Graph\+Action\+Run}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Reviews an ordered draft before execution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ordered\+Draft} & Requests in the order proposed for execution.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the review result.\\
+\hline
+{\em failed} & Receives a review failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs the review.
+\end{DoxyReturn}
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_doc-property-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a902682f63fb4cd4c9944b0c9f69adfe2}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!Actions@{Actions}}
+\index{Actions@{Actions}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{Actions}{Actions}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a902682f63fb4cd4c9944b0c9f69adfe2} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_action_definition}{Graph\+Action\+Definition}}$>$ Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Actions\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the actions currently supported by the provider. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_providers_8cs_source_l00173}{173}} of file \doxymbox{\hyperlink{_graph_providers_8cs_source}{Graph\+Providers.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a711b02161bf9285c0e1e0aceada1a5d7}\index{Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}!Identity@{Identity}}
+\index{Identity@{Identity}!Cashg.GraphExplorer.IGraphActionProvider@{Cashg.GraphExplorer.IGraphActionProvider}}
+\doxysubsubsection{\texorpdfstring{Identity}{Identity}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_action_provider_a711b02161bf9285c0e1e0aceada1a5d7} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Action\+Provider.\+Identity\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the provider\textquotesingle{}s stable identity. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_providers_8cs_source_l00171}{171}} of file \doxymbox{\hyperlink{_graph_providers_8cs_source}{Graph\+Providers.\+cs}}.
+
+
+
+The documentation for this interface was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Providers.\+cs\end{DoxyCompactItemize}

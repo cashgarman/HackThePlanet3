@@ -1,0 +1,147 @@
+\doxysection{Graph\+Cluster\+Tests.\+cs}
+\hypertarget{_graph_cluster_tests_8cs_source}{}\label{_graph_cluster_tests_8cs_source}\index{Tests/Editor/GraphClusterTests.cs@{Tests/Editor/GraphClusterTests.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Linq;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }NUnit.Framework;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }UnityEngine;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }UnityEngine.UIElements;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00007}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_tests}{00007}}\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_1_1_tests}{Cashg.GraphExplorer.Tests}}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00010}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests}{00010}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests}{GraphClusterTests}}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_scene}{GraphScene}}\ MakeScene()}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ internal,\ crossing,\ parallel,\ and\ self\ edges\ to\ exercise\ each\ projection\ rule.}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ var\ facts\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document_afe5479f3f97831fdbe8a83e53c8ff8ca}{GraphDocument}}(\textcolor{stringliteral}{"{}cluster:test"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ \textcolor{keywordtype}{id}\ \textcolor{keywordflow}{in}\ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}},\ \textcolor{stringliteral}{"{}d"{}},\ \textcolor{stringliteral}{"{}outside"{}}\ \})}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertNode(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{GraphNodeRecord}}(\textcolor{keywordtype}{id},\ \textcolor{stringliteral}{"{}item"{}},\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}ab"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}link"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}bc"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}},\ \textcolor{stringliteral}{"{}link"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}cd"{}},\ \textcolor{stringliteral}{"{}c"{}},\ \textcolor{stringliteral}{"{}d"{}},\ \textcolor{stringliteral}{"{}link"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}in"{}},\ \textcolor{stringliteral}{"{}outside"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}link"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}out"{}},\ \textcolor{stringliteral}{"{}c"{}},\ \textcolor{stringliteral}{"{}outside"{}},\ \textcolor{stringliteral}{"{}link"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}parallel"{}},\ \textcolor{stringliteral}{"{}outside"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}link"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ facts.UpsertEdge(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record_a34c821b7a96244aa959e17e88418b756}{GraphEdgeRecord}}(\textcolor{stringliteral}{"{}self"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}link"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_scene_ab6897a076bf35cb71f0c6ceca25b2368}{GraphScene}}(facts,\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_a88e5c2672e449af62db14d2347d18946}{GraphSchema}}());}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00030}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a030360057e349a94e16c4e8cb477ba33}{00030}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a030360057e349a94e16c4e8cb477ba33}{CrossingEdgesKeepIdentityDirectionAndMultiplicity}}()}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ var\ source\ =\ MakeScene();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ var\ before\ =\ GraphJson.Serialize(source.Document);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_cluster_scene_adeda24ebba9b9f2ac3765b48bce5837f}{GraphClusterScene}}(source);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \textcolor{keywordtype}{id}\ =\ view.Collapse(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\ \},\ \textcolor{stringliteral}{"{}Neighborhood"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Internal\ edges\ disappear\ from\ projection\ while\ crossing\ IDs,\ directions,\ and\ parallel\ facts\ survive.}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes.Keys,\ Is.EquivalentTo(\textcolor{keyword}{new}[]\ \{\ id,\ \textcolor{stringliteral}{"{}d"{}},\ \textcolor{stringliteral}{"{}outside"{}}\ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges.Keys,\ Is.EquivalentTo(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}cd"{}},\ \textcolor{stringliteral}{"{}in"{}},\ \textcolor{stringliteral}{"{}out"{}},\ \textcolor{stringliteral}{"{}parallel"{}}\ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges[\textcolor{stringliteral}{"{}in"{}}].From,\ Is.EqualTo(\textcolor{stringliteral}{"{}outside"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges[\textcolor{stringliteral}{"{}in"{}}].To,\ Is.EqualTo(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges[\textcolor{stringliteral}{"{}out"{}}].From,\ Is.EqualTo(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges[\textcolor{stringliteral}{"{}out"{}}].To,\ Is.EqualTo(\textcolor{stringliteral}{"{}outside"{}}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes[\textcolor{keywordtype}{id}].Record.Properties[\textcolor{stringliteral}{"{}memberCount"{}}].Number,\ Is.EqualTo(3));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.LeafIds(\textcolor{keywordtype}{id}),\ Is.EquivalentTo(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.MemberRecords(\textcolor{keywordtype}{id}).Select(record\ =>\ record.Id),\ Is.EquivalentTo(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.InternalEdges(\textcolor{keywordtype}{id}).Select(edge\ =>\ edge.Id),\ Is.EquivalentTo(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}ab"{}},\ \textcolor{stringliteral}{"{}bc"{}},\ \textcolor{stringliteral}{"{}self"{}}\ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(GraphJson.Serialize(source.Document),\ Is.EqualTo(before));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Expand(\textcolor{keywordtype}{id}),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges.Keys,\ Is.EquivalentTo(source.Edges.Keys));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes.Keys,\ Is.EquivalentTo(source.Nodes.Keys));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00056}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_afdb423d9ade9cc026d3d446cfd76a2b1}{00056}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_afdb423d9ade9cc026d3d446cfd76a2b1}{NestedClustersRestoreOneLevelAtATimeAndCarryPositions}}()}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Verify\ both\ hierarchy\ depth\ and\ source-\/node\ positions\ across\ collapse\ and\ expand.}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ var\ source\ =\ MakeScene();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_cluster_scene_adeda24ebba9b9f2ac3765b48bce5837f}{GraphClusterScene}}(source);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ var\ inner\ =\ view.Collapse(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}}\ \},\ \textcolor{stringliteral}{"{}Inner"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ var\ outer\ =\ view.Collapse(\textcolor{keyword}{new}[]\ \{\ inner,\ \textcolor{stringliteral}{"{}c"{}}\ \},\ \textcolor{stringliteral}{"{}Outer"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.LeafIds(outer),\ Is.EquivalentTo(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ var\ original\ =\ source.Nodes[\textcolor{stringliteral}{"{}a"{}}].Position;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ view.Nodes[outer].Position\ +=\ Vector3.right\ *\ 10;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Expand\ one\ level\ at\ a\ time\ so\ the\ outer\ drag\ propagates\ through\ the\ still-\/collapsed\ inner\ group.}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ view.Expand(outer);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes.ContainsKey(inner),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes.ContainsKey(\textcolor{stringliteral}{"{}a"{}}),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ view.Expand(inner);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes.ContainsKey(\textcolor{stringliteral}{"{}a"{}}),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(source.Nodes[\textcolor{stringliteral}{"{}a"{}}].Position.x,\ Is.EqualTo(original.x\ +\ 10).Within(.001f));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges.Keys,\ Is.EquivalentTo(source.Edges.Keys));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Recollapse(inner),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Recollapse(outer),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00081}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a1847c5e028f47c755f8ed16eee29e7cb}{00081}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a1847c5e028f47c755f8ed16eee29e7cb}{PositionHistoryUsesCanonicalNodesAndTracksCollapsedClusterMotion}}()}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ var\ source\ =\ MakeScene();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_cluster_scene_adeda24ebba9b9f2ac3765b48bce5837f}{GraphClusterScene}}(source);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ var\ initial\ =\ source.Nodes[\textcolor{stringliteral}{"{}a"{}}].Position;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ var\ cluster\ =\ view.Collapse(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\ \},\ \textcolor{stringliteral}{"{}Group"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ view.Nodes[cluster].Position\ +=\ Vector3.right\ *\ 7;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Motion\ history\ must\ contain\ source\ identities\ with\ group\ displacement,\ never\ temporary\ cluster\ IDs.}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ var\ positions\ =\ view.CanonicalPositions();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(positions.Keys,\ Is.EquivalentTo(source.Document.Nodes.Keys));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(positions.ContainsKey(cluster),\ Is.False);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(positions[\textcolor{stringliteral}{"{}a"{}}].x,\ Is.EqualTo(initial.x\ +\ 7).Within(.001f));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ view.ApplyCanonicalPositions(positions);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ var\ restored\ =\ view.CanonicalPositions();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(restored[\textcolor{stringliteral}{"{}a"{}}],\ Is.EqualTo(positions[\textcolor{stringliteral}{"{}a"{}}]));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(restored[\textcolor{stringliteral}{"{}b"{}}],\ Is.EqualTo(positions[\textcolor{stringliteral}{"{}b"{}}]));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00102}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a11936669ac03528a14a91934ef0e384f}{00102}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a11936669ac03528a14a91934ef0e384f}{DistanceLodOnlyGroupsFarConnectedNeighborsAndReleasesNearCamera}}()}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ var\ source\ =\ MakeScene();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ source.Nodes[\textcolor{stringliteral}{"{}a"{}}].Position\ =\ \textcolor{keyword}{new}\ Vector3(100,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ source.Nodes[\textcolor{stringliteral}{"{}b"{}}].Position\ =\ \textcolor{keyword}{new}\ Vector3(101,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ source.Nodes[\textcolor{stringliteral}{"{}c"{}}].Position\ =\ \textcolor{keyword}{new}\ Vector3(102,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ source.Nodes[\textcolor{stringliteral}{"{}d"{}}].Position\ =\ \textcolor{keyword}{new}\ Vector3(200,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ source.Nodes[\textcolor{stringliteral}{"{}outside"{}}].Position\ =\ Vector3.zero;}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_cluster_scene_adeda24ebba9b9f2ac3765b48bce5837f}{GraphClusterScene}}(source)}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ LodEnabled\ =\ \textcolor{keyword}{true},\ LodEnterDistance\ =\ 80,\ LodExitDistance\ =\ 65,\ LodNeighborSeparation\ =\ 4\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.UpdateLod(Vector3.zero),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes.Count,\ Is.EqualTo(3));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ var\ cluster\ =\ view.Nodes.Keys.Single(view.IsCluster);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.LeafIds(cluster),\ Is.EquivalentTo(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\ \}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Edges[\textcolor{stringliteral}{"{}in"{}}].To,\ Is.EqualTo(cluster));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Expand(cluster),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.UpdateLod(Vector3.zero),\ Is.False,\ \textcolor{stringliteral}{"{}User\ expansion\ overrides\ automatic\ regrouping."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ view.RemoveCluster(cluster);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ the\ manual\ override\ to\ allow\ regrouping,\ then\ approach\ the\ group\ to\ trigger\ automatic\ expansion.}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ view.ClearLodOverrides();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.UpdateLod(Vector3.zero),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.UpdateLod(\textcolor{keyword}{new}\ Vector3(50,\ 0,\ 0)),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(view.Nodes.Keys,\ Is.EquivalentTo(source.Nodes.Keys));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ [Test]}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00130}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a98b248011e993aa7206c6f4faac1b557}{00130}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_tests_1_1_graph_cluster_tests_a98b248011e993aa7206c6f4faac1b557}{InspectorRelationshipsFollowCollapsedClustersOnTheProjection}}()}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ var\ source\ =\ MakeScene();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ var\ view\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_cluster_scene_adeda24ebba9b9f2ac3765b48bce5837f}{GraphClusterScene}}(source);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \textcolor{keywordtype}{id}\ =\ view.Collapse(\textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\ \},\ \textcolor{stringliteral}{"{}Neighborhood"{}});}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ var\ outside\ =\ view.Nodes[\textcolor{stringliteral}{"{}outside"{}}];}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ var\ missing\ =}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Throws<KeyNotFoundException>(()\ =>\ GraphInspectorPresenter.Render(}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ VisualElement(),\ source,\ outside));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(missing.Message,\ Does.Contain(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ var\ parent\ =\ \textcolor{keyword}{new}\ VisualElement();}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Render\ against\ the\ projection\ so\ retargeted\ relationships\ can\ resolve\ the\ generated\ cluster\ endpoint.}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ GraphInspectorPresenter.Render(parent,\ view,\ outside);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.That(parent.Query<Button>().ToList().Any(button\ =>\ button.text\ ==\ \textcolor{stringliteral}{"{}Neighborhood"{}}),\ Is.True);}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_cluster_tests_8cs_source_l00147}00147\ \}}
+
+\end{DoxyCode}

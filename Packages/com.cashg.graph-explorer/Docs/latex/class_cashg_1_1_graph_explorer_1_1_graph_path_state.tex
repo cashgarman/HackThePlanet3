@@ -1,0 +1,380 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Path\+State Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_path_state}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+
+
+Persistent path selection state. Call Synchronize after scene topology changes.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc}{Graph\+Path\+State}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} scene, Func$<$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}}, bool $>$ edge\+Allowed=null)
+\begin{DoxyCompactList}\small\item\em Creates path-\/selection state for a graph scene. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aa7f45c7cb03c6203e60dadceebfa50ec}{Bind}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} value)
+\begin{DoxyCompactList}\small\item\em Binds the state to a scene and synchronizes its endpoints. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ad5938ae4c136ffdbd265bc5e06730704}{Set\+Endpoints}} (string start\+Id, string end\+Id)
+\begin{DoxyCompactList}\small\item\em Sets both path endpoints and computes the path. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae303313d51bda33a90bed198d693e7f6}{Show}} (string start\+Id, string end\+Id)
+\begin{DoxyCompactList}\small\item\em Sets both endpoints and activates path highlighting. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae19925ddf095796f87248556f4add58d}{Begin\+Pick}} (\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}} endpoint)
+\begin{DoxyCompactList}\small\item\em Begins picking one endpoint from the scene. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a986e41f9c7452727808862c121620dd3}{Accept\+Picked\+Node}} (string node\+Id)
+\begin{DoxyCompactList}\small\item\em Uses a picked node as the pending endpoint. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a6fadf465b51e93bd524f6bfca0a159b5}{Cancel\+Pick}} ()
+\begin{DoxyCompactList}\small\item\em Cancels the current endpoint pick. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aac00ccec530e42f5800c73f9c6876207}{Set\+Endpoint}} (\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}} endpoint, string node\+Id)
+\begin{DoxyCompactList}\small\item\em Sets one path endpoint to a node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af55af9b069d4ce7309ba01e02f9c2c40}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears both endpoints and the current path. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a2a0e80999a0f161d578d8d7acb597419}{Synchronize}} (bool force=false)
+\begin{DoxyCompactList}\small\item\em Recomputes the path when the bound scene has changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}{Is\+Active}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether path highlighting is active. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{Result}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the current path result. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{Start\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the selected starting node identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{End\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the selected destination node identifier. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}}? \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{Pending\+Pick}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the endpoint currently awaiting a node pick. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc}{Graph\+Path\+State}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}}
+\begin{DoxyCompactList}\small\item\em Occurs when path-\/selection state changes. \end{DoxyCompactList}\item 
+Action$<$ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a63c5a91ea83224f568ee11fba8125400}{Pick\+Requested}}
+\begin{DoxyCompactList}\small\item\em Occurs when the user should pick a node for an endpoint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Persistent path selection state. Call Synchronize after scene topology changes. 
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00129}{129}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!GraphPathState@{GraphPathState}}
+\index{GraphPathState@{GraphPathState}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{GraphPathState()}{GraphPathState()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc} 
+Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Graph\+Path\+State (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{scene}{, }\item[{Func$<$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}}, bool $>$}]{edge\+Allowed}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Creates path-\/selection state for a graph scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene} & Scene used to resolve nodes and edges.\\
+\hline
+{\em edge\+Allowed} & Optional predicate that excludes edges from path searches.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00138}{138}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a986e41f9c7452727808862c121620dd3}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!AcceptPickedNode@{AcceptPickedNode}}
+\index{AcceptPickedNode@{AcceptPickedNode}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{AcceptPickedNode()}{AcceptPickedNode()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a986e41f9c7452727808862c121620dd3} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Accept\+Picked\+Node (\begin{DoxyParamCaption}\item[{string}]{node\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Uses a picked node as the pending endpoint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+Id} & Picked node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when a pending endpoint accepted the node.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00205}{205}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae19925ddf095796f87248556f4add58d}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!BeginPick@{BeginPick}}
+\index{BeginPick@{BeginPick}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{BeginPick()}{BeginPick()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae19925ddf095796f87248556f4add58d} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Begin\+Pick (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}}}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Begins picking one endpoint from the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & Endpoint to select.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00195}{195}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aa7f45c7cb03c6203e60dadceebfa50ec}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!Bind@{Bind}}
+\index{Bind@{Bind}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{Bind()}{Bind()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aa7f45c7cb03c6203e60dadceebfa50ec} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Bind (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Binds the state to a scene and synchronizes its endpoints. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Scene to use for path selection.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00161}{161}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a6fadf465b51e93bd524f6bfca0a159b5}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!CancelPick@{CancelPick}}
+\index{CancelPick@{CancelPick}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{CancelPick()}{CancelPick()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a6fadf465b51e93bd524f6bfca0a159b5} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Cancel\+Pick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Cancels the current endpoint pick. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00216}{216}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af55af9b069d4ce7309ba01e02f9c2c40}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!Clear@{Clear}}
+\index{Clear@{Clear}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af55af9b069d4ce7309ba01e02f9c2c40} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears both endpoints and the current path. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00245}{245}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aac00ccec530e42f5800c73f9c6876207}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!SetEndpoint@{SetEndpoint}}
+\index{SetEndpoint@{SetEndpoint}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{SetEndpoint()}{SetEndpoint()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aac00ccec530e42f5800c73f9c6876207} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Set\+Endpoint (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}}}]{endpoint}{, }\item[{string}]{node\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Sets one path endpoint to a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & Endpoint to set.\\
+\hline
+{\em node\+Id} & Node identifier to assign.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00226}{226}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ad5938ae4c136ffdbd265bc5e06730704}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!SetEndpoints@{SetEndpoints}}
+\index{SetEndpoints@{SetEndpoints}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{SetEndpoints()}{SetEndpoints()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ad5938ae4c136ffdbd265bc5e06730704} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Set\+Endpoints (\begin{DoxyParamCaption}\item[{string}]{start\+Id}{, }\item[{string}]{end\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Sets both path endpoints and computes the path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Id} & Starting node identifier.\\
+\hline
+{\em end\+Id} & Destination node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed path result.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00171}{171}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae303313d51bda33a90bed198d693e7f6}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!Show@{Show}}
+\index{Show@{Show}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{Show()}{Show()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae303313d51bda33a90bed198d693e7f6} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Show (\begin{DoxyParamCaption}\item[{string}]{start\+Id}{, }\item[{string}]{end\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Sets both endpoints and activates path highlighting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Id} & Starting node identifier.\\
+\hline
+{\em end\+Id} & Destination node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed path result.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00188}{188}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a2a0e80999a0f161d578d8d7acb597419}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!Synchronize@{Synchronize}}
+\index{Synchronize@{Synchronize}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{Synchronize()}{Synchronize()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a2a0e80999a0f161d578d8d7acb597419} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Synchronize (\begin{DoxyParamCaption}\item[{bool}]{force}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Recomputes the path when the bound scene has changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em force} & When true, recomputes even if the scene revision is unchanged.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the path result changed.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00258}{258}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!EndId@{EndId}}
+\index{EndId@{EndId}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{EndId}{EndId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+End\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the selected destination node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00151}{151}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!IsActive@{IsActive}}
+\index{IsActive@{IsActive}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{IsActive}{IsActive}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Is\+Active\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether path highlighting is active. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00145}{145}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!PendingPick@{PendingPick}}
+\index{PendingPick@{PendingPick}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{PendingPick}{PendingPick}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e} 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}}? Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Pending\+Pick\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the endpoint currently awaiting a node pick. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00153}{153}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!Result@{Result}}
+\index{Result@{Result}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{Result}{Result}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Result\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the current path result. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00147}{147}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!StartId@{StartId}}
+\index{StartId@{StartId}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{StartId}{StartId}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Start\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the selected starting node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00149}{149}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-event-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!Changed@{Changed}}
+\index{Changed@{Changed}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{Changed}{Changed}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee} 
+Action$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc}{Graph\+Path\+State}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Changed}
+
+
+
+Occurs when path-\/selection state changes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00155}{155}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a63c5a91ea83224f568ee11fba8125400}\index{Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}!PickRequested@{PickRequested}}
+\index{PickRequested@{PickRequested}!Cashg.GraphExplorer.GraphPathState@{Cashg.GraphExplorer.GraphPathState}}
+\doxysubsubsection{\texorpdfstring{PickRequested}{PickRequested}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a63c5a91ea83224f568ee11fba8125400} 
+Action$<$\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{Graph\+Path\+Endpoint}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Path\+State.\+Pick\+Requested}
+
+
+
+Occurs when the user should pick a node for an endpoint. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_pathfinder_8cs_source_l00157}{157}} of file \doxymbox{\hyperlink{_graph_pathfinder_8cs_source}{Graph\+Pathfinder.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Pathfinder.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,187 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+
+
+Configures optional content and callbacks used by the graph inspector.  
+
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_action}{Graph\+Inspector\+Action}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a4c3f62cf74483a2a46e7e503e3090c85}{Actions}} = Array.\+Empty$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_action}{Graph\+Inspector\+Action}}$>$()
+\begin{DoxyCompactList}\small\item\em Gets or sets actions available for the inspected node. \end{DoxyCompactList}\item 
+Action$<$ Visual\+Element, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a57e9ba52279e970101f6532a032b7677}{Append\+Relationship\+Actions}}
+\begin{DoxyCompactList}\small\item\em Gets or sets a callback that adds actions to a relationship row. \end{DoxyCompactList}\item 
+Action$<$ Visual\+Element, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a437dccf8ed1e730243a98a380b0ec021}{Append\+Sections}}
+\begin{DoxyCompactList}\small\item\em Gets or sets a callback that adds custom sections to the inspector. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a70b9ff9adcade4caa4f5aab9b4a4ed53}{Append\+Sections\+Before\+Properties}}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether custom sections appear before node properties. \end{DoxyCompactList}\item 
+Action$<$ Visual\+Element, string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_aca794eb0344da87a7bed32c1eb26801f}{Bind\+Tip}} = (element, text) =$>$ element.\+tooltip = text
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback used to bind tooltip text to an element. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_af513abac4e59aeca6d78f583746682ca}{Collapse\+Properties}}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the properties section starts collapsed. \end{DoxyCompactList}\item 
+Action$<$ Foldout $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a37d101d0fa0fd2b6a13ad7cb236d3554}{Decorate}} = foldout =$>$ \{ \}
+\begin{DoxyCompactList}\small\item\em Gets or sets a callback that decorates disclosure foldouts. \end{DoxyCompactList}\item 
+Action$<$ Visual\+Element $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a60fd0d64d236030e8c721ad82173cb86}{Forget\+Tips}} = element =$>$ \{ \}
+\begin{DoxyCompactList}\small\item\em Gets or sets a callback that clears tracked tooltips from an element tree. \end{DoxyCompactList}\item 
+Action$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_ae690b7d4a2b2ce18480e14c598c71ac5}{Open\+Source}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback used to open a source reference. \end{DoxyCompactList}\item 
+Action$<$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a1d1cee8be8349e8130b5eec534a54d73}{Select}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the callback invoked when a related node is selected. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configures optional content and callbacks used by the graph inspector. 
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00054}{54}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a4c3f62cf74483a2a46e7e503e3090c85}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!Actions@{Actions}}
+\index{Actions@{Actions}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{Actions}{Actions}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a4c3f62cf74483a2a46e7e503e3090c85} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_action}{Graph\+Inspector\+Action}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Actions = Array.\+Empty$<$\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_inspector_action}{Graph\+Inspector\+Action}}$>$()}
+
+
+
+Gets or sets actions available for the inspected node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00057}{57}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a57e9ba52279e970101f6532a032b7677}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!AppendRelationshipActions@{AppendRelationshipActions}}
+\index{AppendRelationshipActions@{AppendRelationshipActions}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{AppendRelationshipActions}{AppendRelationshipActions}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a57e9ba52279e970101f6532a032b7677} 
+Action$<$Visual\+Element, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Append\+Relationship\+Actions}
+
+
+
+Gets or sets a callback that adds actions to a relationship row. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00059}{59}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a437dccf8ed1e730243a98a380b0ec021}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!AppendSections@{AppendSections}}
+\index{AppendSections@{AppendSections}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{AppendSections}{AppendSections}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a437dccf8ed1e730243a98a380b0ec021} 
+Action$<$Visual\+Element, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Append\+Sections}
+
+
+
+Gets or sets a callback that adds custom sections to the inspector. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00061}{61}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a70b9ff9adcade4caa4f5aab9b4a4ed53}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!AppendSectionsBeforeProperties@{AppendSectionsBeforeProperties}}
+\index{AppendSectionsBeforeProperties@{AppendSectionsBeforeProperties}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{AppendSectionsBeforeProperties}{AppendSectionsBeforeProperties}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a70b9ff9adcade4caa4f5aab9b4a4ed53} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Append\+Sections\+Before\+Properties}
+
+
+
+Gets or sets whether custom sections appear before node properties. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00063}{63}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_aca794eb0344da87a7bed32c1eb26801f}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!BindTip@{BindTip}}
+\index{BindTip@{BindTip}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{BindTip}{BindTip}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_aca794eb0344da87a7bed32c1eb26801f} 
+Action$<$Visual\+Element, string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Bind\+Tip = (element, text) =$>$ element.\+tooltip = text}
+
+
+
+Gets or sets the callback used to bind tooltip text to an element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00065}{65}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_af513abac4e59aeca6d78f583746682ca}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!CollapseProperties@{CollapseProperties}}
+\index{CollapseProperties@{CollapseProperties}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{CollapseProperties}{CollapseProperties}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_af513abac4e59aeca6d78f583746682ca} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Collapse\+Properties}
+
+
+
+Gets or sets whether the properties section starts collapsed. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00067}{67}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a37d101d0fa0fd2b6a13ad7cb236d3554}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!Decorate@{Decorate}}
+\index{Decorate@{Decorate}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{Decorate}{Decorate}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a37d101d0fa0fd2b6a13ad7cb236d3554} 
+Action$<$Foldout$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Decorate = foldout =$>$ \{ \}}
+
+
+
+Gets or sets a callback that decorates disclosure foldouts. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00069}{69}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a60fd0d64d236030e8c721ad82173cb86}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!ForgetTips@{ForgetTips}}
+\index{ForgetTips@{ForgetTips}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{ForgetTips}{ForgetTips}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a60fd0d64d236030e8c721ad82173cb86} 
+Action$<$Visual\+Element$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Forget\+Tips = element =$>$ \{ \}}
+
+
+
+Gets or sets a callback that clears tracked tooltips from an element tree. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00071}{71}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_ae690b7d4a2b2ce18480e14c598c71ac5}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!OpenSource@{OpenSource}}
+\index{OpenSource@{OpenSource}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{OpenSource}{OpenSource}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_ae690b7d4a2b2ce18480e14c598c71ac5} 
+Action$<$string$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Open\+Source}
+
+
+
+Gets or sets the callback used to open a source reference. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00073}{73}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a1d1cee8be8349e8130b5eec534a54d73}\index{Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}!Select@{Select}}
+\index{Select@{Select}!Cashg.GraphExplorer.GraphInspectorOptions@{Cashg.GraphExplorer.GraphInspectorOptions}}
+\doxysubsubsection{\texorpdfstring{Select}{Select}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_inspector_options_a1d1cee8be8349e8130b5eec534a54d73} 
+Action$<$\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Inspector\+Options.\+Select}
+
+
+
+Gets or sets the callback invoked when a related node is selected. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source_l00075}{75}} of file \doxymbox{\hyperlink{_graph_inspector_presenter_8cs_source}{Graph\+Inspector\+Presenter.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Inspector\+Presenter.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,352 @@
+\doxysection{gen\+\_\+architecture.\+py}
+\hypertarget{gen__architecture_8py_source}{}\label{gen__architecture_8py_source}\index{Documentation\texorpdfstring{$\sim$}{\string~}/gen\_architecture.py@{Documentation\texorpdfstring{$\sim$}{\string~}/gen\_architecture.py}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00001}\doxymbox{\hyperlink{namespacegen__architecture}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}Generate\ ARCHITECTURE.md\ —\ public\ API\ only\ (top-\/level\ types,\ no\ nested\ classes)."{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00002}00002\ \textcolor{keyword}{import}\ re}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00003}00003\ \textcolor{keyword}{from}\ pathlib\ \textcolor{keyword}{import}\ Path}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00004}00004\ \textcolor{keyword}{from}\ collections\ \textcolor{keyword}{import}\ defaultdict}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00006}00006\ root\ =\ Path(\_\_file\_\_).resolve().parent.parent}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00007}00007\ SKIP\ =\ (\textcolor{stringliteral}{"{}Tests"{}},)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00009}00009\ PURPOSE\ =\ \{}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00010}00010\ \ \ \ \ \textcolor{stringliteral}{"{}GraphValueType"{}}:\ \textcolor{stringliteral}{"{}Discriminator\ for\ scalar\ metadata\ stored\ on\ nodes\ and\ edges."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00011}00011\ \ \ \ \ \textcolor{stringliteral}{"{}GraphValue"{}}:\ \textcolor{stringliteral}{"{}Portable\ scalar:\ text,\ finite\ number,\ boolean,\ or\ explicit\ null\ (`GraphValue.Null`)."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00012}00012\ \ \ \ \ \textcolor{stringliteral}{"{}GraphNodeRecord"{}}:\ \textcolor{stringliteral}{"{}Immutable\ semantic\ node.\ View/layout\ state\ lives\ in\ \`{}GraphNodeViewState`,\ not\ here."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00013}00013\ \ \ \ \ \textcolor{stringliteral}{"{}GraphEdgeRecord"{}}:\ \textcolor{stringliteral}{"{}Immutable\ directed\ edge\ between\ existing\ node\ IDs."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00014}00014\ \ \ \ \ \textcolor{stringliteral}{"{}GraphSnapshot"{}}:\ \textcolor{stringliteral}{"{}Complete\ dataset\ payload:\ id,\ display\ name,\ all\ nodes\ and\ edges."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00015}00015\ \ \ \ \ \textcolor{stringliteral}{"{}GraphBatch"{}}:\ \textcolor{stringliteral}{"{}Mutable\ transaction\ buffer\ for\ \`{}GraphDocument.Apply`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00016}00016\ \ \ \ \ \textcolor{stringliteral}{"{}GraphIdSet"{}}:\ \textcolor{stringliteral}{"{}Read-\/only\ set\ of\ opaque\ string\ IDs\ (neighbors,\ incident\ edges)."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00017}00017\ \ \ \ \ \textcolor{stringliteral}{"{}GraphDocument"{}}:\ \textcolor{stringliteral}{"{}Canonical\ fact\ store,\ adjacency\ indexes,\ revisions,\ and\ integrated\ \`{}GraphTimeline`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00018}00018\ \ \ \ \ \textcolor{stringliteral}{"{}GraphSchema"{}}:\ \textcolor{stringliteral}{"{}Registers\ node\ types,\ relation\ types,\ and\ field\ definitions;\ optional\ \`{}Validate`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00019}00019\ \ \ \ \ \textcolor{stringliteral}{"{}GraphViewState"{}}:\ \textcolor{stringliteral}{"{}Per-\/dataset\ presentation:\ positions,\ selection,\ focus,\ fold\ state."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00020}00020\ \ \ \ \ \textcolor{stringliteral}{"{}GraphNodeViewState"{}}:\ \textcolor{stringliteral}{"{}Per-\/node\ layout/filter\ flags:\ position,\ velocity,\ pinned,\ visible,\ matches,\ favorite,\ emphasis."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00021}00021\ \ \ \ \ \textcolor{stringliteral}{"{}GraphExplorerOptions"{}}:\ \textcolor{stringliteral}{"{}Render\ budgets\ passed\ to\ \`{}GraphRenderer`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00022}00022\ \ \ \ \ \textcolor{stringliteral}{"{}GraphTimeline"{}}:\ \textcolor{stringliteral}{"{}Event\ history\ +\ optional\ position\ sampling;\ supports\ scrubbing\ via\ \`{}GraphDocument.Seek`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00023}00023\ \ \ \ \ \textcolor{stringliteral}{"{}GraphJson"{}}:\ \textcolor{stringliteral}{"{}GraphJson\ v1\ serialization\ (semantic\ snapshot\ +\ optional\ timeline/workspace)."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00024}00024\ \ \ \ \ \textcolor{stringliteral}{"{}GraphScene"{}}:\ \textcolor{stringliteral}{"{}Default\ live\ projection\ implementing\ \`{}IGraphScene`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00025}00025\ \ \ \ \ \textcolor{stringliteral}{"{}GraphClusterScene"{}}:\ \textcolor{stringliteral}{"{}Optional\ wrapper:\ collapse/expand\ neighborhoods,\ camera-\/distance\ LOD,\ canonical\ positions."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00026}00026\ \ \ \ \ \textcolor{stringliteral}{"{}GraphPathfinder"{}}:\ \textcolor{stringliteral}{"{}Directed\ unweighted\ shortest\ path\ (BFS)\ over\ projected\ edges."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00027}00027\ \ \ \ \ \textcolor{stringliteral}{"{}GraphPathState"{}}:\ \textcolor{stringliteral}{"{}Persistent\ path\ UI\ state\ with\ graph-\/pick\ workflow."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00028}00028\ \ \ \ \ \textcolor{stringliteral}{"{}GraphRevisionTimeline"{}}:\ \textcolor{stringliteral}{"{}Git-\/like\ revision\ list\ with\ lane\ layout;\ snapshots\ loaded\ by\ host."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00029}00029\ \ \ \ \ \textcolor{stringliteral}{"{}GraphStorage"{}}:\ \textcolor{stringliteral}{"{}Scoped,\ version-\/checked\ JSON\ files\ with\ atomic\ replace."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00030}00030\ \ \ \ \ \textcolor{stringliteral}{"{}GraphQueueCoordinator"{}}:\ \textcolor{stringliteral}{"{}Single-\/flight\ wrapper\ for\ action\ provider\ review/execute/recover."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00031}00031\ \ \ \ \ \textcolor{stringliteral}{"{}GraphWorkflow"{}}:\ \textcolor{stringliteral}{"{}Static\ helpers\ mapping\ workflow\ states\ to\ labels\ and\ progress\ visuals."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00032}00032\ \ \ \ \ \textcolor{stringliteral}{"{}ForceLayout"{}}:\ \textcolor{stringliteral}{"{}Force-\/directed\ layout\ (Barnes–Hut);\ records\ position\ frames\ when\ enabled."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00033}00033\ \ \ \ \ \textcolor{stringliteral}{"{}GraphRenderer"{}}:\ \textcolor{stringliteral}{"{}URP\ instanced\ drawing,\ picking,\ path/edge\ highlights."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00034}00034\ \ \ \ \ \textcolor{stringliteral}{"{}GraphNavigation"{}}:\ \textcolor{stringliteral}{"{}Orbit/fly/pan\ camera\ controller\ (Input\ System)."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00035}00035\ \ \ \ \ \textcolor{stringliteral}{"{}GraphShellController"{}}:\ \textcolor{stringliteral}{"{}Builds\ and\ drives\ the\ shared\ explorer\ shell\ from\ \`{}IGraphShellHost`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00036}00036\ \ \ \ \ \textcolor{stringliteral}{"{}GraphResources"{}}:\ \textcolor{stringliteral}{"{}Loads\ packaged\ assets\ under\ \`{}Resources/CashgGraphExplorer/`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00037}00037\ \ \ \ \ \textcolor{stringliteral}{"{}GraphResourceConfiguration"{}}:\ \textcolor{stringliteral}{"{}Per-\/host\ overrides\ for\ shaders,\ materials,\ and\ UI\ assets."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00038}00038\ \ \ \ \ \textcolor{stringliteral}{"{}GraphDiagnostics"{}}:\ \textcolor{stringliteral}{"{}Unity\ Profiler\ marker\ names\ for\ layout/draw/UI."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00039}00039\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphNode"{}}:\ \textcolor{stringliteral}{"{}Live\ node\ facade:\ record\ +\ mutable\ view\ fields\ +\ adjacency."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00040}00040\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphEdge"{}}:\ \textcolor{stringliteral}{"{}Live\ edge\ facade\ over\ \`{}GraphEdgeRecord`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00041}00041\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphScene"{}}:\ \textcolor{stringliteral}{"{}Document\ +\ schema\ +\ projected\ node/edge\ maps\ +\ topology\ revision."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00042}00042\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphEdgeFilter"{}}:\ \textcolor{stringliteral}{"{}Host\ predicate\ to\ hide\ edge\ types\ from\ layout/render/pick."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00043}00043\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphDataProvider"{}}:\ \textcolor{stringliteral}{"{}Coroutine-\/based\ load\ of\ snapshots\ and\ incremental\ detail\ batches."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00044}00044\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphActionProvider"{}}:\ \textcolor{stringliteral}{"{}Review/execute/recover/control\ for\ queued\ graph\ actions."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00045}00045\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphActionHistoryProvider"{}}:\ \textcolor{stringliteral}{"{}Optional\ catalog\ of\ action\ definitions\ and\ past\ runs."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00046}00046\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphTimelineEventProvider"{}}:\ \textcolor{stringliteral}{"{}Loads\ exact\ graph\ snapshots\ for\ external\ timeline\ events."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00047}00047\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphShellHost"{}}:\ \textcolor{stringliteral}{"{}Host-\/supplied\ UI\ elements\ and\ refresh\ hooks\ for\ the\ shell."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00048}00048\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphTimelineShellHost"{}}:\ \textcolor{stringliteral}{"{}Seek\ semantic\ timeline\ by\ entry\ index."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00049}00049\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphPositionHistoryShellHost"{}}:\ \textcolor{stringliteral}{"{}Seek\ by\ UTC\ time;\ pause\ simulation\ during\ scrub."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00050}00050\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphTimelineEventShellHost"{}}:\ \textcolor{stringliteral}{"{}External\ event\ track\ +\ session/live\ return."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00051}00051\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphCustomDrawerShellHost"{}}:\ \textcolor{stringliteral}{"{}Extra\ shell\ drawers\ (filters,\ source\ panels)."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00052}00052\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphWorkflowAcceptance"{}}:\ \textcolor{stringliteral}{"{}Host\ gate\ for\ marking\ workflow\ steps\ accepted\ on\ nodes."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00053}00053\ \ \ \ \ \textcolor{stringliteral}{"{}IGraphExternalTaskProvider"{}}:\ \textcolor{stringliteral}{"{}Open\ external\ tool\ UI\ for\ handed-\/off\ workflow\ tasks."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00054}00054\ \ \ \ \ \textcolor{stringliteral}{"{}ICodexTransport"{}}:\ \textcolor{stringliteral}{"{}Line-\/delimited\ stdio\ transport\ to\ Codex\ app-\/server."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00055}00055\ \ \ \ \ \textcolor{stringliteral}{"{}CodexAppServerClient"{}}:\ \textcolor{stringliteral}{"{}JSON-\/RPC\ client;\ pump\ on\ host\ thread\ via\ \`{}Pump()`."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00059}00059\ \textcolor{keyword}{def\ }brace\_delta(line:\ str)\ -\/>\ int:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ line.count(\textcolor{stringliteral}{"{}\{"{}})\ -\/\ line.count(\textcolor{stringliteral}{"{}\}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00063}00063\ \textcolor{keyword}{def\ }parse\_file(path:\ Path):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00064}00064\ \ \ \ \ text\ =\ path.read\_text(encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00065}00065\ \ \ \ \ ns\ =\ \textcolor{stringliteral}{"{}Cashg.GraphExplorer"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}namespace\ Cashg.GraphExplorer.Codex"{}}\ \textcolor{keywordflow}{in}\ text:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ ns\ =\ \textcolor{stringliteral}{"{}Cashg.GraphExplorer.Codex"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{stringliteral}{"{}namespace\ Cashg.GraphExplorer.Editor"{}}\ \textcolor{keywordflow}{in}\ text:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ ns\ =\ \textcolor{stringliteral}{"{}Cashg.GraphExplorer.Editor"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00071}00071\ \ \ \ \ lines\ =\ text.splitlines()}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00072}00072\ \ \ \ \ depth\ =\ 0}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00073}00073\ \ \ \ \ in\_namespace\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00074}00074\ \ \ \ \ types\ =\ []}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00075}00075\ \ \ \ \ pending\_summary\ =\ []}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00077}00077\ \ \ \ \ type\_re\ =\ re.compile(}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{r"{}\string^\(\backslash\)s*public\(\backslash\)s+(static\(\backslash\)s+)?(sealed\(\backslash\)s+)?(readonly\(\backslash\)s+)?(class|interface|enum|struct)\(\backslash\)s+(\(\backslash\)w+)"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00079}00079\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00080}00080\ \ \ \ \ member\_re\ =\ re.compile(}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{r"{}\string^\(\backslash\)s*public\(\backslash\)s+(static\(\backslash\)s+)?(.+?)\(\backslash\)s+(\(\backslash\)w+)\(\backslash\)s*(\(\backslash\)([\string^)]*\(\backslash\)))?\(\backslash\)s*(?:\(\backslash\)\{[\string^\}]*\(\backslash\)\}|=>|[;=])"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00082}00082\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00083}00083\ \ \ \ \ iface\_member\_re\ =\ re.compile(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*([\(\backslash\)w<>,\(\backslash\)[\(\backslash\)]\(\backslash\)s.?]+)\(\backslash\)s+(\(\backslash\)w+)\(\backslash\)s*\(\backslash\)([\string^)]*\(\backslash\))\(\backslash\)s*;"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{for}\ line\ \textcolor{keywordflow}{in}\ lines:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ stripped\ =\ line.strip()}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ in\_namespace:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ stripped.startswith(\textcolor{stringliteral}{"{}namespace\ "{}}):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\_namespace\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ stripped.startswith(\textcolor{stringliteral}{"{}///"{}}):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ pending\_summary.append(stripped[3:].strip().lstrip(\textcolor{stringliteral}{"{}/"{}}).strip())}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ m\ =\ type\_re.match(line)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ rel\_depth\ =\ depth\ \ \textcolor{comment}{\#\ depth\ before\ this\ line's\ braces}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ m\ \textcolor{keywordflow}{and}\ rel\_depth\ ==\ 1:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}\ "{}}.join(pending\_summary).replace(\textcolor{stringliteral}{"{}<summary>"{}},\ \textcolor{stringliteral}{"{}"{}}).replace(\textcolor{stringliteral}{"{}</summary>"{}},\ \textcolor{stringliteral}{"{}"{}}).strip()}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ pending\_summary\ =\ []}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ types.append(}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}kind"{}}:\ m.group(4),}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}name"{}}:\ m.group(5),}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}summary"{}}:\ summary,}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}members"{}}:\ [],}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ depth\ +=\ brace\_delta(line)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ types\ \textcolor{keywordflow}{and}\ rel\_depth\ ==\ 2:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ types[-\/1][\textcolor{stringliteral}{"{}kind"{}}]\ ==\ \textcolor{stringliteral}{"{}interface"{}}:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ im\ =\ iface\_member\_re.match(line)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ im:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ types[-\/1][\textcolor{stringliteral}{"{}members"{}}].append(f\textcolor{stringliteral}{"{}\{im.group(1).strip()\}\ \{im.group(2)\}(...)"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mm\ =\ member\_re.match(line)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ mm\ \textcolor{keywordflow}{and}\ \textcolor{stringliteral}{"{}\ class\ "{}}\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ line\ \textcolor{keywordflow}{and}\ \textcolor{stringliteral}{"{}\ interface\ "{}}\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ line:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sig\ =\ stripped.rstrip(\textcolor{stringliteral}{"{}\{"{}}).strip()}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ sig.endswith(\textcolor{stringliteral}{"{};"{}})\ \textcolor{keywordflow}{and}\ \textcolor{stringliteral}{"{}\{"{}}\ \textcolor{keywordflow}{in}\ sig:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sig\ =\ sig.split(\textcolor{stringliteral}{"{}\{"{}})[0].strip()}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ types[-\/1][\textcolor{stringliteral}{"{}members"{}}].append(sig)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00124}00124\ \ \ \ \ \ \ \ \ depth\ +=\ brace\_delta(line)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ depth\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ pending\_summary\ =\ []}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{return}\ ns,\ types}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00131}00131\ sections\ =\ []}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00132}00132\ \textcolor{keywordflow}{for}\ path\ \textcolor{keywordflow}{in}\ sorted(root.rglob(\textcolor{stringliteral}{"{}*.cs"{}})):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00133}00133\ \ \ \ \ rel\ =\ path.relative\_to(root)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{if}\ any(p\ \textcolor{keywordflow}{in}\ str(rel)\ \textcolor{keywordflow}{for}\ p\ \textcolor{keywordflow}{in}\ SKIP):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00136}00136\ \ \ \ \ ns,\ types\ =\ parse\_file(path)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00137}00137\ \ \ \ \ \textcolor{keywordflow}{if}\ types:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ sections.append((str(rel).replace(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}},\ \textcolor{stringliteral}{"{}/"{}}),\ ns,\ types))}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00140}00140\ lines\_out\ =\ []}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00141}00141\ lines\_out\ +=\ [}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00142}00142\ \ \ \ \ \textcolor{stringliteral}{"{}\#\ Graph\ Explorer\ —\ Architecture\ \&\ API\ Reference"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00143}00143\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00144}00144\ \ \ \ \ \textcolor{stringliteral}{"{}\_Package\ \`{}com.cashg.graph-\/explorer`\ v0.1.0.\_"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00145}00145\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00146}00146\ \ \ \ \ \textcolor{stringliteral}{"{}Complete\ **architecture**\ and\ **public\ API**\ reference\ for\ the\ Graph\ Explorer\ Unity\ library."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00147}00147\ \ \ \ \ \textcolor{stringliteral}{"{}Integration\ guide:\ [SDK.md](SDK.md)."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00148}00148\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00149}00149\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\ Table\ of\ contents"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00150}00150\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00151}00151\ \ \ \ \ \textcolor{stringliteral}{"{}1.\ [Architecture\ overview](\#architecture-\/overview)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00152}00152\ \ \ \ \ \textcolor{stringliteral}{"{}2.\ [Assemblies\ \&\ dependencies](\#assemblies-\/-\/dependencies)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00153}00153\ \ \ \ \ \textcolor{stringliteral}{"{}3.\ [Core\ API\ (`Cashg.GraphExplorer`)](\#core-\/api-\/cashggraphexplorer)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00154}00154\ \ \ \ \ \textcolor{stringliteral}{"{}4.\ [Presentation\ API\ (`Cashg.GraphExplorer.Presentation`)](\#presentation-\/api-\/cashggraphexplorerpresentation)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00155}00155\ \ \ \ \ \textcolor{stringliteral}{"{}5.\ [Codex\ (`Cashg.GraphExplorer.Codex`)](\#codex-\/cashggraphexplorercodex)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00156}00156\ \ \ \ \ \textcolor{stringliteral}{"{}6.\ [Editor\ (`Cashg.GraphExplorer.Editor`)](\#editor-\/cashggraphexploreditor)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00157}00157\ \ \ \ \ \textcolor{stringliteral}{"{}7.\ [Usage\ examples](\#usage-\/examples)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00158}00158\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00159}00159\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\ Architecture\ overview"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00160}00160\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00161}00161\ \ \ \ \ \textcolor{stringliteral}{"{}|\ Layer\ |\ Types\ |\ Responsibility\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00162}00162\ \ \ \ \ \textcolor{stringliteral}{"{}|-\/-\/-\/-\/-\/-\/-\/|-\/-\/-\/-\/-\/-\/-\/-\/|-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/|"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00163}00163\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **Records**\ |\ \`{}GraphNodeRecord`,\ \`{}GraphEdgeRecord`,\ \`{}GraphValue`\ |\ Immutable\ facts\ and\ metadata\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00164}00164\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **Document**\ |\ \`{}GraphDocument`,\ \`{}GraphBatch`,\ \`{}GraphTimeline`\ |\ Single-\/threaded\ store,\ atomic\ updates,\ history\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00165}00165\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **Schema**\ |\ \`{}GraphSchema`,\ \`{}*Definition`\ |\ Type\ colors,\ fields,\ validation\ hints\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00166}00166\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **View**\ |\ \`{}GraphViewState`,\ \`{}GraphNodeViewState`\ |\ Layout,\ selection,\ visibility\ (not\ in\ JSON)\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00167}00167\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **Projection**\ |\ \`{}GraphScene`,\ \`{}GraphClusterScene`,\ \`{}IGraphNode`\ |\ Live\ facades\ for\ layout/render/UI\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00168}00168\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **IO**\ |\ \`{}GraphJson`,\ \`{}GraphStorage`\ |\ Portable\ files;\ view\ state\ excluded\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00169}00169\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **Providers**\ |\ \`{}IGraphDataProvider`,\ \`{}IGraphActionProvider`\ |\ Host-\/owned\ backends\ (coroutines)\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00170}00170\ \ \ \ \ \textcolor{stringliteral}{"{}|\ **Presentation**\ |\ \`{}ForceLayout`,\ \`{}GraphRenderer`,\ presenters\ |\ URP\ +\ UI\ Toolkit\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00171}00171\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00172}00172\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}mermaid"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00173}00173\ \ \ \ \ \textcolor{stringliteral}{"{}flowchart\ LR"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00174}00174\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ Provider\ -\/-\/>\ Document"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00175}00175\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ Document\ -\/-\/>\ Scene"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00176}00176\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ View\ -\/-\/>\ Scene"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00177}00177\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ Schema\ -\/-\/>\ Scene"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00178}00178\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ Scene\ -\/-\/>\ Layout"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00179}00179\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ Scene\ -\/-\/>\ Renderer"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00180}00180\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ Document\ -\/-\/>\ Json"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00181}00181\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00182}00182\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00183}00183\ \ \ \ \ \textcolor{stringliteral}{"{}**Rules\ worth\ remembering:**"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00184}00184\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00185}00185\ \ \ \ \ \textcolor{stringliteral}{"{}-\/\ IDs\ are\ opaque,\ case-\/sensitive\ strings;\ no\ auto-\/deduplication."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00186}00186\ \ \ \ \ \textcolor{stringliteral}{"{}-\/\ \`{}Apply`\ validates\ the\ whole\ batch;\ conflicting\ ops\ roll\ back\ entirely."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00187}00187\ \ \ \ \ \textcolor{stringliteral}{"{}-\/\ Editing\ while\ timeline\ is\ historical\ auto-\/returns\ to\ live\ (`EnsureLive`)."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00188}00188\ \ \ \ \ \textcolor{stringliteral}{"{}-\/\ Layout\ proximity\ is\ not\ evidence\ of\ a\ semantic\ edge."{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00189}00189\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00190}00190\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\ Assemblies\ \&\ dependencies"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00191}00191\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00192}00192\ \ \ \ \ \textcolor{stringliteral}{"{}|\ Assembly\ |\ Unity\ deps\ |\ Notes\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00193}00193\ \ \ \ \ \textcolor{stringliteral}{"{}|-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/|-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/|-\/-\/-\/-\/-\/-\/-\/|"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00194}00194\ \ \ \ \ \textcolor{stringliteral}{"{}|\ \`{}Cashg.GraphExplorer`\ |\ Core,\ \`{}System.Text.Json`\ |\ Safe\ for\ non-\/URP\ tools\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00195}00195\ \ \ \ \ \textcolor{stringliteral}{"{}|\ \`{}Cashg.GraphExplorer.Presentation`\ |\ URP\ 17.7,\ Input\ System\ 7.0\ |\ Player\ +\ Editor\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00196}00196\ \ \ \ \ \textcolor{stringliteral}{"{}|\ \`{}Cashg.GraphExplorer.Editor`\ |\ Editor\ only\ |\ Do\ not\ reference\ from\ player\ |"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00197}00197\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00198}00198\ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/-\/"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00199}00199\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00200}00200\ ]}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00202}00202\ by\_asm\ =\ defaultdict(list)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00203}00203\ \textcolor{keywordflow}{for}\ rel,\ ns,\ types\ \textcolor{keywordflow}{in}\ sections:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00204}00204\ \ \ \ \ \textcolor{keywordflow}{if}\ rel.startswith(\textcolor{stringliteral}{"{}Editor/"{}}):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ asm\ =\ \textcolor{stringliteral}{"{}Editor"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{stringliteral}{"{}Presentation/"{}}\ \textcolor{keywordflow}{in}\ rel:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00207}00207\ \ \ \ \ \ \ \ \ asm\ =\ \textcolor{stringliteral}{"{}Presentation"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{stringliteral}{"{}CodexIntegration"{}}\ \textcolor{keywordflow}{in}\ rel:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00209}00209\ \ \ \ \ \ \ \ \ asm\ =\ \textcolor{stringliteral}{"{}Codex"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00210}00210\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ asm\ =\ \textcolor{stringliteral}{"{}Core"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00212}00212\ \ \ \ \ by\_asm[asm].append((rel,\ ns,\ types))}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00214}00214\ titles\ =\ \{}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00215}00215\ \ \ \ \ \textcolor{stringliteral}{"{}Core"{}}:\ \textcolor{stringliteral}{"{}\#\#\ Core\ API\ (`Cashg.GraphExplorer`)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00216}00216\ \ \ \ \ \textcolor{stringliteral}{"{}Presentation"{}}:\ \textcolor{stringliteral}{"{}\#\#\ Presentation\ API\ (`Cashg.GraphExplorer.Presentation`)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00217}00217\ \ \ \ \ \textcolor{stringliteral}{"{}Codex"{}}:\ \textcolor{stringliteral}{"{}\#\#\ Codex\ (`Cashg.GraphExplorer.Codex`)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00218}00218\ \ \ \ \ \textcolor{stringliteral}{"{}Editor"{}}:\ \textcolor{stringliteral}{"{}\#\#\ Editor\ (`Cashg.GraphExplorer.Editor`)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00219}00219\ \}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00221}00221\ \textcolor{keywordflow}{for}\ asm\ \textcolor{keywordflow}{in}\ (\textcolor{stringliteral}{"{}Core"{}},\ \textcolor{stringliteral}{"{}Presentation"{}},\ \textcolor{stringliteral}{"{}Codex"{}},\ \textcolor{stringliteral}{"{}Editor"{}}):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00222}00222\ \ \ \ \ lines\_out.append(titles[asm])}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00223}00223\ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00224}00224\ \ \ \ \ \textcolor{keywordflow}{for}\ rel,\ ns,\ types\ \textcolor{keywordflow}{in}\ sorted(by\_asm.get(asm,\ [])):}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ lines\_out.append(f\textcolor{stringliteral}{"{}\#\#\#\ \`{}\{rel\}`"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00226}00226\ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ lines\_out.append(f\textcolor{stringliteral}{"{}Namespace:\ \`{}\{ns\}`"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ t\ \textcolor{keywordflow}{in}\ types:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(f\textcolor{stringliteral}{"{}\#\#\#\#\ \`{}\{t['name']\}`\ (\{t['kind']\})"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ blurb\ =\ t[\textcolor{stringliteral}{"{}summary"{}}]\ \textcolor{keywordflow}{or}\ PURPOSE.get(t[\textcolor{stringliteral}{"{}name"{}}],\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ blurb:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(blurb)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ t[\textcolor{stringliteral}{"{}members"{}}]:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}|\ Member\ |\ Declaration\ |"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}|-\/-\/-\/-\/-\/-\/-\/-\/|-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/|"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ mem\ \textcolor{keywordflow}{in}\ t[\textcolor{stringliteral}{"{}members"{}}]:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ esc\ =\ mem.replace(\textcolor{stringliteral}{"{}|"{}},\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)|"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name\ =\ re.search(\textcolor{stringliteral}{r"{}\(\backslash\)b(\(\backslash\)w+)\(\backslash\)s*[\(\backslash\)(<]"{}},\ mem)}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ label\ =\ name.group(1)\ \textcolor{keywordflow}{if}\ name\ \textcolor{keywordflow}{else}\ mem.split()[-\/1]}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(f\textcolor{stringliteral}{"{}|\ \`{}\{label\}`\ |\ \`{}\{esc\}`\ |"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ t[\textcolor{stringliteral}{"{}kind"{}}]\ ==\ \textcolor{stringliteral}{"{}enum"{}}:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}\_Enum\ constants\ —\ see\ source\ file.\_"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}\_See\ source\ for\ properties;\ interface/MonoBehaviour\ members\ may\ be\ split\ across\ partial\ declarations.\_"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines\_out.append(\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00252}00252\ lines\_out\ +=\ [}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00253}00253\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\ Usage\ examples"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00254}00254\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00255}00255\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ Bootstrap\ document\ and\ scene"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00256}00256\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00257}00257\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00258}00258\ \ \ \ \ \textcolor{stringliteral}{"{}var\ schema\ =\ new\ GraphSchema();"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00259}00259\ \ \ \ \ \textcolor{stringliteral}{'schema.Register(new\ GraphNodeTypeDefinition("{}file"{},\ "{}File"{},\ shapeId:\ "{}Cube"{},\ color:\ Color.gray));'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00260}00260\ \ \ \ \ \textcolor{stringliteral}{'schema.Register(new\ GraphRelationDefinition("{}imports"{},\ "{}Imports"{},\ springStrength:\ 0.5f));'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00261}00261\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00262}00262\ \ \ \ \ \textcolor{stringliteral}{'var\ doc\ =\ new\ GraphDocument("{}codebase"{},\ "{}My\ Repo"{});'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00263}00263\ \ \ \ \ \textcolor{stringliteral}{"{}var\ batch\ =\ new\ GraphBatch();"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00264}00264\ \ \ \ \ \textcolor{stringliteral}{'batch.Nodes.Add(new\ GraphNodeRecord("{}f1"{},\ "{}file"{},\ "{}Program.cs"{},'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00265}00265\ \ \ \ \ \textcolor{stringliteral}{'\ \ \ \ new[]\ \{\ new\ KeyValuePair<string,\ GraphValue>("{}path"{},\ GraphValue.From("{}src/Program.cs"{}))\ \}));'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00266}00266\ \ \ \ \ \textcolor{stringliteral}{"{}doc.Apply(batch);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00267}00267\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00268}00268\ \ \ \ \ \textcolor{stringliteral}{"{}var\ view\ =\ new\ GraphViewState(doc.DatasetId);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00269}00269\ \ \ \ \ \textcolor{stringliteral}{"{}var\ scene\ =\ new\ GraphScene(doc,\ schema,\ view);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00270}00270\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00271}00271\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00272}00272\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ Force\ layout\ +\ render\ loop"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00273}00273\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00274}00274\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00275}00275\ \ \ \ \ \textcolor{stringliteral}{"{}var\ profile\ =\ new\ GraphPresentationProfile\ \{\ MetricField\ =\ \(\backslash\)"{}loc\(\backslash\)"{}\ \};"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00276}00276\ \ \ \ \ \textcolor{stringliteral}{"{}var\ layout\ =\ new\ ForceLayout(profile)\ \{\ Mode\ =\ LayoutMode.Spatial\ \};"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00277}00277\ \ \ \ \ \textcolor{stringliteral}{"{}var\ renderer\ =\ new\ GraphRenderer(profile);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00278}00278\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00279}00279\ \ \ \ \ \textcolor{stringliteral}{"{}layout.Bind(scene);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00280}00280\ \ \ \ \ \textcolor{stringliteral}{"{}renderer.UpdateMetrics(scene,\ edgeFilter:\ null);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00281}00281\ \ \ \ \ \textcolor{stringliteral}{"{}layout.Step(Time.deltaTime);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00282}00282\ \ \ \ \ \textcolor{stringliteral}{"{}renderer.Draw(scene,\ null,\ camera,\ selected,\ hovered,\ hoveredEdge);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00283}00283\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00284}00284\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00285}00285\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ GraphJson\ round-\/trip"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00286}00286\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00287}00287\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00288}00288\ \ \ \ \ \textcolor{stringliteral}{"{}doc.EstablishBaseline(DateTimeOffset.UtcNow);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00289}00289\ \ \ \ \ \textcolor{stringliteral}{'var\ json\ =\ GraphJson.Serialize(doc);'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00290}00290\ \ \ \ \ \textcolor{stringliteral}{"{}var\ copy\ =\ GraphJson.Parse(json);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00291}00291\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00292}00292\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00293}00293\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ Provider\ load\ (Unity\ coroutine)"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00294}00294\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00295}00295\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00296}00296\ \ \ \ \ \textcolor{stringliteral}{"{}IEnumerator\ Load(IGraphDataProvider\ provider,\ string\ datasetId)\ \{"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00297}00297\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ GraphSnapshot\ snap\ =\ null;\ Exception\ err\ =\ null;"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00298}00298\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ yield\ return\ provider.Load(datasetId,\ null,\ CancellationToken.None,\ s\ =>\ snap\ =\ s,\ e\ =>\ err\ =\ e);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00299}00299\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ if\ (err\ !=\ null)\ yield\ break;"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00300}00300\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ document.ReplaceSnapshot(snap);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00301}00301\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ scene.Synchronize();"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00302}00302\ \ \ \ \ \textcolor{stringliteral}{"{}\}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00303}00303\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00304}00304\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00305}00305\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ Cluster\ +\ LOD"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00306}00306\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00307}00307\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00308}00308\ \ \ \ \ \textcolor{stringliteral}{"{}var\ clustered\ =\ new\ GraphClusterScene(scene);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00309}00309\ \ \ \ \ \textcolor{stringliteral}{'string\ groupId\ =\ clustered.Collapse(new[]\ \{\ "{}a"{},\ "{}b"{},\ "{}c"{}\ \},\ "{}Core"{});'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00310}00310\ \ \ \ \ \textcolor{stringliteral}{"{}if\ (clustered.UpdateLod(camera.transform.position))"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00311}00311\ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ layout.Bind(clustered);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00312}00312\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00313}00313\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00314}00314\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ Shortest\ path\ highlight"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00315}00315\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00316}00316\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00317}00317\ \ \ \ \ \textcolor{stringliteral}{"{}var\ path\ =\ new\ GraphPathState(scene,\ e\ =>\ e.Relation\ ==\ \(\backslash\)"{}imports\(\backslash\)"{});"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00318}00318\ \ \ \ \ \textcolor{stringliteral}{"{}path.SetEndpoints(\(\backslash\)"{}f1\(\backslash\)"{},\ \(\backslash\)"{}f99\(\backslash\)"{});"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00319}00319\ \ \ \ \ \textcolor{stringliteral}{"{}using\ (GraphPathRendering.Bind(path,\ renderer))\ \{\ /*\ draw\ */\ \}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00320}00320\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00321}00321\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00322}00322\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ Action\ queue"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00323}00323\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00324}00324\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00325}00325\ \ \ \ \ \textcolor{stringliteral}{"{}var\ coordinator\ =\ new\ GraphQueueCoordinator(actionProvider);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00326}00326\ \ \ \ \ \textcolor{stringliteral}{"{}yield\ return\ coordinator.Review(draft,\ token,\ onReviewed,\ onFailed);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00327}00327\ \ \ \ \ \textcolor{stringliteral}{"{}yield\ return\ coordinator.Submit(review,\ ()\ =>\ store.Save(review.Id),\ token,\ onDone,\ onFailed);"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00328}00328\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00329}00329\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00330}00330\ \ \ \ \ \textcolor{stringliteral}{"{}\#\#\#\ Scoped\ storage"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00331}00331\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00332}00332\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}csharp"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00333}00333\ \ \ \ \ \textcolor{stringliteral}{'var\ store\ =\ new\ GraphStorage(root:\ @"{}C:\(\backslash\)\(\backslash\)GraphData"{},\ hostId:\ "{}my-\/app"{},\ datasetId:\ doc.DatasetId,\ providerId:\ "{}local"{});'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00334}00334\ \ \ \ \ \textcolor{stringliteral}{'store.Write("{}preferences"{},\ supportedVersion:\ 1,\ json);'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00335}00335\ \ \ \ \ \textcolor{stringliteral}{'var\ loaded\ =\ store.Read("{}preferences"{},\ supportedVersion:\ 1);'},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00336}00336\ \ \ \ \ \textcolor{stringliteral}{"{}\`{}\`{}\`{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00337}00337\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00338}00338\ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/-\/"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00339}00339\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00340}00340\ \ \ \ \ \textcolor{stringliteral}{"{}\_Regenerate\ this\ file:\ \`{}python\ Documentation\string~/gen\_architecture.py`\ from\ the\ package\ root.\_"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00341}00341\ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00342}00342\ ]}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00343}00343\ }
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00344}00344\ dest\ =\ Path(\_\_file\_\_).resolve().parent\ /\ \textcolor{stringliteral}{"{}ARCHITECTURE.md"{}}}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00345}00345\ dest.write\_text(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}.join(lines\_out),\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})}
+\DoxyCodeLine{\Hypertarget{gen__architecture_8py_source_l00346}00346\ print(f\textcolor{stringliteral}{"{}Wrote\ \{dest\}\ (\{len(lines\_out)\}\ lines)"{}})}
+
+\end{DoxyCode}

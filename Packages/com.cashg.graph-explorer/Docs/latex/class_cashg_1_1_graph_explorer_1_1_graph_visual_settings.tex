@@ -1,0 +1,552 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+
+
+Represents graph visual settings.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aa4156bb4a1f6e1aaecbdd45719bbe15e}{Selection\+Pulse}} (float seconds, bool reduced\+Motion)
+\begin{DoxyCompactList}\small\item\em Calculates the current selection pulse multiplier. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ad55bc89a8eb32dd3b2f86eb9fdf64974}{Apply\+Surface}} (Material material)
+\begin{DoxyCompactList}\small\item\em Applies cel shading and selected-\/node material properties. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_acff9f9c90b98a2afaf7af8eb93ea7083}{Cel\+Shading}} = true
+\begin{DoxyCompactList}\small\item\em Gets or sets whether cel shading is applied. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a20179ab5422703db6515e462de3923fa}{Light\+Bands}} = 3
+\begin{DoxyCompactList}\small\item\em Gets or sets the number of lighting bands used by cel shading. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_adf3a05f805f8f9548534bd708b9dec4e}{Shadow\+Brightness}} = .\+38f
+\begin{DoxyCompactList}\small\item\em Gets or sets the brightness of shaded surfaces. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ac61db8bb264bffa58244bee12e689ba2}{Band\+Softness}} = .\+015f
+\begin{DoxyCompactList}\small\item\em Gets or sets the softness of transitions between lighting bands. \end{DoxyCompactList}\item 
+Vector3 \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a78446bfc4fb23d42608777fd763eeaad}{Light\+Direction}} = new(-\/.\+4f, .\+8f, -\/.\+5f)
+\begin{DoxyCompactList}\small\item\em Gets or sets the world-\/space direction of the surface light. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af30a4a26deb44855486d9f7d86dd0371}{Surface\+Emission}} = .\+08f
+\begin{DoxyCompactList}\small\item\em Gets or sets the surface emission amount. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a4e242ecc67aba7df7cef612b3b7943f9}{Outlines}} = true
+\begin{DoxyCompactList}\small\item\em Gets or sets whether node outlines are rendered. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aeba0241eb0bdae248e3ef8aae697d583}{Outline\+Color}} = new(.\+012f, .\+018f, .\+028f, 1)
+\begin{DoxyCompactList}\small\item\em Gets or sets the outline color. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ad86478cac77a1632420e9e3c5206117a}{Outline\+Pixels}} = 1.\+25f
+\begin{DoxyCompactList}\small\item\em Gets or sets the outline width in screen pixels. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a97e0f5287bed8f88ebe7195c4541e226}{Outline\+Opacity}} = .\+95f
+\begin{DoxyCompactList}\small\item\em Gets or sets the outline opacity. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_acbade47ad7b7bcfdc0dc8b53aca4fe9f}{Crease\+Angle}} = 48f
+\begin{DoxyCompactList}\small\item\em Gets or sets the minimum surface-\/normal angle that produces a crease. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a4f6d716d9f9886f8688fbbdef6cf89f1}{Depth\+Threshold}} = .\+025f
+\begin{DoxyCompactList}\small\item\em Gets or sets the relative depth threshold for edge detection. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a08bf02864ebf019cab015501de249dfb}{Bloom}} = true
+\begin{DoxyCompactList}\small\item\em Gets or sets whether subtle node bloom is rendered. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a5cc84d144bfd566430eab6c625e6101a}{Bloom\+Intensity}} = .\+16f
+\begin{DoxyCompactList}\small\item\em Gets or sets the bloom intensity. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a2e41fce7df540201959115cf34366169}{Bloom\+Radius}} = 3.\+5f
+\begin{DoxyCompactList}\small\item\em Gets or sets the bloom blur radius in screen pixels. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ac67ec45b00026de14962363c3cb08424}{Selection\+Glow}} = true
+\begin{DoxyCompactList}\small\item\em Gets or sets whether selected nodes receive a glow. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a1135887c9acf38287d9cae591a7473ce}{Selection\+Color}} = new(.\+4f, .\+85f, 1f, 1)
+\begin{DoxyCompactList}\small\item\em Gets or sets the selected-\/node glow color. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aab6ecab209d1f35795d83a06c21da5b3}{Selection\+Glow\+Intensity}} = 1.\+7f
+\begin{DoxyCompactList}\small\item\em Gets or sets the selected-\/node glow intensity. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aa5986a6b70c6ec9e0e661a9f8458d0a6}{Selection\+Rim\+Intensity}} = .\+65f
+\begin{DoxyCompactList}\small\item\em Gets or sets the selected-\/node rim intensity. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a0669b38eeea19b6386372ffd31caf889}{Selection\+Glow\+Radius}} = 18f
+\begin{DoxyCompactList}\small\item\em Gets or sets the selected-\/node glow radius in pixels. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ab5405cc5de5151b6196977de4ddb375d}{Pulse\+Hz}} = .\+8f
+\begin{DoxyCompactList}\small\item\em Gets or sets the selection pulse frequency in hertz. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a570dbfe905a1d6756a8fb21abd384307}{Pulse\+Amount}} = .\+22f
+\begin{DoxyCompactList}\small\item\em Gets or sets the selection pulse amplitude. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_adeee15dc826ebbf3c3403e861c251d42}{Show\+Selection\+Ring}}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether a selection ring is displayed. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a187de86fb4710a8fbaf0d829553f1cd9}{Show\+Node\+Progress}} = true
+\begin{DoxyCompactList}\small\item\em Gets or sets whether host-\/provided node progress is displayed. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af0c01bd1605a8dbd28e675a2b8570224}{Progress\+Color}} = new(.\+25f, .\+95f, .\+48f, 1)
+\begin{DoxyCompactList}\small\item\em Gets or sets the node progress color. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a7017fcfdbc7611c5ba8c402d5e14b43d}{Progress\+Track\+Color}} = new(.\+16f, .\+23f, .\+20f, 1)
+\begin{DoxyCompactList}\small\item\em Gets or sets the unfilled node progress track color. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af21695fc987cfe524b676582a0a86b06}{Progress\+Width}} = .\+07f
+\begin{DoxyCompactList}\small\item\em Gets or sets the node progress stroke width as a fraction of node radius. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a69ad3a9c97cf338fa8a734efa0d744d2}{Progress\+Radius\+Scale}} = 2.\+45f
+\begin{DoxyCompactList}\small\item\em Gets or sets the progress ring radius scale relative to the node. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a89e5ca1f8e8784961393a60cf2dee07d}{Completion\+Badge\+Size}} = .\+4f
+\begin{DoxyCompactList}\small\item\em Gets or sets the completion badge size relative to the node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents graph visual settings. 
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00009}{9}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ad55bc89a8eb32dd3b2f86eb9fdf64974}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ApplySurface@{ApplySurface}}
+\index{ApplySurface@{ApplySurface}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ApplySurface()}{ApplySurface()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ad55bc89a8eb32dd3b2f86eb9fdf64974} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Apply\+Surface (\begin{DoxyParamCaption}\item[{Material}]{material}{}\end{DoxyParamCaption})}
+
+
+
+Applies cel shading and selected-\/node material properties. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em material} & Material whose shader properties are updated.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00099}{99}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aa4156bb4a1f6e1aaecbdd45719bbe15e}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!SelectionPulse@{SelectionPulse}}
+\index{SelectionPulse@{SelectionPulse}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{SelectionPulse()}{SelectionPulse()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aa4156bb4a1f6e1aaecbdd45719bbe15e} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Selection\+Pulse (\begin{DoxyParamCaption}\item[{float}]{seconds}{, }\item[{bool}]{reduced\+Motion}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the current selection pulse multiplier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & Elapsed time in seconds.\\
+\hline
+{\em reduced\+Motion} & Whether motion effects should be minimized.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The scale multiplier for the selection effect.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00090}{90}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ac61db8bb264bffa58244bee12e689ba2}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!BandSoftness@{BandSoftness}}
+\index{BandSoftness@{BandSoftness}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{BandSoftness}{BandSoftness}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ac61db8bb264bffa58244bee12e689ba2} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Band\+Softness = .\+015f}
+
+
+
+Gets or sets the softness of transitions between lighting bands. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00019}{19}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a08bf02864ebf019cab015501de249dfb}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!Bloom@{Bloom}}
+\index{Bloom@{Bloom}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{Bloom}{Bloom}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a08bf02864ebf019cab015501de249dfb} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Bloom = true}
+
+
+
+Gets or sets whether subtle node bloom is rendered. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00045}{45}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a5cc84d144bfd566430eab6c625e6101a}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!BloomIntensity@{BloomIntensity}}
+\index{BloomIntensity@{BloomIntensity}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{BloomIntensity}{BloomIntensity}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a5cc84d144bfd566430eab6c625e6101a} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Bloom\+Intensity = .\+16f}
+
+
+
+Gets or sets the bloom intensity. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00048}{48}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a2e41fce7df540201959115cf34366169}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!BloomRadius@{BloomRadius}}
+\index{BloomRadius@{BloomRadius}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{BloomRadius}{BloomRadius}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a2e41fce7df540201959115cf34366169} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Bloom\+Radius = 3.\+5f}
+
+
+
+Gets or sets the bloom blur radius in screen pixels. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00052}{52}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_acff9f9c90b98a2afaf7af8eb93ea7083}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!CelShading@{CelShading}}
+\index{CelShading@{CelShading}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{CelShading}{CelShading}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_acff9f9c90b98a2afaf7af8eb93ea7083} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Cel\+Shading = true}
+
+
+
+Gets or sets whether cel shading is applied. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00012}{12}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a89e5ca1f8e8784961393a60cf2dee07d}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!CompletionBadgeSize@{CompletionBadgeSize}}
+\index{CompletionBadgeSize@{CompletionBadgeSize}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{CompletionBadgeSize}{CompletionBadgeSize}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a89e5ca1f8e8784961393a60cf2dee07d} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Completion\+Badge\+Size = .\+4f}
+
+
+
+Gets or sets the completion badge size relative to the node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00084}{84}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_acbade47ad7b7bcfdc0dc8b53aca4fe9f}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!CreaseAngle@{CreaseAngle}}
+\index{CreaseAngle@{CreaseAngle}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{CreaseAngle}{CreaseAngle}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_acbade47ad7b7bcfdc0dc8b53aca4fe9f} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Crease\+Angle = 48f}
+
+
+
+Gets or sets the minimum surface-\/normal angle that produces a crease. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00038}{38}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a4f6d716d9f9886f8688fbbdef6cf89f1}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!DepthThreshold@{DepthThreshold}}
+\index{DepthThreshold@{DepthThreshold}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{DepthThreshold}{DepthThreshold}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a4f6d716d9f9886f8688fbbdef6cf89f1} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Depth\+Threshold = .\+025f}
+
+
+
+Gets or sets the relative depth threshold for edge detection. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00042}{42}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a20179ab5422703db6515e462de3923fa}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!LightBands@{LightBands}}
+\index{LightBands@{LightBands}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{LightBands}{LightBands}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a20179ab5422703db6515e462de3923fa} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Light\+Bands = 3}
+
+
+
+Gets or sets the number of lighting bands used by cel shading. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00015}{15}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a78446bfc4fb23d42608777fd763eeaad}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!LightDirection@{LightDirection}}
+\index{LightDirection@{LightDirection}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{LightDirection}{LightDirection}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a78446bfc4fb23d42608777fd763eeaad} 
+Vector3 Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Light\+Direction = new(-\/.\+4f, .\+8f, -\/.\+5f)}
+
+
+
+Gets or sets the world-\/space direction of the surface light. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00021}{21}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aeba0241eb0bdae248e3ef8aae697d583}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!OutlineColor@{OutlineColor}}
+\index{OutlineColor@{OutlineColor}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{OutlineColor}{OutlineColor}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aeba0241eb0bdae248e3ef8aae697d583} 
+Color Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Outline\+Color = new(.\+012f, .\+018f, .\+028f, 1)}
+
+
+
+Gets or sets the outline color. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00030}{30}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a97e0f5287bed8f88ebe7195c4541e226}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!OutlineOpacity@{OutlineOpacity}}
+\index{OutlineOpacity@{OutlineOpacity}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{OutlineOpacity}{OutlineOpacity}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a97e0f5287bed8f88ebe7195c4541e226} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Outline\+Opacity = .\+95f}
+
+
+
+Gets or sets the outline opacity. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00034}{34}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ad86478cac77a1632420e9e3c5206117a}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!OutlinePixels@{OutlinePixels}}
+\index{OutlinePixels@{OutlinePixels}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{OutlinePixels}{OutlinePixels}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ad86478cac77a1632420e9e3c5206117a} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Outline\+Pixels = 1.\+25f}
+
+
+
+Gets or sets the outline width in screen pixels. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00032}{32}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a4e242ecc67aba7df7cef612b3b7943f9}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!Outlines@{Outlines}}
+\index{Outlines@{Outlines}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{Outlines}{Outlines}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a4e242ecc67aba7df7cef612b3b7943f9} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Outlines = true}
+
+
+
+Gets or sets whether node outlines are rendered. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00027}{27}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af0c01bd1605a8dbd28e675a2b8570224}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ProgressColor@{ProgressColor}}
+\index{ProgressColor@{ProgressColor}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ProgressColor}{ProgressColor}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af0c01bd1605a8dbd28e675a2b8570224} 
+Color Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Progress\+Color = new(.\+25f, .\+95f, .\+48f, 1)}
+
+
+
+Gets or sets the node progress color. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00076}{76}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a69ad3a9c97cf338fa8a734efa0d744d2}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ProgressRadiusScale@{ProgressRadiusScale}}
+\index{ProgressRadiusScale@{ProgressRadiusScale}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ProgressRadiusScale}{ProgressRadiusScale}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a69ad3a9c97cf338fa8a734efa0d744d2} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Progress\+Radius\+Scale = 2.\+45f}
+
+
+
+Gets or sets the progress ring radius scale relative to the node. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00082}{82}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a7017fcfdbc7611c5ba8c402d5e14b43d}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ProgressTrackColor@{ProgressTrackColor}}
+\index{ProgressTrackColor@{ProgressTrackColor}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ProgressTrackColor}{ProgressTrackColor}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a7017fcfdbc7611c5ba8c402d5e14b43d} 
+Color Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Progress\+Track\+Color = new(.\+16f, .\+23f, .\+20f, 1)}
+
+
+
+Gets or sets the unfilled node progress track color. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00078}{78}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af21695fc987cfe524b676582a0a86b06}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ProgressWidth@{ProgressWidth}}
+\index{ProgressWidth@{ProgressWidth}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ProgressWidth}{ProgressWidth}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af21695fc987cfe524b676582a0a86b06} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Progress\+Width = .\+07f}
+
+
+
+Gets or sets the node progress stroke width as a fraction of node radius. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00080}{80}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a570dbfe905a1d6756a8fb21abd384307}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!PulseAmount@{PulseAmount}}
+\index{PulseAmount@{PulseAmount}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{PulseAmount}{PulseAmount}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a570dbfe905a1d6756a8fb21abd384307} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Pulse\+Amount = .\+22f}
+
+
+
+Gets or sets the selection pulse amplitude. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ab5405cc5de5151b6196977de4ddb375d}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!PulseHz@{PulseHz}}
+\index{PulseHz@{PulseHz}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{PulseHz}{PulseHz}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ab5405cc5de5151b6196977de4ddb375d} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Pulse\+Hz = .\+8f}
+
+
+
+Gets or sets the selection pulse frequency in hertz. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00066}{66}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a1135887c9acf38287d9cae591a7473ce}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!SelectionColor@{SelectionColor}}
+\index{SelectionColor@{SelectionColor}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{SelectionColor}{SelectionColor}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a1135887c9acf38287d9cae591a7473ce} 
+Color Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Selection\+Color = new(.\+4f, .\+85f, 1f, 1)}
+
+
+
+Gets or sets the selected-\/node glow color. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00058}{58}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ac67ec45b00026de14962363c3cb08424}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!SelectionGlow@{SelectionGlow}}
+\index{SelectionGlow@{SelectionGlow}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{SelectionGlow}{SelectionGlow}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_ac67ec45b00026de14962363c3cb08424} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Selection\+Glow = true}
+
+
+
+Gets or sets whether selected nodes receive a glow. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00055}{55}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aab6ecab209d1f35795d83a06c21da5b3}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!SelectionGlowIntensity@{SelectionGlowIntensity}}
+\index{SelectionGlowIntensity@{SelectionGlowIntensity}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{SelectionGlowIntensity}{SelectionGlowIntensity}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aab6ecab209d1f35795d83a06c21da5b3} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Selection\+Glow\+Intensity = 1.\+7f}
+
+
+
+Gets or sets the selected-\/node glow intensity. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00060}{60}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a0669b38eeea19b6386372ffd31caf889}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!SelectionGlowRadius@{SelectionGlowRadius}}
+\index{SelectionGlowRadius@{SelectionGlowRadius}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{SelectionGlowRadius}{SelectionGlowRadius}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a0669b38eeea19b6386372ffd31caf889} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Selection\+Glow\+Radius = 18f}
+
+
+
+Gets or sets the selected-\/node glow radius in pixels. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00064}{64}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aa5986a6b70c6ec9e0e661a9f8458d0a6}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!SelectionRimIntensity@{SelectionRimIntensity}}
+\index{SelectionRimIntensity@{SelectionRimIntensity}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{SelectionRimIntensity}{SelectionRimIntensity}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_aa5986a6b70c6ec9e0e661a9f8458d0a6} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Selection\+Rim\+Intensity = .\+65f}
+
+
+
+Gets or sets the selected-\/node rim intensity. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00062}{62}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_adf3a05f805f8f9548534bd708b9dec4e}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ShadowBrightness@{ShadowBrightness}}
+\index{ShadowBrightness@{ShadowBrightness}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ShadowBrightness}{ShadowBrightness}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_adf3a05f805f8f9548534bd708b9dec4e} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Shadow\+Brightness = .\+38f}
+
+
+
+Gets or sets the brightness of shaded surfaces. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00017}{17}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a187de86fb4710a8fbaf0d829553f1cd9}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ShowNodeProgress@{ShowNodeProgress}}
+\index{ShowNodeProgress@{ShowNodeProgress}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ShowNodeProgress}{ShowNodeProgress}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_a187de86fb4710a8fbaf0d829553f1cd9} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Show\+Node\+Progress = true}
+
+
+
+Gets or sets whether host-\/provided node progress is displayed. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00073}{73}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_adeee15dc826ebbf3c3403e861c251d42}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!ShowSelectionRing@{ShowSelectionRing}}
+\index{ShowSelectionRing@{ShowSelectionRing}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{ShowSelectionRing}{ShowSelectionRing}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_adeee15dc826ebbf3c3403e861c251d42} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Show\+Selection\+Ring}
+
+
+
+Gets or sets whether a selection ring is displayed. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00070}{70}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af30a4a26deb44855486d9f7d86dd0371}\index{Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}!SurfaceEmission@{SurfaceEmission}}
+\index{SurfaceEmission@{SurfaceEmission}!Cashg.GraphExplorer.GraphVisualSettings@{Cashg.GraphExplorer.GraphVisualSettings}}
+\doxysubsubsection{\texorpdfstring{SurfaceEmission}{SurfaceEmission}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings_af30a4a26deb44855486d9f7d86dd0371} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Visual\+Settings.\+Surface\+Emission = .\+08f}
+
+
+
+Gets or sets the surface emission amount. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_visual_settings_8cs_source_l00023}{23}} of file \doxymbox{\hyperlink{_graph_visual_settings_8cs_source}{Graph\+Visual\+Settings.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Visual\+Settings.\+cs\end{DoxyCompactItemize}

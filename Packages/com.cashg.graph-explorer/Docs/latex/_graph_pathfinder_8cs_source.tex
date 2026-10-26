@@ -1,0 +1,218 @@
+\doxysection{Graph\+Pathfinder.\+cs}
+\hypertarget{_graph_pathfinder_8cs_source}{}\label{_graph_pathfinder_8cs_source}\index{Runtime/GraphPathfinder.cs@{Runtime/GraphPathfinder.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }System.Linq;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{Cashg.GraphExplorer}}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00006}00006\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00008}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{00008}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{GraphPathEndpoint}}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00009}00009\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00011}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465aa6122a65eaa676f700ae68d393054a37}{00011}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465aa6122a65eaa676f700ae68d393054a37}{Start}},}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00013}\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465a87557f11575c0ad78e4e28abedc13b6e}{00013}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465a87557f11575c0ad78e4e28abedc13b6e}{End}}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00014}00014\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }GraphPathfinder}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ GraphPathResult\ Find(IGraphScene\ scene,\ \textcolor{keywordtype}{string}\ startId,\ \textcolor{keywordtype}{string}\ endId,}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Func<IGraphEdge,\ bool>\ edgeAllowed\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scene\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(scene));}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(startId)\ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(endId)\ ||}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ !scene.Nodes.ContainsKey(startId)\ ||\ !scene.Nodes.ContainsKey(endId))}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GraphPathResult.Unreachable(startId,\ endId);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (startId\ ==\ endId)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a63f35d394b91057888156cbd4c012d4d}{GraphPathResult}}(startId,\ endId,\ \textcolor{keyword}{new}[]\ \{\ startId\ \},\ Array.Empty<\textcolor{keywordtype}{string}>());}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Build\ deterministic\ outgoing\ adjacency\ from\ the\ permitted\ directed\ edges.}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ var\ outgoing\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ List<IGraphEdge>>(StringComparer.Ordinal);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ edge\ \textcolor{keywordflow}{in}\ scene.Edges.Values)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (edgeAllowed\ !=\ \textcolor{keyword}{null}\ \&\&\ !edgeAllowed(edge))\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!outgoing.TryGetValue(edge.From,\ out\ var\ list))}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outgoing.Add(edge.From,\ list\ =\ \textcolor{keyword}{new}\ List<IGraphEdge>());}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ list.Add(edge);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ list\ \textcolor{keywordflow}{in}\ outgoing.Values)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ list.Sort((a,\ b)\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ c\ =\ \textcolor{keywordtype}{string}.CompareOrdinal(a.To,\ b.To);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ c\ !=\ 0\ ?\ c\ :\ \textcolor{keywordtype}{string}.CompareOrdinal(a.Id,\ b.Id);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ var\ previousNode\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>(StringComparer.Ordinal);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ var\ previousEdge\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>(StringComparer.Ordinal);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ var\ visited\ =\ \textcolor{keyword}{new}\ HashSet<string>(StringComparer.Ordinal)\ \{\ startId\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ var\ queue\ =\ \textcolor{keyword}{new}\ Queue<string>();}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ queue.Enqueue(startId);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Breadth-\/first\ traversal\ discovers\ the\ shortest\ path\ and\ records\ predecessors.}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (queue.Count\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ current\ =\ queue.Dequeue();}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!outgoing.TryGetValue(current,\ out\ var\ edges))\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ edge\ \textcolor{keywordflow}{in}\ edges)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!visited.Add(edge.To))\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ previousNode[edge.To]\ =\ current;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ previousEdge[edge.To]\ =\ edge.Id;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (edge.To\ ==\ endId)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Walk\ predecessors\ backward,\ then\ restore\ source-\/to-\/destination\ order.}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ nodes\ =\ \textcolor{keyword}{new}\ List<string>\ \{\ endId\ \};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ edgeIds\ =\ \textcolor{keyword}{new}\ List<string>();}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursor\ =\ endId;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (cursor\ !=\ startId)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edgeIds.Add(previousEdge[cursor]);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursor\ =\ previousNode[cursor];}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nodes.Add(cursor);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nodes.Reverse();}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edgeIds.Reverse();}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a63f35d394b91057888156cbd4c012d4d}{GraphPathResult}}(startId,\ endId,\ nodes,\ edgeIds);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queue.Enqueue(edge.To);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GraphPathResult.Unreachable(startId,\ endId);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00094}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{00094}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a63f35d394b91057888156cbd4c012d4d}{GraphPathResult}}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00095}00095\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00101}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a63f35d394b91057888156cbd4c012d4d}{00101}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a63f35d394b91057888156cbd4c012d4d}{GraphPathResult}}(\textcolor{keywordtype}{string}\ startId,\ \textcolor{keywordtype}{string}\ endId,\ IEnumerable<string>\ nodeIds,\ IEnumerable<string>\ edgeIds)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a977d82852d642859a4b46526d38e2a06}{StartId}}\ =\ startId;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a25e6332a7d44f1456442417bd0dcff25}{EndId}}\ =\ endId;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_ae041b79e58283d0314ab65558e4f4e52}{NodeIds}}\ =\ Array.AsReadOnly(nodeIds.ToArray());}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a38c5f8fdd5893c922ff436b93e87b769}{EdgeIds}}\ =\ Array.AsReadOnly(edgeIds.ToArray());}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00110}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a977d82852d642859a4b46526d38e2a06}{00110}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a977d82852d642859a4b46526d38e2a06}{StartId}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00112}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a25e6332a7d44f1456442417bd0dcff25}{00112}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a25e6332a7d44f1456442417bd0dcff25}{EndId}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00114}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_ae041b79e58283d0314ab65558e4f4e52}{00114}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<string>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_ae041b79e58283d0314ab65558e4f4e52}{NodeIds}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00116}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a38c5f8fdd5893c922ff436b93e87b769}{00116}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<string>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a38c5f8fdd5893c922ff436b93e87b769}{EdgeIds}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00118}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a7796ee76230c53c9081447f0396b5060}{00118}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a7796ee76230c53c9081447f0396b5060}{IsReachable}}\ =>\ NodeIds.Count\ >\ 0;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00120}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a3388ed9cbf04400dd518fa2b2d9dde0f}{00120}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a3388ed9cbf04400dd518fa2b2d9dde0f}{Jumps}}\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a38c5f8fdd5893c922ff436b93e87b769}{EdgeIds}}.Count;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keyword}{internal}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a63f35d394b91057888156cbd4c012d4d}{GraphPathResult}}\ Unreachable(\textcolor{keywordtype}{string}\ startId,\ \textcolor{keywordtype}{string}\ endId)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result_a63f35d394b91057888156cbd4c012d4d}{GraphPathResult}}(startId,\ endId,\ Array.Empty<\textcolor{keywordtype}{string}>(),\ Array.Empty<\textcolor{keywordtype}{string}>());}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00129}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state}{00129}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc}{GraphPathState}}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Func<IGraphEdge,\ bool>\ edgeAllowed;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ revision\ =\ \textcolor{keywordtype}{int}.MinValue;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraphScene}}\ scene;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00138}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc}{00138}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af3946038f0d5821a69b03022897800bc}{GraphPathState}}(\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraphScene}}\ scene,\ Func<IGraphEdge,\ bool>\ edgeAllowed\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ this.scene\ =\ scene\ ??\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(scene));}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ this.edgeAllowed\ =\ edgeAllowed;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00145}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}{00145}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}{IsActive}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00147}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{00147}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{GraphPathResult}}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{Result}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00149}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{00149}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{StartId}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00151}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{00151}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{EndId}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00153}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{00153}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{GraphPathEndpoint}}?\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00155}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{00155}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<GraphPathState>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00157}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a63c5a91ea83224f568ee11fba8125400}{00157}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action<GraphPathEndpoint>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a63c5a91ea83224f568ee11fba8125400}{PickRequested}};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00161}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aa7f45c7cb03c6203e60dadceebfa50ec}{00161}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aa7f45c7cb03c6203e60dadceebfa50ec}{Bind}}(\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraphScene}}\ value)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ scene\ =\ value\ ??\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(value));}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a2a0e80999a0f161d578d8d7acb597419}{Synchronize}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00171}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ad5938ae4c136ffdbd265bc5e06730704}{00171}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{GraphPathResult}}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ad5938ae4c136ffdbd265bc5e06730704}{SetEndpoints}}(\textcolor{keywordtype}{string}\ startId,\ \textcolor{keywordtype}{string}\ endId)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Finish\ any\ pending\ pick\ and\ compute\ against\ the\ current\ scene\ revision\ before\ notifying\ listeners.}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{StartId}}\ =\ startId;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{EndId}}\ =\ endId;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}{IsActive}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ revision\ =\ scene.Revision;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{Result}}\ =\ GraphPathfinder.Find(scene,\ startId,\ endId,\ edgeAllowed);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}}?.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{Result}};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00188}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae303313d51bda33a90bed198d693e7f6}{00188}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{GraphPathResult}}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae303313d51bda33a90bed198d693e7f6}{Show}}(\textcolor{keywordtype}{string}\ startId,\ \textcolor{keywordtype}{string}\ endId)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ad5938ae4c136ffdbd265bc5e06730704}{SetEndpoints}}(startId,\ endId);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00195}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae19925ddf095796f87248556f4add58d}{00195}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_ae19925ddf095796f87248556f4add58d}{BeginPick}}(\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{GraphPathEndpoint}}\ endpoint)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}\ =\ endpoint;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a63c5a91ea83224f568ee11fba8125400}{PickRequested}}?.Invoke(endpoint);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}}?.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00205}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a986e41f9c7452727808862c121620dd3}{00205}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a986e41f9c7452727808862c121620dd3}{AcceptPickedNode}}(\textcolor{keywordtype}{string}\ nodeId)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reject\ unrelated\ clicks\ until\ a\ valid\ scene\ node\ can\ satisfy\ the\ pending\ endpoint\ pick.}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}.HasValue\ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(nodeId)\ ||\ !scene.Nodes.ContainsKey(nodeId))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ var\ endpoint\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}.Value;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aac00ccec530e42f5800c73f9c6876207}{SetEndpoint}}(endpoint,\ nodeId);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00216}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a6fadf465b51e93bd524f6bfca0a159b5}{00216}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a6fadf465b51e93bd524f6bfca0a159b5}{CancelPick}}()}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}.HasValue)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}}?.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00226}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aac00ccec530e42f5800c73f9c6876207}{00226}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aac00ccec530e42f5800c73f9c6876207}{SetEndpoint}}(\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{GraphPathEndpoint}}\ endpoint,\ \textcolor{keywordtype}{string}\ nodeId)}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(nodeId)\ ||\ !scene.Nodes.ContainsKey(nodeId))}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}Endpoint\ must\ identify\ a\ node\ in\ the\ bound\ scene."{}},\ nameof(nodeId));}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (endpoint\ ==\ \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a696daef3ab42e74a6b6329aa3a69d465}{GraphPathEndpoint}}.Start)\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{StartId}}\ =\ nodeId;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{EndId}}\ =\ nodeId;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\textcolor{keywordtype}{string}.IsNullOrEmpty(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{StartId}})\ \&\&\ !\textcolor{keywordtype}{string}.IsNullOrEmpty(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{EndId}}))}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Activate\ a\ route\ only\ after\ both\ endpoint\ identities\ have\ been\ chosen.}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}{IsActive}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ revision\ =\ scene.Revision;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{Result}}\ =\ GraphPathfinder.Find(scene,\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{StartId}},\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{EndId}},\ edgeAllowed);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}}?.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00245}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af55af9b069d4ce7309ba01e02f9c2c40}{00245}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af55af9b069d4ce7309ba01e02f9c2c40}{Clear}}()}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}{IsActive}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{Result}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{StartId}}\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{EndId}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a8cd525522505615b9616838c6976975e}{PendingPick}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ revision\ =\ scene.Revision;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}}?.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00258}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a2a0e80999a0f161d578d8d7acb597419}{00258}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a2a0e80999a0f161d578d8d7acb597419}{Synchronize}}(\textcolor{keywordtype}{bool}\ force\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ unreachable\ selections\ active\ and\ recompute\ only\ after\ topology\ changes\ or\ an\ explicit\ refresh.}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aae9fda20c1966170fd900824a7c36c13}{IsActive}}\ ||\ (!force\ \&\&\ revision\ ==\ scene.Revision))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ revision\ =\ scene.Revision;}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a29a3a6893276ac699efdba08464997e5}{Result}}\ =\ GraphPathfinder.Find(scene,\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_a162cf919d9ae5f02ded85a4ae27487e7}{StartId}},\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_aff82bae1819633815f1c83b791632652}{EndId}},\ edgeAllowed);}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_state_af7e4be484bafe6310fa3e007c88f8cee}{Changed}}?.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00267}00267\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_pathfinder_8cs_source_l00268}00268\ \}}
+
+\end{DoxyCode}

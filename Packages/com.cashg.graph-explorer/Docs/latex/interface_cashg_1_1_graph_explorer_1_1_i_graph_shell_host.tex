@@ -1,0 +1,1093 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host Interface Reference}
+\hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host}{}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+
+
+Defines graph shell host.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a9ec80b04ad8e51a3d1f65241ccc3d7fc}{History}} (int direction)
+\begin{DoxyCompactList}\small\item\em Moves backward or forward through history. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a305d66c5c065dbeb17af1972de2a255d}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a305d66c5c065dbeb17af1972de2a255d} 
+void {\bfseries Overview} ()
+\begin{DoxyCompactList}\small\item\em Frames the full graph overview. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aad6dfeeca006edff9e97be05ef921dd0}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aad6dfeeca006edff9e97be05ef921dd0} 
+void {\bfseries Build\+Node\+Search} ()
+\begin{DoxyCompactList}\small\item\em Builds the host\textquotesingle{}s node search controls. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae0ff52d86b539a7bdbe55b65260fb549}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae0ff52d86b539a7bdbe55b65260fb549} 
+void {\bfseries Show\+Help} ()
+\begin{DoxyCompactList}\small\item\em Shows host-\/provided help. \end{DoxyCompactList}\item 
+Button \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae4cc5903dcabe8f7bc2a7147c7c878e8}{Labeled\+Icon}} (string icon, string text, Action action, string tip)
+\begin{DoxyCompactList}\small\item\em Creates a labeled icon button. \end{DoxyCompactList}\item 
+Button \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad2481e212b359453cdf0d45a5af6dc10}{Icon\+Button}} (string icon, Action action, string tip)
+\begin{DoxyCompactList}\small\item\em Creates an icon-\/only button. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a082e2f69867b1bcee7be2d5b963c39db}{Apply\+Reduced\+Motion}} (bool value)
+\begin{DoxyCompactList}\small\item\em Applies the reduced-\/motion preference to host controls. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a62b14af773fe28a9be528463622361a9}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a62b14af773fe28a9be528463622361a9} 
+void {\bfseries Save\+Shell\+Preferences} ()
+\begin{DoxyCompactList}\small\item\em Persists shell preferences. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8bf513040f425d035f4cf76303bca8fc}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8bf513040f425d035f4cf76303bca8fc} 
+void {\bfseries Save\+Command\+Workspace} ()
+\begin{DoxyCompactList}\small\item\em Persists the command workspace. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1089bd503eefb9810a13ebe65b66b111}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1089bd503eefb9810a13ebe65b66b111} 
+void {\bfseries Refresh\+Shell\+Tool\+Choice} ()
+\begin{DoxyCompactList}\small\item\em Refreshes the available tool selector. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a439c94db70fd2fbad29d97eed6ec2168}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a439c94db70fd2fbad29d97eed6ec2168} 
+void {\bfseries Refresh\+Shell\+Source} ()
+\begin{DoxyCompactList}\small\item\em Refreshes provider connection status. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7b390b70108088eda21882a4662f399f}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7b390b70108088eda21882a4662f399f} 
+void {\bfseries Refresh\+Shell\+Task\+Hud} ()
+\begin{DoxyCompactList}\small\item\em Refreshes the task status display. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a912fca56bde3a030c9e9ed02affa699d}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a912fca56bde3a030c9e9ed02affa699d} 
+void {\bfseries Refresh\+Command\+Panel} ()
+\begin{DoxyCompactList}\small\item\em Refreshes command panel content. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a122bafc3eab66e31455d7ff256aebdf1}{Is\+Editing\+Text}} ()
+\begin{DoxyCompactList}\small\item\em Determines whether a text field currently has focus. \end{DoxyCompactList}\item 
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aa9baec534eead70638de81a895911929}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aa9baec534eead70638de81a895911929} 
+void {\bfseries Apply\+Filters} ()
+\begin{DoxyCompactList}\small\item\em Applies the current graph filters. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afc799439bb059f8bde52b30115034650}{Equip\+Tool\+At}} (int index)
+\begin{DoxyCompactList}\small\item\em Activates the tool at the specified index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a21604586d06b6247f52cec976a26e371}{Actions\+Available}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether action controls should be available. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_preferences}{Graph\+Shell\+Preferences}} \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a13295ac69d53b5dea5573441150453de}{shell\+Preferences}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the persisted shell preferences. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8208176f5788012e48bc24d092392316}{shell\+Preferences\+Loaded}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether preferences have loaded. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4f4bcff6848cea3e3fdedf4aeed36cd0}{shell\+Ready}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the shell has been built. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ac629eabe1632690435f05c284b1b7779}{shell\+Inspector\+Open}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the inspector drawer is open. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a956bb713460fa194aa63fbcec9e5e8c9}{shell\+Resizing}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the shell is being resized. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a5214794e1279cd7afc0b29ceabbf2507}{shell\+Workspace\+Open}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the workspace menu is open. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a452f84d3394fe163f9fe5cc6a2478762}{shell\+Updating\+Tools}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether tool controls are being updated. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4d0a0b59b80e7b0fd96d29cadf9ddd75}{command\+Panel\+Open}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the command panel is open. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aa986bd3841fe419f4a09f9c5ba1f8f01}{command\+Floating}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether the command panel floats over the graph. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2a00b26e0ffd632a159773321055e5a5}{reduced\+Motion}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether reduced motion is active. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1d0fbe322a1e28db6db417cec936f321}{shell\+Drawer}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the currently open shell drawer identifier. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2d61ce64b1d380c33c76cb6ff6daaacf}{shell\+Pending\+Search}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the search query waiting to be applied. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a37ebfccf0af6521285af1671d93b7f93}{shell\+Consumed\+Pointer\+Frame}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the pointer frame consumed by shell controls. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af7955bd223cc363bfad5c06813b9e00c}{root}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the shell root element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_adc16c9d3ccf059672a1d2607c4cb59cb}{sidebar}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the left sidebar element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a29803fcfaeee0f8be60f3475c9b341c4}{right\+Column}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the right column element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3505792f87c559e980a3150f5e212b0a}{inspector}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the inspector element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2053288d081b93611d5433361b2b5f2a}{command\+Panel}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the command panel element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a9490b133e22454cea0947a0712f23e6b}{command\+Belt}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the command belt element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad35803c679ec871d972947c487d1e6a7}{hotbar}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the hotbar element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afdd1524988b94d4d3d3133376ad9238f}{shell\+Header}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the shell header element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae304ec4d922f147c84b893f2f09151a2}{shell\+Search\+Host}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the shell search host element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_abbfa0f2dfa3d510d1799a3170ac2340c}{shell\+Rail}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the navigation rail element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1658b6a2c194cacebefcc1891b87387c}{shell\+Dock\+Header}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the dock header element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab54c76879f40de92272fdff756ad82ba}{shell\+Counts}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the graph counts element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a679d825a2558b97b545cfb3037269964}{shell\+Source\+Body}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the source drawer body. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab8dae0caf57450ab56312c8ca69e9f31}{shell\+Filters\+Body}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the filters drawer body. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad09ac693139c59fa6bc9911700de247f}{shell\+View\+Body}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the view drawer body. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a44616fb00fdcb70426c3345a90edb854}{shell\+Browse\+Body}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the browse drawer body. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a26f450a6c5530b975ec67dd579a76dcd}{shell\+Favorites\+Body}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the favorites drawer body. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a22a5d3d16126d98e3668128a26e02917}{shell\+Workspace\+Menu}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the workspace menu element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af9908610db6d14ca033a551a691977fe}{tooltip}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the shell tooltip element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3844926c7c92ab891cc3ee0163bc84de}{ui\+Tip}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the general UI tip element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a36cf82385ef7fb0ff09d85ffda7403c8}{hotbar\+Tip}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the hotbar tip element. \end{DoxyCompactList}\item 
+Visual\+Element \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a72df52fcc5e98af2490f651d4d3a1197}{loading\+Overlay}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the loading overlay element. \end{DoxyCompactList}\item 
+Label \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a34d3b0fc55c5e96fb488e6cc15d18a8b}{shell\+Drawer\+Title}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the active drawer title label. \end{DoxyCompactList}\item 
+Label \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4829b8b94ab59c70df2cd5b804464e17}{shell\+Source\+Status}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the provider connection status label. \end{DoxyCompactList}\item 
+Label \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a46b34c69c4286aa68e292a40b2d14be9}{shell\+Queue\+Badge}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the queue count badge. \end{DoxyCompactList}\item 
+Label \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1e1e204c1856142c0e6ca239bf14d108}{task\+Now\+Label}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the current task status label. \end{DoxyCompactList}\item 
+Button \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2d805738d8195db084a55d56b08145e4}{shell\+Inspect\+Tab}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the inspector tab button. \end{DoxyCompactList}\item 
+Button \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aec80fb2c29c5d3d910386c2ac97d84cd}{shell\+Queue\+Tab}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the queue tab button. \end{DoxyCompactList}\item 
+Button \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3de68d07d2b87842c6c26743f6dc3a5f}{shell\+Workspace\+Button}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the workspace menu button. \end{DoxyCompactList}\item 
+Dropdown\+Field \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ac2e04e8e3b3d95a9ddf1d99644eadea4}{shell\+Scale\+Field}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the UI scale selector. \end{DoxyCompactList}\item 
+Dropdown\+Field \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab384563969b74429bc2d5a4f7f1193f3}{shell\+Tool\+Field}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the active tool selector. \end{DoxyCompactList}\item 
+List\+View \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1ba9b70cde74d6bd4919daf695800864}{favorites\+List}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the favorites result list. \end{DoxyCompactList}\item 
+List\+View \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af19b56016ffd9ff57a85e1e84fdd0728}{result\+List}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the search result list. \end{DoxyCompactList}\item 
+Text\+Field \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a67b42013b39474473903474c25f40062}{node\+Search\+Field}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the node search field. \end{DoxyCompactList}\item 
+Panel\+Settings \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afa8893118b9098b116c85183c278bb15}{runtime\+Panel\+Settings}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets runtime panel settings for the shell. \end{DoxyCompactList}\item 
+Dictionary$<$ string, Button $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7740dc21a270796144ec96940b5631fe}{shell\+Rail\+Buttons}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the navigation rail buttons keyed by drawer identifier. \end{DoxyCompactList}\item 
+List$<$ string $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae89d21fe8b74e09bb24cc437e46a4664}{shell\+Tool\+Labels}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the available tool labels. \end{DoxyCompactList}\item 
+IVisual\+Element\+Scheduled\+Item \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7f769d44db4bb9eabcc72512762f7909}{shell\+Search\+Schedule}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the scheduled search update. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a19004fd020f1a3229ca79134f3188a1b}{Brand\+Mark}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the host\textquotesingle{}s brand mark. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a6363812d4d063b72bc1d812057cd7bca}{Title}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the host\textquotesingle{}s display title. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a27ce8d9ccbbfa4469675d87116a33c27}{Draft\+Count}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the number of draft actions. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8f13c12af26bc161256ae4a973fdc04d}{Query}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the current search query. \end{DoxyCompactList}\item 
+IRead\+Only\+Dictionary$<$ string, Action $>$ \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_adacac108003ae8ba9b27f640e8cfc330}{Workspace\+Actions}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets host-\/provided workspace actions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines graph shell host. 
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00097}{97}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_doc-func-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a082e2f69867b1bcee7be2d5b963c39db}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!ApplyReducedMotion@{ApplyReducedMotion}}
+\index{ApplyReducedMotion@{ApplyReducedMotion}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{ApplyReducedMotion()}{ApplyReducedMotion()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a082e2f69867b1bcee7be2d5b963c39db} 
+void Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Apply\+Reduced\+Motion (\begin{DoxyParamCaption}\item[{bool}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Applies the reduced-\/motion preference to host controls. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Whether reduced motion is enabled.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afc799439bb059f8bde52b30115034650}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!EquipToolAt@{EquipToolAt}}
+\index{EquipToolAt@{EquipToolAt}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{EquipToolAt()}{EquipToolAt()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afc799439bb059f8bde52b30115034650} 
+void Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Equip\+Tool\+At (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Activates the tool at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Tool index.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a9ec80b04ad8e51a3d1f65241ccc3d7fc}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!History@{History}}
+\index{History@{History}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{History()}{History()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a9ec80b04ad8e51a3d1f65241ccc3d7fc} 
+void Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+History (\begin{DoxyParamCaption}\item[{int}]{direction}{}\end{DoxyParamCaption})}
+
+
+
+Moves backward or forward through history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em direction} & Negative for backward, positive for forward.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad2481e212b359453cdf0d45a5af6dc10}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!IconButton@{IconButton}}
+\index{IconButton@{IconButton}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{IconButton()}{IconButton()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad2481e212b359453cdf0d45a5af6dc10} 
+Button Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Icon\+Button (\begin{DoxyParamCaption}\item[{string}]{icon}{, }\item[{Action}]{action}{, }\item[{string}]{tip}{}\end{DoxyParamCaption})}
+
+
+
+Creates an icon-\/only button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em icon} & Icon identifier.\\
+\hline
+{\em action} & Action invoked by the button.\\
+\hline
+{\em tip} & Tooltip text.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created button.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a122bafc3eab66e31455d7ff256aebdf1}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!IsEditingText@{IsEditingText}}
+\index{IsEditingText@{IsEditingText}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{IsEditingText()}{IsEditingText()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a122bafc3eab66e31455d7ff256aebdf1} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Is\+Editing\+Text (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Determines whether a text field currently has focus. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when text editing is active.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae4cc5903dcabe8f7bc2a7147c7c878e8}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!LabeledIcon@{LabeledIcon}}
+\index{LabeledIcon@{LabeledIcon}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{LabeledIcon()}{LabeledIcon()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae4cc5903dcabe8f7bc2a7147c7c878e8} 
+Button Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Labeled\+Icon (\begin{DoxyParamCaption}\item[{string}]{icon}{, }\item[{string}]{text}{, }\item[{Action}]{action}{, }\item[{string}]{tip}{}\end{DoxyParamCaption})}
+
+
+
+Creates a labeled icon button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em icon} & Icon identifier.\\
+\hline
+{\em text} & Button label.\\
+\hline
+{\em action} & Action invoked by the button.\\
+\hline
+{\em tip} & Tooltip text.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created button.
+\end{DoxyReturn}
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_doc-property-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a21604586d06b6247f52cec976a26e371}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!ActionsAvailable@{ActionsAvailable}}
+\index{ActionsAvailable@{ActionsAvailable}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{ActionsAvailable}{ActionsAvailable}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a21604586d06b6247f52cec976a26e371} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Actions\+Available\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether action controls should be available. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00100}{100}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a19004fd020f1a3229ca79134f3188a1b}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!BrandMark@{BrandMark}}
+\index{BrandMark@{BrandMark}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{BrandMark}{BrandMark}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a19004fd020f1a3229ca79134f3188a1b} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Brand\+Mark\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the host\textquotesingle{}s brand mark. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00204}{204}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a9490b133e22454cea0947a0712f23e6b}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!commandBelt@{commandBelt}}
+\index{commandBelt@{commandBelt}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{commandBelt}{commandBelt}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a9490b133e22454cea0947a0712f23e6b} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+command\+Belt\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the command belt element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00138}{138}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aa986bd3841fe419f4a09f9c5ba1f8f01}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!commandFloating@{commandFloating}}
+\index{commandFloating@{commandFloating}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{commandFloating}{commandFloating}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aa986bd3841fe419f4a09f9c5ba1f8f01} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+command\+Floating\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether the command panel floats over the graph. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00118}{118}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2053288d081b93611d5433361b2b5f2a}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!commandPanel@{commandPanel}}
+\index{commandPanel@{commandPanel}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{commandPanel}{commandPanel}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2053288d081b93611d5433361b2b5f2a} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+command\+Panel\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the command panel element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00136}{136}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4d0a0b59b80e7b0fd96d29cadf9ddd75}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!commandPanelOpen@{commandPanelOpen}}
+\index{commandPanelOpen@{commandPanelOpen}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{commandPanelOpen}{commandPanelOpen}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4d0a0b59b80e7b0fd96d29cadf9ddd75} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+command\+Panel\+Open\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether the command panel is open. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00116}{116}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a27ce8d9ccbbfa4469675d87116a33c27}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!DraftCount@{DraftCount}}
+\index{DraftCount@{DraftCount}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{DraftCount}{DraftCount}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a27ce8d9ccbbfa4469675d87116a33c27} 
+int Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Draft\+Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the number of draft actions. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00208}{208}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1ba9b70cde74d6bd4919daf695800864}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!favoritesList@{favoritesList}}
+\index{favoritesList@{favoritesList}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{favoritesList}{favoritesList}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1ba9b70cde74d6bd4919daf695800864} 
+List\+View Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+favorites\+List\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the favorites result list. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00190}{190}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad35803c679ec871d972947c487d1e6a7}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!hotbar@{hotbar}}
+\index{hotbar@{hotbar}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{hotbar}{hotbar}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad35803c679ec871d972947c487d1e6a7} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+hotbar\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the hotbar element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00140}{140}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a36cf82385ef7fb0ff09d85ffda7403c8}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!hotbarTip@{hotbarTip}}
+\index{hotbarTip@{hotbarTip}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{hotbarTip}{hotbarTip}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a36cf82385ef7fb0ff09d85ffda7403c8} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+hotbar\+Tip\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the hotbar tip element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00168}{168}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3505792f87c559e980a3150f5e212b0a}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!inspector@{inspector}}
+\index{inspector@{inspector}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{inspector}{inspector}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3505792f87c559e980a3150f5e212b0a} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+inspector\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the inspector element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00134}{134}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a72df52fcc5e98af2490f651d4d3a1197}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!loadingOverlay@{loadingOverlay}}
+\index{loadingOverlay@{loadingOverlay}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{loadingOverlay}{loadingOverlay}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a72df52fcc5e98af2490f651d4d3a1197} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+loading\+Overlay\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the loading overlay element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00170}{170}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a67b42013b39474473903474c25f40062}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!nodeSearchField@{nodeSearchField}}
+\index{nodeSearchField@{nodeSearchField}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{nodeSearchField}{nodeSearchField}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a67b42013b39474473903474c25f40062} 
+Text\+Field Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+node\+Search\+Field\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the node search field. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00194}{194}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8f13c12af26bc161256ae4a973fdc04d}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!Query@{Query}}
+\index{Query@{Query}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{Query}{Query}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8f13c12af26bc161256ae4a973fdc04d} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Query\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the current search query. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00210}{210}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2a00b26e0ffd632a159773321055e5a5}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!reducedMotion@{reducedMotion}}
+\index{reducedMotion@{reducedMotion}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{reducedMotion}{reducedMotion}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2a00b26e0ffd632a159773321055e5a5} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+reduced\+Motion\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether reduced motion is active. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00120}{120}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af19b56016ffd9ff57a85e1e84fdd0728}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!resultList@{resultList}}
+\index{resultList@{resultList}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{resultList}{resultList}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af19b56016ffd9ff57a85e1e84fdd0728} 
+List\+View Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+result\+List\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the search result list. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00192}{192}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a29803fcfaeee0f8be60f3475c9b341c4}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!rightColumn@{rightColumn}}
+\index{rightColumn@{rightColumn}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{rightColumn}{rightColumn}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a29803fcfaeee0f8be60f3475c9b341c4} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+right\+Column\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the right column element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00132}{132}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af7955bd223cc363bfad5c06813b9e00c}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!root@{root}}
+\index{root@{root}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af7955bd223cc363bfad5c06813b9e00c} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+root\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the shell root element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00128}{128}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afa8893118b9098b116c85183c278bb15}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!runtimePanelSettings@{runtimePanelSettings}}
+\index{runtimePanelSettings@{runtimePanelSettings}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{runtimePanelSettings}{runtimePanelSettings}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afa8893118b9098b116c85183c278bb15} 
+Panel\+Settings Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+runtime\+Panel\+Settings\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets runtime panel settings for the shell. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00196}{196}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a44616fb00fdcb70426c3345a90edb854}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellBrowseBody@{shellBrowseBody}}
+\index{shellBrowseBody@{shellBrowseBody}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellBrowseBody}{shellBrowseBody}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a44616fb00fdcb70426c3345a90edb854} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Browse\+Body\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the browse drawer body. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00158}{158}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a37ebfccf0af6521285af1671d93b7f93}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellConsumedPointerFrame@{shellConsumedPointerFrame}}
+\index{shellConsumedPointerFrame@{shellConsumedPointerFrame}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellConsumedPointerFrame}{shellConsumedPointerFrame}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a37ebfccf0af6521285af1671d93b7f93} 
+int Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Consumed\+Pointer\+Frame\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the pointer frame consumed by shell controls. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00126}{126}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab54c76879f40de92272fdff756ad82ba}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellCounts@{shellCounts}}
+\index{shellCounts@{shellCounts}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellCounts}{shellCounts}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab54c76879f40de92272fdff756ad82ba} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Counts\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the graph counts element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00150}{150}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1658b6a2c194cacebefcc1891b87387c}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellDockHeader@{shellDockHeader}}
+\index{shellDockHeader@{shellDockHeader}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellDockHeader}{shellDockHeader}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1658b6a2c194cacebefcc1891b87387c} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Dock\+Header\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the dock header element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00148}{148}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1d0fbe322a1e28db6db417cec936f321}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellDrawer@{shellDrawer}}
+\index{shellDrawer@{shellDrawer}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellDrawer}{shellDrawer}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1d0fbe322a1e28db6db417cec936f321} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Drawer\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the currently open shell drawer identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00122}{122}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a34d3b0fc55c5e96fb488e6cc15d18a8b}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellDrawerTitle@{shellDrawerTitle}}
+\index{shellDrawerTitle@{shellDrawerTitle}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellDrawerTitle}{shellDrawerTitle}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a34d3b0fc55c5e96fb488e6cc15d18a8b} 
+Label Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Drawer\+Title\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the active drawer title label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00172}{172}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a26f450a6c5530b975ec67dd579a76dcd}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellFavoritesBody@{shellFavoritesBody}}
+\index{shellFavoritesBody@{shellFavoritesBody}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellFavoritesBody}{shellFavoritesBody}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a26f450a6c5530b975ec67dd579a76dcd} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Favorites\+Body\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the favorites drawer body. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00160}{160}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab8dae0caf57450ab56312c8ca69e9f31}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellFiltersBody@{shellFiltersBody}}
+\index{shellFiltersBody@{shellFiltersBody}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellFiltersBody}{shellFiltersBody}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab8dae0caf57450ab56312c8ca69e9f31} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Filters\+Body\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the filters drawer body. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00154}{154}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afdd1524988b94d4d3d3133376ad9238f}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellHeader@{shellHeader}}
+\index{shellHeader@{shellHeader}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellHeader}{shellHeader}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_afdd1524988b94d4d3d3133376ad9238f} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Header\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the shell header element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00142}{142}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ac629eabe1632690435f05c284b1b7779}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellInspectorOpen@{shellInspectorOpen}}
+\index{shellInspectorOpen@{shellInspectorOpen}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellInspectorOpen}{shellInspectorOpen}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ac629eabe1632690435f05c284b1b7779} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Inspector\+Open\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether the inspector drawer is open. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00108}{108}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2d805738d8195db084a55d56b08145e4}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellInspectTab@{shellInspectTab}}
+\index{shellInspectTab@{shellInspectTab}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellInspectTab}{shellInspectTab}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2d805738d8195db084a55d56b08145e4} 
+Button Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Inspect\+Tab\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the inspector tab button. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00180}{180}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2d61ce64b1d380c33c76cb6ff6daaacf}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellPendingSearch@{shellPendingSearch}}
+\index{shellPendingSearch@{shellPendingSearch}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellPendingSearch}{shellPendingSearch}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a2d61ce64b1d380c33c76cb6ff6daaacf} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Pending\+Search\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the search query waiting to be applied. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00124}{124}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a13295ac69d53b5dea5573441150453de}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellPreferences@{shellPreferences}}
+\index{shellPreferences@{shellPreferences}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellPreferences}{shellPreferences}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a13295ac69d53b5dea5573441150453de} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_shell_preferences}{Graph\+Shell\+Preferences}} Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Preferences\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the persisted shell preferences. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00102}{102}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8208176f5788012e48bc24d092392316}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellPreferencesLoaded@{shellPreferencesLoaded}}
+\index{shellPreferencesLoaded@{shellPreferencesLoaded}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellPreferencesLoaded}{shellPreferencesLoaded}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a8208176f5788012e48bc24d092392316} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Preferences\+Loaded\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether preferences have loaded. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00104}{104}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a46b34c69c4286aa68e292a40b2d14be9}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellQueueBadge@{shellQueueBadge}}
+\index{shellQueueBadge@{shellQueueBadge}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellQueueBadge}{shellQueueBadge}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a46b34c69c4286aa68e292a40b2d14be9} 
+Label Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Queue\+Badge\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the queue count badge. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00176}{176}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aec80fb2c29c5d3d910386c2ac97d84cd}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellQueueTab@{shellQueueTab}}
+\index{shellQueueTab@{shellQueueTab}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellQueueTab}{shellQueueTab}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_aec80fb2c29c5d3d910386c2ac97d84cd} 
+Button Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Queue\+Tab\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the queue tab button. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00182}{182}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_abbfa0f2dfa3d510d1799a3170ac2340c}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellRail@{shellRail}}
+\index{shellRail@{shellRail}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellRail}{shellRail}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_abbfa0f2dfa3d510d1799a3170ac2340c} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Rail\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the navigation rail element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00146}{146}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7740dc21a270796144ec96940b5631fe}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellRailButtons@{shellRailButtons}}
+\index{shellRailButtons@{shellRailButtons}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellRailButtons}{shellRailButtons}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7740dc21a270796144ec96940b5631fe} 
+Dictionary$<$string, Button$>$ Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Rail\+Buttons\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the navigation rail buttons keyed by drawer identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00198}{198}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4f4bcff6848cea3e3fdedf4aeed36cd0}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellReady@{shellReady}}
+\index{shellReady@{shellReady}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellReady}{shellReady}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4f4bcff6848cea3e3fdedf4aeed36cd0} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Ready\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether the shell has been built. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00106}{106}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a956bb713460fa194aa63fbcec9e5e8c9}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellResizing@{shellResizing}}
+\index{shellResizing@{shellResizing}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellResizing}{shellResizing}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a956bb713460fa194aa63fbcec9e5e8c9} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Resizing\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether the shell is being resized. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00110}{110}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ac2e04e8e3b3d95a9ddf1d99644eadea4}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellScaleField@{shellScaleField}}
+\index{shellScaleField@{shellScaleField}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellScaleField}{shellScaleField}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ac2e04e8e3b3d95a9ddf1d99644eadea4} 
+Dropdown\+Field Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Scale\+Field\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the UI scale selector. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00186}{186}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae304ec4d922f147c84b893f2f09151a2}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellSearchHost@{shellSearchHost}}
+\index{shellSearchHost@{shellSearchHost}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellSearchHost}{shellSearchHost}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae304ec4d922f147c84b893f2f09151a2} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Search\+Host\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the shell search host element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00144}{144}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7f769d44db4bb9eabcc72512762f7909}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellSearchSchedule@{shellSearchSchedule}}
+\index{shellSearchSchedule@{shellSearchSchedule}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellSearchSchedule}{shellSearchSchedule}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a7f769d44db4bb9eabcc72512762f7909} 
+IVisual\+Element\+Scheduled\+Item Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Search\+Schedule\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the scheduled search update. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00202}{202}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a679d825a2558b97b545cfb3037269964}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellSourceBody@{shellSourceBody}}
+\index{shellSourceBody@{shellSourceBody}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellSourceBody}{shellSourceBody}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a679d825a2558b97b545cfb3037269964} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Source\+Body\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the source drawer body. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00152}{152}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4829b8b94ab59c70df2cd5b804464e17}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellSourceStatus@{shellSourceStatus}}
+\index{shellSourceStatus@{shellSourceStatus}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellSourceStatus}{shellSourceStatus}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a4829b8b94ab59c70df2cd5b804464e17} 
+Label Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Source\+Status\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the provider connection status label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00174}{174}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab384563969b74429bc2d5a4f7f1193f3}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellToolField@{shellToolField}}
+\index{shellToolField@{shellToolField}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellToolField}{shellToolField}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ab384563969b74429bc2d5a4f7f1193f3} 
+Dropdown\+Field Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Tool\+Field\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the active tool selector. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00188}{188}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae89d21fe8b74e09bb24cc437e46a4664}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellToolLabels@{shellToolLabels}}
+\index{shellToolLabels@{shellToolLabels}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellToolLabels}{shellToolLabels}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ae89d21fe8b74e09bb24cc437e46a4664} 
+List$<$string$>$ Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Tool\+Labels\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the available tool labels. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00200}{200}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a452f84d3394fe163f9fe5cc6a2478762}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellUpdatingTools@{shellUpdatingTools}}
+\index{shellUpdatingTools@{shellUpdatingTools}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellUpdatingTools}{shellUpdatingTools}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a452f84d3394fe163f9fe5cc6a2478762} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Updating\+Tools\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether tool controls are being updated. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00114}{114}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad09ac693139c59fa6bc9911700de247f}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellViewBody@{shellViewBody}}
+\index{shellViewBody@{shellViewBody}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellViewBody}{shellViewBody}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_ad09ac693139c59fa6bc9911700de247f} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+View\+Body\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the view drawer body. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00156}{156}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3de68d07d2b87842c6c26743f6dc3a5f}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellWorkspaceButton@{shellWorkspaceButton}}
+\index{shellWorkspaceButton@{shellWorkspaceButton}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellWorkspaceButton}{shellWorkspaceButton}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3de68d07d2b87842c6c26743f6dc3a5f} 
+Button Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Workspace\+Button\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the workspace menu button. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00184}{184}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a22a5d3d16126d98e3668128a26e02917}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellWorkspaceMenu@{shellWorkspaceMenu}}
+\index{shellWorkspaceMenu@{shellWorkspaceMenu}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellWorkspaceMenu}{shellWorkspaceMenu}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a22a5d3d16126d98e3668128a26e02917} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Workspace\+Menu\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the workspace menu element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00162}{162}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a5214794e1279cd7afc0b29ceabbf2507}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!shellWorkspaceOpen@{shellWorkspaceOpen}}
+\index{shellWorkspaceOpen@{shellWorkspaceOpen}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{shellWorkspaceOpen}{shellWorkspaceOpen}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a5214794e1279cd7afc0b29ceabbf2507} 
+bool Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+shell\+Workspace\+Open\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets whether the workspace menu is open. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00112}{112}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_adc16c9d3ccf059672a1d2607c4cb59cb}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!sidebar@{sidebar}}
+\index{sidebar@{sidebar}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{sidebar}{sidebar}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_adc16c9d3ccf059672a1d2607c4cb59cb} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+sidebar\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the left sidebar element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00130}{130}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1e1e204c1856142c0e6ca239bf14d108}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!taskNowLabel@{taskNowLabel}}
+\index{taskNowLabel@{taskNowLabel}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{taskNowLabel}{taskNowLabel}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a1e1e204c1856142c0e6ca239bf14d108} 
+Label Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+task\+Now\+Label\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the current task status label. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00178}{178}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a6363812d4d063b72bc1d812057cd7bca}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!Title@{Title}}
+\index{Title@{Title}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{Title}{Title}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a6363812d4d063b72bc1d812057cd7bca} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Title\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the host\textquotesingle{}s display title. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00206}{206}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af9908610db6d14ca033a551a691977fe}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!tooltip@{tooltip}}
+\index{tooltip@{tooltip}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{tooltip}{tooltip}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_af9908610db6d14ca033a551a691977fe} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+tooltip\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the shell tooltip element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00164}{164}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3844926c7c92ab891cc3ee0163bc84de}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!uiTip@{uiTip}}
+\index{uiTip@{uiTip}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{uiTip}{uiTip}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_a3844926c7c92ab891cc3ee0163bc84de} 
+Visual\+Element Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+ui\+Tip\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the general UI tip element. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00166}{166}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_adacac108003ae8ba9b27f640e8cfc330}\index{Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}!WorkspaceActions@{WorkspaceActions}}
+\index{WorkspaceActions@{WorkspaceActions}!Cashg.GraphExplorer.IGraphShellHost@{Cashg.GraphExplorer.IGraphShellHost}}
+\doxysubsubsection{\texorpdfstring{WorkspaceActions}{WorkspaceActions}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_shell_host_adacac108003ae8ba9b27f640e8cfc330} 
+IRead\+Only\+Dictionary$<$string, Action$>$ Cashg.\+Graph\+Explorer.\+IGraph\+Shell\+Host.\+Workspace\+Actions\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets host-\/provided workspace actions. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_shell_host_8cs_source_l00212}{212}} of file \doxymbox{\hyperlink{_graph_shell_host_8cs_source}{Graph\+Shell\+Host.\+cs}}.
+
+
+
+The documentation for this interface was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Shell\+Host.\+cs\end{DoxyCompactItemize}

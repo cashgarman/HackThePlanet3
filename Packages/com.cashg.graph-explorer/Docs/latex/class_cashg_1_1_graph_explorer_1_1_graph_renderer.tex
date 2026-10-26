@@ -1,0 +1,764 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Renderer Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_renderer}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+
+
+Instanced node meshes; a single dynamic line mesh for edges. No per-\/node Game\+Objects.  
+
+
+Inheritance diagram for Cashg.\+Graph\+Explorer.\+Graph\+Renderer:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cashg_1_1_graph_explorer_1_1_graph_renderer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a2a040baf10b36683f26930a4018ad7f4}{Graph\+Renderer}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_presentation_profile}{Graph\+Presentation\+Profile}} profile=null, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_explorer_options}{Graph\+Explorer\+Options}} options=null, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_resource_configuration}{Graph\+Resource\+Configuration}} resources=null)
+\begin{DoxyCompactList}\small\item\em Creates a graph renderer and its owned meshes and materials. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a37ecfd8f158f8b02c5ab775056a3f7ba}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Releases meshes and materials owned by the renderer. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a961e7a0cc8aab6f2b3a30be48b120ba7}{Degree}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} node)
+\begin{DoxyCompactList}\small\item\em Gets the connection count used for node sizing. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a1fb58219ae697c5397f9ea0100c20786}{Radius}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} node)
+\begin{DoxyCompactList}\small\item\em Calculates the rendered radius for a node. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a8748a3ecffe569a10749f22128a3ff5b}{Node\+Color}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} node)
+\begin{DoxyCompactList}\small\item\em Calculates the rendered color for a node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a536f2f57fa326e96881d4608802e0593}{Update\+Metrics}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} graph, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge_filter}{IGraph\+Edge\+Filter}} filter)
+\begin{DoxyCompactList}\small\item\em Recomputes degrees and metric ranges for a scene. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_afc475e9b671cd93a42bb1c35591a8c5a}{Draw}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} graph, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge_filter}{IGraph\+Edge\+Filter}} filter, Camera camera, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} selected, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} hovered, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}} hovered\+Edge)
+\begin{DoxyCompactList}\small\item\em Draws graph nodes, edges, labels, and selection effects. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a4aefa5d33c51cd00a49d0be854912f45}{Draw\+Effects\+Mask}} (Raster\+Command\+Buffer command, Material material)
+\begin{DoxyCompactList}\small\item\em Draw the same visible instance batches into the camera\textquotesingle{}s node-\/only masks. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0d10d7bf5ed8636327a413b06d56b8c9}{Draw\+Progress\+Overlay}} (Raster\+Command\+Buffer command)
+\begin{DoxyCompactList}\small\item\em URP camera-\/local overlay, independent of scene labels and node effects. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0c3a6c947e393183295dd8352ec520ce}{Is\+Drawn}} (string node\+Id)
+\begin{DoxyCompactList}\small\item\em Determines whether a node was included in the latest draw. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a1107b5080c7b2c2a18a2a03d3f1aabce}{Try\+Visible\+Segment}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} a, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} b, out Vector3 start, out Vector3 end)
+\begin{DoxyCompactList}\small\item\em Gets the world-\/space segment between two nodes when non-\/degenerate. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ac0072d95d1c4e2aa9a1c7d1d9d831c24}{Try\+Project}} (Camera camera, Vector3 world, out Vector2 screen\+Point)
+\begin{DoxyCompactList}\small\item\em Projects a world point to screen coordinates and checks whether it is near the viewport. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a80e263ddccf9314d40ccb71e1ac8cf54}{Try\+Camera\+Near\+Edge}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} a, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} b, Camera camera, out Vector3 anchor, out float distance)
+\begin{DoxyCompactList}\small\item\em Finds the point on an edge nearest to the camera. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_abfc036ba9ce122803c6e0cdee3848b6e}{Try\+Selected\+Edge\+Anchor}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} selected, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} other, Camera camera, out Vector3 anchor, out float distance)
+\begin{DoxyCompactList}\small\item\em Finds an anchor point for an edge incident to the selected node. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_aa9c4479ef87b6a6d265e7d09ec789722}{Pick\+Edge}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} graph, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge_filter}{IGraph\+Edge\+Filter}} filter, Camera camera, Vector2 mouse, float max\+Pixels=16f)
+\begin{DoxyCompactList}\small\item\em Finds the closest visible edge to a screen-\/space pointer. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a15bc6927aa33551298f45d4f23e5bbe4}{Try\+Edge\+Label\+Anchor}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}} edge, \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} graph, Camera camera, out Vector2 panel\+Point)
+\begin{DoxyCompactList}\small\item\em Projects the midpoint of an edge for a hover label. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a8044c582e70058badc198c29e5032dfd}{Pick}} (\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}} graph, Camera camera, Vector2 mouse)
+\begin{DoxyCompactList}\small\item\em Finds the closest visible node to a screen-\/space pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a1a83de0909d69341d333ffaee1b3428f}{Color\+Mapping}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0c8461fd355b2772f1691ad03664a3b8}{Color\+By}} = \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a1a83de0909d69341d333ffaee1b3428faa1fa27779242b4902f7ae3bdd5c6d508}{Color\+Mapping.\+Type}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the node color mapping mode. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a80c7f0990df8bad225f0f890c700f23b}{Flash\+Target}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the identifier of the node currently being flashed. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ae3734c76b5061c7141b5b0610a7f9d66}{Flash\+Until}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the time when the current flash ends. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_af6329befd06dd3968faf0da06340df46}{Maximum\+Visible}} = 8000
+\begin{DoxyCompactList}\small\item\em Gets or sets the maximum number of visible nodes. \end{DoxyCompactList}\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_progress_visual}{Graph\+Node\+Progress\+Visual}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ad009dc3709a935538720d175c92879d1}{Node\+Progress}}
+\begin{DoxyCompactList}\small\item\em Gets or sets progress visuals keyed by node identifier. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ae091cb96ac4971c12feb95bf076c4f80}{Reduced\+Motion}}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether reduced motion is active. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a7c471fc9e7aa95c3ab3ea6c57cb222dc}{Size\+Mapping}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a3f2f80f70368d37c5c06ea8e8c5fda85}{Size}} = \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a7c471fc9e7aa95c3ab3ea6c57cb222dca98a2bc79c11d0cbb19f99b2b8c70e6e3}{Size\+Mapping.\+Connections}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the node size mapping mode. \end{DoxyCompactList}\item 
+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_task_visual}{Graph\+Task\+Visual}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_afefe78b713de8532545f362779ba6cf9}{Task\+Visuals}}
+\begin{DoxyCompactList}\small\item\em Gets or sets task visuals keyed by node identifier. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_addfc89ccdacece4e45a728848682bb57}{Visible\+Degree}}
+\begin{DoxyCompactList}\small\item\em Gets or sets whether degree counts include only visible edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const float \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a2e184ac6255c4ce0d35419bb30caa17c}{Edge\+Label\+Near\+Distance}} = 4.\+5f
+\begin{DoxyCompactList}\small\item\em Maximum camera distance at which edge labels are eligible. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a5e96d7295b648a5fff55caa83cf8fe07}{Visible\+Count}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the number of nodes rendered by the latest draw. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_abe2c7d30738937e8a03e13099a49ce58}{Visible\+Edges}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the number of edges rendered by the latest draw. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a01c1848a585ae5c12530b2f30543dd06}{Truncated}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets whether the node rendering budget truncated the graph. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a5008ab56c501e7ae3b5ec25f1036c91d}{Visible\+Progress\+Indicators}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the number of progress indicators rendered by the latest draw. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a48cce7ea23fccce08ad1e1b58987044f}{Active\+Path}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Set the persistent route shown above transient selection and hover highlights. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings}{Graph\+Visual\+Settings}} \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a56c601d0272c873ffa1fa7f534497fac}{Visual\+Settings}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Gets or sets the visual settings asset used by this renderer. \end{DoxyCompactList}\item 
+float? \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a3a670767ce71192ef512a843d6e17938}{Animation\+Time\+Override}}\hspace{0.3cm}{\ttfamily  \+[get, set]}
+\begin{DoxyCompactList}\small\item\em Optional deterministic clock for previews. Null uses real unscaled time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instanced node meshes; a single dynamic line mesh for edges. No per-\/node Game\+Objects. 
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00010}{10}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a2a040baf10b36683f26930a4018ad7f4}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!GraphRenderer@{GraphRenderer}}
+\index{GraphRenderer@{GraphRenderer}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{GraphRenderer()}{GraphRenderer()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a2a040baf10b36683f26930a4018ad7f4} 
+Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Graph\+Renderer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_presentation_profile}{Graph\+Presentation\+Profile}}}]{profile}{ = {\ttfamily null}, }\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_explorer_options}{Graph\+Explorer\+Options}}}]{options}{ = {\ttfamily null}, }\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_resource_configuration}{Graph\+Resource\+Configuration}}}]{resources}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Creates a graph renderer and its owned meshes and materials. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em profile} & Optional domain presentation profile.\\
+\hline
+{\em options} & Optional render budgets.\\
+\hline
+{\em resources} & Optional resource overrides.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00080}{80}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a961e7a0cc8aab6f2b3a30be48b120ba7}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!Degree@{Degree}}
+\index{Degree@{Degree}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{Degree()}{Degree()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a961e7a0cc8aab6f2b3a30be48b120ba7} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Degree (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Gets the connection count used for node sizing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to measure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cached degree, or the node\textquotesingle{}s neighbor count.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00159}{159}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a37ecfd8f158f8b02c5ab775056a3f7ba}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a37ecfd8f158f8b02c5ab775056a3f7ba} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Releases meshes and materials owned by the renderer. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00127}{127}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_afc475e9b671cd93a42bb1c35591a8c5a}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!Draw@{Draw}}
+\index{Draw@{Draw}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_afc475e9b671cd93a42bb1c35591a8c5a} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Draw (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{graph}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge_filter}{IGraph\+Edge\+Filter}}}]{filter}{, }\item[{Camera}]{camera}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{selected}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{hovered}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}}}]{hovered\+Edge}{}\end{DoxyParamCaption})}
+
+
+
+Draws graph nodes, edges, labels, and selection effects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Scene to draw.\\
+\hline
+{\em filter} & Filter used to draw edges.\\
+\hline
+{\em camera} & Camera used for rendering.\\
+\hline
+{\em selected} & Selected node, when any.\\
+\hline
+{\em hovered} & Hovered node, when any.\\
+\hline
+{\em hovered\+Edge} & Hovered edge, when any.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00258}{258}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a4aefa5d33c51cd00a49d0be854912f45}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!DrawEffectsMask@{DrawEffectsMask}}
+\index{DrawEffectsMask@{DrawEffectsMask}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{DrawEffectsMask()}{DrawEffectsMask()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a4aefa5d33c51cd00a49d0be854912f45} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Draw\+Effects\+Mask (\begin{DoxyParamCaption}\item[{Raster\+Command\+Buffer}]{command}{, }\item[{Material}]{material}{}\end{DoxyParamCaption})}
+
+
+
+Draw the same visible instance batches into the camera\textquotesingle{}s node-\/only masks. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00417}{417}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0d10d7bf5ed8636327a413b06d56b8c9}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!DrawProgressOverlay@{DrawProgressOverlay}}
+\index{DrawProgressOverlay@{DrawProgressOverlay}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{DrawProgressOverlay()}{DrawProgressOverlay()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0d10d7bf5ed8636327a413b06d56b8c9} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Draw\+Progress\+Overlay (\begin{DoxyParamCaption}\item[{Raster\+Command\+Buffer}]{command}{}\end{DoxyParamCaption})}
+
+
+
+URP camera-\/local overlay, independent of scene labels and node effects. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00578}{578}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0c3a6c947e393183295dd8352ec520ce}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!IsDrawn@{IsDrawn}}
+\index{IsDrawn@{IsDrawn}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{IsDrawn()}{IsDrawn()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0c3a6c947e393183295dd8352ec520ce} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Is\+Drawn (\begin{DoxyParamCaption}\item[{string}]{node\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Determines whether a node was included in the latest draw. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+Id} & Node identifier.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the node was drawn.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00680}{680}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a8748a3ecffe569a10749f22128a3ff5b}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!NodeColor@{NodeColor}}
+\index{NodeColor@{NodeColor}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{NodeColor()}{NodeColor()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a8748a3ecffe569a10749f22128a3ff5b} 
+Color Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Node\+Color (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the rendered color for a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to color.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Node color after mapping and tool emphasis are applied.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00184}{184}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a8044c582e70058badc198c29e5032dfd}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!Pick@{Pick}}
+\index{Pick@{Pick}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{Pick()}{Pick()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a8044c582e70058badc198c29e5032dfd} 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}} Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Pick (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{graph}{, }\item[{Camera}]{camera}{, }\item[{Vector2}]{mouse}{}\end{DoxyParamCaption})}
+
+
+
+Finds the closest visible node to a screen-\/space pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Scene containing candidate nodes.\\
+\hline
+{\em camera} & Camera used for projection.\\
+\hline
+{\em mouse} & Pointer position in screen coordinates.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The picked node, or null when none is close enough.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00933}{933}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_aa9c4479ef87b6a6d265e7d09ec789722}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!PickEdge@{PickEdge}}
+\index{PickEdge@{PickEdge}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{PickEdge()}{PickEdge()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_aa9c4479ef87b6a6d265e7d09ec789722} 
+\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}} Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Pick\+Edge (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{graph}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge_filter}{IGraph\+Edge\+Filter}}}]{filter}{, }\item[{Camera}]{camera}{, }\item[{Vector2}]{mouse}{, }\item[{float}]{max\+Pixels}{ = {\ttfamily 16f}}\end{DoxyParamCaption})}
+
+
+
+Finds the closest visible edge to a screen-\/space pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Scene containing candidate edges.\\
+\hline
+{\em filter} & Filter applied to candidate edges.\\
+\hline
+{\em camera} & Camera used for projection.\\
+\hline
+{\em mouse} & Pointer position in screen coordinates.\\
+\hline
+{\em max\+Pixels} & Minimum hit radius in pixels.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The picked edge, or null when none is close enough.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00864}{864}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a1fb58219ae697c5397f9ea0100c20786}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!Radius@{Radius}}
+\index{Radius@{Radius}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{Radius()}{Radius()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a1fb58219ae697c5397f9ea0100c20786} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Radius (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the rendered radius for a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to size.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Node radius in world units.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00167}{167}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a80e263ddccf9314d40ccb71e1ac8cf54}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!TryCameraNearEdge@{TryCameraNearEdge}}
+\index{TryCameraNearEdge@{TryCameraNearEdge}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{TryCameraNearEdge()}{TryCameraNearEdge()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a80e263ddccf9314d40ccb71e1ac8cf54} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Try\+Camera\+Near\+Edge (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{a}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{b}{, }\item[{Camera}]{camera}{, }\item[{out Vector3}]{anchor}{, }\item[{out float}]{distance}{}\end{DoxyParamCaption})}
+
+
+
+Finds the point on an edge nearest to the camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First endpoint node.\\
+\hline
+{\em b} & Second endpoint node.\\
+\hline
+{\em camera} & Camera used for the query.\\
+\hline
+{\em anchor} & Receives the nearest world-\/space point.\\
+\hline
+{\em distance} & Receives the camera distance to the point.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the edge is within the label distance.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00722}{722}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a15bc6927aa33551298f45d4f23e5bbe4}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!TryEdgeLabelAnchor@{TryEdgeLabelAnchor}}
+\index{TryEdgeLabelAnchor@{TryEdgeLabelAnchor}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{TryEdgeLabelAnchor()}{TryEdgeLabelAnchor()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a15bc6927aa33551298f45d4f23e5bbe4} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Try\+Edge\+Label\+Anchor (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge}{IGraph\+Edge}}}]{edge}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{graph}{, }\item[{Camera}]{camera}{, }\item[{out Vector2}]{panel\+Point}{}\end{DoxyParamCaption})}
+
+
+
+Projects the midpoint of an edge for a hover label. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & Edge to label.\\
+\hline
+{\em graph} & Scene containing the edge endpoints.\\
+\hline
+{\em camera} & Projection camera.\\
+\hline
+{\em panel\+Point} & Receives the projected panel coordinate.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the midpoint is visible.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00904}{904}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ac0072d95d1c4e2aa9a1c7d1d9d831c24}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!TryProject@{TryProject}}
+\index{TryProject@{TryProject}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{TryProject()}{TryProject()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ac0072d95d1c4e2aa9a1c7d1d9d831c24} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Try\+Project (\begin{DoxyParamCaption}\item[{Camera}]{camera}{, }\item[{Vector3}]{world}{, }\item[{out Vector2}]{screen\+Point}{}\end{DoxyParamCaption})}
+
+
+
+Projects a world point to screen coordinates and checks whether it is near the viewport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & Projection camera.\\
+\hline
+{\em world} & World-\/space point.\\
+\hline
+{\em screen\+Point} & Receives the projected panel point.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when the point is in front of and near the viewport.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00705}{705}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_abfc036ba9ce122803c6e0cdee3848b6e}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!TrySelectedEdgeAnchor@{TrySelectedEdgeAnchor}}
+\index{TrySelectedEdgeAnchor@{TrySelectedEdgeAnchor}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{TrySelectedEdgeAnchor()}{TrySelectedEdgeAnchor()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_abfc036ba9ce122803c6e0cdee3848b6e} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Try\+Selected\+Edge\+Anchor (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{selected}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{other}{, }\item[{Camera}]{camera}{, }\item[{out Vector3}]{anchor}{, }\item[{out float}]{distance}{}\end{DoxyParamCaption})}
+
+
+
+Finds an anchor point for an edge incident to the selected node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em selected} & Selected endpoint.\\
+\hline
+{\em other} & Other edge endpoint.\\
+\hline
+{\em camera} & Camera used for the query.\\
+\hline
+{\em anchor} & Receives the world-\/space anchor.\\
+\hline
+{\em distance} & Receives the camera distance to the near point.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when a visible edge segment exists.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00744}{744}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a1107b5080c7b2c2a18a2a03d3f1aabce}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!TryVisibleSegment@{TryVisibleSegment}}
+\index{TryVisibleSegment@{TryVisibleSegment}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{TryVisibleSegment()}{TryVisibleSegment()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a1107b5080c7b2c2a18a2a03d3f1aabce} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Try\+Visible\+Segment (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{a}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_node}{IGraph\+Node}}}]{b}{, }\item[{out Vector3}]{start}{, }\item[{out Vector3}]{end}{}\end{DoxyParamCaption})}
+
+
+
+Gets the world-\/space segment between two nodes when non-\/degenerate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First endpoint node.\\
+\hline
+{\em b} & Second endpoint node.\\
+\hline
+{\em start} & Receives the segment start.\\
+\hline
+{\em end} & Receives the segment end.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} when a visible segment exists.
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00691}{691}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a536f2f57fa326e96881d4608802e0593}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!UpdateMetrics@{UpdateMetrics}}
+\index{UpdateMetrics@{UpdateMetrics}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{UpdateMetrics()}{UpdateMetrics()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a536f2f57fa326e96881d4608802e0593} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Update\+Metrics (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_scene}{IGraph\+Scene}}}]{graph}{, }\item[{\doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_edge_filter}{IGraph\+Edge\+Filter}}}]{filter}{}\end{DoxyParamCaption})}
+
+
+
+Recomputes degrees and metric ranges for a scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Scene whose nodes and edges are measured.\\
+\hline
+{\em filter} & Edge filter used when visible-\/degree mode is enabled.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00219}{219}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-variable-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0c8461fd355b2772f1691ad03664a3b8}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!ColorBy@{ColorBy}}
+\index{ColorBy@{ColorBy}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{ColorBy}{ColorBy}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a0c8461fd355b2772f1691ad03664a3b8} 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a1a83de0909d69341d333ffaee1b3428f}{Color\+Mapping}} Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Color\+By = \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a1a83de0909d69341d333ffaee1b3428faa1fa27779242b4902f7ae3bdd5c6d508}{Color\+Mapping.\+Type}}}
+
+
+
+Gets or sets the node color mapping mode. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00052}{52}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a2e184ac6255c4ce0d35419bb30caa17c}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!EdgeLabelNearDistance@{EdgeLabelNearDistance}}
+\index{EdgeLabelNearDistance@{EdgeLabelNearDistance}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{EdgeLabelNearDistance}{EdgeLabelNearDistance}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a2e184ac6255c4ce0d35419bb30caa17c} 
+const float Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Edge\+Label\+Near\+Distance = 4.\+5f\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Maximum camera distance at which edge labels are eligible. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00022}{22}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a80c7f0990df8bad225f0f890c700f23b}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!FlashTarget@{FlashTarget}}
+\index{FlashTarget@{FlashTarget}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{FlashTarget}{FlashTarget}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a80c7f0990df8bad225f0f890c700f23b} 
+string Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Flash\+Target}
+
+
+
+Gets or sets the identifier of the node currently being flashed. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00054}{54}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ae3734c76b5061c7141b5b0610a7f9d66}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!FlashUntil@{FlashUntil}}
+\index{FlashUntil@{FlashUntil}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{FlashUntil}{FlashUntil}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ae3734c76b5061c7141b5b0610a7f9d66} 
+float Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Flash\+Until}
+
+
+
+Gets or sets the time when the current flash ends. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00056}{56}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_af6329befd06dd3968faf0da06340df46}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!MaximumVisible@{MaximumVisible}}
+\index{MaximumVisible@{MaximumVisible}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{MaximumVisible}{MaximumVisible}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_af6329befd06dd3968faf0da06340df46} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Maximum\+Visible = 8000}
+
+
+
+Gets or sets the maximum number of visible nodes. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00058}{58}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ad009dc3709a935538720d175c92879d1}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!NodeProgress@{NodeProgress}}
+\index{NodeProgress@{NodeProgress}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{NodeProgress}{NodeProgress}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ad009dc3709a935538720d175c92879d1} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_progress_visual}{Graph\+Node\+Progress\+Visual}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Node\+Progress}
+
+
+
+Gets or sets progress visuals keyed by node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00060}{60}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ae091cb96ac4971c12feb95bf076c4f80}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!ReducedMotion@{ReducedMotion}}
+\index{ReducedMotion@{ReducedMotion}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{ReducedMotion}{ReducedMotion}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_ae091cb96ac4971c12feb95bf076c4f80} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Reduced\+Motion}
+
+
+
+Gets or sets whether reduced motion is active. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00062}{62}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a3f2f80f70368d37c5c06ea8e8c5fda85}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!Size@{Size}}
+\index{Size@{Size}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{Size}{Size}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a3f2f80f70368d37c5c06ea8e8c5fda85} 
+\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a7c471fc9e7aa95c3ab3ea6c57cb222dc}{Size\+Mapping}} Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Size = \doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer_a7c471fc9e7aa95c3ab3ea6c57cb222dca98a2bc79c11d0cbb19f99b2b8c70e6e3}{Size\+Mapping.\+Connections}}}
+
+
+
+Gets or sets the node size mapping mode. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00064}{64}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_afefe78b713de8532545f362779ba6cf9}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!TaskVisuals@{TaskVisuals}}
+\index{TaskVisuals@{TaskVisuals}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{TaskVisuals}{TaskVisuals}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_afefe78b713de8532545f362779ba6cf9} 
+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_task_visual}{Graph\+Task\+Visual}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Task\+Visuals}
+
+
+
+Gets or sets task visuals keyed by node identifier. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00066}{66}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_addfc89ccdacece4e45a728848682bb57}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!VisibleDegree@{VisibleDegree}}
+\index{VisibleDegree@{VisibleDegree}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{VisibleDegree}{VisibleDegree}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_addfc89ccdacece4e45a728848682bb57} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Visible\+Degree}
+
+
+
+Gets or sets whether degree counts include only visible edges. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00068}{68}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a48cce7ea23fccce08ad1e1b58987044f}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!ActivePath@{ActivePath}}
+\index{ActivePath@{ActivePath}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{ActivePath}{ActivePath}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a48cce7ea23fccce08ad1e1b58987044f} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_path_result}{Graph\+Path\+Result}} Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Active\+Path\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Set the persistent route shown above transient selection and hover highlights. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00118}{118}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a3a670767ce71192ef512a843d6e17938}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!AnimationTimeOverride@{AnimationTimeOverride}}
+\index{AnimationTimeOverride@{AnimationTimeOverride}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{AnimationTimeOverride}{AnimationTimeOverride}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a3a670767ce71192ef512a843d6e17938} 
+float? Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Animation\+Time\+Override\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Optional deterministic clock for previews. Null uses real unscaled time. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00124}{124}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a01c1848a585ae5c12530b2f30543dd06}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!Truncated@{Truncated}}
+\index{Truncated@{Truncated}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{Truncated}{Truncated}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a01c1848a585ae5c12530b2f30543dd06} 
+bool Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Truncated\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets whether the node rendering budget truncated the graph. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00113}{113}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a5e96d7295b648a5fff55caa83cf8fe07}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!VisibleCount@{VisibleCount}}
+\index{VisibleCount@{VisibleCount}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{VisibleCount}{VisibleCount}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a5e96d7295b648a5fff55caa83cf8fe07} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Visible\+Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the number of nodes rendered by the latest draw. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00109}{109}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_abe2c7d30738937e8a03e13099a49ce58}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!VisibleEdges@{VisibleEdges}}
+\index{VisibleEdges@{VisibleEdges}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{VisibleEdges}{VisibleEdges}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_abe2c7d30738937e8a03e13099a49ce58} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Visible\+Edges\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the number of edges rendered by the latest draw. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00111}{111}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a5008ab56c501e7ae3b5ec25f1036c91d}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!VisibleProgressIndicators@{VisibleProgressIndicators}}
+\index{VisibleProgressIndicators@{VisibleProgressIndicators}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{VisibleProgressIndicators}{VisibleProgressIndicators}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a5008ab56c501e7ae3b5ec25f1036c91d} 
+int Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Visible\+Progress\+Indicators\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the number of progress indicators rendered by the latest draw. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00115}{115}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a56c601d0272c873ffa1fa7f534497fac}\index{Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}!VisualSettings@{VisualSettings}}
+\index{VisualSettings@{VisualSettings}!Cashg.GraphExplorer.GraphRenderer@{Cashg.GraphExplorer.GraphRenderer}}
+\doxysubsubsection{\texorpdfstring{VisualSettings}{VisualSettings}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_renderer_a56c601d0272c873ffa1fa7f534497fac} 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_visual_settings}{Graph\+Visual\+Settings}} Cashg.\+Graph\+Explorer.\+Graph\+Renderer.\+Visual\+Settings\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the visual settings asset used by this renderer. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_renderer_8cs_source_l00121}{121}} of file \doxymbox{\hyperlink{_graph_renderer_8cs_source}{Graph\+Renderer.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/\+\+Presentation/Graph\+Renderer.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,217 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+Graph\+Schema Class Reference}
+\hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema}{}\label{class_cashg_1_1_graph_explorer_1_1_graph_schema}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+
+
+Host-\/supplied meaning and presentation for a graph. Graph\+Document instances remain open: they may contain types, relations, and properties not declared here.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_a88e5c2672e449af62db14d2347d18946}{Graph\+Schema}} ()
+\begin{DoxyCompactList}\small\item\em Creates an empty schema; populate via Register(\+Graph\+Node\+Type\+Definition) and related overloads. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_aa59f4d8220d477e6f621bbbe80d806dd}{Register}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition}{Graph\+Node\+Type\+Definition}} definition)
+\begin{DoxyCompactList}\small\item\em Adds a node type. Duplicate ids throw rather than replace. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_acdc3a0ed1c49af705799ee64abf0ac3d}{Register}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_relation_definition}{Graph\+Relation\+Definition}} definition)
+\begin{DoxyCompactList}\small\item\em Adds a relation type. Duplicate ids throw rather than replace. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_a5951dd4e82d6a3234b59e857de62df66}{Register}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_field_definition}{Graph\+Field\+Definition}} definition)
+\begin{DoxyCompactList}\small\item\em Adds a field definition. Duplicate ids throw rather than replace. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ string $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_a276b6a73c9b258e5ef72c8ebd6e9f0dc}{Validate}} (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document}{Graph\+Document}} document)
+\begin{DoxyCompactList}\small\item\em Returns non-\/fatal validation messages for a document against this schema. Checks registered node and relation ids and value types for declared fields; undeclared properties are allowed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition}{Graph\+Node\+Type\+Definition}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_ab62cf01c1132f8abcb49b8601a2c2661}{Node\+Types}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Registered node types keyed by id (ordinal comparison). \end{DoxyCompactList}\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_relation_definition}{Graph\+Relation\+Definition}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_a6799143fa9d1c34ea23352c132300473}{Relations}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Registered relation types keyed by id (ordinal comparison). \end{DoxyCompactList}\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_field_definition}{Graph\+Field\+Definition}} $>$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_schema_a95755c4c0e87e7c1228c0604311afdf7}{Fields}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Registered field definitions keyed by property id (ordinal comparison). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Host-\/supplied meaning and presentation for a graph. Graph\+Document instances remain open: they may contain types, relations, and properties not declared here. 
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00200}{200}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_schema_doc-constructors}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_a88e5c2672e449af62db14d2347d18946}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!GraphSchema@{GraphSchema}}
+\index{GraphSchema@{GraphSchema}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{GraphSchema()}{GraphSchema()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_a88e5c2672e449af62db14d2347d18946} 
+Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Graph\+Schema (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates an empty schema; populate via Register(\+Graph\+Node\+Type\+Definition) and related overloads. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00207}{207}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_schema_doc-func-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_a5951dd4e82d6a3234b59e857de62df66}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!Register@{Register}}
+\index{Register@{Register}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_a5951dd4e82d6a3234b59e857de62df66} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Register (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_field_definition}{Graph\+Field\+Definition}}}]{definition}{}\end{DoxyParamCaption})}
+
+
+
+Adds a field definition. Duplicate ids throw rather than replace. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em definition} & Field to register.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & {\itshape definition}  is null.\\
+\hline
+{\em Argument\+Exception} & A field with the same Graph\+Field\+Definition.\+Id is already registered.\\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00253}{253}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_aa59f4d8220d477e6f621bbbe80d806dd}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!Register@{Register}}
+\index{Register@{Register}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_aa59f4d8220d477e6f621bbbe80d806dd} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Register (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition}{Graph\+Node\+Type\+Definition}}}]{definition}{}\end{DoxyParamCaption})}
+
+
+
+Adds a node type. Duplicate ids throw rather than replace. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em definition} & Type to register.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & {\itshape definition}  is null.\\
+\hline
+{\em Argument\+Exception} & A type with the same Graph\+Node\+Type\+Definition.\+Id is already registered. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00230}{230}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_acdc3a0ed1c49af705799ee64abf0ac3d}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!Register@{Register}}
+\index{Register@{Register}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_acdc3a0ed1c49af705799ee64abf0ac3d} 
+void Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Register (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_relation_definition}{Graph\+Relation\+Definition}}}]{definition}{}\end{DoxyParamCaption})}
+
+
+
+Adds a relation type. Duplicate ids throw rather than replace. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em definition} & Relation to register.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & {\itshape definition}  is null.\\
+\hline
+{\em Argument\+Exception} & A relation with the same Graph\+Relation\+Definition.\+Id is already registered. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00243}{243}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_a276b6a73c9b258e5ef72c8ebd6e9f0dc}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!Validate@{Validate}}
+\index{Validate@{Validate}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_a276b6a73c9b258e5ef72c8ebd6e9f0dc} 
+IRead\+Only\+List$<$ string $>$ Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Validate (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_document}{Graph\+Document}}}]{document}{}\end{DoxyParamCaption})}
+
+
+
+Returns non-\/fatal validation messages for a document against this schema. Checks registered node and relation ids and value types for declared fields; undeclared properties are allowed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em document} & Document to inspect.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Human-\/readable issue strings; empty when no problems are found.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & {\itshape document}  is null.\\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00266}{266}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+
+
+\label{class_cashg_1_1_graph_explorer_1_1_graph_schema_doc-property-members}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_a95755c4c0e87e7c1228c0604311afdf7}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!Fields@{Fields}}
+\index{Fields@{Fields}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{Fields}{Fields}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_a95755c4c0e87e7c1228c0604311afdf7} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_field_definition}{Graph\+Field\+Definition}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Fields\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Registered field definitions keyed by property id (ordinal comparison). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00221}{221}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_ab62cf01c1132f8abcb49b8601a2c2661}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!NodeTypes@{NodeTypes}}
+\index{NodeTypes@{NodeTypes}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{NodeTypes}{NodeTypes}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_ab62cf01c1132f8abcb49b8601a2c2661} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_type_definition}{Graph\+Node\+Type\+Definition}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Node\+Types\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Registered node types keyed by id (ordinal comparison). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00215}{215}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+\Hypertarget{class_cashg_1_1_graph_explorer_1_1_graph_schema_a6799143fa9d1c34ea23352c132300473}\index{Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}!Relations@{Relations}}
+\index{Relations@{Relations}!Cashg.GraphExplorer.GraphSchema@{Cashg.GraphExplorer.GraphSchema}}
+\doxysubsubsection{\texorpdfstring{Relations}{Relations}}
+{\footnotesize\ttfamily \label{class_cashg_1_1_graph_explorer_1_1_graph_schema_a6799143fa9d1c34ea23352c132300473} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_relation_definition}{Graph\+Relation\+Definition}}$>$ Cashg.\+Graph\+Explorer.\+Graph\+Schema.\+Relations\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Registered relation types keyed by id (ordinal comparison). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_schema_8cs_source_l00218}{218}} of file \doxymbox{\hyperlink{_graph_schema_8cs_source}{Graph\+Schema.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Schema.\+cs\end{DoxyCompactItemize}

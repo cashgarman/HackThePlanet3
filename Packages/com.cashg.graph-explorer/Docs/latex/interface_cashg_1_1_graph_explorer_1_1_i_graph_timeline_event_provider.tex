@@ -1,0 +1,77 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+IGraph\+Timeline\+Event\+Provider Interface Reference}
+\hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider}{}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider}\index{Cashg.GraphExplorer.IGraphTimelineEventProvider@{Cashg.GraphExplorer.IGraphTimelineEventProvider}}
+
+
+Loads exact external event states. Context must change when provider configuration changes.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_ab8d78dce1fe9f0307f5cd2686b7636d1}{Load\+Event}} (string id, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Loads the snapshot associated with an external timeline event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_a28b121253788a6d97556429773e4fae7}{Cache\+Context}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the provider configuration key used to scope cached snapshots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Loads exact external event states. Context must change when provider configuration changes. 
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_workspace_8cs_source_l00010}{10}} of file \doxymbox{\hyperlink{_graph_timeline_workspace_8cs_source}{Graph\+Timeline\+Workspace.\+cs}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_doc-func-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_ab8d78dce1fe9f0307f5cd2686b7636d1}\index{Cashg.GraphExplorer.IGraphTimelineEventProvider@{Cashg.GraphExplorer.IGraphTimelineEventProvider}!LoadEvent@{LoadEvent}}
+\index{LoadEvent@{LoadEvent}!Cashg.GraphExplorer.IGraphTimelineEventProvider@{Cashg.GraphExplorer.IGraphTimelineEventProvider}}
+\doxysubsubsection{\texorpdfstring{LoadEvent()}{LoadEvent()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_ab8d78dce1fe9f0307f5cd2686b7636d1} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Timeline\+Event\+Provider.\+Load\+Event (\begin{DoxyParamCaption}\item[{string}]{id}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Loads the snapshot associated with an external timeline event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Event identifier.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the loaded snapshot.\\
+\hline
+{\em failed} & Receives a load failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that loads the snapshot.
+\end{DoxyReturn}
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_doc-property-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_a28b121253788a6d97556429773e4fae7}\index{Cashg.GraphExplorer.IGraphTimelineEventProvider@{Cashg.GraphExplorer.IGraphTimelineEventProvider}!CacheContext@{CacheContext}}
+\index{CacheContext@{CacheContext}!Cashg.GraphExplorer.IGraphTimelineEventProvider@{Cashg.GraphExplorer.IGraphTimelineEventProvider}}
+\doxysubsubsection{\texorpdfstring{CacheContext}{CacheContext}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_timeline_event_provider_a28b121253788a6d97556429773e4fae7} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Timeline\+Event\+Provider.\+Cache\+Context\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the provider configuration key used to scope cached snapshots. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_timeline_workspace_8cs_source_l00013}{13}} of file \doxymbox{\hyperlink{_graph_timeline_workspace_8cs_source}{Graph\+Timeline\+Workspace.\+cs}}.
+
+
+
+The documentation for this interface was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Timeline\+Workspace.\+cs\end{DoxyCompactItemize}

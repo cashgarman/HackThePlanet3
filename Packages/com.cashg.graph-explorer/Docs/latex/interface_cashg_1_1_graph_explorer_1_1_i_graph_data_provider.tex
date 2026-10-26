@@ -1,0 +1,109 @@
+\doxysection{Cashg.\+Graph\+Explorer.\+IGraph\+Data\+Provider Interface Reference}
+\hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider}{}\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider}\index{Cashg.GraphExplorer.IGraphDataProvider@{Cashg.GraphExplorer.IGraphDataProvider}}
+
+
+Defines graph data provider.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_a861f167616e03447b9bf92c854ae351f}{Load}} (string dataset\+Id, IProgress$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_provider_progress}{Graph\+Provider\+Progress}} $>$ progress, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Loads a dataset snapshot and reports completion or failure through callbacks. \end{DoxyCompactList}\item 
+IEnumerator \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_aa845c349806628787f2feaace6fc73c0}{Load\+Details}} (string dataset\+Id, string node\+Id, IProgress$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_provider_progress}{Graph\+Provider\+Progress}} $>$ progress, Cancellation\+Token cancellation, Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch}{Graph\+Batch}} $>$ completed, Action$<$ Exception $>$ failed)
+\begin{DoxyCompactList}\small\item\em Loads details for one node and reports completion or failure through callbacks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_af0b1399629b6317684185887ee9a519e}{Identity}}\hspace{0.3cm}{\ttfamily  \+[get]}
+\begin{DoxyCompactList}\small\item\em Gets the provider\textquotesingle{}s stable identity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines graph data provider. 
+
+Definition at line \doxymbox{\hyperlink{_graph_providers_8cs_source_l00032}{32}} of file \doxymbox{\hyperlink{_graph_providers_8cs_source}{Graph\+Providers.\+cs}}.
+
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_doc-func-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_a861f167616e03447b9bf92c854ae351f}\index{Cashg.GraphExplorer.IGraphDataProvider@{Cashg.GraphExplorer.IGraphDataProvider}!Load@{Load}}
+\index{Load@{Load}!Cashg.GraphExplorer.IGraphDataProvider@{Cashg.GraphExplorer.IGraphDataProvider}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_a861f167616e03447b9bf92c854ae351f} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Data\+Provider.\+Load (\begin{DoxyParamCaption}\item[{string}]{dataset\+Id}{, }\item[{IProgress$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_provider_progress}{Graph\+Provider\+Progress}} $>$}]{progress}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{Graph\+Snapshot}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Loads a dataset snapshot and reports completion or failure through callbacks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+Id} & Dataset to load.\\
+\hline
+{\em progress} & Receives progress updates, when supplied.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the loaded snapshot.\\
+\hline
+{\em failed} & Receives a load failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs the load.
+\end{DoxyReturn}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_aa845c349806628787f2feaace6fc73c0}\index{Cashg.GraphExplorer.IGraphDataProvider@{Cashg.GraphExplorer.IGraphDataProvider}!LoadDetails@{LoadDetails}}
+\index{LoadDetails@{LoadDetails}!Cashg.GraphExplorer.IGraphDataProvider@{Cashg.GraphExplorer.IGraphDataProvider}}
+\doxysubsubsection{\texorpdfstring{LoadDetails()}{LoadDetails()}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_aa845c349806628787f2feaace6fc73c0} 
+IEnumerator Cashg.\+Graph\+Explorer.\+IGraph\+Data\+Provider.\+Load\+Details (\begin{DoxyParamCaption}\item[{string}]{dataset\+Id}{, }\item[{string}]{node\+Id}{, }\item[{IProgress$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_provider_progress}{Graph\+Provider\+Progress}} $>$}]{progress}{, }\item[{Cancellation\+Token}]{cancellation}{, }\item[{Action$<$ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_batch}{Graph\+Batch}} $>$}]{completed}{, }\item[{Action$<$ Exception $>$}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Loads details for one node and reports completion or failure through callbacks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+Id} & Dataset containing the node.\\
+\hline
+{\em node\+Id} & Node whose details are requested.\\
+\hline
+{\em progress} & Receives progress updates, when supplied.\\
+\hline
+{\em cancellation} & Token that requests cancellation.\\
+\hline
+{\em completed} & Receives the resulting batch.\\
+\hline
+{\em failed} & Receives a load failure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coroutine that performs the load.
+\end{DoxyReturn}
+
+
+\label{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_doc-property-members}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_af0b1399629b6317684185887ee9a519e}\index{Cashg.GraphExplorer.IGraphDataProvider@{Cashg.GraphExplorer.IGraphDataProvider}!Identity@{Identity}}
+\index{Identity@{Identity}!Cashg.GraphExplorer.IGraphDataProvider@{Cashg.GraphExplorer.IGraphDataProvider}}
+\doxysubsubsection{\texorpdfstring{Identity}{Identity}}
+{\footnotesize\ttfamily \label{interface_cashg_1_1_graph_explorer_1_1_i_graph_data_provider_af0b1399629b6317684185887ee9a519e} 
+string Cashg.\+Graph\+Explorer.\+IGraph\+Data\+Provider.\+Identity\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the provider\textquotesingle{}s stable identity. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_graph_providers_8cs_source_l00035}{35}} of file \doxymbox{\hyperlink{_graph_providers_8cs_source}{Graph\+Providers.\+cs}}.
+
+
+
+The documentation for this interface was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Runtime/Graph\+Providers.\+cs\end{DoxyCompactItemize}

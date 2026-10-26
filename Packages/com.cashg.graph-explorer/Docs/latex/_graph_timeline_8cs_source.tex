@@ -1,0 +1,321 @@
+\doxysection{Graph\+Timeline.\+cs}
+\hypertarget{_graph_timeline_8cs_source}{}\label{_graph_timeline_8cs_source}\index{Runtime/GraphTimeline.cs@{Runtime/GraphTimeline.cs}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Collections.Generic;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }System.Collections.ObjectModel;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }System.Linq;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }UnityEngine;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00007}00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_cashg_1_1_graph_explorer}{Cashg.GraphExplorer}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00010}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame}{00010}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a07e260cff6da97497302829e803777e6}{GraphPositionFrame}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00015}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a07e260cff6da97497302829e803777e6}{00015}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a07e260cff6da97497302829e803777e6}{GraphPositionFrame}}(DateTimeOffset\ timestampUtc,\ IEnumerable<KeyValuePair<string,\ Vector3>>\ positions)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a1038586a668db1c0d663d2be66182b40}{TimestampUtc}}\ =\ timestampUtc.ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ only\ valid,\ finite\ position\ samples\ and\ reject\ duplicate\ node\ IDs\ before\ exposing\ the\ frame.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ var\ copy\ =\ \textcolor{keyword}{new}\ SortedDictionary<string,\ Vector3>(StringComparer.Ordinal);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (positions\ !=\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ pair\ \textcolor{keywordflow}{in}\ positions)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(pair.Key))}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentException(\textcolor{stringliteral}{"{}Position\ sample\ node\ IDs\ cannot\ be\ empty."{}},\ nameof(positions));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!Finite(pair.Value.x)\ ||\ !Finite(pair.Value.y)\ ||\ !Finite(pair.Value.z))}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentOutOfRangeException(nameof(positions),\ \textcolor{stringliteral}{"{}Node\ positions\ must\ be\ finite."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ copy.Add(pair.Key,\ pair.Value);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a97f6e1b1c5c9d9ffa0174bb77080b6f6}{Positions}}\ =\ \textcolor{keyword}{new}\ ReadOnlyDictionary<string,\ Vector3>(copy);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00035}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a1038586a668db1c0d663d2be66182b40}{00035}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ DateTimeOffset\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a1038586a668db1c0d663d2be66182b40}{TimestampUtc}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00037}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a97f6e1b1c5c9d9ffa0174bb77080b6f6}{00037}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyDictionary<string,\ Vector3>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a97f6e1b1c5c9d9ffa0174bb77080b6f6}{Positions}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ Finite(\textcolor{keywordtype}{float}\ value)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !\textcolor{keywordtype}{float}.IsNaN(value)\ \&\&\ !\textcolor{keywordtype}{float}.IsInfinity(value);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00046}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change}{00046}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ad7c748452f4db5cc307c605bb0901d1c}{GraphTimelineChange}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00055}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ad7c748452f4db5cc307c605bb0901d1c}{00055}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ad7c748452f4db5cc307c605bb0901d1c}{GraphTimelineChange}}(IEnumerable<GraphNodeRecord>\ nodesBefore,\ IEnumerable<GraphNodeRecord>\ nodesAfter,}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IEnumerable<GraphEdgeRecord>\ edgesBefore,\ IEnumerable<GraphEdgeRecord>\ edgesAfter,}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ displayNameBefore,\ \textcolor{keywordtype}{string}\ displayNameAfter)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ad7df1a5921674811f7cc1fca6b6f6564}{NodesBefore}}\ =\ Array.AsReadOnly((nodesBefore\ ??\ Array.Empty<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{GraphNodeRecord}}>()).ToArray());}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ae0825658f50cc63be17ff7750afb4b0c}{NodesAfter}}\ =\ Array.AsReadOnly((nodesAfter\ ??\ Array.Empty<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_node_record}{GraphNodeRecord}}>()).ToArray());}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_a16bb1c24897f41603108c961b030ce84}{EdgesBefore}}\ =\ Array.AsReadOnly((edgesBefore\ ??\ Array.Empty<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{GraphEdgeRecord}}>()).ToArray());}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ace621c4b6ef14d4b552aec8786f8d455}{EdgesAfter}}\ =\ Array.AsReadOnly((edgesAfter\ ??\ Array.Empty<\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_edge_record}{GraphEdgeRecord}}>()).ToArray());}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_af94ea10d7294246bf4cc6d658c582993}{DisplayNameBefore}}\ =\ displayNameBefore\ ??\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_a47cf1b7782c0d6d1f728a5d2148ab8ef}{DisplayNameAfter}}\ =\ displayNameAfter\ ??\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00068}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ad7df1a5921674811f7cc1fca6b6f6564}{00068}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<GraphNodeRecord>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ad7df1a5921674811f7cc1fca6b6f6564}{NodesBefore}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00070}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ae0825658f50cc63be17ff7750afb4b0c}{00070}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<GraphNodeRecord>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ae0825658f50cc63be17ff7750afb4b0c}{NodesAfter}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00072}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_a16bb1c24897f41603108c961b030ce84}{00072}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<GraphEdgeRecord>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_a16bb1c24897f41603108c961b030ce84}{EdgesBefore}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00074}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ace621c4b6ef14d4b552aec8786f8d455}{00074}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<GraphEdgeRecord>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_ace621c4b6ef14d4b552aec8786f8d455}{EdgesAfter}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00076}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_af94ea10d7294246bf4cc6d658c582993}{00076}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_af94ea10d7294246bf4cc6d658c582993}{DisplayNameBefore}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00078}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_a47cf1b7782c0d6d1f728a5d2148ab8ef}{00078}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change_a47cf1b7782c0d6d1f728a5d2148ab8ef}{DisplayNameAfter}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00082}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry}{00082}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_aac8e74ed5a75ab617d8bdc7eb17e7358}{GraphTimelineEntry}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00083}00083\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00088}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_aac8e74ed5a75ab617d8bdc7eb17e7358}{00088}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_aac8e74ed5a75ab617d8bdc7eb17e7358}{GraphTimelineEntry}}(\textcolor{keywordtype}{long}\ sequence,\ DateTimeOffset\ timestampUtc,\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change}{GraphTimelineChange}}\ change)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_a6be02c9419ddb0150f48af1b4a4fb7b2}{Sequence}}\ =\ sequence;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_ace74bf8c86c8b7c162fea665594859cb}{TimestampUtc}}\ =\ timestampUtc.ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_a42df0c6f4c48ed003c5ce68148ff02b0}{Change}}\ =\ change\ ??\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(change));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00096}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_a6be02c9419ddb0150f48af1b4a4fb7b2}{00096}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{long}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_a6be02c9419ddb0150f48af1b4a4fb7b2}{Sequence}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00098}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_ace74bf8c86c8b7c162fea665594859cb}{00098}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ DateTimeOffset\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_ace74bf8c86c8b7c162fea665594859cb}{TimestampUtc}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00100}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_a42df0c6f4c48ed003c5ce68148ff02b0}{00100}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change}{GraphTimelineChange}}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_a42df0c6f4c48ed003c5ce68148ff02b0}{Change}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00104}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline}{00104}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline}{GraphTimeline}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00105}00105\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<GraphTimelineEntry>\ entries\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<GraphPositionFrame>\ positionFrames\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ hasPlayhead;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ DateTimeOffset\ playheadTimeUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ positionRecordingEnabled;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{float}\ positionSampleIntervalSeconds\ =\ 1f;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00113}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0eb9f0b815067e0bf5ffb88e1ef2c6a4}{00113}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_workspace}{GraphTimelineWorkspace}}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0eb9f0b815067e0bf5ffb88e1ef2c6a4}{Workspace}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00115}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}{00115}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{GraphSnapshot}}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}{Baseline}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00117}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{00117}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ DateTimeOffset\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00119}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a698f1f3de03c67df5278e203713566ef}{00119}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<GraphTimelineEntry>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a698f1f3de03c67df5278e203713566ef}{Entries}}\ =>\ entries.AsReadOnly();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00121}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0e9585e81f66e052c985de688c737d7a}{00121}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<GraphPositionFrame>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0e9585e81f66e052c985de688c737d7a}{PositionFrames}}\ =>\ positionFrames.AsReadOnly();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00123}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a00e7afc26c7c58c4933fd44f5041b159}{00123}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a00e7afc26c7c58c4933fd44f5041b159}{Enabled}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00127}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a93e90f78419b8c2081a605f8ceedbda2}{00127}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a93e90f78419b8c2081a605f8ceedbda2}{PositionRecordingAvailable}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00130}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a58359887e68a77e1fb6ee78a4fbd4ace}{00130}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a58359887e68a77e1fb6ee78a4fbd4ace}{PositionRecordingEnabled}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ =>\ positionRecordingEnabled;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{set}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (positionRecordingEnabled\ ==\ value)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ positionRecordingEnabled\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{Changed}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00142}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a89afd6c4a92e684cdff442f081432832}{00142}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a89afd6c4a92e684cdff442f081432832}{PositionSampleIntervalSeconds}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ =>\ positionSampleIntervalSeconds;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{set}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{float}.IsNaN(value)\ ||\ \textcolor{keywordtype}{float}.IsInfinity(value)\ ||\ value\ <\ .1f\ ||\ value\ >\ 60f)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentOutOfRangeException(nameof(value),}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Position\ sample\ interval\ must\ be\ between\ 0.1\ and\ 60\ seconds."{}});}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Mathf.Approximately(positionSampleIntervalSeconds,\ value))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ positionSampleIntervalSeconds\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{Changed}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00157}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{00157}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{internal}\ \textcolor{keyword}{set};\ \}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00159}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28}{00159}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28}{HasBaseline}}\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}{Baseline}}\ !=\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00161}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa1e2bb8e3a8eb972966d0ac24e42cce0}{00161}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa1e2bb8e3a8eb972966d0ac24e42cce0}{HasPositionHistory}}\ =>\ positionFrames.Count\ >\ 0;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00163}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa2adb61264e7a604b2e035096ac08ae9}{00163}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa2adb61264e7a604b2e035096ac08ae9}{IsHistorical}}\ =>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28}{HasBaseline}}\ \&\&\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a3256de03644dd6ebca2ad7337c01ec50}{CurrentTimeUtc}}\ <\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{LatestTimeUtc}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00165}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a3256de03644dd6ebca2ad7337c01ec50}{00165}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ DateTimeOffset\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a3256de03644dd6ebca2ad7337c01ec50}{CurrentTimeUtc}}\ =>\ hasPlayhead\ ?\ playheadTimeUtc\ :\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{LatestTimeUtc}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00168}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{00168}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ DateTimeOffset\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{LatestTimeUtc}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ latest\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (entries.Count\ >\ 0\ \&\&\ entries[entries.Count\ -\/\ 1].TimestampUtc\ >\ latest)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ latest\ =\ entries[entries.Count\ -\/\ 1].TimestampUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (positionFrames.Count\ >\ 0\ \&\&\ positionFrames[positionFrames.Count\ -\/\ 1].TimestampUtc\ >\ latest)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ latest\ =\ positionFrames[positionFrames.Count\ -\/\ 1].TimestampUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ latest;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00182}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_abdcc4bfec3d57acd45af0073c58aab98}{00182}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ DateTimeOffset\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_abdcc4bfec3d57acd45af0073c58aab98}{EarliestTimeUtc}}\ =>}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ positionFrames.Count\ >\ 0\ \&\&\ positionFrames[0].TimestampUtc\ <\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ positionFrames[0].TimestampUtc}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ DateTimeOffset\ LastRecordedTimeUtc}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ latest\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (entries.Count\ >\ 0\ \&\&\ entries[entries.Count\ -\/\ 1].TimestampUtc\ >\ latest)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ latest\ =\ entries[entries.Count\ -\/\ 1].TimestampUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (positionFrames.Count\ >\ 0\ \&\&\ positionFrames[positionFrames.Count\ -\/\ 1].TimestampUtc\ >\ latest)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ latest\ =\ positionFrames[positionFrames.Count\ -\/\ 1].TimestampUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ latest;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00201}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{00201}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{Changed}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00206}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ac9cd413944f801505b47f2151fd67ad8}{00206}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ac9cd413944f801505b47f2151fd67ad8}{EstablishBaseline}}(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{GraphSnapshot}}\ snapshot,\ DateTimeOffset?\ timestampUtc\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ both\ history\ tracks\ from\ the\ supplied\ snapshot\ and\ reset\ the\ playhead.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}{Baseline}}\ =\ snapshot\ ??\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(snapshot));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ =\ (timestampUtc\ ??\ DateTimeOffset.UtcNow).ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ entries.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ positionFrames.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ hasPlayhead\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \textcolor{keyword}{internal}\ \textcolor{keywordtype}{void}\ Append(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_change}{GraphTimelineChange}}\ change,\ DateTimeOffset?\ timestampUtc\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a00e7afc26c7c58c4933fd44f5041b159}{Enabled}}\ ||\ !\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28}{HasBaseline}}\ ||\ change\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Discard\ entries\ beyond\ the\ cursor\ and\ keep\ new\ timestamps\ monotonic\ across\ both\ tracks.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ <\ entries.Count\ -\/\ 1)\ entries.RemoveRange(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ +\ 1,\ entries.Count\ -\/\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ var\ timestamp\ =\ (timestampUtc\ ??\ DateTimeOffset.UtcNow).ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (timestamp\ <\ LastRecordedTimeUtc)\ timestamp\ =\ LastRecordedTimeUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ entries.Add(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_entry_aac8e74ed5a75ab617d8bdc7eb17e7358}{GraphTimelineEntry}}(entries.Count\ +\ 1L,\ timestamp,\ change));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ =\ entries.Count\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ =\ timestamp;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ hasPlayhead\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00235}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a7c54cbecfca8e0d20a5557ebbb2d06ca}{00235}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a7c54cbecfca8e0d20a5557ebbb2d06ca}{RecordPositionFrame}}(IEnumerable<KeyValuePair<string,\ Vector3>>\ positions,}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DateTimeOffset?\ timestampUtc\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a00e7afc26c7c58c4933fd44f5041b159}{Enabled}}\ ||\ !\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a93e90f78419b8c2081a605f8ceedbda2}{PositionRecordingAvailable}}\ ||\ !\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a58359887e68a77e1fb6ee78a4fbd4ace}{PositionRecordingEnabled}}\ ||\ !\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aad7cf550533f2f2c0500b23491f15e28}{HasBaseline}}\ ||}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa2adb61264e7a604b2e035096ac08ae9}{IsHistorical}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Append\ motion\ only\ in\ the\ live\ view\ and\ advance\ its\ playhead\ with\ the\ new\ sample.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ var\ wasHistorical\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_aa2adb61264e7a604b2e035096ac08ae9}{IsHistorical}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ var\ timestamp\ =\ (timestampUtc\ ??\ DateTimeOffset.UtcNow).ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (timestamp\ <\ LastRecordedTimeUtc)\ timestamp\ =\ LastRecordedTimeUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ positionFrames.Add(\textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_position_frame_a07e260cff6da97497302829e803777e6}{GraphPositionFrame}}(timestamp,\ positions));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!wasHistorical)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ =\ timestamp;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hasPlayhead\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{Changed}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00258}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a4cba23fceccdfef66f0c662d05eca3ba}{00258}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a4cba23fceccdfef66f0c662d05eca3ba}{EntryIndexAt}}(DateTimeOffset\ timeUtc)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Binary-\/search\ for\ the\ final\ semantic\ entry\ at\ or\ before\ the\ requested\ timestamp.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ var\ ticks\ =\ timeUtc.ToUniversalTime().UtcDateTime.Ticks;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ low\ =\ 0,\ high\ =\ entries.Count\ -\/\ 1,\ result\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (low\ <=\ high)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ middle\ =\ low\ +\ (high\ -\/\ low)\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (entries[middle].TimestampUtc.UtcDateTime.Ticks\ <=\ ticks)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ middle;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ low\ =\ middle\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ high\ =\ middle\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00283}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a5f86ee2211b6bac562c1f986d02845da}{00283}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyDictionary<string,\ Vector3>\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a5f86ee2211b6bac562c1f986d02845da}{PositionsAt}}(DateTimeOffset\ timeUtc)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ \textcolor{keyword}{new}\ SortedDictionary<string,\ Vector3>(StringComparer.Ordinal);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (positionFrames.Count\ ==\ 0)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ReadOnlyDictionary<string,\ Vector3>(result);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ bracketing\ samples,\ using\ an\ endpoint\ frame\ outside\ the\ recorded\ range.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ var\ ticks\ =\ timeUtc.ToUniversalTime().UtcDateTime.Ticks;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ var\ right\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (right\ <\ positionFrames.Count\ \&\&}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ positionFrames[right].TimestampUtc.UtcDateTime.Ticks\ <\ ticks)\ right++;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ var\ before\ =\ right\ >\ 0\ ?\ positionFrames[right\ -\/\ 1]\ :\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ var\ after\ =\ right\ <\ positionFrames.Count\ ?\ positionFrames[right]\ :\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (before\ ==\ \textcolor{keyword}{null})\ before\ =\ after;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (after\ ==\ \textcolor{keyword}{null})\ after\ =\ before;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (before\ ==\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ReadOnlyDictionary<string,\ Vector3>(result);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ var\ span\ =\ after.TimestampUtc.UtcDateTime.Ticks\ -\/\ before.TimestampUtc.UtcDateTime.Ticks;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ var\ amount\ =\ span\ <=\ 0}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ 0}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ Mathf.Clamp01((\textcolor{keywordtype}{float})((ticks\ -\/\ before.TimestampUtc.UtcDateTime.Ticks)\ /\ (\textcolor{keywordtype}{double})span));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ pair\ \textcolor{keywordflow}{in}\ before.Positions)\ result[pair.Key]\ =\ pair.Value;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Interpolate\ shared\ nodes\ and\ retain\ positions\ that\ appear\ in\ only\ one\ frame.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ pair\ \textcolor{keywordflow}{in}\ after.Positions)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[pair.Key]\ =\ before.Positions.TryGetValue(pair.Key,\ out\ var\ start)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ Vector3.Lerp(start,\ pair.Value,\ amount)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ pair.Value;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ReadOnlyDictionary<string,\ Vector3>(result);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00313}\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0fb110e121fe9ef9c3daa3c917b664a4}{00313}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a0fb110e121fe9ef9c3daa3c917b664a4}{ClearPositionHistory}}()}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (positionFrames.Count\ ==\ 0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ positionFrames.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hasPlayhead)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clamp\ the\ playhead\ to\ the\ remaining\ semantic\ history\ after\ removing\ motion\ samples.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ =\ playheadTimeUtc\ <\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ ?\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ :}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ >\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{LatestTimeUtc}}\ ?\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{LatestTimeUtc}}\ :\ playheadTimeUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a4cba23fceccdfef66f0c662d05eca3ba}{EntryIndexAt}}(playheadTimeUtc);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{Changed}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \textcolor{keyword}{internal}\ \textcolor{keywordtype}{void}\ ClearEventHistory(\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_snapshot}{GraphSnapshot}}\ current,\ DateTimeOffset?\ timestampUtc\ =\ \textcolor{keyword}{null},}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ clearPositions\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Promote\ the\ current\ graph\ to\ the\ baseline\ and\ optionally\ preserve\ the\ independent\ motion\ track.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}{Baseline}}\ =\ current\ ??\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ArgumentNullException(nameof(current));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ =\ (timestampUtc\ ??\ DateTimeOffset.UtcNow).ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!clearPositions\ \&\&\ positionFrames.Count\ >\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ positionFrames[positionFrames.Count\ -\/\ 1].TimestampUtc\ >\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}})}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ =\ positionFrames[positionFrames.Count\ -\/\ 1].TimestampUtc;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ entries.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (clearPositions)\ positionFrames.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ hasPlayhead\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a1e3b7185e8013da95871edc1a6979566}{Changed}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \textcolor{keyword}{internal}\ \textcolor{keywordtype}{void}\ SetPlayhead(DateTimeOffset\ timestampUtc)}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ =\ timestampUtc.ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ hasPlayhead\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ =\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a4cba23fceccdfef66f0c662d05eca3ba}{EntryIndexAt}}(playheadTimeUtc);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{keyword}{internal}\ \textcolor{keywordtype}{void}\ Restore(GraphSnapshot\ baseline,\ DateTimeOffset\ baselineTimeUtc,}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IEnumerable<GraphTimelineEntry>\ history,\ \textcolor{keywordtype}{int}\ cursor,}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IEnumerable<GraphPositionFrame>\ positionHistory\ =\ \textcolor{keyword}{null},}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ positionRecordingEnabled\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{float}\ sampleIntervalSeconds\ =\ 1f,}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DateTimeOffset?\ currentTimeUtc\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a62f97d0fe35c6a634e9d440cda16968a}{Baseline}}\ =\ baseline;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ =\ baselineTimeUtc.ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Restore\ each\ track\ in\ its\ own\ ordering\ before\ rebuilding\ the\ bounded\ cursor\ and\ playhead.}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ entries.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (history\ !=\ \textcolor{keyword}{null})\ entries.AddRange(history.OrderBy(item\ =>\ item.Sequence));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ positionFrames.Clear();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (positionHistory\ !=\ \textcolor{keyword}{null})\ positionFrames.AddRange(positionHistory.OrderBy(item\ =>\ item.TimestampUtc));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ this.positionRecordingEnabled\ =\ positionRecordingEnabled;}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ positionSampleIntervalSeconds\ =\ Mathf.Clamp(sampleIntervalSeconds,\ .1f,\ 60f);}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ =\ Math.Max(-\/1,\ Math.Min(cursor,\ entries.Count\ -\/\ 1));}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ playheadTimeUtc\ =}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (currentTimeUtc\ ??\ (\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ ==\ entries.Count\ -\/\ 1\ ?\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_a6914e49e27b44221dfd6d2870ae78c32}{LatestTimeUtc}}\ :}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}\ <\ 0\ ?\ \doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_af400c53b28b6ffdc677071269d7e5671}{BaselineTimeUtc}}\ :\ entries[\doxymbox{\hyperlink{class_cashg_1_1_graph_explorer_1_1_graph_timeline_ab770e88b47eee0a4c74e1df15a1ab6c2}{Cursor}}].TimestampUtc)).ToUniversalTime();}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ hasPlayhead\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00374}00374\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graph_timeline_8cs_source_l00375}00375\ \}}
+
+\end{DoxyCode}
