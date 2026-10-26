@@ -28,6 +28,10 @@
 .sectors { background-color: #0d191c; border-color: #263b35; padding-top: 8px; padding-bottom: 8px; }
 .sector { color: #83a79b; font-size: 7px; letter-spacing: 1.5px; }
 .graph-viewport { background-color: #071014; }
+.contract-difficulty { margin-top: 7px; }
+.no-intel-view { align-items: center; justify-content: center; }
+.no-intel-message { background-color: rgba(7, 16, 20, 0.93); border-width: 1px; border-color: #527b64; padding: 20px 24px; }
+.no-intel-title { color: #b2d9ca; font-size: 20px; -unity-font-style: bold; letter-spacing: 3px; -unity-text-align: middle-center; white-space: normal; }
 .net-node { background-color: rgba(12,26,30,0.97); border-color: #345048; padding: 5px 9px; border-left-width: 2px; }
 .net-node:hover { background-color: #1a3434; border-color: #93d7c0; }
 .net-node.controlled { background-color: #112c25; border-color: #477e66; }

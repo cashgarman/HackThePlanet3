@@ -23,6 +23,8 @@ namespace HackThePlanet.Editor
         private static RenderTexture sharedField, sharedGlass;
         private static float settingsElapsed, settingsTaskElapsed, settingsTrace;
         private static Career settingsCareer;
+        private static int previousTextSize;
+        private static readonly Dictionary<TextElement,float> textSizeBaseline=new Dictionary<TextElement,float>();
         private static DataDrivenValidation.Fixture dataFixture;
         private static RenderTexture smokeUiTexture;
         private static string Project=>Directory.GetParent(Application.dataPath).FullName;
@@ -37,7 +39,8 @@ namespace HackThePlanet.Editor
                 {smokePhase=1;smokeFrames=0;}
                 if(state==PlayModeStateChange.EnteredEditMode&&smokePhase==43)
                 {
-                    File.WriteAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"PASS / Real player UI callbacks: connect, scan, hack, recover, deliver, research purchase, hardware upgrade. Both shaders compile and render nonblank GPU textures; display modes and GPU texture reuse passed. Settings button and Escape, exact menu choices, menu bounds, operation freeze, previous pause state, blocked background controls and shortcuts, reset confirmation, Cancel and Escape cancellation, confirmed fresh career, usable first contract, and Quit passed. Rendered screenshots captured. Asset-only contract, node variant, action button, shortcut, objective, technology and hardware extension rendered and exercised. Tactical queue, clear and stop controls exercised. Test career and effect preference isolated from user saves.");
+                    File.WriteAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"PASS / Real player UI callbacks: connect, scan, hack, recover, deliver, research purchase, hardware upgrade. Both shaders compile and render nonblank GPU textures; display modes and GPU texture reuse passed. Settings button and Escape, exact menu choices, menu bounds, operation freeze, previous pause state, blocked background controls and shortcuts, reset confirmation, Cancel and Escape cancellation, confirmed fresh career, usable first contract, and Quit passed. Rendered screenshots captured. Asset-only contract, node variant, action button, shortcut, objective, technology and hardware extension rendered and exercised. Tactical queue, clear and stop controls exercised. Easy full intel, Medium anonymous topology and labels, Hard renderer-free centered message, animated GPU static, reduced/off effects, and connection back to discovered systems passed. Test career and effect preference isolated from user saves.");
+                    File.AppendAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"\nPASS / Text size: 200% default; real slider callbacks at 100% and 300%; every TextElement scales without compounding, including inline graph labels and numeric input; scrollable Settings stays in bounds at 300%, including a 1280 x 720 render; preference persistence and career-reset independence; original user preference restored.\n");
                     if(smokeUiTexture!=null){smokeUiTexture.Release();UnityEngine.Object.DestroyImmediate(smokeUiTexture);smokeUiTexture=null;}
                     dataFixture?.Dispose();dataFixture=null;settingsCareer=null;SessionState.SetBool("HTP.Smoke",false);smokePhase=0;Status("PASS / smoke");if(Application.isBatchMode)EditorApplication.Exit(0);
                 }
@@ -129,28 +132,65 @@ namespace HackThePlanet.Editor
                 switch(smokePhase)
                 {
                     case 1:
-                        if(Application.isBatchMode)
-                        {
-                            smokeUiTexture=new RenderTexture(1680,960,24,RenderTextureFormat.ARGB32);smokeUiTexture.Create();
-                            app.GetComponent<UIDocument>().panelSettings.targetTexture=smokeUiTexture;
-                        }
-                        previousEffects=app.Visuals.Mode;app.UseTestCareer(new Career());app.Visuals.SetMode(SignalEffects.Full);smokePhase++;return;
+                        smokeUiTexture=new RenderTexture(1680,960,24,RenderTextureFormat.ARGB32);smokeUiTexture.Create();
+                        app.GetComponent<UIDocument>().panelSettings.targetTexture=smokeUiTexture;
+                        previousEffects=app.Visuals.Mode;previousTextSize=app.TextSizePercent;app.UseTestCareer(new Career());app.SetTextSize(200);app.Visuals.SetMode(SignalEffects.Full);smokePhase++;return;
                     case 2:
                         Check(app.Root.Q<UnityEngine.UIElements.Button>("connect")!=null,"Connect control exists.");
                         var preview=app.Root.Q<GraphViewport>();
                         Check(preview!=null&&preview.NodeCount==32&&preview.VisibleNodes==32&&preview.VisibleEdges>0,
                             "GraphExplorer renders all preview systems and their links in 3D: "+preview?.NodeCount+" nodes / "+preview?.VisibleNodes+" drawn / "+preview?.VisibleEdges+" links.");
                         Check(app.Root.Q<Button>("node-home")!=null,"Projected system labels remain selectable.");
+                        var mapBounds=preview.GetFirstAncestorOfType<ScrollView>().contentViewport.worldBound;
+                        Check(mapBounds.Contains(preview.worldBound.min+Vector2.one)&&mapBounds.Contains(preview.worldBound.max-Vector2.one)&&mapBounds.Contains(app.Root.Q<Button>("fit").worldBound.center),"Default 200% layout keeps the full graph and its controls visible: viewport "+mapBounds+", graph "+preview.worldBound+", fit "+app.Root.Q<Button>("fit").worldBound);
                         ValidateSignalRendering(app);
                         NetworkVisualValidation.CheckViewport(preview);
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/01-contract-exchange.png"));smokePhase=100;return;
                     case 100:
+                        app.Root.Q<Foldout>("network-key").value=true;
                         NetworkVisualValidation.Orbit(app.Root.Q<GraphViewport>(),55,15);smokePhase=101;return;
                     case 101:
+                        Check(Mathf.Approximately(app.Root.Q<Foldout>("network-key").Q<Label>(className:"micro").resolvedStyle.fontSize,14),"Expanded network key doubles its authored 7px telemetry text.");
+                        app.Root.Q<Foldout>("network-key").value=false;
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/network-orbit.png"));
                         smokePhase=102;return;
                     case 102:
-                        NetworkVisualValidation.Orbit(app.Root.Q<GraphViewport>(),0,28);smokePhase=3;return;
+                        NetworkVisualValidation.Orbit(app.Root.Q<GraphViewport>(),0,28);
+                        Check(app.ActivateVisibleControl("contract-"+GameContent.Story.First(c=>c.Intel==ContractIntel.Topology).id),"Medium contract can be previewed.");smokePhase=120;return;
+                    case 120:
+                        var mediumGraph=app.Root.Q<GraphViewport>();
+                        Check(mediumGraph!=null&&mediumGraph.NodeCount==44&&mediumGraph.VisibleNodes==44&&mediumGraph.VisibleEdges>0,"Medium draws the complete anonymous topology.");
+                        Check(mediumGraph.Query<Button>().ToList().All(b=>b.text=="UNKNOWN SYSTEM"&&string.IsNullOrEmpty(b.tooltip)),"Medium node cards expose no system names or hover tooltips.");
+                        Check(app.Root.Query<VisualElement>(className:"legend-key").ToList().Count==0&&app.Root.Q(className:"sectors")==null,"Medium contains no type legend or sector intel.");
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/16-medium-contract-intel.png"));
+                        smokePhase=128;return;
+                    case 128:
+                        var hard=GameContent.Story.First(c=>c.Intel==ContractIntel.None);
+                        var developed=new Career();developed.completed=GameContent.Story.TakeWhile(c=>c.id!=hard.id).Select(c=>c.id).ToList();
+                        app.UseTestCareer(developed);Check(app.ActivateVisibleControl("contract-"+hard.id),"Hard contract can be previewed.");smokePhase=121;return;
+                    case 121:
+                        Check(app.Root.Q<GraphViewport>()==null&&app.Root.Q("no-intel-view")!=null,"Hard creates no graph renderer or selectable systems.");
+                        var blocked=app.Root.Q("no-intel-view");var message=app.Root.Q<Label>(className:"no-intel-title");
+                        Check(message?.text=="NO INTEL AVAILABLE"&&Vector2.Distance(message.worldBound.center,blocked.worldBound.center)<3,"Hard intel message is centered in the graph view.");
+                        Check(app.Root.Q<Button>("fit")==null&&app.Root.Q<Button>("zoom-in")==null&&app.Root.Query<VisualElement>(className:"legend-key").ToList().Count==0,"Hard hides map controls and system legend.");
+                        ValidateSignalRendering(app);frozenField=ReadPixels(app.Visuals.FieldTexture);
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/17-hard-contract-no-intel.png"));smokePhase++;return;
+                    case 122:
+                        Check(!frozenField.SequenceEqual(ReadPixels(app.Visuals.FieldTexture)),"Hard static animates in Full effects mode.");
+                        app.Visuals.SetMode(SignalEffects.Reduced);smokePhase++;return;
+                    case 123:
+                        frozenField=ReadPixels(app.Visuals.FieldTexture);smokePhase++;return;
+                    case 124:
+                        Check(frozenField.SequenceEqual(ReadPixels(app.Visuals.FieldTexture)),"Hard static freezes in Reduced effects mode.");
+                        app.Visuals.SetMode(SignalEffects.Off);smokePhase++;return;
+                    case 125:
+                        Check(app.Root.Q<Image>("signal-field").resolvedStyle.display==DisplayStyle.None&&app.Root.Q<Label>(className:"no-intel-title").resolvedStyle.display!=DisplayStyle.None,"Effects Off preserves the Hard intel message without animation.");
+                        app.Visuals.SetMode(SignalEffects.Full);Check(app.ActivateVisibleControl("connect")&&app.State.Active,"Hard connects through its intel screen.");smokePhase++;return;
+                    case 126:
+                        Check(app.Root.Q("no-intel-view")==null&&app.Root.Q<GraphViewport>()?.NodeCount==app.State.KnownGraph.Nodes.Count&&app.State.KnownGraph.Nodes.Count<app.State.Op.nodes.Count,"Hard connection replaces the static screen with discovered systems only.");
+                        app.UseTestCareer(new Career());frozenField=null;smokePhase++;return;
+                    case 127:
+                        Check(app.Root.Q<GraphViewport>()?.NodeCount==32&&app.Root.Q("no-intel-view")==null,"Returning to Easy restores the full preview.");smokePhase=3;return;
                     case 3:
                         Check(app.ActivateVisibleControl("connect"),"Connect button works.");Check(app.State.Active,"Mission connected through UI.");smokePhase++;return;
                     case 4:
@@ -236,14 +276,57 @@ namespace HackThePlanet.Editor
                         Check(app.ActivateVisibleControl("settings"),"Settings rail button opens the menu.");smokePhase++;return;
                     case 25:
                         var menu=app.Root.Q<VisualElement>(className:"settings-menu");
-                        Check(menu!=null&&menu.Query<Button>().ToList().Select(b=>b.text).SequenceEqual(new[]{"Resume","Reset Game Save","Quit"}),"Settings contains exactly Resume, Reset Game Save, and Quit.");
+                        Check(menu!=null&&menu.Q<Button>("resume")?.text=="Resume"&&menu.Q<Button>("reset-save")?.text=="Reset Game Save"&&menu.Q<Button>("quit")?.text=="Quit","Settings retains Resume, Reset Game Save, and Quit.");
+                        Check(app.Root.Q<SliderInt>("text-size")?.value==200,"Settings defaults to double text size.");
                         Check(menu.worldBound.width>300&&menu.worldBound.height>200&&app.Root.worldBound.Contains(menu.worldBound.min)&&app.Root.worldBound.Contains(menu.worldBound.max),"Settings menu fits within the rendered viewport.");
                         Check(app.State.Op.paused&&app.State.Op.elapsed==settingsElapsed&&app.State.Op.task.elapsed==settingsTaskElapsed&&app.State.Op.trace==settingsTrace,"Settings freezes operation time, tool progress, and trace across frames.");
                         Check(!app.ActivateVisibleControl("action-scan")&&!app.ActivateVisibleControl("tab-research"),"Settings blocks underlying gameplay and navigation controls.");
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/10-settings-menu.png"));
+                        smokePhase=300;return;
+                    case 300:
+                        app.Root.Q<SliderInt>("text-size").value=100;smokePhase=301;return;
+                    case 301:
+                        textSizeBaseline.Clear();
+                        foreach(var text in app.Root.Query<TextElement>().ToList())
+                            textSizeBaseline[text]=text.resolvedStyle.fontSize;
+                        app.Root.Q<SliderInt>("text-size").value=300;smokePhase++;return;
+                    case 302:
+                        Check(app.TextSizePercent==300,"Text size changes through the actual slider callback.");
+                        foreach(var text in app.Root.Query<TextElement>().ToList())
+                            if(textSizeBaseline.TryGetValue(text,out var baseline))
+                                Check(Mathf.Abs(text.resolvedStyle.fontSize-baseline*3)<.1f,"Every text element scales, including graph labels and settings inputs: "+text.name+" / "+text.text+" / "+text.resolvedStyle.fontSize+" expected "+baseline*3);
+                        var largeMenu=app.Root.Q(className:"settings-menu");
+                        Check(app.Root.worldBound.Contains(largeMenu.worldBound.min)&&app.Root.worldBound.Contains(largeMenu.worldBound.max),"Settings stays within the viewport at 300%.");
+                        var menuScroll=largeMenu as ScrollView;menuScroll.ScrollTo(app.Root.Q<Button>("quit"));
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/18-settings-300-percent.png"));
+                        smokePhase++;return;
+                    case 303:
+                        smokeUiTexture.Release();smokeUiTexture.width=1280;smokeUiTexture.height=720;smokeUiTexture.Create();smokePhase++;return;
+                    case 304:
+                        var smallMenu=app.Root.Q(className:"settings-menu");
+                        Check(app.Root.worldBound.Contains(smallMenu.worldBound.min)&&app.Root.worldBound.Contains(smallMenu.worldBound.max),"300% settings fits after resizing to 1280 x 720.");
+                        (smallMenu as ScrollView).ScrollTo(app.Root.Q<Button>("resume"));
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/19-settings-1280x720.png"));
+                        smokePhase++;return;
+                    case 305:
+                        bool hadSize=PlayerPrefs.HasKey(WorkstationApp.TextSizePreference);int savedSize=PlayerPrefs.GetInt(WorkstationApp.TextSizePreference);
+                        try
+                        {
+                            app.Testing=false;app.SetTextSize(175);
+                            Check(PlayerPrefs.GetInt(WorkstationApp.TextSizePreference)==175,"Text size is saved independently of the career.");
+                        }
+                        finally
+                        {
+                            app.Testing=true;
+                            if(hadSize)PlayerPrefs.SetInt(WorkstationApp.TextSizePreference,savedSize);else PlayerPrefs.DeleteKey(WorkstationApp.TextSizePreference);
+                            PlayerPrefs.Save();app.SetTextSize(200);
+                        }
+                        smokeUiTexture.Release();smokeUiTexture.width=1680;smokeUiTexture.height=960;smokeUiTexture.Create();smokePhase++;return;
+                    case 306:
+                        Check(Mathf.Approximately(app.Root.Q<Label>(className:"micro").resolvedStyle.fontSize,16),"Returning to 200% does not compound font scaling.");
                         Check(app.ActivateVisibleControl("resume")&&app.State.Op.paused,"Resume preserves an already paused operation.");
                         app.State.SetPaused(false);SendKey(app,KeyCode.Escape);
-                        Check(app.State.Op.paused,"Escape opens Settings and pauses a running operation.");smokePhase++;return;
+                        Check(app.State.Op.paused,"Escape opens Settings and pauses a running operation.");smokePhase=26;return;
                     case 26:
                         SendKey(app,KeyCode.Space);SendKey(app,KeyCode.Alpha2);
                         Check(app.State.Op.paused,"Gameplay shortcuts cannot run behind Settings.");
@@ -271,6 +354,7 @@ namespace HackThePlanet.Editor
                         Check(!ReferenceEquals(fresh,settingsCareer)&&!app.State.Active&&fresh.credits==600&&fresh.xp==0&&fresh.day==1&&fresh.jobs==0&&fresh.completed.Count==0&&fresh.reports.Count==0&&fresh.cpu==0&&fresh.unlocked.SequenceEqual(new[]{"base"}),"Confirmed reset starts a fresh career and clears the active operation.");smokePhase++;return;
                     case 34:
                         Check(app.CurrentView=="network"&&app.Root.Q<Button>("connect").enabledInHierarchy,"Reset returns to the first contract with a usable connection control.");
+                        Check(app.TextSizePercent==200,"Career resets preserve text size.");
                         SendKey(app,KeyCode.Escape);smokePhase++;return;
                     case 35:
                         Check(app.ActivateVisibleControl("resume"),"Settings resumes before asset-only fixture.");
@@ -301,11 +385,13 @@ namespace HackThePlanet.Editor
                         Check(app.Root.Q<Button>("tech-field-analysis")!=null,"Asset-only technology appears in research graph.");
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/14-asset-defined-research.png"));SendKey(app,KeyCode.Escape);smokePhase++;return;
                     case 42:
+                        app.SetTextSize(previousTextSize);
                         smokePhase=43;Check(app.ActivateVisibleControl("quit"),"Quit button is wired.");return;
                 }
             }
             catch(Exception ex)
             {
+                if(WorkstationApp.Instance!=null)WorkstationApp.Instance.SetTextSize(previousTextSize);
                 WorkstationApp.Instance?.Visuals?.SetMode(previousEffects);frozenField=null;frozenGlass=null;
                 SessionState.SetBool("HTP.Smoke",false);smokePhase=0;Status("FAIL / smoke\n"+ex);Debug.LogException(ex);EditorApplication.isPlaying=false;if(Application.isBatchMode)EditorApplication.Exit(1);
             }

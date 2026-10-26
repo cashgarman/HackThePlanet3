@@ -19,13 +19,15 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 | Right-drag graph | Orbit in 3D |
 | FIT | Recenter the graph |
 | F1 or ? | Operator field guide |
-| Escape or ESC button | Settings menu: Resume, Reset Game Save, Quit |
+| Escape or ESC button | Settings menu: text size, Resume, Reset Game Save, Quit |
 | SND | Toggle interface sounds |
 | FX+ / FX− / FX0 | Cycle animated, reduced/static, and disabled display effects |
 
 ## Career loop
 
 - Six linked story contracts across Helix Dynamics, Morrow Financial, and Aegis Systems: theft, synchronized record edits, evidence recovery, and a final disruption.
+- Contract difficulty controls pre-operation intel: **Easy** shows the complete network and system types; **Medium** shows the complete topology with anonymous, identical unknown systems; **Hard** shows **NO INTEL AVAILABLE** over animated signal static. Connecting starts normal discovery on every tier. Reduced effects freeze the static; effects off retain the message on a plain background.
+- Difficulty also scales the contract's base credits and XP: **Easy ×1**, **Medium ×1.5**, **Hard ×2**. The exchange and brief show the final delivery amounts; optional archive and quiet bonuses are added separately.
 - 32, 44, or 56 systems per operation by difficulty, with three to five approaches through a volumetric 3D network. Short ingress routes expose you to scanners; longer maintenance routes trade time for lower trace. Three optional archive detours contain bonus rewards and authored lore. Hubs strengthen connected targets; scanners add trace while tools run nearby.
 - No idle trace, unlimited pause, trace forecasts, a visible queue, tool cancellation, and retryable failures. Scanning prepares targets for 15% faster hacks and 20% less hack trace. Disconnect after completing every objective to deliver. A 100% trace ends the attempt and loses its unbanked rewards; hardware and purchased research persist.
 - Eighteen connected research nodes including the starting toolkit, four branches, and crossover technologies requiring both parents. XP is spent directly. Refund all research for free between contracts. Passives are always active; special abilities occupy a limited loadout.
@@ -42,6 +44,8 @@ Early branch roots cost 45 XP. Bridge has two prepared crossings per operation; 
 The game automatically saves your career and active operation every five seconds and at important transitions. Reopened operations start paused, including any running tool. Saves use atomic replacement and a previous-save backup.
 
 Open Settings with **Escape** or the **ESC** button on the left rail. The menu pauses an active operation; **Resume** restores its previous pause state. **Reset Game Save** asks for confirmation, then starts a fresh career and resets the recovery backup. **Quit** saves your career before closing the game.
+
+Text defaults to **200%**, twice the original size. In Settings, move **Text size** or enter a percentage from **100 to 300**. Changes apply immediately throughout the interface, including graph labels, tooltips, reports, and logs, and are remembered between launches independently of career resets. Panels wrap or scroll to keep larger text and controls accessible.
 
 Windows save location: `%USERPROFILE%/AppData/LocalLow/Independent Operator/Hack The Planet/career-v2.json`.
 

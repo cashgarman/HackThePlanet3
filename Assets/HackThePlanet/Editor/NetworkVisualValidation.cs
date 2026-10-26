@@ -12,6 +12,26 @@ namespace HackThePlanet.Editor
     {
         private static T Field<T>(GraphViewport viewport,string name) => (T)typeof(GraphViewport).GetField(name,BindingFlags.Instance|BindingFlags.NonPublic).GetValue(viewport);
 
+        public static void CheckIntel(Action<bool,string> check)
+        {
+            var network=NetworkGenerator.Generate(GameContent.Story[0],new Career());
+            var before=JsonUtility.ToJson(new NodeSnapshot{nodes=network.nodes});
+            GraphScene Project(bool preview,ContractIntel intel)=>(GraphScene)typeof(GraphViewport).GetMethod("BuildNetwork",BindingFlags.Static|BindingFlags.NonPublic)
+                .Invoke(null,new object[]{network.nodes,network.links,preview,intel});
+            var full=Project(true,ContractIntel.Full);
+            check(full.Nodes.Count==network.nodes.Count&&full.Nodes.Values.Any(n=>n.Record.TypeId.EndsWith("-objective")),"Easy previews preserve the full network and objective intel.");
+            var topology=Project(true,ContractIntel.Topology);
+            check(topology.Nodes.Count==full.Nodes.Count&&topology.Edges.Count==full.Edges.Count,"Medium previews preserve every system and connection.");
+            check(topology.Schema.NodeTypes.Count==1&&topology.Nodes.Values.All(n=>n.Record.TypeId=="unknown"&&n.Label=="UNKNOWN SYSTEM"&&n.Record.Properties.Count==0&&n.Emphasis==ToolEmphasis.None),"Medium graph records contain no types, labels, ownership, objectives or emphasis.");
+            check(topology.Nodes.Values.All(n=>n.Position==full.Nodes[n.Id].Position),"Medium previews preserve exact route geometry.");
+            var blocked=Project(true,ContractIntel.None);
+            check(blocked.Nodes.Count==0&&blocked.Edges.Count==0,"Hard previews expose no systems or connections.");
+            var live=Project(false,ContractIntel.None);
+            check(live.Nodes.Count==network.nodes.Count(n=>n.known)&&live.Nodes.Values.All(n=>n.Record.TypeId!="unknown"),"Connecting restores normal discovered-system intel even on Hard.");
+            check(before==JsonUtility.ToJson(new NodeSnapshot{nodes=network.nodes}),"Preview redaction never mutates the generated operation.");
+        }
+        [Serializable] private sealed class NodeSnapshot { public List<NetNode> nodes; }
+
         public static void CheckViewport(GraphViewport viewport)
         {
             viewport.ResetView();
@@ -87,7 +107,6 @@ namespace HackThePlanet.Editor
                         }
                         if(hits<12)throw new InvalidOperationException("No rendered pixels for "+node.Label+" in view "+view+" ("+hits+")");
                     }
-                    SaveTexture(texture,"node-models-"+view+".png");
                 }
                 File.WriteAllText(Path.Combine(root,"Artifacts/network-model-validation.txt"),"PASS / Seven original readable normalized meshes, actual graph shader pixels and picking from front, three-quarter and rear views. Reduced motion exercised. Gallery order: Gateway, Workstation, Relay, Firewall, Scanner, Database, SecurityHub.");
             }

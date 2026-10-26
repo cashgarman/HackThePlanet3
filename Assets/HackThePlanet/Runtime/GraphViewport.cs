@@ -51,18 +51,14 @@ namespace HackThePlanet
         private float yawStart, pitchStart;
         private bool disposed;
         private bool fitPending;
-        private string hoveredId;
-        private readonly HashSet<string> objectives = new HashSet<string>();
-        private readonly HashSet<string> frontiers = new HashSet<string>();
-        private readonly List<Rect> occupiedLabels = new List<Rect>();
 
         public int VisibleNodes => session.Renderer.VisibleCount;
         public int VisibleEdges => session.Renderer.VisibleEdges;
         public int NodeCount => scene.Nodes.Count;
 
         public GraphViewport(List<NetNode> nodes, List<NetLink> links, string selected, bool preview,
-            Action<string> select, GraphPathResult route = null, GraphCameraState cameraState = null)
-            : this(BuildNetwork(nodes, links, preview), selected, select, false, route, cameraState)
+            Action<string> select, GraphPathResult route = null, GraphCameraState cameraState = null, ContractIntel intel = ContractIntel.Full)
+            : this(BuildNetwork(nodes, links, preview, intel), preview && intel != ContractIntel.Full ? "" : selected, select, false, route, cameraState)
         {
         }
 
@@ -126,11 +122,9 @@ namespace HackThePlanet
             Add(labels);
             foreach (var node in scene.Nodes.Values)
             {
-                if (node.Record.Properties.TryGetValue("objective", out var objective) && objective.Boolean) objectives.Add(node.Id);
-                if(node.Record.Properties.TryGetValue("frontier",out var frontier)&&frontier.Boolean)frontiers.Add(node.Id);
-                if(node.Record.Properties.TryGetValue("affordable",out var affordable)&&affordable.Boolean)frontiers.Add(node.Id);
                 var button = new Button(() => select(node.Id)) { name = (research ? "tech-" : "node-") + node.Id,
-                    text = node.Label, tooltip = node.Label };
+                    text = node.Label };
+                button.style.display = DisplayStyle.None;
                 button.style.position = Position.Absolute;
                 button.style.width = research ? 118 : 104;
                 button.style.height = 26;
@@ -176,18 +170,7 @@ namespace HackThePlanet
             });
             RegisterCallback<PointerMoveEvent>(evt =>
             {
-                if (!dragging)
-                {
-                    var local = this.WorldToLocal(evt.position);
-                    var nextHoveredId = PickNode(local);
-                    if (hoveredId != nextHoveredId)
-                    {
-                        hoveredId = nextHoveredId;
-                        PositionLabels();
-                    }
-                    tooltip = hoveredId == null ? "Drag to pan / Right-drag to orbit / Wheel to zoom" : scene.Nodes[hoveredId].Label;
-                    return;
-                }
+                if (!dragging) return;
                 var delta = (Vector2)evt.position - dragStart;
                 if(delta.sqrMagnitude>25)savedCamera.UserAdjusted=true;
                 if (orbiting)
@@ -210,17 +193,29 @@ namespace HackThePlanet
                 dragging = false;
                 this.ReleasePointer(evt.pointerId);
             });
-            RegisterCallback<PointerLeaveEvent>(_ =>
-            {
-                hoveredId = null;
-                PositionLabels();
-            });
+
         }
 
-        private static GraphScene BuildNetwork(List<NetNode> nodes, List<NetLink> links, bool preview)
+        private static GraphScene BuildNetwork(List<NetNode> nodes, List<NetLink> links, bool preview, ContractIntel intel)
         {
             var document = new GraphDocument("workstation-network", "Live network");
             var schema = new GraphSchema();
+            // Redact at the graph-document boundary so labels, picking, models and effects
+            // all receive the same anonymous topology, without changing simulation nodes.
+            if (preview && intel != ContractIntel.Full)
+            {
+                schema.Register(new GraphNodeTypeDefinition("unknown", "Unknown system", "default", Palette.Cyan, .95f));
+                schema.Register(new GraphRelationDefinition("network", "Connection", Palette.Cyan));
+                if (intel == ContractIntel.Topology)
+                {
+                    foreach (var node in nodes) document.UpsertNode(new GraphNodeRecord(node.id, "unknown", "UNKNOWN SYSTEM"));
+                    foreach (var link in links) document.UpsertEdge(new GraphEdgeRecord(link.a + ">" + link.b, link.a, link.b, "network"));
+                }
+                var redacted = new GraphScene(document, schema);
+                foreach (var node in nodes.Where(n => redacted.Nodes.ContainsKey(n.id)))
+                { redacted.Nodes[node.id].Position = node.position; redacted.Nodes[node.id].Pinned = true; }
+                return redacted;
+            }
             foreach(var group in nodes.GroupBy(n=>string.IsNullOrEmpty(n.typeId)?n.kind.ToString():n.typeId))
             {
                 var node=group.First();string glyph=node.kind.ToString();var color=node.color.a>0?node.color:Palette.Kind(node.kind);
@@ -289,34 +284,56 @@ namespace HackThePlanet
                 { [state.Op.task.target] = new GraphNodeProgressVisual { Fraction = state.Progress } };
             else session.Renderer.NodeProgress = null;
             scene.Nodes.TryGetValue(selectedId, out var selected);
-            scene.Nodes.TryGetValue(hoveredId ?? "", out var hovered);
-            session.Renderer.Draw(scene, edgeFilter, camera, selected, hovered, null);
+            session.Renderer.Draw(scene, edgeFilter, camera, selected, null, null);
         }
 
         private void PositionLabels()
         {
             if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
-            links?.MarkDirtyRepaint();
-            occupiedLabels.Clear();
-            foreach (var pair in nodeButtons.OrderBy(p => p.Key == selectedId ? 0 : p.Key==hoveredId?1:objectives.Contains(p.Key) ? 2 : 3)
-                         .ThenBy(p => Vector3.Distance(camera.transform.position, scene.Nodes[p.Key].Position)))
+            links.SelectionVisible = false;
+            foreach (var pair in nodeButtons)
             {
-                var point = camera.WorldToScreenPoint(scene.Nodes[pair.Key].Position);
-                // Keep small screen-space text on whole panel pixels while the camera moves.
-                // Fractional UI positions make glyph edges shimmer during orbit and zoom.
-                var rect = new Rect(Mathf.Round(point.x / texture.width * contentRect.width - (research ? 59 : 52)),
-                    Mathf.Round((1 - point.y / texture.height) * contentRect.height + 15), research ? 118 : 104, 26);
-                bool priority = pair.Key == selectedId;
-                bool active = priority || pair.Key == hoveredId || objectives.Contains(pair.Key) || frontiers.Contains(pair.Key);
-                bool show = active && point.z > 0 && rect.xMax > 0 && rect.xMin < contentRect.width && rect.yMin >= 0 && rect.yMax < contentRect.height;
-                if(show&&!priority&&occupiedLabels.Any(other=>other.Overlaps(rect)))show=false;
-                var display = show ? DisplayStyle.Flex : DisplayStyle.None;
-                if (pair.Value.resolvedStyle.display != display) pair.Value.style.display = display;
-                if (!show) continue;
-                occupiedLabels.Add(new Rect(rect.x-4,rect.y-3,rect.width+8,rect.height+6));
-                if (!Mathf.Approximately(pair.Value.resolvedStyle.left, rect.x)) pair.Value.style.left = rect.x;
-                if (!Mathf.Approximately(pair.Value.resolvedStyle.top, rect.y)) pair.Value.style.top = rect.y;
+                var button = pair.Value;
+                button.style.display = DisplayStyle.None;
+                if (pair.Key != selectedId) continue;
+                var node = scene.Nodes[pair.Key];
+                var point = camera.WorldToViewportPoint(node.Position);
+                if (point.z <= camera.nearClipPlane || point.x < 0 || point.x > 1 || point.y < 0 || point.y > 1) continue;
+
+                // Project the model's bounding sphere into the same panel coordinates as its card.
+                float radius = session.Renderer.Radius(node);
+                var edge = camera.WorldToViewportPoint(node.Position + camera.transform.up * radius);
+                float halfSize = Mathf.Max(10, Mathf.Abs(edge.y - point.y) * contentRect.height + 4);
+                var nodeCenter = new Vector2(point.x * contentRect.width, (1 - point.y) * contentRect.height);
+                var reticle = new Rect(nodeCenter.x - halfSize, nodeCenter.y - halfSize, halfSize * 2, halfSize * 2);
+                float width = Mathf.Min((research ? 118 : 104) * textScale, contentRect.width);
+                float height = 26 * textScale;
+                float top = reticle.yMax + 12;
+                if (top + height > contentRect.height) top = reticle.yMin - 12 - height;
+                var card = new Rect(Mathf.Round(Mathf.Clamp(nodeCenter.x - width / 2, 0, contentRect.width - width)),
+                    Mathf.Round(Mathf.Clamp(top, 0, Mathf.Max(0, contentRect.height - height))), width, height);
+                button.style.display = DisplayStyle.Flex;
+                button.style.width = width;
+                button.style.left = card.x;
+                button.style.top = card.y;
+                links.SelectionVisible = true;
+                links.SelectionRect = reticle;
+                links.CardRect = card;
             }
+            links.MarkDirtyRepaint();
+        }
+
+        private float textScale=1;
+        public void SetTextScale(float scale)
+        {
+            textScale=scale;
+            foreach(var button in nodeButtons.Values)
+            {
+                button.style.width=Mathf.Min((research?118:104)*scale,Mathf.Max(1,contentRect.width));
+                button.style.height=26*scale;
+                button.style.whiteSpace=WhiteSpace.Normal;
+            }
+            PositionLabels();
         }
 
         private string PickNode(Vector2 local)
@@ -369,6 +386,8 @@ namespace HackThePlanet
             private readonly string selected;
             private readonly HashSet<string> path;
             private readonly bool research;
+            public bool SelectionVisible;
+            public Rect SelectionRect, CardRect;
 
             public LinkOverlay(GraphScene scene, Camera camera, string selected, GraphPathResult route, bool research)
             {
@@ -407,7 +426,36 @@ namespace HackThePlanet
                         (1 - end.y / camera.pixelHeight) * contentRect.height));
                     painter.Stroke();
                 }
+                if (!SelectionVisible) return;
+                painter.strokeColor = Palette.Lime;
+                painter.lineWidth = 1.5f;
+                var corners = Corners(SelectionRect);
+                painter.BeginPath();
+                painter.MoveTo(corners[0]);
+                for (int i = 1; i < corners.Length; i++) painter.LineTo(corners[i]);
+                painter.ClosePath();
+                painter.Stroke();
+
+                // Choose the two facing corners on each rectangle, then pair without crossing.
+                var cardCorners = Corners(CardRect).OrderBy(p => (p - SelectionRect.center).sqrMagnitude).Take(2).ToArray();
+                var nodeCorners = corners.OrderBy(p => (p - CardRect.center).sqrMagnitude).Take(2).ToArray();
+                float direct = (cardCorners[0] - nodeCorners[0]).sqrMagnitude + (cardCorners[1] - nodeCorners[1]).sqrMagnitude;
+                float crossed = (cardCorners[0] - nodeCorners[1]).sqrMagnitude + (cardCorners[1] - nodeCorners[0]).sqrMagnitude;
+                for (int i = 0; i < 2; i++)
+                {
+                    painter.BeginPath();
+                    painter.MoveTo(cardCorners[i]);
+                    painter.LineTo(nodeCorners[crossed < direct ? 1 - i : i]);
+                    painter.Stroke();
+                }
             }
+
+            private static Vector2[] Corners(Rect rect) => new[]
+            {
+                new Vector2(rect.xMin, rect.yMin), new Vector2(rect.xMax, rect.yMin),
+                new Vector2(rect.xMax, rect.yMax), new Vector2(rect.xMin, rect.yMax)
+            };
+
         }
 
         public void Dispose()

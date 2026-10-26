@@ -48,6 +48,10 @@ The **Parallel Routes** generator preserves the current seeded 3D networks. Its 
 
 Contract reward, XP, seed, and difficulty expressions can reference career day. Repeatable contracts use the same rule system as story contracts. Lore fragments live on contract assets and are assigned through archive indices.
 
+Difficulty values map to **Easy** (1 or below), **Medium** (2), and **Hard** (3 or above). These tiers control both offline intel and base delivery rewards. Easy previews expose all systems, types and objectives; Medium previews preserve geometry and connections but use one anonymous node type without ownership, objective emphasis, system names or a type legend; Hard previews instantiate no network renderer and display `NO INTEL AVAILABLE` over procedural static. Live operations always use normal discovered-node presentation and research reveal rules.
+
+The `credits` and `xp` formulas author base amounts. Catalog descriptors apply the tier multiplier once (Easy ×1, Medium ×1.5, Hard ×2), rounding to whole credits and XP. Reward rules reading `ContractCredits` and `ContractXp` receive these final amounts, matching exchange cards and briefs. Archive and quiet bonuses retain their authored values. Repeatable contracts re-evaluate their difficulty and payout with the career day.
+
 ### Hardware, rewards, and outcomes
 
 Hardware definitions also have shared execution requirements; the shipped memory expansion requires an unlocked ability. `UnlockedAbilities` is a numeric condition input. Hardware tiers specify prices and cumulative modifiers. Add another tier or another hardware definition to extend both progression and the rig UI. Hardware levels are stored by ID.

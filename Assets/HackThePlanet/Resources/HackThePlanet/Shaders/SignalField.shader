@@ -12,6 +12,7 @@ Shader "HackThePlanet/SignalField"
             float4 _Resolution;
             float4 _SignalState; // trace, tool activity, research, animation enabled
             float _SignalTime;
+            float _NoIntel;
 
             float hash(float2 p) { return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453); }
             float inkLine(float distance, float width, float aa) { return 1 - smoothstep(width, width + aa, abs(distance)); }
@@ -22,6 +23,24 @@ Shader "HackThePlanet/SignalField"
                 float2 pixels = uv * _Resolution.xy;
                 float2 p = (uv - .5) * float2(_Resolution.x / _Resolution.y, 1);
                 float time = _SignalTime;
+                if (_NoIntel > .5)
+                {
+                    // Television snow with drifting horizontal signal tears. No topology
+                    // is sampled; reduced effects freeze the supplied clock.
+                    float frame = floor(time * 18);
+                    float row = floor(pixels.y / 3);
+                    float tear = step(.94, hash(float2(floor(time * 4), floor(uv.y * 22))));
+                    float shift = tear * (hash(float2(frame, row)) - .5) * 100;
+                    float snow = hash(float2(floor((pixels.x + shift) / 2), row) + float2(frame * 31, frame * 17));
+                    float scan = .65 + .35 * step(1, fmod(pixels.y, 3));
+                    float band = step(.985, hash(float2(floor(uv.y * 80), floor(time * 7))));
+                    float3 staticColor = float3(.025, .05, .06) + float3(.15, .32, .30) * (snow * .6 * scan + tear * .12 + band * .12);
+                    staticColor *= 1 - .35 * length(uv - .5);
+                    #ifndef UNITY_COLORSPACE_GAMMA
+                    staticColor = GammaToLinearSpace(staticColor);
+                    #endif
+                    return fixed4(staticColor, 1);
+                }
                 float danger = smoothstep(.55, .95, _SignalState.x);
                 float3 mint = lerp(float3(.29, .83, .67), float3(1, .32, .25), danger);
                 float3 blue = float3(.22, .55, .67);

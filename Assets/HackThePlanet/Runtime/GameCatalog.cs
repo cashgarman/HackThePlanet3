@@ -129,6 +129,8 @@ namespace HackThePlanet
             var job=new Contract {id=d.id,title=d.title,description=d.description,client=d.client,company=d.company.title,tag=d.tag,objective=d.objective,condition=d.condition,aftermath=d.aftermath,
                 kind=d.displayKind,requiredWins=d.requiredWins,quietLimit=d.quietLimit,recurring=d.recurring,networkId=d.network.id,
                 credits=Mathf.RoundToInt(d.credits.Evaluate(context)),xp=Mathf.RoundToInt(d.xp.Evaluate(context)),difficulty=Mathf.RoundToInt(d.difficulty.Evaluate(context)),seed=Mathf.RoundToInt(d.seed.Evaluate(context))};
+            job.credits=Mathf.RoundToInt(job.credits*job.RewardMultiplier);
+            job.xp=Mathf.RoundToInt(job.xp*job.RewardMultiplier);
             job.lore=d.lore.Select(x=>new LoreFragment {id=x.id,title=x.title,text=x.text,company=job.company,contract=job.title}).ToArray();
             return job;
         }

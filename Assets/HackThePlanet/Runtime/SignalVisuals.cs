@@ -16,6 +16,7 @@ namespace HackThePlanet
         private Image fieldImage, glassImage;
         private float nextFrame;
         private bool invalidated = true;
+        private bool noIntel;
         private Vector4 lastState;
         public SignalEffects Mode { get; private set; }
         public bool Available => fieldMaterial != null && glassMaterial != null;
@@ -45,8 +46,9 @@ namespace HackThePlanet
             UpdateVisibility();
         }
 
-        public void AttachField(VisualElement viewport)
+        public void AttachField(VisualElement viewport, bool noIntel = false)
         {
+            this.noIntel = noIntel;
             fieldImage = Decoration("signal-field");
             fieldImage.image = fieldTexture;
             viewport.Insert(0, fieldImage);
@@ -111,6 +113,7 @@ namespace HackThePlanet
             if (glassImage != null) glassImage.image = glassTexture;
 
             float clock = Mode == SignalEffects.Full ? Time.unscaledTime : 13.75f;
+            fieldMaterial.SetFloat("_NoIntel", noIntel ? 1 : 0);
             if (fieldReady) Render(fieldMaterial, fieldTexture, parameters, clock);
             Render(glassMaterial, glassTexture, parameters, clock);
         }

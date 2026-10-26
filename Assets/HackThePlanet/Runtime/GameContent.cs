@@ -8,6 +8,7 @@ namespace HackThePlanet
     public enum NodeKind { Gateway, Workstation, Relay, Firewall, Scanner, Database, SecurityHub }
     public enum JobKind { Copy, Alter, Investigate, Disrupt }
     public enum ToolKind { Scan, Hack, Download, Disrupt, Bridge, Backdoor }
+    public enum ContractIntel { Full, Topology, None }
 
     [Serializable]
     public sealed class NetNode
@@ -40,6 +41,12 @@ namespace HackThePlanet
         public bool recurring;
         public string networkId;
         public LoreFragment[] lore=Array.Empty<LoreFragment>();
+        public ContractIntel Intel => difficulty <= 1 ? ContractIntel.Full : difficulty == 2 ? ContractIntel.Topology : ContractIntel.None;
+        public string DifficultyLabel => Intel == ContractIntel.Full ? "EASY" : Intel == ContractIntel.Topology ? "MEDIUM" : "HARD";
+        public float RewardMultiplier => Intel == ContractIntel.Full ? 1f : Intel == ContractIntel.Topology ? 1.5f : 2f;
+        public string IntelDescription => Intel == ContractIntel.Full ? "Full network intel. System types and objectives are visible before connecting."
+            : Intel == ContractIntel.Topology ? "Topology only. All systems are unknown until you connect and discover them."
+            : "No intel available. Connect and discover the network from your gateway.";
     }
 
     [Serializable]

@@ -19,10 +19,18 @@ class Model:
     def cylinder(self, x,y,z,r,h,top=None, segments=10, axis='y'):
         top = r if top is None else top
         def point(a,b,c): return (x+a,y+b,z+c) if axis=='y' else (x+a,y+c,z+b)
-        v=[point(cos(i*2*pi/segments)*radius,height,sin(i*2*pi/segments)*radius)
-           for radius,height in [(r,-h/2),(top,h/2)] for i in range(segments)]
-        f=[tuple(reversed(range(segments))),tuple(range(segments,segments*2))]
-        f += [(i,(i+1)%segments,(i+1)%segments+segments,i+segments) for i in range(segments)]
+        v=[point(cos(i*2*pi/segments)*r,-h/2,sin(i*2*pi/segments)*r) for i in range(segments)]
+        f=[tuple(range(segments))]
+        if top == 0:
+            # A single apex avoids zero-area cap and side triangles.
+            v.append(point(0,h/2,0))
+            f += [(i,segments,(i+1)%segments) for i in range(segments)]
+        else:
+            v += [point(cos(i*2*pi/segments)*top,h/2,sin(i*2*pi/segments)*top) for i in range(segments)]
+            f.append(tuple(reversed(range(segments,segments*2))))
+            f += [(i,i+segments,(i+1)%segments+segments,(i+1)%segments) for i in range(segments)]
+        # Swapping Y/Z reflects the mesh, so reverse winding for that mapping.
+        if axis == 'z': f=[tuple(reversed(face)) for face in f]
         self.solid(v,f)
     def save(self,name):
         mins=[min(v[i] for v in self.vertices) for i in range(3)]
@@ -49,7 +57,7 @@ def build():
     m.cylinder(0,.83,0,.12,.3,top=0,segments=8);m.save('Relay')
     m=Model();m.solid([(-.65,.7,-.15),(.65,.7,-.15),(.58,-.1,-.15),(0,-.75,-.15),(-.58,-.1,-.15),
         (-.65,.7,.15),(.65,.7,.15),(.58,-.1,.15),(0,-.75,.15),(-.58,-.1,.15)],
-        [(4,3,2,1,0),(5,6,7,8,9),(0,1,6,5),(1,2,7,6),(2,3,8,7),(3,4,9,8),(4,0,5,9)])
+        [(0,1,2,3,4),(9,8,7,6,5),(5,6,1,0),(6,7,2,1),(7,8,3,2),(8,9,4,3),(9,5,0,4)])
     m.box(0,.15,-.22,.17,.72,.15);m.box(0,.24,-.23,.7,.16,.15);m.save('Firewall')
     m=Model();m.cylinder(0,-.57,0,.43,.2,segments=8);m.box(0,-.2,0,.13,.65,.13)
     m.cylinder(0,.3,0,.62,.24,top=.3,segments=12,axis='z');m.cylinder(0,.3,-.3,.07,.55,segments=6,axis='z')

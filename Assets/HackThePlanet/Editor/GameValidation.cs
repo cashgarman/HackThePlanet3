@@ -48,12 +48,43 @@ namespace HackThePlanet.Editor
             FinishTask(sim);
         }
 
+        private static void ValidateDifficultyRewards()
+        {
+            var source=Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game");
+            var root=UnityEngine.Object.Instantiate(source);var definition=UnityEngine.Object.Instantiate(source.contracts[0]);
+            root.contracts=root.contracts.Select(d=>d.id==definition.id?definition:d).ToArray();
+            definition.credits=new ConstantNumber(600);definition.xp=new ConstantNumber(50);
+            try
+            {
+                foreach(int tier in new[]{1,2,3})
+                {
+                    definition.difficulty=new ConstantNumber(tier);
+                    using(var catalog=new GameCatalog(root))
+                    {
+                        var sim=new GameSimulation(catalog);var job=catalog.Contracts(sim.Career).First(c=>c.id==definition.id);
+                        Check(job.credits==300*(tier+1)&&job.xp==25*(tier+1),"Difficulty "+tier+" scales advertised credits and XP.");
+                        Check(sim.Start(job),"Difficulty "+tier+" contract connects.");
+                        var restored=new GameSimulation(catalog,JsonUtility.FromJson<Career>(JsonUtility.ToJson(sim.Career)));
+                        Check(restored.Job.credits==job.credits&&restored.Job.xp==job.xp,"Difficulty payout survives active-save restoration without double scaling.");
+                        foreach(var node in restored.Op.nodes.Where(n=>n.objective)){node.controlled=true;node.collected=true;}
+                        restored.Op.trace=job.quietLimit;
+                        int credits=restored.Career.credits,xp=restored.Career.xp;
+                        var report=restored.Disconnect();
+                        Check(report.success&&report.credits==job.credits&&report.xp==job.xp&&restored.Career.credits-credits==job.credits&&restored.Career.xp-xp==job.xp,"Difficulty "+tier+" banks exactly the advertised base payout.");
+                    }
+                }
+            }
+            finally{UnityEngine.Object.DestroyImmediate(definition);UnityEngine.Object.DestroyImmediate(root);}
+        }
+
         public static void Run()
         {
             results.Clear();string dir=Path.Combine(Directory.GetParent(Application.dataPath).FullName,"Artifacts");Directory.CreateDirectory(dir);
             try
             {
                 NetworkValidation.Run(Check);
+                NetworkVisualValidation.CheckIntel(Check);
+                ValidateDifficultyRewards();
                 var sim=new GameSimulation();
                 Check(!sim.Start(GameContent.Story[1]),"Locked contracts cannot start.");
                 Check(sim.Start(GameContent.Story[0]),"Starting contract connects.");
