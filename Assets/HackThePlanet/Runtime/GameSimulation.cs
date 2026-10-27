@@ -213,6 +213,9 @@ namespace HackThePlanet
 		/// <summary>Generated network links for this operation instance.</summary>
 		public List<NetLink> links;
 
+		/// <summary>Snapshot of security layers; old active saves intentionally have none.</summary>
+		public List<DefenseState> defenses = new();
+
 		/// <summary>Timestamped operation log lines shown in the workstation feed.</summary>
 		public List<string> log = new();
 
@@ -271,6 +274,23 @@ namespace HackThePlanet
 		public List<string> log = new();
 	}
 
+	/// <summary>One player-facing requirement row for an action preview.</summary>
+	public sealed class ActionRequirementStep
+	{
+		/// <summary>Gets the requirement copy shown in UI checklists.</summary>
+		public string message;
+
+		/// <summary>Gets whether this requirement is satisfied for the current target.</summary>
+		public bool met;
+
+		/// <summary>Creates a requirement row.</summary>
+		public ActionRequirementStep(string message, bool met)
+		{
+			this.message = message;
+			this.met = met;
+		}
+	}
+
 	/// <summary>Result of previewing an action, upgrade, or purchase before committing.</summary>
 	public sealed class ToolPreview
 	{
@@ -282,6 +302,9 @@ namespace HackThePlanet
 
 		/// <summary>Player-facing explanation when blocked or describing queue behavior.</summary>
 		public string reason;
+
+		/// <summary>Ordered checklist of requirements evaluated for this preview.</summary>
+		public List<ActionRequirementStep> steps = new();
 	}
 
 	/// <summary>Core simulation for career progression, network operations, research, and rig stats.</summary>
@@ -599,6 +622,7 @@ namespace HackThePlanet
 				Op.log ??= new List<string>();
 				Op.counters ??= new List<CounterState>();
 				Op.statuses ??= new List<StatusState>();
+				Op.defenses ??= new List<DefenseState>();
 
 				// Store empty status target and memory keys as null.
 				foreach (var status in Op.statuses)
@@ -710,6 +734,13 @@ namespace HackThePlanet
 									 Finite(s.remaining)), "unknown or invalid status");
 
 			// Validate the operation clock and trace values.
+			Require(op.defenses != null && op.defenses.All(d => d != null && !string.IsNullOrEmpty(d.id) &&
+				Enum.IsDefined(typeof(DefenseKind), d.kind) &&
+				ids.Contains(d.sourceNodeId) && d.targetNodeIds != null && d.targetNodeIds.All(ids.Contains) &&
+				Finite(d.remaining) && d.remaining >= 0 && Finite(d.intervalSeconds) && d.intervalSeconds > 0 &&
+				Finite(d.traceBurst) && d.traceBurst >= 0 &&
+				d.spoofedTargets != null && d.spoofedTargets.All(d.targetNodeIds.Contains)) &&
+				op.defenses.Select(d => d.id).Distinct().Count() == op.defenses.Count, "invalid security layer");
 			Require(Finite(op.trace) && op.trace >= 0 && Finite(op.elapsed) && op.elapsed >= 0,
 					"invalid operation time or trace");
 		}
@@ -756,6 +787,9 @@ namespace HackThePlanet
 				generationVersion = NetworkGenerator.Version, entryNode = definition.network.entryNode,
 				lastControlled = definition.network.entryNode
 			};
+			Op.defenses = definition.defenses.Where(d => d.minimumDifficulty <= Job.difficulty)
+				.Select(d => new DefenseState(d)).ToList();
+			LabelDefenseSources();
 
 			// Mark each objective node as an objective.
 			foreach (var goal in definition.objectives)
@@ -1038,10 +1072,17 @@ namespace HackThePlanet
 			var a = Catalog.Action(actionId);
 			var node = Node(targetId);
 
+			bool Step(string message, bool met)
+			{
+				p.steps.Add(new ActionRequirementStep(message, met));
+				return met;
+			}
+
 			// Block the preview when no operation or valid target exists.
 			if (!Active || a == null || (!a.operatorTarget && node == null))
 			{
 				p.reason = "Connect to a contract and select a valid action target.";
+				Step(p.reason, false);
 				return p;
 			}
 
@@ -1051,6 +1092,7 @@ namespace HackThePlanet
 				p.allowed = true;
 				p.projectedTrace = Op.trace;
 				p.reason = "Disable and release reserved RAM.";
+				Step("Ability active — disable to release reserved RAM.", true);
 				return p;
 			}
 
@@ -1060,46 +1102,78 @@ namespace HackThePlanet
 			// Block the action when free RAM is too low.
 			if (a.memoryCost > MemoryFree)
 			{
-				p.reason = "Not enough free RAM: disable an ability or wait for reclamation.";
+				var ramMessage = "Not enough free RAM: disable an ability or wait for reclamation.";
+				p.reason = ramMessage;
+				Step(ramMessage, false);
 				return p;
 			}
 
+			if (a.memoryCost > 0)
+				Step("Enough free RAM (" + MemoryFree.ToString("0.#") + " GB free).", true);
+
 			// Block the action when it does not apply to this target.
-			if (!a.visible.Test(c))
+			var applies = a.visible.Test(c);
+			var appliesMessage = applies ? "Action applies to this target." : ActionVisibilityBlockReason(a, node, c);
+			if (!Step(appliesMessage, applies))
 			{
-				p.reason = "This action does not apply to this target.";
+				p.reason = appliesMessage;
 				return p;
 			}
 
 			// Block the action until its technology is researched and equipped.
-			if (!Granted(a))
+			if (!a.initiallyAvailable)
 			{
-				p.reason = "Research and equip " +
-						   string.Join(
-							   " / ",
-							   Catalog.Data.technologies.Where(t => t.grants.Any(x => x.id == a.id))
-									  .Select(t => t.title)) + ".";
-				return p;
+				var granted = Granted(a);
+				var grantMessage = granted
+					? "Research and equipment requirement met."
+					: "Research and equip " +
+					  string.Join(
+						  " / ",
+						  Catalog.Data.technologies.Where(t => t.grants.Any(x => x.id == a.id))
+									 .Select(t => t.title)) + ".";
+				if (!Step(grantMessage, granted))
+				{
+					p.reason = grantMessage;
+					return p;
+				}
 			}
 
 			// Block the action when its use limit is spent.
 			var limit = a.useLimit.Evaluate(c);
-			if (limit > 0 && Counter("uses:" + a.id) >= limit)
+			if (limit > 0)
 			{
-				p.reason = "This ability has no uses remaining in this operation.";
-				return p;
+				var usesOk = Counter("uses:" + a.id) < limit;
+				var usesMessage = usesOk
+					? "Uses remaining in this operation."
+					: "This ability has no uses remaining in this operation.";
+				if (!Step(usesMessage, usesOk))
+				{
+					p.reason = usesMessage;
+					return p;
+				}
 			}
 
 			// Block the action when any requirement fails.
 			foreach (var r in Requirements(a, node))
-				if (!r.condition.Test(c))
+			{
+				var met = r.condition.Test(c);
+				var message = Catalog.Format(r.message, c);
+				if (!Step(message, met))
 				{
-					p.reason = Catalog.Format(r.message, c);
+					p.reason = message;
 					return p;
 				}
+			}
+
+			if (a.tags.Contains("download") && IsCredentialLocked(node?.id))
+			{
+				p.reason = CredentialHint(node.id);
+				Step(p.reason, false);
+				return p;
+			}
 
 			// Calculate the duration and trace cost.
-			p.duration = ApplyModifiers("duration", a.duration.Evaluate(c), c);
+			p.duration = ApplyModifiers("duration", a.duration.Evaluate(c), c) * Definition.paceMultiplier;
 			c.Duration = p.duration;
 			p.trace = ActionTrace(a, c, p.duration);
 
@@ -1112,7 +1186,7 @@ namespace HackThePlanet
 			// A conservative forecast: protection can lower this, never increase it.
 			var protectedSeconds = Mathf.Max(0, Op.decoyRemaining - Catalog.Data.career.maxTick);
 			var exposedFraction = p.duration <= 0 ? 1 : Mathf.Clamp01((p.duration - protectedSeconds) / p.duration);
-			p.projectedTrace = Op.trace + p.trace * exposedFraction;
+			p.projectedTrace = Op.trace + p.trace * exposedFraction + ForecastSweeps(p.duration);
 
 			// Flag whether the trace would isolate or lose the quiet bonus.
 			p.willIsolate = p.projectedTrace >= TraceLimit;
@@ -1121,7 +1195,32 @@ namespace HackThePlanet
 			// Mark the action allowed and explain how it will run.
 			p.allowed = true;
 			p.reason = Op.task != null && a.queueable ? "Queue after the current task." : "Ready to execute.";
+			Step(p.reason, true);
 			return p;
+		}
+
+		// Explains why an action's visibility rule hides it from the current target.
+		private static string ActionVisibilityBlockReason(ActionDefinition action, NetNode node, RuleContext context)
+		{
+			if (node == null)
+				return "Select a system on the map.";
+
+			if (action.id == "hack" && node.controlled)
+				return "You already control this system.";
+
+			if (action.id == "scan" && node.scanned)
+				return "Already scanned. Its surrounding connections are known.";
+
+			if (action.id == "download")
+			{
+				if (node.collected)
+					return "Files already secured.";
+
+				if (!node.objective && !node.bonus)
+					return "No contract files or optional archives on this node.";
+			}
+
+			return "This action does not apply to this target.";
 		}
 
 		// Computes trace cost for an action including pressure, modifiers, and trace-free rules.
@@ -1372,6 +1471,8 @@ namespace HackThePlanet
 			// Clamp the step and advance the operation clock and RAM reclamation.
 			delta = Mathf.Min(delta, Catalog.Data.career.maxTick);
 			Op.elapsed += delta;
+			AdvanceSweeps(delta);
+			if (CheckTrace()) return;
 			Op.memoryReclaiming = Mathf.Max(0, Op.memoryReclaiming - MemoryReclaim * delta);
 
 			// Count down timed statuses and expire the ones that finish.
@@ -1643,6 +1744,9 @@ namespace HackThePlanet
 
 					// Apply the new controlled flag.
 					node.controlled = value;
+					if (value)
+						foreach (var defense in Defenses.Where(d => d.kind == DefenseKind.SecuritySweep && d.sourceNodeId == node.id))
+							defense.disabled = true;
 
 					// Release abilities that target this node when control is gained.
 					if (value)

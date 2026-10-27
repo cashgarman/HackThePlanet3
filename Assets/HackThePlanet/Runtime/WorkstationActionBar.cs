@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -50,25 +51,9 @@ namespace HackThePlanet
 			center.Add(scroll);
 			var list = El(scroll, "graph-action-list");
 
-			// Start with the base actions, then add any actions granted by owned techs.
-			var ids = new List<string> { "scan", "hack", "download" };
-
-			// Mirrors GameSimulation.Granted: owned techs grant their actions, special techs also need to be equipped.
-			foreach (var tech in State.Catalog.Technologies)
-			{
-				// Skip techs that are not owned, or special techs that are not equipped.
-				if (!State.Has(tech.id) || (tech.special && !State.Equipped(tech.id)))
-					continue;
-
-				// Add each granted action once.
-				foreach (var actionId in tech.grants)
-					if (!ids.Contains(actionId))
-						ids.Add(actionId);
-			}
-
 			// Create one button per action; the first one is the primary button.
 			var primary = true;
-			foreach (var id in ids)
+			foreach (var id in OperationActionIds())
 			{
 				// Skip action ids that the catalog does not define.
 				var action = State.Catalog.FindAction(id);
@@ -256,6 +241,101 @@ namespace HackThePlanet
 										free.ToString("0.#") + " GB available / " + total.ToString("0.#") +
 										" GB total");
 			}
+		}
+
+		// Builds the tooltip body for an action, including a requirement checklist.
+		private static string FormatActionRequirementTooltip(string title, string description, float memoryCost,
+															 ToolPreview preview, string statusReason)
+		{
+			var text = new StringBuilder();
+			text.Append(title);
+			if (!string.IsNullOrWhiteSpace(description))
+				text.Append("\n").Append(description);
+			if (memoryCost > 0)
+				text.Append("\nRAM COST / ").Append(memoryCost.ToString("0.#")).Append(" GB");
+			if (preview.steps.Count > 0)
+			{
+				text.Append("\n\nREQUIREMENTS");
+				foreach (var step in preview.steps)
+					text.Append("\n").Append(step.met ? "[OK] " : "[NEED] ").Append(step.message);
+			}
+
+			if (!string.IsNullOrWhiteSpace(statusReason))
+				text.Append("\n\nSTATUS / ").Append(statusReason);
+
+			return text.ToString();
+		}
+
+		// Shortens a block reason for the action button estimate line.
+		private static string CompactActionBlockReason(string reason)
+		{
+			if (string.IsNullOrWhiteSpace(reason))
+				return "BLOCKED";
+
+			var compact = reason.Trim();
+			if (compact.Length <= 34)
+				return compact.ToUpperInvariant();
+
+			return compact.Substring(0, 31).ToUpperInvariant() + "...";
+		}
+
+		// Action ids shown in the operation bar, including equipped research grants.
+		private IReadOnlyList<string> OperationActionIds()
+		{
+			var ids = new List<string> { "scan", "hack", "download" };
+
+			// Mirrors GameSimulation.Granted: owned techs grant their actions, special techs also need to be equipped.
+			foreach (var tech in State.Catalog.Technologies)
+			{
+				if (!State.Has(tech.id) || (tech.special && !State.Equipped(tech.id)))
+					continue;
+
+				foreach (var actionId in tech.grants)
+					if (!ids.Contains(actionId))
+						ids.Add(actionId);
+			}
+
+			return ids;
+		}
+
+		// Lists requirement gaps for every operation action that applies to the selected target.
+		private void BuildTargetActionRequirements(VisualElement scroll, NetNode node)
+		{
+			if (!State.Active || node == null)
+				return;
+
+			Text(scroll, "ACTION REQUIREMENTS", "eyebrow section-space");
+			var any = false;
+			foreach (var actionId in OperationActionIds())
+			{
+				var definition = State.Catalog.FindAction(actionId);
+				if (definition == null || definition.operatorTarget)
+					continue;
+
+				var preview = State.Preview(actionId, node.id);
+				if (!preview.allowed && preview.steps.Count == 1 && !preview.steps[0].met &&
+					preview.steps[0].message == "This action does not apply to this target.")
+					continue;
+
+				any = true;
+				var title = State.ActionTitle(actionId, node.id);
+				var blockers = preview.steps.Where(s => !s.met).Select(s => s.message).ToArray();
+				if (preview.allowed)
+				{
+					Text(scroll, title.ToUpperInvariant() + " / READY", "small lime section-space");
+					continue;
+				}
+
+				Text(scroll, title.ToUpperInvariant() + " / BLOCKED", "small amber section-space");
+				if (blockers.Length == 0 && !string.IsNullOrWhiteSpace(preview.reason))
+					Text(scroll, "NEED / " + preview.reason, "small muted");
+				else
+					foreach (var blocker in blockers)
+						Text(scroll, "NEED / " + blocker, "small muted");
+			}
+
+			if (!any)
+				Text(scroll, "No actions apply to this target.", "small muted");
 		}
 
 		// Widget bundle for one operation action button and its cached description.

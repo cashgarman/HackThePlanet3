@@ -1,0 +1,46 @@
+{
+  "id": "loop-feed",
+  "title": "Loop feed",
+  "description": "Reserve 18 GB RAM to prevent security sweep bursts while active.",
+  "tags": [
+    "loop-feed",
+    "countermeasure"
+  ],
+  "shortcut": "None",
+  "shortcutLabel": "",
+  "legacyGroup": "loop-feed",
+  "presentationPriority": 12,
+  "operatorTarget": true,
+  "queueable": false,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "AlwaysCondition"
+  },
+  "requirements": [],
+  "queueRequirements": [],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 3
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 3
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "LogEffect",
+      "message": "LOOP FEED ACTIVE // Security sweeps diverted."
+    }
+  ],
+  "memoryCost": 18,
+  "memoryMode": "Persistent",
+  "activeModifiers": [],
+  "releaseOnTargetControl": false,
+  "instant": false
+}

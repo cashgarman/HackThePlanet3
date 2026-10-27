@@ -1,0 +1,63 @@
+{
+  "id": "spoof-gate",
+  "title": "Spoof gate",
+  "description": "Open one protected download without visiting its key server.",
+  "tags": [
+    "spoof-gate",
+    "countermeasure"
+  ],
+  "shortcut": "None",
+  "shortcutLabel": "",
+  "legacyGroup": "spoof-gate",
+  "presentationPriority": 12,
+  "operatorTarget": false,
+  "queueable": false,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "DefenseCondition",
+    "operation": "LockedTarget"
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "message": "Control this protected system first."
+    }
+  ],
+  "queueRequirements": [],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 10
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 10
+  },
+  "useLimit": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 2
+    },
+    "right": {
+      "type": "StatNumber",
+      "stat": "spoofBonus"
+    }
+  },
+  "effects": [
+    {
+      "type": "DefenseEffect",
+      "operation": "LockedTarget"
+    }
+  ],
+  "memoryCost": 0,
+  "memoryMode": "None",
+  "activeModifiers": [],
+  "releaseOnTargetControl": false,
+  "instant": false
+}

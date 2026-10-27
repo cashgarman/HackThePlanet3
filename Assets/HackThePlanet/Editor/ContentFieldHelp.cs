@@ -92,6 +92,13 @@ difficulty|Difficulty formula: 1 or less Easy, 2 Medium, 3 or more Hard. Control
 seed|Deterministic network generation seed formula. The same content and seed produce the same topology.
 objectives|All required goals. Every completion condition must pass before delivery.
 actionRules|Extra execution requirements applied to a particular action throughout this contract.
+defenses|Credential locks and periodic security sweeps captured when a new operation starts. Existing saved operations retain their snapshot.
+paceMultiplier|Positive contract-specific multiplier for action duration. Use this to keep contracts with more objectives within their pacing target.
+sourceNodeId|Network-local key server or security sweep controller. The node must exist in this contract's network.
+targetNodeIds|Download targets protected by this credential lock. One extracted key opens all these targets; spoofing opens one target.
+minimumDifficulty|Lowest evaluated difficulty that activates this layer. Freelance contracts can add locks at Medium and sweeps at Hard.
+intervalSeconds|Active simulation seconds between sweep bursts. Pause, controller suppression and Loop Feed freeze the countdown.
+traceBurst|Trace added by each security sweep before sweepTrace modifiers, independently from ordinary action trace.
 lore|Lore fragments available to this contract; network archive indices select fragments.
 nodeId|Exact local node ID used by this selector, condition or objective.
 label|Player-facing node or objective label, or revision name in authoring tools.
@@ -322,6 +329,11 @@ StackRows|Maximum number of upward label-stacking rows.
 		/// <exception cref="InvalidOperationException">No description is registered for the field name.</exception>
 		public static string Description(FieldInfo field)
 		{
+			if (field.DeclaringType == typeof(ContractDefenseDefinition) && field.Name == "kind")
+				return "CredentialLock protects downloads; SecuritySweep periodically adds trace while its controller remains active.";
+			if ((field.DeclaringType == typeof(DefenseCondition) || field.DeclaringType == typeof(DefenseEffect)) &&
+				field.Name == "operation")
+				return "KeyServer acquires a shared credential; LockedTarget spoofs one download gate; SweepController permanently disables a sweep.";
 			// Starter rack rows use their own row-specific description.
 			if (field.DeclaringType == typeof(RigStarterPart) && field.Name == "row")
 				return "Zero-based starter rack row; the footprint must fit without overlap.";

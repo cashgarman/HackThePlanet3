@@ -26,24 +26,26 @@ MonoBehaviour:
   recurring: 0
   requiredWins: 0
   quietLimit: 60
+  paceMultiplier: 1
   credits:
-    rid: 213507095544725523
+    rid: 213507098990346330
   xp:
-    rid: 213507095544725524
+    rid: 213507098990346331
   difficulty:
-    rid: 213507095544725525
+    rid: 213507098990346332
   seed:
-    rid: 213507095544725526
+    rid: 213507098990346333
   objectives:
   - nodeId: n22
-    label: 
+    label:
     actionLabel: Download files
     action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     payload: 1
     complete:
-      rid: 213507095544725527
+      rid: 213507098990346334
     actionRequirements: []
   actionRules: []
+  defenses: []
   lore:
   - id: quiet-copy/0
     title: The missing appendix
@@ -63,23 +65,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 213507095544725523
+    - rid: 213507098990346330
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 650
-    - rid: 213507095544725524
+    - rid: 213507098990346331
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 50
-    - rid: 213507095544725525
+    - rid: 213507098990346332
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1
-    - rid: 213507095544725526
+    - rid: 213507098990346333
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 114
-    - rid: 213507095544725527
+    - rid: 213507098990346334
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 3

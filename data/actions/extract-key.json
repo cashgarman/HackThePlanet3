@@ -1,0 +1,55 @@
+{
+  "id": "extract-key",
+  "title": "Extract key",
+  "description": "Copy the contract credential from a controlled key server.",
+  "tags": [
+    "extract-key",
+    "countermeasure"
+  ],
+  "shortcut": "None",
+  "shortcutLabel": "",
+  "legacyGroup": "extract-key",
+  "presentationPriority": 12,
+  "operatorTarget": false,
+  "queueable": false,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "DefenseCondition",
+    "operation": "KeyServer"
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "message": "Control this key server first."
+    }
+  ],
+  "queueRequirements": [],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 12
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 4
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "DefenseEffect",
+      "operation": "KeyServer"
+    }
+  ],
+  "memoryCost": 0,
+  "memoryMode": "None",
+  "activeModifiers": [],
+  "releaseOnTargetControl": false,
+  "instant": false
+}

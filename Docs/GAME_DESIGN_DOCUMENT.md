@@ -11,6 +11,8 @@
 
 This document defines the intended game, including rules, content, progression, presentation, production scope, and acceptance criteria. Numbers are initial tuning values. Features described here are requirements or proposals, not claims that they are implemented. **Hack The Planet** remains the product name; **Ghost Route** names this design direction and does not require a rename.
 
+The implemented progression expansion supersedes this baseline's original research catalog and late-contract stock-tool requirement. See [Progression and automated balance](BALANCE_AUTOMATION.md) for the current credential/sweep puzzles, counter paths, rig additions and measured pacing gates.
+
 ## Contents
 
 1. [Vision and design pillars](#1-vision-and-design-pillars)

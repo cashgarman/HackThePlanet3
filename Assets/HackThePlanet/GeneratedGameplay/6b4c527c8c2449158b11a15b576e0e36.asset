@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb6116ef3368fb478a80b75d9610f5a, type: 3}
+  m_Name: 6b4c527c8c2449158b11a15b576e0e36
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
+  id: isolation-bank
+  title: Isolation Bank
+  description: +15 GB RAM; Hard Reset is 25% faster.
+  family: memory
+  branch: CONTROL
+  flavour: Purpose-built countermeasure hardware.
+  synergy:
+  tier: 2
+  width: 2
+  height: 2
+  price: 1000
+  rotatable: 1
+  powerDemand: 4
+  heatOutput: 3
+  powerCapacity: 0
+  coolingCapacity: 0
+  requirements:
+  - condition:
+      rid: 213507098990347234
+    message: Requires Infrastructure 2 research.
+  modifiers:
+  - id:
+    stat: memoryPool
+    priority: 0
+    operation: 0
+    when:
+      rid: 213507098990347235
+    value:
+      rid: 213507098990347236
+  - id:
+    stat: duration
+    priority: 0
+    operation: 2
+    when:
+      rid: 213507098990347237
+    value:
+      rid: 213507098990347238
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507098990347234
+      type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        technology: {fileID: 11400000, guid: 049ac12394f6b0d4a968c1a7fab8cdd1, type: 2}
+        equipped: 0
+    - rid: 213507098990347235
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507098990347236
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 15
+    - rid: 213507098990347237
+      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        action: {fileID: 11400000, guid: b2e826e4b7f276c418edf38cb9b5d022, type: 2}
+        tag:
+    - rid: 213507098990347238
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.75

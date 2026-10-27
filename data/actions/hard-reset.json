@@ -1,0 +1,74 @@
+{
+  "id": "hard-reset",
+  "title": "Hard reset",
+  "description": "Permanently disable a discovered sweep controller within three mapped hops.",
+  "tags": [
+    "hard-reset",
+    "countermeasure"
+  ],
+  "shortcut": "None",
+  "shortcutLabel": "",
+  "legacyGroup": "hard-reset",
+  "presentationPriority": 12,
+  "operatorTarget": false,
+  "queueable": false,
+  "initiallyAvailable": false,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "DefenseCondition",
+    "operation": "SweepController"
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this controller first."
+    },
+    {
+      "condition": {
+        "type": "CompareCondition",
+        "comparison": "LessOrEqual",
+        "left": {
+          "type": "InputNumber",
+          "input": "ControlledDistance",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 3
+        }
+      },
+      "message": "Requires a mapped route within three controlled hops."
+    }
+  ],
+  "queueRequirements": [],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 12
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 10
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "effects": [
+    {
+      "type": "DefenseEffect",
+      "operation": "SweepController"
+    }
+  ],
+  "memoryCost": 16,
+  "memoryMode": "OneShot",
+  "activeModifiers": [],
+  "releaseOnTargetControl": false,
+  "instant": false
+}

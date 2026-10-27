@@ -34,6 +34,20 @@ namespace HackThePlanet
 		public Requirement[] actionRequirements = Array.Empty<Requirement>();
 	}
 
+	/// <summary>Contract defense that protects downloads or periodically raises trace.</summary>
+	[Serializable]
+	public sealed class ContractDefenseDefinition
+	{
+		public string id, sourceNodeId;
+		public string[] targetNodeIds = Array.Empty<string>();
+		public DefenseKind kind;
+		public int minimumDifficulty = 1;
+		public float intervalSeconds = 60, traceBurst = 12;
+	}
+
+	/// <summary>Types of contract security layer.</summary>
+	public enum DefenseKind { CredentialLock, SecuritySweep }
+
 	/// <summary>Scriptable contract with company, network, payouts, objectives, and lore.</summary>
 	[CreateAssetMenu(menuName = "Hack The Planet/Contract")]
 	public sealed class ContractDefinition : GameplayDefinition
@@ -59,6 +73,9 @@ namespace HackThePlanet
 		/// <summary>Gets or sets the quiet-run trace threshold (default 75).</summary>
 		public float quietLimit = 75;
 
+		/// <summary>Contract-specific action time adjustment for objective-heavy jobs.</summary>
+		public float paceMultiplier = 1;
+
 		/// <summary>Gets or sets evaluated credit, XP, difficulty, and procedural seed rewards (defaults 600, 50, 1, 114).</summary>
 		[SerializeReference] public Number credits = new ConstantNumber(600);
 
@@ -71,6 +88,9 @@ namespace HackThePlanet
 
 		/// <summary>Gets or sets per-action requirement overrides.</summary>
 		public ContractActionRule[] actionRules = Array.Empty<ContractActionRule>();
+
+		/// <summary>Security layers selected when the operation starts.</summary>
+		public ContractDefenseDefinition[] defenses = Array.Empty<ContractDefenseDefinition>();
 
 		/// <summary>Gets or sets story fragments unlocked by this contract.</summary>
 		public LoreFragment[] lore = Array.Empty<LoreFragment>();

@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6351d8921bbb66c4590e73662cfb54e9, type: 3}
+  m_Name: b983bf0e45d7431e915bd1509705b790
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ActionDefinition
+  id: hard-reset
+  title: Hard reset
+  description: Permanently disable a discovered sweep controller within three mapped hops.
+  memoryMode: 1
+  memoryCost: 16
+  instant: 0
+  releaseOnTargetControl: 0
+  activeModifiers: []
+  tags:
+  - hard-reset
+  - countermeasure
+  shortcut: 0
+  shortcutLabel:
+  legacyGroup: hard-reset
+  presentationPriority: 12
+  operatorTarget: 0
+  queueable: 0
+  initiallyAvailable: 0
+  futureNeighborQueue: 0
+  traceFree: 0
+  visible:
+    rid: 213507098990347209
+  requirements:
+  - condition:
+      rid: 213507098990347210
+    message: Discover this controller first.
+  - condition:
+      rid: 213507098990347211
+    message: Requires a mapped route within three controlled hops.
+  queueRequirements: []
+  duration:
+    rid: 213507098990347212
+  baseTrace:
+    rid: 213507098990347213
+  useLimit:
+    rid: 213507098990347214
+  effects:
+  - rid: 213507098990347215
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507098990347209
+      type: {class: DefenseCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+    - rid: 213507098990347210
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 0
+    - rid: 213507098990347211
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 3
+        left:
+          rid: 213507098990347216
+        right:
+          rid: 213507098990347217
+    - rid: 213507098990347212
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 12
+    - rid: 213507098990347213
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 10
+    - rid: 213507098990347214
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507098990347215
+      type: {class: DefenseEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+    - rid: 213507098990347216
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 28
+        key:
+        filter:
+          rid: 213507098990347218
+    - rid: 213507098990347217
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507098990347218
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:

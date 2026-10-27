@@ -85,7 +85,7 @@ This is a numeric subtree, not a complete definition file. Use the populated fil
 
 ## Rig, storage, and RAM authoring
 
-The shipped catalog has four chassis and sixteen module models. `data/rig/rules/rig.json` defines the initial chassis and starter layout, sale fractions, reclaim rate, rotation policy, compute and bandwidth caps, and minimum trace fraction. `data/rig/chassis/` defines grid dimensions, career gates, prices, ability slots, power/cooling limits, base storage (GB), and RAM (GB). `data/rig/modules/` defines every purchasable model, including all power and cooling tiers.
+The shipped catalog has four chassis and twenty module models. `data/rig/rules/rig.json` defines the initial chassis and starter layout, sale fractions, reclaim rate, rotation policy, compute and bandwidth caps, and minimum trace fraction. `data/rig/chassis/` defines grid dimensions, career gates, prices, ability slots, power/cooling limits, base storage (GB), and RAM (GB). `data/rig/modules/` defines every purchasable model, including all power and cooling tiers.
 
 A module's `width` and `height` describe its unrotated footprint in cells. Rotation swaps those dimensions. `family` identifies its gameplay group; `branch` supplies its research colour. Each purchase creates a separate career-owned instance. Repeated models can be installed together. `price` is the purchase cost; voluntary sales return the configured fraction of the actual price paid, rounded down. Free starter copies sell for zero. Research refunds sell newly locked copies at `researchSaleFraction` and clear their placements. Other owned copies remain in inventory.
 

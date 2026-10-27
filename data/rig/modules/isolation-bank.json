@@ -1,0 +1,58 @@
+{
+  "id": "isolation-bank",
+  "title": "Isolation Bank",
+  "description": "+15 GB RAM; Hard Reset is 25% faster.",
+  "family": "memory",
+  "branch": "CONTROL",
+  "tier": 2,
+  "width": 2,
+  "height": 2,
+  "price": 1000,
+  "rotatable": true,
+  "powerDemand": 4,
+  "heatOutput": 3,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Purpose-built countermeasure hardware.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "infrastructure-2",
+        "equipped": false
+      },
+      "message": "Requires Infrastructure 2 research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "memoryPool",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 15
+      }
+    },
+    {
+      "id": "",
+      "stat": "duration",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "ActionCondition",
+        "action": "hard-reset",
+        "tag": ""
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.75
+      }
+    }
+  ]
+}

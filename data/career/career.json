@@ -114,6 +114,14 @@
     {
       "id": "memoryReclaim",
       "value": 0
+    },
+    {
+      "id": "spoofBonus",
+      "value": 0
+    },
+    {
+      "id": "sweepTrace",
+      "value": 0
     }
   ],
   "ranks": [

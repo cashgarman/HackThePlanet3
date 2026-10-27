@@ -148,16 +148,17 @@ namespace HackThePlanet.Editor
 		// Runs modifier, trigger, and rig mechanic checks against the live catalog.
 		private static void ValidateMechanics()
 		{
+			const float easyTime = 2.25f, easyTrace = .8f;
 			// Verify the baseline relay hack duration and trace before any modifiers apply.
 			var plain = Developed();
 			var hack = plain.Preview("hack", "n2");
-			Near(hack.duration, 3.35f, "baseline relay hack duration");
-			Near(hack.trace, 4.7f, "baseline relay hack trace");
+			Near(hack.duration, 3.35f * easyTime, "baseline relay hack duration");
+			Near(hack.trace, 4.7f * easyTrace, "baseline relay hack trace");
 
 			// Verify the efficient and quiet technologies scale duration and trace.
 			var efficient = Developed("efficient", "quiet");
-			Near(efficient.Preview("hack", "n2").duration, 3.35f * .8f, "efficient hack duration");
-			Near(efficient.Preview("hack", "n2").trace, 4.7f * .8f, "quiet hack trace");
+			Near(efficient.Preview("hack", "n2").duration, 3.35f * .8f * easyTime, "efficient hack duration");
+			Near(efficient.Preview("hack", "n2").trace, 4.7f * .8f * easyTrace, "quiet hack trace");
 
 			// Verify the ghost relay makes the first relay trace-free and consumes its control trigger.
 			var ghost = Developed("quiet", "ghost");
@@ -168,7 +169,7 @@ namespace HackThePlanet.Editor
 
 			// Verify signal halves scan duration, removes base scan trace, and widens scan radius.
 			var scan = Developed("wide", "signal");
-			Near(scan.Preview("scan", "n2").duration, .8f, "signal halves scan duration");
+			Near(scan.Preview("scan", "n2").duration, .8f * easyTime, "signal halves scan duration");
 			Near(scan.Preview("scan", "n2").trace, 0, "signal removes base scan trace");
 			scan.Execute("scan", "n2");
 			Finish(scan);
@@ -188,7 +189,7 @@ namespace HackThePlanet.Editor
 			// Verify scan preparation, weak-point, and global buffer modifiers stack multiplicatively.
 			var weak = Developed("wide", "efficient", "weakpoint", "buffer");
 			weak.Node("n2").scanned = true;
-			Near(weak.Preview("hack", "n2").trace, 4.7f * .8f * .75f * .9f,
+			Near(weak.Preview("hack", "n2").trace, 4.7f * .8f * .75f * .9f * easyTrace,
 				 "scan preparation, weak-point and global buffer stack");
 
 			// Verify scanner pressure follows duration modifiers and precedes global trace modifiers.
@@ -198,16 +199,16 @@ namespace HackThePlanet.Editor
 			pressure.Node("n10").known = true;
 			var p = pressure.Preview("hack", "n10");
 			var basis = 3 + pressure.EffectiveSecurity(pressure.Node("n10")) * 1.7f;
-			Near(p.trace, (basis * .8f + p.duration * pressure.Scanners * .18f) * .9f,
+			Near(p.trace, (basis * .8f + p.duration * pressure.Scanners * .18f) * .9f * easyTrace,
 				 "scanner pressure follows duration modifiers and precedes global trace modifiers");
 
 			// Verify the selective main-objective download duration and trace.
 			var selective = Developed("efficient", "selective");
 			selective.Node("n22").known = true;
 			selective.Node("n22").controlled = true;
-			Near(selective.Preview("download", "n22").duration, selective.Node("n22").storage * .7f / 1.25f,
+			Near(selective.Preview("download", "n22").duration, selective.Node("n22").storage * .7f / 1.25f * easyTime,
 				 "selective main-objective duration is file size over uplink bandwidth");
-			Near(selective.Preview("download", "n22").trace, 8 * .7f, "selective main-objective trace");
+			Near(selective.Preview("download", "n22").trace, 8 * .7f * easyTrace, "selective main-objective trace");
 
 			// Verify chain hacks queue future neighboring actions and reject duplicates.
 			var chain = Developed("efficient", "chain");
@@ -236,7 +237,7 @@ namespace HackThePlanet.Editor
 			Near(decoy.Op.trace, 30, "decoy does not refund trace");
 			Near(decoy.MemoryReserved, 16, "decoy reserves authored RAM");
 			var decoyTrace = decoy.Preview("hack", "n2").trace;
-			Near(decoyTrace, 4.7f * .65f, "decoy reduces trace by its authored modifier");
+			Near(decoyTrace, 4.7f * .65f * easyTrace, "decoy reduces trace by its authored modifier");
 			Check(decoy.Execute("decoy") && decoy.MemoryReserved == 0, "operator toggle releases RAM");
 
 			// Verify scanner suppression expires and restores pressure.
@@ -625,11 +626,11 @@ namespace HackThePlanet.Editor
 				// Verify the new action is discoverable and uses its authored duration.
 				Check(sim.AvailableActions("beta").Any(a => a.id == "audit" && a.shortcut == KeyCode.V),
 					  "new action discoverable with an authored shortcut");
-				Near(sim.Preview("audit", "beta").duration, 2, "new action uses authored formula");
+				Near(sim.Preview("audit", "beta").duration, 2 * 2.25f, "new action uses authored formula and Easy pacing");
 
 				// Edit the authored asset and verify the compiled catalog is not affected.
 				fixture.Definition.actions.First(a => a.id == "audit").duration = N(999);
-				Near(sim.Preview("audit", "beta").duration, 2,
+				Near(sim.Preview("audit", "beta").duration, 2 * 2.25f,
 					 "compiled catalog is isolated from subsequent asset changes");
 
 				// Execute the new action and verify a status expiry runs its authored effect.

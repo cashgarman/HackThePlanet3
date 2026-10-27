@@ -55,6 +55,12 @@ Difficulty values map to **Easy** (1 or below), **Medium** (2), and **Hard** (3 
 
 The `credits` and `xp` formulas author base amounts. Catalog descriptors apply the tier multiplier once (Easy ×1, Medium ×1.5, Hard ×2), rounding to whole credits and XP. Reward rules reading `ContractCredits` and `ContractXp` receive these final amounts, matching exchange cards and briefs. Archive and quiet bonuses retain their authored values. Repeatable contracts re-evaluate their difficulty and payout with the career day.
 
+### Contract security and pacing
+
+Contracts may author `defenses`: credential locks with key-server and protected-download IDs, or sweep controllers with an interval and trace burst. `minimumDifficulty` enables tier-specific freelance puzzles. `DefenseCondition` and `DefenseEffect` compose their countermeasure actions. New operations snapshot these definitions and their mutable state; existing active saves with no layers stay unchanged. The optional `paceMultiplier` adjusts contract action time and defaults to 1 for older extension content.
+
+The [automated balance guide](BALANCE_AUTOMATION.md) describes the shipped counters, pacing factors, test profiles, reports and command-line runner. `spoofBonus` controls extra spoof uses; `sweepTrace` modifiers scale each authored sweep burst independently from ordinary action trace.
+
 ### Rig, rewards, and outcomes
 
 The physical rig uses Rig Rules, Chassis, and Module definitions. Every bought module copy has an independent career instance, actual paid price, position, and rotation. Installed copies contribute modifiers, power demand, heat, and power/cooling capacities. Chassis upgrades preserve grid coordinates. Runtime connection checks require a legal assembly. The starter layout, sale policy, research gates, tiers, speed caps, trace floor, payload formulas, RAM costs, persistent effects, and reclaim rate are authored JSON; see the [rig authoring guide](MODDING.md#rig-storage-and-ram-authoring).

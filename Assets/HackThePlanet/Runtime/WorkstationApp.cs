@@ -124,6 +124,7 @@ namespace HackThePlanet
 
 		// Internal member supporting workstation or graph viewport behavior.
 		private Label traceNumber, traceState;
+		private Label sweepStatus;
 
 		/// <summary>Gets the live workstation instance created at bootstrap.</summary>
 		public static WorkstationApp Instance { get; private set; }
@@ -637,6 +638,7 @@ namespace HackThePlanet
 			traceFill = null;
 			traceNumber = null;
 			traceState = null;
+			sweepStatus = null;
 			opPower = opCooling = opCompute = opBandwidth = opStorage = opMemory = opReclaim = null;
 			canvas = null;
 
@@ -1101,6 +1103,12 @@ namespace HackThePlanet
 				SectionTitle(brief, "REWARD CONDITIONS");
 				Text(brief, State.Job.credits + " cr + " + State.Job.xp + " XP on delivery", "small lime");
 				RichText(brief, State.RewardDescription, "small muted");
+				if (State.Defenses.Count > 0)
+				{
+					SectionTitle(brief, "SECURITY LAYERS");
+					Text(brief, State.DefenseBrief(State.Job), "small amber");
+					sweepStatus = Text(brief, State.SweepStatus, "small amber");
+				}
 			}
 
 			// Build the loadout list of equipped abilities.
@@ -1293,6 +1301,8 @@ namespace HackThePlanet
 			// Show the difficulty, intel level, and the objective.
 			Text(scroll, selectedJob.DifficultyLabel + " / NETWORK INTEL", "eyebrow section-space");
 			RichText(scroll, selectedJob.IntelDescription, "body-copy");
+			Text(scroll, "SECURITY LAYERS", "eyebrow section-space");
+			Text(scroll, State.DefenseBrief(selectedJob), "body-copy amber");
 			Text(scroll, "THE ASK", "eyebrow section-space");
 			RichText(scroll, selectedJob.objective, "body-copy");
 
@@ -1545,6 +1555,15 @@ namespace HackThePlanet
 			// Show that the intel is verified when the node has been scanned.
 			if (node.scanned)
 				Text(scroll, "INTEL VERIFIED / INTRUSION PREPARED", "micro cyan section-space");
+			if (State.IsCredentialLocked(node.id))
+				Text(scroll, State.CredentialHint(node.id),
+					"small amber section-space");
+			foreach (var defense in State.Defenses.Where(d => d.sourceNodeId == node.id))
+				Text(scroll, defense.kind == DefenseKind.CredentialLock
+					? defense.keyAcquired ? "CREDENTIAL ACQUIRED" : "KEY SERVER / Credential available after control"
+					: defense.disabled || node.controlled ? "SECURITY SWEEP DISABLED" :
+						"SWEEP CONTROLLER / " + Mathf.CeilToInt(defense.remaining) + "s to next burst",
+					"small cyan section-space");
 
 			// Show the research hint and the storage size when the node has files.
 			var researchHint = State.ActionResearchHint(node.id);
@@ -1577,6 +1596,10 @@ namespace HackThePlanet
 					Text(scroll, "Extract to preserve this fragment.", "small muted");
 				}
 			}
+
+			// Show why each core action is blocked or ready on this target.
+			if (State.Active)
+				BuildTargetActionRequirements(scroll, node);
 
 			// Show the access route from the gateway to this system.
 			var route = State.Route(node.id, true);
@@ -1699,16 +1722,16 @@ namespace HackThePlanet
 			else if (memoryBlocked && State.MemoryReclaim <= 0)
 				reason = "RAM cannot be reclaimed with the current rig.";
 
-			// Build the tooltip from the title, description, RAM cost, and reason.
-			parts.wrapper.tooltip = action.title + "\n" + parts.description +
-									(action.Definition.memoryCost > 0
-										? "\nRAM COST / " + action.Definition.memoryCost.ToString("0.#") + " GB"
-										: "") + Environment.NewLine + reason;
+			// Build the tooltip from the title, description, RAM cost, checklist, and status.
+			var tooltip = FormatActionRequirementTooltip(action.title, parts.description,
+				action.Definition.memoryCost, preview, reason);
+			parts.wrapper.tooltip = tooltip;
+			button.tooltip = tooltip;
 
 			// Apply the enabled state and style classes to the button.
-			button.tooltip = parts.wrapper.tooltip;
 			button.SetEnabled(enabled);
 			button.EnableInClassList("available-action", enabled);
+			button.EnableInClassList("blocked-action", !enabled && !toggleOff);
 			button.EnableInClassList("suggested-action", primary && enabled);
 			button.EnableInClassList("risky-action", !queue && preview.allowed && preview.willIsolate);
 
@@ -1730,12 +1753,14 @@ namespace HackThePlanet
 						State.Op.queue.Count >= State.QueueCapacity ? "QUEUE FULL" : "WAIT"
 						: preview.allowed
 							? "READY"
-							: "LOCKED";
+							: CompactActionBlockReason(reason);
 
 			// Append the remaining uses and show the estimate.
 			if (remaining.HasValue)
 				estimate += " / " + remaining.Value + " LEFT";
-			button.Q<Label>(className: "action-estimate").text = estimate;
+			var estimateLabel = button.Q<Label>(className: "action-estimate");
+			estimateLabel.text = estimate;
+			estimateLabel.EnableInClassList("action-blocked", !enabled && !toggleOff && !preview.allowed);
 
 			// Build the cost line: RAM freed when toggling off, or trace and duration when enabled.
 			var cost = string.Empty;
@@ -1753,6 +1778,8 @@ namespace HackThePlanet
 				if (action.Definition.memoryCost > 0)
 					cost += " / " + action.Definition.memoryCost.ToString("0.#") + " GB RAM";
 			}
+			else if (!toggleOff && !string.IsNullOrWhiteSpace(reason))
+				cost = "NEED / " + reason;
 
 			// Show the cost line.
 			button.Q<Label>(className: "action-cost").text = cost;
@@ -1896,6 +1923,7 @@ namespace HackThePlanet
 		// Handles UpdateMeters for the workstation or graph UI.
 		private void UpdateMeters()
 		{
+			if (sweepStatus != null) sweepStatus.text = State.SweepStatus;
 			// Refresh the rig stats readouts and the resource radials.
 			UpdateOperationStats();
 			RefreshResourceRadials();

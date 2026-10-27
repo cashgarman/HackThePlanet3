@@ -851,6 +851,17 @@ ScrollView {
     opacity: .58;
 }
 
+.action-slot .action-button.blocked-action {
+    border-color: #6a4a32;
+    background-color: #241912;
+}
+
+.action-slot .action-button.blocked-action .action-estimate,
+.action-slot .action-button.blocked-action .action-cost,
+.action-slot .action-estimate.action-blocked {
+    color: #ffb86c;
+}
+
 .action-slot .action-button.available-action {
     border-color: #83ddbc;
     background-color: #1b493d;

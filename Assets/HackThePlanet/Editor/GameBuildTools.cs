@@ -201,6 +201,7 @@ namespace HackThePlanet.Editor
 					case "balance-after":    BalanceLab.CaptureAfter(); break;
 					case "data-validate":    DataDrivenValidation.Run(); break;
 					case "balance-validate": BalanceValidation.Run(); break;
+					case "career-balance": BalanceSuite.Run(false); break;
 					case "setup":            Setup(); break;
 
 					// Save the rig pointer career and capture its preview screenshot.
@@ -551,8 +552,8 @@ namespace HackThePlanet.Editor
 
 						Check(app.Root.Q<Button>("node-home") != null, "Projected system labels remain selectable.");
 
-						// Verify the default layout keeps the whole graph and its controls inside the viewport.
-						var mapBounds = preview.parent.worldBound;
+						// The graph host contains the graph; its footer controls belong to the surrounding network panel.
+						var mapBounds = app.Root.Q(className: "network-panel").worldBound;
 
 						Check(
 							mapBounds.Contains(preview.worldBound.min + Vector2.one) &&

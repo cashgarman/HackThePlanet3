@@ -389,6 +389,7 @@ Public fields and properties are authoring data, not logic. Exercise them throug
 | Entry | Role |
 |-------|------|
 | `GameValidation.Run` | Full simulation validation suite |
+| `BalanceSuite`, `UpgradeBalanceAudit` | Seeded contract/build trials, earned-reward careers, pacing gates, and all-catalog upgrade measurements |
 | `NetworkValidation`, `RigValidation`, `DataDrivenValidation`, `BalanceValidation`, `ContentValidation` | Domain integration checks |
 | `GameBuildTools` | `Temp/HackThePlanet.command` dispatch and smoke tests |
 
@@ -410,6 +411,7 @@ Run via **Hack The Planet** menus or command file with Unity Editor open.
 | `SimulationTests` | Seeded network stability and route connectivity; reachability; action preview, pause, execution, and ticks; effects; rig placement and RAM capacity; research and hardware purchase gates; aborted and delivered contract outcomes. |
 | `SimulationEdgeTests` | Invalid and use-limited actions; queue clearing and cancellation; status expiry; stat/security modifiers; effect floors and log formatting; persistent RAM reservations; research visibility, equipment slots, refunds, and caught outcomes. |
 | `RigAndWaypointTests` | Rotated grid bounds; module purchase, resale, and chassis upgrades; rig adjacency rules; waypoint tier capacity, editing, seed isolation, removal, and disconnected routes. |
+| `SecurityLayerTests` | Credential extraction/spoofing and settlement; sweep pause, Loop Feed and suppression forecast; Hard Reset and old active-save restoration; new module gates. |
 | `PersistenceTests` | Active-operation save round trip, backup recovery, unsupported version rejection, failed-save preservation, and autosave blocking after unrecoverable corruption. |
 
 ### Game PlayMode NUnit coverage
@@ -465,6 +467,7 @@ Every `Assets/HackThePlanet/Runtime/*.cs` file appears below. Rows identify the 
 | `RigRulesDefinition.cs` | Starter rig, placement validation, adjacency, power/heat/storage/memory constraints. |
 | `RigSimulation.cs` | Placement/rotation, buying/selling, upgrades, capacity, research refunds, and ability reservations. |
 | `SignalVisuals.cs` | PlayMode effect-mode transitions, labels, toggle behavior, and workstation frame updates. |
+| `SecurityLayers.cs` | Credential/sweep state, action rules, countdowns, forecasts, and persistence through security EditMode tests and live workstation PlayMode checks. |
 | `StatusDefinition.cs` | Timed status application, suppression, and expiry behavior. |
 | `TechnologyDefinition.cs` | Research visibility, purchase, parent requirements, equipment, modifiers, grants, and refund behavior. |
 | `WaypointOverlay.cs` | Tier-gated route anchors, visible marker creation, and waypoint overlay configuration. |

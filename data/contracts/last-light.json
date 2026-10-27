@@ -95,5 +95,28 @@
       "contract": "Last Light",
       "text": "Buffered message from NULL: When the index goes quiet, leave the relays running. People will need those connections tomorrow. We can build something better on the wires they left behind."
     }
-  ]
+  ],
+  "defenses": [
+    {
+      "id": "vault-lock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "kind": "CredentialLock",
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    },
+    {
+      "id": "hub-sweep",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [],
+      "kind": "SecuritySweep",
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    }
+  ],
+  "paceMultiplier": 1
 }

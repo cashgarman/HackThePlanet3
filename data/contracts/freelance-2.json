@@ -174,5 +174,29 @@
       "contract": "Signal Lost",
       "text": "A security analyst left a note in the archive: Protection means giving people somewhere safe to go. It does not mean following them there."
     }
-  ]
+  ],
+  "defenses": [
+    {
+      "id": "freelance-lock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22",
+        "n9"
+      ],
+      "kind": "CredentialLock",
+      "minimumDifficulty": 2,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    },
+    {
+      "id": "freelance-sweep",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [],
+      "kind": "SecuritySweep",
+      "minimumDifficulty": 3,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    }
+  ],
+  "paceMultiplier": 0.6
 }

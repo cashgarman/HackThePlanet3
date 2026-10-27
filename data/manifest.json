@@ -516,6 +516,78 @@
       "category": "Actions",
       "file": "actions/discard.json",
       "type": "ActionDefinition"
+    },
+    {
+      "key": "845e8014b3eb4e8595fdb81b4d8ffc2a",
+      "category": "Actions",
+      "file": "actions/extract-key.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "e641ab4e303e45caba0105be023c48ed",
+      "category": "Actions",
+      "file": "actions/spoof-gate.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "549e1f9dfa554cf68168b2f60edef0ca",
+      "category": "Actions",
+      "file": "actions/loop-feed.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "b983bf0e45d7431e915bd1509705b790",
+      "category": "Actions",
+      "file": "actions/hard-reset.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "63e8dee24d0b4a6083d10690d288a380",
+      "category": "Technologies",
+      "file": "technologies/credential-analysis.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "12244d9f033e4f8388b9ed198d911a43",
+      "category": "Technologies",
+      "file": "technologies/protocol-spoof.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "fc6009f6d1774681820c70391c5b0f31",
+      "category": "Technologies",
+      "file": "technologies/loop-feed.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "51c60c8e283f4a0d9b76dcdde37d17d8",
+      "category": "Technologies",
+      "file": "technologies/hard-reset.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "1f3ac4c491fc40e7b22331a3f526c772",
+      "category": "Modules",
+      "file": "rig/modules/decoder-board.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "6adcc20697384b078988fb9cde58254f",
+      "category": "Modules",
+      "file": "rig/modules/spoof-asic.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "1927ac83a4fc4814b0efac0f8027caca",
+      "category": "Modules",
+      "file": "rig/modules/veil-array.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "6b4c527c8c2449158b11a15b576e0e36",
+      "category": "Modules",
+      "file": "rig/modules/isolation-bank.json",
+      "type": "RigModuleDefinition"
     }
   ]
 }

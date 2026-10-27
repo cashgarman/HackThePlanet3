@@ -70,7 +70,7 @@ namespace HackThePlanet.Editor
 				// Verify every shipped rig definition loads from external JSON.
 				using (var bundle = ContentJson.Load(GameData.DirectoryPath))
 				{
-					Check(bundle.Game.modules.Length == 16 && bundle.Game.chassis.Length == 4,
+					Check(bundle.Game.modules.Length == 20 && bundle.Game.chassis.Length == 4,
 						  "all shipped rig definitions load from external JSON");
 				}
 

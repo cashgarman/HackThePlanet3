@@ -186,10 +186,10 @@ namespace HackThePlanet.Editor
 			var scene = Field<GraphScene>(viewport, "scene");
 			var point = camera.WorldToViewportPoint(scene.Nodes[saved.FocusedId].Position);
 
-			// Verify the camera frames the node beside its card.
-			if (Mathf.Abs(point.x - .275f) > .01f || Mathf.Abs(point.y - .5f) > .01f)
+			// Verify the camera centers the node in the graph view.
+			if (Mathf.Abs(point.x - .5f) > .01f || Mathf.Abs(point.y - .5f) > .01f)
 				throw new InvalidOperationException(
-					"Focused camera does not frame the selected system beside its card.");
+					"Focused camera does not center the selected system in the graph view.");
 		}
 
 		/// <summary>Asserts FIT framing, captures an overview PNG, and checks for visible model pixels.</summary>
@@ -220,8 +220,10 @@ namespace HackThePlanet.Editor
 			// Read the rendered pixels back for analysis.
 			var pixels = Read(texture);
 
-			// Verify the render contains enough visible model pixels.
-			if (pixels.Count(c => c.g > 70 && c.g > c.r * 1.2f) < 80)
+			// Authored models use several hues. Compare against the cleared corner instead of assuming green geometry.
+			var background = pixels[0];
+			if (pixels.Count(c => Mathf.Abs(c.r - background.r) + Mathf.Abs(c.g - background.g) +
+				Mathf.Abs(c.b - background.b) > 30) < 80)
 				throw new InvalidOperationException("Network graph has no visible model pixels");
 		}
 

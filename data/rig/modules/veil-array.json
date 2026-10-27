@@ -1,0 +1,56 @@
+{
+  "id": "veil-array",
+  "title": "Veil Array",
+  "description": "6% less action trace and 20% less security sweep trace.",
+  "family": "stealth",
+  "branch": "STEALTH",
+  "tier": 2,
+  "width": 2,
+  "height": 1,
+  "price": 900,
+  "rotatable": true,
+  "powerDemand": 3,
+  "heatOutput": 2,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Purpose-built countermeasure hardware.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "signal-engineering",
+        "equipped": false
+      },
+      "message": "Requires Signal Engineering research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "trace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.94
+      }
+    },
+    {
+      "id": "",
+      "stat": "sweepTrace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.8
+      }
+    }
+  ]
+}

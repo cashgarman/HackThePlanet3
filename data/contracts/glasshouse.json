@@ -66,5 +66,19 @@
       "contract": "Glasshouse",
       "text": "An early prototype carries a handwritten dedication: For the people who keep the lights on. The production specification omits the inscription. The archive preserves a photograph."
     }
-  ]
+  ],
+  "defenses": [
+    {
+      "id": "vault-lock",
+      "sourceNodeId": "n9",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "kind": "CredentialLock",
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    }
+  ],
+  "paceMultiplier": 1
 }

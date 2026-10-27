@@ -480,6 +480,16 @@ namespace HackThePlanet
 						if (goal == null || !ids.Contains(goal.nodeId) || goal.complete == null)
 							Error(c, "objectives", "missing target node or completion condition");
 
+				if (c.defenses == null || c.defenses.Any(d => d == null || string.IsNullOrWhiteSpace(d.id) ||
+					!ids.Contains(d.sourceNodeId) || d.targetNodeIds == null || d.targetNodeIds.Any(id => !ids.Contains(id)) ||
+					!Enum.IsDefined(typeof(DefenseKind), d.kind) ||
+					(d.kind == DefenseKind.CredentialLock && d.targetNodeIds.Length == 0) ||
+					d.minimumDifficulty < 1 || d.intervalSeconds <= 0 || d.traceBurst < 0) ||
+					c.defenses.Select(d => d?.id).Distinct().Count() != c.defenses.Length)
+					Error(c, "defenses", "security layers need unique IDs, valid nodes, and positive timing");
+				if (c.paceMultiplier <= 0 || float.IsNaN(c.paceMultiplier) || float.IsInfinity(c.paceMultiplier))
+					Error(c, "paceMultiplier", "contract pacing must be positive and finite");
+
 				// Walk the contract's conditions to check named-node prerequisites.
 				Walk(c, "contract", new HashSet<object>(), 0, true, (obj, path) =>
 				{

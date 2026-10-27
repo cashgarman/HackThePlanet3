@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -80,6 +81,38 @@ namespace HackThePlanet.Tests.PlayMode
 			foreach (var camera in Resources.FindObjectsOfTypeAll<Camera>())
 				if (camera != null && camera.name == "Workstation GraphExplorer Camera")
 					camera.enabled = false;
+		}
+
+		[Test]
+		public void SecurityBriefAndLiveCountdownExposeCountermeasureControls()
+		{
+			var catalog = GameCatalog.Default;
+			var setup = new GameSimulation(catalog);
+			setup.Career.completed.AddRange(new[] { "quiet-copy", "paper-trail", "ghost-wire", "glasshouse" });
+			setup.Career.jobs = 4;
+			setup.Career.xp = 1000;
+			foreach (var id in new[] { "efficient", "protocol-spoof", "quiet", "loop-feed" })
+				Assert.That(setup.BuyTech(id), Is.True);
+			app.UseTestCatalog(catalog, setup.Career, "dead-drop");
+			app.SendMessage("Update");
+			DisableGraphViewportCameras();
+			Assert.That(app.Root.Query<Label>().ToList().Any(l => l.text.Contains("Credential Analysis or Protocol Spoof")), Is.True);
+			Assert.That(app.ActivateVisibleControl("connect"), Is.True);
+			app.State.SetManualPause(true);
+			app.SendMessage("Update");
+			DisableGraphViewportCameras();
+			var sweep = app.State.Defenses.First(d => d.kind == DefenseKind.SecuritySweep);
+			sweep.remaining = 5;
+			app.SendMessage("Update");
+			Assert.That(app.Root.Query<Label>().ToList().Any(l => l.text == "NEXT SECURITY SWEEP / 5s"), Is.True);
+			Assert.That(app.State.Node("n19").label, Does.Contain("Key server"));
+			app.State.Node("n22").known = app.State.Node("n22").controlled = true;
+			app.SelectNode("n22");
+			app.SendMessage("Update");
+			DisableGraphViewportCameras();
+			Assert.That(app.Root.Q<Button>("action-spoof-gate"), Is.Not.Null);
+			Assert.That(app.ActivateVisibleControl("action-spoof-gate"), Is.True);
+			Assert.That(app.State.Op.task.actionId, Is.EqualTo("spoof-gate"));
 		}
 
 		[Test]

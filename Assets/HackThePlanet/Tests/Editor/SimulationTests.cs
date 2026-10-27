@@ -52,12 +52,35 @@ namespace HackThePlanet.Tests
         }
 
         [Test]
+        public void PreviewListsRequirementStepsWhenHackIsBlocked()
+        {
+            var sim = Started();
+            NetNode target = null;
+            foreach (var node in sim.Op.nodes.Where(n => !n.controlled))
+            {
+                node.known = true;
+                if (!sim.Reachable(node))
+                {
+                    target = node;
+                    break;
+                }
+            }
+
+            Assert.That(target, Is.Not.Null, "Expected a known node outside the controlled route.");
+            var preview = sim.Preview("hack", target.id);
+            Assert.That(preview.allowed, Is.False);
+            Assert.That(preview.steps.Any(s => !s.met && s.message.Contains("connected neighbor")), Is.True,
+                preview.reason);
+        }
+
+        [Test]
         public void PreviewExecutePauseAndTickCompleteHack()
         {
             var sim = Started();
             var target = sim.Op.nodes.First(n => n.known && !n.controlled && sim.Reachable(n));
             var preview = sim.Preview("hack", target.id);
             Assert.That(preview.allowed, Is.True, preview.reason);
+            Assert.That(preview.steps.Any(s => s.met), Is.True);
             Assert.That(preview.duration, Is.GreaterThan(0));
             sim.SetManualPause(true);
             Assert.That(sim.Execute("hack", target.id), Is.True);

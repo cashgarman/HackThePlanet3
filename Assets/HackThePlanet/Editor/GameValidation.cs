@@ -552,54 +552,8 @@ namespace HackThePlanet.Editor
 				// Disconnect the test operation.
 				abilities.Disconnect();
 
-				// Play the full authored campaign with an earned-XP build, using only legal actions.
-				var campaign = new GameSimulation();
-
-				// Run every authored contract in story order.
-				foreach (var job in GameContent.Story)
-				{
-					// Start the campaign contract and verify it unlocks.
-					Check(campaign.Start(job), "Campaign unlock / " + job.title);
-
-					// Hack along the last approach to reach the objectives.
-					var generated = NetworkGenerator.Generate(job, campaign.Career);
-					foreach (var id in generated.approaches.Last().Skip(1))
-						Hack(campaign, id);
-
-					// Disrupt contracts also require traversing the decoy system.
-					if (job.kind == JobKind.Disrupt)
-						Traverse(campaign, "n14");
-
-					// Find every objective that is not the security hub.
-					foreach (var target in campaign.Op.nodes.Where(n => n.objective && n.kind != NodeKind.SecurityHub)
-												   .ToArray())
-					{
-						// Traverse to the objective and recover its file.
-						Traverse(campaign, target.id);
-						Recover(campaign, target.id);
-					}
-
-					// Verify every required objective is viable on this route.
-					Check(campaign.Active && campaign.ObjectiveComplete,
-						  "All required objectives viable / " + job.title);
-
-					// Disconnect to deliver and verify the contract succeeds.
-					var result = campaign.Disconnect();
-					Check(result.success,
-						  "Career delivery / " + job.title + " / " + result.trace.ToString("0.0") + "% trace");
-
-					// Buy the next starting technology in order, if one is still missing.
-					if (!campaign.Has("quiet"))
-						campaign.BuyTech("quiet");
-					else if (!campaign.Has("efficient"))
-						campaign.BuyTech("efficient");
-					else if (!campaign.Has("selective"))
-						campaign.BuyTech("selective");
-
-					// Upgrade the chassis when the preview allows it.
-					if (campaign.PreviewChassis().allowed)
-						campaign.UpgradeChassis();
-				}
+				// Exercise the same legal defense-aware policy as the balance suite using only earned base rewards.
+				var campaign = BalanceSuite.ValidateBaseCareer(Check);
 
 				// Verify the story campaign completed the full career loop.
 				Check(campaign.Career.completed.Count == 6 && campaign.Career.jobs == 6,

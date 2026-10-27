@@ -45,7 +45,11 @@
     "infrastructure-3",
     "parallel-engineering",
     "data-engineering",
-    "signal-engineering"
+    "signal-engineering",
+    "credential-analysis",
+    "protocol-spoof",
+    "loop-feed",
+    "hard-reset"
   ],
   "actions": [
     "scan",
@@ -56,7 +60,11 @@
     "bridge",
     "backdoor",
     "decoy",
-    "discard"
+    "discard",
+    "extract-key",
+    "spoof-gate",
+    "loop-feed",
+    "hard-reset"
   ],
   "nodeTypes": [
     "gateway",
@@ -125,6 +133,240 @@
         "type": "ConstantNumber",
         "value": 0.8
       }
+    },
+    {
+      "id": "career-pacing-1-duration",
+      "stat": "duration",
+      "priority": 100,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "CompareCondition",
+            "comparison": "LessOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          },
+          {
+            "type": "NotCondition",
+            "condition": {
+              "type": "ActionCondition",
+              "action": null,
+              "tag": "countermeasure"
+            }
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 2.25
+      }
+    },
+    {
+      "id": "career-pacing-1-trace",
+      "stat": "trace",
+      "priority": 100,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "CompareCondition",
+            "comparison": "LessOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          },
+          {
+            "type": "NotCondition",
+            "condition": {
+              "type": "ActionCondition",
+              "action": null,
+              "tag": "countermeasure"
+            }
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.8
+      }
+    },
+    {
+      "id": "career-pacing-2-duration",
+      "stat": "duration",
+      "priority": 100,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "CompareCondition",
+            "comparison": "Equal",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          {
+            "type": "NotCondition",
+            "condition": {
+              "type": "ActionCondition",
+              "action": null,
+              "tag": "countermeasure"
+            }
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 3
+      }
+    },
+    {
+      "id": "career-pacing-2-trace",
+      "stat": "trace",
+      "priority": 100,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "CompareCondition",
+            "comparison": "Equal",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          {
+            "type": "NotCondition",
+            "condition": {
+              "type": "ActionCondition",
+              "action": null,
+              "tag": "countermeasure"
+            }
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.55
+      }
+    },
+    {
+      "id": "career-pacing-3-duration",
+      "stat": "duration",
+      "priority": 100,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 3
+            }
+          },
+          {
+            "type": "NotCondition",
+            "condition": {
+              "type": "ActionCondition",
+              "action": null,
+              "tag": "countermeasure"
+            }
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 5
+      }
+    },
+    {
+      "id": "career-pacing-3-trace",
+      "stat": "trace",
+      "priority": 100,
+      "operation": "Multiply",
+      "when": {
+        "type": "AllCondition",
+        "conditions": [
+          {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 3
+            }
+          },
+          {
+            "type": "NotCondition",
+            "condition": {
+              "type": "ActionCondition",
+              "action": null,
+              "tag": "countermeasure"
+            }
+          }
+        ]
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.25
+      }
     }
   ],
   "triggers": [
@@ -190,6 +432,10 @@
     "storage-array",
     "ram-bank",
     "quiet-filter",
-    "recon-cache"
+    "recon-cache",
+    "decoder-board",
+    "spoof-asic",
+    "veil-array",
+    "isolation-bank"
   ]
 }

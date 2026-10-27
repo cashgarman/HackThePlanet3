@@ -78,5 +78,29 @@
       "contract": "Dead Drop",
       "text": "The whistleblower's last draft: They have a list of everyone who asked questions. I thought leaving the company would get me off it. Now I know why the surveillance contract was worth more than the bank."
     }
-  ]
+  ],
+  "defenses": [
+    {
+      "id": "vault-lock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "kind": "CredentialLock",
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    },
+    {
+      "id": "hub-sweep",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [],
+      "kind": "SecuritySweep",
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    }
+  ],
+  "paceMultiplier": 1.05
 }

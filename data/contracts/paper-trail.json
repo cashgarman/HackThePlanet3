@@ -78,5 +78,7 @@
       "contract": "Paper Trail",
       "text": "Unsent message from a collections clerk: I can see the charge twice. I can see the payment once. The script tells me to say the account is accurate. I am keeping copies of everything."
     }
-  ]
+  ],
+  "defenses": [],
+  "paceMultiplier": 1
 }

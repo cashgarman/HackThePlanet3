@@ -26,32 +26,34 @@ MonoBehaviour:
   recurring: 0
   requiredWins: 1
   quietLimit: 60
+  paceMultiplier: 1
   credits:
-    rid: 213507095544725528
+    rid: 213507098990346335
   xp:
-    rid: 213507095544725529
+    rid: 213507098990346336
   difficulty:
-    rid: 213507095544725530
+    rid: 213507098990346337
   seed:
-    rid: 213507095544725531
+    rid: 213507098990346338
   objectives:
   - nodeId: n22
-    label: 
+    label:
     actionLabel: Correct record
     action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     payload: 0
     complete:
-      rid: 213507095544725532
+      rid: 213507098990346339
     actionRequirements: []
   - nodeId: n20
-    label: 
+    label:
     actionLabel: Correct record
     action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     payload: 0
     complete:
-      rid: 213507095544725533
+      rid: 213507098990346340
     actionRequirements: []
   actionRules: []
+  defenses: []
   lore:
   - id: paper-trail/0
     title: Rounding errors
@@ -71,27 +73,27 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 213507095544725528
+    - rid: 213507098990346335
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 850
-    - rid: 213507095544725529
+    - rid: 213507098990346336
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 65
-    - rid: 213507095544725530
+    - rid: 213507098990346337
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1
-    - rid: 213507095544725531
+    - rid: 213507098990346338
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 222
-    - rid: 213507095544725532
+    - rid: 213507098990346339
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 3
-    - rid: 213507095544725533
+    - rid: 213507098990346340
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 3

@@ -90,5 +90,19 @@
       "contract": "Ghost in the Wire",
       "text": "Recovered radio transcript: NULL asked if anyone could still hear the neighborhood relay. Twelve operators answered. By dawn, the clinic and the night school were back online."
     }
-  ]
+  ],
+  "defenses": [
+    {
+      "id": "archive-lock",
+      "sourceNodeId": "n9",
+      "targetNodeIds": [
+        "n13"
+      ],
+      "kind": "CredentialLock",
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 12
+    }
+  ],
+  "paceMultiplier": 0.85
 }

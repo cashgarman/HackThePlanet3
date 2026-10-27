@@ -1,5 +1,7 @@
 # Career balance refinement
 
+The current progression expansion and its authoritative automated suite are documented in [Progression and automated balance](BALANCE_AUTOMATION.md). The measurements below describe the earlier 600-trial route refinement and remain a historical comparison.
+
 The target is a tactical hacking game with short, readable commitments: prepare an intrusion, choose exposure versus distance, and decide when to take optional archives. Planning and pause remain free. Existing career and operation IDs remain compatible.
 
 ## Measured pacing

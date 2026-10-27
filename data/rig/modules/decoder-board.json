@@ -1,0 +1,58 @@
+{
+  "id": "decoder-board",
+  "title": "Decoder Board",
+  "description": "+0.20 GB/s bandwidth; key extraction is 25% faster.",
+  "family": "transfer",
+  "branch": "RECON",
+  "tier": 2,
+  "width": 2,
+  "height": 1,
+  "price": 750,
+  "rotatable": true,
+  "powerDemand": 3,
+  "heatOutput": 2,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Purpose-built countermeasure hardware.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "data-engineering",
+        "equipped": false
+      },
+      "message": "Requires Data Engineering research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "bandwidth",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.2
+      }
+    },
+    {
+      "id": "",
+      "stat": "duration",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "ActionCondition",
+        "action": "extract-key",
+        "tag": ""
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.75
+      }
+    }
+  ]
+}

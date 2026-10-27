@@ -774,9 +774,8 @@ namespace HackThePlanet
 			// Frame the node at a distance scaled to its radius.
 			distance = Mathf.Clamp(session.Renderer.Radius(node) * 10, 8, 18);
 
-			// Leave space to the right for the expanded intel card.
-			center = node.Position + camera.transform.right *
-				(distance * Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f) * camera.aspect * .45f);
+			// Orbit center on the node; the intel card is placed beside it in panel space.
+			center = node.Position;
 
 			// Apply the camera move and reposition the labels.
 			PlaceCamera();

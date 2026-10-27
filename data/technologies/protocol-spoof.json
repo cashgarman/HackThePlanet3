@@ -1,0 +1,21 @@
+{
+  "id": "protocol-spoof",
+  "title": "Protocol Spoof",
+  "description": "Spoof two protected downloads per operation without a key.",
+  "branch": "INTRUSION",
+  "cost": 90,
+  "waypointTier": 0,
+  "special": true,
+  "position": {
+    "x": 1060,
+    "y": 155
+  },
+  "parents": [
+    "efficient"
+  ],
+  "grants": [
+    "spoof-gate"
+  ],
+  "modifiers": [],
+  "triggers": []
+}

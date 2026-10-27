@@ -1,0 +1,21 @@
+{
+  "id": "hard-reset",
+  "title": "Hard Reset",
+  "description": "Permanently shut down one discovered sweep controller per operation.",
+  "branch": "CONTROL",
+  "cost": 85,
+  "waypointTier": 0,
+  "special": true,
+  "position": {
+    "x": 1060,
+    "y": 460
+  },
+  "parents": [
+    "disrupt"
+  ],
+  "grants": [
+    "hard-reset"
+  ],
+  "modifiers": [],
+  "triggers": []
+}

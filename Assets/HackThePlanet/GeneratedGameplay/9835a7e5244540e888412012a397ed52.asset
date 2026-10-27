@@ -26,32 +26,50 @@ MonoBehaviour:
   recurring: 0
   requiredWins: 4
   quietLimit: 65
+  paceMultiplier: 1.05
   credits:
-    rid: 213507095544725546
+    rid: 213507098990346353
   xp:
-    rid: 213507095544725547
+    rid: 213507098990346354
   difficulty:
-    rid: 213507095544725548
+    rid: 213507098990346355
   seed:
-    rid: 213507095544725549
+    rid: 213507098990346356
   objectives:
   - nodeId: n22
-    label: 
+    label:
     actionLabel: Correct record
     action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     payload: 0
     complete:
-      rid: 213507095544725550
+      rid: 213507098990346357
     actionRequirements: []
   - nodeId: n20
-    label: 
+    label:
     actionLabel: Correct record
     action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     payload: 0
     complete:
-      rid: 213507095544725551
+      rid: 213507098990346358
     actionRequirements: []
   actionRules: []
+  defenses:
+  - id: vault-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    - n20
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 12
+  - id: hub-sweep
+    sourceNodeId: n14
+    targetNodeIds: []
+    kind: 1
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 12
   lore:
   - id: dead-drop/0
     title: Before the freeze
@@ -71,27 +89,27 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 213507095544725546
+    - rid: 213507098990346353
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1450
-    - rid: 213507095544725547
+    - rid: 213507098990346354
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 100
-    - rid: 213507095544725548
+    - rid: 213507098990346355
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 3
-    - rid: 213507095544725549
+    - rid: 213507098990346356
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 551
-    - rid: 213507095544725550
+    - rid: 213507098990346357
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 3
-    - rid: 213507095544725551
+    - rid: 213507098990346358
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 3

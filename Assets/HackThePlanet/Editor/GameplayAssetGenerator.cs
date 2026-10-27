@@ -34,6 +34,7 @@ namespace HackThePlanet.Editor
 
 				// Track the source-to-asset map and the asset paths written by this run.
 				var map = new Dictionary<Object, Object>();
+				var changed = new HashSet<Object>();
 				var paths = new HashSet<string>();
 
 				// Immutable manifest keys preserve .meta GUIDs across ID, filename and title changes.
@@ -60,15 +61,19 @@ namespace HackThePlanet.Editor
 						AssetDatabase.CreateAsset(asset, path);
 					}
 
-					// Copy the source data into the asset and set its identity.
-					EditorUtility.CopySerialized(source, asset);
-					asset.hideFlags = HideFlags.None;
-					asset.name = entry.key;
+					// Keep existing managed-reference identities when the authored content has not changed.
+					if (ContentJson.Encode(source) != ContentJson.Encode(asset))
+					{
+						EditorUtility.CopySerialized(source, asset);
+						asset.hideFlags = HideFlags.None;
+						asset.name = entry.key;
+						changed.Add(asset);
+					}
 					map.Add(source, asset);
 				}
 
 				// Re-point object references between generated assets so they link to each other.
-				foreach (var asset in map.Values)
+				foreach (var asset in changed)
 				{
 					// Open the asset for serialized property access.
 					var serialized = new SerializedObject(asset);

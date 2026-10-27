@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6351d8921bbb66c4590e73662cfb54e9, type: 3}
+  m_Name: 845e8014b3eb4e8595fdb81b4d8ffc2a
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ActionDefinition
+  id: extract-key
+  title: Extract key
+  description: Copy the contract credential from a controlled key server.
+  memoryMode: 0
+  memoryCost: 0
+  instant: 0
+  releaseOnTargetControl: 0
+  activeModifiers: []
+  tags:
+  - extract-key
+  - countermeasure
+  shortcut: 0
+  shortcutLabel:
+  legacyGroup: extract-key
+  presentationPriority: 12
+  operatorTarget: 0
+  queueable: 0
+  initiallyAvailable: 0
+  futureNeighborQueue: 0
+  traceFree: 0
+  visible:
+    rid: 213507098990347190
+  requirements:
+  - condition:
+      rid: 213507098990347191
+    message: Control this key server first.
+  queueRequirements: []
+  duration:
+    rid: 213507098990347192
+  baseTrace:
+    rid: 213507098990347193
+  useLimit:
+    rid: 213507098990347194
+  effects:
+  - rid: 213507098990347195
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507098990347190
+      type: {class: DefenseCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+    - rid: 213507098990347191
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1
+    - rid: 213507098990347192
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 12
+    - rid: 213507098990347193
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 4
+    - rid: 213507098990347194
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507098990347195
+      type: {class: DefenseEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0

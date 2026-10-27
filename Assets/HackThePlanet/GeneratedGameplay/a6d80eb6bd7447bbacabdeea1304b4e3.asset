@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.CareerDefinition
   id: career
   title: Career rules
-  description: 
+  description:
   credits: 600
   xp: 0
   day: 1
@@ -88,6 +88,10 @@ MonoBehaviour:
   - id: memoryPool
     value: 0
   - id: memoryReclaim
+    value: 0
+  - id: spoofBonus
+    value: 0
+  - id: sweepTrace
     value: 0
   ranks:
   - jobs: 0
