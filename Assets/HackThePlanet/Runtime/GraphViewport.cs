@@ -229,7 +229,8 @@ namespace HackThePlanet
 		/// <param name="catalog">Technology source; defaults to <see cref="GameCatalog.Default" />.</param>
 		public GraphViewport(Career career, string selected, Action<string> select, GraphCameraState cameraState = null,
 							 GameCatalog catalog = null)
-			: this(BuildResearch(career, catalog ?? GameCatalog.Default), selected, select, true, null, cameraState)
+			: this(BuildResearch(career, catalog ?? GameCatalog.Default), selected, select, true, null, cameraState,
+				   false, new HashSet<string>(career.unlocked))
 		{
 			// Index technologies by id.
 			var technologies = (catalog ?? GameCatalog.Default).Technologies.ToDictionary(t => t.id);
@@ -391,7 +392,10 @@ namespace HackThePlanet
 				// Outline the button in the node's type color.
 				button.style.borderBottomWidth = button.style.borderTopWidth = 1;
 				button.style.borderLeftWidth = button.style.borderRightWidth = 1;
-				var tint = scene.Schema.NodeTypes[node.Record.TypeId].Color;
+				var ownedResearch = research && node.Record.TypeId.EndsWith("-owned", StringComparison.Ordinal);
+				var tint = ownedResearch
+					? WorkstationApp.HackedConnectionColor
+					: scene.Schema.NodeTypes[node.Record.TypeId].Color;
 				button.style.borderBottomColor = button.style.borderTopColor = tint;
 				button.style.borderLeftColor = button.style.borderRightColor = tint;
 
@@ -967,11 +971,13 @@ namespace HackThePlanet
 			var document = new GraphDocument("workstation-research", "Research network");
 			var schema = new GraphSchema();
 
-			// Each branch has a bright type for owned nodes and a dimmed twin for revealed but locked nodes.
+			// Each branch has unlocked (hacked-style), dimmed locked, and neutral variants for the tree.
 			foreach (var branch in catalog.Technologies.Select(t => t.branch).Distinct())
 			{
 				schema.Register(new GraphNodeTypeDefinition(branch, branch, "default",
 															Palette.Branch(branch), .95f));
+				schema.Register(new GraphNodeTypeDefinition(OwnedType(branch), branch, "default", Palette.Lime,
+															1.12f));
 				schema.Register(new GraphNodeTypeDefinition(LockedType(branch), branch, "default",
 															LockedColor(Palette.Branch(branch)), .95f));
 			}
@@ -988,7 +994,7 @@ namespace HackThePlanet
 			foreach (var tech in visible)
 				document.UpsertNode(new GraphNodeRecord(
 										tech.id,
-										career.unlocked.Contains(tech.id) ? tech.branch : LockedType(tech.branch),
+										career.unlocked.Contains(tech.id) ? OwnedType(tech.branch) : LockedType(tech.branch),
 										tech.title,
 										new Dictionary<string, GraphValue>
 										{
@@ -1030,6 +1036,11 @@ namespace HackThePlanet
 		private static string LockedType(string branch)
 		{
 			return branch + "-locked";
+		}
+
+		private static string OwnedType(string branch)
+		{
+			return branch + "-owned";
 		}
 
 		// Shared helper used by the workstation or graph viewport.
@@ -1149,6 +1160,9 @@ namespace HackThePlanet
 				if (pair.Key != selectedId)
 					continue;
 				if (activeProgressNodeId == selectedId)
+					continue;
+				// Match UpdateFocusedCard: selection alone does not open the intel card.
+				if (savedCamera.FocusedId != selectedId)
 					continue;
 				var node = scene.Nodes[pair.Key];
 
@@ -1460,7 +1474,7 @@ namespace HackThePlanet
 					// Work out the route, selection, and hacked states for this edge.
 					var highlight = path.Contains(edge.Id);
 					var related = edge.From == selected || edge.To == selected;
-					var hacked = !research && controlledNodes.Contains(edge.From) && controlledNodes.Contains(edge.To);
+					var hacked = controlledNodes.Contains(edge.From) && controlledNodes.Contains(edge.To);
 
 					// Draw a wide translucent underlay under hacked connections.
 					if (hacked)

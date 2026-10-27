@@ -1185,13 +1185,18 @@ namespace HackThePlanet
 					? nodes.FirstOrDefault(n => n.objective && !n.collected)?.id
 					: null;
 
-				// Create the graph viewport and attach the signal field and intel card.
+				// Host the graph and the overlaid task queue strip in one stack.
+				var graphHost = El(map, "map-graph-host");
 				canvas = new GraphViewport(nodes, links, selectedNode, !State.Active, SelectNode, route, networkCamera,
 										   intel, job.Intel, State.Catalog, entryId, objectiveId, State.Waypoints(job),
 										   State.WaypointTier);
-				map.Add(canvas);
+				graphHost.Add(canvas);
 				Visuals.AttachField(canvas);
 				Visuals.AttachIntelCard(canvas.IntelStatic);
+
+				// Overlay the queued-task strip on the live network map during a run.
+				if (State.Active)
+					BuildGraphQueueStrip(graphHost);
 			}
 
 			// Add the action and operation bars during an active run.

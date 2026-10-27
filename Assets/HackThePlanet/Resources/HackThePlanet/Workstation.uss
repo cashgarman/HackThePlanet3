@@ -503,6 +503,101 @@ ScrollView {
     letter-spacing: 2px;
 }
 
+.map-graph-host {
+    flex-grow: 1;
+    min-height: 0;
+    position: relative;
+}
+
+.map-graph-host > .graph-viewport {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.graph-task-queue-strip {
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    bottom: 16px;
+    min-height: 46px;
+    max-height: 52px;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    padding: 4px 10px;
+    border-width: 1px;
+    border-color: #3a5654;
+    background-color: rgba(11, 23, 29, 0.94);
+}
+
+.graph-task-queue-row {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.graph-task-queue-card {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 148px;
+    max-width: 220px;
+    margin: 0 4px;
+    padding: 4px 8px 4px 6px;
+    border-width: 1px;
+    border-color: #36514e;
+    background-color: #11231f;
+}
+
+.graph-task-queue-card-running {
+    border-left-width: 3px;
+    border-left-color: #60d8d0;
+    background-color: #152a28;
+}
+
+.graph-task-queue-card-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    margin-left: 6px;
+}
+
+.graph-task-queue-action {
+    color: #dceee9;
+    font-size: 9px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.graph-task-queue-target {
+    color: #7f9892;
+    font-size: 8px;
+    margin-top: 2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.graph-task-queue-badge {
+    flex-shrink: 0;
+    margin-left: 6px;
+    padding: 1px 4px;
+    color: #70d7cd;
+    font-size: 7px;
+    letter-spacing: 0.5px;
+    border-width: 1px;
+    border-color: #36514e;
+    background-color: #0d191f;
+}
+
+.graph-task-queue-card-running .graph-task-queue-badge {
+    color: #a8f0e8;
+    border-color: #4a7a74;
+}
+
 .graph-viewport {
     flex-grow: 1;
     min-height: 0;

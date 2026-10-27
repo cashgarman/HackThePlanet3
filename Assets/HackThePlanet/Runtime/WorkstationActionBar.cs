@@ -19,8 +19,11 @@ namespace HackThePlanet
 		// Row of chips showing queued actions in order.
 		private VisualElement queueList;
 
+		// Overlaid strip on the network map showing the running task and queue.
+		private VisualElement graphQueueStrip, graphQueueRow;
+
 		// Cached queue signature to avoid rebuilding chips when unchanged.
-		private string queueSignature;
+		private string queueSignature, graphQueueSignature;
 
 		// Builds the operation action bar with RAM meter, actions, queue, and storage meter.
 		private void BuildActionBar(VisualElement parent)
@@ -107,6 +110,70 @@ namespace HackThePlanet
 
 			// Refresh the queue summary and chips.
 			RefreshQueueStatus();
+			RefreshGraphQueueStrip();
+		}
+
+		// Builds the horizontal task queue strip overlaid on the network graph.
+		private void BuildGraphQueueStrip(VisualElement host)
+		{
+			graphQueueSignature = null;
+			graphQueueStrip = El(host, "graph-task-queue-strip");
+			graphQueueRow = El(graphQueueStrip, "graph-task-queue-row");
+			RefreshGraphQueueStrip();
+		}
+
+		// Updates the graph queue strip when the running task or queue changes.
+		private void RefreshGraphQueueStrip()
+		{
+			if (graphQueueStrip == null || graphQueueRow == null || !State.Active)
+				return;
+
+			var task = State.Op.task;
+			var hasRunning = task != null;
+			var visible = hasRunning || State.Op.queue.Count > 0;
+			graphQueueStrip.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+			if (!visible)
+				return;
+
+			var runningSig = hasRunning
+				? task.actionId + "@" + task.target + (State.Op.paused ? "|paused" : "|run")
+				: string.Empty;
+			var signature = runningSig + "|" +
+							string.Join(";", State.Op.queue.Select(q => q.actionId + "@" + q.target));
+			if (signature == graphQueueSignature)
+				return;
+
+			graphQueueSignature = signature;
+			graphQueueRow.Clear();
+
+			if (hasRunning)
+				AddGraphQueueCard(task.actionId, task.target, true, 0);
+
+			for (var i = 0; i < State.Op.queue.Count; i++)
+			{
+				var queued = State.Op.queue[i];
+				AddGraphQueueCard(queued.actionId, queued.target, false, i + 1);
+			}
+		}
+
+		// Adds one card to the graph queue strip for the running task or a queued slot.
+		private void AddGraphQueueCard(string actionId, string targetId, bool running, int queueIndex)
+		{
+			var card = El(graphQueueRow, "graph-task-queue-card");
+			if (running)
+				card.AddToClassList("graph-task-queue-card-running");
+
+			card.Add(new ActionGlyph(actionId, ActionGlyph.ColorFor(actionId), 16));
+			var text = El(card, "graph-task-queue-card-text");
+			var title = State.ActionTitle(actionId, targetId);
+			var target = State.Node(targetId)?.label ?? "OPERATOR";
+			Text(text, title, "graph-task-queue-action");
+			Text(text, target, "graph-task-queue-target");
+			Text(card, running ? State.Op.paused ? "PAUSED" : "RUNNING" : queueIndex.ToString(),
+				 "graph-task-queue-badge");
+			card.tooltip = running
+				? (State.Op.paused ? "PAUSED / " : "RUNNING / ") + title + " / " + target
+				: queueIndex + " / " + title + " / " + target;
 		}
 
 		// Updates queue status text and rebuilds queue chips when the queue changes.
