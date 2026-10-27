@@ -9,6 +9,7 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>The starting node of a path.</summary>
 		Start,
+
 		/// <summary>The destination node of a path.</summary>
 		End
 	}
@@ -108,14 +109,19 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the starting node identifier.</summary>
 		public string StartId { get; }
+
 		/// <summary>Gets the destination node identifier.</summary>
 		public string EndId { get; }
+
 		/// <summary>Gets node identifiers in path order.</summary>
 		public IReadOnlyList<string> NodeIds { get; }
+
 		/// <summary>Gets edge identifiers in path order.</summary>
 		public IReadOnlyList<string> EdgeIds { get; }
+
 		/// <summary>Gets whether a path was found.</summary>
 		public bool IsReachable => NodeIds.Count > 0;
+
 		/// <summary>Gets the number of edges in the path.</summary>
 		public int Jumps => EdgeIds.Count;
 
@@ -143,16 +149,22 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets whether path highlighting is active.</summary>
 		public bool IsActive { get; private set; }
+
 		/// <summary>Gets the current path result.</summary>
 		public GraphPathResult Result { get; private set; }
+
 		/// <summary>Gets the selected starting node identifier.</summary>
 		public string StartId { get; private set; }
+
 		/// <summary>Gets the selected destination node identifier.</summary>
 		public string EndId { get; private set; }
+
 		/// <summary>Gets the endpoint currently awaiting a node pick.</summary>
 		public GraphPathEndpoint? PendingPick { get; private set; }
+
 		/// <summary>Occurs when path-selection state changes.</summary>
 		public event Action<GraphPathState> Changed;
+
 		/// <summary>Occurs when the user should pick a node for an endpoint.</summary>
 		public event Action<GraphPathEndpoint> PickRequested;
 
@@ -201,7 +213,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Uses a picked node as the pending endpoint.</summary>
 		/// <param name="nodeId">Picked node identifier.</param>
-		/// <returns><see langword="true"/> when a pending endpoint accepted the node.</returns>
+		/// <returns><see langword="true" /> when a pending endpoint accepted the node.</returns>
 		public bool AcceptPickedNode(string nodeId)
 		{
 			// Reject unrelated clicks until a valid scene node can satisfy the pending endpoint pick.
@@ -254,7 +266,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Recomputes the path when the bound scene has changed.</summary>
 		/// <param name="force">When true, recomputes even if the scene revision is unchanged.</param>
-		/// <returns><see langword="true"/> when the path result changed.</returns>
+		/// <returns><see langword="true" /> when the path result changed.</returns>
 		public bool Synchronize(bool force = false)
 		{
 			// Keep unreachable selections active and recompute only after topology changes or an explicit refresh.

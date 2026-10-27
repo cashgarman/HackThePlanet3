@@ -7,8 +7,10 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the normalized start of the visible range.</summary>
 		public double Start { get; private set; }
+
 		/// <summary>Gets the normalized end of the visible range.</summary>
 		public double End { get; private set; } = 1;
+
 		/// <summary>Gets whether the range is zoomed in from the full timeline.</summary>
 		public bool IsZoomed => Start > 0 || End < 1;
 

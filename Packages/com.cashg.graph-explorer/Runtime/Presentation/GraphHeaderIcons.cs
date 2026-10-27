@@ -5,12 +5,12 @@ using UnityEngine.UIElements;
 
 namespace Cashg.GraphExplorer
 {
-    /// <summary>
-    ///     Interface glyphs from Font Awesome Free 6.7.2 by @fontawesome (https://fontawesome.com).
-    ///     Icons: CC BY 4.0. Fonts: SIL OFL 1.1. Code: MIT. Copyright 2024 Fonticons, Inc.
-    ///     https://fontawesome.com/license/free
-    /// </summary>
-    public static class HeaderIcons
+	/// <summary>
+	///     Interface glyphs from Font Awesome Free 6.7.2 by @fontawesome (https://fontawesome.com).
+	///     Icons: CC BY 4.0. Fonts: SIL OFL 1.1. Code: MIT. Copyright 2024 Fonticons, Inc.
+	///     https://fontawesome.com/license/free
+	/// </summary>
+	public static class HeaderIcons
 	{
 		private const byte Move = 0;
 		private const byte Line = 1;

@@ -38,8 +38,10 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the cached event descriptor.</summary>
 		public GraphTimelineEvent Event { get; }
+
 		/// <summary>Gets the provider context for the cached snapshot.</summary>
 		public string Context { get; }
+
 		/// <summary>Gets the cached graph snapshot.</summary>
 		public GraphSnapshot Snapshot { get; }
 	}
@@ -49,31 +51,41 @@ namespace Cashg.GraphExplorer
 	{
 		private readonly Dictionary<string, GraphCachedTimelineEvent> cached = new(StringComparer.Ordinal);
 		private readonly HashSet<string> cachedIds = new(StringComparer.Ordinal);
+
 		/// <summary>Gets the cached external event snapshots.</summary>
 		public IReadOnlyCollection<GraphCachedTimelineEvent> CachedEvents => cached.Values;
+
 		/// <summary>Gets the start of the selected event range.</summary>
 		public DateTimeOffset? SelectionStartUtc { get; private set; }
+
 		/// <summary>Gets the end of the selected event range.</summary>
 		public DateTimeOffset? SelectionEndUtc { get; private set; }
+
 		/// <summary>Gets the start of the visible timeline range.</summary>
 		public DateTimeOffset? ViewStartUtc { get; private set; }
+
 		/// <summary>Gets the end of the visible timeline range.</summary>
 		public DateTimeOffset? ViewEndUtc { get; private set; }
+
 		/// <summary>Gets whether an event range is selected.</summary>
 		public bool HasSelection => SelectionStartUtc.HasValue;
+
 		/// <summary>Gets whether selected event snapshots are being cached.</summary>
 		public bool IsCaching { get; private set; }
+
 		/// <summary>Gets the number of snapshots cached by the current operation.</summary>
 		public int Completed { get; private set; }
+
 		/// <summary>Gets the number of selected events in the current cache operation.</summary>
 		public int Total { get; private set; }
+
 		/// <summary>Gets the latest cache operation error, when one occurred.</summary>
 		public string Error { get; private set; }
 
 		/// <summary>Determines whether an event snapshot is cached for the specified context.</summary>
 		/// <param name="id">Event identifier.</param>
 		/// <param name="context">Optional provider context; null checks any cached context.</param>
-		/// <returns><see langword="true"/> when the event is cached.</returns>
+		/// <returns><see langword="true" /> when the event is cached.</returns>
 		public bool IsCached(string id, string context = null)
 		{
 			return context == null ? cachedIds.Contains(id) : cached.ContainsKey(Key(context, id));
@@ -114,7 +126,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Determines whether a timestamp is inside the selected range.</summary>
 		/// <param name="time">Timestamp to check.</param>
-		/// <returns><see langword="true"/> when the timestamp is selected.</returns>
+		/// <returns><see langword="true" /> when the timestamp is selected.</returns>
 		public bool Contains(DateTimeOffset time)
 		{
 			return HasSelection && time >= SelectionStartUtc.Value && time <= SelectionEndUtc.Value;
@@ -138,7 +150,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="context">Provider context.</param>
 		/// <param name="id">Event identifier.</param>
 		/// <param name="snapshot">Receives the snapshot when found.</param>
-		/// <returns><see langword="true"/> when the snapshot is cached.</returns>
+		/// <returns><see langword="true" /> when the snapshot is cached.</returns>
 		public bool TryGet(string context, string id, out GraphSnapshot snapshot)
 		{
 			if (cached.TryGetValue(Key(context, id), out var value))
@@ -284,7 +296,7 @@ namespace Cashg.GraphExplorer
 		/// <summary>Attempts to get a snapshot and marks it as recently used.</summary>
 		/// <param name="key">Cache key.</param>
 		/// <param name="snapshot">Receives the cached snapshot when found.</param>
-		/// <returns><see langword="true"/> when the key is present.</returns>
+		/// <returns><see langword="true" /> when the key is present.</returns>
 		public bool TryGet(string key, out GraphSnapshot snapshot)
 		{
 			if (!entries.TryGetValue(key, out var node))

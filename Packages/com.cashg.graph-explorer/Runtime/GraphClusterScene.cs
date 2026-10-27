@@ -11,6 +11,7 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Type identifier assigned to generated cluster records.</summary>
 		public const string ClusterType = "graph-explorer:cluster";
+
 		private readonly Dictionary<string, Cluster> clusters = new(StringComparer.Ordinal);
 		private readonly Dictionary<string, IGraphEdge> edges = new(StringComparer.Ordinal);
 		private readonly HashSet<string> lodSuppressed = new(StringComparer.Ordinal);
@@ -32,20 +33,28 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets whether distance-based level of detail is enabled.</summary>
 		public bool LodEnabled { get; set; }
+
 		/// <summary>Gets or sets the distance at which clusters collapse automatically.</summary>
 		public float LodEnterDistance { get; set; } = 80;
+
 		/// <summary>Gets or sets the distance below which clusters expand automatically.</summary>
 		public float LodExitDistance { get; set; } = 65;
+
 		/// <summary>Gets or sets the minimum spacing between automatically formed neighbors.</summary>
 		public float LodNeighborSeparation { get; set; } = 12;
+
 		/// <summary>Gets or sets the minimum number of members for an automatic cluster.</summary>
 		public int LodMinimumMembers { get; set; } = 2;
+
 		/// <summary>Gets the source document.</summary>
 		public GraphDocument Document => source.Document;
+
 		/// <summary>Gets the source view state.</summary>
 		public GraphViewState View => source.View;
+
 		/// <summary>Gets the source schema.</summary>
 		public GraphSchema Schema => source.Schema;
+
 		/// <summary>Gets the currently visible nodes, including collapsed clusters.</summary>
 		public IReadOnlyDictionary<string, IGraphNode> Nodes { get; }
 
@@ -57,7 +66,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Determines whether an identifier belongs to a cluster.</summary>
 		/// <param name="id">Identifier to check.</param>
-		/// <returns><see langword="true"/> when the identifier is a cluster.</returns>
+		/// <returns><see langword="true" /> when the identifier is a cluster.</returns>
 		public bool IsCluster(string id)
 		{
 			return id != null && clusters.ContainsKey(id);
@@ -65,7 +74,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Determines whether a cluster is currently collapsed.</summary>
 		/// <param name="id">Cluster identifier.</param>
-		/// <returns><see langword="true"/> when the cluster is collapsed.</returns>
+		/// <returns><see langword="true" /> when the cluster is collapsed.</returns>
 		public bool IsCollapsed(string id)
 		{
 			return id != null && clusters.TryGetValue(id, out var cluster) && cluster.Collapsed;
@@ -82,7 +91,7 @@ namespace Cashg.GraphExplorer
 		/// <summary>Expand collapsed ancestors so a canonical source node can be selected.</summary>
 		/// <summary>Expands collapsed ancestors so a source node can be selected.</summary>
 		/// <param name="sourceNodeId">Identifier of the source node to reveal.</param>
-		/// <returns><see langword="true"/> when an ancestor was expanded.</returns>
+		/// <returns><see langword="true" /> when an ancestor was expanded.</returns>
 		public bool Reveal(string sourceNodeId)
 		{
 			if (!source.Nodes.ContainsKey(sourceNodeId)) return false;
@@ -268,7 +277,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Expands a collapsed cluster and restores its members.</summary>
 		/// <param name="id">Cluster identifier.</param>
-		/// <returns><see langword="true"/> when the cluster was expanded.</returns>
+		/// <returns><see langword="true" /> when the cluster was expanded.</returns>
 		public bool Expand(string id)
 		{
 			return Expand(id, true);
@@ -294,7 +303,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Collapses an expanded cluster around its current members.</summary>
 		/// <param name="id">Cluster identifier.</param>
-		/// <returns><see langword="true"/> when the cluster was collapsed.</returns>
+		/// <returns><see langword="true" /> when the cluster was collapsed.</returns>
 		public bool Recollapse(string id)
 		{
 			if (!clusters.TryGetValue(id, out var cluster) || cluster.Collapsed) return false;
@@ -313,7 +322,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Removes a cluster while preserving its member nodes.</summary>
 		/// <param name="id">Cluster identifier.</param>
-		/// <returns><see langword="true"/> when the cluster was removed.</returns>
+		/// <returns><see langword="true" /> when the cluster was removed.</returns>
 		public bool RemoveCluster(string id)
 		{
 			if (!clusters.TryGetValue(id, out var cluster)) return false;
@@ -423,7 +432,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Updates automatic cluster collapse and expansion for a camera position.</summary>
 		/// <param name="cameraPosition">Current camera position in world space.</param>
-		/// <returns><see langword="true"/> when the visible cluster projection changed.</returns>
+		/// <returns><see langword="true" /> when the visible cluster projection changed.</returns>
 		public bool UpdateLod(Vector3 cameraPosition)
 		{
 			Synchronize();

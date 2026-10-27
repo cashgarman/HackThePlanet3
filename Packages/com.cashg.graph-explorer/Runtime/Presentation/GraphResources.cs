@@ -13,7 +13,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Loads a package asset by key.</summary>
 		/// <typeparam name="T">Asset type to load.</typeparam>
-		/// <param name="key">Key relative to <see cref="Root"/>.</param>
+		/// <param name="key">Key relative to <see cref="Root" />.</param>
 		/// <returns>The loaded asset, or null when it is unavailable.</returns>
 		public static T Load<T>(string key) where T : Object
 		{

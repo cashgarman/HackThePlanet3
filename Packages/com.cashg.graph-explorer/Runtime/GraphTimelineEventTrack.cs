@@ -28,10 +28,13 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the stable event identifier.</summary>
 		public string Id { get; }
+
 		/// <summary>Gets the event timestamp in UTC.</summary>
 		public DateTimeOffset TimestampUtc { get; }
+
 		/// <summary>Gets the event display label.</summary>
 		public string Label { get; }
+
 		/// <summary>Gets the event details.</summary>
 		public string Details { get; }
 
@@ -47,20 +50,28 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets the provider used to load selected events.</summary>
 		public IGraphTimelineEventProvider Provider { get; set; }
+
 		/// <summary>Gets the selected event identifier.</summary>
 		public string SelectedId { get; private set; }
+
 		/// <summary>Gets the event identifier whose selection is pending.</summary>
 		public string PendingId { get; private set; }
+
 		/// <summary>Gets the latest selection error.</summary>
 		public string Error { get; private set; }
+
 		/// <summary>Gets the event-list revision.</summary>
 		public int Revision { get; private set; }
+
 		/// <summary>Gets the selected event descriptor, when present.</summary>
 		public GraphTimelineEvent Selected => Events.FirstOrDefault(item => item.Id == SelectedId);
+
 		/// <summary>Occurs when event descriptors or selection state changes.</summary>
 		public event Action Changed;
+
 		/// <summary>Occurs when an event selection is requested.</summary>
 		public event Action<GraphTimelineEvent> SelectionRequested;
+
 		/// <summary>Occurs before selection starts, allowing playback to stop.</summary>
 		public event Action SelectionStarting;
 

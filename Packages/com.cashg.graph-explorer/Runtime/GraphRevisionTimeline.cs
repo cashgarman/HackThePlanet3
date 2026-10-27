@@ -24,16 +24,22 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the revision identifier.</summary>
 		public string Id { get; }
+
 		/// <summary>Gets the parent revision identifiers.</summary>
 		public IReadOnlyList<string> ParentIds { get; }
+
 		/// <summary>Gets the optional revision timestamp.</summary>
 		public DateTimeOffset? TimestampUtc { get; }
+
 		/// <summary>Gets the display label.</summary>
 		public string Label { get; }
+
 		/// <summary>Gets the assigned lane in the revision visualization.</summary>
 		public int Lane { get; internal set; }
+
 		/// <summary>Gets lane glyphs used to draw revision links.</summary>
 		public string LaneGlyphs { get; internal set; }
+
 		/// <summary>Gets the number of lanes occupied by this revision's links.</summary>
 		public int LaneCount { get; internal set; }
 
@@ -43,6 +49,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets whether revision changes have been computed.</summary>
 		public bool Ready { get; internal set; }
+
 		/// <summary>Gets the summary of changes from the parent revision.</summary>
 		public GraphRevisionChangeSummary Changes { get; internal set; }
 	}
@@ -52,6 +59,7 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the source lane index.</summary>
 		public int FromLane { get; }
+
 		/// <summary>Gets the destination lane index.</summary>
 		public int ToLane { get; }
 
@@ -88,26 +96,37 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the number of created nodes.</summary>
 		public int NodesCreated { get; }
+
 		/// <summary>Gets the number of modified nodes.</summary>
 		public int NodesModified { get; }
+
 		/// <summary>Gets the number of deleted nodes.</summary>
 		public int NodesDeleted { get; }
+
 		/// <summary>Gets the number of created edges.</summary>
 		public int EdgesCreated { get; }
+
 		/// <summary>Gets the number of modified edges.</summary>
 		public int EdgesModified { get; }
+
 		/// <summary>Gets the number of deleted edges.</summary>
 		public int EdgesDeleted { get; }
+
 		/// <summary>Gets the identifiers of created nodes.</summary>
 		public IReadOnlyList<string> CreatedNodeIds { get; private set; } = Array.Empty<string>();
+
 		/// <summary>Gets the identifiers of modified nodes.</summary>
 		public IReadOnlyList<string> ModifiedNodeIds { get; private set; } = Array.Empty<string>();
+
 		/// <summary>Gets the identifiers of deleted nodes.</summary>
 		public IReadOnlyList<string> DeletedNodeIds { get; private set; } = Array.Empty<string>();
+
 		/// <summary>Gets the identifiers of created edges.</summary>
 		public IReadOnlyList<string> CreatedEdgeIds { get; private set; } = Array.Empty<string>();
+
 		/// <summary>Gets the identifiers of modified edges.</summary>
 		public IReadOnlyList<string> ModifiedEdgeIds { get; private set; } = Array.Empty<string>();
+
 		/// <summary>Gets the identifiers of deleted edges.</summary>
 		public IReadOnlyList<string> DeletedEdgeIds { get; private set; } = Array.Empty<string>();
 
@@ -175,12 +194,16 @@ namespace Cashg.GraphExplorer
 	{
 		private readonly Dictionary<string, GraphRevision> byId = new(StringComparer.Ordinal);
 		private readonly List<GraphRevision> revisions = new();
+
 		/// <summary>Gets the ordered revisions in the timeline.</summary>
 		public IReadOnlyList<GraphRevision> Revisions => revisions;
+
 		/// <summary>Gets the currently selected revision.</summary>
 		public GraphRevision Selected { get; private set; }
+
 		/// <summary>Occurs when timeline content or selection changes.</summary>
 		public event Action Changed;
+
 		/// <summary>Occurs when a revision selection is requested.</summary>
 		public event Action<GraphRevision> SelectionRequested;
 
@@ -210,7 +233,7 @@ namespace Cashg.GraphExplorer
 		/// <summary>Attempts to find a revision by identifier.</summary>
 		/// <param name="id">Revision identifier.</param>
 		/// <param name="revision">Receives the revision when found.</param>
-		/// <returns><see langword="true"/> when the identifier exists.</returns>
+		/// <returns><see langword="true" /> when the identifier exists.</returns>
 		public bool TryGet(string id, out GraphRevision revision)
 		{
 			return byId.TryGetValue(id ?? "", out revision);

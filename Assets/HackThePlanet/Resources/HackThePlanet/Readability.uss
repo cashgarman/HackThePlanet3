@@ -1,129 +1,655 @@
 /* Font sizes remain authored in the theme; WorkstationApp scales every TextElement.
    Containers grow, wrap or scroll instead of imposing the former tiny text bounds. */
-Button { white-space: normal; flex-shrink: 0; }
-Label { min-width: 0; }
-.header { height: auto; min-height: 0; flex-direction: column; align-items: stretch; padding: 8px 20px; }
-.header-summary { flex-direction: row; align-items: center; flex-shrink: 0; }
-.logo { width: 42%; flex-grow: 1; min-width: 0; }
-.brand { flex-shrink: 1; min-width: 0; }
-.brand-name { letter-spacing: 1px; }
-.brand-sub { letter-spacing: 0; }
-.wallet { padding-left: 16px; margin-left: 8px; flex-shrink: 0; }
-.wallet-cell { margin-right: 18px; min-width: 120px; }
-.identity { max-width: 20%; padding-left: 16px; }
-.header-tabs { height: auto; width: 100%; flex-grow: 0; flex-wrap: wrap; margin-top: 6px; }
-.tab { padding: 7px 16px; letter-spacing: 0; }
-.rail { width: 86px; padding-top: 12px; padding-bottom: 10px; }
-.rail-logo { margin-bottom: 18px; letter-spacing: 0; }
-.rail-button { width: 60px; height: auto; min-height: 48px; padding: 5px; margin-bottom: 10px; }
-.rail-small { padding: 6px; letter-spacing: 0; }
-.rail-help { width: 48px; height: 48px; border-radius: 24px; }
-.left-panel { width: 22%; flex-grow: 0; }
-.right-panel { width: 26%; }
-.network-panel > .unity-scroll-view__content-viewport > .unity-scroll-view__content-container { flex-grow: 1; }
-.map-content { flex-grow: 1; min-height: 0; flex-direction: column; }
-.graph-viewport { flex-grow: 1; min-height: 240px; }
-.left-panel > .unity-scroll-view__content-viewport > .unity-scroll-view__content-container { flex-grow: 1; }
-.contract-list { flex-grow: 0; }
-.contract-card { white-space: normal; }
-.contract-title, .mission-title, .map-title, .large-heading, .target-title { letter-spacing: 0; }
-.row-between, .contract-reward, .target-stats { flex-wrap: wrap; }
-.row-between > Label { flex-shrink: 1; }
-.panel-heading, .active-brief, .research-intro { padding: 14px; }
-.loadout { padding: 14px; }
-.map-heading { padding: 12px 16px; flex-wrap: wrap; }
-.map-title-block { flex-grow: 1; flex-shrink: 1; min-width: 0; }
-.map-status { flex-shrink: 1; max-width: 44%; }
-.map-status .micro { -unity-text-align: middle-right; }
-.map-title { margin-top: 2px; }
-.signal-strip { height: auto; min-height: 30px; padding: 3px 12px; flex-wrap: wrap; }
-.signal-strip Label { height: auto; white-space: normal; letter-spacing: 0; flex-shrink: 1; }
-.sectors { padding: 5px 12px; flex-wrap: wrap; }
-.sector { letter-spacing: 0; flex-shrink: 1; margin-right: 8px; }
-.map-footer { height: 48px; min-height: 48px; max-height: 48px; padding: 6px 12px; flex-wrap: nowrap; overflow: hidden; }
-.graph-action-bar { padding: 6px 8px; }
-.resource-radial { margin: 0 8px; }
-.action-slot .action-button { width: 184px; }
-.large-text .graph-action-bar { height: 152px; min-height: 152px; max-height: 152px; }
-.large-text .action-bar-header { height: 28px; min-height: 28px; }
-.large-text .resource-radial { width: 100px; height: 100px; }
-.large-text .resource-radial-center { left: 12px; right: 12px; }
-.large-text .resource-radial-amount { font-size: 20px; }
-.large-text .resource-radial-caption { font-size: 7px; }
-.large-text .graph-action-scroll { height: 104px; }
-.large-text .graph-action-list { height: 104px; min-height: 104px; max-height: 104px; }
-.large-text .action-slot .action-button { width: 250px; height: 96px; min-height: 96px; max-height: 96px; }
-.research-loadout { padding: 12px; }
-.legend { flex-wrap: nowrap; flex-grow: 1; flex-shrink: 1; overflow: hidden; }
-.legend-key { margin-right: 12px; margin-bottom: 4px; }
-.legend-dot { width: 10px; height: 10px; margin-right: 7px; flex-shrink: 0; }
-.map-controls { flex-shrink: 0; margin-top: 4px; margin-bottom: 4px; }
-.network-key { flex-grow: 1; flex-shrink: 1; min-width: 0; margin-right: 12px; }
-.network-key .unity-foldout__text { font-size: 10px; color: #9cb8ab; }
-.network-key .unity-foldout__input { width: 22px; height: 22px; }
-.network-key .unity-foldout__content { margin-left: 0; }
-.network-key .legend { padding: 10px; }
-.unity-scroller--vertical { width: 14px; }
-.unity-scroller--horizontal { height: 14px; }
-.map-button { height: auto; min-height: 34px; min-width: 36px; padding: 3px 8px; }
-.operation-bar { padding: 8px 12px; }
-.time-controls { justify-content: flex-end; margin-left: 10px; flex-wrap: nowrap; flex-shrink: 0; }
-.time-button, .speed-button, .stop-tool, .clear-tools { width: auto; height: auto; min-width: 40px; min-height: 36px; padding: 3px 8px; }
-.inspector-scroll, .tech-inspector { padding: 14px; }
-.contract-brief .eyebrow { font-size: 12px; -unity-font-style: bold; letter-spacing: 1.4px; }
-.inspector-bottom { padding: 12px 14px; }
-.target-status { flex-shrink: 1; }
-.security-bar { flex-shrink: 1; }
-.footer { padding: 5px 16px; flex-wrap: nowrap; }
-.footer-brand, .footer-center, .footer-save { letter-spacing: 0; flex-shrink: 1; min-width: 0; margin-right: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.full-page { padding: 20px 26px; }
-.rig-layout, .intel-columns { flex-grow: 0; flex-shrink: 0; }
-.rig-art { padding: 20px; flex-shrink: 0; }
-.upgrade-summary { min-width: 0; flex-shrink: 1; margin-right: 20px; }
-.upgrade-card { flex-wrap: wrap; flex-grow: 0; }
-.upgrade-purchase { width: auto; min-width: 230px; }
-.news-feed { width: 50%; flex-shrink: 0; padding-right: 20px; }
-.reports-feed { min-width: 0; flex-shrink: 1; }
-.career-stats { flex-wrap: wrap; }
-.career-stats .eyebrow { margin-right: 24px; margin-bottom: 10px; }
-.modal-box { width: 960px; max-width: 94%; max-height: 92%; flex-grow: 0; padding: 20px 26px; }
-.settings-menu { width: 640px; }
-.modal-box > .unity-scroll-view__content-viewport { flex-shrink: 1; }
-.modal-actions, .result-rewards { flex-wrap: wrap; }
-.modal-actions Button { min-width: 220px; margin-top: 10px; }
-.result-credit, .result-xp, .result-trace { margin-right: 16px; }
-.text-size-slider { margin: 14px 0; min-height: 44px; flex-shrink: 0; }
-.text-size-slider .unity-base-field__label { min-width: 0; width: auto; margin-right: 16px; }
-.text-size-slider .unity-base-slider__input { min-width: 60px; }
-.text-size-slider .unity-text-field { min-width: 90px; }
-.text-size-slider .unity-base-slider__tracker { height: 6px; background-color: #34594d; }
-.text-size-slider .unity-base-slider__dragger { width: 22px; height: 28px; background-color: #9bfacb; }
-.text-size-slider .unity-text-field__input { color: #dce8e5; background-color: #172f27; padding: 5px; }
-.readable-tooltip { position: absolute; display: none; align-self: flex-start; width: auto; max-width: 410px; padding: 8px 12px; color: #dce8e5; background-color: #172f27; border-width: 1px; border-color: #9bfacb; white-space: normal; -unity-text-align: middle-center; }
-/* Matches the graph node intel card (GraphViewport focused-node-card). */
-.readable-tooltip.intel-tooltip { color: #dceae4; background-color: #102025; border-color: #9bfacb; }
-.large-text .rail { width: 104px; }
-.large-text .rail-button { width: 80px; }
-.large-text .rail-small { padding: 4px; }
-.large-text .header { padding-top: 6px; padding-bottom: 4px; }
-.large-text .left-panel { width: 24%; }
-.large-text .right-panel { width: 29%; }
-.large-text .map-heading { flex-direction: column; align-items: stretch; }
-.large-text .map-status { max-width: 100%; align-items: flex-start; }
-.large-text .map-status .micro { -unity-text-align: middle-left; }
-.large-text .operation-bar { height: 84px; min-height: 84px; max-height: 84px; }
-.large-text .operation-stat-row { height: 26px; min-height: 26px; max-height: 26px; }
-.large-text .rig-layout, .large-text .intel-columns { flex-direction: column; }
-.large-text .rig-art, .large-text .news-feed { width: 100%; margin-right: 0; margin-bottom: 20px; }
-.large-text .reports-feed { padding-left: 0; border-left-width: 0; }
-.compact-width .header { padding-left: 12px; padding-right: 12px; }
-.compact-width .identity { max-width: 22%; }
-.compact-width .left-panel { width: 23%; }
-.compact-width .right-panel { width: 28%; }
-.compact-width .map-heading { flex-direction: column; align-items: stretch; }
-.compact-width .map-status { max-width: 100%; align-items: flex-start; }
-.compact-width .rig-layout, .compact-width .intel-columns { flex-direction: column; }
-.compact-width .rig-art, .compact-width .news-feed { width: 100%; margin-right: 0; margin-bottom: 20px; }
-.compact-width .reports-feed { padding-left: 0; border-left-width: 0; }
+Button {
+    white-space: normal;
+    flex-shrink: 0;
+}
 
-.rig-resource-meters { width: auto; max-width: none; min-width: 0; flex-direction: row; flex-wrap: wrap; margin-left: 0; margin-top: 0; }
+Label {
+    min-width: 0;
+}
+
+.header {
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 20px;
+}
+
+.header-summary {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo {
+    width: 42%;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.brand {
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.brand-name {
+    letter-spacing: 1px;
+}
+
+.brand-sub {
+    letter-spacing: 0;
+}
+
+.wallet {
+    padding-left: 16px;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.wallet-cell {
+    margin-right: 18px;
+    min-width: 120px;
+}
+
+.identity {
+    max-width: 20%;
+    padding-left: 16px;
+}
+
+.header-tabs {
+    height: auto;
+    width: 100%;
+    flex-grow: 0;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.tab {
+    padding: 7px 16px;
+    letter-spacing: 0;
+}
+
+.rail {
+    width: 86px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+}
+
+.rail-logo {
+    margin-bottom: 18px;
+    letter-spacing: 0;
+}
+
+.rail-button {
+    width: 60px;
+    height: auto;
+    min-height: 48px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.rail-small {
+    padding: 6px;
+    letter-spacing: 0;
+}
+
+.rail-help {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+}
+
+.left-panel {
+    width: 22%;
+    flex-grow: 0;
+}
+
+.right-panel {
+    width: 26%;
+}
+
+.network-panel > .unity-scroll-view__content-viewport > .unity-scroll-view__content-container {
+    flex-grow: 1;
+}
+
+.map-content {
+    flex-grow: 1;
+    min-height: 0;
+    flex-direction: column;
+}
+
+.graph-viewport {
+    flex-grow: 1;
+    min-height: 240px;
+}
+
+.left-panel > .unity-scroll-view__content-viewport > .unity-scroll-view__content-container {
+    flex-grow: 1;
+}
+
+.contract-list {
+    flex-grow: 0;
+}
+
+.contract-card {
+    white-space: normal;
+}
+
+.contract-title, .mission-title, .map-title, .large-heading, .target-title {
+    letter-spacing: 0;
+}
+
+.row-between, .contract-reward, .target-stats {
+    flex-wrap: wrap;
+}
+
+.row-between > Label {
+    flex-shrink: 1;
+}
+
+.panel-heading, .active-brief, .research-intro {
+    padding: 14px;
+}
+
+.loadout {
+    padding: 14px;
+}
+
+.map-heading {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+}
+
+.map-title-block {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.map-status {
+    flex-shrink: 1;
+    max-width: 44%;
+}
+
+.map-status .micro {
+    -unity-text-align: middle-right;
+}
+
+.map-title {
+    margin-top: 2px;
+}
+
+.signal-strip {
+    height: auto;
+    min-height: 30px;
+    padding: 3px 12px;
+    flex-wrap: wrap;
+}
+
+.signal-strip Label {
+    height: auto;
+    white-space: normal;
+    letter-spacing: 0;
+    flex-shrink: 1;
+}
+
+.sectors {
+    padding: 5px 12px;
+    flex-wrap: wrap;
+}
+
+.sector {
+    letter-spacing: 0;
+    flex-shrink: 1;
+    margin-right: 8px;
+}
+
+.map-footer {
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    padding: 6px 12px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.graph-action-bar {
+    padding: 6px 8px;
+}
+
+.resource-radial {
+    margin: 0 8px;
+}
+
+.action-slot .action-button {
+    width: 184px;
+}
+
+.large-text .graph-action-bar {
+    height: 152px;
+    min-height: 152px;
+    max-height: 152px;
+}
+
+.large-text .action-bar-header {
+    height: 28px;
+    min-height: 28px;
+}
+
+.large-text .resource-radial {
+    width: 100px;
+    height: 100px;
+}
+
+.large-text .resource-radial-center {
+    left: 12px;
+    right: 12px;
+}
+
+.large-text .resource-radial-amount {
+    font-size: 20px;
+}
+
+.large-text .resource-radial-caption {
+    font-size: 7px;
+}
+
+.large-text .graph-action-scroll {
+    height: 104px;
+}
+
+.large-text .graph-action-list {
+    height: 104px;
+    min-height: 104px;
+    max-height: 104px;
+}
+
+.large-text .action-slot .action-button {
+    width: 250px;
+    height: 96px;
+    min-height: 96px;
+    max-height: 96px;
+}
+
+.research-loadout {
+    padding: 12px;
+}
+
+.legend {
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+}
+
+.legend-key {
+    margin-right: 12px;
+    margin-bottom: 4px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    margin-right: 7px;
+    flex-shrink: 0;
+}
+
+.map-controls {
+    flex-shrink: 0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.network-key {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    margin-right: 12px;
+}
+
+.network-key .unity-foldout__text {
+    font-size: 10px;
+    color: #9cb8ab;
+}
+
+.network-key .unity-foldout__input {
+    width: 22px;
+    height: 22px;
+}
+
+.network-key .unity-foldout__content {
+    margin-left: 0;
+}
+
+.network-key .legend {
+    padding: 10px;
+}
+
+.unity-scroller--vertical {
+    width: 14px;
+}
+
+.unity-scroller--horizontal {
+    height: 14px;
+}
+
+.map-button {
+    height: auto;
+    min-height: 34px;
+    min-width: 36px;
+    padding: 3px 8px;
+}
+
+.operation-bar {
+    padding: 8px 12px;
+}
+
+.time-controls {
+    justify-content: flex-end;
+    margin-left: 10px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+.time-button, .speed-button, .stop-tool, .clear-tools {
+    width: auto;
+    height: auto;
+    min-width: 40px;
+    min-height: 36px;
+    padding: 3px 8px;
+}
+
+.inspector-scroll, .tech-inspector {
+    padding: 14px;
+}
+
+.contract-brief .eyebrow {
+    font-size: 12px;
+    -unity-font-style: bold;
+    letter-spacing: 1.4px;
+}
+
+.inspector-bottom {
+    padding: 12px 14px;
+}
+
+.target-status {
+    flex-shrink: 1;
+}
+
+.security-bar {
+    flex-shrink: 1;
+}
+
+.footer {
+    padding: 5px 16px;
+    flex-wrap: nowrap;
+}
+
+.footer-brand, .footer-center, .footer-save {
+    letter-spacing: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    margin-right: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.full-page {
+    padding: 20px 26px;
+}
+
+.rig-layout, .intel-columns {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.rig-art {
+    padding: 20px;
+    flex-shrink: 0;
+}
+
+.upgrade-summary {
+    min-width: 0;
+    flex-shrink: 1;
+    margin-right: 20px;
+}
+
+.upgrade-card {
+    flex-wrap: wrap;
+    flex-grow: 0;
+}
+
+.upgrade-purchase {
+    width: auto;
+    min-width: 230px;
+}
+
+.news-feed {
+    width: 50%;
+    flex-shrink: 0;
+    padding-right: 20px;
+}
+
+.reports-feed {
+    min-width: 0;
+    flex-shrink: 1;
+}
+
+.career-stats {
+    flex-wrap: wrap;
+}
+
+.career-stats .eyebrow {
+    margin-right: 24px;
+    margin-bottom: 10px;
+}
+
+.modal-box {
+    width: 960px;
+    max-width: 94%;
+    max-height: 92%;
+    flex-grow: 0;
+    padding: 20px 26px;
+}
+
+.settings-menu {
+    width: 640px;
+}
+
+.modal-box > .unity-scroll-view__content-viewport {
+    flex-shrink: 1;
+}
+
+.modal-actions, .result-rewards {
+    flex-wrap: wrap;
+}
+
+.modal-actions Button {
+    min-width: 220px;
+    margin-top: 10px;
+}
+
+.result-credit, .result-xp, .result-trace {
+    margin-right: 16px;
+}
+
+.text-size-slider {
+    margin: 14px 0;
+    min-height: 44px;
+    flex-shrink: 0;
+}
+
+.text-size-slider .unity-base-field__label {
+    min-width: 0;
+    width: auto;
+    margin-right: 16px;
+}
+
+.text-size-slider .unity-base-slider__input {
+    min-width: 60px;
+}
+
+.text-size-slider .unity-text-field {
+    min-width: 90px;
+}
+
+.text-size-slider .unity-base-slider__tracker {
+    height: 6px;
+    background-color: #34594d;
+}
+
+.text-size-slider .unity-base-slider__dragger {
+    width: 22px;
+    height: 28px;
+    background-color: #9bfacb;
+}
+
+.text-size-slider .unity-text-field__input {
+    color: #dce8e5;
+    background-color: #172f27;
+    padding: 5px;
+}
+
+.readable-tooltip {
+    position: absolute;
+    display: none;
+    align-self: flex-start;
+    width: auto;
+    max-width: 410px;
+    padding: 8px 12px;
+    color: #dce8e5;
+    background-color: #172f27;
+    border-width: 1px;
+    border-color: #9bfacb;
+    white-space: normal;
+    -unity-text-align: middle-center;
+}
+
+/* Matches the graph node intel card (GraphViewport focused-node-card). */
+.readable-tooltip.intel-tooltip {
+    color: #dceae4;
+    background-color: #102025;
+    border-color: #9bfacb;
+}
+
+.large-text .rail {
+    width: 104px;
+}
+
+.large-text .rail-button {
+    width: 80px;
+}
+
+.large-text .rail-small {
+    padding: 4px;
+}
+
+.large-text .header {
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+
+.large-text .left-panel {
+    width: 24%;
+}
+
+.large-text .right-panel {
+    width: 29%;
+}
+
+.large-text .map-heading {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.large-text .map-status {
+    max-width: 100%;
+    align-items: flex-start;
+}
+
+.large-text .map-status .micro {
+    -unity-text-align: middle-left;
+}
+
+.large-text .operation-bar {
+    height: 84px;
+    min-height: 84px;
+    max-height: 84px;
+}
+
+.large-text .operation-stat-row {
+    height: 26px;
+    min-height: 26px;
+    max-height: 26px;
+}
+
+.large-text .rig-layout, .large-text .intel-columns {
+    flex-direction: column;
+}
+
+.large-text .rig-art, .large-text .news-feed {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.large-text .reports-feed {
+    padding-left: 0;
+    border-left-width: 0;
+}
+
+.compact-width .header {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.compact-width .identity {
+    max-width: 22%;
+}
+
+.compact-width .left-panel {
+    width: 23%;
+}
+
+.compact-width .right-panel {
+    width: 28%;
+}
+
+.compact-width .map-heading {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.compact-width .map-status {
+    max-width: 100%;
+    align-items: flex-start;
+}
+
+.compact-width .rig-layout, .compact-width .intel-columns {
+    flex-direction: column;
+}
+
+.compact-width .rig-art, .compact-width .news-feed {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.compact-width .reports-feed {
+    padding-left: 0;
+    border-left-width: 0;
+}
+
+.rig-resource-meters {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 0;
+    margin-top: 0;
+}

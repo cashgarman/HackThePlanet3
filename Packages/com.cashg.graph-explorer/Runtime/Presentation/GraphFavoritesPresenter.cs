@@ -12,24 +12,34 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the callback that activates a favorite node.</summary>
 		public Action<TNode> Activate;
+
 		/// <summary>Gets or sets the callback that returns a node's color.</summary>
 		public Func<TNode, Color> Color;
+
 		/// <summary>Gets or sets the favorite star color.</summary>
 		public Color FavoriteColor;
+
 		/// <summary>Gets or sets the persisted favorite node identifiers.</summary>
 		public HashSet<string> FavoriteIds;
+
 		/// <summary>Gets or sets the callback that reports whether only favorites are shown.</summary>
 		public Func<bool> FavoritesOnly;
+
 		/// <summary>Gets or sets the callback that returns nodes keyed by identifier.</summary>
 		public Func<IReadOnlyDictionary<string, TNode>> Nodes;
+
 		/// <summary>Gets or sets the scroll view that hosts the favorites drawer.</summary>
 		public ScrollView Parent;
+
 		/// <summary>Gets or sets the callback that clears filters before activating a hidden favorite.</summary>
 		public Action ResetFilters;
+
 		/// <summary>Gets or sets the mutable favorite result list.</summary>
 		public List<TNode> Results;
+
 		/// <summary>Gets or sets the callback that changes favorite-only filtering.</summary>
 		public Action<bool> SetFavoritesOnly;
+
 		/// <summary>Gets or sets the callback that returns a node's type label.</summary>
 		public Func<TNode, string> TypeLabel;
 	}
@@ -38,12 +48,16 @@ namespace Cashg.GraphExplorer
 	public sealed class GraphFavoritesPresenter<TNode> : IDisposable where TNode : class, IGraphNode
 	{
 		private readonly GraphFavoritesOptions<TNode> options;
+
 		/// <summary>Gets the favorite status label.</summary>
 		public Label favoriteStatus;
+
 		/// <summary>Gets the favorites list view.</summary>
 		public ListView favoritesList;
+
 		/// <summary>Gets the favorites-only toggle.</summary>
 		public Toggle favoritesOnlyToggle;
+
 		/// <summary>Gets the favorites drawer content element.</summary>
 		public VisualElement shellFavoritesBody;
 

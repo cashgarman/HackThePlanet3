@@ -16,10 +16,13 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the visual settings used by camera effects.</summary>
 		public GraphVisualSettings Settings;
+
 		private EffectsPass pass;
 		private ProgressPass progressPass;
+
 		/// <summary>Gets or sets the renderer supplying node masks and progress data.</summary>
 		public GraphRenderer Renderer { get; set; }
+
 		/// <summary>Gets or sets resource overrides used by the effects.</summary>
 		public GraphResourceConfiguration Resources { get; set; } = new();
 

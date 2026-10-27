@@ -22,6 +22,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the status text for this update.</summary>
 		public string Message { get; }
+
 		/// <summary>Gets the optional completion fraction.</summary>
 		public double? Fraction { get; }
 	}
@@ -61,12 +62,16 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the parameter identifier.</summary>
 		public string Id { get; set; }
+
 		/// <summary>Gets or sets the display label.</summary>
 		public string Label { get; set; }
+
 		/// <summary>Gets or sets explanatory text for the parameter.</summary>
 		public string Description { get; set; }
+
 		/// <summary>Gets or sets the expected value type.</summary>
 		public GraphValueType Type { get; set; }
+
 		/// <summary>Gets or sets whether callers must provide a value.</summary>
 		public bool Required { get; set; }
 	}
@@ -76,14 +81,19 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the action identifier.</summary>
 		public string Id { get; set; }
+
 		/// <summary>Gets or sets the display label.</summary>
 		public string Label { get; set; }
+
 		/// <summary>Gets or sets explanatory text for the action.</summary>
 		public string Description { get; set; }
+
 		/// <summary>Gets or sets the node type identifiers accepted as targets.</summary>
 		public List<string> AcceptedTypeIds { get; set; } = new();
+
 		/// <summary>Gets or sets the action's input parameters.</summary>
 		public List<GraphActionParameter> Parameters { get; set; } = new();
+
 		/// <summary>Gets or sets the provider-owned configuration schema.</summary>
 		public JsonElement ConfigurationSchema { get; set; }
 	}
@@ -93,8 +103,10 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the request identifier used for idempotent execution.</summary>
 		public string Id { get; set; } = Guid.NewGuid().ToString("N");
+
 		/// <summary>Gets or sets the identifier of the action to invoke.</summary>
 		public string ActionId { get; set; }
+
 		/// <summary>Gets or sets the source node identifier.</summary>
 		public string SourceNodeId { get; set; }
 
@@ -118,14 +130,19 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the request identifier for this entry.</summary>
 		public string RequestId { get; set; }
+
 		/// <summary>Gets or sets the current entry status.</summary>
 		public string Status { get; set; }
+
 		/// <summary>Gets or sets status text for this entry.</summary>
 		public string Message { get; set; }
+
 		/// <summary>Gets or sets the optional completion fraction.</summary>
 		public double? Fraction { get; set; }
+
 		/// <summary>Gets or sets error messages reported for this entry.</summary>
 		public List<string> Errors { get; set; } = new();
+
 		/// <summary>Gets or sets warning messages reported for this entry.</summary>
 		public List<string> Warnings { get; set; } = new();
 	}
@@ -135,14 +152,19 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the run identifier.</summary>
 		public string Id { get; set; }
+
 		/// <summary>Gets or sets the token that identifies the reviewed request state.</summary>
 		public string ReviewToken { get; set; }
+
 		/// <summary>Gets or sets the current run status.</summary>
 		public string Status { get; set; }
+
 		/// <summary>Gets or sets the revision associated with this run.</summary>
 		public long Revision { get; set; }
+
 		/// <summary>Gets or sets progress entries for the run.</summary>
 		public List<GraphActionEntryProgress> Entries { get; set; } = new();
+
 		/// <summary>Gets or sets provider-owned structured run data.</summary>
 		public JsonElement Payload { get; set; }
 	}
@@ -160,6 +182,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the provider response code.</summary>
 		public long ResponseCode { get; }
+
 		/// <summary>Gets whether the response code indicates a rejected request.</summary>
 		public bool Rejected => ResponseCode >= 400 && ResponseCode < 500;
 	}
@@ -169,8 +192,10 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the provider's stable identity.</summary>
 		string Identity { get; }
+
 		/// <summary>Gets the actions currently supported by the provider.</summary>
 		IReadOnlyList<GraphActionDefinition> Actions { get; }
+
 		/// <summary>Resolves eligible targets for an action and source node.</summary>
 		/// <param name="actionId">Action to resolve.</param>
 		/// <param name="scene">Scene containing candidate nodes.</param>

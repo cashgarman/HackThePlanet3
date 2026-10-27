@@ -10,10 +10,13 @@ namespace Cashg.GraphExplorer
 		private readonly Dictionary<string, Vector3> groupAnchors = new();
 		private readonly Dictionary<string, int> indices = new();
 		private readonly GraphPresentationProfile profile;
+
 		/// <summary>Gets or sets the layout arrangement mode.</summary>
 		public LayoutMode Mode;
+
 		/// <summary>Gets or sets whether force integration is paused.</summary>
 		public bool Paused;
+
 		private int cellCount;
 		private Cell[] cells = new Cell[1024];
 		private int[] degrees = Array.Empty<int>();
@@ -35,6 +38,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the current total layout energy.</summary>
 		public float Energy { get; private set; }
+
 		/// <summary>Gets the current integration temperature.</summary>
 		public float Temperature { get; private set; } = 1;
 

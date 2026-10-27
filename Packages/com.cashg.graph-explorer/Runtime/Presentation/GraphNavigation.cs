@@ -12,8 +12,10 @@ namespace Cashg.GraphExplorer
 		private const float FlightDrag = 1.8f;
 		private const float WheelZoom = .1f;
 		private readonly Camera camera;
+
 		/// <summary>Gets or sets the movement speed used for camera navigation.</summary>
 		public float Speed = 22;
+
 		private bool framing, looking, orbiting;
 		private Vector3 orbitCenter, destination, panVelocity, flightVelocity, trackedPosition;
 		private bool ownsCursor;
@@ -32,6 +34,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets whether the camera is in look or orbit mode.</summary>
 		public bool Looking => looking || orbiting;
+
 		/// <summary>Gets whether the camera tracks a node.</summary>
 		public bool Tracking { get; private set; }
 
@@ -47,7 +50,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Plain F frames the selection. Ctrl/Cmd+F stays reserved for search.</summary>
 		/// <summary>Determines whether the plain F key requests framing the selection.</summary>
-		/// <returns><see langword="true"/> when F was pressed without Ctrl or Command.</returns>
+		/// <returns><see langword="true" /> when F was pressed without Ctrl or Command.</returns>
 		public static bool FrameKeyPressed()
 		{
 			var keyboard = Keyboard.current;

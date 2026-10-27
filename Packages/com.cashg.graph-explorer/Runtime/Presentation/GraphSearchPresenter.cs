@@ -12,28 +12,40 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the callback that activates a result.</summary>
 		public Action<TNode> Activate;
+
 		/// <summary>Gets or sets the favorite icon color.</summary>
 		public Color FavoriteColor;
+
 		/// <summary>Gets or sets the callback that creates a search field with ghost text.</summary>
 		public Func<TextField, string, VisualElement> Ghost;
+
 		/// <summary>Gets or sets the callback that creates an icon button.</summary>
 		public Func<string, Action, string, Button> IconButton;
+
 		/// <summary>Gets or sets the callback that reports whether search is open.</summary>
 		public Func<bool> IsOpen;
+
 		/// <summary>Gets or sets the callback that returns searchable nodes.</summary>
 		public Func<IEnumerable<TNode>> Nodes;
+
 		/// <summary>Gets or sets the callback that resets filters before activating a hidden node.</summary>
 		public Action ResetFilters;
+
 		/// <summary>Gets or sets the mutable result list.</summary>
 		public List<TNode> Results;
+
 		/// <summary>Gets or sets the root element used for popup positioning.</summary>
 		public VisualElement Root;
+
 		/// <summary>Gets or sets the element that hosts the search control.</summary>
 		public VisualElement SearchHost;
+
 		/// <summary>Gets or sets the callback that changes open state.</summary>
 		public Action<bool> SetOpen;
+
 		/// <summary>Gets or sets the callback that creates a node shape icon.</summary>
 		public Func<TNode, VisualElement> Shape;
+
 		/// <summary>Gets or sets the callback that returns a node's type label.</summary>
 		public Func<TNode, string> TypeLabel;
 	}
@@ -43,14 +55,19 @@ namespace Cashg.GraphExplorer
 	{
 		private readonly List<Action> detach = new();
 		private readonly GraphSearchOptions<TNode> options;
+
 		/// <summary>Gets the node search text field.</summary>
 		public TextField nodeSearchField;
+
 		/// <summary>Gets the node search results list.</summary>
 		public ListView nodeSearchList;
+
 		/// <summary>Gets the node search popup element.</summary>
 		public VisualElement nodeSearchPopup;
+
 		/// <summary>Gets the node search status label.</summary>
 		public Label nodeSearchStatus;
+
 		private VisualElement searchRow;
 
 		/// <summary>Creates a node search presenter with host-provided callbacks.</summary>
@@ -252,7 +269,7 @@ namespace Cashg.GraphExplorer
 		}
 
 		/// <summary>Closes the search popup.</summary>
-		/// <returns><see langword="true"/> when the popup was open.</returns>
+		/// <returns><see langword="true" /> when the popup was open.</returns>
 		public bool CloseNodeSearch()
 		{
 			if (!options.IsOpen()) return false;

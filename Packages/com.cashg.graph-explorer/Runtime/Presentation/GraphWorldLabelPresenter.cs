@@ -9,18 +9,24 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets optional step chip elements.</summary>
 		public VisualElement[] Chips;
-		/// <summary>Gets or sets the root label element.</summary>
-		public VisualElement Root;
-		/// <summary>Gets or sets the workflow steps container.</summary>
-		public VisualElement Steps;
-		/// <summary>Gets or sets the display states for workflow steps.</summary>
-		public string[] StepStates;
-		/// <summary>Gets or sets the node type caption element.</summary>
-		public Label TypeHeader;
-		/// <summary>Gets or sets the node name element.</summary>
-		public Label Name;
+
 		/// <summary>Gets or sets the node metadata element.</summary>
 		public Label Meta;
+
+		/// <summary>Gets or sets the node name element.</summary>
+		public Label Name;
+
+		/// <summary>Gets or sets the root label element.</summary>
+		public VisualElement Root;
+
+		/// <summary>Gets or sets the display states for workflow steps.</summary>
+		public string[] StepStates;
+
+		/// <summary>Gets or sets the workflow steps container.</summary>
+		public VisualElement Steps;
+
+		/// <summary>Gets or sets the node type caption element.</summary>
+		public Label TypeHeader;
 	}
 
 	/// <summary>Represents graph world label presenter.</summary>
@@ -32,7 +38,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="a">First label rectangle.</param>
 		/// <param name="b">Second label rectangle.</param>
 		/// <param name="padding">Minimum spacing between rectangles.</param>
-		/// <returns><see langword="true"/> when the rectangles overlap after spacing.</returns>
+		/// <returns><see langword="true" /> when the rectangles overlap after spacing.</returns>
 		public static bool LabelRectsOverlap(Rect a, Rect b, float padding)
 		{
 			return a.xMax + padding > b.x && b.xMax + padding > a.x && a.yMax + padding > b.y && b.yMax + padding > a.y;

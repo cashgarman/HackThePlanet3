@@ -18,8 +18,10 @@ namespace Cashg.GraphExplorer
 		// falloff finishes inside the triangle instead of being cut into stairs.
 		private const float EdgeFilterPixels = .8f;
 		private const float EdgePadPixels = EdgeFilterPixels + .55f;
+
 		/// <summary>Maximum camera distance at which edge labels are eligible.</summary>
 		public const float EdgeLabelNearDistance = 4.5f;
+
 		private static readonly Color Unmapped = new(.5f, .57f, .65f);
 		private readonly HashSet<string> activePathEdges = new(StringComparer.Ordinal);
 		private readonly HashSet<string> activePathNodes = new(StringComparer.Ordinal);
@@ -48,35 +50,48 @@ namespace Cashg.GraphExplorer
 		// Explicit selection reveals context. Hover never expands the filtered graph.
 		private readonly HashSet<string> spotlight = new();
 		private readonly HashSet<string> spotlightFocus = new();
+
 		/// <summary>Gets or sets the node color mapping mode.</summary>
 		public ColorMapping ColorBy = ColorMapping.Type;
-		/// <summary>Gets or sets the identifier of the node currently being flashed.</summary>
-		public string FlashTarget;
-		/// <summary>Gets or sets the time when the current flash ends.</summary>
-		public float FlashUntil;
-		/// <summary>Gets or sets the maximum number of visible nodes.</summary>
-		public int MaximumVisible = 8000;
+
 		/// <summary>Scales relationship ribbon width for compact or high resolution hosts.</summary>
 		public float EdgeWidthScale = 1f;
-		/// <summary>World-space width multiplier for active route edges.</summary>
-		public float PathEdgeWidth = .16f;
-		/// <summary>Gets or sets progress visuals keyed by node identifier.</summary>
-		public IReadOnlyDictionary<string, GraphNodeProgressVisual> NodeProgress;
-		/// <summary>Gets or sets whether reduced motion is active.</summary>
-		public bool ReducedMotion;
-		/// <summary>Gets or sets the node size mapping mode.</summary>
-		public SizeMapping Size = SizeMapping.Connections;
-		/// <summary>Gets or sets task visuals keyed by node identifier.</summary>
-		public Dictionary<string, GraphTaskVisual> TaskVisuals;
-		/// <summary>Gets or sets whether degree counts include only visible edges.</summary>
-		public bool VisibleDegree;
+
+		/// <summary>Gets or sets the identifier of the node currently being flashed.</summary>
+		public string FlashTarget;
+
+		/// <summary>Gets or sets the time when the current flash ends.</summary>
+		public float FlashUntil;
+
 		/// <summary>Gets or sets contract or tutorial arrows keyed by node identifier.</summary>
 		public IReadOnlyList<GraphGuideArrow> GuideArrows;
+
+		/// <summary>Gets or sets the maximum number of visible nodes.</summary>
+		public int MaximumVisible = 8000;
+
+		/// <summary>Gets or sets progress visuals keyed by node identifier.</summary>
+		public IReadOnlyDictionary<string, GraphNodeProgressVisual> NodeProgress;
+
+		/// <summary>World-space width multiplier for active route edges.</summary>
+		public float PathEdgeWidth = .16f;
+
+		/// <summary>Gets or sets whether reduced motion is active.</summary>
+		public bool ReducedMotion;
+
+		/// <summary>Gets or sets the node size mapping mode.</summary>
+		public SizeMapping Size = SizeMapping.Connections;
+
+		/// <summary>Gets or sets task visuals keyed by node identifier.</summary>
+		public Dictionary<string, GraphTaskVisual> TaskVisuals;
+
+		/// <summary>Gets or sets whether degree counts include only visible edges.</summary>
+		public bool VisibleDegree;
+
 		private bool disposed;
+		private Material guideArrowMaterial;
+		private Mesh guideArrowMesh;
 		private Material progressMaterial;
 		private Mesh progressMesh;
-		private Mesh guideArrowMesh;
-		private Material guideArrowMaterial;
 		private IGraphScene scene;
 		private string selectedVisualId, hoveredVisualId;
 		private float selectionPulse = 1;
@@ -115,10 +130,13 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the number of nodes rendered by the latest draw.</summary>
 		public int VisibleCount { get; private set; }
+
 		/// <summary>Gets the number of edges rendered by the latest draw.</summary>
 		public int VisibleEdges { get; private set; }
+
 		/// <summary>Gets whether the node rendering budget truncated the graph.</summary>
 		public bool Truncated { get; private set; }
+
 		/// <summary>Gets the number of progress indicators rendered by the latest draw.</summary>
 		public int VisibleProgressIndicators { get; private set; }
 
@@ -420,6 +438,7 @@ namespace Cashg.GraphExplorer
 					if (graph.Nodes.TryGetValue(id, out var pathNode) && rendered.Contains(id))
 						Halo(pathNode, camera, new Color(1f, .72f, .2f));
 			}
+
 			DrawNodeProgress(graph, camera);
 		}
 
@@ -538,8 +557,11 @@ namespace Cashg.GraphExplorer
 				if (shader == null) throw new InvalidOperationException("Missing Resources/GraphGuideArrow shader.");
 				guideArrowMaterial = new Material(shader) { name = "Graph guide arrows" };
 				guideArrowMesh = new Mesh { name = "Graph guide arrow quad" };
-				guideArrowMesh.vertices = new[] { new Vector3(-.5f, -.5f, 0), new Vector3(.5f, -.5f, 0),
-					new Vector3(.5f, .5f, 0), new Vector3(-.5f, .5f, 0) };
+				guideArrowMesh.vertices = new[]
+				{
+					new Vector3(-.5f, -.5f, 0), new Vector3(.5f, -.5f, 0),
+					new Vector3(.5f, .5f, 0), new Vector3(-.5f, .5f, 0)
+				};
 				guideArrowMesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
 				guideArrowMesh.RecalculateBounds();
 			}
@@ -547,8 +569,11 @@ namespace Cashg.GraphExplorer
 			// Keep the filled silhouette legible at overview zoom and face it toward the viewer.
 			var depth = camera.WorldToScreenPoint(node.Position).z;
 			if (depth <= camera.nearClipPlane) return;
-			var unitsPerPixel = (camera.orthographic ? camera.orthographicSize * 2f :
-				2f * depth * Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f)) / Mathf.Max(1, camera.pixelHeight);
+			var unitsPerPixel =
+				(camera.orthographic
+					? camera.orthographicSize * 2f
+					: 2f * depth * Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f)) /
+				Mathf.Max(1, camera.pixelHeight);
 			var height = unitsPerPixel * 34f;
 			var time = AnimationTimeOverride ?? Time.unscaledTime;
 			var phase = (nodeId.GetHashCode() & 1023) * (Mathf.PI * 2f / 1023f);
@@ -557,8 +582,9 @@ namespace Cashg.GraphExplorer
 			selectionProperties.Clear();
 			selectionProperties.SetColor("_ArrowColor", color);
 			Graphics.DrawMesh(guideArrowMesh, Matrix4x4.TRS(center, camera.transform.rotation,
-				new Vector3(height, height, 1)), guideArrowMaterial, 0, camera, 0,
-				selectionProperties, ShadowCastingMode.Off, false);
+															new Vector3(height, height, 1)), guideArrowMaterial, 0,
+							  camera, 0,
+							  selectionProperties, ShadowCastingMode.Off, false);
 		}
 
 		private void DrawNodeProgress(IGraphScene graph, Camera camera)
@@ -728,7 +754,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Determines whether a node was included in the latest draw.</summary>
 		/// <param name="nodeId">Node identifier.</param>
-		/// <returns><see langword="true"/> when the node was drawn.</returns>
+		/// <returns><see langword="true" /> when the node was drawn.</returns>
 		public bool IsDrawn(string nodeId)
 		{
 			return rendered.Contains(nodeId);
@@ -739,7 +765,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="b">Second endpoint node.</param>
 		/// <param name="start">Receives the segment start.</param>
 		/// <param name="end">Receives the segment end.</param>
-		/// <returns><see langword="true"/> when a visible segment exists.</returns>
+		/// <returns><see langword="true" /> when a visible segment exists.</returns>
 		public bool TryVisibleSegment(IGraphNode a, IGraphNode b, out Vector3 start, out Vector3 end)
 		{
 			start = end = default;
@@ -753,7 +779,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="camera">Projection camera.</param>
 		/// <param name="world">World-space point.</param>
 		/// <param name="screenPoint">Receives the projected panel point.</param>
-		/// <returns><see langword="true"/> when the point is in front of and near the viewport.</returns>
+		/// <returns><see langword="true" /> when the point is in front of and near the viewport.</returns>
 		public bool TryProject(Camera camera, Vector3 world, out Vector2 screenPoint)
 		{
 			// Convert Unity's bottom-origin screen coordinates to panel coordinates with a small offscreen margin.
@@ -770,7 +796,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="camera">Camera used for the query.</param>
 		/// <param name="anchor">Receives the nearest world-space point.</param>
 		/// <param name="distance">Receives the camera distance to the point.</param>
-		/// <returns><see langword="true"/> when the edge is within the label distance.</returns>
+		/// <returns><see langword="true" /> when the edge is within the label distance.</returns>
 		public bool TryCameraNearEdge(IGraphNode a, IGraphNode b, Camera camera, out Vector3 anchor, out float distance)
 		{
 			anchor = default;
@@ -792,7 +818,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="camera">Camera used for the query.</param>
 		/// <param name="anchor">Receives the world-space anchor.</param>
 		/// <param name="distance">Receives the camera distance to the near point.</param>
-		/// <returns><see langword="true"/> when a visible edge segment exists.</returns>
+		/// <returns><see langword="true" /> when a visible edge segment exists.</returns>
 		public bool TrySelectedEdgeAnchor(IGraphNode selected, IGraphNode other, Camera camera, out Vector3 anchor,
 										  out float distance)
 		{
@@ -952,7 +978,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="graph">Scene containing the edge endpoints.</param>
 		/// <param name="camera">Projection camera.</param>
 		/// <param name="panelPoint">Receives the projected panel coordinate.</param>
-		/// <returns><see langword="true"/> when the midpoint is visible.</returns>
+		/// <returns><see langword="true" /> when the midpoint is visible.</returns>
 		public bool TryEdgeLabelAnchor(IGraphEdge edge, IGraphScene graph, Camera camera, out Vector2 panelPoint)
 		{
 			panelPoint = default;

@@ -1,9 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace HackThePlanet
 {
-    [CreateAssetMenu(menuName="Hack The Planet/Company")]
-    public sealed class CompanyDefinition : GameplayDefinition { }
-
+	/// <summary>Scriptable definition of a corporation that offers contracts.</summary>
+	[CreateAssetMenu(menuName = "Hack The Planet/Company")]
+	public sealed class CompanyDefinition : GameplayDefinition
+	{
+	}
 }

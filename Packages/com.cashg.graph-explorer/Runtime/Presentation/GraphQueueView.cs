@@ -195,12 +195,15 @@ namespace Cashg.GraphExplorer
 		/// <summary>Represents row.</summary>
 		public sealed class Row
 		{
-			/// <summary>Gets or sets the row card element.</summary>
-			public VisualElement Card;
-			/// <summary>Gets or sets the row's main content line.</summary>
-			public VisualElement Line;
 			/// <summary>Gets or sets the row's action container.</summary>
 			public VisualElement Actions;
+
+			/// <summary>Gets or sets the row card element.</summary>
+			public VisualElement Card;
+
+			/// <summary>Gets or sets the row's main content line.</summary>
+			public VisualElement Line;
+
 			/// <summary>Gets or sets the row title label.</summary>
 			public Label Title;
 		}

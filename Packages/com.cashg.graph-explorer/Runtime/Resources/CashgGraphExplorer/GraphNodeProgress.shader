@@ -88,10 +88,10 @@ Shader "Cashg/GraphExplorer/GraphNodeProgress"
                     float background = 1 - smoothstep(size + width, size + width + aa, square);
                     float outline = 1 - smoothstep(width - aa, width + aa, abs(square - size));
                     float check = 1 - smoothstep(width - aa, width + aa, min(
-                                                                 Segment(badge, float2(-.65, 0) * size,
-              float2(-.12, -.45) * size),
-                                                                 Segment(badge, float2(-.12, -.45) * size,
-                                  float2(.65, .6) * size)));
+                                                     Segment(badge, float2(-.65, 0) * size,
+                                                             float2(-.12, -.45) * size),
+                                                     Segment(badge, float2(-.12, -.45) * size,
+                                                             float2(.65, .6) * size)));
                     float ink = max(outline, check);
                     color.rgb = lerp(color.rgb, lerp(half3(.015, .035, .025), _ProgressColor.rgb, ink), background);
                     color.a = max(color.a, background);

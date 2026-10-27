@@ -23,14 +23,15 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the camera used to project nodes.</summary>
 		public Func<Camera> Camera;
+
 		/// <summary>Gets or sets the callback that composes label text.</summary>
 		public GraphLabelComposer<TNode> Compose;
+
 		/// <summary>Gets or sets the callback that creates a label model and its UI.</summary>
 		public Action CreateLabel;
+
 		/// <summary>Gets or sets the distance threshold for detailed labels.</summary>
 		public Func<float> DetailDistance;
-		/// <summary>Gets or sets the maximum distance at which labels appear.</summary>
-		public Func<float> MaxDistance;
 
 		/// <summary>When set, adds horizontal space during label width measurement (e.g. a type icon).</summary>
 		public Func<TNode, bool, bool, float> ExtraLabelWidth;
@@ -44,28 +45,39 @@ namespace Cashg.GraphExplorer
 		/// <summary>Gets or sets the predicate indicating whether a node has workflow steps.</summary>
 		public Func<TNode, bool, bool> HasSteps;
 
+		/// <summary>Gets or sets the callback that returns the hovered node.</summary>
+		public Func<TNode> Hovered;
+
+		/// <summary>Gets or sets the maximum distance at which labels appear.</summary>
+		public Func<float> MaxDistance;
+
 		/// <summary>When set, overrides name font size for label measurement and placement.</summary>
 		public Func<TNode, bool, bool, GraphNodeLabelSettings, float> NameFontSize;
 
 		/// <summary>Gets or sets the maximum number of label models to create.</summary>
 		public int NodeLabelCap;
+
 		/// <summary>Gets or sets the height reserved for a step row.</summary>
 		public float NodeStepRowHeight;
+
 		/// <summary>Gets or sets the width reserved for a step row.</summary>
 		public float NodeStepRowWidth;
 
 		/// <summary>Gets or sets a callback that returns nodes keyed by identifier.</summary>
 		public Func<IReadOnlyDictionary<string, TNode>> Nodes;
+
 		/// <summary>Gets or sets the function that calculates opacity by distance and focus state.</summary>
 		public Func<float, bool, float> Opacity;
+
 		/// <summary>Gets or sets the callback that paints workflow step states.</summary>
 		public Action<TLabel, string[]> PaintSteps;
+
 		/// <summary>Gets or sets the safe area available for label placement.</summary>
 		public Func<Rect> SafeArea;
+
 		/// <summary>Gets or sets the callback that returns the selected node.</summary>
 		public Func<TNode> Selected;
-		/// <summary>Gets or sets the callback that returns the hovered node.</summary>
-		public Func<TNode> Hovered;
+
 		/// <summary>Gets or sets the callback that returns label settings.</summary>
 		public Func<GraphNodeLabelSettings> Settings;
 
@@ -74,36 +86,52 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets the function that returns a node's type color.</summary>
 		public Func<TNode, Color> TypeColor;
+
 		/// <summary>Gets or sets the function that returns a node's type label.</summary>
 		public Func<TNode, string> TypeLabel;
+
 		/// <summary>Gets or sets the renderer used to measure and cull node labels.</summary>
 		public GraphRenderer graphRenderer;
+
 		/// <summary>Gets or sets the reusable workflow step state buffer.</summary>
 		public string[] jobStepStates;
+
 		/// <summary>Gets or sets the nodes considered for label placement.</summary>
 		public List<TNode> labelCandidates;
+
 		/// <summary>Gets or sets the last assigned vertical offset for each node label.</summary>
 		public Dictionary<string, int> labelOffsets;
+
 		/// <summary>Gets or sets the node placement order for the current frame.</summary>
 		public List<TNode> labelPlacementOrder;
+
 		/// <summary>Gets or sets the reusable list of identifiers to prune.</summary>
 		public List<string> labelPrune;
+
 		/// <summary>Gets or sets identifiers already queued for label placement.</summary>
 		public HashSet<string> labelQueued;
+
 		/// <summary>Gets or sets smoothed panel positions keyed by node identifier.</summary>
 		public Dictionary<string, Vector2> labelSmoothPosition;
+
 		/// <summary>Gets or sets the reusable label models.</summary>
 		public List<TLabel> labels;
+
 		/// <summary>Gets or sets nodes labeled during the previous frame.</summary>
 		public HashSet<string> lastFrameLabelNodes;
+
 		/// <summary>Gets or sets the assigned label slot for each node.</summary>
 		public Dictionary<string, int> nodeLabelSlots;
+
 		/// <summary>Gets or sets panel bounds occupied during the current frame.</summary>
 		public List<Rect> occupiedLabels;
+
 		/// <summary>Gets or sets the root panel element.</summary>
 		public VisualElement root;
+
 		/// <summary>Gets or sets task presentation data keyed by node identifier.</summary>
 		public Dictionary<string, GraphTaskVisual> taskVisuals;
+
 		/// <summary>Gets or sets the container for world-space label elements.</summary>
 		public VisualElement worldLabels;
 	}
@@ -128,7 +156,7 @@ namespace Cashg.GraphExplorer
 		/// <summary>Determines whether a candidate label overlaps a previously placed label.</summary>
 		/// <param name="rect">Candidate label rectangle.</param>
 		/// <param name="spacing">Minimum spacing between labels.</param>
-		/// <returns><see langword="true"/> when the label is blocked.</returns>
+		/// <returns><see langword="true" /> when the label is blocked.</returns>
 		public bool NodeLabelBlocked(Rect rect, float spacing)
 		{
 			for (var i = 0; i < options.occupiedLabels.Count; i++)
@@ -151,7 +179,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="bottom">Bottom safe-area boundary.</param>
 		/// <param name="rect">Receives the available rectangle.</param>
 		/// <param name="rowUsed">Receives the stacking row index.</param>
-		/// <returns><see langword="true"/> when an unblocked rectangle was found.</returns>
+		/// <returns><see langword="true" /> when an unblocked rectangle was found.</returns>
 		public bool TryNodeLabelRect(GraphNodeLabelSettings s, string id, Vector2 anchor, float nodeRadius, float width,
 									 float height, bool featured, float left, float right, float top, float bottom,
 									 out Rect rect, out int rowUsed)

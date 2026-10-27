@@ -13,6 +13,7 @@ namespace Cashg.GraphExplorer.Codex
 	{
 		/// <summary>Opens a new chat prefilled with a workspace and prompt.</summary>
 		PrefilledChat,
+
 		/// <summary>Starts an automatically dispatched task.</summary>
 		AutomaticTask
 	}
@@ -47,10 +48,13 @@ namespace Cashg.GraphExplorer.Codex
 	{
 		/// <summary>Occurs when a complete protocol line is received.</summary>
 		event Action<string> Line;
+
 		/// <summary>Occurs when the transport closes, with a reason.</summary>
 		event Action<string> Closed;
+
 		/// <summary>Starts the transport.</summary>
 		void Start();
+
 		/// <summary>Sends one protocol line.</summary>
 		/// <param name="line">Line to send.</param>
 		void Send(string line);
@@ -72,6 +76,7 @@ namespace Cashg.GraphExplorer.Codex
 
 		/// <summary>Occurs when the process writes a protocol line.</summary>
 		public event Action<string> Line;
+
 		/// <summary>Occurs when the process output closes.</summary>
 		public event Action<string> Closed;
 
@@ -162,6 +167,7 @@ namespace Cashg.GraphExplorer.Codex
 
 		/// <summary>Occurs when the server sends a notification or request.</summary>
 		public event Action<string, JsonElement, JsonElement?> Message;
+
 		/// <summary>Occurs when the transport disconnects.</summary>
 		public event Action<string> Disconnected;
 

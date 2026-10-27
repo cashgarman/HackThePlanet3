@@ -11,10 +11,13 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Represents the absence of a value.</summary>
 		Null,
+
 		/// <summary>Represents a text value.</summary>
 		Text,
+
 		/// <summary>Represents a numeric value.</summary>
 		Number,
+
 		/// <summary>Represents a Boolean value.</summary>
 		Boolean
 	}
@@ -24,11 +27,14 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the representation kind stored by this value.</summary>
 		public GraphValueType Type { get; }
-		/// <summary>Gets the text payload when <see cref="Type"/> is <see cref="GraphValueType.Text"/>.</summary>
+
+		/// <summary>Gets the text payload when <see cref="Type" /> is <see cref="GraphValueType.Text" />.</summary>
 		public string Text { get; }
-		/// <summary>Gets the numeric payload when <see cref="Type"/> is <see cref="GraphValueType.Number"/>.</summary>
+
+		/// <summary>Gets the numeric payload when <see cref="Type" /> is <see cref="GraphValueType.Number" />.</summary>
 		public double Number { get; }
-		/// <summary>Gets the Boolean payload when <see cref="Type"/> is <see cref="GraphValueType.Boolean"/>.</summary>
+
+		/// <summary>Gets the Boolean payload when <see cref="Type" /> is <see cref="GraphValueType.Boolean" />.</summary>
 		public bool Boolean { get; }
 
 		private GraphValue(GraphValueType type, string text = null, double number = 0, bool boolean = false)
@@ -78,22 +84,22 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Determines whether another value has the same kind and payload.</summary>
 		/// <param name="other">Value to compare.</param>
-		/// <returns><see langword="true"/> when both values are equal.</returns>
+		/// <returns><see langword="true" /> when both values are equal.</returns>
 		public bool Equals(GraphValue other)
 		{
 			return Type == other.Type && Text == other.Text && Number == other.Number && Boolean == other.Boolean;
 		}
 
-		/// <summary>Determines whether the specified object is an equal <see cref="GraphValue"/>.</summary>
+		/// <summary>Determines whether the specified object is an equal <see cref="GraphValue" />.</summary>
 		/// <param name="obj">Object to compare.</param>
-		/// <returns><see langword="true"/> when <paramref name="obj"/> is an equal value.</returns>
+		/// <returns><see langword="true" /> when <paramref name="obj" /> is an equal value.</returns>
 		public override bool Equals(object obj)
 		{
 			return obj is GraphValue other && Equals(other);
 		}
 
 		/// <summary>Returns a hash code for this value.</summary>
-		/// <returns>A hash code consistent with <see cref="Equals(GraphValue)"/>.</returns>
+		/// <returns>A hash code consistent with <see cref="Equals(GraphValue)" />.</returns>
 		public override int GetHashCode()
 		{
 			return HashCode.Combine(Type, Text, Number, Boolean);
@@ -156,12 +162,16 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the stable node identifier.</summary>
 		public string Id { get; }
+
 		/// <summary>Gets the node type identifier.</summary>
 		public string TypeId { get; }
+
 		/// <summary>Gets the display label.</summary>
 		public string Label { get; }
+
 		/// <summary>Gets the node's immutable property map.</summary>
 		public IReadOnlyDictionary<string, GraphValue> Properties { get; }
+
 		/// <summary>Gets the source identifiers associated with the node.</summary>
 		public IReadOnlyList<string> Sources { get; }
 
@@ -231,18 +241,25 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the stable edge identifier.</summary>
 		public string Id { get; }
+
 		/// <summary>Gets the source node identifier.</summary>
 		public string From { get; }
+
 		/// <summary>Gets the destination node identifier.</summary>
 		public string To { get; }
+
 		/// <summary>Gets the relationship type identifier.</summary>
 		public string TypeId { get; }
+
 		/// <summary>Gets the relationship status.</summary>
 		public string Status { get; }
+
 		/// <summary>Gets the optional confidence value.</summary>
 		public double? Confidence { get; }
+
 		/// <summary>Gets the edge's immutable property map.</summary>
 		public IReadOnlyDictionary<string, GraphValue> Properties { get; }
+
 		/// <summary>Gets the source identifiers associated with the edge.</summary>
 		public IReadOnlyList<string> Sources { get; }
 
@@ -275,10 +292,13 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the stable dataset identifier.</summary>
 		public string DatasetId { get; }
+
 		/// <summary>Gets the human-readable dataset name.</summary>
 		public string DisplayName { get; }
+
 		/// <summary>Gets the snapshot's node records.</summary>
 		public IReadOnlyList<GraphNodeRecord> Nodes { get; }
+
 		/// <summary>Gets the snapshot's edge records.</summary>
 		public IReadOnlyList<GraphEdgeRecord> Edges { get; }
 	}
@@ -288,10 +308,13 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Contains edge records to add or update.</summary>
 		public readonly List<GraphEdgeRecord> Edges = new();
+
 		/// <summary>Contains node records to add or update.</summary>
 		public readonly List<GraphNodeRecord> Nodes = new();
+
 		/// <summary>Contains edge identifiers to remove.</summary>
 		public readonly List<string> RemoveEdges = new();
+
 		/// <summary>Contains node identifiers to remove.</summary>
 		public readonly List<string> RemoveNodes = new();
 	}

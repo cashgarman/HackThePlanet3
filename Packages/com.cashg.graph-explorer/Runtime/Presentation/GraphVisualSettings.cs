@@ -13,12 +13,16 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets the number of lighting bands used by cel shading.</summary>
 		[Range(2, 5)] public int LightBands = 3;
+
 		/// <summary>Gets or sets the brightness of shaded surfaces.</summary>
 		[Range(0, 1)] public float ShadowBrightness = .38f;
+
 		/// <summary>Gets or sets the softness of transitions between lighting bands.</summary>
 		[Range(0, .15f)] public float BandSoftness = .015f;
+
 		/// <summary>Gets or sets the world-space direction of the surface light.</summary>
 		public Vector3 LightDirection = new(-.4f, .8f, -.5f);
+
 		/// <summary>Gets or sets the surface emission amount.</summary>
 		[Range(0, 1)] public float SurfaceEmission = .08f;
 
@@ -28,8 +32,10 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets the outline color.</summary>
 		public Color OutlineColor = new(.012f, .018f, .028f, 1);
+
 		/// <summary>Gets or sets the outline width in screen pixels.</summary>
 		[Range(.5f, 4)] public float OutlinePixels = 1.25f;
+
 		/// <summary>Gets or sets the outline opacity.</summary>
 		[Range(0, 1)] public float OutlineOpacity = .95f;
 
@@ -56,16 +62,22 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets the selected-node glow color.</summary>
 		[ColorUsage(false, true)] public Color SelectionColor = new(.4f, .85f, 1f, 1);
+
 		/// <summary>Gets or sets the selected-node glow intensity.</summary>
 		[Range(0, 5)] public float SelectionGlowIntensity = 1.7f;
+
 		/// <summary>Gets or sets the selected-node rim intensity.</summary>
 		[Range(0, 4)] public float SelectionRimIntensity = .65f;
+
 		/// <summary>Gets or sets the selected-node glow radius in pixels.</summary>
 		[Range(4, 64)] public float SelectionGlowRadius = 18f;
+
 		/// <summary>Gets or sets the selection pulse frequency in hertz.</summary>
 		[Range(0, 4)] public float PulseHz = .8f;
+
 		/// <summary>Gets or sets the selection pulse amplitude.</summary>
 		[Range(0, .8f)] public float PulseAmount = .22f;
+
 		/// <summary>Gets or sets whether a selection ring is displayed.</summary>
 		public bool ShowSelectionRing;
 
@@ -74,12 +86,16 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets the node progress color.</summary>
 		public Color ProgressColor = new(.25f, .95f, .48f, 1);
+
 		/// <summary>Gets or sets the unfilled node progress track color.</summary>
 		public Color ProgressTrackColor = new(.16f, .23f, .20f, 1);
+
 		/// <summary>Gets or sets the node progress stroke width as a fraction of node radius.</summary>
 		[Range(.01f, .2f)] public float ProgressWidth = .07f;
+
 		/// <summary>Gets or sets the progress ring radius scale relative to the node.</summary>
 		[Range(2.3f, 4f)] public float ProgressRadiusScale = 2.45f;
+
 		/// <summary>Gets or sets the completion badge size relative to the node.</summary>
 		[Range(.15f, .8f)] public float CompletionBadgeSize = .4f;
 

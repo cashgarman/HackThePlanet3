@@ -13,18 +13,24 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the node's tool-specific emphasis identifier.</summary>
 		public string Emphasis = "";
-		/// <summary>Gets or sets whether layout keeps the node fixed.</summary>
-		public bool Pinned;
-		/// <summary>Gets or sets whether the node is visible.</summary>
-		public bool Visible = true;
-		/// <summary>Gets or sets whether the node matches active filters.</summary>
-		public bool Matches = true;
+
 		/// <summary>Gets or sets whether the node is marked as a favorite.</summary>
 		public bool Favorite;
+
+		/// <summary>Gets or sets whether the node matches active filters.</summary>
+		public bool Matches = true;
+
+		/// <summary>Gets or sets whether layout keeps the node fixed.</summary>
+		public bool Pinned;
+
 		/// <summary>Gets or sets the node's world position.</summary>
 		public Vector3 Position;
+
 		/// <summary>Gets or sets the node's layout velocity.</summary>
 		public Vector3 Velocity;
+
+		/// <summary>Gets or sets whether the node is visible.</summary>
+		public bool Visible = true;
 	}
 
 	/// <summary>Represents graph view state.</summary>
@@ -32,11 +38,14 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the identifiers of collapsed nodes.</summary>
 		public readonly HashSet<string> FoldedNodeIds = new(StringComparer.Ordinal);
+
 		private readonly Dictionary<string, GraphNodeViewState> nodes = new(StringComparer.Ordinal);
-		/// <summary>Gets or sets the selected node identifier.</summary>
-		public string SelectedId = "";
+
 		/// <summary>Gets or sets the focused node identifier.</summary>
 		public string FocusId = "";
+
+		/// <summary>Gets or sets the selected node identifier.</summary>
+		public string SelectedId = "";
 
 		/// <summary>Creates view state scoped to a dataset.</summary>
 		/// <param name="datasetId">Dataset identifier.</param>
@@ -48,6 +57,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets mutable view state for nodes keyed by identifier.</summary>
 		public IReadOnlyDictionary<string, GraphNodeViewState> Nodes { get; }
+
 		/// <summary>Gets the dataset identifier that owns this state.</summary>
 		public string DatasetId { get; }
 
@@ -110,6 +120,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the node rendering budget.</summary>
 		public int NodeRenderBudget { get; }
+
 		/// <summary>Gets the node label rendering budget.</summary>
 		public int NodeLabelBudget { get; }
 	}

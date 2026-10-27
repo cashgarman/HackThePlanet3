@@ -66,7 +66,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="name">Document name.</param>
 		/// <param name="supportedVersion">Version required in the JSON document.</param>
 		/// <param name="json">Document content to write.</param>
-		/// <returns><see langword="true"/> when the document was written.</returns>
+		/// <returns><see langword="true" /> when the document was written.</returns>
 		public bool Write(string name, int supportedVersion, string json)
 		{
 			// Validate the new payload before inspecting or replacing any existing file.
@@ -87,7 +87,6 @@ namespace Cashg.GraphExplorer
 			var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
 			try
 			{
-
 				// Stage the complete file before replacing the destination.
 				File.WriteAllText(temporary, json, new UTF8Encoding(false));
 				if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");

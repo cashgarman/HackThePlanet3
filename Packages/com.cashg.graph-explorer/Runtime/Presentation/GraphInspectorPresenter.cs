@@ -36,16 +36,22 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the stable identifier used to name the action button.</summary>
 		public string Id { get; }
+
 		/// <summary>Gets the button label.</summary>
 		public string Label { get; }
+
 		/// <summary>Gets the action help text.</summary>
 		public string Tooltip { get; }
+
 		/// <summary>Gets the predicate that determines whether the action is shown for a node.</summary>
 		public Func<IGraphNode, bool> IsVisible { get; }
+
 		/// <summary>Gets the predicate that determines whether the action is enabled for a node.</summary>
 		public Func<IGraphNode, bool> IsEnabled { get; }
+
 		/// <summary>Gets the optional reason displayed when the action is disabled.</summary>
 		public Func<IGraphNode, string> DisabledReason { get; }
+
 		/// <summary>Gets the callback invoked when the action is activated.</summary>
 		public Action<IGraphNode> Execute { get; }
 	}
@@ -55,22 +61,31 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets actions available for the inspected node.</summary>
 		public IReadOnlyList<GraphInspectorAction> Actions = Array.Empty<GraphInspectorAction>();
+
 		/// <summary>Gets or sets a callback that adds actions to a relationship row.</summary>
 		public Action<VisualElement, IGraphEdge> AppendRelationshipActions;
+
 		/// <summary>Gets or sets a callback that adds custom sections to the inspector.</summary>
 		public Action<VisualElement, IGraphNode> AppendSections;
+
 		/// <summary>Gets or sets whether custom sections appear before node properties.</summary>
 		public bool AppendSectionsBeforeProperties;
+
 		/// <summary>Gets or sets the callback used to bind tooltip text to an element.</summary>
 		public Action<VisualElement, string> BindTip = (element, text) => element.tooltip = text;
+
 		/// <summary>Gets or sets whether the properties section starts collapsed.</summary>
 		public bool CollapseProperties;
+
 		/// <summary>Gets or sets a callback that decorates disclosure foldouts.</summary>
 		public Action<Foldout> Decorate = foldout => { };
+
 		/// <summary>Gets or sets a callback that clears tracked tooltips from an element tree.</summary>
 		public Action<VisualElement> ForgetTips = element => { };
+
 		/// <summary>Gets or sets the callback used to open a source reference.</summary>
 		public Action<string> OpenSource;
+
 		/// <summary>Gets or sets the callback invoked when a related node is selected.</summary>
 		public Action<IGraphNode> Select;
 	}
@@ -80,20 +95,27 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the color associated with the related node type.</summary>
 		public Color Color;
-		/// <summary>Gets or sets the color associated with the relationship type.</summary>
-		public Color RelationColor;
+
 		/// <summary>Gets or sets the graph edge represented by this row.</summary>
 		public IGraphEdge Edge;
+
 		/// <summary>Gets or sets a factory that creates the related node icon.</summary>
 		public Func<VisualElement> Icon;
+
 		/// <summary>Gets or sets the related node label.</summary>
 		public string Label;
-		/// <summary>Gets or sets the related node type label.</summary>
-		public string TypeLabel;
+
+		/// <summary>Gets or sets the color associated with the relationship type.</summary>
+		public Color RelationColor;
+
 		/// <summary>Gets or sets the relationship label.</summary>
 		public string RelationLabel;
+
 		/// <summary>Gets or sets the callback invoked when this row is selected.</summary>
 		public Action Select;
+
+		/// <summary>Gets or sets the related node type label.</summary>
+		public string TypeLabel;
 	}
 
 	/// <summary>Builds the graph node inspector and its relationship controls.</summary>
@@ -291,7 +313,7 @@ namespace Cashg.GraphExplorer
 		/// <summary>Rebuilds the inspector contents for the selected graph node.</summary>
 		/// <param name="parent">Element whose contents are replaced.</param>
 		/// <param name="scene">Graph scene containing the node and schema.</param>
-		/// <param name="node">Node to inspect, or <see langword="null"/> to show the empty state.</param>
+		/// <param name="node">Node to inspect, or <see langword="null" /> to show the empty state.</param>
 		/// <param name="options">Optional content and interaction callbacks.</param>
 		public static void Render(VisualElement parent, IGraphScene scene, IGraphNode node,
 								  GraphInspectorOptions options = null)

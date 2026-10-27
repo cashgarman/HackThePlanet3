@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Unity.Scripting.LifecycleManagement;
 using UnityEditor;
 using UnityEngine;
 
 namespace HackThePlanet.Editor
 {
-    /// <summary>Descriptions shared by forms and authoring coverage validation. Missing help is an error, never a silent generic fallback.</summary>
-    [Unity.Scripting.LifecycleManagement.NoAutoStaticsCleanup]
-    public static class ContentFieldHelp
-    {
-        private static readonly Dictionary<string, string> Help = @"
+	/// <summary>
+	///     Descriptions shared by forms and authoring coverage validation. Missing help is an error, never a silent
+	///     generic fallback.
+	/// </summary>
+	[NoAutoStaticsCleanup]
+	public static class ContentFieldHelp
+	{
+		// Parse the embedded help table into a lookup keyed by field name.
+		private static readonly Dictionary<string, string> Help = @"
 rig|Shared rig rules and starting layout. JSON is authoritative; generated assets are mirrors.
 chassis|Registered chassis models, ordered by their unique progression tier.
 modules|Registered purchasable module models. Each purchase creates an independent owned copy.
@@ -308,27 +313,88 @@ MaxWidth|Maximum package label width in pixels.
 AboveNodeGap|Gap between the node and its package label in pixels.
 LabelSpacing|Minimum preferred spacing between package label cards in pixels.
 StackRows|Maximum number of upward label-stacking rows.
-".Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(l => l.Split(new[] { '|' }, 2)).ToDictionary(p => p[0], p => p[1]);
-        public static string Description(FieldInfo field)
-        {
-            if(field.DeclaringType==typeof(RigStarterPart)&&field.Name=="row")return "Zero-based starter rack row; the footprint must fit without overlap.";
-            if(field.DeclaringType==typeof(RigStarterPart)&&field.Name=="column")return "Zero-based starter rack column; upgrades preserve this coordinate.";
-            var tooltip = field.GetCustomAttribute<TooltipAttribute>();
-            if (tooltip != null) return tooltip.tooltip;
-            return Help.TryGetValue(field.Name, out var text) ? text : throw new InvalidOperationException("Missing property description: " + field.DeclaringType.Name + "." + field.Name);
-        }
-        /// <summary>Friendly label for a property name. Keeps acronyms readable (Xp becomes XP, Id becomes ID).</summary>
-        public static string DisplayName(string name) => Regex.Replace(ObjectNames.NicifyVariableName(name), @"\b(Xp|Id|Ids)\b", m => m.Value == "Xp" ? "XP" : m.Value == "Id" ? "ID" : "IDs");
-        public static IEnumerable<string> CheckCoverage()
-        {
-            var seen = new HashSet<Type>(); var errors = new List<string>();
-            foreach (var type in ContentJson.DefinitionTypes.Concat(ContentJson.RuleTypes)) Visit(type); return errors;
-            void Visit(Type type)
-            {
-                if (type.IsArray) { Visit(type.GetElementType()); return; }
-                if (type.IsPrimitive || type.IsEnum || type == typeof(string) || !seen.Add(type)) return;
-                foreach (var field in ContentJson.Fields(type)) { try { Description(field); } catch (Exception ex) { errors.Add(ex.Message); } Visit(field.FieldType); }
-            }
-        }
-    }
+".Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(l => l.Split(new[] { '|' }, 2))
+ .ToDictionary(p => p[0], p => p[1]);
+
+		/// <summary>Resolves the authoring description for a serialized content field.</summary>
+		/// <param name="field">Definition or rule field reflected from JSON types.</param>
+		/// <returns>Tooltip text from attributes or the shared help table.</returns>
+		/// <exception cref="InvalidOperationException">No description is registered for the field name.</exception>
+		public static string Description(FieldInfo field)
+		{
+			// Starter rack rows use their own row-specific description.
+			if (field.DeclaringType == typeof(RigStarterPart) && field.Name == "row")
+				return "Zero-based starter rack row; the footprint must fit without overlap.";
+
+			// Starter rack columns use their own column-specific description.
+			if (field.DeclaringType == typeof(RigStarterPart) && field.Name == "column")
+				return "Zero-based starter rack column; upgrades preserve this coordinate.";
+
+			// Prefer a Tooltip attribute on the field when one is present.
+			var tooltip = field.GetCustomAttribute<TooltipAttribute>();
+			if (tooltip != null)
+				return tooltip.tooltip;
+
+			// Look up the shared help table and throw when no description is registered.
+			return Help.TryGetValue(field.Name, out var text)
+				? text
+				: throw new InvalidOperationException("Missing property description: " + field.DeclaringType.Name +
+													  "." + field.Name);
+		}
+
+		/// <summary>Friendly label for a property name. Keeps acronyms readable (Xp becomes XP, Id becomes ID).</summary>
+		public static string DisplayName(string name)
+		{
+			// Nicify the property name, then restore acronym casing.
+			return Regex.Replace(ObjectNames.NicifyVariableName(name), @"\b(Xp|Id|Ids)\b",
+								 m => m.Value == "Xp" ? "XP" : m.Value == "Id" ? "ID" : "IDs");
+		}
+
+		/// <summary>Walks all definition and rule types and reports fields missing descriptions.</summary>
+		/// <returns>Error messages for fields that would throw from <see cref="Description" />.</returns>
+		public static IEnumerable<string> CheckCoverage()
+		{
+			// Track visited types and collect every missing-description error.
+			var seen = new HashSet<Type>();
+			var errors = new List<string>();
+
+			// Visit every definition and rule type to reach all of their fields.
+			foreach (var type in ContentJson.DefinitionTypes.Concat(ContentJson.RuleTypes))
+				Visit(type);
+
+			return errors;
+
+			// Local helper that walks a type graph and checks each field description.
+			void Visit(Type type)
+			{
+				// Recurse into the element type of arrays.
+				if (type.IsArray)
+				{
+					Visit(type.GetElementType());
+					return;
+				}
+
+				// Skip primitives, enums, strings, and types that were already visited.
+				if (type.IsPrimitive || type.IsEnum || type == typeof(string) || !seen.Add(type))
+					return;
+
+				// Check every serialized field of this type.
+				foreach (var field in ContentJson.Fields(type))
+				{
+					// Record the error message when a field has no description.
+					try
+					{
+						Description(field);
+					}
+					catch (Exception ex)
+					{
+						errors.Add(ex.Message);
+					}
+
+					// Recurse into the field's own type.
+					Visit(field.FieldType);
+				}
+			}
+		}
+	}
 }

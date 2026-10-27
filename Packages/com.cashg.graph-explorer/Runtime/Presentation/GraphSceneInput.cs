@@ -14,7 +14,7 @@ namespace Cashg.GraphExplorer
 		/// <summary>Determines whether a screen position is over blocking UI.</summary>
 		/// <param name="root">Panel root to inspect.</param>
 		/// <param name="screenPosition">Pointer position in screen coordinates.</param>
-		/// <returns><see langword="true"/> when UI blocks graph input.</returns>
+		/// <returns><see langword="true" /> when UI blocks graph input.</returns>
 		public static bool IsUiBlockingGraph(VisualElement root, Vector2 screenPosition)
 		{
 			// Convert to panel coordinates before hit testing; the root itself leaves the graph interactive.
@@ -62,7 +62,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="node">Clicked node.</param>
 		/// <param name="time">Current unscaled time.</param>
 		/// <param name="doubleClickSeconds">Maximum interval between clicks.</param>
-		/// <returns><see langword="true"/> when the click is a double click.</returns>
+		/// <returns><see langword="true" /> when the click is a double click.</returns>
 		public static bool RegisterPrimaryClick(
 		ref PrimaryClickState state,
 		IGraphNode node,
@@ -139,6 +139,7 @@ namespace Cashg.GraphExplorer
 		{
 			/// <summary>Gets or sets the time of the previous primary click.</summary>
 			public float LastTime;
+
 			/// <summary>Gets or sets the identifier of the node from the previous click.</summary>
 			public string LastNodeId;
 		}
@@ -148,8 +149,10 @@ namespace Cashg.GraphExplorer
 		{
 			/// <summary>Gets whether UI blocked the pointer position.</summary>
 			public bool Blocked { get; }
+
 			/// <summary>Gets the node under the pointer, when any.</summary>
 			public IGraphNode Node { get; }
+
 			/// <summary>Gets the edge under the pointer, when any.</summary>
 			public IGraphEdge Edge { get; }
 

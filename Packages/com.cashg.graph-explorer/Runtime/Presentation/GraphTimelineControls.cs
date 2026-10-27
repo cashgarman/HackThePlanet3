@@ -31,9 +31,11 @@ namespace Cashg.GraphExplorer
 		private readonly List<TimePoint> points = new();
 		private readonly IGraphPositionHistoryShellHost positionHost;
 		private readonly Toggle recordingToggle;
+		private readonly EventCallback<GeometryChangedEvent> rootGeometryHandler;
 		private readonly IGraphShellHost shell;
 		private readonly SliderInt slider;
 		private readonly Slider timeSlider;
+		private readonly EventCallback<KeyDownEvent> timelineKeyHandler;
 		private CancellationTokenSource cacheCancellation;
 		private IVisualElementScheduledItem cacheSchedule;
 		private VisualElement hoveredMarker;
@@ -46,10 +48,8 @@ namespace Cashg.GraphExplorer
 		private DateTimeOffset playbackStartedAt, playbackFrom;
 		private DateTimeOffset rangeAnchor;
 		private int rangePointer;
-		private readonly EventCallback<GeometryChangedEvent> rootGeometryHandler;
 		private bool selectingRange;
 		private bool syncing, playing, disposed;
-		private readonly EventCallback<KeyDownEvent> timelineKeyHandler;
 
 		/// <summary>Creates timeline controls for a shell and its timeline host.</summary>
 		/// <param name="shell">Shell that owns the controls.</param>
@@ -226,6 +226,7 @@ namespace Cashg.GraphExplorer
 		}
 
 		private GraphTimelineWorkspace Workspace => Document?.Timeline.Workspace;
+
 		/// <summary>Gets the normalized viewport used to zoom the timeline.</summary>
 		public GraphTimelineViewport Viewport { get; } = new();
 
@@ -970,8 +971,7 @@ namespace Cashg.GraphExplorer
 				Refresh();
 				if (playing) ScheduleNext();
 			}).StartingIn(HasExternal
-							  ?
-							  eventTrack.SelectedId == null && Document.Timeline.HasPositionHistory ? 33 : 650
+							  ? eventTrack.SelectedId == null && Document.Timeline.HasPositionHistory ? 33 : 650
 							  : Continuous
 								  ? 33
 								  : 650);

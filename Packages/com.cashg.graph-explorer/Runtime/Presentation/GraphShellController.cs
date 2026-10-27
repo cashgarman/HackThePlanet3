@@ -370,7 +370,7 @@ namespace Cashg.GraphExplorer
 		}
 
 		/// <summary>Closes the active shell surface.</summary>
-		/// <returns><see langword="true"/> when a surface was closed.</returns>
+		/// <returns><see langword="true" /> when a surface was closed.</returns>
 		public bool CloseShellSurface()
 		{
 			// Dismiss the most immediate open surface first so repeated escape actions unwind the shell.

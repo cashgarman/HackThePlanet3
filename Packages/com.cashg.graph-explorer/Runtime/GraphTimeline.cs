@@ -33,6 +33,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the sample timestamp in UTC.</summary>
 		public DateTimeOffset TimestampUtc { get; }
+
 		/// <summary>Gets the sampled positions keyed by node identifier.</summary>
 		public IReadOnlyDictionary<string, Vector3> Positions { get; }
 
@@ -66,14 +67,19 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the node records before the change.</summary>
 		public IReadOnlyList<GraphNodeRecord> NodesBefore { get; }
+
 		/// <summary>Gets the node records after the change.</summary>
 		public IReadOnlyList<GraphNodeRecord> NodesAfter { get; }
+
 		/// <summary>Gets the edge records before the change.</summary>
 		public IReadOnlyList<GraphEdgeRecord> EdgesBefore { get; }
+
 		/// <summary>Gets the edge records after the change.</summary>
 		public IReadOnlyList<GraphEdgeRecord> EdgesAfter { get; }
+
 		/// <summary>Gets the dataset name before the change.</summary>
 		public string DisplayNameBefore { get; }
+
 		/// <summary>Gets the dataset name after the change.</summary>
 		public string DisplayNameAfter { get; }
 	}
@@ -94,8 +100,10 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the sequence number of this entry.</summary>
 		public long Sequence { get; }
+
 		/// <summary>Gets the entry timestamp in UTC.</summary>
 		public DateTimeOffset TimestampUtc { get; }
+
 		/// <summary>Gets the change recorded by this entry.</summary>
 		public GraphTimelineChange Change { get; }
 	}
@@ -109,16 +117,22 @@ namespace Cashg.GraphExplorer
 		private DateTimeOffset playheadTimeUtc;
 		private bool positionRecordingEnabled;
 		private float positionSampleIntervalSeconds = 1f;
+
 		/// <summary>Gets the workspace for cached external timeline events.</summary>
 		public GraphTimelineWorkspace Workspace { get; } = new();
+
 		/// <summary>Gets the baseline snapshot for event history.</summary>
 		public GraphSnapshot Baseline { get; private set; }
+
 		/// <summary>Gets the baseline timestamp in UTC.</summary>
 		public DateTimeOffset BaselineTimeUtc { get; private set; }
+
 		/// <summary>Gets the ordered event history entries.</summary>
 		public IReadOnlyList<GraphTimelineEntry> Entries => entries.AsReadOnly();
+
 		/// <summary>Gets the recorded node-position frames.</summary>
 		public IReadOnlyList<GraphPositionFrame> PositionFrames => positionFrames.AsReadOnly();
+
 		/// <summary>Gets or sets whether event and position history recording is enabled.</summary>
 		public bool Enabled { get; set; } = true;
 
@@ -155,12 +169,16 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the selected event-history entry index.</summary>
 		public int Cursor { get; internal set; } = -1;
+
 		/// <summary>Gets whether an event-history baseline is available.</summary>
 		public bool HasBaseline => Baseline != null;
+
 		/// <summary>Gets whether any position frames have been recorded.</summary>
 		public bool HasPositionHistory => positionFrames.Count > 0;
+
 		/// <summary>Gets whether the playhead is earlier than the latest recorded time.</summary>
 		public bool IsHistorical => HasBaseline && CurrentTimeUtc < LatestTimeUtc;
+
 		/// <summary>Gets the current playhead time in UTC.</summary>
 		public DateTimeOffset CurrentTimeUtc => hasPlayhead ? playheadTimeUtc : LatestTimeUtc;
 

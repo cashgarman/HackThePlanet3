@@ -11,6 +11,7 @@ namespace Cashg.GraphExplorer
 	public sealed class GraphIdSet : IReadOnlyCollection<string>
 	{
 		internal readonly HashSet<string> Values = new(StringComparer.Ordinal);
+
 		/// <summary>Gets the number of identifiers in the set.</summary>
 		public int Count => Values.Count;
 
@@ -28,7 +29,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Determines whether the set contains an identifier.</summary>
 		/// <param name="id">Identifier to find.</param>
-		/// <returns><see langword="true"/> when the identifier is present.</returns>
+		/// <returns><see langword="true" /> when the identifier is present.</returns>
 		public bool Contains(string id)
 		{
 			return Values.Contains(id);
@@ -58,18 +59,25 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the current node records keyed by identifier.</summary>
 		public IReadOnlyDictionary<string, GraphNodeRecord> Nodes { get; }
+
 		/// <summary>Gets the current edge records keyed by identifier.</summary>
 		public IReadOnlyDictionary<string, GraphEdgeRecord> Edges { get; }
+
 		/// <summary>Gets the stable identifier of this dataset.</summary>
 		public string DatasetId { get; }
+
 		/// <summary>Gets the display name of this dataset.</summary>
 		public string DisplayName { get; private set; }
+
 		/// <summary>Gets the document revision, including non-topology changes.</summary>
 		public int Revision { get; private set; }
+
 		/// <summary>Gets the revision that changes when graph topology changes.</summary>
 		public int TopologyRevision { get; private set; }
+
 		/// <summary>Gets the document's event and position timeline.</summary>
 		public GraphTimeline Timeline { get; } = new();
+
 		/// <summary>Occurs when document content or timeline state changes.</summary>
 		public event Action Changed;
 
@@ -234,7 +242,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Removes an edge and updates the document when it exists.</summary>
 		/// <param name="id">Edge identifier.</param>
-		/// <returns><see langword="true"/> when an edge was removed.</returns>
+		/// <returns><see langword="true" /> when an edge was removed.</returns>
 		public bool RemoveEdge(string id)
 		{
 			EnsureLive();
@@ -256,7 +264,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Removes a node and its incident edges when it exists.</summary>
 		/// <param name="id">Node identifier.</param>
-		/// <returns><see langword="true"/> when a node was removed.</returns>
+		/// <returns><see langword="true" /> when a node was removed.</returns>
 		public bool RemoveNode(string id)
 		{
 			EnsureLive();

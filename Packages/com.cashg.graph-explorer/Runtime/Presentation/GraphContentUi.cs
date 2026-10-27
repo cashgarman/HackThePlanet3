@@ -29,10 +29,8 @@ namespace Cashg.GraphExplorer
 				value = timestamp.ToString("MMM d, yyyy · HH:mm:ss", CultureInfo.InvariantCulture) +
 						(timestamp.Kind == DateTimeKind.Utc
 							? " UTC"
-							:
-							timestamp.Kind == DateTimeKind.Local
-								?
-								timestamp.ToString(" zzz", CultureInfo.InvariantCulture)
+							: timestamp.Kind == DateTimeKind.Local
+								? timestamp.ToString(" zzz", CultureInfo.InvariantCulture)
 								: "");
 			var caption = key.Replace('_', ' ');
 			if (caption.Length > 0) caption = char.ToUpperInvariant(caption[0]) + caption.Substring(1);

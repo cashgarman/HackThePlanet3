@@ -52,14 +52,19 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the camera used by this session.</summary>
 		public Camera Camera { get; }
+
 		/// <summary>Gets the graph renderer owned by this session.</summary>
 		public GraphRenderer Renderer { get; }
+
 		/// <summary>Gets the force layout owned by this session.</summary>
 		public ForceLayout Layout { get; }
+
 		/// <summary>Gets the navigation controller owned by this session.</summary>
 		public GraphNavigation Navigation { get; }
+
 		/// <summary>Gets the atmosphere controller owned by this session.</summary>
 		public GraphAtmosphere Atmosphere { get; }
+
 		/// <summary>Gets the camera effects component used by this session.</summary>
 		public GraphNodeEffects Effects { get; }
 

@@ -1,0 +1,654 @@
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -973,1 +973,2 @@
+-		private void BuildNetwork(VisualElement workspace)
++		// Handles BuildNetwork for the workstation UI shell.
++		private void BuildNetwork(VisualElement workspace)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -98,1 +98,2 @@
+-		private Label traceNumber, traceState;
++		// Internal member supporting workstation or graph viewport behavior.
++		private Label traceNumber, traceState;
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -946,1 +946,2 @@
+-		private void Tab(VisualElement parent, string target, string label)
++		// Handles Tab for the workstation UI shell.
++		private void Tab(VisualElement parent, string target, string label)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -934,1 +934,2 @@
+-		private void BuildRail(VisualElement body)
++		// Handles BuildRail for the workstation UI shell.
++		private void BuildRail(VisualElement body)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -93,1 +93,2 @@
+-		private VisualElement tooltipOwner;
++		// Internal member supporting workstation or graph viewport behavior.
++		private VisualElement tooltipOwner;
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -919,1 +919,2 @@
+-		private void PositionTooltip()
++		// Handles PositionTooltip for the workstation UI shell.
++		private void PositionTooltip()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -904,1 +904,2 @@
+-		private void RefreshTooltip()
++		// Handles RefreshTooltip for the workstation UI shell.
++		private void RefreshTooltip()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -894,1 +894,2 @@
+-		private void HideTooltip()
++		// Handles HideTooltip for the workstation UI shell.
++		private void HideTooltip()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -77,1 +77,2 @@
+-		private bool pausedBeforeSettings;
++		// Returns whether pausedBeforeSettings holds for the current rig or UI state.
++		private bool pausedBeforeSettings;
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2830,1 +2830,2 @@
+-		private Button RailCircleButton(VisualElement parent, string glyph, Action action, string name, string classes)
++		// Builds or resolves the glyph string for UI display.
++		private Button RailCircleButton(VisualElement parent, string glyph, Action action, string name, string classes)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2814,1 +2814,2 @@
+-		private Button Btn(VisualElement parent, string text, Action action, string name, string classes)
++		// Builds or resolves the text string for UI display.
++		private Button Btn(VisualElement parent, string text, Action action, string name, string classes)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2804,1 +2804,2 @@
+-		private static void IgnorePointerHits(VisualElement element)
++		// Handles IgnorePointerHits for the workstation UI shell.
++		private static void IgnorePointerHits(VisualElement element)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2789,1 +2789,2 @@
+-		private static Label RichText(VisualElement parent, string text, string classes)
++		// Builds or resolves the text string for UI display.
++		private static Label RichText(VisualElement parent, string text, string classes)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2778,1 +2778,2 @@
+-		private void OpenModalWithMotion(VisualElement box)
++		// Handles OpenModalWithMotion for the workstation UI shell.
++		private void OpenModalWithMotion(VisualElement box)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2773,1 +2773,2 @@
+-		private static Label SectionTitle(VisualElement parent, string title)
++		// Builds or resolves the title string for UI display.
++		private static Label SectionTitle(VisualElement parent, string title)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2768,1 +2768,2 @@
+-		private static Label PanelTitle(VisualElement parent, string title)
++		// Builds or resolves the title string for UI display.
++		private static Label PanelTitle(VisualElement parent, string title)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2753,1 +2753,2 @@
+-		private static Label Text(VisualElement parent, string text, string classes)
++		// Builds or resolves the text string for UI display.
++		private static Label Text(VisualElement parent, string text, string classes)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2738,1 +2738,2 @@
+-		private static ScrollView Scroll(VisualElement parent, string classes)
++		// Builds or resolves the classes string for UI display.
++		private static ScrollView Scroll(VisualElement parent, string classes)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2723,1 +2723,2 @@
+-		private static VisualElement El(VisualElement parent, string classes)
++		// Builds or resolves the classes string for UI display.
++		private static VisualElement El(VisualElement parent, string classes)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2718,1 +2718,2 @@
+-		private string Rank()
++		// Builds or resolves the Rank string for UI display.
++		private string Rank()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2704,1 +2704,2 @@
+-		private void SelectNextContract()
++		// Handles SelectNextContract for the workstation UI shell.
++		private void SelectNextContract()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2642,1 +2642,2 @@
+-		private void ReportBonuses(VisualElement box, OperationReport report)
++		// Handles ReportBonuses for the workstation UI shell.
++		private void ReportBonuses(VisualElement box, OperationReport report)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2334,1 +2334,2 @@
+-		private void BuildModal()
++		// Handles BuildModal for the workstation UI shell.
++		private void BuildModal()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2316,1 +2316,2 @@
+-		private void QuitGame()
++		// Handles QuitGame for the workstation UI shell.
++		private void QuitGame()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2272,1 +2272,2 @@
+-		private void ResetGameSave()
++		// Handles ResetGameSave for the workstation UI shell.
++		private void ResetGameSave()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2263,1 +2263,2 @@
+-		private void CancelResetSave()
++		// Handles CancelResetSave for the workstation UI shell.
++		private void CancelResetSave()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2254,1 +2254,2 @@
+-		private void OpenResetSaveConfirm(string returnModal = "settings")
++		// Handles OpenResetSaveConfirm for the workstation UI shell.
++		private void OpenResetSaveConfirm(string returnModal = "settings")
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2234,1 +2234,2 @@
+-		private void ResumeFromSettings(bool resumeOperation = false)
++		// Handles ResumeFromSettings for the workstation UI shell.
++		private void ResumeFromSettings(bool resumeOperation = false)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2214,1 +2214,2 @@
+-		private void ShowSettings()
++		// Handles ShowSettings for the workstation UI shell.
++		private void ShowSettings()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2200,1 +2200,2 @@
+-		private void ShowHelp()
++		// Handles ShowHelp for the workstation UI shell.
++		private void ShowHelp()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -2122,1 +2122,2 @@
+-		private void BuildIntel(VisualElement workspace)
++		// Handles BuildIntel for the workstation UI shell.
++		private void BuildIntel(VisualElement workspace)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1921,1 +1921,2 @@
+-		private void BuildResearch(VisualElement workspace)
++		// Handles BuildResearch for the workstation UI shell.
++		private void BuildResearch(VisualElement workspace)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1881,1 +1881,2 @@
+-		private void UpdateOperationStats()
++		// Handles UpdateOperationStats for the workstation UI shell.
++		private void UpdateOperationStats()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1846,1 +1846,2 @@
+-		private void UpdateMeters()
++		// Handles UpdateMeters for the workstation UI shell.
++		private void UpdateMeters()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1766,1 +1766,2 @@
+-		private void BuildOperationBar(VisualElement parent)
++		// Handles BuildOperationBar for the workstation UI shell.
++		private void BuildOperationBar(VisualElement parent)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1753,1 +1753,2 @@
+-		private void BuildTraceBar(VisualElement parent)
++		// Handles BuildTraceBar for the workstation UI shell.
++		private void BuildTraceBar(VisualElement parent)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1736,1 +1736,2 @@
+-		private void DisconnectClicked()
++		// Handles DisconnectClicked for the workstation UI shell.
++		private void DisconnectClicked()
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1731,1 +1731,2 @@
+-		private Technology FindTech(string id)
++		// Builds or resolves the id string for UI display.
++		private Technology FindTech(string id)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1716,1 +1716,2 @@
+-		private void Run(string actionId, string targetId)
++		// Handles Run for the workstation UI shell.
++		private void Run(string actionId, string targetId)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1597,1 +1597,2 @@
+-		private void UpdateActionButton(ActionButtonParts parts, bool primary = false)
++		// Handles UpdateActionButton for the workstation UI shell.
++		private void UpdateActionButton(ActionButtonParts parts, bool primary = false)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1555,1 +1555,2 @@
+-		private void ActionButton(VisualElement parent, ActionInfo action, bool primary)
++		// Handles ActionButton for the workstation UI shell.
++		private void ActionButton(VisualElement parent, ActionInfo action, bool primary)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1427,1 +1427,2 @@
+-		private void BuildTarget(VisualElement right, NetNode node)
++		// Handles BuildTarget for the workstation UI shell.
++		private void BuildTarget(VisualElement right, NetNode node)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1299,1 +1299,2 @@
+-		private void BuildWaypointPlanner(VisualElement parent)
++		// Handles BuildWaypointPlanner for the workstation UI shell.
++		private void BuildWaypointPlanner(VisualElement parent)
+--- a/Assets/HackThePlanet/Runtime/WorkstationApp.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationApp.cs
+@@ -1237,1 +1237,2 @@
+-		private void BuildBrief(VisualElement right)
++		// Handles BuildBrief for the workstation UI shell.
++		private void BuildBrief(VisualElement right)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -968,1 +968,2 @@
+-		private bool TryNearestRigAnchor(Vector2 panelPosition, Vector2Int size, out int row, out int column)
++		// Attempts NearestRigAnchor and reports whether it succeeded.
++		private bool TryNearestRigAnchor(Vector2 panelPosition, Vector2Int size, out int row, out int column)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -941,1 +941,2 @@
+-		private void BeginRigDrag(string instance, PointerDownEvent evt)
++		// Handles BeginRigDrag for the workstation UI shell.
++		private void BeginRigDrag(string instance, PointerDownEvent evt)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -924,1 +924,2 @@
+-		internal void RotateRigDrag()
++		// Handles RotateRigDrag for the workstation UI shell.
++		internal void RotateRigDrag()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -906,1 +906,2 @@
+-		private void RotateRigSelection()
++		// Handles RotateRigSelection for the workstation UI shell.
++		private void RotateRigSelection()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -863,1 +863,2 @@
+-		private void SlotClicked(string id)
++		// Handles SlotClicked for the workstation UI shell.
++		private void SlotClicked(string id)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -791,1 +791,2 @@
+-		private void BuildRigInventory(VisualElement parent, List<string> categories)
++		// Handles BuildRigInventory for the workstation UI shell.
++		private void BuildRigInventory(VisualElement parent, List<string> categories)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -761,1 +761,2 @@
+-		private void BuildRigShopFilters(VisualElement parent, List<string> categories)
++		// Handles BuildRigShopFilters for the workstation UI shell.
++		private void BuildRigShopFilters(VisualElement parent, List<string> categories)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -756,1 +756,2 @@
+-		private static string RigCategoryTitle(string category)
++		// Builds or resolves the RigCategoryTitle string for UI display.
++		private static string RigCategoryTitle(string category)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -746,1 +746,2 @@
+-		private IEnumerable<string> RigCategories()
++		// Internal member supporting workstation or graph viewport behavior.
++		private IEnumerable<string> RigCategories()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -738,1 +738,2 @@
+-		private string ModuleSpecs(RigModuleDefinition model)
++		// Builds or resolves the ModuleSpecs string for UI display.
++		private string ModuleSpecs(RigModuleDefinition model)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -727,1 +727,2 @@
+-		private string ModuleTooltip(RigModuleDefinition model)
++		// Builds or resolves the ModuleTooltip string for UI display.
++		private string ModuleTooltip(RigModuleDefinition model)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -677,1 +677,2 @@
+-		private GraphScene BuildRackScene()
++		// Internal member supporting workstation or graph viewport behavior.
++		private GraphScene BuildRackScene()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -613,1 +613,2 @@
+-		private void BuildRigDetails(VisualElement info)
++		// Handles BuildRigDetails for the workstation UI shell.
++		private void BuildRigDetails(VisualElement info)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -580,1 +580,2 @@
+-		private static Label OperationStat(VisualElement line, string glyph, Color tint, string text, string classes,
++		// Builds or resolves the glyph string for UI display.
++		private static Label OperationStat(VisualElement line, string glyph, Color tint, string text, string classes,
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -554,1 +554,2 @@
+-		private void BuildRigBudgets(VisualElement head)
++		// Handles BuildRigBudgets for the workstation UI shell.
++		private void BuildRigBudgets(VisualElement head)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -527,1 +527,2 @@
+-		private void BuildRigBudgetActions(VisualElement parent)
++		// Handles BuildRigBudgetActions for the workstation UI shell.
++		private void BuildRigBudgetActions(VisualElement parent)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -347,1 +347,2 @@
+-		private void BuildRig(VisualElement workspace)
++		// Handles BuildRig for the workstation UI shell.
++		private void BuildRig(VisualElement workspace)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1408,1 +1408,2 @@
+-		private void BuildRefundModal()
++		// Handles BuildRefundModal for the workstation UI shell.
++		private void BuildRefundModal()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1368,1 +1368,2 @@
+-		private void BuildStorageBrief(VisualElement parent)
++		// Handles BuildStorageBrief for the workstation UI shell.
++		private void BuildStorageBrief(VisualElement parent)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1363,1 +1363,2 @@
+-		private void RefreshResourceActions()
++		// Handles RefreshResourceActions for the workstation UI shell.
++		private void RefreshResourceActions()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1339,1 +1339,2 @@
+-		private void CancelRigDrag(bool placed = false)
++		// Handles CancelRigDrag for the workstation UI shell.
++		private void CancelRigDrag(bool placed = false)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1302,1 +1302,2 @@
+-		private void EndRigDrag(PointerUpEvent evt)
++		// Handles EndRigDrag for the workstation UI shell.
++		private void EndRigDrag(PointerUpEvent evt)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1276,1 +1276,2 @@
+-		private Vector2 RigCellPanelSize()
++		// Internal member supporting workstation or graph viewport behavior.
++		private Vector2 RigCellPanelSize()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1254,1 +1254,2 @@
+-		private void HighlightFootprint(int row, int column, Vector2Int size, bool valid)
++		// Handles HighlightFootprint for the workstation UI shell.
++		private void HighlightFootprint(int row, int column, Vector2Int size, bool valid)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1241,1 +1241,2 @@
+-		private void ClearDragDropHighlights()
++		// Handles ClearDragDropHighlights for the workstation UI shell.
++		private void ClearDragDropHighlights()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1212,1 +1212,2 @@
+-		private void RefreshRigDragGhost()
++		// Handles RefreshRigDragGhost for the workstation UI shell.
++		private void RefreshRigDragGhost()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1189,1 +1189,2 @@
+-		private void EnsureRigDragGhost(RigModuleDefinition model)
++		// Handles EnsureRigDragGhost for the workstation UI shell.
++		private void EnsureRigDragGhost(RigModuleDefinition model)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1168,1 +1168,2 @@
+-		private void RevealEmptyRigSlots()
++		// Handles RevealEmptyRigSlots for the workstation UI shell.
++		private void RevealEmptyRigSlots()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1158,1 +1158,2 @@
+-		private void RestoreRigDragPart()
++		// Handles RestoreRigDragPart for the workstation UI shell.
++		private void RestoreRigDragPart()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1136,1 +1136,2 @@
+-		private void LiftRigDragPart()
++		// Handles LiftRigDragPart for the workstation UI shell.
++		private void LiftRigDragPart()
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1131,1 +1131,2 @@
+-		private bool IsOverRigInventory(Vector2 panelPosition)
++		// Returns whether IsOverRigInventory holds for the current rig or UI state.
++		private bool IsOverRigInventory(Vector2 panelPosition)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1108,1 +1108,2 @@
+-		private void UpdateRigDrag(Vector2 position)
++		// Handles UpdateRigDrag for the workstation UI shell.
++		private void UpdateRigDrag(Vector2 position)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1093,1 +1093,2 @@
+-		private bool TrySlotPanelRect(int row, int column, out Rect rect)
++		// Attempts SlotPanelRect and reports whether it succeeded.
++		private bool TrySlotPanelRect(int row, int column, out Rect rect)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1078,1 +1078,2 @@
+-		private bool TrySlotPanelCenter(int row, int column, out Vector2 center)
++		// Attempts SlotPanelCenter and reports whether it succeeded.
++		private bool TrySlotPanelCenter(int row, int column, out Vector2 center)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1057,1 +1057,2 @@
+-		private bool TrySlotButtonRect(int row, int column, out Rect rect)
++		// Attempts SlotButtonRect and reports whether it succeeded.
++		private bool TrySlotButtonRect(int row, int column, out Rect rect)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1041,1 +1041,2 @@
+-		private bool TryGetRigGridBounds(out Rect grid, out float cellWidth, out float cellHeight)
++		// Attempts GetRigGridBounds and reports whether it succeeded.
++		private bool TryGetRigGridBounds(out Rect grid, out float cellWidth, out float cellHeight)
+--- a/Assets/HackThePlanet/Runtime/WorkstationRig.cs
++++ b/Assets/HackThePlanet/Runtime/WorkstationRig.cs
+@@ -1013,1 +1013,2 @@
+-		private bool TryRigGridMetrics(out Rect originCell, out float cellWidth, out float cellHeight)
++		// Attempts RigGridMetrics and reports whether it succeeded.
++		private bool TryRigGridMetrics(out Rect originCell, out float cellWidth, out float cellHeight)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -992,1 +992,2 @@
+-		private static Color LockedColor(Color branch)
++		// Internal member supporting workstation or graph viewport behavior.
++		private static Color LockedColor(Color branch)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -921,1 +921,2 @@
+-		private static GraphScene BuildResearch(Career career, GameCatalog catalog)
++		// Internal member supporting workstation or graph viewport behavior.
++		private static GraphScene BuildResearch(Career career, GameCatalog catalog)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -891,1 +891,2 @@
+-		internal static string DescribeTechnology(Technology tech, Career career,
++		// Builds or resolves the DescribeTechnology string for UI display.
++		internal static string DescribeTechnology(Technology tech, Career career,
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -802,1 +802,2 @@
+-		private static GraphScene BuildNetwork(List<NetNode> nodes, List<NetLink> links, bool preview,
++		// Returns whether preview holds for the current rig or UI state.
++		private static GraphScene BuildNetwork(List<NetNode> nodes, List<NetLink> links, bool preview,
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -776,1 +776,2 @@
+-		internal static string DescribeNode(NetNode node, ContractIntel intel, bool preview, GameCatalog catalog)
++		// Returns whether preview holds for the current rig or UI state.
++		internal static string DescribeNode(NetNode node, ContractIntel intel, bool preview, GameCatalog catalog)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -759,1 +759,2 @@
+-		private void UpdateFocusedCard()
++		// Handles UpdateFocusedCard for the workstation UI shell.
++		private void UpdateFocusedCard()
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -745,1 +745,2 @@
+-		private void FocusIntel(string id)
++		// Handles FocusIntel for the workstation UI shell.
++		private void FocusIntel(string id)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -710,1 +710,2 @@
+-		private void ClearSelection(Action<string> select)
++		// Handles ClearSelection for the workstation UI shell.
++		private void ClearSelection(Action<string> select)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -700,1 +700,2 @@
+-		private static bool SelectWithoutCameraFocus()
++		// Returns whether SelectWithoutCameraFocus holds for the current rig or UI state.
++		private static bool SelectWithoutCameraFocus()
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -668,1 +668,2 @@
+-		private void ClickNode(string id, Action<string> select)
++		// Handles ClickNode for the workstation UI shell.
++		private void ClickNode(string id, Action<string> select)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -227,1 +227,2 @@
+-		private GraphViewport(GraphScene graph, string selected, Action<string> select, bool research,
++		// Returns whether research holds for the current rig or UI state.
++		private GraphViewport(GraphScene graph, string selected, Action<string> select, bool research,
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1509,1 +1509,2 @@
+-			private static Vector2[] Corners(Rect rect)
++			// Internal member supporting workstation or graph viewport behavior.
++			private static Vector2[] Corners(Rect rect)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1375,1 +1375,2 @@
+-			private void Draw(MeshGenerationContext context)
++			// Handles Draw for the workstation UI shell.
++			private void Draw(MeshGenerationContext context)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1340,1 +1340,2 @@
+-			private readonly string selected;
++			// Builds or resolves the selected string for UI display.
++			private readonly string selected;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1339,1 +1339,2 @@
+-			private readonly GraphScene scene;
++			// Backing state for graph viewport rendering and interaction.
++			private readonly GraphScene scene;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1338,1 +1338,2 @@
+-			private readonly bool research;
++			// Returns whether research holds for the current rig or UI state.
++			private readonly bool research;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1337,1 +1337,2 @@
+-			private readonly HashSet<string> reachableNodes;
++			// Backing state for graph viewport rendering and interaction.
++			private readonly HashSet<string> reachableNodes;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1336,1 +1336,2 @@
+-			private readonly HashSet<string> path;
++			// Backing state for graph viewport rendering and interaction.
++			private readonly HashSet<string> path;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1335,1 +1335,2 @@
+-			private readonly bool flat;
++			// Returns whether flat holds for the current rig or UI state.
++			private readonly bool flat;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1333,1 +1333,2 @@
+-			private readonly HashSet<string> controlledNodes;
++			// Backing state for graph viewport rendering and interaction.
++			private readonly HashSet<string> controlledNodes;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1332,1 +1332,2 @@
+-			private readonly Camera camera;
++			// Backing state for graph viewport rendering and interaction.
++			private readonly Camera camera;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1313,1 +1313,2 @@
+-		private static void DestroyOwned(Object obj)
++		// Handles DestroyOwned for the workstation UI shell.
++		private static void DestroyOwned(Object obj)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1295,1 +1295,2 @@
+-		private void PlaceCamera()
++		// Handles PlaceCamera for the workstation UI shell.
++		private void PlaceCamera()
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1220,1 +1220,2 @@
+-		private string PickNode(Vector2 local)
++		// Builds or resolves the PickNode string for UI display.
++		private string PickNode(Vector2 local)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1155,1 +1155,2 @@
+-		private Vector2 MeasureFocusedCard(float availableWidth)
++		// Internal member supporting workstation or graph viewport behavior.
++		private Vector2 MeasureFocusedCard(float availableWidth)
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -116,1 +116,2 @@
+-		private Vector3 centerStart;
++		// Internal member supporting workstation or graph viewport behavior.
++		private Vector3 centerStart;
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1056,1 +1056,2 @@
+-		private void PositionLabels()
++		// Handles PositionLabels for the workstation UI shell.
++		private void PositionLabels()
+--- a/Assets/HackThePlanet/Runtime/GraphViewport.cs
++++ b/Assets/HackThePlanet/Runtime/GraphViewport.cs
+@@ -1037,1 +1037,2 @@
+-		private IReadOnlyList<GraphGuideArrow> BuildGuideArrows()
++		// Backing state for graph viewport rendering and interaction.
++		private IReadOnlyList<GraphGuideArrow> BuildGuideArrows()

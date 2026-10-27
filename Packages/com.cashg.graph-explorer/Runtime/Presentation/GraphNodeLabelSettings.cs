@@ -57,8 +57,10 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets or sets the panel corner radius in pixels.</summary>
 		[Range(0, 16)] public float CornerRadius = 4f;
+
 		/// <summary>Gets or sets the minimum panel width in pixels.</summary>
 		[Range(48, 400)] public float MinWidth = 72f;
+
 		/// <summary>Gets or sets the maximum panel width in pixels.</summary>
 		[Range(96, 600)] public float MaxWidth = 208f;
 

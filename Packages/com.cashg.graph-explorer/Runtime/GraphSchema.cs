@@ -203,7 +203,7 @@ namespace Cashg.GraphExplorer
 		private readonly Dictionary<string, GraphRelationDefinition> relations = new(StringComparer.Ordinal);
 		private readonly Dictionary<string, GraphNodeTypeDefinition> types = new(StringComparer.Ordinal);
 
-		/// <summary>Creates an empty schema; populate via <see cref="Register(GraphNodeTypeDefinition)"/> and related overloads.</summary>
+		/// <summary>Creates an empty schema; populate via <see cref="Register(GraphNodeTypeDefinition)" /> and related overloads.</summary>
 		public GraphSchema()
 		{
 			NodeTypes = new ReadOnlyDictionary<string, GraphNodeTypeDefinition>(types);

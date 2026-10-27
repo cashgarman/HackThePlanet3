@@ -15,7 +15,11 @@ Shader "HackThePlanet/SignalField"
             float _NoIntel;
 
             float hash(float2 p) { return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453); }
-            float inkLine(float distance, float width, float aa) { return 1 - smoothstep(width, width + aa, abs(distance)); }
+
+            float inkLine(float distance, float width, float aa)
+            {
+                return 1 - smoothstep(width, width + aa, abs(distance));
+            }
 
             fixed4 frag(v2f_img input) : SV_Target
             {
@@ -34,7 +38,8 @@ Shader "HackThePlanet/SignalField"
                     float snow = hash(float2(floor((pixels.x + shift) / 2), row) + float2(frame * 31, frame * 17));
                     float scan = .65 + .35 * step(1, fmod(pixels.y, 3));
                     float band = step(.985, hash(float2(floor(uv.y * 80), floor(time * 7))));
-                    float3 staticColor = float3(.025, .05, .06) + float3(.15, .32, .30) * (snow * .6 * scan + tear * .12 + band * .12);
+                    float3 staticColor = float3(.025, .05, .06) + float3(.15, .32, .30) * (snow * .6 * scan + tear * .12
+                        + band * .12);
                     staticColor *= 1 - .35 * length(uv - .5);
                     #ifndef UNITY_COLORSPACE_GAMMA
                     staticColor = GammaToLinearSpace(staticColor);

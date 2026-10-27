@@ -9,10 +9,13 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Positions nodes in a three-dimensional force layout.</summary>
 		Spatial = 0,
+
 		/// <summary>Positions nodes on a flat plane.</summary>
 		Flat = 1,
+
 		/// <summary>Arranges nodes in groups using domain grouping policies.</summary>
 		Groups = 2,
+
 		/// <summary>Arranges nodes along lanes using domain lane policies.</summary>
 		Lanes = 3
 	}
@@ -22,8 +25,10 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Uses one size for every node.</summary>
 		Uniform = 0,
+
 		/// <summary>Maps node size to its connection count.</summary>
 		Connections = 1,
+
 		/// <summary>Maps node size to a numeric metric.</summary>
 		Metric = 2
 	}
@@ -33,10 +38,13 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Colors nodes by their declared type.</summary>
 		Type = 0,
+
 		/// <summary>Colors nodes by connection count.</summary>
 		Connections = 1,
+
 		/// <summary>Colors nodes by categorical property values.</summary>
 		Category = 2,
+
 		/// <summary>Colors nodes by a numeric metric.</summary>
 		Metric = 3
 	}
@@ -46,8 +54,10 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>No tool-specific emphasis is applied.</summary>
 		None,
+
 		/// <summary>The node represents completed work.</summary>
 		Done,
+
 		/// <summary>The node is the next item of work.</summary>
 		Next
 	}
@@ -57,6 +67,7 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Node to mark.</summary>
 		public string NodeId;
+
 		/// <summary>Arrow color.</summary>
 		public Color Color;
 	}
@@ -66,26 +77,37 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the stable node identifier.</summary>
 		string Id { get; }
+
 		/// <summary>Gets the semantic node record.</summary>
 		GraphNodeRecord Record { get; }
+
 		/// <summary>Gets the node's display label.</summary>
 		string Label { get; }
+
 		/// <summary>Gets or sets the node's world position.</summary>
 		Vector3 Position { get; set; }
+
 		/// <summary>Gets or sets the node's layout velocity.</summary>
 		Vector3 Velocity { get; set; }
+
 		/// <summary>Gets or sets whether layout should keep this node fixed.</summary>
 		bool Pinned { get; set; }
+
 		/// <summary>Gets or sets whether the node is visible.</summary>
 		bool Visible { get; set; }
+
 		/// <summary>Gets or sets whether the node matches active filters.</summary>
 		bool Matches { get; set; }
+
 		/// <summary>Gets or sets whether the node is marked as a favorite.</summary>
 		bool Favorite { get; set; }
+
 		/// <summary>Gets or sets the node's tool-specific emphasis.</summary>
 		ToolEmphasis Emphasis { get; set; }
+
 		/// <summary>Gets identifiers of adjacent nodes.</summary>
 		GraphIdSet Neighbors { get; }
+
 		/// <summary>Gets edges incident to the node.</summary>
 		IReadOnlyList<IGraphEdge> Edges { get; }
 	}
@@ -95,14 +117,19 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the stable edge identifier.</summary>
 		string Id { get; }
+
 		/// <summary>Gets the semantic edge record.</summary>
 		GraphEdgeRecord Record { get; }
+
 		/// <summary>Gets the source node identifier.</summary>
 		string From { get; }
+
 		/// <summary>Gets the destination node identifier.</summary>
 		string To { get; }
+
 		/// <summary>Gets the relationship type identifier.</summary>
 		string Relation { get; }
+
 		/// <summary>Gets the relationship status.</summary>
 		string Status { get; }
 	}
@@ -112,14 +139,19 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets the graph document projected by the scene.</summary>
 		GraphDocument Document { get; }
+
 		/// <summary>Gets the scene's mutable view state.</summary>
 		GraphViewState View { get; }
+
 		/// <summary>Gets the schema used to interpret graph records.</summary>
 		GraphSchema Schema { get; }
+
 		/// <summary>Gets visible nodes keyed by identifier.</summary>
 		IReadOnlyDictionary<string, IGraphNode> Nodes { get; }
+
 		/// <summary>Gets visible edges keyed by identifier.</summary>
 		IReadOnlyDictionary<string, IGraphEdge> Edges { get; }
+
 		/// <summary>Gets the revision used to detect scene changes.</summary>
 		int Revision { get; }
 	}
@@ -129,7 +161,7 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Determines whether an edge passes the active filter.</summary>
 		/// <param name="edge">Edge to evaluate.</param>
-		/// <returns><see langword="true"/> when the edge is included.</returns>
+		/// <returns><see langword="true" /> when the edge is included.</returns>
 		bool EdgeMatches(IGraphEdge edge);
 	}
 
@@ -137,30 +169,42 @@ namespace Cashg.GraphExplorer
 	public sealed class GraphPresentationProfile
 	{
 		private readonly Dictionary<string, GraphNodeTypeDefinition> fallbackTypes = new(StringComparer.Ordinal);
+
 		/// <summary>Optional predicate controlling which nodes use category coloring.</summary>
 		public Func<IGraphNode, bool> CategoryApplies;
+
 		/// <summary>Optional fallback color for nodes without a category color.</summary>
 		public Func<IGraphNode, Color?> CategoryFallback;
-		/// <summary>Optional function that returns a node's grouping identifier.</summary>
-		public Func<IGraphNode, string> GroupId;
-		/// <summary>Optional function that returns the node's grouping strength.</summary>
-		public Func<IGraphNode, float> GroupStrength;
-		/// <summary>Optional predicate identifying nodes that anchor a group.</summary>
-		public Func<IGraphNode, bool> IsGroupAnchor;
-		/// <summary>Optional function that returns a node's lane coordinate.</summary>
-		public Func<IGraphNode, float?> Lane;
-		/// <summary>Gets or sets the center coordinate used for lanes.</summary>
-		public float LaneCenter;
-		/// <summary>Gets or sets the distance between adjacent lanes.</summary>
-		public float LaneSpacing = 16;
-		/// <summary>Optional predicate controlling which nodes use metric mapping.</summary>
-		public Func<IGraphNode, bool> MetricApplies;
-		/// <summary>Gets or sets the function that maps a normalized metric to a color.</summary>
-		public Func<float, Color> MetricColor = Spectrum;
-		/// <summary>Gets or sets the numeric field used for metric mapping.</summary>
-		public string MetricField = "";
+
 		/// <summary>Gets or sets the categorical field used for category mapping.</summary>
 		public string CategoryField = "";
+
+		/// <summary>Optional function that returns a node's grouping identifier.</summary>
+		public Func<IGraphNode, string> GroupId;
+
+		/// <summary>Optional function that returns the node's grouping strength.</summary>
+		public Func<IGraphNode, float> GroupStrength;
+
+		/// <summary>Optional predicate identifying nodes that anchor a group.</summary>
+		public Func<IGraphNode, bool> IsGroupAnchor;
+
+		/// <summary>Optional function that returns a node's lane coordinate.</summary>
+		public Func<IGraphNode, float?> Lane;
+
+		/// <summary>Gets or sets the center coordinate used for lanes.</summary>
+		public float LaneCenter;
+
+		/// <summary>Gets or sets the distance between adjacent lanes.</summary>
+		public float LaneSpacing = 16;
+
+		/// <summary>Optional predicate controlling which nodes use metric mapping.</summary>
+		public Func<IGraphNode, bool> MetricApplies;
+
+		/// <summary>Gets or sets the function that maps a normalized metric to a color.</summary>
+		public Func<float, Color> MetricColor = Spectrum;
+
+		/// <summary>Gets or sets the numeric field used for metric mapping.</summary>
+		public string MetricField = "";
 
 		/// <summary>Gets a node type definition, creating a fallback for undeclared types.</summary>
 		/// <param name="scene">Scene whose schema is queried.</param>
@@ -182,7 +226,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="node">Node whose metric is read.</param>
 		/// <param name="value">Receives the finite numeric value.</param>
 		/// <param name="partition">Receives the partition key, when configured.</param>
-		/// <returns><see langword="true"/> when a valid metric is available.</returns>
+		/// <returns><see langword="true" /> when a valid metric is available.</returns>
 		public bool TryMetric(IGraphScene scene, IGraphNode node, out float value, out string partition)
 		{
 			value = 0;
@@ -235,12 +279,13 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the current progress fraction.</summary>
 		public float Fraction { get; set; }
+
 		/// <summary>Gets or sets whether progress is complete.</summary>
 		public bool Complete { get; set; }
 
 		/// <summary>Returns a valid progress fraction clamped to zero through one.</summary>
 		/// <param name="fraction">Receives the normalized fraction when valid.</param>
-		/// <returns><see langword="true"/> when the fraction is finite.</returns>
+		/// <returns><see langword="true" /> when the fraction is finite.</returns>
 		public bool TryFraction(out float fraction)
 		{
 			fraction = Complete ? 1 : Fraction;
@@ -255,12 +300,16 @@ namespace Cashg.GraphExplorer
 	{
 		/// <summary>Gets or sets the total number of tasks.</summary>
 		public int Count;
+
 		/// <summary>Gets or sets the number of completed tasks.</summary>
 		public int Done;
+
 		/// <summary>Gets or sets the optional task completion fraction.</summary>
 		public float? Progress;
+
 		/// <summary>Gets or sets the task status identifier.</summary>
 		public string Status = "draft";
+
 		/// <summary>Gets or sets the display text for the task.</summary>
 		public string Text = "";
 

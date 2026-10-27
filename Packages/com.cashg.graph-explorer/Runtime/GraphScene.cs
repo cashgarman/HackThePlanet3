@@ -23,6 +23,7 @@ namespace Cashg.GraphExplorer
 		/// <param name="id">Key to look up.</param>
 		/// <returns>The value associated with the key.</returns>
 		public T this[string id] => source[id];
+
 		/// <summary>Gets the keys in the source dictionary.</summary>
 		public IEnumerable<string> Keys => source.Keys;
 
@@ -40,7 +41,7 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Determines whether the source contains the specified key.</summary>
 		/// <param name="id">Key to find.</param>
-		/// <returns><see langword="true"/> when the key exists.</returns>
+		/// <returns><see langword="true" /> when the key exists.</returns>
 		public bool ContainsKey(string id)
 		{
 			return source.ContainsKey(id);
@@ -49,7 +50,7 @@ namespace Cashg.GraphExplorer
 		/// <summary>Attempts to get the value associated with a key.</summary>
 		/// <param name="id">Key to look up.</param>
 		/// <param name="value">Receives the value when the key exists.</param>
-		/// <returns><see langword="true"/> when the key exists.</returns>
+		/// <returns><see langword="true" /> when the key exists.</returns>
 		public bool TryGetValue(string id, out T value)
 		{
 			if (source.TryGetValue(id, out var item))
@@ -99,14 +100,19 @@ namespace Cashg.GraphExplorer
 
 		/// <summary>Gets the backing graph document.</summary>
 		public GraphDocument Document { get; }
+
 		/// <summary>Gets the scene's mutable view state.</summary>
 		public GraphViewState View { get; }
+
 		/// <summary>Gets the schema used to interpret graph records.</summary>
 		public GraphSchema Schema { get; }
+
 		/// <summary>Gets the scene's nodes keyed by identifier.</summary>
 		public IReadOnlyDictionary<string, IGraphNode> Nodes { get; }
+
 		/// <summary>Gets the scene's edges keyed by identifier.</summary>
 		public IReadOnlyDictionary<string, IGraphEdge> Edges { get; }
+
 		/// <summary>Gets the document topology revision represented by the scene.</summary>
 		public int Revision => Document.TopologyRevision;
 
