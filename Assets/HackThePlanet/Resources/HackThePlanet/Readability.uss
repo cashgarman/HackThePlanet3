@@ -99,9 +99,9 @@ Label { min-width: 0; }
 .text-size-slider .unity-base-slider__tracker { height: 6px; background-color: #34594d; }
 .text-size-slider .unity-base-slider__dragger { width: 22px; height: 28px; background-color: #9bfacb; }
 .text-size-slider .unity-text-field__input { color: #dce8e5; background-color: #172f27; padding: 5px; }
-.readable-tooltip { position: absolute; display: none; width: 410px; max-width: 92%; padding: 12px; color: #dce8e5; background-color: #172f27; border-width: 1px; border-color: #9bfacb; white-space: normal; }
+.readable-tooltip { position: absolute; display: none; align-self: flex-start; width: auto; max-width: 410px; padding: 8px 12px; color: #dce8e5; background-color: #172f27; border-width: 1px; border-color: #9bfacb; white-space: normal; -unity-text-align: middle-center; }
 /* Matches the graph node intel card (GraphViewport focused-node-card). */
-.readable-tooltip.intel-tooltip { padding: 8px 10px; color: #dceae4; background-color: #102025; border-color: #9bfacb; }
+.readable-tooltip.intel-tooltip { color: #dceae4; background-color: #102025; border-color: #9bfacb; }
 .large-text .rail { width: 104px; }
 .large-text .rail-button { width: 80px; }
 .large-text .rail-small { padding: 4px; }

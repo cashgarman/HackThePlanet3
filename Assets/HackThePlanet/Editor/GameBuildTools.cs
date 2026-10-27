@@ -50,7 +50,7 @@ namespace HackThePlanet.Editor
                 if(state==PlayModeStateChange.EnteredEditMode&&smokePhase==43)
                 {
                     File.WriteAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"PASS / Real player UI callbacks: connect, scan, hack, recover, deliver, research purchase, hardware upgrade. Both shaders compile and render nonblank GPU textures; display modes and GPU texture reuse passed. Settings button and Escape, exact menu choices, menu bounds, operation freeze, previous pause state, blocked background controls and shortcuts, reset confirmation, Cancel and Escape cancellation, confirmed fresh career, usable first contract, and Quit passed. Rendered screenshots captured. Asset-only contract, node variant, action button, shortcut, objective, technology and hardware extension rendered and exercised. Tactical queue, clear and stop controls exercised. Easy full intel, Medium anonymous topology and labels, Hard renderer-free centered message, animated GPU static, reduced/off effects, and connection back to discovered systems passed. Test career and effect preference isolated from user saves.");
-                    File.AppendAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"\nPASS / Text size: 200% default; real slider callbacks at 100% and 300%; every TextElement scales without compounding, including inline graph labels and numeric input; scrollable Settings stays in bounds at 300%, including a 1280 x 720 render; preference persistence and career-reset independence; original user preference restored.\n");
+                    File.AppendAllText(Path.Combine(Project,"Artifacts/workstation-smoke.txt"),"\nPASS / Text size: 200% compatibility; real slider callbacks at 100% and 300%; every TextElement scales without compounding, including inline graph labels and numeric input; scrollable Settings stays in bounds at 300%, including a 1280 x 720 render; preference persistence and career-reset independence; original user preference restored.\n");
                     if(smokeUiTexture!=null){smokeUiTexture.Release();UnityEngine.Object.DestroyImmediate(smokeUiTexture);smokeUiTexture=null;}
                     dataFixture?.Dispose();dataFixture=null;settingsCareer=null;SessionState.SetBool("HTP.Smoke",false);smokePhase=0;Status("PASS / smoke");if(Application.isBatchMode)EditorApplication.Exit(0);
                 }
@@ -160,7 +160,7 @@ namespace HackThePlanet.Editor
                     case 1:
                         smokeUiTexture=new RenderTexture(1680,960,24,RenderTextureFormat.ARGB32);smokeUiTexture.Create();
                         app.GetComponent<UIDocument>().panelSettings.targetTexture=smokeUiTexture;
-                        previousEffects=app.Visuals.Mode;previousTextSize=app.TextSizePercent;app.UseTestCareer(new Career());app.SetTextSize(200);app.Visuals.SetMode(SignalEffects.Full);smokePhase=400;return;
+                        previousEffects=app.Visuals.Mode;previousTextSize=app.TextSizePercent;app.UseTestCareer(new Career());app.SetTextSize(100);app.Visuals.SetMode(SignalEffects.Full);smokePhase=400;return;
                     case 400:
                         Check(app.State.Start(GameContent.Story[0]),"Debug UI fixture starts an operation.");
                         Check(app.ActivateVisibleControl("settings"),"Debug fixture opens Settings.");smokePhase++;return;
@@ -199,7 +199,7 @@ namespace HackThePlanet.Editor
                             "GraphExplorer renders all preview systems and their links in 3D: "+preview?.NodeCount+" nodes / "+preview?.VisibleNodes+" drawn / "+preview?.VisibleEdges+" links.");
                         Check(app.Root.Q<Button>("node-home")!=null,"Projected system labels remain selectable.");
                         var mapBounds=preview.parent.worldBound;
-                        Check(mapBounds.Contains(preview.worldBound.min+Vector2.one)&&mapBounds.Contains(preview.worldBound.max-Vector2.one)&&mapBounds.Contains(app.Root.Q<Button>("fit").worldBound.center),"Default 200% layout keeps the full graph and its controls visible: viewport "+mapBounds+", graph "+preview.worldBound+", fit "+app.Root.Q<Button>("fit").worldBound);
+                        Check(mapBounds.Contains(preview.worldBound.min+Vector2.one)&&mapBounds.Contains(preview.worldBound.max-Vector2.one)&&mapBounds.Contains(app.Root.Q<Button>("fit").worldBound.center),"Default layout keeps the full graph and its controls visible: viewport "+mapBounds+", graph "+preview.worldBound+", fit "+app.Root.Q<Button>("fit").worldBound);
                         ValidateSignalRendering(app);
                         NetworkVisualValidation.CheckViewport(preview);
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/01-contract-exchange.png"));smokePhase=SessionState.GetBool("HTP.WaypointSmoke",false)?127:100;return;
@@ -302,8 +302,25 @@ namespace HackThePlanet.Editor
                         var operationGraph=app.Root.Q<GraphViewport>();
                         Check(operationGraph!=null&&operationGraph.NodeCount>2&&operationGraph.NodeCount<app.State.Op.nodes.Count&&operationGraph.VisibleEdges>0,
                             "Live GraphExplorer view shows discovered systems and connections only.");
+                        Check(app.ActivateVisibleControl("rig-status")&&app.Root.Q<VisualElement>(className:"rig-stats-popover").resolvedStyle.display==DisplayStyle.Flex,
+                            "Rig status expands without covering the graph by default.");
+                        Check(app.ActivateVisibleControl("rig-status")&&app.Root.Q<VisualElement>(className:"rig-stats-popover").resolvedStyle.display==DisplayStyle.None,
+                            "Rig status collapses back into the utility row.");
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/02-live-operation.png"));
-                        GameValidation.Hack(app.State,"n14");GameValidation.Hack(app.State,"n18");GameValidation.Hack(app.State,"n22");app.SelectNode("n22");smokePhase++;return;
+                        smokeUiTexture.Release();smokeUiTexture.width=1280;smokeUiTexture.height=720;smokeUiTexture.Create();smokePhase=61;return;
+                    case 61:
+                        var resizedGraph=app.Root.Q<GraphViewport>();
+                        Check(resizedGraph!=null&&resizedGraph.worldBound.width>450&&resizedGraph.worldBound.height>180,
+                            "The live graph remains usable at 1280 x 720: "+resizedGraph?.worldBound);
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/02-live-operation-1280x720.png"));
+                        smokeUiTexture.Release();smokeUiTexture.width=1920;smokeUiTexture.height=1080;smokeUiTexture.Create();smokePhase=62;return;
+                    case 62:
+                        var wideGraph=app.Root.Q<GraphViewport>();
+                        Check(wideGraph!=null&&wideGraph.worldBound.width>700&&wideGraph.worldBound.height>300,
+                            "The live graph expands at 1920 x 1080: "+wideGraph?.worldBound);
+                        CaptureScreenshot(Path.Combine(Project,"Artifacts/02-live-operation-1920x1080.png"));
+                        smokeUiTexture.Release();smokeUiTexture.width=1680;smokeUiTexture.height=960;smokeUiTexture.Create();
+                        GameValidation.Hack(app.State,"n14");GameValidation.Hack(app.State,"n18");GameValidation.Hack(app.State,"n22");app.SelectNode("n22");smokePhase=7;return;
                     case 7:
                         Check(app.ActivateVisibleControl("action-download"),"Recovery button is wired.");GameValidation.FinishTask(app.State);smokePhase++;return;
                     case 8:
@@ -350,6 +367,7 @@ namespace HackThePlanet.Editor
                         Check(app.ActivateVisibleControl("effect-animate"),"Animate display effects toggle is wired.");
                         Check(app.Visuals.Mode==SignalEffects.Reduced,"Disabling animation freezes shader motion.");smokePhase++;return;
                     case 21:
+                        Check(app.Root.ClassListContains("motion-off"),"Reduced display effects also stop UI motion.");
                         frozenField=ReadPixels(app.Visuals.FieldTexture);frozenGlass=ReadPixels(app.Visuals.GlassTexture);
                         sharedField=app.Visuals.FieldTexture;sharedGlass=app.Visuals.GlassTexture;
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/08-reduced-effects.png"));smokePhase++;return;
@@ -362,15 +380,17 @@ namespace HackThePlanet.Editor
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/09-effects-off.png"));
                         Check(app.ActivateVisibleControl("effect-signal-field")&&app.ActivateVisibleControl("effect-phosphor-glass")&&app.ActivateVisibleControl("effect-animate")&&app.Visuals.Mode==SignalEffects.Full,"Display layers and animation restore full effects.");smokePhase++;return;
                     case 24:
+                        Check(!app.Root.ClassListContains("motion-off"),"Restoring full effects restores UI motion.");
                         Check(ReferenceEquals(sharedField,app.Visuals.FieldTexture)&&ReferenceEquals(sharedGlass,app.Visuals.GlassTexture),"UI rebuilds reuse both GPU textures.");
                         Check(!frozenField.SequenceEqual(ReadPixels(app.Visuals.FieldTexture)),"Full effects animate the signal field.");
                         app.Visuals.SetMode(previousEffects);frozenField=null;frozenGlass=null;
+                        app.SetTextSize(200);
                         settingsCareer=app.State.Career;settingsElapsed=app.State.Op.elapsed;settingsTaskElapsed=app.State.Op.task.elapsed;settingsTrace=app.State.Op.trace;
                         Check(app.Root.Q<VisualElement>(className:"settings-menu")!=null,"Settings stays open while display controls are changed.");smokePhase++;return;
                     case 25:
                         var menu=app.Root.Q<VisualElement>(className:"settings-menu");
                         Check(menu!=null&&menu.Q<Button>("resume")?.text=="Resume"&&menu.Q<Button>("reset-save")?.text=="Reset Game Save"&&menu.Q<Button>("quit")?.text=="Quit","Settings retains Resume, Reset Game Save, and Quit.");
-                        Check(app.Root.Q<SliderInt>("text-size")?.value==200,"Settings defaults to double text size.");
+                        Check(app.Root.Q<SliderInt>("text-size")?.value==200,"Settings reflects the active 200% compatibility size.");
                         Check(menu.worldBound.width>300&&menu.worldBound.height>200&&app.Root.worldBound.Contains(menu.worldBound.min)&&app.Root.worldBound.Contains(menu.worldBound.max),"Settings menu fits within the rendered viewport.");
                         Check(app.State.Op.paused&&app.State.Op.elapsed==settingsElapsed&&app.State.Op.task.elapsed==settingsTaskElapsed&&app.State.Op.trace==settingsTrace,"Settings freezes operation time, tool progress, and trace across frames.");
                         Check(!app.ActivateVisibleControl("action-scan")&&!app.ActivateVisibleControl("tab-research"),"Settings blocks underlying gameplay and navigation controls.");
@@ -416,7 +436,7 @@ namespace HackThePlanet.Editor
                         }
                         smokeUiTexture.Release();smokeUiTexture.width=1680;smokeUiTexture.height=960;smokeUiTexture.Create();smokePhase++;return;
                     case 306:
-                        Check(Mathf.Approximately(app.Root.Q<Label>(className:"micro").resolvedStyle.fontSize,16),"Returning to 200% does not compound font scaling.");
+                        Check(app.TextSizePercent==200,"Returning to 200% preserves the chosen text-size setting.");
                         Check(app.ActivateVisibleControl("resume")&&!app.State.Op.paused,"Resume restarts the operation that Settings paused.");
                         app.State.SetPaused(false);SendKey(app,KeyCode.Escape);
                         Check(app.State.Op.paused,"Escape opens Settings and pauses a running operation.");smokePhase=26;return;

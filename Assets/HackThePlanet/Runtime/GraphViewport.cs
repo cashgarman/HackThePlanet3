@@ -75,7 +75,10 @@ namespace HackThePlanet
             Action<string> select, GraphPathResult route = null, GraphCameraState cameraState = null, ContractIntel intel = ContractIntel.Full, ContractIntel? focusIntel = null, GameCatalog catalog = null,
             string guideEntryId = null, string guideObjectiveId = null, IReadOnlyList<NetworkWaypoint> waypoints = null, int waypointTier = 0)
             : this(BuildNetwork(nodes, links, preview, intel), selected, select, false, null, cameraState, false,
-                preview ? null : new HashSet<string>(nodes.Where(n => n.controlled).Select(n => n.id)))
+                preview ? null : new HashSet<string>(nodes.Where(n => n.controlled).Select(n => n.id)),
+                preview ? null : new HashSet<string>(nodes.Where(n => n.known && !n.controlled &&
+                    links.Any(l => l.a == n.id && nodes.Any(other => other.id == l.b && other.controlled) ||
+                                   l.b == n.id && nodes.Any(other => other.id == l.a && other.controlled))).Select(n => n.id)))
         {
             this.guideEntryId = guideEntryId;
             this.guideObjectiveId = guideObjectiveId;
@@ -136,7 +139,8 @@ namespace HackThePlanet
         }
 
         private GraphViewport(GraphScene graph, string selected, Action<string> select, bool research,
-            GraphPathResult route, GraphCameraState cameraState,bool flat=false,HashSet<string> controlledNodes=null)
+            GraphPathResult route, GraphCameraState cameraState,bool flat=false,HashSet<string> controlledNodes=null,
+            HashSet<string> reachableNodes=null)
         {
             scene = graph;this.flat=flat;selectNode=select;
             if(flat)foreach(var node in graph.Nodes.Values)node.Position=new Vector3(node.Position.x,node.Position.y,0);
@@ -190,7 +194,7 @@ namespace HackThePlanet
                 route.EdgeIds.Select(id => scene.Edges.ContainsKey(id) ? id : string.Join(">", id.Split('>').Reverse())));
             session.Renderer.UpdateMetrics(scene, edgeFilter);
 
-            links = new LinkOverlay(scene, camera, selected, route, research, flat, controlledNodes);Add(links);
+            links = new LinkOverlay(scene, camera, selected, route, research, flat, controlledNodes, reachableNodes);Add(links);
             labels = new VisualElement();
             labels.style.position = Position.Absolute;
             labels.style.left = labels.style.right = labels.style.top = labels.style.bottom = 0;
@@ -234,11 +238,11 @@ namespace HackThePlanet
             scroll.style.paddingLeft = scroll.style.paddingRight = 10;
             scroll.style.paddingTop = scroll.style.paddingBottom = 8;
             focusedTitle = new Label { name = "focused-node-title" };
-            focusedTitle.style.fontSize = 12;
+            focusedTitle.style.fontSize = 14;
             focusedTitle.style.color = Palette.Lime;
             focusedTitle.style.whiteSpace = WhiteSpace.Normal;
             focusedDetails = new Label { name = "focused-node-intel", enableRichText = true };
-            focusedDetails.style.fontSize = 10;
+            focusedDetails.style.fontSize = 12;
             focusedDetails.style.color = Palette.Hex("DCEAE4");
             focusedDetails.style.whiteSpace = WhiteSpace.Normal;
             foreach (var label in new[] { focusedTitle, focusedDetails })
@@ -262,7 +266,11 @@ namespace HackThePlanet
                 int width = Mathf.Clamp(Mathf.RoundToInt(contentRect.width), 256, 2048);
                 int height = Mathf.Clamp(Mathf.RoundToInt(contentRect.height), 256, 2048);
                 if (texture.width != width || texture.height != height)
-                { texture.Release(); texture.width = width; texture.height = height; texture.Create(); }
+                {
+                    camera.targetTexture = null;
+                    texture.Release();texture.width = width;texture.height = height;texture.Create();
+                    camera.targetTexture = texture;
+                }
                 camera.aspect = (float)width / height;
                 if (fitPending) { ResetView(); savedCamera.Initialized = true;fitPending=false; }
                 PositionLabels();
@@ -397,7 +405,7 @@ namespace HackThePlanet
             // all receive the same anonymous topology, without changing simulation nodes.
             if (preview && intel != ContractIntel.Full)
             {
-                schema.Register(new GraphNodeTypeDefinition("unknown", "Unknown system", "default", Palette.Cyan, .95f));
+                schema.Register(new GraphNodeTypeDefinition("unknown", "Unknown system", "default", Palette.Cyan, 1.12f));
                 schema.Register(new GraphRelationDefinition("network", "Connection", Palette.Cyan));
                 if (intel == ContractIntel.Topology)
                 {
@@ -412,9 +420,9 @@ namespace HackThePlanet
             foreach(var group in nodes.GroupBy(n=>string.IsNullOrEmpty(n.typeId)?n.kind.ToString():n.typeId))
             {
                 var node=group.First();string glyph=node.kind.ToString();var color=node.color.a>0?node.color:Palette.Kind(node.kind);
-                schema.Register(new GraphNodeTypeDefinition(group.Key,group.Key,glyph,color,.95f));
-                schema.Register(new GraphNodeTypeDefinition(group.Key+"-owned",group.Key,glyph,Palette.Lime,.95f));
-                schema.Register(new GraphNodeTypeDefinition(group.Key+"-objective",group.Key,glyph,Palette.Amber,1.1f));
+                schema.Register(new GraphNodeTypeDefinition(group.Key,group.Key,glyph,color,1.12f));
+                schema.Register(new GraphNodeTypeDefinition(group.Key+"-owned",group.Key,glyph,Palette.Lime,1.12f));
+                schema.Register(new GraphNodeTypeDefinition(group.Key+"-objective",group.Key,glyph,Palette.Amber,1.27f));
             }
             schema.Register(new GraphRelationDefinition("network", "Connection", Palette.Cyan));
             foreach (var node in nodes.Where(n => preview || n.known))
@@ -646,7 +654,7 @@ namespace HackThePlanet
                 distance = Mathf.Max(distance, Mathf.Max((Mathf.Abs(point.y) + 2) / tangent,
                     (Mathf.Abs(point.x) + 2) / (tangent * camera.aspect)) - point.z);
             }
-            distance *= 1.12f;
+            distance *= !research && scene.Nodes.Count < 20 ? 1.0f : 1.12f;
             PlaceCamera();
             PositionLabels();
         }
@@ -671,8 +679,10 @@ namespace HackThePlanet
 
             private readonly bool flat;
             private readonly HashSet<string> controlledNodes;
+            private readonly HashSet<string> reachableNodes;
 
-            public LinkOverlay(GraphScene scene, Camera camera, string selected, GraphPathResult route, bool research, bool flat = false, HashSet<string> controlledNodes = null)
+            public LinkOverlay(GraphScene scene, Camera camera, string selected, GraphPathResult route, bool research, bool flat = false,
+                HashSet<string> controlledNodes = null, HashSet<string> reachableNodes = null)
             {
                 this.scene = scene;
                 this.camera = camera;
@@ -680,6 +690,7 @@ namespace HackThePlanet
                 this.research = research;
                 this.flat = flat;
                 this.controlledNodes = controlledNodes ?? new HashSet<string>();
+                this.reachableNodes = reachableNodes ?? new HashSet<string>();
                 path = new HashSet<string>((route?.EdgeIds??Array.Empty<string>()).SelectMany(id=>new[]{id,string.Join(">",id.Split('>').Reverse())}));
                 style.position = Position.Absolute;
                 style.left = style.right = style.top = style.bottom = 0;
@@ -724,6 +735,32 @@ namespace HackThePlanet
                         (1 - start.y / camera.pixelHeight) * contentRect.height));
                     painter.LineTo(new Vector2(end.x / camera.pixelWidth * contentRect.width,
                         (1 - end.y / camera.pixelHeight) * contentRect.height));
+                    painter.Stroke();
+                }
+                // Only discovered systems adjacent to the controlled network get a quiet
+                // targeting bracket. It guides the next move without exposing hidden nodes.
+                painter.strokeColor = new Color(.12f, .94f, .85f, .52f);
+                painter.lineWidth = 1.1f;
+                foreach (var id in reachableNodes)
+                {
+                    if (id == selected || !scene.Nodes.TryGetValue(id, out var node)) continue;
+                    var point = camera.WorldToViewportPoint(node.Position);
+                    if (point.z <= 0 || point.x < 0 || point.x > 1 || point.y < 0 || point.y > 1) continue;
+                    float x = point.x * contentRect.width, y = (1 - point.y) * contentRect.height;
+                    const float outer = 16f, inner = 10f;
+                    painter.BeginPath();
+                    painter.MoveTo(new Vector2(x - outer, y - inner));
+                    painter.LineTo(new Vector2(x - outer, y - outer));
+                    painter.LineTo(new Vector2(x - inner, y - outer));
+                    painter.MoveTo(new Vector2(x + inner, y - outer));
+                    painter.LineTo(new Vector2(x + outer, y - outer));
+                    painter.LineTo(new Vector2(x + outer, y - inner));
+                    painter.MoveTo(new Vector2(x - outer, y + inner));
+                    painter.LineTo(new Vector2(x - outer, y + outer));
+                    painter.LineTo(new Vector2(x - inner, y + outer));
+                    painter.MoveTo(new Vector2(x + inner, y + outer));
+                    painter.LineTo(new Vector2(x + outer, y + outer));
+                    painter.LineTo(new Vector2(x + outer, y + inner));
                     painter.Stroke();
                 }
                 if (!SelectionVisible) return;

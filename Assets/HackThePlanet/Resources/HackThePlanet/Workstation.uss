@@ -254,6 +254,12 @@ ScrollView { flex-grow: 1; min-height: 0; }
 .result-timeline .unity-base-slider__dragger { background-color: #4a6670; border-width: 0; border-radius: 5px; min-height: 28px; }
 .result-timeline .unity-base-slider__dragger-border { border-width: 0; }
 .result-timeline .terminal-line { font-size: 12px; margin-bottom: 8px; color: #9eb4bc; }
+.operation-report .eyebrow { font-size: 12px; }
+.operation-report .micro { font-size: 10px; }
+.operation-report .body-copy { font-size: 15px; line-height: 1.35; }
+.operation-report .result-trace { font-size: 20px; }
+.operation-report .result-bonus { font-size: 13px; }
+.operation-report .result-timeline .terminal-line { font-size: 14px; margin-bottom: 10px; }
 .eyebrow { font-size: 9px; letter-spacing: 1.6px; color: #8ba2aa; }
 .micro { font-size: 8px; letter-spacing: 0.8px; }
 .small { font-size: 11px; }
@@ -292,16 +298,42 @@ ScrollView { flex-grow: 1; min-height: 0; }
 .rig-details { flex-grow: 1; flex-shrink: 1; min-height: 0; padding: 24px 22px 10px 22px; }
 .rig-inventory { height: 50%; flex-shrink: 0; min-height: 0; padding: 14px 16px 12px 16px; border-top-width: 1px; border-top-color: #26383e; background-color: #101c23; }
 .rig-inventory.rig-drop-zone { border-top-width: 2px; border-top-color: #9af58b; background-color: #14281f; }
-.rig-category-tabs { flex-direction: row; flex-wrap: wrap; margin-bottom: 8px; }
-.rig-category-tab { width: 34px; height: 34px; margin-right: 6px; margin-bottom: 6px; padding: 0; align-items: center; justify-content: center; border-width: 1px; border-color: #32444a; background-color: #132027; }
+.rig-category-tabs { flex-direction: row; flex-wrap: nowrap; margin-bottom: 8px; min-width: 0; }
+.rig-shop-category-tabs { margin-top: 8px; margin-bottom: 4px; }
+.rig-category-tab { width: 30px; height: 30px; flex-grow: 1; flex-shrink: 1; min-width: 0; margin-right: 2px; margin-bottom: 0; padding: 0; align-items: center; justify-content: center; border-width: 1px; border-color: #32444a; background-color: #132027; }
 .rig-category-tab:hover { border-color: #88abb3; }
 .rig-category-tab.active { border-color: #c5f56b; background-color: #1c2d24; }
 .rig-inventory-list { flex-grow: 1; min-height: 0; }
 .rig-inventory-row { white-space: normal; margin-top: 6px; }
+.rig-inventory-empty { min-height: 44px; justify-content: center; align-items: center; border-width: 1px; border-color: #26383e; background-color: #101c23; }
 .rig-part-content { flex-direction: row; align-items: center; justify-content: center; flex-grow: 1; flex-shrink: 1; min-width: 0; }
 .rig-inventory-row .rig-part-content { justify-content: flex-start; }
 .rig-part-title { margin-left: 7px; white-space: normal; -unity-text-align: middle-left; flex-shrink: 1; }
 .rig-shop-head { flex-direction: row; align-items: center; }
+.rig-shop .eyebrow, .rig-inventory > .eyebrow { font-size: 12px; }
+.rig-shop .small, .rig-inventory .small, .rig-details .small { font-size: 15px; }
+.rig-shop .micro, .rig-inventory .micro, .rig-details .micro { font-size: 12px; }
+.rig-layout .rig-shop .rig-shop-card .small, .rig-layout .rig-details .small { font-size: 16px; }
+.rig-layout .rig-shop .rig-shop-card .micro, .rig-layout .rig-budgets .micro { font-size: 12px; }
+.rig-layout .rig-inventory .eyebrow { font-size: 15px; }
+.rig-shop .rig-part-title { font-size: 16px; }
+.rig-details .body-copy { font-size: 15px; line-height: 1.35; }
+.rig-category-tab { width: 30px; height: 30px; }
+.rig-inventory-row { min-height: 44px; }
+.rig-stat { margin-left: 16px; margin-top: 5px; }
+.rig-stat-icon { margin-right: 7px; }
+.rig-layout .rig-shop .eyebrow, .rig-layout .rig-inventory .eyebrow { font-size: 30px; }
+.rig-layout .rig-shop .small, .rig-layout .rig-inventory .small, .rig-layout .rig-details .small { font-size: 32px; }
+.rig-layout .rig-shop .micro, .rig-layout .rig-inventory .micro, .rig-layout .rig-details .micro, .rig-layout .rig-budgets .micro { font-size: 24px; }
+.rig-layout .rig-shop .rig-part-title, .rig-layout .rig-part-title { font-size: 32px; }
+.rig-layout .rig-details .body-copy { font-size: 30px; line-height: 1.35; }
+.rig-layout .rig-details .eyebrow { font-size: 30px; }
+.rig-layout .rig-details .mission-title { font-size: 40px; }
+.rig-layout .rig-module { font-size: 22px; }
+.rig-layout .rig-module .rig-part-title { font-size: 24px; }
+.rig-layout .rig-shop .secondary-button, .rig-layout .rig-details .secondary-button, .rig-layout .rig-details .danger-button { font-size: 26px; min-height: 72px; }
+.rig-layout .rig-category-tab { width: 30px; height: 30px; }
+.rig-layout .rig-inventory-row { min-height: 72px; }
 .rig-stat-line { flex-direction: row; align-items: center; justify-content: flex-end; flex-wrap: wrap; max-width: none; }
 .rig-stat { flex-direction: row; align-items: center; margin-left: 12px; margin-top: 2px; }
 .rig-stat-icon { margin-right: 5px; }

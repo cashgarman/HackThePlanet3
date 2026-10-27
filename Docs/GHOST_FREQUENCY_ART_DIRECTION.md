@@ -16,6 +16,14 @@ Hack The Planet looks like a private workstation intercepting a corporate signal
 
 Give every system a small instrument face: corner brackets, a device glyph, security rating, access state, address, and a quiet barcode. Keep route lines beneath cards. Ambient geometry stays quieter than unexplored connections; controlled paths are brighter. The animated progress segment beneath a running target reflects the real tool's progress. Pausing stops mission packet travel and scanner-ring expansion.
 
+## Signal deck UI
+
+The active operation uses a three-panel 16:9 layout: contract and objectives on the left, the largest flexible area for the 3D network in the center, and a selection-locked inspector on the right. Trace sits above the graph; actions and the two resource rings sit below it. The compact utility row keeps simulation controls visible and opens detailed rig statistics on demand. The same framed panels, cyan controls, typography, and status treatments carry through Research, the rig, Intelligence, and dialogs.
+
+Only discovered systems next to controlled nodes receive reachable brackets. Selecting a system highlights its known route, while the inspector stays on that selection as the pointer moves. Action cards show the current trace and time forecast. Previews, no-intel contracts, hidden nodes, and modded actions follow the same disclosure rules as gameplay.
+
+Buttons react on hover and press; panels ease in when switching screens; dialogs lift into place; trace and action-state changes transition briefly. These interface transitions follow **Animate display effects**. With motion disabled, state changes remain immediate and readable. Text size defaults to the new layout density for new players; saved text-size preferences remain in force.
+
 Maintain the palette's gameplay meanings with glyphs, labels, and state text. New effects should convey a route, action, or security condition. Favor slow measurement and transmission over random flicker.
 
 ## Shader stack

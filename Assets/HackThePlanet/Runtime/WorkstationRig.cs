@@ -113,7 +113,7 @@ namespace HackThePlanet
     {
         private readonly GraphCameraState rigCamera=new GraphCameraState();
         private static readonly string[] RigCategoryOrder={"power","cooling","processing","transfer","storage","memory","stealth","reclaim"};
-        private string selectedRigId,dragRigId,rigMessage,rigCategory="ALL";
+        private string selectedRigId,dragRigId,rigMessage,rigCategory="ALL",shopCategory="ALL";
         private bool dragRotated,dragMoved,dragLifted;
         private int dragPointer,dragRestoreRow=-1,dragRestoreCol=-1;
         private bool dragRestoreRot;
@@ -127,15 +127,17 @@ namespace HackThePlanet
             if(State.Part(selectedRigId)==null)selectedRigId=null;
             var categories=RigCategories().ToList();
             if(rigCategory!="ALL"&&!categories.Contains(rigCategory))rigCategory="ALL";
+            if(shopCategory!="ALL"&&!categories.Contains(shopCategory))shopCategory="ALL";
             var left=El(workspace,"left-panel");var shop=Scroll(left,"rig-shop");
             Text(shop,"MODULE EXCHANGE","eyebrow cyan");Text(shop,"Buy copies. Pack your signal.","small muted");
-            foreach(var branch in State.Modules.GroupBy(m=>m.branch))
+            BuildRigShopFilters(shop,categories);
+            foreach(var branch in State.Modules.Where(m=>shopCategory=="ALL"||m.family==shopCategory).GroupBy(m=>m.branch))
             {
                 Text(shop,branch.Key,"eyebrow section-space").style.color=Palette.Branch(branch.Key);
                 foreach(var model in branch)
                 {
                     var card=El(shop,"rig-shop-card");card.tooltip=ModuleTooltip(model)+"\n"+State.PreviewModule(model.id).reason;
-                    var shopHead=El(card,"rig-shop-head");shopHead.Add(RigGlyph.ForModule(model,Palette.Branch(model.branch),18));
+                    var shopHead=El(card,"rig-shop-head");shopHead.Add(RigGlyph.ForModule(model,Palette.Branch(model.branch),40));
                     Text(shopHead,model.title+" / T"+model.tier,"small rig-part-title").style.color=Palette.Branch(model.branch);
                     RichText(card,model.width+"x"+model.height+" / "+model.price+" cr / "+model.powerDemand+" POWER / "+model.heatOutput+" HEAT","micro muted");
                     RichText(card,model.description,"small");
@@ -168,7 +170,7 @@ namespace HackThePlanet
                 canvas.ConfigureFlatNode("part-"+part.instanceId,footprint,ModuleIntel(model),module:true);
                 var module=canvas.Q<Button>("part-"+part.instanceId);
                 module?.AddToClassList("rig-module");module?.AddToClassList(IntelTooltipClass);
-                if(module!=null)SetPartContent(module,model,model.title,18);
+                if(module!=null)SetPartContent(module,model,model.title,56);
                 module?.RegisterCallback<PointerDownEvent>(evt=>BeginRigDrag(part.instanceId,evt),TrickleDown.TrickleDown);
             }
             var footer=El(map,"map-footer");
@@ -220,7 +222,7 @@ namespace HackThePlanet
         private static Label OperationStat(VisualElement line,string glyph,Color tint,string text,string classes)
         {
             var stat=El(line,"rig-stat");
-            var icon=new RigGlyph(glyph,tint,14);icon.AddToClassList("rig-stat-icon");stat.Add(icon);
+            var icon=new RigGlyph(glyph,tint,36);icon.AddToClassList("rig-stat-icon");stat.Add(icon);
             return RichText(stat,text,classes);
         }
         // Rig parts show their icon beside the title. The button text is cleared so both share one row.
@@ -234,7 +236,7 @@ namespace HackThePlanet
         }
         private void BuildRigDetails(VisualElement info)
         {
-            Text(info,"SELECTED COMPONENT","eyebrow cyan");
+            PanelTitle(info,"SELECTED COMPONENT");
             var selected=State.Part(selectedRigId);
             if(selected==null)Text(info,"Select a component in the rack or the inventory.","body-copy muted section-space");
             else
@@ -280,6 +282,18 @@ namespace HackThePlanet
         private IEnumerable<string> RigCategories()=>State.Modules.Select(m=>m.family).Where(f=>!string.IsNullOrEmpty(f)).Distinct()
             .OrderBy(f=>{int i=Array.IndexOf(RigCategoryOrder,f);return i<0?RigCategoryOrder.Length:i;}).ThenBy(f=>f,StringComparer.Ordinal);
         private static string RigCategoryTitle(string category)=>category=="ALL"?"ALL PARTS":category.ToUpperInvariant();
+        private void BuildRigShopFilters(VisualElement parent,List<string> categories)
+        {
+            var tabs=El(parent,"rig-category-tabs rig-shop-category-tabs");
+            var tabKeys=new List<string>{"ALL"};tabKeys.AddRange(categories);
+            foreach(var category in tabKeys)
+            {
+                var key=category;bool active=shopCategory==key;
+                var tab=Btn(tabs,"",()=>{shopCategory=key;dirty=true;Beep();},"shop-category-"+key,"rig-category-tab");
+                tab.EnableInClassList("active",active);tab.tooltip=RigCategoryTitle(key);
+                tab.Add(new RigGlyph(key,active?Palette.Lime:Palette.Hex("7C919D"),24));
+            }
+        }
         private void BuildRigInventory(VisualElement parent,List<string> categories)
         {
             Text(parent,"INVENTORY","eyebrow cyan");
@@ -290,17 +304,21 @@ namespace HackThePlanet
                 var key=category;bool active=rigCategory==key;
                 var tab=Btn(tabs,"",()=>{rigCategory=key;dirty=true;Beep();},"rig-category-"+key,"rig-category-tab");
                 tab.EnableInClassList("active",active);tab.tooltip=RigCategoryTitle(key);
-                tab.Add(new RigGlyph(key,active?Palette.Lime:Palette.Hex("7C919D"),20));
+                tab.Add(new RigGlyph(key,active?Palette.Lime:Palette.Hex("7C919D"),30));
             }
             var parts=State.Career.rigParts.Where(p=>!p.Installed&&(rigCategory=="ALL"||State.Module(p.modelId).family==rigCategory)).ToList();
             Text(parent,RigCategoryTitle(rigCategory)+" / "+parts.Count+" SPARE","eyebrow section-space");
             var list=Scroll(parent,"rig-inventory-list");
-            if(parts.Count==0)Text(list,"No spare parts here. Buy copies in the module exchange, or drag installed parts into this panel.","small muted");
+            if(parts.Count==0)
+            {
+                var emptyRow=El(list,"rig-inventory-row rig-inventory-empty");
+                Text(emptyRow,"EMPTY","micro muted");
+            }
             foreach(var part in parts)
             {
                 var model=State.Module(part.modelId);
                 var row=Btn(list,"",()=>{selectedRigId=part.instanceId;rigMessage=null;dirty=true;},"owned-"+part.instanceId,"ability-button rig-inventory-row");
-                SetPartContent(row,model,(part.instanceId==selectedRigId?"> ":"")+model.title,20);
+                SetPartContent(row,model,(part.instanceId==selectedRigId?"> ":"")+model.title,52);
                 row.tooltip=ModuleIntel(model);row.AddToClassList(IntelTooltipClass);row.style.color=Palette.Branch(model.branch);
                 row.RegisterCallback<PointerDownEvent>(evt=>BeginRigDrag(part.instanceId,evt),TrickleDown.TrickleDown);
             }
@@ -544,7 +562,7 @@ namespace HackThePlanet
         }
         private void BuildRefundModal()
         {
-            overlay=El(root,"modal-overlay");var box=Scroll(overlay,"modal-box");Text(box,"REFUND RESEARCH","large-heading");
+            overlay=El(root,"modal-overlay");var box=Scroll(overlay,"modal-box");OpenModalWithMotion(box);Text(box,"REFUND RESEARCH","large-heading");
             Text(box,State.PreviewResearchRefund().description,"body-copy");
             Btn(box,"CONFIRM REFUND",()=>{State.RefundResearch();modal=null;dirty=true;},"confirm-research-refund","primary-button").SetEnabled(!State.Active);
             Btn(box,"CANCEL",()=>{modal=null;dirty=true;},"cancel-research-refund","secondary-button");
