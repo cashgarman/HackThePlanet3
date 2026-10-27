@@ -107,7 +107,12 @@ namespace HackThePlanet.Editor
             rebuilding = true; rootVisualElement.Clear(); countLabel = null; headerUnsaved = null;
             rootVisualElement.AddToClassList("ctp-root");
             var chrome = new VisualElement(); chrome.AddToClassList("ctp-chrome");
-            chrome.Add(BuildCategoryTabs()); chrome.Add(BuildToolbar());
+            chrome.style.flexDirection = FlexDirection.Column;
+            chrome.style.flexShrink = 0;
+            chrome.Add(BuildCategoryTabs());
+            var toolbarHost = new VisualElement(); toolbarHost.AddToClassList("ctp-toolbar-host");
+            toolbarHost.Add(BuildToolbar());
+            chrome.Add(toolbarHost);
             rootVisualElement.Add(chrome);
             banner = new VisualElement(); banner.AddToClassList("ctp-banner"); rootVisualElement.Add(banner);
             form = new ScrollView(); form.AddToClassList("ctp-form"); form.style.flexGrow = 1; form.style.paddingLeft = form.style.paddingRight = 12;
@@ -127,6 +132,7 @@ namespace HackThePlanet.Editor
         private VisualElement BuildCategoryTabs()
         {
             var scroll = new ScrollView(ScrollViewMode.Horizontal); scroll.AddToClassList("ctp-tabs");
+            scroll.style.flexShrink = 0;
             scroll.horizontalScrollerVisibility = ScrollerVisibility.Auto;
             scroll.verticalScrollerVisibility = ScrollerVisibility.Hidden;
             var row = new VisualElement(); row.AddToClassList("ctp-tab-row"); scroll.Add(row);

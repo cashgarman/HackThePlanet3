@@ -146,11 +146,13 @@ namespace HackThePlanet
                     if(!preview.allowed)Text(card,preview.reason,"micro amber");
                 }
             }
-            var middle=El(workspace,"network-panel");var map=El(middle,"map-content");BuildRigIssues(map);var head=El(map,"map-heading");
+            var middle=El(workspace,"network-panel");var map=El(middle,"map-content");BuildRigIssues(map);var head=El(map,"map-heading rig-map-heading");
             var titles=El(head,"map-title-block");
             var titleRow=El(titles,"rig-title-row");
-            Text(titleRow,State.Chassis.title.ToUpperInvariant()+" / "+State.Chassis.rows+"x"+State.Chassis.columns,"map-title");
-            Text(titleRow,"DRAG TO PLACE / R OR WHEEL ROTATES","micro muted");
+            var titleLead=El(titleRow,"rig-title-lead");
+            Text(titleLead,State.Chassis.title.ToUpperInvariant()+" / "+State.Chassis.rows+"x"+State.Chassis.columns,"map-title");
+            Text(titleLead,"DRAG TO PLACE / R OR WHEEL ROTATES","micro muted");
+            BuildRigBudgetActions(titleRow);
             BuildRigBudgets(head);
             canvas=new GraphViewport(BuildRackScene(),SlotClicked,rigCamera,true);map.Add(canvas);
             const float cellPitch=4f,cellInset=.32f;
@@ -193,19 +195,9 @@ namespace HackThePlanet
                 Text(panel,(error?"ERROR / ":"WARNING / ")+issue.message,"small rig-issue "+(error?"rig-issue-error":"rig-issue-warning"));
             }
         }
-        private void BuildRigBudgets(VisualElement head)
+        private void BuildRigBudgetActions(VisualElement parent)
         {
-            var budgets=El(head,"rig-budgets");
-            var stats=El(budgets,"rig-stat-line");
-            RigStat(stats,"power",Palette.Hex("A8C2BC"),"POWER / "+State.PowerUsed+" / "+State.PowerLimit,"small");
-            RigStat(stats,"cooling",Palette.Hex("A8C2BC"),"COOLING / "+State.HeatUsed+" / "+State.CoolingLimit,"small");
-            RigStat(stats,"processing",Palette.Hex("60D8D0"),"COMPUTE / "+State.Compute.ToString("0.00")+" GFLOP/s","small cyan");
-            RigStat(stats,"transfer",Palette.Hex("60D8D0"),"BANDWIDTH / "+State.Bandwidth.ToString("0.00")+" GB/s","small cyan");
-            RigStat(stats,"storage",Palette.Hex("60D8D0"),"STORAGE / "+State.StorageCapacity.ToString("0")+" GB","micro cyan");
-            RigStat(stats,"memory",Palette.Hex("60D8D0"),"RAM / "+State.MemoryPool.ToString("0.#")+" GB","micro cyan");
-            RigStat(stats,"reclaim",Palette.Hex("60D8D0"),"RECLAIM / "+State.MemoryReclaim.ToString("0.#")+" GB/s","micro cyan");
-            RigStat(stats,"slots",Palette.Hex("60D8D0"),"SLOTS / "+State.Slots,"micro cyan");
-            var actions=El(budgets,"rig-budget-actions");
+            var actions=El(parent,"rig-budget-actions");
             Text(actions,State.RigValid?"BUILD READY":"BUILD INVALID / CONNECTION BLOCKED",State.RigValid?"micro lime":"micro amber");
             if(State.NextChassis!=null)
             {
@@ -214,15 +206,29 @@ namespace HackThePlanet
                 Text(actions,preview.reason,"micro muted");
             }
         }
+        private void BuildRigBudgets(VisualElement head)
+        {
+            var budgets=El(head,"rig-budgets");
+            var stats=El(budgets,"rig-stat-line");
+            var muted=Palette.Hex("A8C2BC");var cyan=Palette.Hex("60D8D0");
+            RigStat(stats,"power",muted,"POWER / "+State.PowerUsed+" / "+State.PowerLimit,"micro");
+            RigStat(stats,"cooling",muted,"COOLING / "+State.HeatUsed+" / "+State.CoolingLimit,"micro");
+            RigStat(stats,"processing",cyan,"COMPUTE / "+State.Compute.ToString("0.00")+" GFLOP/s","micro cyan");
+            RigStat(stats,"transfer",cyan,"BANDWIDTH / "+State.Bandwidth.ToString("0.00")+" GB/s","micro cyan");
+            RigStat(stats,"storage",cyan,"STORAGE / "+State.StorageCapacity.ToString("0")+" GB","micro cyan");
+            RigStat(stats,"memory",cyan,"RAM / "+State.MemoryPool.ToString("0.#")+" GB","micro cyan");
+            RigStat(stats,"reclaim",cyan,"RECLAIM / "+State.MemoryReclaim.ToString("0.#")+" GB/s","micro cyan");
+            RigStat(stats,"slots",cyan,"SLOTS / "+State.Slots,"micro cyan");
+        }
         // Each readout pairs its value with the icon of the thing it measures.
         private static void RigStat(VisualElement line,string glyph,Color tint,string text,string classes)
         {
-            OperationStat(line,glyph,tint,text,classes);
+            OperationStat(line,glyph,tint,text,classes,22);
         }
-        private static Label OperationStat(VisualElement line,string glyph,Color tint,string text,string classes)
+        private static Label OperationStat(VisualElement line,string glyph,Color tint,string text,string classes,float iconSize=36)
         {
             var stat=El(line,"rig-stat");
-            var icon=new RigGlyph(glyph,tint,36);icon.AddToClassList("rig-stat-icon");stat.Add(icon);
+            var icon=new RigGlyph(glyph,tint,iconSize);icon.AddToClassList("rig-stat-icon");stat.Add(icon);
             return RichText(stat,text,classes);
         }
         // Rig parts show their icon beside the title. The button text is cleared so both share one row.

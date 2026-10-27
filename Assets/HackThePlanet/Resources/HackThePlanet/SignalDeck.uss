@@ -54,7 +54,7 @@
 .contract-card.active { border-color: #00dcd2; border-left-width: 3px; border-left-color: #00f2df; background-color: #07313a; }
 .contract-card:hover { border-color: #76fff3; background-color: #103c43; }
 .contract-title { color: #f2f8fa; font-size: 21px; }
-.map-heading { height: 94px; min-height: 94px; padding: 15px 22px 9px 22px; background-color: #001c23; border-bottom-width: 0; }
+.map-heading { height: auto; min-height: 94px; padding: 15px 22px 9px 22px; background-color: #001c23; border-bottom-width: 0; }
 .map-title { color: #f1f8fa; font-size: 36px; letter-spacing: 3px; margin-top: 0; }
 .map-heading .eyebrow { color: #00eee2; font-size: 14px; }
 .map-status .micro { margin-top: 4px; font-size: 13px; color: #a6bdd3; }
@@ -162,6 +162,11 @@
 .rig-shop .eyebrow { color: #00e9df; }
 .rig-shop-card .small { font-size: 14px; }
 .rig-shop-card .micro, .rig-budgets .micro { font-size: 10px; }
+.rig-budgets > .rig-stat-line { flex-wrap: nowrap; }
+.rig-budgets > .rig-stat-line > .rig-stat { margin-left: 5px; }
+.rig-budgets > .rig-stat-line .rig-stat-icon { width: 22px; height: 22px; margin-right: 3px; }
+.rig-map-heading .rig-budget-actions .secondary-button { min-height: 34px; padding: 4px 10px; font-size: 11px; }
+.rig-map-heading .rig-budget-actions .micro { font-size: 11px; }
 .rig-details .small { font-size: 14px; }
 .rig-inventory .eyebrow { font-size: 14px; }
 .full-page .body-copy { font-size: 16px; }
