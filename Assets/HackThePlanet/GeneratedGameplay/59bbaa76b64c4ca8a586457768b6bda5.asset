@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: disrupt
   title: Disrupt scanner
-  description: Suppress a reachable scanner for 45 seconds. Takes 1.2 seconds with 1 base trace. Reusable while equipped. Costs 10 MEM, reclaimed over simulation time.
+  description: Suppress a reachable scanner for 45 seconds. Takes 1.2 seconds with 1 base trace. Reusable while equipped. Costs 10 GB RAM, reclaimed over simulation time.
   branch: CONTROL
   cost: 45
   waypointTier: 0

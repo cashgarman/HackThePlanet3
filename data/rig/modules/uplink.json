@@ -1,7 +1,7 @@
 {
   "id": "uplink",
   "title": "Uplink",
-  "description": "+0.25 transfer speed.",
+  "description": "+0.25 GB/s bandwidth.",
   "family": "transfer",
   "branch": "RECON",
   "tier": 1,
@@ -28,7 +28,7 @@
   "modifiers": [
     {
       "id": "",
-      "stat": "transferSpeed",
+      "stat": "bandwidth",
       "priority": 0,
       "operation": "Add",
       "when": {

@@ -157,7 +157,7 @@ MonoBehaviour:
     - rid: 213507078570378784
       type: {class: StatNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        stat: hackSpeed
+        stat: compute
     - rid: 213507078570378785
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:

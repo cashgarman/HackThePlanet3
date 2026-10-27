@@ -232,7 +232,7 @@ MonoBehaviour:
     - rid: 213507066652786761
       type: {class: StatNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        stat: transferSpeed
+        stat: bandwidth
     - rid: 213507066652786762
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:

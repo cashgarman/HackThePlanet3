@@ -19,9 +19,9 @@ namespace HackThePlanet.Editor
             foreach(var id in new[]{"bridge","backdoor"})Tool(id).presentationPriority=10;
             foreach(var id in new[]{"disrupt","blackout"})Tool(id).presentationPriority=15;
             scan.duration=N(1.6f);scan.baseTrace=N(.6f);scan.visible=Not(State(NodeState.Scanned));
-            hack.duration=B(Arithmetic.Divide,B(Arithmetic.Add,N(2.2f),B(Arithmetic.Multiply,I(NumberInput.Security),N(1.15f))),S("hackSpeed"));
+            hack.duration=B(Arithmetic.Divide,B(Arithmetic.Add,N(2.2f),B(Arithmetic.Multiply,I(NumberInput.Security),N(1.15f))),S("compute"));
             hack.visible=Not(State(NodeState.Controlled));
-            download.duration=B(Arithmetic.Divide,Choose(State(NodeState.Objective),N(5.5f),N(4)),S("transferSpeed"));
+            download.duration=B(Arithmetic.Divide,Choose(Compare(I(NumberInput.NodeStorage),Comparison.Greater,N(0)),I(NumberInput.NodeStorage),Choose(State(NodeState.Objective),N(5.5f),N(4))),S("bandwidth"));
             download.visible=All(Any(State(NodeState.Objective),State(NodeState.Bonus)),Not(State(NodeState.Collected)),Not(Tag("securityhub")));
             var preparationTime=Mod("duration",Arithmetic.Multiply,N(.85f),All(Action(hack),State(NodeState.Scanned)));preparationTime.id="scan-preparation-time";
             var preparationTrace=Mod("baseTrace",Arithmetic.Multiply,N(.8f),All(Action(hack),State(NodeState.Scanned)));preparationTrace.id="scan-preparation-trace";

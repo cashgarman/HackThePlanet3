@@ -14,7 +14,7 @@ namespace HackThePlanet
         public RigChassisDefinition startingChassis;
         public RigStarterPart[] startingParts=Array.Empty<RigStarterPart>();
         [Range(0,1)] public float saleFraction=.75f, researchSaleFraction=1, minimumTraceFraction=.2f;
-        public float maximumHackSpeed=3, maximumTransferSpeed=3, memoryReclaim=4;
+        public float maximumCompute=3, maximumBandwidth=3, memoryReclaim=4;
         public bool allowRotation=true, requireValidBuild=true;
     }
 }

@@ -7,20 +7,126 @@ using UnityEngine.UIElements;
 
 namespace HackThePlanet
 {
+    // Vector icons for rig parts, stat readouts and inventory tabs. Drawn like DeviceGlyph so they stay crisp at any text scale.
+    // The key is a module id for parts with their own drawing, otherwise a family name. tier > 0 adds one pip per tier to power and cooling icons.
+    public sealed class RigGlyph : VisualElement
+    {
+        private static readonly HashSet<string> BespokeModules=new HashSet<string>{"uplink","recon-cache","drive","storage-array","accelerator","ram-bank","quiet-filter"};
+        private readonly string category;
+        private readonly Color tint;
+        private readonly int tier;
+        public RigGlyph(string category,Color tint,float size=20,int tier=0)
+        {
+            this.category=category??""; this.tint=tint; this.tier=Mathf.Clamp(tier,0,5); style.width=size; style.height=size; style.flexShrink=0;
+            pickingMode=PickingMode.Ignore; generateVisualContent+=Draw;
+        }
+        // Parts without a bespoke icon (including mod parts) use their family icon, so every module gets one.
+        public static RigGlyph ForModule(RigModuleDefinition model,Color tint,float size=20)
+        {
+            bool tiered=model.family=="power"||model.family=="cooling";
+            return new RigGlyph(BespokeModules.Contains(model.id)?model.id:model.family,tint,size,tiered?model.tier:0);
+        }
+        private void Draw(MeshGenerationContext context)
+        {
+            var p=context.painter2D; p.strokeColor=tint; p.fillColor=tint; p.lineWidth=1.5f;
+            float w=contentRect.width, h=contentRect.height;
+            // Tiered icons shrink the artwork upward to leave a row of pips along the bottom edge.
+            float scale=tier>0?.8f:1f;
+            Vector2 P(float x,float y) => new Vector2(x*w,y*h*scale);
+            void Line(float x,float y,float a,float b) { p.BeginPath(); p.MoveTo(P(x,y)); p.LineTo(P(a,b)); p.Stroke(); }
+            void Box(float x,float y,float a,float b) { p.BeginPath(); p.MoveTo(P(x,y)); p.LineTo(P(a,y)); p.LineTo(P(a,b)); p.LineTo(P(x,b)); p.ClosePath(); p.Stroke(); }
+            void Poly(params float[] v) { p.BeginPath(); p.MoveTo(P(v[0],v[1])); for(int i=2;i<v.Length;i+=2) p.LineTo(P(v[i],v[i+1])); p.ClosePath(); p.Stroke(); }
+            void Chip(float x,float y,float a,float b) { p.BeginPath(); p.MoveTo(P(x,y)); p.LineTo(P(a,y)); p.LineTo(P(a,b)); p.LineTo(P(x,b)); p.ClosePath(); p.Fill(); }
+            switch(category)
+            {
+                case "ALL":
+                    Box(.12f,.12f,.46f,.46f); Box(.54f,.12f,.88f,.46f); Box(.12f,.54f,.46f,.88f); Box(.54f,.54f,.88f,.88f); break;
+                case "power":
+                    Poly(.58f,.06f, .22f,.56f, .48f,.56f, .40f,.94f, .78f,.42f, .52f,.42f, .58f,.06f); break;
+                case "cooling":
+                    for(int i=0;i<3;i++)
+                    {
+                        float a=i*60f*Mathf.Deg2Rad, dx=Mathf.Cos(a)*.38f, dy=Mathf.Sin(a)*.38f;
+                        Line(.5f-dx,.5f-dy,.5f+dx,.5f+dy);
+                    }
+                    p.BeginPath(); p.Arc(P(.5f,.5f),w*.07f,0f,360f); p.Fill(); break;
+                case "processing":
+                    Box(.22f,.22f,.78f,.78f); Box(.38f,.38f,.62f,.62f);
+                    Line(.36f,.08f,.36f,.22f); Line(.64f,.08f,.64f,.22f); Line(.36f,.78f,.36f,.92f); Line(.64f,.78f,.64f,.92f);
+                    Line(.08f,.36f,.22f,.36f); Line(.08f,.64f,.22f,.64f); Line(.78f,.36f,.92f,.36f); Line(.78f,.64f,.92f,.64f); break;
+                case "transfer":
+                    Line(.10f,.36f,.84f,.36f); Line(.84f,.36f,.70f,.24f); Line(.84f,.36f,.70f,.48f);
+                    Line(.90f,.64f,.16f,.64f); Line(.16f,.64f,.30f,.52f); Line(.16f,.64f,.30f,.76f); break;
+                case "storage":
+                    Box(.16f,.10f,.84f,.34f); Box(.16f,.40f,.84f,.64f); Box(.16f,.70f,.84f,.94f);
+                    Line(.26f,.22f,.40f,.22f); Line(.26f,.52f,.40f,.52f); Line(.26f,.82f,.40f,.82f); break;
+                case "memory":
+                    Box(.08f,.30f,.92f,.66f);
+                    Line(.20f,.66f,.20f,.80f); Line(.35f,.66f,.35f,.80f); Line(.50f,.66f,.50f,.80f); Line(.65f,.66f,.65f,.80f); Line(.80f,.66f,.80f,.80f);
+                    Box(.20f,.40f,.36f,.56f); Line(.46f,.42f,.80f,.42f); Line(.46f,.54f,.80f,.54f); break;
+                case "stealth":
+                    p.BeginPath(); p.MoveTo(P(.08f,.5f)); p.BezierCurveTo(P(.28f,.20f),P(.72f,.20f),P(.92f,.5f));
+                    p.BezierCurveTo(P(.72f,.80f),P(.28f,.80f),P(.08f,.5f)); p.Stroke();
+                    p.BeginPath(); p.Arc(P(.5f,.5f),w*.12f,0f,360f); p.Stroke();
+                    Line(.14f,.90f,.86f,.10f); break;
+                case "reclaim":
+                    p.BeginPath(); p.Arc(P(.5f,.5f),w*.34f,30f,300f); p.Stroke();
+                    float end=300f*Mathf.Deg2Rad, ex=.5f+Mathf.Cos(end)*.34f, ey=.5f+Mathf.Sin(end)*.34f;
+                    Line(ex,ey,ex+.16f,ey-.02f); Line(ex,ey,ex-.02f,ey-.16f); break;
+                case "slots":
+                    Box(.1f,.1f,.9f,.9f); Line(.1f,.37f,.9f,.37f); Line(.1f,.63f,.9f,.63f); Line(.37f,.1f,.37f,.9f); Line(.63f,.1f,.63f,.9f); break;
+                case "uplink":
+                    Line(.5f,.56f,.5f,.92f); Line(.34f,.92f,.66f,.92f);
+                    p.BeginPath(); p.Arc(P(.5f,.5f),w*.14f,200f,340f); p.Stroke();
+                    p.BeginPath(); p.Arc(P(.5f,.5f),w*.27f,200f,340f); p.Stroke();
+                    p.BeginPath(); p.Arc(P(.5f,.5f),w*.05f,0f,360f); p.Fill(); break;
+                case "recon-cache":
+                    Box(.14f,.46f,.86f,.86f); Line(.5f,.1f,.5f,.6f); Line(.36f,.46f,.5f,.6f); Line(.64f,.46f,.5f,.6f); break;
+                case "drive":
+                    Box(.1f,.12f,.9f,.88f);
+                    p.BeginPath(); p.Arc(P(.42f,.5f),w*.22f,0f,360f); p.Stroke();
+                    p.BeginPath(); p.Arc(P(.76f,.26f),w*.04f,0f,360f); p.Fill(); break;
+                case "storage-array":
+                    Box(.08f,.08f,.92f,.92f);
+                    foreach(float fx in new[]{.3f,.7f}) foreach(float fy in new[]{.3f,.7f}) { p.BeginPath(); p.Arc(P(fx,fy),w*.1f,0f,360f); p.Stroke(); }
+                    break;
+                case "accelerator":
+                    Box(.18f,.18f,.82f,.82f);
+                    Line(.06f,.36f,.18f,.36f); Line(.06f,.64f,.18f,.64f); Line(.82f,.36f,.94f,.36f); Line(.82f,.64f,.94f,.64f);
+                    Line(.36f,.06f,.36f,.18f); Line(.64f,.06f,.64f,.18f); Line(.36f,.82f,.36f,.94f); Line(.64f,.82f,.64f,.94f);
+                    Line(.34f,.58f,.5f,.42f); Line(.5f,.42f,.66f,.58f); Line(.34f,.74f,.5f,.58f); Line(.5f,.58f,.66f,.74f); break;
+                case "ram-bank":
+                    Box(.08f,.14f,.92f,.44f); Box(.08f,.56f,.92f,.86f);
+                    foreach(float cx in new[]{.22f,.4f,.6f,.78f}) { Chip(cx-.04f,.22f,cx+.04f,.36f); Chip(cx-.04f,.64f,cx+.04f,.78f); }
+                    break;
+                case "quiet-filter":
+                    Poly(.12f,.14f, .88f,.14f, .58f,.5f, .58f,.86f, .42f,.76f, .42f,.5f); break;
+                default:
+                    p.BeginPath(); p.Arc(P(.5f,.5f),w*.38f,0f,360f); p.Stroke();
+                    Line(.12f,.5f,.88f,.5f); break;
+            }
+            for(int i=0;i<tier;i++){float cx=.5f+(i-(tier-1)*.5f)*.16f;Chip(cx-.05f,.84f,cx+.05f,.92f);}
+        }
+    }
+
     public sealed partial class WorkstationApp
     {
         private readonly GraphCameraState rigCamera=new GraphCameraState();
-        private string selectedRigId,dragRigId,rigMessage;
+        private static readonly string[] RigCategoryOrder={"power","cooling","processing","transfer","storage","memory","stealth","reclaim"};
+        private string selectedRigId,dragRigId,rigMessage,rigCategory="ALL";
         private bool dragRotated,dragMoved,dragLifted;
         private int dragPointer,dragRestoreRow=-1,dragRestoreCol=-1;
         private bool dragRestoreRot;
         private Vector2 dragOrigin,lastRigDragPanelPos;
         private Button dragGhost;
+        private VisualElement inventoryDropZone;
         private readonly List<Button> dragValidSlots=new List<Button>();
 
         private void BuildRig(VisualElement workspace)
         {
             if(State.Part(selectedRigId)==null)selectedRigId=null;
+            var categories=RigCategories().ToList();
+            if(rigCategory!="ALL"&&!categories.Contains(rigCategory))rigCategory="ALL";
             var left=El(workspace,"left-panel");var shop=Scroll(left,"rig-shop");
             Text(shop,"MODULE EXCHANGE","eyebrow cyan");Text(shop,"Buy copies. Pack your signal.","small muted");
             foreach(var branch in State.Modules.GroupBy(m=>m.branch))
@@ -29,7 +135,8 @@ namespace HackThePlanet
                 foreach(var model in branch)
                 {
                     var card=El(shop,"rig-shop-card");card.tooltip=ModuleTooltip(model)+"\n"+State.PreviewModule(model.id).reason;
-                    Text(card,model.title+" / T"+model.tier,"small").style.color=Palette.Branch(model.branch);
+                    var shopHead=El(card,"rig-shop-head");shopHead.Add(RigGlyph.ForModule(model,Palette.Branch(model.branch),18));
+                    Text(shopHead,model.title+" / T"+model.tier,"small rig-part-title").style.color=Palette.Branch(model.branch);
                     RichText(card,model.width+"x"+model.height+" / "+model.price+" cr / "+model.powerDemand+" POWER / "+model.heatOutput+" HEAT","micro muted");
                     RichText(card,model.description,"small");
                     var preview=State.PreviewModule(model.id);
@@ -37,9 +144,12 @@ namespace HackThePlanet
                     if(!preview.allowed)Text(card,preview.reason,"micro amber");
                 }
             }
-            var middle=El(workspace,"network-panel");var map=El(middle,"map-content");var head=El(map,"map-heading");
-            Text(head,State.Chassis.title.ToUpperInvariant()+" / "+State.Chassis.rows+"x"+State.Chassis.columns,"map-title");
-            Text(head,"DRAG TO PLACE / R OR WHEEL ROTATES","micro muted");
+            var middle=El(workspace,"network-panel");var map=El(middle,"map-content");BuildRigIssues(map);var head=El(map,"map-heading");
+            var titles=El(head,"map-title-block");
+            var titleRow=El(titles,"rig-title-row");
+            Text(titleRow,State.Chassis.title.ToUpperInvariant()+" / "+State.Chassis.rows+"x"+State.Chassis.columns,"map-title");
+            Text(titleRow,"DRAG TO PLACE / R OR WHEEL ROTATES","micro muted");
+            BuildRigBudgets(head);
             canvas=new GraphViewport(BuildRackScene(),SlotClicked,rigCamera,true);map.Add(canvas);
             const float cellPitch=4f,cellInset=.32f;
             foreach(var node in canvas.Query<Button>().ToList())
@@ -55,34 +165,84 @@ namespace HackThePlanet
             {
                 var model=State.Module(part.modelId);var size=State.PartSize(part);
                 var footprint=new Vector2(size.x*cellPitch-cellInset,size.y*cellPitch-cellInset);
-                canvas.ConfigureFlatNode("part-"+part.instanceId,footprint,ModuleTooltip(model),module:true);
+                canvas.ConfigureFlatNode("part-"+part.instanceId,footprint,ModuleIntel(model),module:true);
                 var module=canvas.Q<Button>("part-"+part.instanceId);
-                module?.AddToClassList("rig-module");
+                module?.AddToClassList("rig-module");module?.AddToClassList(IntelTooltipClass);
+                if(module!=null)SetPartContent(module,model,model.title,18);
                 module?.RegisterCallback<PointerDownEvent>(evt=>BeginRigDrag(part.instanceId,evt),TrickleDown.TrickleDown);
             }
             var footer=El(map,"map-footer");
             Btn(footer,"-",()=>canvas.Zoom(1.15f),"rig-zoom-out","map-button");Btn(footer,"+",()=>canvas.Zoom(.85f),"rig-zoom-in","map-button");Btn(footer,"FIT",()=>canvas.ResetView(),"rig-fit","map-button");
-            var right=El(workspace,"right-panel");var info=Scroll(right,"rig-inspector");
-            Text(info,"BUILD BUDGETS","eyebrow cyan");
-            RichText(info,"POWER / "+State.PowerUsed+" / "+State.PowerLimit+"\nCOOLING / "+State.HeatUsed+" / "+State.CoolingLimit,"body-copy");
-            Text(info,"BASE / "+State.Chassis.powerCapacity+" POWER / "+State.Chassis.coolingCapacity+" COOLING","micro muted");
-            RichText(info,"STORAGE / "+State.StorageCapacity+" GB\nRAM / "+State.MemoryPool+" MEM / "+State.MemoryReclaim+" MEM/s\nABILITY SLOTS / "+State.Slots,"small cyan");
-            foreach(var problem in State.RigProblems)Text(info,problem,"small amber");
-            Text(info,State.RigValid?"BUILD READY":"BUILD INVALID / CONNECTION BLOCKED",State.RigValid?"eyebrow lime":"eyebrow amber");
+            var right=El(workspace,"right-panel");
+            var details=Scroll(right,"rig-details");
+            var inventory=El(right,"rig-inventory");inventoryDropZone=inventory;
+            BuildRigInventory(inventory,categories);
+            BuildRigDetails(details);
+        }
+        // Shown above the rack on every edit. Red entries block connecting; amber entries are advisory.
+        private void BuildRigIssues(VisualElement map)
+        {
+            var issues=State.RigIssues;
+            var panel=El(map,"rig-issues");panel.name="rig-issues";
+            panel.style.display=issues.Count==0?DisplayStyle.None:DisplayStyle.Flex;
+            foreach(var issue in issues)
+            {
+                bool error=issue.severity==RigIssueSeverity.Error;
+                Text(panel,(error?"ERROR / ":"WARNING / ")+issue.message,"small rig-issue "+(error?"rig-issue-error":"rig-issue-warning"));
+            }
+        }
+        private void BuildRigBudgets(VisualElement head)
+        {
+            var budgets=El(head,"rig-budgets");
+            var stats=El(budgets,"rig-stat-line");
+            RigStat(stats,"power",Palette.Hex("A8C2BC"),"POWER / "+State.PowerUsed+" / "+State.PowerLimit,"small");
+            RigStat(stats,"cooling",Palette.Hex("A8C2BC"),"COOLING / "+State.HeatUsed+" / "+State.CoolingLimit,"small");
+            RigStat(stats,"processing",Palette.Hex("60D8D0"),"COMPUTE / "+State.Compute.ToString("0.00")+" GFLOP/s","small cyan");
+            RigStat(stats,"transfer",Palette.Hex("60D8D0"),"BANDWIDTH / "+State.Bandwidth.ToString("0.00")+" GB/s","small cyan");
+            RigStat(stats,"storage",Palette.Hex("60D8D0"),"STORAGE / "+State.StorageCapacity.ToString("0")+" GB","micro cyan");
+            RigStat(stats,"memory",Palette.Hex("60D8D0"),"RAM / "+State.MemoryPool.ToString("0.#")+" GB","micro cyan");
+            RigStat(stats,"reclaim",Palette.Hex("60D8D0"),"RECLAIM / "+State.MemoryReclaim.ToString("0.#")+" GB/s","micro cyan");
+            RigStat(stats,"slots",Palette.Hex("60D8D0"),"SLOTS / "+State.Slots,"micro cyan");
+            var actions=El(budgets,"rig-budget-actions");
+            Text(actions,State.RigValid?"BUILD READY":"BUILD INVALID / CONNECTION BLOCKED",State.RigValid?"micro lime":"micro amber");
             if(State.NextChassis!=null)
             {
-                Text(info,State.NextChassis.title+" / "+State.NextChassis.rows+"x"+State.NextChassis.columns+" / "+State.NextChassis.price+" cr","small section-space");
-                var preview=State.PreviewChassis();var upgrade=Btn(info,"EXPAND CHASSIS",()=>{State.UpgradeChassis();rigCamera.Reset();},"upgrade-chassis","secondary-button");upgrade.SetEnabled(preview.allowed);Text(info,preview.reason,"micro muted");
+                var preview=State.PreviewChassis();
+                var upgrade=Btn(actions,"EXPAND CHASSIS / "+State.NextChassis.title+" / "+State.NextChassis.price+" cr",()=>{State.UpgradeChassis();rigCamera.Reset();},"upgrade-chassis","secondary-button");upgrade.SetEnabled(preview.allowed);
+                Text(actions,preview.reason,"micro muted");
             }
-            Text(info,"OWNED COPIES / "+State.Career.rigParts.Count,"eyebrow section-space");
-            foreach(var part in State.Career.rigParts)
-            {
-                var model=State.Module(part.modelId);var row=Btn(info,(part.instanceId==selectedRigId?"> ":"")+model.title+(part.Installed?" [INSTALLED]":" [INVENTORY]"),()=>{selectedRigId=part.instanceId;dirty=true;},"owned-"+part.instanceId,"ability-button");row.tooltip=ModuleTooltip(model);row.RegisterCallback<PointerDownEvent>(evt=>BeginRigDrag(part.instanceId,evt),TrickleDown.TrickleDown);
-            }
+        }
+        // Each readout pairs its value with the icon of the thing it measures.
+        private static void RigStat(VisualElement line,string glyph,Color tint,string text,string classes)
+        {
+            OperationStat(line,glyph,tint,text,classes);
+        }
+        private static Label OperationStat(VisualElement line,string glyph,Color tint,string text,string classes)
+        {
+            var stat=El(line,"rig-stat");
+            var icon=new RigGlyph(glyph,tint,14);icon.AddToClassList("rig-stat-icon");stat.Add(icon);
+            return RichText(stat,text,classes);
+        }
+        // Rig parts show their icon beside the title. The button text is cleared so both share one row.
+        private static void SetPartContent(Button button,RigModuleDefinition model,string title,float iconSize)
+        {
+            button.text="";
+            var content=new VisualElement();content.AddToClassList("rig-part-content");
+            content.Add(RigGlyph.ForModule(model,Palette.Branch(model.branch),iconSize));
+            var label=new Label(title){pickingMode=PickingMode.Ignore};label.AddToClassList("rig-part-title");content.Add(label);
+            button.Add(content);
+        }
+        private void BuildRigDetails(VisualElement info)
+        {
+            Text(info,"SELECTED COMPONENT","eyebrow cyan");
             var selected=State.Part(selectedRigId);
-            if(selected!=null)
+            if(selected==null)Text(info,"Select a component in the rack or the inventory.","body-copy muted section-space");
+            else
             {
-                var model=State.Module(selected.modelId);Text(info,model.title,"mission-title section-space");RichText(info,ModuleTooltip(model),"small");
+                var model=State.Module(selected.modelId);var branch=Palette.Branch(model.branch);
+                Text(info,model.title,"mission-title section-space").style.color=branch;
+                Text(info,model.branch+" / "+(model.family??"").ToUpperInvariant()+" / "+(selected.Installed?"INSTALLED":"INVENTORY"),"micro section-space").style.color=branch;
+                RichText(info,ModuleSpecs(model),"small");
                 Text(info,"ROTATION / "+(selected.rotated?"90":"0")+" DEGREES","micro muted");
                 Btn(info,"PLACE IN FIRST FREE SPACE",()=>{if(!State.PlaceFirstFree(selected.instanceId,selected.rotated)){rigMessage="No valid space for this footprint.";dirty=true;}},"rig-place-first","secondary-button").SetEnabled(!State.Active);
                 Btn(info,"ROTATE / R",RotateRigSelection,"rig-rotate","secondary-button").SetEnabled(!State.Active&&model.rotatable&&State.Catalog.Data.rig.allowRotation);
@@ -90,7 +250,7 @@ namespace HackThePlanet
                 Btn(info,"SELL / "+State.ModuleSalePrice(selected.instanceId)+" cr",()=>State.SellModule(selected.instanceId),"rig-sell","danger-button").SetEnabled(!State.Active);
             }
             if(rigMessage!=null)Text(info,rigMessage,"small amber section-space");
-            Text(info,State.Active?"Disconnect before changing hardware.":"Select a copy, then click a cell. Removed parts stay in inventory. Sales return "+(State.Catalog.Data.rig.saleFraction*100).ToString("0")+"% of the paid price.","small muted section-space");
+            Text(info,State.Active?"Disconnect before changing hardware.":"Drag parts between the rack and the inventory, or select a part and click a cell. Sales return "+(State.Catalog.Data.rig.saleFraction*100).ToString("0")+"% of the paid price.","small muted section-space");
             // Extension hardware remains authorable for mods; the shipped catalog uses rack modules.
             foreach(var h in State.Catalog.Hardware)
             {
@@ -113,7 +273,38 @@ namespace HackThePlanet
             foreach(var part in State.InstalledParts){var size=State.PartSize(part);var node=scene.Nodes["part-"+part.instanceId];node.Position=new Vector3((part.column+(size.x-1)*.5f)*4,-(part.row+(size.y-1)*.5f)*4,0);node.Pinned=true;}
             return scene;
         }
-        private string ModuleTooltip(RigModuleDefinition model)=>model.title+" / TIER "+model.tier+" / "+model.width+"x"+model.height+"\n"+model.description+"\n"+model.powerDemand+" POWER / "+model.heatOutput+" HEAT / +"+model.powerCapacity+" POWER LIMIT / +"+model.coolingCapacity+" COOLING LIMIT\n"+model.synergy+"\n"+model.flavour;
+        private string ModuleTooltip(RigModuleDefinition model)=>model.title+" / "+ModuleSpecs(model);
+        // Same layout as the graph node intel card: lime title over light body text.
+        private string ModuleIntel(RigModuleDefinition model)=>"<color=#9BFACB><b>"+model.title+"</b></color>\n"+ModuleSpecs(model);
+        private string ModuleSpecs(RigModuleDefinition model)=>"TIER "+model.tier+" / "+model.width+"x"+model.height+"\n"+model.description+"\n"+model.powerDemand+" POWER / "+model.heatOutput+" HEAT / +"+model.powerCapacity+" POWER LIMIT / +"+model.coolingCapacity+" COOLING LIMIT\n"+model.synergy+"\n"+model.flavour;
+        private IEnumerable<string> RigCategories()=>State.Modules.Select(m=>m.family).Where(f=>!string.IsNullOrEmpty(f)).Distinct()
+            .OrderBy(f=>{int i=Array.IndexOf(RigCategoryOrder,f);return i<0?RigCategoryOrder.Length:i;}).ThenBy(f=>f,StringComparer.Ordinal);
+        private static string RigCategoryTitle(string category)=>category=="ALL"?"ALL PARTS":category.ToUpperInvariant();
+        private void BuildRigInventory(VisualElement parent,List<string> categories)
+        {
+            Text(parent,"INVENTORY","eyebrow cyan");
+            var tabs=El(parent,"rig-category-tabs");
+            var tabKeys=new List<string>{"ALL"};tabKeys.AddRange(categories);
+            foreach(var category in tabKeys)
+            {
+                var key=category;bool active=rigCategory==key;
+                var tab=Btn(tabs,"",()=>{rigCategory=key;dirty=true;Beep();},"rig-category-"+key,"rig-category-tab");
+                tab.EnableInClassList("active",active);tab.tooltip=RigCategoryTitle(key);
+                tab.Add(new RigGlyph(key,active?Palette.Lime:Palette.Hex("7C919D"),20));
+            }
+            var parts=State.Career.rigParts.Where(p=>!p.Installed&&(rigCategory=="ALL"||State.Module(p.modelId).family==rigCategory)).ToList();
+            Text(parent,RigCategoryTitle(rigCategory)+" / "+parts.Count+" SPARE","eyebrow section-space");
+            var list=Scroll(parent,"rig-inventory-list");
+            if(parts.Count==0)Text(list,"No spare parts here. Buy copies in the module exchange, or drag installed parts into this panel.","small muted");
+            foreach(var part in parts)
+            {
+                var model=State.Module(part.modelId);
+                var row=Btn(list,"",()=>{selectedRigId=part.instanceId;rigMessage=null;dirty=true;},"owned-"+part.instanceId,"ability-button rig-inventory-row");
+                SetPartContent(row,model,(part.instanceId==selectedRigId?"> ":"")+model.title,20);
+                row.tooltip=ModuleIntel(model);row.AddToClassList(IntelTooltipClass);row.style.color=Palette.Branch(model.branch);
+                row.RegisterCallback<PointerDownEvent>(evt=>BeginRigDrag(part.instanceId,evt),TrickleDown.TrickleDown);
+            }
+        }
         private void SlotClicked(string id)
         {
             if(State.Active)return;
@@ -214,7 +405,9 @@ namespace HackThePlanet
             if(!dragMoved)return;
             if(!dragLifted)LiftRigDragPart();
             RefreshRigDragGhost();
+            inventoryDropZone?.EnableInClassList("rig-drop-zone",IsOverRigInventory(position));
         }
+        private bool IsOverRigInventory(Vector2 panelPosition)=>inventoryDropZone!=null&&inventoryDropZone.worldBound.Contains(panelPosition);
         private void LiftRigDragPart()
         {
             dragLifted=true;
@@ -245,8 +438,9 @@ namespace HackThePlanet
         {
             if(dragGhost!=null)return;
             var branch=Palette.Branch(model.branch);
-            dragGhost=new Button{ name="rig-drag-ghost",text=model.title,pickingMode=PickingMode.Ignore};
+            dragGhost=new Button{ name="rig-drag-ghost",pickingMode=PickingMode.Ignore};
             dragGhost.AddToClassList("rig-module");dragGhost.AddToClassList("rig-drag-ghost");
+            SetPartContent(dragGhost,model,model.title,18);
             dragGhost.style.position=Position.Absolute;
             dragGhost.style.backgroundColor=new Color(branch.r*.22f,branch.g*.22f,branch.b*.22f,.94f);
             dragGhost.style.borderBottomColor=dragGhost.style.borderTopColor=branch;
@@ -263,9 +457,8 @@ namespace HackThePlanet
             bool overRack=TryNearestRigAnchor(lastRigDragPanelPos,size,out row,out column);
             bool valid=overRack&&State.CanPlace(dragRigId,row,column,dragRotated);
             if(overRack)HighlightFootprint(row,column,size,valid);
-            dragGhost.text=model.title;
             dragGhost.EnableInClassList("rig-drag-invalid",overRack&&!valid);
-            PositionRigDragGhost(row,column,size,overRack);
+            PositionRigDragGhost(size);
         }
         private void ClearDragDropHighlights()
         {
@@ -295,43 +488,25 @@ namespace HackThePlanet
             if(cell!=null&&cell.worldBound.width>1)return new Vector2(cell.worldBound.width,cell.worldBound.height);
             return new Vector2(72,48);
         }
-        private void PositionRigDragGhost(int row,int column,Vector2Int size,bool snapToGrid)
+        // The ghost always follows the cursor, RPG-inventory style. Grid cells show the landing footprint instead of snapping the ghost.
+        private void PositionRigDragGhost(Vector2Int size)
         {
-            float width,height,left,top;
-            if(snapToGrid&&TryFootprintPanelRect(row,column,size,out left,out top,out width,out height))
-            {
-                dragGhost.style.left=left;dragGhost.style.top=top;
-                dragGhost.style.width=width;dragGhost.style.height=height;return;
-            }
             var cell=RigCellPanelSize();
-            width=cell.x*size.x;height=cell.y*size.y;
-            dragGhost.style.left=pointerPosition.x-width*.5f;dragGhost.style.top=pointerPosition.y-height*.5f;
+            float width=cell.x*size.x,height=cell.y*size.y;
+            var pointer=root.WorldToLocal(lastRigDragPanelPos);
+            dragGhost.style.left=pointer.x-width*.5f;dragGhost.style.top=pointer.y-height*.5f;
             dragGhost.style.width=width;dragGhost.style.height=height;
-        }
-        private bool TryFootprintPanelRect(int row,int column,Vector2Int size,out float left,out float top,out float width,out float height)
-        {
-            left=top=width=height=0;
-            if(canvas==null)return false;
-            int cols=State.Chassis.columns;
-            if(!TrySlotPanelRect(row,column,out var anchorBound))return false;
-            if(TrySlotPanelRect(row+size.y-1,column+size.x-1,out var endBound))
-            {
-                width=endBound.xMax-anchorBound.xMin;height=endBound.yMax-anchorBound.yMin;
-            }
-            else
-            {
-                var cell=RigCellPanelSize();
-                width=cell.x*size.x;height=cell.y*size.y;
-            }
-            var origin=root.WorldToLocal(new Vector2(anchorBound.xMin,anchorBound.yMin));
-            left=origin.x;top=origin.y;
-            return true;
         }
         private void EndRigDrag(PointerUpEvent evt)
         {
             if(dragRigId==null||evt.pointerId!=dragPointer)return;
             bool placed=false;
-            if(dragMoved)
+            if(dragMoved&&IsOverRigInventory(evt.position))
+            {
+                // Dropping on the inventory keeps a lifted part out of the rack (it is already unplaced).
+                placed=true;rigMessage=null;
+            }
+            else if(dragMoved)
             {
                 var part=State.Part(dragRigId);
                 var size=GameSimulation.PartSize(State.Module(part.modelId),dragRotated);
@@ -346,6 +521,7 @@ namespace HackThePlanet
             if(dragLifted&&!placed)RestoreRigDragPart();
             if(dragRigId!=null&&root!=null&&root.HasPointerCapture(dragPointer))root.ReleasePointer(dragPointer);
             ClearDragDropHighlights();
+            inventoryDropZone?.RemoveFromClassList("rig-drop-zone");
             dragRigId=null;dragLifted=false;dragRestoreRow=-1;
             dragGhost?.RemoveFromHierarchy();dragGhost=null;
         }
@@ -362,7 +538,7 @@ namespace HackThePlanet
                 var button=root.Q<Button>("action-"+action.id);if(button==null)continue;
                 var preview=State.Preview(action.id,selectedNode);bool queued=State.Op.task!=null&&!action.Definition.instant&&!State.IsAbilityActive(action.id,selectedNode);
                 button.SetEnabled(queued?State.CanQueue(action.id,selectedNode):preview.allowed);
-                var estimate=button.Q<Label>(className:"action-estimate");if(estimate!=null&&!queued)estimate.text=preview.allowed?preview.duration.ToString("0.0")+"s / +"+preview.trace.ToString("0.0")+" trace / "+action.Definition.memoryCost+" MEM":preview.reason;
+                var estimate=button.Q<Label>(className:"action-estimate");if(estimate!=null&&!queued)estimate.text=preview.allowed?preview.duration.ToString("0.0")+"s / +"+preview.trace.ToString("0.0")+" trace / "+action.Definition.memoryCost+" GB":preview.reason;
             }
         }
         private void BuildStorageBrief(VisualElement parent)

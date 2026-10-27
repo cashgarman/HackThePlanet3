@@ -1,7 +1,7 @@
 {
   "id": "backdoor",
   "title": "Backdoor",
-  "description": "Once per operation, reclaim a discovered workstation or relay within three mapped hops of controlled access. Takes 0.8 seconds and produces no trace. Costs 12 MEM, reclaimed over simulation time.",
+  "description": "Once per operation, reclaim a discovered workstation or relay within three mapped hops of controlled access. Takes 0.8 seconds and produces no trace. Costs 12 GB RAM, reclaimed over simulation time.",
   "branch": "STEALTH",
   "cost": 100,
   "waypointTier": 0,

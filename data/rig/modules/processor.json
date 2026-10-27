@@ -1,7 +1,7 @@
 {
   "id": "processor",
   "title": "Processor",
-  "description": "+0.20 hack speed.",
+  "description": "+0.20 GFLOP/s compute.",
   "family": "processing",
   "branch": "INTRUSION",
   "tier": 1,
@@ -28,7 +28,7 @@
   "modifiers": [
     {
       "id": "",
-      "stat": "hackSpeed",
+      "stat": "compute",
       "priority": 0,
       "operation": "Add",
       "when": {

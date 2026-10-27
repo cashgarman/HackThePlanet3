@@ -32,8 +32,8 @@
   "saleFraction": 0.75,
   "researchSaleFraction": 1,
   "minimumTraceFraction": 0.2,
-  "maximumHackSpeed": 3,
-  "maximumTransferSpeed": 3,
+  "maximumCompute": 3,
+  "maximumBandwidth": 3,
   "memoryReclaim": 4,
   "allowRotation": true,
   "requireValidBuild": true

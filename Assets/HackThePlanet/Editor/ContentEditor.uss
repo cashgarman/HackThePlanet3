@@ -1,12 +1,18 @@
 /* Content Editor window styles. Neutral alpha overlays and opacity keep both editor themes readable. */
 
-/* Category tabs */
-.ctp-tabs { height: 32px; flex-shrink: 0; }
-.ctp-tab-row { flex-direction: row; align-items: center; padding: 2px 6px; }
-.ctp-tab-group { flex-direction: row; align-items: center; margin-right: 12px; }
-.ctp-group-label { font-size: 10px; -unity-font-style: bold; opacity: 0.6; margin-right: 4px; }
-.ctp-tab { margin: 0 2px; padding: 2px 8px; min-height: 22px; }
+/* Window chrome */
+.ctp-root { flex-grow: 1; flex-direction: column; }
+.ctp-chrome { flex-shrink: 0; flex-direction: column; border-bottom-width: 1px; border-bottom-color: rgba(128, 128, 128, 0.35); }
+
+/* Category tabs — flex-shrink: 0 on tabs prevents squeezed overlap in the horizontal strip */
+.ctp-tabs { flex-shrink: 0; min-height: 44px; max-height: 52px; }
+.ctp-tab-row { flex-direction: row; align-items: center; flex-shrink: 0; flex-wrap: nowrap; padding: 2px 6px; }
+.ctp-tab-group { flex-direction: column; align-items: flex-start; flex-shrink: 0; margin-right: 14px; }
+.ctp-tab-strip { flex-direction: row; align-items: center; flex-shrink: 0; flex-wrap: nowrap; }
+.ctp-group-label { font-size: 10px; -unity-font-style: bold; opacity: 0.6; margin-bottom: 1px; flex-shrink: 0; white-space: nowrap; }
+.ctp-tab { flex-direction: row; align-items: center; flex-shrink: 0; margin: 0 2px; padding: 2px 8px; min-height: 22px; white-space: nowrap; }
 .ctp-tab--active { -unity-font-style: bold; border-bottom-width: 2px; border-bottom-color: rgb(70, 140, 235); }
+.ctp-btn-with-icon { flex-direction: row; align-items: center; }
 
 /* Toolbar */
 .ctp-sep { width: 1px; margin: 4px 6px; background-color: rgba(128, 128, 128, 0.35); }

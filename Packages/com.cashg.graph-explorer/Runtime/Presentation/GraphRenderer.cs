@@ -58,6 +58,8 @@ namespace Cashg.GraphExplorer
 		public int MaximumVisible = 8000;
 		/// <summary>Scales relationship ribbon width for compact or high resolution hosts.</summary>
 		public float EdgeWidthScale = 1f;
+		/// <summary>World-space width multiplier for active route edges.</summary>
+		public float PathEdgeWidth = .16f;
 		/// <summary>Gets or sets progress visuals keyed by node identifier.</summary>
 		public IReadOnlyDictionary<string, GraphNodeProgressVisual> NodeProgress;
 		/// <summary>Gets or sets whether reduced motion is active.</summary>
@@ -356,7 +358,7 @@ namespace Cashg.GraphExplorer
 					var color = pathEdge
 						? new Color(.98f, .76f, .27f, 1f)
 						: EdgeColor(edge, a, b, incident, directHover);
-					var width = pathEdge ? .16f :
+					var width = pathEdge ? PathEdgeWidth :
 						directHover ? EdgeWidthHovered :
 						incident ? EdgeWidthIncident : EdgeWidth;
 					// Dim unrelated links only for a selection. Hover brightens the link under the pointer and leaves the rest alone.
@@ -414,11 +416,10 @@ namespace Cashg.GraphExplorer
 				if (selected != null && rendered.Contains(selected.Id)) Halo(selected, camera, new Color(1, .85f, .5f));
 				if (hovered != null && hovered != selected && rendered.Contains(hovered.Id))
 					Halo(hovered, camera, new Color(.65f, .85f, 1));
+				foreach (var id in activePathNodes)
+					if (graph.Nodes.TryGetValue(id, out var pathNode) && rendered.Contains(id))
+						Halo(pathNode, camera, new Color(1f, .72f, .2f));
 			}
-
-			foreach (var id in activePathNodes)
-				if (graph.Nodes.TryGetValue(id, out var pathNode) && rendered.Contains(id))
-					Halo(pathNode, camera, new Color(1f, .72f, .2f));
 			DrawNodeProgress(graph, camera);
 		}
 

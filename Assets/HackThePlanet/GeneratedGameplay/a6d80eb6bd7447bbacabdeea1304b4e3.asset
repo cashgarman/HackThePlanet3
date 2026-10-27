@@ -63,9 +63,9 @@ MonoBehaviour:
     value: 2
   - id: queueCapacity
     value: 1
-  - id: hackSpeed
+  - id: compute
     value: 1
-  - id: transferSpeed
+  - id: bandwidth
     value: 1
   - id: scanRadius
     value: 2

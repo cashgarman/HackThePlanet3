@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
   id: recycler
   title: Recycler
-  description: +2 MEM reclaimed per simulation second.
+  description: +2 GB/s RAM reclaimed per simulation second.
   family: reclaim
   branch: CONTROL
   flavour: Salvaged hardware. A private signal.

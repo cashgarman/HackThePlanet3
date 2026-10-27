@@ -1,7 +1,7 @@
 {
   "id": "blackout",
   "title": "Blackout hub",
-  "description": "Toggle sustained hub suppression: reserves 18 MEM per hub.",
+  "description": "Toggle sustained hub suppression: reserves 18 GB RAM per hub.",
   "tags": [
     "blackout"
   ],

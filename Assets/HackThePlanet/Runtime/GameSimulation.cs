@@ -223,8 +223,8 @@ namespace HackThePlanet
         private float ApplyModifiers(string stat,float basis,RuleContext c)
         {
             c.Enter();try{foreach(var item in Modifiers(stat,c).OrderBy(m=>m.modifier.priority)){var m=item.modifier;if(m.when.Test(item.context))basis=RuleMath.Apply(m.operation,basis,m.value.Evaluate(item.context));}
-                if(stat=="hackSpeed")basis=Mathf.Min(basis,Catalog.Data.rig.maximumHackSpeed);
-                if(stat=="transferSpeed")basis=Mathf.Min(basis,Catalog.Data.rig.maximumTransferSpeed);
+                if(stat=="compute")basis=Mathf.Min(basis,Catalog.Data.rig.maximumCompute);
+                if(stat=="bandwidth")basis=Mathf.Min(basis,Catalog.Data.rig.maximumBandwidth);
                 return basis;}finally{c.Leave();}
         }
         public int EffectiveSecurity(NetNode node)=>node==null?0:Mathf.Max(Mathf.RoundToInt(Stat("minimumSecurity")),Mathf.RoundToInt(Stat("security",Context(node))));

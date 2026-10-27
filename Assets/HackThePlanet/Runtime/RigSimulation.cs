@@ -17,6 +17,13 @@ namespace HackThePlanet
         public string actionId,target;
         public float amount;
     }
+    public enum RigIssueSeverity { Error, Warning }
+    public sealed class RigIssue
+    {
+        public readonly RigIssueSeverity severity;
+        public readonly string message;
+        public RigIssue(RigIssueSeverity severity,string message){this.severity=severity;this.message=message;}
+    }
     public sealed class ResearchRefundPreview
     {
         public int xp,credits,copies;
@@ -44,25 +51,35 @@ namespace HackThePlanet
         public float MemoryReclaiming=>Op?.memoryReclaiming??0;
         public float MemoryFree=>Mathf.Max(0,MemoryPool-MemoryReserved-MemoryReclaiming);
         public float MemoryReclaim=>Mathf.Max(0,Stat("memoryReclaim"));
-        public bool RigValid=>!Catalog.Data.rig.requireValidBuild||RigProblems.Count==0;
-        public IReadOnlyList<string> RigProblems
+        public float Compute=>Mathf.Max(0,Stat("compute"));
+        public float Bandwidth=>Mathf.Max(0,Stat("bandwidth"));
+        public const string UplinkModelId="uplink",StorageFamily="storage",ProcessingFamily="processing";
+        public bool RigValid=>!Catalog.Data.rig.requireValidBuild||RigIssues.All(i=>i.severity!=RigIssueSeverity.Error);
+        // Errors block connecting. Warnings describe weaker builds that can still run contracts.
+        public IReadOnlyList<string> RigProblems=>RigIssues.Where(i=>i.severity==RigIssueSeverity.Error).Select(i=>i.message).ToArray();
+        public IReadOnlyList<RigIssue> RigIssues
         {
             get
             {
-                var problems=new List<string>();var occupied=new HashSet<(int,int)>();
+                var issues=new List<RigIssue>();var occupied=new HashSet<(int,int)>();
+                void Error(string message)=>issues.Add(new RigIssue(RigIssueSeverity.Error,message));
+                void Warning(string message)=>issues.Add(new RigIssue(RigIssueSeverity.Warning,message));
                 foreach(var part in InstalledParts)
                 {
                     var model=Module(part.modelId);var size=PartSize(part);
-                    if(part.rotated&&(!model.rotatable||!Catalog.Data.rig.allowRotation))problems.Add(model.title+": rotation is unavailable.");
+                    if(part.rotated&&(!model.rotatable||!Catalog.Data.rig.allowRotation))Error(model.title+": rotation is unavailable.");
                     for(int y=part.row;y<part.row+size.y;y++)for(int x=part.column;x<part.column+size.x;x++)
                     {
-                        if(x<0||y<0||x>=Chassis.columns||y>=Chassis.rows)problems.Add(model.title+": outside the chassis.");
-                        if(!occupied.Add((y,x)))problems.Add(model.title+": overlaps another part.");
+                        if(x<0||y<0||x>=Chassis.columns||y>=Chassis.rows)Error(model.title+": outside the chassis.");
+                        if(!occupied.Add((y,x)))Error(model.title+": overlaps another part.");
                     }
                 }
-                if(PowerUsed>PowerLimit)problems.Add("Power demand exceeds limit by "+(PowerUsed-PowerLimit).ToString("0.#")+". Install a power supply or remove a part.");
-                if(HeatUsed>CoolingLimit)problems.Add("Heat exceeds cooling by "+(HeatUsed-CoolingLimit).ToString("0.#")+". Install cooling or remove a part.");
-                return problems.Distinct().ToArray();
+                if(PowerUsed>PowerLimit)Error("Power demand exceeds limit by "+(PowerUsed-PowerLimit).ToString("0.#")+". Install a power supply or remove a part.");
+                if(HeatUsed>CoolingLimit)Error("Heat exceeds cooling by "+(HeatUsed-CoolingLimit).ToString("0.#")+". Install cooling or remove a part.");
+                if(!InstalledParts.Any(p=>p.modelId==UplinkModelId))Error("No uplink installed. Install an Uplink to connect.");
+                if(!InstalledParts.Any(p=>Module(p.modelId).family==StorageFamily))Warning("No storage module installed. Only chassis storage ("+StorageCapacity.ToString("0")+" GB) is available. Add a Drive or Storage Array for more.");
+                if(!InstalledParts.Any(p=>Module(p.modelId).family==ProcessingFamily))Warning("No processing module installed. Compute stays at base.");
+                return issues.GroupBy(i=>i.severity+"|"+i.message).Select(g=>g.First()).ToArray();
             }
         }
         private void InitializeRig()

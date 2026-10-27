@@ -16,14 +16,14 @@ MonoBehaviour:
   title: Parallel processor
   description: Improves performance for every operation.
   category: PROCESSING
-  statLabel: HACK SPEED
-  displayedStat: hackSpeed
+  statLabel: COMPUTE
+  displayedStat: compute
   requirements: []
   tiers:
   - price: 350
     modifiers:
     - id: 
-      stat: hackSpeed
+      stat: compute
       priority: 0
       operation: 0
       when:
@@ -33,7 +33,7 @@ MonoBehaviour:
   - price: 800
     modifiers:
     - id: 
-      stat: hackSpeed
+      stat: compute
       priority: 0
       operation: 0
       when:
@@ -43,7 +43,7 @@ MonoBehaviour:
   - price: 1450
     modifiers:
     - id: 
-      stat: hackSpeed
+      stat: compute
       priority: 0
       operation: 0
       when:

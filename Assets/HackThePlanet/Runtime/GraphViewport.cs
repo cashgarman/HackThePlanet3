@@ -37,6 +37,7 @@ namespace HackThePlanet
         private readonly GraphRenderingSession session;
         private readonly GraphVisualSettings networkSettings;
         private readonly LinkOverlay links;
+        private readonly CircuitBackdrop circuit;
         private WaypointOverlay waypointOverlay;
         private readonly VisualElement labels;
         private readonly Dictionary<string, Button> nodeButtons = new Dictionary<string, Button>();
@@ -155,6 +156,8 @@ namespace HackThePlanet
             image.pickingMode = PickingMode.Ignore;
             Add(image);
             if(flat)image.style.display=DisplayStyle.None;
+            // The rig rack sits on a circuit board; it stays behind the image, links and cells.
+            if(flat){circuit=new CircuitBackdrop{name="rig-circuit-backdrop"};Insert(0,circuit);}
 
             var cameraObject = new GameObject("Workstation GraphExplorer Camera") {hideFlags=HideFlags.HideAndDontSave};
             camera = cameraObject.AddComponent<Camera>();
@@ -177,7 +180,8 @@ namespace HackThePlanet
             session.Layout.Bind(scene);
             session.Layout.Paused = true;
             session.Renderer.Size = SizeMapping.Uniform;
-            session.Renderer.EdgeWidthScale = 3f;
+            session.Renderer.EdgeWidthScale = 1.15f;
+            session.Renderer.PathEdgeWidth = .07f;
             // The simulation stores both traversal directions; the visual graph draws each link once.
             session.Renderer.ActivePath = route == null ? null : new GraphPathResult(route.StartId, route.EndId, route.NodeIds,
                 route.EdgeIds.Select(id => scene.Edges.ContainsKey(id) ? id : string.Join(">", id.Split('>').Reverse())));
@@ -501,7 +505,7 @@ namespace HackThePlanet
         public void Tick(GameSimulation state, SignalEffects effects)
         {
             if (disposed) return;
-            if (flat) return;
+            if (flat) { circuit?.Tick(effects); return; }
             waypointOverlay?.Reposition(textScale);
             session.Renderer.ReducedMotion = effects != SignalEffects.Full;
             if (state.Active && !research && state.Op.task != null && !string.IsNullOrEmpty(state.Op.task.target))
@@ -701,7 +705,7 @@ namespace HackThePlanet
                     var tint = research ? scene.Schema.NodeTypes[b.Record.TypeId].Color : Palette.Cyan;
                     tint.a = highlight ? .9f : related ? .65f : research ? .38f : .19f;
                     painter.strokeColor = tint;
-                    painter.lineWidth = highlight ? 2 : related ? 1.5f : 1;
+                    painter.lineWidth = highlight ? 1.15f : related ? .9f : .65f;
                     painter.BeginPath();
                     painter.MoveTo(new Vector2(start.x / camera.pixelWidth * contentRect.width,
                         (1 - start.y / camera.pixelHeight) * contentRect.height));

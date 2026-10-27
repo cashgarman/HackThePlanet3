@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ActionDefinition
   id: decoy
   title: Decoy process
-  description: 'Toggle a sustained decoy: reserves 16 MEM for 35% less trace.'
+  description: 'Toggle a sustained decoy: reserves 16 GB RAM for 35% less trace.'
   memoryMode: 2
   memoryCost: 16
   instant: 0

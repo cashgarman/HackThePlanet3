@@ -32,7 +32,7 @@ The built-in stat inputs used by the engine are:
 | --- | --- |
 | `queueCapacity`, `futureQueue` | Queue rules; ability slots come directly from the chassis |
 | `storageCapacity`, `memoryPool`, `memoryReclaim` | Chassis/rig resource bases plus module modifiers |
-| `hackSpeed`, `transferSpeed` | Inputs referenced by the shipped action formulas |
+| `compute` (GFLOP/s), `bandwidth` (GB/s) | Inputs referenced by the shipped action formulas |
 | `scanRadius`, `revealRadius` | Inputs referenced by reveal effects |
 | `minimumSecurity`, `security` | Minimum and effective target security |
 | `duration`, `baseTrace` | Action cost modifiers |

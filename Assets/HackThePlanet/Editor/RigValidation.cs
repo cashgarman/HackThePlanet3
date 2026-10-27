@@ -49,7 +49,7 @@ namespace HackThePlanet.Editor
                 var paid=rich.BuyModule("power-3");rich.TryPlaceModule(paid.instanceId,3,0);
                 int owned=rich.Career.rigParts.Count;var refund=rich.PreviewResearchRefund();Check(refund.copies>=3&&refund.credits>=paid.paidPrice,"research refund previews full-price sales of newly locked copies");
                 credits=rich.Career.credits;Check(rich.RefundResearch()&&rich.Career.credits-credits==refund.credits&&rich.Career.rigParts.Count==owned-refund.copies,"research refund applies matching sales atomically");
-                LimitsAndBudgetFailures();StorageAndRam();ValidatePayloadBalance(Check);Authoring();
+                LimitsAndBudgetFailures();ConnectionIssues();StorageAndRam();ValidatePayloadBalance(Check);Authoring();
                 GameplayAssetGenerator.Generate();
                 using(var bundle=ContentJson.Load(GameData.DirectoryPath))foreach(var entry in bundle.Manifest.entries)
                 {
@@ -70,12 +70,28 @@ namespace HackThePlanet.Editor
                 content.Game.modifiers=content.Game.modifiers.Concat(new[]{new Modifier{stat="trace",operation=Arithmetic.Multiply,value=new ConstantNumber(0)}}).ToArray();
                 using(var catalog=new GameCatalog(content.Game))
                 {
-                    var sim=new GameSimulation(catalog);Check(sim.RigValid&&sim.PowerLimit==sim.PowerUsed&&sim.CoolingLimit==sim.HeatUsed,"exact power and cooling budgets are valid");Near(sim.Stat("hackSpeed"),3,"speed stacking is capped by authored rig rules");
+                    var sim=new GameSimulation(catalog);Check(sim.RigValid&&sim.PowerLimit==sim.PowerUsed&&sim.CoolingLimit==sim.HeatUsed,"exact power and cooling budgets are valid");Near(sim.Stat("compute"),3,"compute stacking is capped by authored rig rules");
                     var drive=sim.Career.rigParts.First(p=>p.modelId=="drive");sim.RemoveModule(drive.instanceId);var extra=sim.BuyModule("processor");Check(extra!=null&&sim.TryPlaceModule(extra.instanceId,1,0)&&!sim.RigValid,"packing permits temporary power and cooling budget failures");
                     Check(!sim.Start(catalog.Contracts(sim.Career).First()),"invalid assembly cannot connect");sim.RemoveModule(extra.instanceId);Check(sim.RigValid&&sim.Start(catalog.Contracts(sim.Career).First()),"removing excess load restores connection eligibility");
                     Near(sim.Preview("hack","n2").trace,4.7f*.2f,"trace reductions retain the authored minimum fraction");
                 }
             }
+        }
+        private static void ConnectionIssues()
+        {
+            var sim=new GameSimulation();var uplink=sim.Career.rigParts.First(p=>p.modelId=="uplink");
+            sim.RemoveModule(uplink.instanceId);
+            Check(sim.RigIssues.Any(i=>i.severity==RigIssueSeverity.Error&&i.message.Contains("uplink"))&&sim.RigProblems.Any(p=>p.Contains("uplink")),"missing uplink is a blocking rig error");
+            Check(!sim.RigValid&&!sim.Start(GameContent.Story[0]),"missing uplink blocks connection");
+            sim.PlaceFirstFree(uplink.instanceId);Check(sim.RigValid&&sim.Start(GameContent.Story[0]),"installing uplink restores connection");
+            sim.Disconnect();
+
+            var lean=new GameSimulation();
+            lean.RemoveModule(lean.Career.rigParts.First(p=>p.modelId=="drive").instanceId);
+            Check(lean.RigValid&&lean.RigIssues.Any(i=>i.severity==RigIssueSeverity.Warning&&i.message.StartsWith("No storage")),"missing storage is a warning that does not block connection");
+            lean.RemoveModule(lean.Career.rigParts.First(p=>p.modelId=="processor").instanceId);
+            Check(lean.RigValid&&lean.RigIssues.Count==2&&lean.RigIssues.All(i=>i.severity==RigIssueSeverity.Warning),"missing processing is a warning and warnings never block");
+            Check(lean.Start(GameContent.Story[0]),"warnings-only rig connects");
         }
         private static void StorageAndRam()
         {
@@ -103,7 +119,7 @@ namespace HackThePlanet.Editor
             sim.Execute("discard",archive.id);foreach(var node in sim.Op.nodes.Where(n=>n.objective)){node.known=node.controlled=node.collected=true;}
             var report=sim.Disconnect();Check(report.success&&report.bonusFiles==0&&sim.Career.lore.Count==0,"discarded archive grants no payout or banked lore");Near(sim.StorageUsed,0,"delivery clears storage");Near(sim.MemoryReserved+sim.MemoryReclaiming,0,"delivery clears RAM state");
             foreach(bool caught in new[]{false,true}){sim.Start(GameContent.Story[1]);sim.Op.memoryReclaiming=10;sim.Disconnect(caught);Check(!sim.Active&&sim.StorageUsed==0&&sim.MemoryReserved==0&&sim.MemoryReclaiming==0,"abort/isolation reset resource state");}
-            var blackout=Rich();blackout.Career.equipped=new List<string>{"blackout"};blackout.Start(GameContent.Story[0]);blackout.Node("n14").known=true;blackout.Node("n10").known=blackout.Node("n10").controlled=true;
+            var blackout=Rich();blackout.PlaceFirstFree(blackout.Career.rigParts.First(p=>p.modelId=="uplink").instanceId);blackout.Career.equipped=new List<string>{"blackout"};blackout.Start(GameContent.Story[0]);blackout.Node("n14").known=true;blackout.Node("n10").known=blackout.Node("n10").controlled=true;
             Check(blackout.Execute("blackout","n14")&&blackout.MemoryReserved==18,"persistent targeted activation reserves RAM immediately");
             Check(blackout.StopTask()&&blackout.MemoryReserved==0,"cancelling persistent activation releases reservation");
             blackout.Execute("blackout","n14");GameValidation.FinishTask(blackout);for(int i=0;i<100;i++)blackout.Tick(.5f);
@@ -157,7 +173,10 @@ namespace HackThePlanet.Editor
         {
             var viewport=app.Root.Q<GraphViewport>();Check(viewport!=null&&app.Root.Q(className:"flat-rig")!=null,"inventory rack uses flat cell layout");
             Check(app.Root.Q<Button>(className:"rig-module")!=null,"installed modules render as grid items");
+            Check(app.Root.Q("rig-issues")!=null,"rig problems are listed above the rack");
             Check(app.Root.Q<Button>("rig-place-first")!=null&&app.Root.Q<Button>("rig-rotate")!=null&&app.Root.Q<Button>("rig-remove")!=null,"keyboard-accessible packing controls exist");
+            Check(app.Root.Q("rig-details")!=null&&app.Root.Q("rig-inventory")!=null&&app.Root.Q<Button>("rig-category-ALL")!=null,"rig splits selected details and inventory with category tabs");
+            Check(app.State.Career.rigParts.All(p=>p.Installed)||app.Root.Q<Button>(className:"rig-inventory-row")!=null,"spare parts appear in the inventory list");
             var part=app.State.Career.rigParts.First(p=>p.modelId=="processor"&&p.Installed);var button=app.Root.Q<Button>("part-"+part.instanceId);
             Check(button!=null&&button.worldBound.width>0&&button.worldBound.height>0&&viewport.worldBound.Overlaps(button.worldBound),"module overlays lie inside the rack viewport");
             Check(app.Root.Query<Label>().ToList().Any(l=>l.text.Contains("COOLING")),"rig displays assembly budgets");

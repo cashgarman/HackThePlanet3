@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
   id: ram-bank
   title: RAM Bank
-  description: +35 MEM.
+  description: +35 GB RAM.
   family: memory
   branch: CONTROL
   flavour: Salvaged hardware. A private signal.

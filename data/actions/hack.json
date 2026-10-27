@@ -95,7 +95,7 @@
     },
     "right": {
       "type": "StatNumber",
-      "stat": "hackSpeed"
+      "stat": "compute"
     }
   },
   "baseTrace": {

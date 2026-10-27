@@ -1,7 +1,7 @@
 {
   "id": "ram-bank",
   "title": "RAM Bank",
-  "description": "+35 MEM.",
+  "description": "+35 GB RAM.",
   "family": "memory",
   "branch": "CONTROL",
   "tier": 1,

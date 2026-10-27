@@ -62,10 +62,7 @@
 .keycap { color: #a7d9bb; border-color: #446b55; }
 .payout { color: #9bfacb; }
 .note { background-color: #152823; border-left-color: #79b39a; }
-.console { background-color: #080f12; border-top-color: #3a5c4b; }
-.console-heading .eyebrow { color: #9bfacb; }
 .terminal-line { font-size: 9px; color: #91b7a4; }
-.console-side { border-left-color: #2a4037; }
 .footer { background-color: #0d1a18; border-top-color: #294338; }
 .footer-brand { color: #89b79d; font-size: 7px; }
 .footer-center, .footer-save { color: #83a795; font-size: 7px; }
@@ -81,6 +78,25 @@
 .reports-feed { border-left-color: #345146; }
 .primary-button { background-color: #9bfacb; color: #0c2319; letter-spacing: 1px; }
 .primary-button:hover { background-color: #c1ffde; color: #0c2319; }
+.inspector-bottom .primary-button { color: #062016; }
+.inspector-bottom .primary-button:hover { color: #062016; }
+.inspector-bottom .primary-button:disabled { background-color: #1a2e28; color: #e4f5ec; border-color: #3a5c4b; }
+.inspector-bottom Button#connect:disabled { opacity: 0.38; background-color: #142220; color: #6a8f82; border-color: #2a4038; }
+@keyframes connect-block-warning-glow {
+    0% { opacity: 0.72; color: #e85f55; text-shadow: 0 0 3px rgba(255, 120, 109, 0.35); }
+    50% { opacity: 1; color: #ff9a92; text-shadow: 0 0 12px rgba(255, 120, 109, 0.95), 0 0 20px rgba(255, 80, 70, 0.5); }
+    100% { opacity: 0.72; color: #e85f55; text-shadow: 0 0 3px rgba(255, 120, 109, 0.35); }
+}
+.connect-block-warning {
+    color: #ff786d;
+    -unity-font-style: bold;
+    margin-top: 10px;
+    white-space: normal;
+    animation-name: connect-block-warning-glow;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
 .secondary-button { border-color: #547e66; color: #bbd8c7; }
 .danger-button { border-color: #8f5145; color: #ffad93; }
 .modal-box { background-color: #10201d; border-color: #547e66; border-top-color: #9bfacb; }

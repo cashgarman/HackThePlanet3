@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: decoy
   title: Decoy process
-  description: Sustained decoy reduces trace generation by 35% while enabled. Reserves 16 MEM; disable it to release RAM.
+  description: Sustained decoy reduces trace generation by 35% while enabled. Reserves 16 GB RAM; disable it to release RAM.
   branch: CONTROL
   cost: 95
   waypointTier: 0

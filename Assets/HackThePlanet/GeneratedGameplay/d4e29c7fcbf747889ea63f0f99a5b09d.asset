@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ActionDefinition
   id: blackout
   title: Blackout hub
-  description: 'Toggle sustained hub suppression: reserves 18 MEM per hub.'
+  description: 'Toggle sustained hub suppression: reserves 18 GB RAM per hub.'
   memoryMode: 2
   memoryCost: 18
   instant: 0

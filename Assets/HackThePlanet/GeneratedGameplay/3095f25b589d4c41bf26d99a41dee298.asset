@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
   id: ram
   title: RAM
-  description: +10 MEM.
+  description: +10 GB RAM.
   family: memory
   branch: CONTROL
   flavour: Salvaged hardware. A private signal.

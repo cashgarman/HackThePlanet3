@@ -1,7 +1,7 @@
 {
   "id": "recon-cache",
   "title": "Recon Cache",
-  "description": "+0.20 transfer speed.",
+  "description": "+0.20 GB/s bandwidth.",
   "family": "transfer",
   "branch": "RECON",
   "tier": 1,
@@ -14,7 +14,7 @@
   "powerCapacity": 0,
   "coolingCapacity": 0,
   "flavour": "Salvaged hardware. A private signal.",
-  "synergy": "+0.20 transfer speed beside an Uplink.",
+  "synergy": "+0.20 GB/s bandwidth beside an Uplink.",
   "requirements": [
     {
       "condition": {
@@ -28,7 +28,7 @@
   "modifiers": [
     {
       "id": "",
-      "stat": "transferSpeed",
+      "stat": "bandwidth",
       "priority": 0,
       "operation": "Add",
       "when": {
@@ -41,7 +41,7 @@
     },
     {
       "id": "",
-      "stat": "transferSpeed",
+      "stat": "bandwidth",
       "priority": 0,
       "operation": "Add",
       "when": {

@@ -21,7 +21,8 @@ namespace HackThePlanet.Editor
             var career=GameCatalog.Default.CreateCareer();career.xp=10000;career.credits=10000;
             foreach(var id in technologies)if(!career.unlocked.Contains(id))career.unlocked.Add(id);
             career.equipped=GameContent.Tech.Where(t=>t.special&&technologies.Contains(t.id)).Select(t=>t.id).ToList();
-            var sim=new GameSimulation(career);foreach(var part in sim.Career.rigParts.ToArray())sim.RemoveModule(part.instanceId);sim.Start(GameContent.Story[0]);return sim;
+            // Fixtures keep the starter uplink, since connecting requires one. Every other part is removed so tests start from a bare rack.
+            var sim=new GameSimulation(career);foreach(var part in sim.Career.rigParts.Where(p=>p.modelId!=GameSimulation.UplinkModelId).ToArray())sim.RemoveModule(part.instanceId);sim.Start(GameContent.Story[0]);return sim;
         }
         [MenuItem("Hack The Planet/Run Data Driven Validation")]
         public static void Run()
@@ -58,7 +59,7 @@ namespace HackThePlanet.Editor
             var p=pressure.Preview("hack","n10");float basis=3+pressure.EffectiveSecurity(pressure.Node("n10"))*1.7f;
             Near(p.trace,(basis*.8f+p.duration*pressure.Scanners*.18f)*.9f,"scanner pressure follows duration modifiers and precedes global trace modifiers");
             var selective=Developed("efficient","selective");selective.Node("n22").known=true;selective.Node("n22").controlled=true;
-            Near(selective.Preview("download","n22").duration,5.5f*.7f,"selective main-objective duration");Near(selective.Preview("download","n22").trace,8*.7f,"selective main-objective trace");
+            Near(selective.Preview("download","n22").duration,selective.Node("n22").storage*.7f/1.25f,"selective main-objective duration is file size over uplink bandwidth");Near(selective.Preview("download","n22").trace,8*.7f,"selective main-objective trace");
             var chain=Developed("efficient","chain");chain.Execute("scan","n2");Finish(chain);Check(chain.Execute("hack","n2")&&chain.Execute("hack","n6"),"chain permits future neighboring action");Check(!chain.Execute("hack","n6"),"duplicate queue entries rejected");Finish(chain);Check(chain.Node("n6").controlled,"queued action executes after gaining reachability");
             var invalid=Developed();invalid.Execute("hack","n2");invalid.Node("n6").known=true;Check(invalid.Execute("scan","n6"),"queue defers future reachability");invalid.Node("n6").scanned=true;Finish(invalid);Check(invalid.Op.queue.Count==0&&invalid.Op.log.Any(l=>l.Contains("SKIPPED")),"queued requirements rechecked and completed action skipped");
             var decoy=Developed("disrupt","decoy");decoy.Op.trace=30;Check(decoy.Execute("decoy"),"persistent operator action executes");Near(decoy.Op.trace,30,"decoy does not refund trace");Near(decoy.MemoryReserved,16,"decoy reserves authored RAM");

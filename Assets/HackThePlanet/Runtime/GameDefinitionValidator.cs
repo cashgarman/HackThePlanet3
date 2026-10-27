@@ -134,7 +134,7 @@ namespace HackThePlanet
             }
             var rig=root.rig;
             if(rig.startingChassis==null||root.chassis.Length==0)Error(rig,"startingChassis","a registered starting chassis is required");
-            if(rig.saleFraction<0||rig.saleFraction>1||rig.researchSaleFraction<0||rig.researchSaleFraction>1||rig.minimumTraceFraction<0||rig.minimumTraceFraction>1||rig.maximumHackSpeed<=0||rig.maximumTransferSpeed<=0||rig.memoryReclaim<0)Error(rig,"limits","invalid sale, resource or stacking limits");
+            if(rig.saleFraction<0||rig.saleFraction>1||rig.researchSaleFraction<0||rig.researchSaleFraction>1||rig.minimumTraceFraction<0||rig.minimumTraceFraction>1||rig.maximumCompute<=0||rig.maximumBandwidth<=0||rig.memoryReclaim<0)Error(rig,"limits","invalid sale, resource or stacking limits");
             if(root.chassis.GroupBy(c=>c.tier).Any(g=>g.Count()>1))Error(rig,"chassis","tiers must be unique");
             foreach(var chassis in root.chassis)
             {

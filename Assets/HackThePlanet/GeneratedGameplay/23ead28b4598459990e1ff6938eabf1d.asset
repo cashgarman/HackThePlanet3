@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
   id: accelerator
   title: Accelerator
-  description: +0.55 hack speed.
+  description: +0.55 GFLOP/s compute.
   family: processing
   branch: INTRUSION
   flavour: Salvaged hardware. A private signal.
@@ -34,7 +34,7 @@ MonoBehaviour:
     message: Requires Parallel Engineering research.
   modifiers:
   - id: 
-    stat: hackSpeed
+    stat: compute
     priority: 0
     operation: 0
     when:

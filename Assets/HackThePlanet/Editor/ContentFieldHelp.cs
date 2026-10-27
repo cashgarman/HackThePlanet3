@@ -22,13 +22,13 @@ module|Registered module model reference.
 rotated|Rotate this footprint 90 degrees; swaps width and height.
 rotatable|Permit 90 degree rotation when global rotation is enabled.
 allowRotation|Enable footprint rotation for models that permit it.
-requireValidBuild|Block connections while the rack has placement, power or cooling failures.
+requireValidBuild|Block connections while the rack has placement, power or cooling failures, or no installed Uplink. Storage and processing gaps are warnings only.
 saleFraction|Voluntary sale fraction of the actual price paid; credits round down.
 researchSaleFraction|Fraction of actual paid price returned when a research refund locks the model.
 minimumTraceFraction|Minimum fraction of ordinary trace retained after reductions. Explicitly trace-free tools remain exempt.
-maximumHackSpeed|Upper limit for the modified hack speed multiplier.
-maximumTransferSpeed|Upper limit for the modified transfer speed multiplier.
-memoryReclaim|MEM returned from the reclaiming bucket per simulation second; pauses with simulation time.
+maximumCompute|Upper limit for the modified compute rate in GFLOP/s.
+maximumBandwidth|Upper limit for the modified bandwidth rate in GB/s.
+memoryReclaim|RAM in GB/s returned from the reclaiming bucket per simulation second; pauses with simulation time.
 family|Module family used for filtering and adjacency matching, such as power, cooling, storage or reclaim.
 tier|Model tier. Power and cooling tiers are separate purchasable models.
 width|Unrotated module footprint width in rack cells.
@@ -38,7 +38,7 @@ columns|Number of rack columns.
 requiredJobs|Successful deliveries required to purchase this chassis, including freelance work.
 slots|Maximum number of equipped abilities, independent of their RAM costs.
 storageCapacity|Storage capacity in GB, held until disconnect.
-memoryPool|Maximum ability RAM in MEM. Active tools reserve it; one-shots occupy it until reclaimed.
+memoryPool|Maximum ability RAM in GB. Active tools reserve it; one-shots occupy it until reclaimed.
 powerCapacity|Power limit supplied by this chassis or installed module; stacks additively.
 coolingCapacity|Cooling limit supplied by this chassis or installed module; stacks additively.
 powerDemand|Power consumed while this module is installed, including cooling modules.
@@ -46,7 +46,7 @@ heatOutput|Cooling capacity required by this installed module, including power s
 flavour|Long-form flavour text shown in readable module tooltips.
 synergy|Player-facing explanation of adjacency modifiers; mechanics live in Modifiers.
 memoryMode|None, OneShot (reclaiming RAM), or Persistent (reserved until disabled).
-memoryCost|MEM needed to start the tool. Queued actions recheck when they start.
+memoryCost|RAM in GB needed to start the tool. Queued actions recheck when they start.
 activeModifiers|Stat modifiers applied while this persistent tool has a RAM reservation.
 instant|Allow a zero-duration targeted action alongside a running tool, such as archive discard.
 releaseOnTargetControl|Release this persistent tool and its RAM when the target becomes permanently controlled.
@@ -191,7 +191,7 @@ parents|All prerequisite technologies that must be unlocked before purchase.
 grants|Actions unlocked by this technology; special technologies must also be equipped.
 category|Player-facing hardware category caption.
 statLabel|Player-facing label for the hardware's displayed stat.
-displayedStat|Baseline/modifiable stat shown in the hardware UI, such as hackSpeed or slots.
+displayedStat|Baseline/modifiable stat shown in the hardware UI, such as compute or slots.
 price|Credit cost to purchase this hardware tier.
 disablesDefense|While active, this status suppresses the target's defense behavior.
 preventsTrace|While active, this status prevents trace generation for its affected context.

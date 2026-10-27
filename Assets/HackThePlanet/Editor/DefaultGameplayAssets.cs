@@ -64,12 +64,12 @@ namespace HackThePlanet.Editor
             hack.requirements=hack.requirements.Concat(new[]{Req(Not(State(NodeState.Controlled)),"You already control this system.")}).ToArray();
             hack.queueRequirements=hack.queueRequirements.Concat(new[]{Req(Not(State(NodeState.Controlled)),"You already control this system.")}).ToArray();
             Number HackCost()=>B(Arithmetic.Add,N(3),B(Arithmetic.Multiply,I(NumberInput.Security),N(1.7f)));
-            hack.duration=B(Arithmetic.Divide,HackCost(),S("hackSpeed"));hack.baseTrace=HackCost();
+            hack.duration=B(Arithmetic.Divide,HackCost(),S("compute"));hack.baseTrace=HackCost();
             Effect[] ControlEffects()=>new Effect[]{new SetStateEffect{state=NodeState.Controlled},new RevealEffect{radius=S("revealRadius")},Log("CONTROL ESTABLISHED // {target}.")};
             hack.effects=ControlEffects();
             var download=Make("download","Download files",KeyCode.Alpha3,"3",1,1,Any(State(NodeState.Objective),State(NodeState.Bonus)));download.initiallyAvailable=true;
             download.requirements=download.requirements.Concat(new[]{Req(State(NodeState.Controlled),"Hack this system before recovering its files."),Req(Not(State(NodeState.Collected)),"Files already secured."),Req(Any(State(NodeState.Objective),State(NodeState.Bonus)),"No contract files or optional archives on this node."),Req(Not(Tag("securityhub")),"Control the hub to satisfy this objective.")}).ToArray();
-            download.duration=B(Arithmetic.Divide,Choose(State(NodeState.Objective),N(9),N(7)),S("transferSpeed"));download.baseTrace=Choose(State(NodeState.Objective),N(8),N(6));
+            download.duration=B(Arithmetic.Divide,Choose(Compare(I(NumberInput.NodeStorage),Comparison.Greater,N(0)),I(NumberInput.NodeStorage),Choose(State(NodeState.Objective),N(9),N(7))),S("bandwidth"));download.baseTrace=Choose(State(NodeState.Objective),N(8),N(6));
             download.effects=new Effect[]{new SetStateEffect{state=NodeState.Collected},new ConditionalEffect{when=State(NodeState.Objective),effects=new[]{Log("OBJECTIVE SECURED // {target}.")}},new ConditionalEffect{when=Not(State(NodeState.Objective)),effects=new[]{Log("OPTIONAL ARCHIVE // +{archiveCredits} cr / +{archiveXp} XP on successful extraction.")}},new RecoverLoreEffect()};
             var disrupt=Make("disrupt","Disrupt scanner",KeyCode.Alpha4,"4",2.5f,2,Tag("scanner"));
             var blackout=Make("blackout","Blackout hub",KeyCode.Alpha4,"4",2.5f,2,Tag("securityhub"));blackout.legacyGroup="disrupt";
@@ -154,7 +154,7 @@ namespace HackThePlanet.Editor
                 d.objectives=objectives.ToArray();d.lore=baseline.lore.Skip(index*3).Take(3).ToArray();return d;
             }).ToArray();
             root.hardware=new[]{Asset<HardwareDefinition>("cpu","Parallel processor"),Asset<HardwareDefinition>("bandwidth","Fiber uplink"),Asset<HardwareDefinition>("memory","Memory expansion")};
-            string[] statNames={"hackSpeed","transferSpeed","slots"},categories={"PROCESSING","BANDWIDTH","ABILITY CAPACITY"},labels={"HACK SPEED","TRANSFER SPEED","ABILITY SLOTS"};
+            string[] statNames={"compute","bandwidth","slots"},categories={"PROCESSING","BANDWIDTH","ABILITY CAPACITY"},labels={"COMPUTE","BANDWIDTH","ABILITY SLOTS"};
             for(int i=0;i<root.hardware.Length;i++)
             {
                 var h=root.hardware[i];h.category=categories[i];h.statLabel=labels[i];h.displayedStat=statNames[i];h.description=i==2?"Additional room for equipped special abilities.":"Improves performance for every operation.";
@@ -164,7 +164,7 @@ namespace HackThePlanet.Editor
             root.rewards.rules=new[]{new RewardRule{credits=I(NumberInput.ContractCredits),xp=I(NumberInput.ContractXp)},new RewardRule{credits=B(Arithmetic.Multiply,I(NumberInput.BonusFiles),I(NumberInput.ArchiveCredits)),xp=B(Arithmetic.Minimum,I(NumberInput.ArchiveXpCap),B(Arithmetic.Multiply,I(NumberInput.BonusFiles),I(NumberInput.ArchiveXp)))},new RewardRule{when=Compare(I(NumberInput.Trace),Comparison.Less,I(NumberInput.QuietLimit)),credits=I(NumberInput.QuietCredits),xp=I(NumberInput.QuietXp)}};
             root.career=Asset<CareerDefinition>("career","Career rules");root.career.initialTechnologies=new[]{Tech("base")};
             root.career.welcome="EXCHANGE ONLINE // A new operator has entered the network. Your first contract is waiting.";
-            root.career.stats=new[]{new NamedStat("slots",2),new NamedStat("queueCapacity",1),new NamedStat("hackSpeed",1),new NamedStat("transferSpeed",1),new NamedStat("scanRadius",2),new NamedStat("revealRadius",1),new NamedStat("traceGrowth",1),new NamedStat("minimumSecurity",1),new NamedStat("futureQueue",0),new NamedStat("traceFree",0),new NamedStat("tracePressure",0),new NamedStat("idleTracePerSecond",0)};
+            root.career.stats=new[]{new NamedStat("slots",2),new NamedStat("queueCapacity",1),new NamedStat("compute",1),new NamedStat("bandwidth",1),new NamedStat("scanRadius",2),new NamedStat("revealRadius",1),new NamedStat("traceGrowth",1),new NamedStat("minimumSecurity",1),new NamedStat("futureQueue",0),new NamedStat("traceFree",0),new NamedStat("tracePressure",0),new NamedStat("idleTracePerSecond",0)};
             root.career.ranks=new[]{new CareerRank{jobs=0,title="NEW SIGNAL"},new CareerRank{jobs=1,title="FREELANCER"},new CareerRank{jobs=3,title="TRUSTED OPERATOR"},new CareerRank{jobs=6,title="GHOST IN THE NETWORK"}};
             foreach(var asset in GameDefinitionValidator.Definitions(root))EditorUtility.SetDirty(asset);
             GameDefinitionValidator.ThrowIfInvalid(root);AssetDatabase.SaveAssets();BalanceRefinement.Apply();File.WriteAllText("Artifacts/gameplay-import.txt","PASS / All gameplay definitions imported as Unity assets with current career tuning.");

@@ -105,8 +105,10 @@ namespace HackThePlanet.Editor
         private void DrawWindow()
         {
             rebuilding = true; rootVisualElement.Clear(); countLabel = null; headerUnsaved = null;
-            rootVisualElement.Add(BuildCategoryTabs());
-            rootVisualElement.Add(BuildToolbar());
+            rootVisualElement.AddToClassList("ctp-root");
+            var chrome = new VisualElement(); chrome.AddToClassList("ctp-chrome");
+            chrome.Add(BuildCategoryTabs()); chrome.Add(BuildToolbar());
+            rootVisualElement.Add(chrome);
             banner = new VisualElement(); banner.AddToClassList("ctp-banner"); rootVisualElement.Add(banner);
             form = new ScrollView(); form.AddToClassList("ctp-form"); form.style.flexGrow = 1; form.style.paddingLeft = form.style.paddingRight = 12;
             list = new ListView { itemsSource = visibleKeys, fixedItemHeight = 36, selectionType = SelectionType.Single };
@@ -125,18 +127,21 @@ namespace HackThePlanet.Editor
         private VisualElement BuildCategoryTabs()
         {
             var scroll = new ScrollView(ScrollViewMode.Horizontal); scroll.AddToClassList("ctp-tabs");
+            scroll.horizontalScrollerVisibility = ScrollerVisibility.Auto;
+            scroll.verticalScrollerVisibility = ScrollerVisibility.Hidden;
             var row = new VisualElement(); row.AddToClassList("ctp-tab-row"); scroll.Add(row);
             foreach (var group in TabGroups)
             {
                 var box = new VisualElement(); box.AddToClassList("ctp-tab-group"); row.Add(box);
                 var title = new Label(group.Name); title.AddToClassList("ctp-group-label"); box.Add(title);
+                var strip = new VisualElement(); strip.AddToClassList("ctp-tab-strip"); box.Add(strip);
                 foreach (string name in group.Items)
                 {
                     string tab = name; int count = EntriesFor(tab).Count();
                     var button = new Button(() => { category = tab; selectedKey = null; DrawWindow(); }) { text = tab, tooltip = tab + " (" + count + (count == 1 ? " entry)" : " entries)") };
                     button.AddToClassList("ctp-tab"); button.EnableInClassList("ctp-tab--active", category == tab);
                     ContentEditorUI.Decorate(button, true, ContentEditorUI.CategoryIconNames(tab));
-                    box.Add(button);
+                    strip.Add(button);
                 }
             }
             return scroll;
@@ -845,6 +850,7 @@ namespace HackThePlanet.Editor
             var image = new Image { image = texture, pickingMode = PickingMode.Ignore };
             image.AddToClassList("ctp-icon");
             button.Insert(0, image);
+            button.AddToClassList("ctp-btn-with-icon");
             if (!keepText) button.text = "";
             return button;
         }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: bridge
   title: Firewall bridge
-  description: Two charges per operation. Scan a reachable firewall, then cross it in 1.2 seconds with zero trace. Requires Wide scan and Efficient hack. Costs 14 MEM, reclaimed over simulation time.
+  description: Two charges per operation. Scan a reachable firewall, then cross it in 1.2 seconds with zero trace. Requires Wide scan and Efficient hack. Costs 14 GB RAM, reclaimed over simulation time.
   branch: CROSSOVER
   cost: 140
   waypointTier: 0

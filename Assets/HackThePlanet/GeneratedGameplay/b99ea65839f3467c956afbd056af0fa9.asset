@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
   id: recon-cache
   title: Recon Cache
-  description: +0.20 transfer speed.
+  description: +0.20 GB/s bandwidth.
   family: transfer
   branch: RECON
   flavour: Salvaged hardware. A private signal.
-  synergy: +0.20 transfer speed beside an Uplink.
+  synergy: +0.20 GB/s bandwidth beside an Uplink.
   tier: 1
   width: 1
   height: 2
@@ -34,7 +34,7 @@ MonoBehaviour:
     message: Requires Signal Engineering research.
   modifiers:
   - id: 
-    stat: transferSpeed
+    stat: bandwidth
     priority: 0
     operation: 0
     when:
@@ -42,7 +42,7 @@ MonoBehaviour:
     value:
       rid: 213507078570639514
   - id: 
-    stat: transferSpeed
+    stat: bandwidth
     priority: 0
     operation: 0
     when:

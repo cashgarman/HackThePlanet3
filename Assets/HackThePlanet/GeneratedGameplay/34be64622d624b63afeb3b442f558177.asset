@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
   id: blackout
   title: Blackout
-  description: Suppress a mapped hub within three controlled hops until disabled or captured. Reserves 18 MEM per hub.
+  description: Suppress a mapped hub within three controlled hops until disabled or captured. Reserves 18 GB RAM per hub.
   branch: CONTROL
   cost: 85
   waypointTier: 0

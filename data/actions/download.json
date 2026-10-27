@@ -143,21 +143,48 @@
     "left": {
       "type": "ConditionalNumber",
       "when": {
-        "type": "NodeStateCondition",
-        "state": "Objective"
+        "type": "CompareCondition",
+        "comparison": "Greater",
+        "left": {
+          "type": "InputNumber",
+          "input": "NodeStorage",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 0
+        }
       },
       "yes": {
-        "type": "ConstantNumber",
-        "value": 5.5
+        "type": "InputNumber",
+        "input": "NodeStorage",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
       },
       "no": {
-        "type": "ConstantNumber",
-        "value": 4
+        "type": "ConditionalNumber",
+        "when": {
+          "type": "NodeStateCondition",
+          "state": "Objective"
+        },
+        "yes": {
+          "type": "ConstantNumber",
+          "value": 5.5
+        },
+        "no": {
+          "type": "ConstantNumber",
+          "value": 4
+        }
       }
     },
     "right": {
       "type": "StatNumber",
-      "stat": "transferSpeed"
+      "stat": "bandwidth"
     }
   },
   "baseTrace": {

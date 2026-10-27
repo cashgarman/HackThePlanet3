@@ -21,13 +21,16 @@ namespace HackThePlanet
         public int TextSizePercent { get; private set; } = 200;
         public bool SelectWithoutCameraFocus { get; private set; } = true;
         private readonly Dictionary<TextElement, float> baseTextSizes = new Dictionary<TextElement, float>();
+        private const float TooltipDelay=.6f;
+        // Owners with this class show their tooltip immediately, styled like the graph node intel card.
+        public const string IntelTooltipClass="intel-tooltip";
         private Label tooltipLabel;
         private VisualElement tooltipOwner;
         private Vector2 pointerPosition;
         private float tooltipAt;
         private VisualElement root, overlay;
-        private Label memoryNumber,storageNumber;
-        private Label traceNumber, runningLabel, traceState, timeLabel, queueLabel;
+        private Label traceNumber, runningLabel, traceState, queueLabel;
+        private Label opPower, opCooling, opCompute, opBandwidth, opStorage, opMemory, opReclaim;
         private VisualElement traceFill, taskFill;
         private GraphViewport canvas;
         private Contract selectedJob;
@@ -57,7 +60,7 @@ namespace HackThePlanet
             State=new GameSimulation(CareerStorage.Load());
             selectedJob=State.Active?State.Job:State.Catalog.Contracts(State.Career).FirstOrDefault(c=>!State.Career.completed.Contains(c.id)&&State.Career.completed.Count>=c.requiredWins)??State.Catalog.Contracts(State.Career).First(c=>!c.recurring);
             State.Changed+=()=>{dirty=true;if(!Testing)CareerStorage.Save(State.Career);};
-            selectedNode=State.Active?State.Op.lastControlled:null;
+            selectedNode=null;
             sessionActive=State.Active;
             selectedTech=null;
             } catch(Exception ex) { initializationError=ex;State=null; }
@@ -85,7 +88,7 @@ namespace HackThePlanet
                 var target=evt.target as VisualElement;
                 while(target!=null&&target!=root&&string.IsNullOrEmpty(target.tooltip))target=target.parent;
                 if(target==root||target!=null&&!target.enabledInHierarchy)target=null;
-                if(target!=tooltipOwner){HideTooltip();tooltipOwner=target;tooltipAt=Time.unscaledTime+.6f;}
+                if(target!=tooltipOwner){HideTooltip();tooltipOwner=target;tooltipAt=Time.unscaledTime+(target!=null&&target.ClassListContains(IntelTooltipClass)?0:TooltipDelay);}
             });
             root.RegisterCallback<PointerUpEvent>(EndRigDrag,TrickleDown.TrickleDown);
             root.RegisterCallback<WheelEvent>(evt=>{
@@ -124,14 +127,16 @@ namespace HackThePlanet
             int band=active?(State.Op.trace>=State.TraceDanger?2:State.Op.trace>=State.TraceWarning?1:0):0;
             if(band>traceBand&&!muted&&audioSource!=null)audioSource.PlayOneShot(warningSound,band==2?1:.5f);
             traceBand=band;
-            if(timeLabel!=null&&State.Active)timeLabel.text="SESSION / "+TimeText(State.Op.elapsed);
             if(!State.Active&&State.LastReport!=null&&modal!="report"&&State.LastReport!=lastShownReport)
             {lastShownReport=State.LastReport;modal="report";dirty=true;Beep(State.LastReport.success);}
             if(State.Active&&Time.unscaledTime>=nextResourceRefresh){nextResourceRefresh=Time.unscaledTime+.5f;if(view=="network")RefreshResourceActions();}
-            if(dirty)Build();
+            // Rebuilding mid-drag would call CancelRigDrag and snap a lifted part back into the rack.
+            if(dirty&&dragRigId==null)Build();
             if(tooltipOwner!=null&&tooltipLabel!=null&&Time.unscaledTime>=tooltipAt)
             {
-                tooltipLabel.text=GameplayRichText.Format(tooltipOwner.tooltip);tooltipLabel.style.display=DisplayStyle.Flex;
+                tooltipLabel.text=GameplayRichText.Format(tooltipOwner.tooltip);
+                tooltipLabel.EnableInClassList(IntelTooltipClass,tooltipOwner.ClassListContains(IntelTooltipClass));
+                tooltipLabel.style.display=DisplayStyle.Flex;
                 PositionTooltip();
             }
             UpdateMeters();
@@ -147,7 +152,7 @@ namespace HackThePlanet
         {
             if(State==null)return;
             if(view=="rig"&&modal==null&&evt.keyCode==KeyCode.R){RotateRigSelection();evt.StopImmediatePropagation();return;}
-            if(evt.keyCode==KeyCode.Escape&&dragRigId!=null){CancelRigDrag();evt.StopImmediatePropagation();return;}
+            if(evt.keyCode==KeyCode.Escape&&dragRigId!=null){CancelRigDrag();dirty=true;evt.StopImmediatePropagation();return;}
             if(evt.keyCode==KeyCode.Escape)
             {
                 if(modal=="settings")ResumeFromSettings();
@@ -179,7 +184,7 @@ namespace HackThePlanet
         private void Build()
         {
             CancelRigDrag();baseTextSizes.Clear();tooltipOwner=null;
-            dirty=false;canvas?.Dispose();uiActions.Clear();root.Clear();memoryNumber=storageNumber=null;traceFill=null;taskFill=null;traceNumber=null;runningLabel=null;traceState=null;timeLabel=null;queueLabel=null;canvas=null;
+            dirty=false;canvas?.Dispose();uiActions.Clear();root.Clear();traceFill=null;taskFill=null;traceNumber=null;runningLabel=null;traceState=null;queueLabel=null;opPower=opCooling=opCompute=opBandwidth=opStorage=opMemory=opReclaim=null;canvas=null;
             BuildHeader();
             var body=El(root,"desktop-body");
             BuildRail(body);
@@ -189,7 +194,6 @@ namespace HackThePlanet
             else if(view=="research")BuildResearch(workspace);
             else if(view=="rig")BuildRig(workspace);
             else BuildIntel(workspace);
-            BuildConsole(content);
             var footer=El(root,"footer");Text(footer,"GHOST FREQUENCY / HTP TERMINAL 1.0","footer-brand");
             Text(footer,State.Active?"ENCRYPTED SESSION  /  "+(State.Op.paused?"PAUSED":"LIVE"):"LOCAL SESSION  /  PRIVATE GATEWAY","footer-center");
             Text(footer,CareerStorage.Warning!=null?"SAVE UNAVAILABLE":"AUTOSAVE ACTIVE  /  LOCAL STORAGE","footer-save");
@@ -301,7 +305,7 @@ namespace HackThePlanet
         private void BuildNetwork(VisualElement workspace)
         {
             var left=Scroll(workspace,"left-panel");
-            var lh=El(left,"panel-heading");Text(lh,State.Active?"ACTIVE CONTRACT":"CONTRACT EXCHANGE","eyebrow");Text(lh,"VERIFIED / ESCROW","micro muted");
+            var lh=El(left,"panel-heading");Text(lh,State.Active?"ACTIVE CONTRACT":"CONTRACTS","large-heading panel-title");
             if(!State.Active)
             {
                 var list=El(left,"contract-list");
@@ -334,19 +338,19 @@ namespace HackThePlanet
                 var operatorActions=State.Active?State.AvailableActions().Where(a=>tech.grants.Contains(a.id)).ToArray():Array.Empty<ActionInfo>();
                 if(operatorActions.Length>0)foreach(var action in operatorActions)
                 {
-                    var abilityPreview=State.Preview(action.id);var button=Btn(loadout,State.ActionTitle(action.id)+" / "+action.Definition.memoryCost+" MEM",()=>Run(action.id,null),"ability-"+id,"ability-button");button.SetEnabled(abilityPreview.allowed);
+                    var abilityPreview=State.Preview(action.id);var button=Btn(loadout,State.ActionTitle(action.id)+" / "+action.Definition.memoryCost+" GB",()=>Run(action.id,null),"ability-"+id,"ability-button");button.SetEnabled(abilityPreview.allowed);
                 }
                 else Btn(loadout,tech.title+" / READY",()=>{selectedTech=id;Navigate("research");},"ability-"+id,"ability-button").SetEnabled(!State.Active);
             }
             if(State.Active)foreach(var reservation in State.Op.reservations.ToArray())
             {
-                var captured=reservation;Btn(loadout,"DISABLE / "+State.Catalog.FindAction(captured.actionId).title+" / "+(State.Node(captured.target)?.label??"OPERATOR")+" / "+captured.amount+" MEM",()=>Run(captured.actionId,captured.target),"disable-"+captured.actionId+"-"+(captured.target??"operator"),"ability-button");
+                var captured=reservation;Btn(loadout,"DISABLE / "+State.Catalog.FindAction(captured.actionId).title+" / "+(State.Node(captured.target)?.label??"OPERATOR")+" / "+captured.amount.ToString("0.#")+" GB",()=>Run(captured.actionId,captured.target),"disable-"+captured.actionId+"-"+(captured.target??"operator"),"ability-button");
             }
             var mid=El(workspace,"network-panel");var map=El(mid,"map-content");var mh=El(map,"map-heading");var title=El(mh,"map-title-block");
             var intel=State.Active?ContractIntel.Full:selectedJob.Intel;
             Text(title,State.Active?"LIVE NETWORK":"NETWORK INTELLIGENCE","eyebrow cyan");Text(title,(State.Active?State.Job:selectedJob).company,"map-title");
-            var state=El(mh,"map-status");Text(state,State.Active?(State.Op.paused?"||  SIMULATION PAUSED":"●  ENCRYPTED CONNECTION"):"○  "+selectedJob.DifficultyLabel+" / "+(intel==ContractIntel.Full?"FULL INTEL":intel==ContractIntel.Topology?"TOPOLOGY ONLY":"NO INTEL"),"micro "+(State.Active?"lime":"muted"));
-            Text(state,State.Active?State.Op.nodes.Count(n=>n.known)+" / "+State.Op.nodes.Count+" SYSTEMS DISCOVERED":"SELECT A CONTRACT TO BEGIN","micro muted");
+            var state=El(mh,"map-status");            Text(state,State.Active?(State.Op.paused?"||  SIMULATION PAUSED":"●  ENCRYPTED CONNECTION"):"○  "+selectedJob.DifficultyLabel+" / "+(intel==ContractIntel.Full?"FULL INTEL":intel==ContractIntel.Topology?"TOPOLOGY ONLY":"NO INTEL"),"micro "+(State.Active?"lime":"muted"));
+            if(State.Active)Text(state,State.Op.nodes.Count(n=>n.known)+" / "+State.Op.nodes.Count+" SYSTEMS DISCOVERED","micro muted");
             var nodes=new List<NetNode>();
             if(intel==ContractIntel.None)
             {
@@ -374,7 +378,7 @@ namespace HackThePlanet
             {var controls=El(mapFooter,"map-controls");Btn(controls,"−",()=>canvas.Zoom(1.15f),"zoom-out","map-button");Btn(controls,"+",()=>canvas.Zoom(.85f),"zoom-in","map-button");Btn(controls,"FIT",()=>canvas.ResetView(),"fit","map-button");}
             if(State.Active)BuildTraceBar(mid);
             var right=El(workspace,"right-panel");
-            if(State.Active)BuildTarget(right,State.Node(selectedNode)??State.Node(State.Op.entryNode));
+            if(State.Active)BuildTarget(right,State.Node(selectedNode));
             else BuildBrief(right);
         }
 
@@ -393,9 +397,9 @@ namespace HackThePlanet
             Text(scroll,selectedJob.RewardMultiplier.ToString("0.#")+"× "+selectedJob.DifficultyLabel+" PAYOUT / CREDITS + XP","micro cyan");
             RichText(scroll,selectedJob.condition,"small muted");Text(scroll,"OPTIONAL ARCHIVES","eyebrow section-space");RichText(scroll,State.ArchiveDescription,"small muted");
             Text(scroll,"OPERATOR NOTE","eyebrow section-space");RichText(scroll,State.Career.jobs==0?"Your gateway is already controlled. Hack a connected relay to get inside, or scan it to discover more routes. Pause whenever you need to think.":"Scanners add pressure while you work near them. A captured hub weakens the systems it protects. Your old successes may have changed these defenses.","body-copy note");
-            var bottom=El(right,"inspector-bottom");bool done=State.Career.completed.Contains(selectedJob.id),locked=State.Career.completed.Count<selectedJob.requiredWins;
-            var start=Btn(bottom,done?"CONTRACT DELIVERED":locked?"COMPLETE EARLIER CONTRACTS":"CONNECT TO NETWORK  →",StartSelected,"connect","primary-button");start.SetEnabled(!done&&!locked&&State.RigValid);if(!State.RigValid)Text(bottom,string.Join("\n",State.RigProblems),"small amber");
-            Text(bottom,"No time limit. Plan freely. Disconnect to bank rewards.","micro muted center-text");
+            var bottom=El(right,"inspector-bottom");bool done=State.Career.completed.Contains(selectedJob.id),locked=State.Career.completed.Count<selectedJob.requiredWins,rigBlocked=!State.RigValid;
+            var start=Btn(bottom,done?"CONTRACT DELIVERED":locked?"COMPLETE EARLIER CONTRACTS":"CONNECT TO NETWORK  →",StartSelected,"connect","primary-button");start.SetEnabled(!done&&!locked&&!rigBlocked);
+            if(rigBlocked)Text(bottom,string.Join("\n",State.RigProblems),"small connect-block-warning center-text");
         }
 
         private void BuildWaypointPlanner(VisualElement parent)
@@ -444,7 +448,7 @@ namespace HackThePlanet
 
         public void StartSelected()
         {
-            if(State.Start(selectedJob)){selectedNode=State.PreferredNode(selectedJob);view="network";networkCamera.Reset();Beep();dirty=true;}
+            if(State.Start(selectedJob)){selectedNode=null;view="network";networkCamera.Reset();Beep();dirty=true;}
         }
 
         private void BuildTarget(VisualElement right,NetNode node)
@@ -502,7 +506,7 @@ namespace HackThePlanet
             var remaining=State.UsesRemaining(action.id,selectedNode);
             float displayedTrace=queue?preview.trace:Mathf.Max(0,preview.projectedTrace-State.Op.trace);
             string estimate=preview.allowed?preview.duration.ToString("0.0")+"s  /  +"+displayedTrace.ToString("0.0")+" trace":preview.reason;
-            if(action.Definition.memoryCost>0)estimate+="  /  "+action.Definition.memoryCost+" MEM";
+            if(action.Definition.memoryCost>0)estimate+="  /  "+action.Definition.memoryCost+" GB";
             if(remaining.HasValue)estimate+="  /  "+remaining.Value+" left";
             Text(button,estimate,"action-estimate");
             if(!queue&&preview.allowed)
@@ -519,13 +523,25 @@ namespace HackThePlanet
         private void BuildTraceBar(VisualElement parent)
         {
             var bar=El(parent,"operation-bar");
-            var trace=El(bar,"trace-block");var heading=El(trace,"row-between");Text(heading,"TRACE LEVEL","eyebrow");traceNumber=Text(heading,"00.0%","trace-number");
-            var track=El(trace,"meter-track");traceFill=El(track,"meter-fill");traceState=Text(trace,"No active connection","micro muted");
-            var task=El(bar,"task-block");runningLabel=Text(task,"YOUR NEXT CONNECTION STARTS HERE","task-title");var taskTrack=El(task,"task-track");taskFill=El(taskTrack,"task-fill");
-            queueLabel=Text(task,"","queue-summary");
-            var resources=El(bar,"rig-resource-meters");
-            memoryNumber=RichText(resources,"","small cyan");memoryNumber.name="memory-meter";
-            storageNumber=RichText(resources,"","small cyan");storageNumber.name="storage-meter";
+            var stats=El(bar,"operation-stats");
+            var trace=El(stats,"operation-trace");
+            var traceIcon=new RigGlyph("stealth",Palette.Hex("A8C2BC"),14);traceIcon.AddToClassList("rig-stat-icon");trace.Add(traceIcon);
+            traceNumber=Text(trace,"00.0%","trace-number");
+            var track=El(trace,"meter-track operation-trace-track");traceFill=El(track,"meter-fill");
+            traceState=Text(trace,"","micro muted operation-trace-state");traceState.style.display=DisplayStyle.None;
+            var task=El(stats,"operation-task");
+            var taskTrack=El(task,"task-track operation-task-track");taskFill=El(taskTrack,"task-fill");
+            runningLabel=Text(task,"IDLE","task-title operation-task-label");
+            queueLabel=Text(task,"","queue-summary");queueLabel.style.display=DisplayStyle.None;
+            var tint=Palette.Hex("A8C2BC");
+            var cyan=Palette.Hex("60D8D0");
+            opPower=OperationStat(stats,"power",tint,"","micro");
+            opCooling=OperationStat(stats,"cooling",tint,"","micro");
+            opCompute=OperationStat(stats,"processing",cyan,"","micro cyan");
+            opBandwidth=OperationStat(stats,"transfer",cyan,"","micro cyan");
+            opStorage=OperationStat(stats,"storage",cyan,"","micro cyan");
+            opMemory=OperationStat(stats,"memory",cyan,"","micro cyan");
+            opReclaim=OperationStat(stats,"reclaim",cyan,"","micro cyan");
             var controls=El(bar,"time-controls");
             var pause=Btn(controls,State.Active&&State.Op.paused?"▶":"Ⅱ",()=>{if(State.Active)State.SetPaused(!State.Op.paused);},"pause","time-button");pause.SetEnabled(State.Active);pause.tooltip="Pause / Space";
             if(State.CanStopTask)Btn(controls,"STOP",()=>State.StopTask(),"stop-tool","time-button stop-tool").tooltip="Stop the current tool and clear its queue. Existing trace remains.";
@@ -535,15 +551,30 @@ namespace HackThePlanet
 
         private void UpdateMeters()
         {
-            if(memoryNumber!=null)memoryNumber.text=GameplayRichText.Format("RAM / "+State.MemoryFree.ToString("0.#")+" / "+State.MemoryPool.ToString("0.#")+" MEM\nRES "+State.MemoryReserved.ToString("0.#")+" / RECLAIM "+State.MemoryReclaiming.ToString("0.#")+" / "+State.MemoryReclaim.ToString("0.#")+"/s");
-            if(storageNumber!=null)storageNumber.text=GameplayRichText.Format("STORAGE / "+State.StorageUsed.ToString("0")+" / "+State.StorageCapacity.ToString("0")+" GB");
             if(traceNumber==null)return;
-            if(queueLabel!=null)queueLabel.text=!State.Active||State.Op.queue.Count==0?"PLANNING IS FREE / SPACE TO PAUSE":"NEXT / "+string.Join(" → ",State.Op.queue.Take(2).Select(q=>State.ActionTitle(q.actionId,q.target)+" · "+State.Node(q.target).label))+(State.Op.queue.Count>2?"  +"+(State.Op.queue.Count-2):"");
+            if(opPower!=null)opPower.text=GameplayRichText.Format("POWER / "+State.PowerUsed+" / "+State.PowerLimit);
+            if(opCooling!=null)opCooling.text=GameplayRichText.Format("COOL / "+State.HeatUsed+" / "+State.CoolingLimit);
+            if(opCompute!=null)opCompute.text=GameplayRichText.Format("COMPUTE / "+State.Compute.ToString("0.00")+" GFLOP/s");
+            if(opBandwidth!=null)opBandwidth.text=GameplayRichText.Format("BW / "+State.Bandwidth.ToString("0.00")+" GB/s");
+            if(opStorage!=null)opStorage.text=GameplayRichText.Format("STORE / "+State.StorageUsed.ToString("0")+" / "+State.StorageCapacity.ToString("0")+" GB");
+            if(opMemory!=null)opMemory.text=GameplayRichText.Format("RAM / "+State.MemoryFree.ToString("0.#")+" / "+State.MemoryPool.ToString("0.#")+" GB / RES "+State.MemoryReserved.ToString("0.#")+" GB");
+            if(opReclaim!=null)opReclaim.text=GameplayRichText.Format("RECLAIM / "+State.MemoryReclaiming.ToString("0.#")+" GB / "+State.MemoryReclaim.ToString("0.#")+" GB/s");
             float trace=State.Active?State.Op.trace:0;Color color=trace>=State.TraceDanger?Palette.Red:trace>=State.TraceWarning?Palette.Amber:Palette.Lime;
             traceNumber.text=trace.ToString("00.0")+"%";traceNumber.style.color=color;traceFill.style.width=Length.Percent(State.TraceFraction*100);traceFill.style.backgroundColor=color;
-            traceState.text=!State.Active?"DISCONNECTED / NO EXPOSURE":State.Op.decoyRemaining>0?"DECOY ACTIVE / "+Mathf.CeilToInt(State.Op.decoyRemaining)+"s":trace>=State.TraceDanger?"LOCKDOWN IMMINENT / FINISH OR DISCONNECT":State.Scanners>0?State.Scanners+" ACTIVE SCANNER"+(State.Scanners>1?"S":"")+" / EXTRA TRACE WHILE TOOLS RUN":"STABLE / PLANNING DOES NOT RAISE TRACE";
-            if(State.Active&&State.Op.task!=null){runningLabel.text=(State.Op.paused?"PAUSED / ":"RUNNING / ")+State.ActionTitle(State.Op.task.actionId,State.Op.task.target)+" : "+(State.Node(State.Op.task.target)?.label??"operator")+"  "+(State.Progress*100).ToString("0")+"%";taskFill.style.width=Length.Percent(State.Progress*100);}
-            else{runningLabel.text=State.Active?(State.Op.paused?"PAUSED / QUEUE YOUR NEXT MOVE":"IDLE / SELECT A SYSTEM AND CHOOSE AN ACTION"):"YOUR NEXT CONNECTION STARTS HERE";taskFill.style.width=0;}
+            string status=!State.Active?"DISCONNECTED":State.Op.decoyRemaining>0?"DECOY "+Mathf.CeilToInt(State.Op.decoyRemaining)+"s":trace>=State.TraceDanger?"LOCKDOWN IMMINENT":State.Scanners>0?State.Scanners+" SCANNER"+(State.Scanners>1?"S":""):"STABLE";
+            if(queueLabel!=null)queueLabel.text=!State.Active||State.Op.queue.Count==0?"":string.Join(" → ",State.Op.queue.Take(2).Select(q=>State.ActionTitle(q.actionId,q.target)))+(State.Op.queue.Count>2?" +"+(State.Op.queue.Count-2):"");
+            if(State.Active&&State.Op.task!=null)
+            {
+                runningLabel.text=(State.Op.paused?"PAUSE / ":"")+State.ActionTitle(State.Op.task.actionId,State.Op.task.target)+" · "+(State.Node(State.Op.task.target)?.label??"operator")+" · "+status;
+                taskFill.style.width=Length.Percent(State.Progress*100);
+            }
+            else
+            {
+                string queue=queueLabel!=null?queueLabel.text:"";
+                runningLabel.text=State.Active?(string.IsNullOrEmpty(queue)?(State.Op.paused?"PAUSED / PLAN":"IDLE / "+status):"NEXT / "+queue+" · "+status):"READY";
+                taskFill.style.width=0;
+            }
+            runningLabel.tooltip=traceState!=null?status+(string.IsNullOrEmpty(queueLabel?.text)?"":" / "+queueLabel.text):"";
         }
 
         // Branch key shown under the research graph. Hover text describes what each route does.
@@ -625,19 +656,6 @@ namespace HackThePlanet
                 Text(card,fragment.title,"upgrade-name");Text(card,fragment.text,"body-copy");
             }
             var stats=El(page,"career-stats");Text(stats,State.Career.jobs+" CONTRACTS DELIVERED","eyebrow lime");Text(stats,State.Career.totalEarnedXp+" TOTAL XP EARNED","eyebrow cyan");Text(stats,(State.ResearchCount)+" TECHNOLOGIES","eyebrow violet");
-        }
-
-        private void BuildConsole(VisualElement content)
-        {
-            var console=El(content,"console");var left=Scroll(console,"console-main");var heading=El(left,"console-heading");Text(heading,"SESSION TERMINAL","eyebrow");Text(heading,State.Active?"LIVE FEED":"LOCAL / ZERO","micro cyan");
-            var lines=State.Active?State.Op.log:State.Career.reports.FirstOrDefault()?.log;
-            if(lines==null||lines.Count==0)
-            {Text(left,"00:00  SYSTEM // Gateway online. Identity masked. The exchange is listening.","terminal-line");Text(left,"00:00  TIP // Contracts earn credits + XP. Credits upgrade your rig. XP grows your research network.","terminal-line muted");Text(left,"00:00  READY // Select The Quiet Copy and connect to your first network.","terminal-line lime");}
-            else foreach(var line in lines.Skip(Math.Max(0,lines.Count-3)))Text(left,line,"terminal-line"+(line.Contains("OBJECTIVE")?" lime":line.Contains("RUN //")?" cyan":" muted"));
-            var side=El(console,"console-side");Text(side,"OPERATOR STATUS","eyebrow");
-            timeLabel=Text(side,State.Active?"SESSION / "+TimeText(State.Op.elapsed):"STANDING / "+Rank(),"small cyan");
-            if(State.Active){Text(side,"QUEUE / "+State.Op.queue.Count+" ACTIONS","small muted");}
-            else Text(side,"UPLINK / STANDBY","small muted");
         }
 
         private OperationReport reportToShow;
@@ -811,7 +829,6 @@ namespace HackThePlanet
 
         private void SelectNextContract(){selectedJob=State.Catalog.Contracts(State.Career).FirstOrDefault(c=>!State.Career.completed.Contains(c.id)&&State.Career.completed.Count>=c.requiredWins)??State.Catalog.Contracts(State.Career).Last();selectedNode=null;networkCamera.Reset();}
         private string Rank()=>State.Rank;
-        private static string TimeText(float seconds)=>((int)seconds/60).ToString("00")+":"+((int)seconds%60).ToString("00");
 
         private static VisualElement El(VisualElement parent,string classes)
         {var el=new VisualElement();foreach(var c in classes.Split(' '))if(c.Length>0)el.AddToClassList(c);parent.Add(el);return el;}
