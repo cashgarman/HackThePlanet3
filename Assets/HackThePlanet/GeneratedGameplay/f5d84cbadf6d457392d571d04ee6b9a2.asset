@@ -22,171 +22,171 @@ MonoBehaviour:
   quietXp: 20
   rules:
   - when:
-      rid: 213507078570378552
+      rid: 213507095541842935
     credits:
-      rid: 213507078570378553
+      rid: 213507095541842936
     xp:
-      rid: 213507078570378554
+      rid: 213507095541842937
   - when:
-      rid: 213507078570378555
+      rid: 213507095541842938
     credits:
-      rid: 213507078570378556
+      rid: 213507095541842939
     xp:
-      rid: 213507078570378557
+      rid: 213507095541842940
   - when:
-      rid: 213507078570378558
+      rid: 213507095541842941
     credits:
-      rid: 213507078570378559
+      rid: 213507095541842942
     xp:
-      rid: 213507078570378560
+      rid: 213507095541842943
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378552
+    - rid: 213507095541842935
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378553
+    - rid: 213507095541842936
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 12
         key: 
         filter:
-          rid: 213507078570378561
-    - rid: 213507078570378554
+          rid: 213507095544725504
+    - rid: 213507095541842937
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 13
         key: 
         filter:
-          rid: 213507078570378562
-    - rid: 213507078570378555
+          rid: 213507095544725505
+    - rid: 213507095541842938
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378556
+    - rid: 213507095541842939
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 2
         left:
-          rid: 213507078570378563
+          rid: 213507095544725506
         right:
-          rid: 213507078570378564
-    - rid: 213507078570378557
+          rid: 213507095544725507
+    - rid: 213507095541842940
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 4
         left:
-          rid: 213507078570378565
+          rid: 213507095544725508
         right:
-          rid: 213507078570378566
-    - rid: 213507078570378558
+          rid: 213507095544725509
+    - rid: 213507095541842941
       type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         comparison: 2
         left:
-          rid: 213507078570378567
+          rid: 213507095544725510
         right:
-          rid: 213507078570378568
-    - rid: 213507078570378559
+          rid: 213507095544725511
+    - rid: 213507095541842942
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 23
         key: 
         filter:
-          rid: 213507078570378569
-    - rid: 213507078570378560
+          rid: 213507095544725512
+    - rid: 213507095541842943
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 24
         key: 
         filter:
-          rid: 213507078570378570
-    - rid: 213507078570378561
+          rid: 213507095544725513
+    - rid: 213507095544725504
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378562
+    - rid: 213507095544725505
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378563
+    - rid: 213507095544725506
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 9
         key: 
         filter:
-          rid: 213507078570378571
-    - rid: 213507078570378564
+          rid: 213507095544725514
+    - rid: 213507095544725507
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 20
         key: 
         filter:
-          rid: 213507078570378572
-    - rid: 213507078570378565
+          rid: 213507095544725515
+    - rid: 213507095544725508
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 22
         key: 
         filter:
-          rid: 213507078570378573
-    - rid: 213507078570378566
+          rid: 213507095544725516
+    - rid: 213507095544725509
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 2
         left:
-          rid: 213507078570378574
+          rid: 213507095544725517
         right:
-          rid: 213507078570378575
-    - rid: 213507078570378567
+          rid: 213507095544725518
+    - rid: 213507095544725510
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 10
         key: 
         filter:
-          rid: 213507078570378576
-    - rid: 213507078570378568
+          rid: 213507095544725519
+    - rid: 213507095544725511
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 11
         key: 
         filter:
-          rid: 213507078570378577
-    - rid: 213507078570378569
+          rid: 213507095544725520
+    - rid: 213507095544725512
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378570
+    - rid: 213507095544725513
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378571
+    - rid: 213507095544725514
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378572
+    - rid: 213507095544725515
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378573
+    - rid: 213507095544725516
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378574
+    - rid: 213507095544725517
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 9
         key: 
         filter:
-          rid: 213507078570378578
-    - rid: 213507078570378575
+          rid: 213507095544725521
+    - rid: 213507095544725518
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 21
         key: 
         filter:
-          rid: 213507078570378579
-    - rid: 213507078570378576
+          rid: 213507095544725522
+    - rid: 213507095544725519
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378577
+    - rid: 213507095544725520
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378578
+    - rid: 213507095544725521
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378579
+    - rid: 213507095544725522
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 

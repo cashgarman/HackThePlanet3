@@ -213,18 +213,17 @@ namespace HackThePlanet.Editor
 		private static GameSimulation EquippedSimulation(Contract job)
 		{
 			// Create a career with the chassis and unlocks needed for the validation runs.
-			var career = new Career
-			{
-				chassisId = "chassis-4",
-				unlocked = new List<string> { "base", "quiet", "efficient", "selective", "buffer" }
-			};
+			var career = GameCatalog.Default.CreateCareer();
+			career.chassisId = "chassis-4";
+			career.unlocked = new List<string> { "base", "quiet", "efficient", "selective", "buffer" };
 
 			// Mark the story contracts this job depends on as completed.
 			career.completed = GameContent.Story.Take(job.recurring ? 3 : job.requiredWins).Select(c => c.id).ToList();
 
 			// Create the simulation and start the job.
 			var sim = new GameSimulation(career);
-			sim.Start(job);
+			if (!sim.Start(job))
+				throw new InvalidOperationException("Validation fixture could not start " + job.id);
 
 			return sim;
 		}

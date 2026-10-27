@@ -30,7 +30,7 @@ MonoBehaviour:
   coolingCapacity: 0
   requirements:
   - condition:
-      rid: 213507078570639494
+      rid: 213507095544726348
     message: Requires Data Engineering research.
   modifiers:
   - id: 
@@ -38,66 +38,66 @@ MonoBehaviour:
     priority: 0
     operation: 0
     when:
-      rid: 213507078570639495
+      rid: 213507095544726349
     value:
-      rid: 213507078570639496
+      rid: 213507095544726350
   - id: 
     stat: storageCapacity
     priority: 0
     operation: 0
     when:
-      rid: 213507078570639497
+      rid: 213507095544726351
     value:
-      rid: 213507078570639498
+      rid: 213507095544726352
   references:
     version: 2
     RefIds:
-    - rid: 213507078570639494
+    - rid: 213507095544726348
       type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         technology: {fileID: 11400000, guid: 6c2d3bb204075f2498d841e31e91520b, type: 2}
         equipped: 0
-    - rid: 213507078570639495
+    - rid: 213507095544726349
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570639496
+    - rid: 213507095544726350
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 60
-    - rid: 213507078570639497
+    - rid: 213507095544726351
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570639498
+    - rid: 213507095544726352
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 2
         left:
-          rid: 213507078570639499
+          rid: 213507095544726353
         right:
-          rid: 213507078570639500
-    - rid: 213507078570639499
+          rid: 213507095544726354
+    - rid: 213507095544726353
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 4
         left:
-          rid: 213507078570639501
+          rid: 213507095544726355
         right:
-          rid: 213507078570639502
-    - rid: 213507078570639500
+          rid: 213507095544726356
+    - rid: 213507095544726354
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 10
-    - rid: 213507078570639501
+    - rid: 213507095544726355
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 38
         key: storage
         filter:
-          rid: 213507078570639503
-    - rid: 213507078570639502
+          rid: 213507095544726357
+    - rid: 213507095544726356
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 2
-    - rid: 213507078570639503
+    - rid: 213507095544726357
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 

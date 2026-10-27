@@ -30,17 +30,17 @@ MonoBehaviour:
     priority: 0
     operation: 2
     when:
-      rid: 213507078570378750
+      rid: 213507095544725693
     value:
-      rid: 213507078570378751
+      rid: 213507095544725694
   triggers: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378750
+    - rid: 213507095544725693
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378751
+    - rid: 213507095544725694
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.9

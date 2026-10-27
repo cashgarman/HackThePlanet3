@@ -20,12 +20,12 @@ MonoBehaviour:
   tags:
   - database
   security:
-    rid: 213507078570378942
+    rid: 213507095544725892
   auras: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378942
+    - rid: 213507095544725892
       type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         minimum: 1

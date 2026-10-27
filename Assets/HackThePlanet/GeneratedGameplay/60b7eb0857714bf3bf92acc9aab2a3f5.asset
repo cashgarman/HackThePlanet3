@@ -30,7 +30,7 @@ MonoBehaviour:
   coolingCapacity: 0
   requirements:
   - condition:
-      rid: 213507078570639507
+      rid: 213507095544726361
     message: Requires Signal Engineering research.
   modifiers:
   - id: 
@@ -38,38 +38,38 @@ MonoBehaviour:
     priority: 0
     operation: 2
     when:
-      rid: 213507078570639508
+      rid: 213507095544726362
     value:
-      rid: 213507078570639509
+      rid: 213507095544726363
   - id: 
     stat: trace
     priority: 0
     operation: 2
     when:
-      rid: 213507078570639510
+      rid: 213507095544726364
     value:
-      rid: 213507078570639511
+      rid: 213507095544726365
   references:
     version: 2
     RefIds:
-    - rid: 213507078570639507
+    - rid: 213507095544726361
       type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         technology: {fileID: 11400000, guid: 205dbaaabcd752d4aa1c2b4e6675ad29, type: 2}
         equipped: 0
-    - rid: 213507078570639508
+    - rid: 213507095544726362
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570639509
+    - rid: 213507095544726363
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.9
-    - rid: 213507078570639510
+    - rid: 213507095544726364
       type: {class: RigNeighborCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         kind: reclaim
         minimum: 1
-    - rid: 213507078570639511
+    - rid: 213507095544726365
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.95

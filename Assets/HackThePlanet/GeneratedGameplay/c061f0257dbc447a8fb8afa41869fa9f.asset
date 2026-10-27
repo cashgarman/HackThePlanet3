@@ -27,13 +27,13 @@ MonoBehaviour:
   requiredWins: 0
   quietLimit: 60
   credits:
-    rid: 213507078570378580
+    rid: 213507095544725523
   xp:
-    rid: 213507078570378581
+    rid: 213507095544725524
   difficulty:
-    rid: 213507078570378582
+    rid: 213507095544725525
   seed:
-    rid: 213507078570378583
+    rid: 213507095544725526
   objectives:
   - nodeId: n22
     label: 
@@ -41,7 +41,7 @@ MonoBehaviour:
     action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     payload: 1
     complete:
-      rid: 213507078570378584
+      rid: 213507095544725527
     actionRequirements: []
   actionRules: []
   lore:
@@ -63,23 +63,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378580
+    - rid: 213507095544725523
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 650
-    - rid: 213507078570378581
+    - rid: 213507095544725524
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 50
-    - rid: 213507078570378582
+    - rid: 213507095544725525
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1
-    - rid: 213507078570378583
+    - rid: 213507095544725526
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 114
-    - rid: 213507078570378584
+    - rid: 213507095544725527
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 3

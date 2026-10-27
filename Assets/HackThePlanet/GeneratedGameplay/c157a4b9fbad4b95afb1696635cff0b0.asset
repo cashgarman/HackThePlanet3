@@ -27,13 +27,13 @@ MonoBehaviour:
   requiredWins: 5
   quietLimit: 70
   credits:
-    rid: 213507078570378609
+    rid: 213507095544725552
   xp:
-    rid: 213507078570378610
+    rid: 213507095544725553
   difficulty:
-    rid: 213507078570378611
+    rid: 213507095544725554
   seed:
-    rid: 213507078570378612
+    rid: 213507095544725555
   objectives:
   - nodeId: n22
     label: 
@@ -41,7 +41,7 @@ MonoBehaviour:
     action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     payload: 0
     complete:
-      rid: 213507078570378613
+      rid: 213507095544725556
     actionRequirements: []
   - nodeId: n14
     label: 
@@ -49,13 +49,13 @@ MonoBehaviour:
     action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
     payload: 0
     complete:
-      rid: 213507078570378614
+      rid: 213507095544725557
     actionRequirements: []
   actionRules:
   - action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
     requirements:
     - condition:
-        rid: 213507078570378615
+        rid: 213507095544725558
       message: Take control of Security hub before erasing the index.
   lore:
   - id: last-light/0
@@ -76,37 +76,37 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378609
+    - rid: 213507095544725552
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 2000
-    - rid: 213507078570378610
+    - rid: 213507095544725553
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 140
-    - rid: 213507078570378611
+    - rid: 213507095544725554
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 3
-    - rid: 213507078570378612
+    - rid: 213507095544725555
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 669
-    - rid: 213507078570378613
+    - rid: 213507095544725556
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 3
-    - rid: 213507078570378614
+    - rid: 213507095544725557
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 1
-    - rid: 213507078570378615
+    - rid: 213507095544725558
       type: {class: NamedNodeCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         nodeId: n14
         condition:
-          rid: 213507078570378616
-    - rid: 213507078570378616
+          rid: 213507095544725559
+    - rid: 213507095544725559
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 1

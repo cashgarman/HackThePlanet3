@@ -30,13 +30,13 @@ MonoBehaviour:
   coolingCapacity: 6
   requirements:
   - condition:
-      rid: 213507078570639488
+      rid: 213507095544726342
     message: Requires Base research.
   modifiers: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570639488
+    - rid: 213507095544726342
       type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         technology: {fileID: 11400000, guid: 733029773cf9b10488a7ba7f575b0713, type: 2}

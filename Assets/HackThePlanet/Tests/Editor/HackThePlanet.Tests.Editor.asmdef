@@ -1,0 +1,16 @@
+{
+  "name": "HackThePlanet.Tests.Editor",
+  "rootNamespace": "HackThePlanet.Tests",
+  "references": [
+    "HackThePlanet",
+    "Cashg.GraphExplorer",
+    "Cashg.GraphExplorer.Presentation"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "autoReferenced": false
+}

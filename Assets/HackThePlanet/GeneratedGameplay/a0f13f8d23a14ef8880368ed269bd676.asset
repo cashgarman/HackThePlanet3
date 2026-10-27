@@ -29,52 +29,52 @@ MonoBehaviour:
     priority: 0
     operation: 6
     when:
-      rid: 213507078570378728
+      rid: 213507095544725671
     value:
-      rid: 213507078570378729
+      rid: 213507095544725672
   triggers: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378728
+    - rid: 213507095544725671
       type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         conditions:
-        - rid: 213507078570378730
-        - rid: 213507078570378731
-        - rid: 213507078570378732
-    - rid: 213507078570378729
+        - rid: 213507095544725673
+        - rid: 213507095544725674
+        - rid: 213507095544725675
+    - rid: 213507095544725672
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1
-    - rid: 213507078570378730
+    - rid: 213507095544725673
       type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
         tag: 
-    - rid: 213507078570378731
+    - rid: 213507095544725674
       type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         tag: relay
-    - rid: 213507078570378732
+    - rid: 213507095544725675
       type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         comparison: 0
         left:
-          rid: 213507078570378733
+          rid: 213507095544725676
         right:
-          rid: 213507078570378734
-    - rid: 213507078570378733
+          rid: 213507095544725677
+    - rid: 213507095544725676
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 17
         key: relay-controls
         filter:
-          rid: 213507078570378735
-    - rid: 213507078570378734
+          rid: 213507095544725678
+    - rid: 213507095544725677
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0
-    - rid: 213507078570378735
+    - rid: 213507095544725678
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 

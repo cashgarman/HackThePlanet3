@@ -1,8 +1,10 @@
 # HackThePlanet — Testable Units Inventory
 
-Identification only (no tests implemented). Scope: **`Assets/HackThePlanet/Runtime`**.
+Runtime inventory and coverage map. Scope: **`Assets/HackThePlanet/Runtime`**.
 
-**Excluded:** `Editor/` (UnityEditor menus and play-mode harnesses), MonoBehaviour UI (`WorkstationApp`, `GraphViewport`, `NetworkCanvas` rendering, `CircuitBackdrop`, `WaypointOverlay`, most of `WorkstationRig` / `WorkstationActionBar`), and ScriptableObject definition assets that only hold serialized fields (see [Appendix A](#appendix-a--definition-scriptableobjects-data-only)).
+**Scope:** Every C# file in `Runtime/` is mapped in [Appendix D](#appendix-d--runtime-file-coverage-map). Serialized definition fields are exercised through content loading, validation, catalog, and simulation behavior instead of field-by-field tests. Pixel output, shader appearance, and rendering fidelity remain visual-smoke concerns.
+
+**Not a target:** `Editor/` (UnityEditor menus and play-mode harnesses), the separate GraphExplorer package internals, and trivial field accessors.
 
 **Ratings:** **Easy** = deterministic, few dependencies; **Medium** = needs `GameCatalog`, fixture graph, or `RuleContext`; **Hard** = filesystem, `Resources`, `JsonUtility`, globals, or large integration surface.
 
@@ -396,12 +398,76 @@ Run via **Hack The Planet** menus or command file with Unity Editor open.
 
 ## Appendix C — Related tests elsewhere in the repo
 
-`Packages/com.cashg.graph-explorer/Tests/Editor/` — **Cashg.GraphExplorer.Tests.Editor** (~77 EditMode NUnit tests). Not part of `Assets/HackThePlanet`; HackThePlanet has no test asmdef yet.
+`Packages/com.cashg.graph-explorer/Tests/Editor/` — **Cashg.GraphExplorer.Tests.Editor** (GraphExplorer EditMode NUnit tests). The game has its own **HackThePlanet.Tests.Editor** assembly in `Assets/HackThePlanet/Tests/Editor/`.
+
+### Game EditMode NUnit coverage
+
+| Test group | Behaviors covered |
+|------------|-------------------|
+| `RuleAndContentTests` | Arithmetic operations and zero guards; numeric, conditional, recursive, and seeded rule evaluation; strict JSON rule round trips and reference resolution; safe content paths; definition validation; catalog lookups. |
+| `ContentAndUtilityTests` | Content overrides and invalid-entry handling; recurring-contract gating and message formatting; rich-text overlap and regex rules; palette hex parsing. |
+| `RuntimeHelpersTests` | Lore lookup; intel/research descriptions; legacy canvas visibility and zoom; device/action/module glyph helpers; deterministic circuit trace generation; waypoint route anchors; radial meter labels; node-model resource registration. |
+| `SimulationTests` | Seeded network stability and route connectivity; reachability; action preview, pause, execution, and ticks; effects; rig placement and RAM capacity; research and hardware purchase gates; aborted and delivered contract outcomes. |
+| `SimulationEdgeTests` | Invalid and use-limited actions; queue clearing and cancellation; status expiry; stat/security modifiers; effect floors and log formatting; persistent RAM reservations; research visibility, equipment slots, refunds, and caught outcomes. |
+| `RigAndWaypointTests` | Rotated grid bounds; module purchase, resale, and chassis upgrades; rig adjacency rules; waypoint tier capacity, editing, seed isolation, removal, and disconnected routes. |
+| `PersistenceTests` | Active-operation save round trip, backup recovery, unsupported version rejection, failed-save preservation, and autosave blocking after unrecoverable corruption. |
+
+### Game PlayMode NUnit coverage
+
+| Test group | Behaviors covered |
+|------------|-------------------|
+| `WorkstationRuntimePlayModeTests` | Workstation host/UI initialization; named tab activation and view rebuilds; pausing an active run when leaving operations; test-mode preference isolation; display-effect mode transitions. |
+
+Run `HackThePlanet.Tests.Editor` in Unity's **Test Runner > EditMode** and `HackThePlanet.Tests.PlayMode` in **PlayMode**. Then use the existing **Hack The Planet** validation commands and workstation smoke test for broader scenario and rendering coverage. NUnit uses disposable catalog fixtures and temporary save directories.
 
 ---
 
-## Suggested layering (for future test work)
+## Coverage layering
 
-1. **Easy:** `RuleMath`, leaf `Condition`/`Number` types, `ContentJson.SafePath`, `Palette.Hex`, `GameplayRichText`, `Career.Level`, `QueuedTool.kind`.
-2. **Medium:** `NetworkGenerator.Generate` (golden seeds), `GameDefinitionValidator.Validate`, `GameSimulation` reachability and `Execute`/`Tick` with in-memory catalog.
-3. **Hard / integration:** `ContentJson.Load`, `CareerStorage`, `NetworkAppearance.Create`, chains through `GameCatalog.Default`.
+NUnit covers deterministic Hack The Planet rules, content, persistence, simulation, rig, waypoints, runtime helpers, and workstation lifecycle/view interactions. The game tests call GraphExplorer only through its public API; GraphExplorer implementation tests remain in the package's own assembly. Pixel-level rendering is checked through the existing workstation smoke and visual checks.
+
+---
+
+## Appendix D — Runtime file coverage map
+
+Every `Assets/HackThePlanet/Runtime/*.cs` file appears below. Rows identify the behavior exercised, not a promise that every line or serialized field has a separate assertion.
+
+| Runtime file | NUnit or complementary behavior coverage |
+|--------------|-----------------------------------------|
+| `ActionDefinition.cs` | Content/rule decode and validation; action preview, execution, effects, queue, and use limits. |
+| `AssemblyInfo.cs` | Assembly friend metadata is compile-checked by the game Editor and PlayMode test assemblies. |
+| `CareerDefinition.cs` | Content decode and definition validation; career creation, save validation, and progression. |
+| `CircuitBackdrop.cs` | Deterministic trace layout for a fixed viewport size and non-interactive surface behavior; pixel drawing remains visual-smoke coverage. |
+| `CompanyDefinition.cs` | Content decode, catalog projections, and contract/company mapping. |
+| `ContentJson.cs` | Codec, path safety, references, overrides, invalid entries, and bundle disposal. |
+| `ContractDefinition.cs` | Definition validation, contract gating/formatting, network generation, and outcomes. |
+| `GameCatalog.cs` | Lookup, catalog projections, contract gates, career defaults, and formula formatting. |
+| `GameContent.cs` | Catalog DTOs, intel/difficulty/reward readouts, and simulation fixture behavior. |
+| `GameDefinition.cs` | Root definition validation and catalog construction. |
+| `GameDefinitionValidator.cs` | Missing roots, duplicate IDs, malformed rules, and cross-reference validation. |
+| `GameplayDefinition.cs` | Shared definition metadata and rule references through content decode and validation. |
+| `GameplayRichText.cs` | Overlap resolution, regex highlighting, plain-text stripping, and palette replacement. |
+| `GameplayRules.cs` | Arithmetic guards, numbers, conditions, recursion protection, seeded randomness, and effect application. |
+| `GameplayTextPalette.cs` | Default terms and custom phrase/regex palette behavior. |
+| `GameSimulation.cs` | Actions, ticking, pause, queue, status, modifiers, contracts, rewards, and career progression. |
+| `GraphViewport.cs` | Node/research intel descriptions and workstation PlayMode view construction/lifecycle. |
+| `HardwareDefinition.cs` | Catalog hardware lookup, price gates, upgrades, and tier progression. |
+| `LoreContent.cs` | Contract-scoped indexed and ID-based lookup, including invalid inputs. |
+| `NetworkAppearance.cs` | Resource registration for every game node kind and cloned settings lifetime. |
+| `NetworkCanvas.cs` | Palette mapping, hidden-node filtering, selection surface construction, and zoom bounds. |
+| `NetworkDefinition.cs` | Content/reference validation and seeded generated network topology. |
+| `NetworkGenerator.cs` | Seed stability, topology/route invariants, and objective generation. |
+| `NetworkWaypoints.cs` | Waypoint tier limits, CRUD, seed isolation, and route reachability/anchors. |
+| `NodeTypeDefinition.cs` | Tag/type references, rule contexts, and runtime node role descriptions. |
+| `RewardDefinition.cs` | Reward formula validation and successful/failed contract outcome tests. |
+| `RigChassisDefinition.cs` | Chassis bounds, capacity, and chassis-upgrade behavior. |
+| `RigModuleDefinition.cs` | Module footprints, requirements, shop transactions, capacity, and glyph helper behavior. |
+| `RigRulesDefinition.cs` | Starter rig, placement validation, adjacency, power/heat/storage/memory constraints. |
+| `RigSimulation.cs` | Placement/rotation, buying/selling, upgrades, capacity, research refunds, and ability reservations. |
+| `SignalVisuals.cs` | PlayMode effect-mode transitions, labels, toggle behavior, and workstation frame updates. |
+| `StatusDefinition.cs` | Timed status application, suppression, and expiry behavior. |
+| `TechnologyDefinition.cs` | Research visibility, purchase, parent requirements, equipment, modifiers, grants, and refund behavior. |
+| `WaypointOverlay.cs` | Tier-gated route anchors, visible marker creation, and waypoint overlay configuration. |
+| `WorkstationActionBar.cs` | Action tint selection, radial meter readouts, and named workstation control activation. |
+| `WorkstationApp.cs` | PlayMode host creation/teardown, tab activation, active-operation pause behavior, test preferences, and view rebuilds. |
+| `WorkstationRig.cs` | Rig glyph configuration plus PlayMode rig view construction; rack transactions are covered by rig simulation tests. |

@@ -30,7 +30,7 @@ MonoBehaviour:
   coolingCapacity: 0
   requirements:
   - condition:
-      rid: 213507078570639491
+      rid: 213507095544726345
     message: Requires Parallel Engineering research.
   modifiers:
   - id: 
@@ -38,21 +38,21 @@ MonoBehaviour:
     priority: 0
     operation: 0
     when:
-      rid: 213507078570639492
+      rid: 213507095544726346
     value:
-      rid: 213507078570639493
+      rid: 213507095544726347
   references:
     version: 2
     RefIds:
-    - rid: 213507078570639491
+    - rid: 213507095544726345
       type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         technology: {fileID: 11400000, guid: 0e611066576dd5946b744e4a652da447, type: 2}
         equipped: 0
-    - rid: 213507078570639492
+    - rid: 213507095544726346
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570639493
+    - rid: 213507095544726347
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.55

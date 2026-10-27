@@ -1,0 +1,11 @@
+{
+  "name": "HackThePlanet.Tests.PlayMode",
+  "rootNamespace": "HackThePlanet.Tests.PlayMode",
+  "references": [
+    "HackThePlanet"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "autoReferenced": false
+}

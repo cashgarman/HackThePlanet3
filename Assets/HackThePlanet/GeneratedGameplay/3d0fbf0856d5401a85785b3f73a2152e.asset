@@ -30,7 +30,7 @@ MonoBehaviour:
   coolingCapacity: 0
   requirements:
   - condition:
-      rid: 213507078570639504
+      rid: 213507095544726358
     message: Requires Data Engineering research.
   modifiers:
   - id: 
@@ -38,21 +38,21 @@ MonoBehaviour:
     priority: 0
     operation: 0
     when:
-      rid: 213507078570639505
+      rid: 213507095544726359
     value:
-      rid: 213507078570639506
+      rid: 213507095544726360
   references:
     version: 2
     RefIds:
-    - rid: 213507078570639504
+    - rid: 213507095544726358
       type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         technology: {fileID: 11400000, guid: 6c2d3bb204075f2498d841e31e91520b, type: 2}
         equipped: 0
-    - rid: 213507078570639505
+    - rid: 213507095544726359
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570639506
+    - rid: 213507095544726360
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 35

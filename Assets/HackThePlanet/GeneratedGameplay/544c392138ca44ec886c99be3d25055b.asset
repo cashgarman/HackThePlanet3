@@ -20,12 +20,12 @@ MonoBehaviour:
   tags:
   - relay
   security:
-    rid: 213507078570378928
+    rid: 213507095544725878
   auras: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378928
+    - rid: 213507095544725878
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1

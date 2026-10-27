@@ -29,19 +29,19 @@ MonoBehaviour:
     priority: 0
     operation: 2
     when:
-      rid: 213507078570378726
+      rid: 213507095544725669
     value:
-      rid: 213507078570378727
+      rid: 213507095544725670
   triggers: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378726
+    - rid: 213507095544725669
       type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
         tag: 
-    - rid: 213507078570378727
+    - rid: 213507095544725670
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.8

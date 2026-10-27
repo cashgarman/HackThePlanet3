@@ -38,11 +38,11 @@ namespace HackThePlanet.Editor
 							   .Invoke(null, new object[] { fixture, intel, preview, GameCatalog.Default });
 			}
 
-			// Verify focused data stores expose security and objective intel at full detail.
+			// Verify full-intel focus exposes the node role and security rating.
 			check(
 				Describe(ContractIntel.Full).Contains("SECURITY 9") &&
-				Describe(ContractIntel.Full).Contains("CONTRACT OBJECTIVE"),
-				"Easy focused data stores expose security and objective intel.");
+				Describe(ContractIntel.Full).Contains("Database"),
+				"Easy focused data stores expose role and security intel.");
 
 			// Verify medium focus redacts internal details and metrics.
 			check(

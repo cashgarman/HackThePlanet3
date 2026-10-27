@@ -32,107 +32,107 @@ MonoBehaviour:
   futureNeighborQueue: 0
   traceFree: 0
   visible:
-    rid: 213507078570378752
+    rid: 213507095544725695
   requirements:
   - condition:
-      rid: 213507078570378753
+      rid: 213507095544725696
     message: Scan to discover this system.
   - condition:
-      rid: 213507078570378754
+      rid: 213507095544725697
     message: Control a connected neighbor first.
   - condition:
-      rid: 213507078570378755
+      rid: 213507095544725698
     message: Already scanned. Its surrounding connections are known.
   queueRequirements:
   - condition:
-      rid: 213507078570378756
+      rid: 213507095544725699
     message: Discover this system first.
   duration:
-    rid: 213507078570378757
+    rid: 213507095544725700
   baseTrace:
-    rid: 213507078570378758
+    rid: 213507095544725701
   useLimit:
-    rid: 213507078570378759
+    rid: 213507095544725702
   effects:
-  - rid: 213507078570378760
-  - rid: 213507078570378761
-  - rid: 213507078570378762
+  - rid: 213507095544725703
+  - rid: 213507095544725704
+  - rid: 213507095544725705
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378752
+    - rid: 213507095544725695
       type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         condition:
-          rid: 213507078570378763
-    - rid: 213507078570378753
+          rid: 213507095544725706
+    - rid: 213507095544725696
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 0
-    - rid: 213507078570378754
+    - rid: 213507095544725697
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 7
-    - rid: 213507078570378755
+    - rid: 213507095544725698
       type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         condition:
-          rid: 213507078570378764
-    - rid: 213507078570378756
+          rid: 213507095544725707
+    - rid: 213507095544725699
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 0
-    - rid: 213507078570378757
+    - rid: 213507095544725700
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1.6
-    - rid: 213507078570378758
+    - rid: 213507095544725701
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.6
-    - rid: 213507078570378759
+    - rid: 213507095544725702
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0
-    - rid: 213507078570378760
+    - rid: 213507095544725703
       type: {class: SetStateEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         targets:
           scope: 0
           nodeId: 
           filter:
-            rid: 213507078570378765
+            rid: 213507095544725708
         state: 2
         value: 1
-    - rid: 213507078570378761
+    - rid: 213507095544725704
       type: {class: RevealEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         targets:
           scope: 0
           nodeId: 
           filter:
-            rid: 213507078570378766
+            rid: 213507095544725709
         radius:
-          rid: 213507078570378767
-    - rid: 213507078570378762
+          rid: 213507095544725710
+    - rid: 213507095544725705
       type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         message: SCAN COMPLETE // New routes mapped around {target}.
-    - rid: 213507078570378763
+    - rid: 213507095544725706
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 2
-    - rid: 213507078570378764
+    - rid: 213507095544725707
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 2
-    - rid: 213507078570378765
+    - rid: 213507095544725708
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378766
+    - rid: 213507095544725709
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378767
+    - rid: 213507095544725710
       type: {class: StatNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         stat: scanRadius

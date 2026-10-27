@@ -20,12 +20,12 @@ MonoBehaviour:
   tags:
   - gateway
   security:
-    rid: 213507078570378926
+    rid: 213507095544725876
   auras: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378926
+    - rid: 213507095544725876
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0

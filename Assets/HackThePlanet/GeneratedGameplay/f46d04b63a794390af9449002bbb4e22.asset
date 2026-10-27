@@ -32,191 +32,191 @@ MonoBehaviour:
   futureNeighborQueue: 1
   traceFree: 0
   visible:
-    rid: 213507078570378768
+    rid: 213507095544725711
   requirements:
   - condition:
-      rid: 213507078570378769
+      rid: 213507095544725712
     message: Scan to discover this system.
   - condition:
-      rid: 213507078570378770
+      rid: 213507095544725713
     message: Control a connected neighbor first.
   - condition:
-      rid: 213507078570378771
+      rid: 213507095544725714
     message: You already control this system.
   queueRequirements:
   - condition:
-      rid: 213507078570378772
+      rid: 213507095544725715
     message: Discover this system first.
   - condition:
-      rid: 213507078570378773
+      rid: 213507095544725716
     message: You already control this system.
   duration:
-    rid: 213507078570378774
+    rid: 213507095544725717
   baseTrace:
-    rid: 213507078570378775
+    rid: 213507095544725718
   useLimit:
-    rid: 213507078570378776
+    rid: 213507095544725719
   effects:
-  - rid: 213507078570378777
-  - rid: 213507078570378778
-  - rid: 213507078570378779
+  - rid: 213507095544725720
+  - rid: 213507095544725721
+  - rid: 213507095544725722
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378768
+    - rid: 213507095544725711
       type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         condition:
-          rid: 213507078570378780
-    - rid: 213507078570378769
+          rid: 213507095544725723
+    - rid: 213507095544725712
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 0
-    - rid: 213507078570378770
+    - rid: 213507095544725713
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 7
-    - rid: 213507078570378771
+    - rid: 213507095544725714
       type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         condition:
-          rid: 213507078570378781
-    - rid: 213507078570378772
+          rid: 213507095544725724
+    - rid: 213507095544725715
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 0
-    - rid: 213507078570378773
+    - rid: 213507095544725716
       type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         condition:
-          rid: 213507078570378782
-    - rid: 213507078570378774
+          rid: 213507095544725725
+    - rid: 213507095544725717
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 3
         left:
-          rid: 213507078570378783
+          rid: 213507095544725726
         right:
-          rid: 213507078570378784
-    - rid: 213507078570378775
+          rid: 213507095544725727
+    - rid: 213507095544725718
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 0
         left:
-          rid: 213507078570378785
+          rid: 213507095544725728
         right:
-          rid: 213507078570378786
-    - rid: 213507078570378776
+          rid: 213507095544725729
+    - rid: 213507095544725719
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0
-    - rid: 213507078570378777
+    - rid: 213507095544725720
       type: {class: SetStateEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         targets:
           scope: 0
           nodeId: 
           filter:
-            rid: 213507078570378787
+            rid: 213507095544725730
         state: 1
         value: 1
-    - rid: 213507078570378778
+    - rid: 213507095544725721
       type: {class: RevealEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         targets:
           scope: 0
           nodeId: 
           filter:
-            rid: 213507078570378788
+            rid: 213507095544725731
         radius:
-          rid: 213507078570378789
-    - rid: 213507078570378779
+          rid: 213507095544725732
+    - rid: 213507095544725722
       type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         message: CONTROL ESTABLISHED // {target}.
-    - rid: 213507078570378780
+    - rid: 213507095544725723
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 1
-    - rid: 213507078570378781
+    - rid: 213507095544725724
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 1
-    - rid: 213507078570378782
+    - rid: 213507095544725725
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 1
-    - rid: 213507078570378783
+    - rid: 213507095544725726
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 0
         left:
-          rid: 213507078570378790
+          rid: 213507095544725733
         right:
-          rid: 213507078570378791
-    - rid: 213507078570378784
+          rid: 213507095544725734
+    - rid: 213507095544725727
       type: {class: StatNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         stat: compute
-    - rid: 213507078570378785
+    - rid: 213507095544725728
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 3
-    - rid: 213507078570378786
+    - rid: 213507095544725729
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 2
         left:
-          rid: 213507078570378792
+          rid: 213507095544725735
         right:
-          rid: 213507078570378793
-    - rid: 213507078570378787
+          rid: 213507095544725736
+    - rid: 213507095544725730
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378788
+    - rid: 213507095544725731
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378789
+    - rid: 213507095544725732
       type: {class: StatNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         stat: revealRadius
-    - rid: 213507078570378790
+    - rid: 213507095544725733
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 2.2
-    - rid: 213507078570378791
+    - rid: 213507095544725734
       type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         operation: 2
         left:
-          rid: 213507078570378794
+          rid: 213507095544725737
         right:
-          rid: 213507078570378795
-    - rid: 213507078570378792
+          rid: 213507095544725738
+    - rid: 213507095544725735
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 0
         key: 
         filter:
-          rid: 213507078570378796
-    - rid: 213507078570378793
+          rid: 213507095544725739
+    - rid: 213507095544725736
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1.7
-    - rid: 213507078570378794
+    - rid: 213507095544725737
       type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         input: 0
         key: 
         filter:
-          rid: 213507078570378797
-    - rid: 213507078570378795
+          rid: 213507095544725740
+    - rid: 213507095544725738
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1.15
-    - rid: 213507078570378796
+    - rid: 213507095544725739
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 
-    - rid: 213507078570378797
+    - rid: 213507095544725740
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data: 

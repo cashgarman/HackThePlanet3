@@ -30,13 +30,13 @@ MonoBehaviour:
   coolingCapacity: 0
   requirements:
   - condition:
-      rid: 213507078570639486
+      rid: 213507095544726340
     message: Requires Infrastructure 2 research.
   modifiers: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570639486
+    - rid: 213507095544726340
       type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         technology: {fileID: 11400000, guid: 049ac12394f6b0d4a968c1a7fab8cdd1, type: 2}

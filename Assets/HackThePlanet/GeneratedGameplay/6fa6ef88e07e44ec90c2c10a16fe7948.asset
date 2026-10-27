@@ -30,18 +30,18 @@ MonoBehaviour:
     priority: 0
     operation: 6
     when:
-      rid: 213507078570378736
+      rid: 213507095544725679
     value:
-      rid: 213507078570378737
+      rid: 213507095544725680
   triggers: []
   references:
     version: 2
     RefIds:
-    - rid: 213507078570378736
+    - rid: 213507095544725679
       type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         tag: relay
-    - rid: 213507078570378737
+    - rid: 213507095544725680
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 3
