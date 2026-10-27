@@ -277,13 +277,19 @@ namespace HackThePlanet.Editor
                     case 3:
                         Check(app.ActivateVisibleControl("connect"),"Connect button works.");Check(app.State.Active,"Mission connected through UI.");smokePhase++;return;
                     case 4:
+                        var scanBarButton=app.Root.Q<Button>("action-scan");
+                        Check(scanBarButton!=null&&!scanBarButton.enabledInHierarchy,"Action bar disables Scan until a graph target is selected.");
+                        app.SelectNode("n2");
                         Check(app.ActivateVisibleControl("action-scan"),"Scan button is wired.");
+                        var scanButton=app.Root.Q<Button>("action-scan");
+                        Check(scanButton!=null&&scanButton.Query<VisualElement>().Where(v=>v!=scanButton).ToList().All(v=>v.pickingMode==PickingMode.Ignore),"Action button decorations ignore pointer hits.");
                         GameValidation.FinishTask(app.State);app.SelectNode("n2");smokePhase++;return;
                     case 5:
                         Check(app.ActivateVisibleControl("action-hack"),"Hack button is wired.");app.State.Tick(.25f);
-                        Check(app.State.Execute("scan","n6"),"A future reachable scan can be queued.");app.State.SetPaused(true);smokePhase=110;return;
+                        Check(app.State.Execute("scan","n6"),"A future reachable scan can be queued.");app.State.SetManualPause(true);smokePhase=110;return;
                     case 110:
-                        Check(app.Root.Q<Button>("stop-tool")!=null&&app.Root.Query<Button>("clear-queue").ToList().Count==1&&app.Root.Q<Label>(className:"queue-summary").text.Contains("NEXT"),"Running tools expose Stop and a readable next-action summary.");
+                        var queuedChip=app.Root.Query<VisualElement>(className:"action-queue-chip").ToList().FirstOrDefault(c=>c.tooltip!=null&&c.tooltip.Contains("Scan connections"));
+                        Check(app.Root.Q<Button>("stop-tool")?.enabledInHierarchy==true&&app.Root.Q<Button>("clear-queue")?.enabledInHierarchy==true&&queuedChip!=null,"Running tools expose enabled Stop and Clear, and the queued action chip.");
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/15-tactical-queue.png"));
                         Check(app.ActivateVisibleControl("clear-queue")&&app.State.Op.task!=null&&app.State.Op.queue.Count==0,"Clear removes queued work without cancelling the current tool.");
                         Check(app.State.Execute("scan","n6"),"Queue can be rebuilt after clearing.");float beforeStop=app.State.Op.trace;
@@ -411,7 +417,7 @@ namespace HackThePlanet.Editor
                         smokeUiTexture.Release();smokeUiTexture.width=1680;smokeUiTexture.height=960;smokeUiTexture.Create();smokePhase++;return;
                     case 306:
                         Check(Mathf.Approximately(app.Root.Q<Label>(className:"micro").resolvedStyle.fontSize,16),"Returning to 200% does not compound font scaling.");
-                        Check(app.ActivateVisibleControl("resume")&&app.State.Op.paused,"Resume preserves an already paused operation.");
+                        Check(app.ActivateVisibleControl("resume")&&!app.State.Op.paused,"Resume restarts the operation that Settings paused.");
                         app.State.SetPaused(false);SendKey(app,KeyCode.Escape);
                         Check(app.State.Op.paused,"Escape opens Settings and pauses a running operation.");smokePhase=26;return;
                     case 26:

@@ -53,8 +53,7 @@
 .trace-alert .operation-bar { border-top-color: #ffbc70; }
 .trace-alert .signal-strip { background-color: #2d2118; border-bottom-color: #76503b; }
 .trace-alert .signal-strip Label { color: #ffbc70; }
-.meter-track, .task-track { background-color: #243d35; }
-.task-fill { background-color: #65d9eb; }
+.meter-track { background-color: #243d35; }
 .speed-button.active { color: #9bfacb; background-color: #213e2e; }
 .inspector-bottom { background-color: #0e1d1d; border-top-color: #314d40; }
 .action-button { background-color: #102321; border-color: #385249; border-left-width: 2px; }
@@ -117,7 +116,6 @@
 .action-button.suggested-action { border-left-color: #9bfacb; border-left-width: 3px; background-color: #18392f; }
 .action-button.risky-action { border-color: #ffbc70; background-color: #30251e; }
 .action-forecast { font-size: 9px; margin-top: 4px; letter-spacing: 0.5px; }
-.queue-summary { font-size: 9px; color: #91b6ab; margin-top: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stop-tool { color: #ffbc70; border-color: #8d6550; margin-right: 5px; }
 .brief-toggle { background-color: transparent; color: #91b6ab; border-width: 0; padding: 5px 0; margin-top: 8px; -unity-text-align: middle-left; font-size: 10px; }
 .target-title { font-size: 23px; }

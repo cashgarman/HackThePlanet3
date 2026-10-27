@@ -98,6 +98,7 @@ namespace HackThePlanet
         public int Revision {get;private set;}
         public event Action Changed;
         private int effectDepth,effectCount;
+        private bool manuallyPaused;
         public bool Active=>Op!=null;
         public bool CanStopTask=>Active&&Op.task!=null&&Catalog.Data.career.allowTaskCancellation;
         public int ResearchCount=>Career.unlocked.Except(Catalog.Data.career.initialTechnologies.Select(t=>t.id)).Count();
@@ -196,11 +197,13 @@ namespace HackThePlanet
             if(Active||!RigValid||definition==null||Career.completed.Count<definition.requiredWins||(!definition.recurring&&Career.completed.Contains(definition.id)))return false;
             Job=JsonUtility.FromJson<Contract>(JsonUtility.ToJson(job));Job.networkId=definition.network.id;Job.lore=Catalog.DescribeContract(definition,Career).lore;
             var network=NetworkGenerator.Generate(Job,Career,Catalog);
-            Career.operation=new Operation{contractId=Job.id,seed=Job.seed,nodes=network.nodes,links=network.links,generationVersion=NetworkGenerator.Version,entryNode=definition.network.entryNode,lastControlled=definition.network.entryNode};
+            manuallyPaused=false;Career.operation=new Operation{contractId=Job.id,seed=Job.seed,nodes=network.nodes,links=network.links,generationVersion=NetworkGenerator.Version,entryNode=definition.network.entryNode,lastControlled=definition.network.entryNode};
             foreach(var goal in definition.objectives)Node(goal.nodeId).objective=true;
             Dispatch(RuleEvent.OperationStarted,Context());Log("TUNNEL OPEN // "+Job.company+". Gateway secured.");Log("CLIENT // "+Job.objective);RefreshGraph();Touch();return true;
         }
         public void SetPaused(bool paused){if(!Active)return;Op.paused=paused;Touch();}
+        public void SetManualPause(bool paused){manuallyPaused=paused;if(Active)SetPaused(paused);}
+        private void ResumeAfterActionUnlessManuallyPaused(){if(Active&&!manuallyPaused)Op.paused=false;}
         public string PreferredNode(Contract job,bool preview=false){var n=Catalog.Network(job.networkId??Catalog.Contract(job.id).network.id);return preview?n.previewNode:n.preferredNode;}
         public float Stat(string stat)=>Stat(stat,Context());
         internal float Stat(string stat,RuleContext c)=>ApplyModifiers(stat,stat=="security"?(c.Node?.security??0):RigBaseStat(stat),c);
@@ -293,6 +296,7 @@ namespace HackThePlanet
         {
             var a=Catalog.Action(actionId);var n=Node(targetId);
             if(!Active||Op.task==null||a==null||!a.queueable||a.operatorTarget||n==null||Op.queue.Count>=QueueCapacity)return false;
+            if(a.memoryCost>MemoryFree)return false;
             if(Op.queue.Any(q=>q.actionId==actionId&&q.target==targetId)||(Op.task.actionId==actionId&&Op.task.target==targetId))return false;
             var c=Context(n,a);if(!Granted(a)||!a.visible.Test(c)||!a.queueRequirements.All(r=>r.condition.Test(c)))return false;
             float limit=a.useLimit.Evaluate(c);
@@ -303,17 +307,17 @@ namespace HackThePlanet
         public bool Execute(string actionId,string targetId=null)
         {
             var action=Catalog.Action(actionId);if(!Active||action==null)return false;
-            if(IsAbilityActive(actionId,targetId)){ReleaseAbility(actionId,targetId);Touch();return true;}
+            if(IsAbilityActive(actionId,targetId)){ReleaseAbility(actionId,targetId);ResumeAfterActionUnlessManuallyPaused();Touch();return true;}
             if(Op.task!=null&&action.queueable&&!action.operatorTarget)
             {
-                if(!CanQueue(actionId,targetId))return false;Op.queue.Add(new QueuedTool(actionId,targetId));Log("QUEUED // "+ActionTitle(actionId,targetId)+" : "+Node(targetId).label);Touch();return true;
+                if(!CanQueue(actionId,targetId))return false;Op.queue.Add(new QueuedTool(actionId,targetId));Log("QUEUED // "+ActionTitle(actionId,targetId)+" : "+Node(targetId).label);ResumeAfterActionUnlessManuallyPaused();Touch();return true;
             }
             var p=Preview(actionId,targetId);if(!p.allowed)return false;
             if(Op.task!=null&&!action.instant&&p.duration>0)return false;
             SpendMemory(action,targetId);
             var task=new ToolTask{actionId=actionId,target=action.operatorTarget?null:targetId,duration=p.duration,trace=p.trace};
-            if((action.operatorTarget||action.instant)&&p.duration==0){Op.trace=Mathf.Min(TraceLimit,Op.trace+p.trace);CompleteTask(task);RefreshGraph();Touch();return true;}
-            if(Op.task!=null)return false;Op.task=task;Log("RUN // "+ActionTitle(actionId,targetId)+" : "+(Node(targetId)?.label??"operator"));Touch();return true;
+            if((action.operatorTarget||action.instant)&&p.duration==0){Op.trace=Mathf.Min(TraceLimit,Op.trace+p.trace);CompleteTask(task);RefreshGraph();ResumeAfterActionUnlessManuallyPaused();Touch();return true;}
+            if(Op.task!=null)return false;Op.task=task;Log("RUN // "+ActionTitle(actionId,targetId)+" : "+(Node(targetId)?.label??"operator"));ResumeAfterActionUnlessManuallyPaused();Touch();return true;
         }
         private string LegacyAction(ToolKind kind,string target)
         {

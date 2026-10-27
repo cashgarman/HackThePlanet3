@@ -40,8 +40,21 @@ Label { min-width: 0; }
 .signal-strip Label { height: auto; white-space: normal; letter-spacing: 0; flex-shrink: 1; }
 .sectors { padding: 5px 12px; flex-wrap: wrap; }
 .sector { letter-spacing: 0; flex-shrink: 1; margin-right: 8px; }
-.map-footer { height: auto; min-height: 48px; padding: 6px 12px; flex-wrap: wrap; }
-.legend { flex-wrap: wrap; flex-grow: 1; flex-shrink: 1; }
+.map-footer { height: 48px; min-height: 48px; max-height: 48px; padding: 6px 12px; flex-wrap: nowrap; overflow: hidden; }
+.graph-action-bar { padding: 6px 8px; }
+.resource-radial { margin: 0 8px; }
+.action-slot .action-button { width: 184px; }
+.large-text .graph-action-bar { height: 152px; min-height: 152px; max-height: 152px; }
+.large-text .action-bar-header { height: 28px; min-height: 28px; }
+.large-text .resource-radial { width: 100px; height: 100px; }
+.large-text .resource-radial-center { left: 12px; right: 12px; }
+.large-text .resource-radial-amount { font-size: 20px; }
+.large-text .resource-radial-caption { font-size: 7px; }
+.large-text .graph-action-scroll { height: 104px; }
+.large-text .graph-action-list { height: 104px; min-height: 104px; max-height: 104px; }
+.large-text .action-slot .action-button { width: 250px; height: 96px; min-height: 96px; max-height: 96px; }
+.research-loadout { padding: 12px; }
+.legend { flex-wrap: nowrap; flex-grow: 1; flex-shrink: 1; overflow: hidden; }
 .legend-key { margin-right: 12px; margin-bottom: 4px; }
 .legend-dot { width: 10px; height: 10px; margin-right: 7px; flex-shrink: 0; }
 .map-controls { flex-shrink: 0; margin-top: 4px; margin-bottom: 4px; }
@@ -53,14 +66,7 @@ Label { min-width: 0; }
 .unity-scroller--vertical { width: 14px; }
 .unity-scroller--horizontal { height: 14px; }
 .map-button { height: auto; min-height: 34px; min-width: 36px; padding: 3px 8px; }
-.operation-bar { height: auto; min-height: 52px; padding: 8px 12px; flex-wrap: nowrap; }
-.operation-stats { flex-wrap: wrap; }
-.operation-task { max-width: none; flex-basis: 180px; }
-.operation-task-label { white-space: normal; }
-.trace-block { width: 35%; margin-right: 16px; }
-.task-block { flex-basis: 0; margin-right: 0; }
-.task-title { letter-spacing: 0; }
-.queue-summary { white-space: normal; overflow: visible; text-overflow: clip; }
+.operation-bar { padding: 8px 12px; }
 .time-controls { justify-content: flex-end; margin-left: 10px; flex-wrap: nowrap; flex-shrink: 0; }
 .time-button, .speed-button, .stop-tool, .clear-tools { width: auto; height: auto; min-width: 40px; min-height: 36px; padding: 3px 8px; }
 .inspector-scroll, .tech-inspector { padding: 14px; }
@@ -68,8 +74,8 @@ Label { min-width: 0; }
 .inspector-bottom { padding: 12px 14px; }
 .target-status { flex-shrink: 1; }
 .security-bar { flex-shrink: 1; }
-.footer { height: auto; min-height: 34px; padding: 5px 16px; flex-wrap: wrap; }
-.footer-brand, .footer-center, .footer-save { letter-spacing: 0; flex-shrink: 1; margin-right: 18px; }
+.footer { padding: 5px 16px; flex-wrap: nowrap; }
+.footer-brand, .footer-center, .footer-save { letter-spacing: 0; flex-shrink: 1; min-width: 0; margin-right: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .full-page { padding: 20px 26px; }
 .rig-layout, .intel-columns { flex-grow: 0; flex-shrink: 0; }
 .rig-art { padding: 20px; flex-shrink: 0; }
@@ -105,11 +111,8 @@ Label { min-width: 0; }
 .large-text .map-heading { flex-direction: column; align-items: stretch; }
 .large-text .map-status { max-width: 100%; align-items: flex-start; }
 .large-text .map-status .micro { -unity-text-align: middle-left; }
-.large-text .trace-block { width: 100%; margin-right: 0; }
-.large-text .task-block { width: 100%; margin-top: 8px; }
-.large-text .operation-bar { flex-wrap: wrap; }
-.large-text .operation-stats { width: 100%; margin-right: 0; margin-bottom: 6px; }
-.large-text .time-controls { width: 100%; margin-top: 4px; margin-left: 0; justify-content: flex-start; }
+.large-text .operation-bar { height: 84px; min-height: 84px; max-height: 84px; }
+.large-text .operation-stat-row { height: 26px; min-height: 26px; max-height: 26px; }
 .large-text .rig-layout, .large-text .intel-columns { flex-direction: column; }
 .large-text .rig-art, .large-text .news-feed { width: 100%; margin-right: 0; margin-bottom: 20px; }
 .large-text .reports-feed { padding-left: 0; border-left-width: 0; }
@@ -123,8 +126,4 @@ Label { min-width: 0; }
 .compact-width .rig-art, .compact-width .news-feed { width: 100%; margin-right: 0; margin-bottom: 20px; }
 .compact-width .reports-feed { padding-left: 0; border-left-width: 0; }
 
-.operation-bar .trace-block { width: 35%; flex-shrink: 0; }
-.operation-bar .task-block { flex-basis: 60%; flex-grow: 1; min-width: 160px; }
 .rig-resource-meters { width: auto; max-width: none; min-width: 0; flex-direction: row; flex-wrap: wrap; margin-left: 0; margin-top: 0; }
-.large-text .operation-bar .task-block { flex-basis: 100%; }
-.large-text .operation-task { flex-basis: 100%; max-width: none; margin-bottom: 6px; }

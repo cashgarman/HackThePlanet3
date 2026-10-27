@@ -175,7 +175,7 @@ namespace HackThePlanet.Editor
             Check(app.Root.Q<Button>(className:"rig-module")!=null,"installed modules render as grid items");
             Check(app.Root.Q("rig-issues")!=null,"rig problems are listed above the rack");
             Check(app.Root.Q<Button>("rig-place-first")!=null&&app.Root.Q<Button>("rig-rotate")!=null&&app.Root.Q<Button>("rig-remove")!=null,"keyboard-accessible packing controls exist");
-            Check(app.Root.Q("rig-details")!=null&&app.Root.Q("rig-inventory")!=null&&app.Root.Q<Button>("rig-category-ALL")!=null,"rig splits selected details and inventory with category tabs");
+            Check(app.Root.Q(className:"rig-details")!=null&&app.Root.Q(className:"rig-inventory")!=null&&app.Root.Q<Button>("rig-category-ALL")!=null,"rig splits selected details and inventory with category tabs");
             Check(app.State.Career.rigParts.All(p=>p.Installed)||app.Root.Q<Button>(className:"rig-inventory-row")!=null,"spare parts appear in the inventory list");
             var part=app.State.Career.rigParts.First(p=>p.modelId=="processor"&&p.Installed);var button=app.Root.Q<Button>("part-"+part.instanceId);
             Check(button!=null&&button.worldBound.width>0&&button.worldBound.height>0&&viewport.worldBound.Overlaps(button.worldBound),"module overlays lie inside the rack viewport");

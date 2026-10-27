@@ -63,6 +63,7 @@ namespace HackThePlanet
         private float yawStart, pitchStart;
         private bool disposed;
         private bool fitPending;
+        private string activeProgressNodeId;
         private readonly string guideEntryId, guideObjectiveId;
         private static readonly Color GuideObjectiveOrange = new(1f, .55f, .15f, 1f);
 
@@ -73,7 +74,8 @@ namespace HackThePlanet
         public GraphViewport(List<NetNode> nodes, List<NetLink> links, string selected, bool preview,
             Action<string> select, GraphPathResult route = null, GraphCameraState cameraState = null, ContractIntel intel = ContractIntel.Full, ContractIntel? focusIntel = null, GameCatalog catalog = null,
             string guideEntryId = null, string guideObjectiveId = null, IReadOnlyList<NetworkWaypoint> waypoints = null, int waypointTier = 0)
-            : this(BuildNetwork(nodes, links, preview, intel), selected, select, false, route, cameraState)
+            : this(BuildNetwork(nodes, links, preview, intel), selected, select, false, null, cameraState, false,
+                preview ? null : new HashSet<string>(nodes.Where(n => n.controlled).Select(n => n.id)))
         {
             this.guideEntryId = guideEntryId;
             this.guideObjectiveId = guideObjectiveId;
@@ -100,6 +102,8 @@ namespace HackThePlanet
 
         public GraphViewport(GraphScene graph,Action<string> select,GraphCameraState cameraState,bool flat)
             :this(graph,null,select,true,null,cameraState,flat) {}
+
+        public void RefreshConnectionColors()=>links?.MarkDirtyRepaint();
 
         public void ConfigureFlatNode(string id,Vector2 size,string tooltip,bool decorative=false,bool module=false)
         {
@@ -132,7 +136,7 @@ namespace HackThePlanet
         }
 
         private GraphViewport(GraphScene graph, string selected, Action<string> select, bool research,
-            GraphPathResult route, GraphCameraState cameraState,bool flat=false)
+            GraphPathResult route, GraphCameraState cameraState,bool flat=false,HashSet<string> controlledNodes=null)
         {
             scene = graph;this.flat=flat;selectNode=select;
             if(flat)foreach(var node in graph.Nodes.Values)node.Position=new Vector3(node.Position.x,node.Position.y,0);
@@ -140,7 +144,6 @@ namespace HackThePlanet
             savedCamera = cameraState ?? new GraphCameraState();
             fitPending=!savedCamera.Initialized||(!savedCamera.UserAdjusted&&savedCamera.NodeCount!=graph.Nodes.Count);
             savedCamera.NodeCount=graph.Nodes.Count;
-            savedCamera.FocusedId = string.IsNullOrEmpty(selectedId) ? null : selectedId;
             this.research = research;
             AddToClassList("graph-viewport");
             if(flat)AddToClassList("flat-rig");
@@ -187,7 +190,7 @@ namespace HackThePlanet
                 route.EdgeIds.Select(id => scene.Edges.ContainsKey(id) ? id : string.Join(">", id.Split('>').Reverse())));
             session.Renderer.UpdateMetrics(scene, edgeFilter);
 
-            links = new LinkOverlay(scene, camera, selected, route, research, flat);Add(links);
+            links = new LinkOverlay(scene, camera, selected, route, research, flat, controlledNodes);Add(links);
             labels = new VisualElement();
             labels.style.position = Position.Absolute;
             labels.style.left = labels.style.right = labels.style.top = labels.style.bottom = 0;
@@ -365,7 +368,8 @@ namespace HackThePlanet
 
         private void UpdateFocusedCard()
         {
-            bool focused = !flat&&savedCamera.FocusedId == selectedId && scene.Nodes.ContainsKey(selectedId);
+            bool focused = !flat&&savedCamera.FocusedId == selectedId && scene.Nodes.ContainsKey(selectedId)
+                && activeProgressNodeId != selectedId;
             focusedCard.style.display = focused ? DisplayStyle.Flex : DisplayStyle.None;
             if (!focused) return;
             focusedTitle.text = scene.Nodes[selectedId].Label;
@@ -381,20 +385,8 @@ namespace HackThePlanet
             var type = catalog.NodeTypes.FirstOrDefault(t => t.id == node.typeId)
                 ?? catalog.NodeTypes.FirstOrDefault(t => t.glyph == node.kind);
             string role = type?.title ?? node.kind.ToString();
-            if (intel == ContractIntel.Topology) return "LIMITED INTEL / " + role + "\n" + status + "\nSecurity and internal details unavailable.";
-            string detail = "FULL INTEL / " + role + "\n" + status + " / SECURITY " + node.security
-                + "\n" + (string.IsNullOrEmpty(node.detail) ? type?.description : node.detail);
-            switch (node.kind)
-            {
-                case NodeKind.Gateway: detail += "\nEntry point / route traffic through controlled systems."; break;
-                case NodeKind.Workstation: detail += "\nEndpoint / control it to extend your route."; break;
-                case NodeKind.Relay: detail += "\nTransit / connects network branches."; break;
-                case NodeKind.Firewall: detail += "\nPerimeter defense / guards access to deeper systems."; break;
-                case NodeKind.Scanner: detail += "\nDetection / " + (node.suppressed > 0 ? "SUPPRESSED" : "ACTIVE SENSOR"); break;
-                case NodeKind.SecurityHub: detail += "\nSecurity coordination / " + (node.suppressed > 0 ? "SUPPRESSED" : "ACTIVE DEFENSE"); break;
-                case NodeKind.Database: detail += "\nData store / " + (node.collected ? "DATA COLLECTED" : node.objective ? "CONTRACT OBJECTIVE" : node.bonus ? "BONUS DATA" : "ARCHIVE"); break;
-            }
-            return detail;
+            if (intel == ContractIntel.Topology) return "LIMITED INTEL / " + role + "\n" + status;
+            return "FULL INTEL / " + role + "\n" + status + " / SECURITY " + node.security;
         }
 
         private static GraphScene BuildNetwork(List<NetNode> nodes, List<NetLink> links, bool preview, ContractIntel intel)
@@ -508,6 +500,9 @@ namespace HackThePlanet
             if (flat) { circuit?.Tick(effects); return; }
             waypointOverlay?.Reposition(textScale);
             session.Renderer.ReducedMotion = effects != SignalEffects.Full;
+            activeProgressNodeId = state.Active && !research && state.Op.task != null && state.Op.task.duration > 0
+                ? state.Op.task.target : null;
+            if (activeProgressNodeId == savedCamera.FocusedId) UpdateFocusedCard();
             if (state.Active && !research && state.Op.task != null && !string.IsNullOrEmpty(state.Op.task.target))
                 session.Renderer.NodeProgress = new Dictionary<string, GraphNodeProgressVisual>
                 { [state.Op.task.target] = new GraphNodeProgressVisual { Fraction = state.Progress } };
@@ -552,6 +547,7 @@ namespace HackThePlanet
             {
                 pair.Value.style.display = DisplayStyle.None;
                 if (pair.Key != selectedId) continue;
+                if (activeProgressNodeId == selectedId) continue;
                 var node = scene.Nodes[pair.Key];
                 var point = camera.WorldToViewportPoint(node.Position);
                 if (point.z <= camera.nearClipPlane || point.x < 0 || point.x > 1 || point.y < 0 || point.y > 1) continue;
@@ -674,14 +670,16 @@ namespace HackThePlanet
             public Rect SelectionRect, CardRect;
 
             private readonly bool flat;
+            private readonly HashSet<string> controlledNodes;
 
-            public LinkOverlay(GraphScene scene, Camera camera, string selected, GraphPathResult route, bool research, bool flat = false)
+            public LinkOverlay(GraphScene scene, Camera camera, string selected, GraphPathResult route, bool research, bool flat = false, HashSet<string> controlledNodes = null)
             {
                 this.scene = scene;
                 this.camera = camera;
                 this.selected = selected;
                 this.research = research;
                 this.flat = flat;
+                this.controlledNodes = controlledNodes ?? new HashSet<string>();
                 path = new HashSet<string>((route?.EdgeIds??Array.Empty<string>()).SelectMany(id=>new[]{id,string.Join(">",id.Split('>').Reverse())}));
                 style.position = Position.Absolute;
                 style.left = style.right = style.top = style.bottom = 0;
@@ -702,10 +700,25 @@ namespace HackThePlanet
                     if (start.z <= 0 || end.z <= 0) continue;
                     var highlight = path.Contains(edge.Id);
                     var related = edge.From == selected || edge.To == selected;
+                    var hacked = !research && controlledNodes.Contains(edge.From) && controlledNodes.Contains(edge.To);
+                    if (hacked)
+                    {
+                        var hackedColor = WorkstationApp.HackedConnectionColor;
+                        hackedColor.a = .28f;
+                        painter.strokeColor = hackedColor;
+                        painter.lineWidth = 7f;
+                        painter.BeginPath();
+                        painter.MoveTo(new Vector2(start.x / camera.pixelWidth * contentRect.width,
+                            (1 - start.y / camera.pixelHeight) * contentRect.height));
+                        painter.LineTo(new Vector2(end.x / camera.pixelWidth * contentRect.width,
+                            (1 - end.y / camera.pixelHeight) * contentRect.height));
+                        painter.Stroke();
+                    }
                     var tint = research ? scene.Schema.NodeTypes[b.Record.TypeId].Color : Palette.Cyan;
-                    tint.a = highlight ? .9f : related ? .65f : research ? .38f : .19f;
+                    if(hacked)tint=WorkstationApp.HackedConnectionColor;
+                    tint.a = hacked ? highlight ? 1f : related ? .98f : .9f : highlight ? .9f : related ? .65f : research ? .38f : .19f;
                     painter.strokeColor = tint;
-                    painter.lineWidth = highlight ? 1.15f : related ? .9f : .65f;
+                    painter.lineWidth = hacked ? highlight ? 3.2f : related ? 2.8f : 2.4f : highlight ? 1.15f : related ? .9f : .65f;
                     painter.BeginPath();
                     painter.MoveTo(new Vector2(start.x / camera.pixelWidth * contentRect.width,
                         (1 - start.y / camera.pixelHeight) * contentRect.height));

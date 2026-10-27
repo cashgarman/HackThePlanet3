@@ -527,19 +527,7 @@ namespace HackThePlanet
         }
         private void RefreshResourceActions()
         {
-            if(!State.Active)return;
-            foreach(var action in State.AvailableActions())
-            {
-                var tech=State.Catalog.Technologies.FirstOrDefault(t=>t.grants.Contains(action.id));if(tech==null)continue;
-                var button=root.Q<Button>("ability-"+tech.id);button?.SetEnabled(State.Preview(action.id).allowed);
-            }
-            foreach(var action in State.AvailableActions(selectedNode))
-            {
-                var button=root.Q<Button>("action-"+action.id);if(button==null)continue;
-                var preview=State.Preview(action.id,selectedNode);bool queued=State.Op.task!=null&&!action.Definition.instant&&!State.IsAbilityActive(action.id,selectedNode);
-                button.SetEnabled(queued?State.CanQueue(action.id,selectedNode):preview.allowed);
-                var estimate=button.Q<Label>(className:"action-estimate");if(estimate!=null&&!queued)estimate.text=preview.allowed?preview.duration.ToString("0.0")+"s / +"+preview.trace.ToString("0.0")+" trace / "+action.Definition.memoryCost+" GB":preview.reason;
-            }
+            RefreshActionBar();
         }
         private void BuildStorageBrief(VisualElement parent)
         {
