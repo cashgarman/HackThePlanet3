@@ -1,0 +1,43 @@
+{
+  "id": "drive",
+  "title": "Drive",
+  "description": "+20 GB storage.",
+  "family": "storage",
+  "branch": "RECON",
+  "tier": 1,
+  "width": 2,
+  "height": 1,
+  "price": 250,
+  "rotatable": true,
+  "powerDemand": 1,
+  "heatOutput": 1,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "base",
+        "equipped": false
+      },
+      "message": "Requires Base research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "storageCapacity",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 20
+      }
+    }
+  ]
+}

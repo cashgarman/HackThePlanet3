@@ -47,23 +47,28 @@ namespace HackThePlanet
             typeof(GameDefinition), typeof(CompanyDefinition), typeof(ContractDefinition), typeof(NetworkDefinition),
             typeof(NodeTypeDefinition), typeof(ActionDefinition), typeof(TechnologyDefinition), typeof(HardwareDefinition),
             typeof(StatusDefinition), typeof(CareerDefinition), typeof(RewardDefinition), typeof(GameplayTextPalette),
-            typeof(GraphVisualSettings), typeof(GraphNodeLabelSettings)
+            typeof(GraphVisualSettings), typeof(GraphNodeLabelSettings), typeof(RigChassisDefinition), typeof(RigModuleDefinition), typeof(RigRulesDefinition)
         };
         public static readonly Type[] RuleTypes = {
             typeof(ConstantNumber), typeof(StatNumber), typeof(InputNumber), typeof(BinaryNumber), typeof(ConditionalNumber), typeof(RandomNumber),
             typeof(AlwaysCondition), typeof(AllCondition), typeof(AnyCondition), typeof(NotCondition), typeof(NodeStateCondition),
-            typeof(NodeTagCondition), typeof(ActionCondition), typeof(ResearchCondition), typeof(NamedNodeCondition), typeof(CompareCondition),
+            typeof(RigNeighborCondition), typeof(NodeTagCondition), typeof(ActionCondition), typeof(ResearchCondition), typeof(NamedNodeCondition), typeof(CompareCondition),
             typeof(SetStateEffect), typeof(RevealEffect), typeof(TraceEffect), typeof(ApplyStatusEffect), typeof(SecurityEffect),
             typeof(CounterEffect), typeof(ConditionalEffect), typeof(LogEffect), typeof(RecoverLoreEffect)
         };
         private static readonly Type[] ValueTypes = {
-            typeof(ContentManifest), typeof(ContentEntry), typeof(NamedStat), typeof(Requirement), typeof(Modifier), typeof(Trigger), typeof(Aura), typeof(NodeSelector),
+            typeof(RigStarterPart), typeof(ContentManifest), typeof(ContentEntry), typeof(NamedStat), typeof(Requirement), typeof(Modifier), typeof(Trigger), typeof(Aura), typeof(NodeSelector),
             typeof(ObjectiveDefinition), typeof(ContractActionRule), typeof(LoreFragment), typeof(HardwareTier), typeof(NetworkNode), typeof(NetworkEdge),
             typeof(RouteTier), typeof(ParallelRouteLayout), typeof(CareerRank), typeof(OutcomeRule), typeof(RewardRule), typeof(GameplayTextPalette.TermStyle),
             typeof(Vector2), typeof(Vector3), typeof(Color)
         };
-        public static readonly string[] Categories = { "Game", "Companies", "Contracts", "Networks", "Node Types", "Actions", "Technologies", "Hardware", "Statuses", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals", "Graph Labels" };
-        public static Type CategoryType(string category) => DefinitionTypes[Array.IndexOf(Categories, category) == 13 ? 12 : Array.IndexOf(Categories, category) == 14 ? 13 : Array.IndexOf(Categories, category)];
+        public static readonly string[] Categories = { "Game", "Companies", "Contracts", "Networks", "Node Types", "Actions", "Technologies", "Hardware", "Statuses", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals", "Graph Labels", "Chassis", "Modules", "Rig Rules" };
+        public static Type CategoryType(string category)
+        {
+            int index=Array.IndexOf(Categories,category);
+            if(index<0)throw new InvalidDataException("Unknown category: "+category);
+            return DefinitionTypes[index>13?index-1:index==13?12:index];
+        }
         public static FieldInfo[] Fields(Type type) => type.GetFields(BindingFlags.Instance | BindingFlags.Public)
             .Where(f => !f.IsNotSerialized && (f.DeclaringType == typeof(GameplayDefinition) || DefinitionTypes.Contains(f.DeclaringType) || RuleTypes.Contains(f.DeclaringType) || ValueTypes.Contains(f.DeclaringType)))
             .OrderBy(f => f.DeclaringType == typeof(GameplayDefinition) ? 0 : 1).ThenBy(f => f.MetadataToken).ToArray();
@@ -185,7 +190,7 @@ namespace HackThePlanet
         public static IEnumerable<string> Validate(ContentBundle bundle)
         {
             var errors = new List<string>();
-            foreach (var category in new[] { "Game", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals", "Graph Labels" })
+            foreach (var category in new[] { "Game", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals", "Graph Labels", "Rig Rules" })
                 if (bundle.Manifest.entries.Count(e => e.category == category) != 1) errors.Add("manifest.json: expected one " + category + " entry");
             if (errors.Count > 0) return errors;
             try { errors.AddRange(GameDefinitionValidator.Validate(bundle.Game)); }

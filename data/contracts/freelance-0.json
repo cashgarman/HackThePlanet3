@@ -1,13 +1,13 @@
 {
   "id": "freelance-0",
   "title": "Open Secrets",
-  "description": "A verified exchange contract generated from today\u0027s network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
+  "description": "A verified exchange contract generated from today's network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
   "company": "company-0",
   "network": "corporate-network",
   "client": "EXCHANGE // verified escrow",
   "tag": "FREELANCE / REPEATABLE",
   "objective": "Recover the archive from Research vault.",
-  "condition": "Below 75% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "condition": "Below 75% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
   "aftermath": "A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.",
   "displayKind": "Copy",
   "recurring": true,
@@ -123,7 +123,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     }
   ],
   "actionRules": [],
@@ -133,7 +134,7 @@
       "title": "Maintenance testimony",
       "company": "HELIX DYNAMICS",
       "contract": "Open Secrets",
-      "text": "A Helix technician has hidden repair manuals inside routine compliance backups. The official service program charges a year\u0027s wages for the same instructions."
+      "text": "A Helix technician has hidden repair manuals inside routine compliance backups. The official service program charges a year's wages for the same instructions."
     },
     {
       "id": "freelance/0/1",
@@ -147,7 +148,7 @@
       "title": "What the archive kept",
       "company": "HELIX DYNAMICS",
       "contract": "Open Secrets",
-      "text": "Helix\u0027s discarded patent register credits a community workshop with the original design. The attribution survived in the archive after it disappeared from the product page."
+      "text": "Helix's discarded patent register credits a community workshop with the original design. The attribution survived in the archive after it disappeared from the product page."
     }
   ]
 }

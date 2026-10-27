@@ -1,0 +1,19 @@
+{
+  "id": "signal-engineering",
+  "title": "Signal Engineering",
+  "description": "Unlocks module purchases: Quiet Filter, Recon Cache.",
+  "branch": "STEALTH",
+  "cost": 100,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 860,
+    "y": 760
+  },
+  "parents": [
+    "quiet"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": []
+}

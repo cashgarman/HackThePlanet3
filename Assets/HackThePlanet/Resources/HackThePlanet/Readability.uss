@@ -119,3 +119,11 @@ Label { min-width: 0; }
 .compact-width .rig-layout, .compact-width .intel-columns { flex-direction: column; }
 .compact-width .rig-art, .compact-width .news-feed { width: 100%; margin-right: 0; margin-bottom: 20px; }
 .compact-width .reports-feed { padding-left: 0; border-left-width: 0; }
+
+/* Resource meters take their own row so task text never collapses into a column. */
+.operation-bar .trace-block { width: 35%; flex-shrink: 0; }
+.operation-bar .task-block { flex-basis: 60%; flex-grow: 1; min-width: 160px; }
+.rig-resource-meters { width: 100%; max-width: none; min-width: 0; flex-direction: row; flex-wrap: wrap; margin-left: 0; margin-top: 8px; }
+.rig-resource-meters > Label { flex-grow: 1; flex-basis: 0; min-width: 160px; margin-right: 12px; }
+.operation-bar .time-controls { width: 100%; margin-left: 0; margin-top: 6px; }
+.large-text .operation-bar .task-block { flex-basis: 100%; }

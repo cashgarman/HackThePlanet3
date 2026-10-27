@@ -21,7 +21,7 @@ namespace HackThePlanet.Editor
             var career=GameCatalog.Default.CreateCareer();career.xp=10000;career.credits=10000;
             foreach(var id in technologies)if(!career.unlocked.Contains(id))career.unlocked.Add(id);
             career.equipped=GameContent.Tech.Where(t=>t.special&&technologies.Contains(t.id)).Select(t=>t.id).ToList();
-            var sim=new GameSimulation(career);sim.Start(GameContent.Story[0]);return sim;
+            var sim=new GameSimulation(career);foreach(var part in sim.Career.rigParts.ToArray())sim.RemoveModule(part.instanceId);sim.Start(GameContent.Story[0]);return sim;
         }
         [MenuItem("Hack The Planet/Run Data Driven Validation")]
         public static void Run()
@@ -61,9 +61,9 @@ namespace HackThePlanet.Editor
             Near(selective.Preview("download","n22").duration,5.5f*.7f,"selective main-objective duration");Near(selective.Preview("download","n22").trace,8*.7f,"selective main-objective trace");
             var chain=Developed("efficient","chain");chain.Execute("scan","n2");Finish(chain);Check(chain.Execute("hack","n2")&&chain.Execute("hack","n6"),"chain permits future neighboring action");Check(!chain.Execute("hack","n6"),"duplicate queue entries rejected");Finish(chain);Check(chain.Node("n6").controlled,"queued action executes after gaining reachability");
             var invalid=Developed();invalid.Execute("hack","n2");invalid.Node("n6").known=true;Check(invalid.Execute("scan","n6"),"queue defers future reachability");invalid.Node("n6").scanned=true;Finish(invalid);Check(invalid.Op.queue.Count==0&&invalid.Op.log.Any(l=>l.Contains("SKIPPED")),"queued requirements rechecked and completed action skipped");
-            var decoy=Developed("disrupt","decoy");decoy.Op.trace=30;Check(decoy.Execute("decoy"),"operator action executes");Near(decoy.Op.trace,18,"decoy subtracts authored trace");Check(!decoy.Execute("decoy"),"operator action use limit");
-            decoy.Execute("hack","n2");decoy.SetPaused(true);decoy.Tick(.5f);Near(decoy.Op.decoyRemaining,10,"pause freezes status timers");decoy.SetPaused(false);Finish(decoy);Near(decoy.Op.trace,18,"trace prevention status protects a running action");
-            while(decoy.Op.decoyRemaining>0)decoy.Tick(.5f);Check(decoy.Op.statuses.Count==0,"operator status expires while idle");
+            var decoy=Developed("disrupt","decoy");decoy.Op.trace=30;Check(decoy.Execute("decoy"),"persistent operator action executes");Near(decoy.Op.trace,30,"decoy does not refund trace");Near(decoy.MemoryReserved,16,"decoy reserves authored RAM");
+            float decoyTrace=decoy.Preview("hack","n2").trace;Near(decoyTrace,4.7f*.65f,"decoy reduces trace by its authored modifier");
+            Check(decoy.Execute("decoy")&&decoy.MemoryReserved==0,"operator toggle releases RAM");
             var suppression=Developed("disrupt","blackout","efficient","cascade");suppression.Node("n6").known=true;suppression.Node("n6").controlled=true;suppression.Node("n5").known=true;
             Check(suppression.Execute("disrupt","n5"),"scanner suppression action available");Finish(suppression);Near(suppression.Node("n5").suppressed,45,"suppression uses authored duration");
             int count=suppression.Scanners;for(int i=0;i<121;i++)suppression.Tick(.5f);Check(suppression.Node("n5").suppressed==0&&suppression.Scanners>count,"expiration restores scanner pressure");
@@ -80,7 +80,7 @@ namespace HackThePlanet.Editor
             Check(backdoor.Execute("backdoor",remote.id),"backdoor bypasses direct reachability within its range");Finish(backdoor);Check(remote.controlled&&!backdoor.Preview("backdoor","n2").allowed,"backdoor one-use counter");
             var saved=Developed("disrupt","decoy","efficient","chain");saved.Execute("decoy");saved.Execute("scan","n2");saved.Tick(.5f);saved.Execute("hack","n2");
             var restore=new GameSimulation(JsonUtility.FromJson<Career>(JsonUtility.ToJson(saved.Career)));
-            Check(restore.Op.paused&&restore.Op.queue.Count==1&&restore.Op.task.actionId=="scan"&&restore.Op.task.elapsed==.5f&&restore.Counter("uses:decoy")==1&&restore.Op.decoyRemaining>0,"v2 round trip preserves task, queue, counters and timed statuses");
+            Check(restore.Op.paused&&restore.Op.queue.Count==1&&restore.Op.task.actionId=="scan"&&restore.Op.task.elapsed==.5f&&restore.Counter("uses:decoy")==1&&restore.IsAbilityActive("decoy")&&restore.MemoryReserved==16,"v2 round trip preserves task, queue, counters and timed statuses");
         }
         private static void ValidateAuthoring()
         {
@@ -127,8 +127,7 @@ namespace HackThePlanet.Editor
             var action=New<ActionDefinition>("audit","Verify sample");action.duration=N(2);action.baseTrace=N(1);action.shortcut=KeyCode.V;action.shortcutLabel="V";action.tags=new[]{"analysis"};action.visible=Tag("audit-target");
             action.requirements=new[]{Req(State(NodeState.Known),"Discover the target."),Req(State(NodeState.Controlled),"Control this terminal first.")};action.queueRequirements=new[]{Req(State(NodeState.Known),"Discover the target.")};action.effects=new Effect[]{new SetStateEffect{state=NodeState.Collected},Log("SAMPLE VERIFIED // {target}")};root.actions=root.actions.Concat(new[]{action}).ToArray();
             var tech=New<TechnologyDefinition>("field-analysis","Field analysis");tech.branch="CROSSOVER";tech.position=new Vector2(920,600);tech.parents=new[]{root.technologies[0]};tech.grants=new[]{action};root.technologies=root.technologies.Concat(new[]{tech}).ToArray();
-            var hardware=New<HardwareDefinition>("expansion","Analysis expansion");hardware.category="EXPANSION";hardware.statLabel="ABILITY SLOTS";hardware.displayedStat="slots";hardware.tiers=new[]{new HardwareTier{price=1,modifiers=new[]{Mod("slots",Arithmetic.Add,N(2))}}};
-            var cpu=UnityEngine.Object.Instantiate(root.hardware[0]);fixture.Owned.Add(cpu);cpu.tiers=cpu.tiers.Concat(new[]{new HardwareTier{price=2500,modifiers=new[]{Mod("hackSpeed",Arithmetic.Add,N(.5f))}}}).ToArray();root.hardware=root.hardware.Select(h=>h.id==cpu.id?cpu:h).Concat(new[]{hardware}).ToArray();
+            var expansion=New<RigModuleDefinition>("expansion","Analysis expansion");expansion.family="analysis";expansion.branch="CROSSOVER";expansion.price=1;expansion.modifiers=new[]{Mod("memoryPool",Arithmetic.Add,N(2))};root.modules=root.modules.Concat(new[]{expansion}).ToArray();
             var network=New<NetworkDefinition>("field-network","Field network");network.layout=NetworkLayout.Authored;network.entryNode="entry";network.preferredNode="alpha";network.previewNode="beta";
             network.nodes=new[]{new NetworkNode{id="entry",label="Entry",type=root.nodeTypes[0],known=true,controlled=true,position=new Vector3(-6,0,0)},new NetworkNode{id="alpha",label="Access terminal",type=nodeType,known=true,position=Vector3.zero},new NetworkNode{id="beta",label="Sample terminal",type=nodeType,known=true,position=new Vector3(6,0,0)},new NetworkNode{id="side",label="Side terminal",type=nodeType,position=new Vector3(0,5,4)}};
             network.links=new[]{new NetworkEdge{a="entry",b="alpha"},new NetworkEdge{a="alpha",b="beta"},new NetworkEdge{a="alpha",b="side"}};root.networks=root.networks.Concat(new[]{network}).ToArray();
@@ -140,8 +139,8 @@ namespace HackThePlanet.Editor
             using(var fixture=CreateFixture())
             {
                 var sim=new GameSimulation(fixture.Catalog);sim.Career.credits=10000;
-                Check(sim.BuyTech("field-analysis"),"asset-only technology can grant a new action");Check(sim.Upgrade("expansion")&&sim.Slots==4,"asset-only hardware affects generic stats");
-                sim.Career.SetLevel("cpu",3);Check(sim.Upgrade("cpu")&&sim.Career.Level("cpu")==4,"asset-only extra hardware tier purchases without an enum change");
+                Check(sim.BuyTech("field-analysis"),"asset-only technology can grant a new action");var copy=sim.BuyModule("expansion");sim.RemoveModule(sim.Career.rigParts.First(p=>p.modelId=="ram").instanceId);Check(copy!=null&&sim.PlaceFirstFree(copy.instanceId)&&sim.MemoryPool==42,"asset-only module affects generic stats");
+                Check(sim.BuyModule("expansion")!=null,"asset-only module supports repeat copies");
                 Check(sim.Start(fixture.Catalog.Contracts(sim.Career).First(c=>c.id=="field-contract")),"asset-only contract uses a different network layout");
                 Check(sim.Op.nodes.Count==4&&sim.Op.entryNode=="entry"&&sim.Node("beta").typeId=="audit-terminal","asset-only node type and arbitrary stable node IDs");
                 GameValidation.Hack(sim,"alpha");GameValidation.Hack(sim,"beta");
@@ -155,7 +154,7 @@ namespace HackThePlanet.Editor
                 const string savePath="Artifacts/asset-extension-career-v2.json";
                 Check(CareerStorage.Save(sim.Career,savePath,fixture.Catalog),"custom catalog career saves with stable IDs");
                 var restored=new GameSimulation(fixture.Catalog,CareerStorage.Load(savePath,fixture.Catalog));
-                Check(restored.Op.paused&&restored.Op.task.actionId=="audit"&&restored.Op.queue[0].actionId=="scan"&&restored.Counter("expired-statuses")==1&&restored.Op.statuses.Count==1&&restored.Career.Level("cpu")==4,"custom v2 save restores actions, queue, counters, statuses and extended hardware");
+                Check(restored.Op.paused&&restored.Op.task.actionId=="audit"&&restored.Op.queue[0].actionId=="scan"&&restored.Counter("expired-statuses")==1&&restored.Op.statuses.Count==1&&restored.Career.rigParts.Count(p=>p.modelId=="expansion")==2,"custom v2 save restores actions, queue, counters, statuses and extended hardware");
                 Finish(sim);Check(sim.ObjectiveComplete,"new action satisfies authored completion condition");
                 var report=sim.Disconnect();Check(report.success&&sim.Career.completed.Contains("field-contract"),"new objective and contract deliver through the generic career flow");
             }

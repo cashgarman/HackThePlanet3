@@ -1,0 +1,19 @@
+{
+  "id": "data-engineering",
+  "title": "Data Engineering",
+  "description": "Unlocks module purchases: Storage Array, RAM Bank.",
+  "branch": "RECON",
+  "cost": 100,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 670,
+    "y": 850
+  },
+  "parents": [
+    "wide"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": []
+}

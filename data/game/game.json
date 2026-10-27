@@ -40,7 +40,12 @@
     "waypoints-1",
     "waypoints-2",
     "waypoints-3",
-    "waypoints-4"
+    "waypoints-4",
+    "infrastructure-2",
+    "infrastructure-3",
+    "parallel-engineering",
+    "data-engineering",
+    "signal-engineering"
   ],
   "actions": [
     "scan",
@@ -50,7 +55,8 @@
     "blackout",
     "bridge",
     "backdoor",
-    "decoy"
+    "decoy",
+    "discard"
   ],
   "nodeTypes": [
     "gateway",
@@ -64,11 +70,7 @@
   "networks": [
     "corporate-network"
   ],
-  "hardware": [
-    "cpu",
-    "bandwidth",
-    "memory"
-  ],
+  "hardware": [],
   "statuses": [
     "suppression",
     "trace-protection"
@@ -164,5 +166,30 @@
         }
       ]
     }
+  ],
+  "rig": "rig",
+  "chassis": [
+    "chassis-1",
+    "chassis-2",
+    "chassis-3",
+    "chassis-4"
+  ],
+  "modules": [
+    "processor",
+    "uplink",
+    "drive",
+    "ram",
+    "recycler",
+    "power-1",
+    "power-2",
+    "power-3",
+    "cooling-1",
+    "cooling-2",
+    "cooling-3",
+    "accelerator",
+    "storage-array",
+    "ram-bank",
+    "quiet-filter",
+    "recon-cache"
   ]
 }

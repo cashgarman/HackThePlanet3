@@ -1,0 +1,43 @@
+{
+  "id": "ram-bank",
+  "title": "RAM Bank",
+  "description": "+35 MEM.",
+  "family": "memory",
+  "branch": "CONTROL",
+  "tier": 1,
+  "width": 2,
+  "height": 2,
+  "price": 850,
+  "rotatable": true,
+  "powerDemand": 5,
+  "heatOutput": 3,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "data-engineering",
+        "equipped": false
+      },
+      "message": "Requires Data Engineering research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "memoryPool",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 35
+      }
+    }
+  ]
+}

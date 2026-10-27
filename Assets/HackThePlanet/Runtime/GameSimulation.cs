@@ -11,14 +11,16 @@ namespace HackThePlanet
     [Serializable] public sealed class CounterState { public string key; public int value; }
     [Serializable] public sealed class StatusState
     {
-        public string id,target;
+        public string id,target,memoryKey;
         public float remaining;
         public bool preventsTrace,disablesDefense;
     }
     [Serializable] public sealed class Career
     {
-        public int version=2, credits=-1, xp, day=1, totalEarnedXp, jobs;
+        public int version=3, credits=-1, xp, day=1, totalEarnedXp, jobs;
         public bool initialized;
+        public string chassisId;
+        public List<RigPart> rigParts=new List<RigPart>();
         public int researchSpent = -1;
         public List<HardwareLevel> hardware=new List<HardwareLevel>();
         public List<string> completed=new List<string>(), unlocked=new List<string>(), equipped=new List<string>(), news=new List<string>();
@@ -61,7 +63,8 @@ namespace HackThePlanet
         public List<CounterState> counters=new List<CounterState>();
         public List<StatusState> statuses=new List<StatusState>();
         public ToolTask task;
-        public float trace,elapsed;
+        public float trace,elapsed,memoryReclaiming;
+        public List<MemoryReservation> reservations=new List<MemoryReservation>();
         public bool paused;
         public float decoyRemaining=>statuses?.Where(s=>s.preventsTrace).Select(s=>s.remaining).DefaultIfEmpty(0).Max()??0;
     }
@@ -100,7 +103,7 @@ namespace HackThePlanet
         public int ResearchCount=>Career.unlocked.Except(Catalog.Data.career.initialTechnologies.Select(t=>t.id)).Count();
         public int ResearchTotal=>Catalog.Data.technologies.Length-Catalog.Data.career.initialTechnologies.Length;
         public float RefundFraction=>Catalog.Data.career.refundFraction;
-        public int Slots=>Mathf.Max(0,Mathf.FloorToInt(Stat("slots")));
+        public int Slots=>Chassis.slots;
         public int QueueCapacity=>Mathf.Max(0,Mathf.FloorToInt(Stat("queueCapacity")));
         public float TraceLimit=>Catalog.Data.career.traceLimit;
         public float TraceWarning=>Catalog.Data.career.traceWarning;
@@ -149,7 +152,7 @@ namespace HackThePlanet
                 foreach(var tech in defaults.initialTechnologies)if(!Has(tech.id))Career.unlocked.Add(tech.id);
                 if(Career.news.Count==0)Career.news.Add(defaults.welcome);Career.initialized=true;
             }
-            EnsureResearchReveal();
+            InitializeRig();EnsureResearchReveal();
             if(Career.researchSpent<0)
             {
                 var purchased=Career.unlocked.Except(Catalog.Data.career.initialTechnologies.Select(t=>t.id)).ToArray();
@@ -159,20 +162,21 @@ namespace HackThePlanet
             if(Op!=null&&string.IsNullOrEmpty(Op.contractId)&&(Op.nodes==null||Op.nodes.Count==0)&&(Op.links==null||Op.links.Count==0)&&Op.trace==0&&Op.elapsed==0)Career.operation=null;
             if(Active)
             {
-                Op.queue??=new List<QueuedTool>();Op.log??=new List<string>();Op.counters??=new List<CounterState>();Op.statuses??=new List<StatusState>();
+                Op.reservations??=new List<MemoryReservation>();foreach(var reservation in Op.reservations)if(string.IsNullOrEmpty(reservation.target))reservation.target=null;Op.queue??=new List<QueuedTool>();Op.log??=new List<string>();Op.counters??=new List<CounterState>();Op.statuses??=new List<StatusState>();foreach(var status in Op.statuses){if(string.IsNullOrEmpty(status.target))status.target=null;if(string.IsNullOrEmpty(status.memoryKey))status.memoryKey=null;}
                 if(Op.task!=null&&string.IsNullOrEmpty(Op.task.actionId)&&Op.task.duration==0)Op.task=null;
             }
         }
         public static void ValidateCareer(Career career,GameCatalog catalog)
         {
-            void Require(bool pass,string message){if(!pass)throw new InvalidDataException("Career v2: "+message+". The save has not been overwritten.");}
-            Require(career.version==2,"unsupported save version");Require(career.credits>=0&&career.xp>=0&&career.day>=1&&career.researchSpent>=0,"invalid economy values");
+            void Require(bool pass,string message){if(!pass)throw new InvalidDataException("Career v3: "+message+". The save has not been overwritten.");}
+            Require(career.version==3,"unsupported save version");Require(career.credits>=0&&career.xp>=0&&career.day>=1&&career.researchSpent>=0,"invalid economy values");
             Require(career.completed.All(id=>catalog.Contract(id)!=null&&!catalog.Contract(id).recurring),"unknown completed contract");
             Require(career.unlocked.All(id=>catalog.Technology(id)!=null)&&career.unlocked.Distinct().Count()==career.unlocked.Count,"unknown or duplicate technology");
             Require(career.equipped.All(id=>career.unlocked.Contains(id)&&catalog.Technology(id).special)&&career.equipped.Distinct().Count()==career.equipped.Count,"invalid equipped technology");
             Require(career.hardware.All(h=>catalog.Data.hardware.Any(d=>d.id==h.id&&h.level>=0&&h.level<=d.tiers.Length))&&career.hardware.Select(h=>h.id).Distinct().Count()==career.hardware.Count,"unknown hardware or invalid tier");
             Require(career.waypoints!=null&&career.waypoints.All(w=>w!=null&&catalog.Contract(w.contractId)!=null&&!string.IsNullOrEmpty(w.nodeId)&&w.color>=0&&w.color<WaypointColors.Length&&(w.label?.Length??0)<=40),"invalid waypoint");
             Require(career.waypoints.GroupBy(w=>(w.contractId,w.seed)).All(g=>g.Count()<=4&&g.Select(w=>w.nodeId).Distinct().Count()==g.Count()&&g.Count(w=>w.showPath)<=1),"invalid waypoint capacity or route");
+            ValidateRigCareer(career,catalog,Require);
             var op=career.operation;if(op==null)return;
             Require(catalog.Contract(op.contractId)!=null,"unknown active contract "+op.contractId);
             Require(op.nodes!=null&&op.nodes.Count>0&&op.links!=null,"missing active network");var ids=new HashSet<string>(op.nodes.Select(n=>n.id));
@@ -189,7 +193,7 @@ namespace HackThePlanet
         public bool Start(Contract job)
         {
             var definition=Catalog.Contract(job?.id);
-            if(Active||definition==null||Career.completed.Count<definition.requiredWins||(!definition.recurring&&Career.completed.Contains(definition.id)))return false;
+            if(Active||!RigValid||definition==null||Career.completed.Count<definition.requiredWins||(!definition.recurring&&Career.completed.Contains(definition.id)))return false;
             Job=JsonUtility.FromJson<Contract>(JsonUtility.ToJson(job));Job.networkId=definition.network.id;Job.lore=Catalog.DescribeContract(definition,Career).lore;
             var network=NetworkGenerator.Generate(Job,Career,Catalog);
             Career.operation=new Operation{contractId=Job.id,seed=Job.seed,nodes=network.nodes,links=network.links,generationVersion=NetworkGenerator.Version,entryNode=definition.network.entryNode,lastControlled=definition.network.entryNode};
@@ -199,23 +203,29 @@ namespace HackThePlanet
         public void SetPaused(bool paused){if(!Active)return;Op.paused=paused;Touch();}
         public string PreferredNode(Contract job,bool preview=false){var n=Catalog.Network(job.networkId??Catalog.Contract(job.id).network.id);return preview?n.previewNode:n.preferredNode;}
         public float Stat(string stat)=>Stat(stat,Context());
-        internal float Stat(string stat,RuleContext c)=>ApplyModifiers(stat,stat=="security"?(c.Node?.security??0):Catalog.BaseStat(stat),c);
-        private IEnumerable<Modifier> Modifiers(string stat,RuleContext context)
+        internal float Stat(string stat,RuleContext c)=>ApplyModifiers(stat,stat=="security"?(c.Node?.security??0):RigBaseStat(stat),c);
+        private IEnumerable<(Modifier modifier,RuleContext context)> Modifiers(string stat,RuleContext context)
         {
-            foreach(var m in Catalog.Data.modifiers)if(m.stat==stat)yield return m;
-            foreach(var t in Catalog.Data.technologies.Where(t=>Has(t.id)&&(!t.special||Equipped(t.id))))foreach(var m in t.modifiers)if(m.stat==stat)yield return m;
-            foreach(var h in Catalog.Data.hardware)for(int i=0;i<Career.Level(h.id);i++)foreach(var m in h.tiers[i].modifiers)if(m.stat==stat)yield return m;
-            if(!Active)yield break;var seen=new HashSet<string>();
+            foreach(var m in Catalog.Data.modifiers)if(m.stat==stat)yield return (m,context);
+            foreach(var t in Catalog.Data.technologies.Where(t=>Has(t.id)&&(!t.special||Equipped(t.id))))foreach(var m in t.modifiers)if(m.stat==stat)yield return (m,context);
+            foreach(var h in Catalog.Data.hardware)for(int i=0;i<Career.Level(h.id);i++)foreach(var m in h.tiers[i].modifiers)if(m.stat==stat)yield return (m,context);
+            foreach(var part in InstalledParts)foreach(var m in Module(part.modelId).modifiers)if(m.stat==stat)yield return (m,context.ForRig(part.instanceId));
+            if(!Active)yield break;
+            foreach(var reservation in Op.reservations)foreach(var m in Catalog.Action(reservation.actionId).activeModifiers)if(m.stat==stat)yield return (m,context);
+            var seen=new HashSet<string>();
             foreach(var source in Op.nodes)foreach(var aura in Catalog.NodeType(source.typeId).auras)
             {
                 if(aura.modifier.stat!=stat||!aura.source.Test(context.At(source)))continue;
                 if(aura.adjacentOnly&&(context.Node==null||!Neighbors(source).Any(n=>n.id==context.Node.id)))continue;
-                if(!aura.modifier.when.Test(context))continue;if(!aura.stack&&!seen.Add(aura.id))continue;yield return aura.modifier;
+                if(!aura.modifier.when.Test(context))continue;if(!aura.stack&&!seen.Add(aura.id))continue;yield return (aura.modifier,context);
             }
         }
         private float ApplyModifiers(string stat,float basis,RuleContext c)
         {
-            c.Enter();try{foreach(var m in Modifiers(stat,c).OrderBy(m=>m.priority))if(m.when.Test(c))basis=RuleMath.Apply(m.operation,basis,m.value.Evaluate(c));return basis;}finally{c.Leave();}
+            c.Enter();try{foreach(var item in Modifiers(stat,c).OrderBy(m=>m.modifier.priority)){var m=item.modifier;if(m.when.Test(item.context))basis=RuleMath.Apply(m.operation,basis,m.value.Evaluate(item.context));}
+                if(stat=="hackSpeed")basis=Mathf.Min(basis,Catalog.Data.rig.maximumHackSpeed);
+                if(stat=="transferSpeed")basis=Mathf.Min(basis,Catalog.Data.rig.maximumTransferSpeed);
+                return basis;}finally{c.Leave();}
         }
         public int EffectiveSecurity(NetNode node)=>node==null?0:Mathf.Max(Mathf.RoundToInt(Stat("minimumSecurity")),Mathf.RoundToInt(Stat("security",Context(node))));
         private bool Granted(ActionDefinition action)=>action.initiallyAvailable||Catalog.Data.technologies.Any(t=>Has(t.id)&&(!t.special||Equipped(t.id))&&t.grants.Any(a=>a.id==action.id));
@@ -223,7 +233,7 @@ namespace HackThePlanet
         {
             if(!Active)return Array.Empty<ActionInfo>();var node=Node(targetId);
             if(targetId!=null&&node==null)return Array.Empty<ActionInfo>();
-            return Catalog.Actions.Where(a=>a.operatorTarget==(node==null)&&Granted(a.Definition)&&a.Definition.visible.Test(Context(node,a.Definition))).OrderBy(a=>a.priority).ToArray();
+            return Catalog.Actions.Where(a=>a.operatorTarget==(node==null)&&Granted(a.Definition)&&(IsAbilityActive(a.id,node?.id)||a.Definition.visible.Test(Context(node,a.Definition)))).OrderBy(a=>a.priority).ToArray();
         }
         public string ActionResearchHint(string targetId)
         {
@@ -240,28 +250,39 @@ namespace HackThePlanet
         }
         public string ActionTitle(string actionId,string targetId=null)
         {
-            var action=Catalog.Action(actionId);var objective=Active?Definition.objectives.FirstOrDefault(o=>o.nodeId==targetId&&o.action?.id==actionId):null;
+            var action=Catalog.Action(actionId);if(IsAbilityActive(actionId,targetId))return "Disable "+action.title;var objective=Active?Definition.objectives.FirstOrDefault(o=>o.nodeId==targetId&&o.action?.id==actionId):null;
             return string.IsNullOrEmpty(objective?.actionLabel)?action?.title:objective.actionLabel;
         }
         public ToolPreview Preview(string actionId,string targetId=null)
         {
             var p=new ToolPreview();var a=Catalog.Action(actionId);var node=Node(targetId);
             if(!Active||a==null||(!a.operatorTarget&&node==null)){p.reason="Connect to a contract and select a valid action target.";return p;}
+            if(IsAbilityActive(actionId,targetId)){p.allowed=true;p.projectedTrace=Op.trace;p.reason="Disable and release reserved RAM.";return p;}
             var c=Context(a.operatorTarget?null:node,a);
+            if(a.memoryCost>MemoryFree){p.reason="Not enough free RAM: disable an ability or wait for reclamation.";return p;}
             if(!a.visible.Test(c)){p.reason="This action does not apply to this target.";return p;}
             if(!Granted(a)){p.reason="Research and equip "+string.Join(" / ",Catalog.Data.technologies.Where(t=>t.grants.Any(x=>x.id==a.id)).Select(t=>t.title))+".";return p;}
             float limit=a.useLimit.Evaluate(c);if(limit>0&&Counter("uses:"+a.id)>=limit){p.reason="This ability has no uses remaining in this operation.";return p;}
             foreach(var r in Requirements(a,node))if(!r.condition.Test(c)){p.reason=Catalog.Format(r.message,c);return p;}
             p.duration=ApplyModifiers("duration",a.duration.Evaluate(c),c);c.Duration=p.duration;
-            float trace=ApplyModifiers("baseTrace",a.baseTrace.Evaluate(c),c);p.trace=ApplyModifiers("trace",trace+p.duration*Stat("tracePressure",c),c);
-            if(a.traceFree||Stat("traceFree",c)>0)p.trace=0;
-            if(!Finite(p.duration)||!Finite(p.trace)||p.duration<0||(!a.operatorTarget&&p.duration==0)||p.trace<0)throw new InvalidOperationException("Invalid duration/trace in action "+a.id);
+            p.trace=ActionTrace(a,c,p.duration);
+            if(!Finite(p.duration)||!Finite(p.trace)||p.duration<0||(!a.operatorTarget&&!a.instant&&p.duration==0)||p.trace<0)throw new InvalidOperationException("Invalid duration/trace in action "+a.id);
             // A conservative forecast: protection can lower this, never increase it.
             float protectedSeconds=Mathf.Max(0,Op.decoyRemaining-Catalog.Data.career.maxTick);
             float exposedFraction=p.duration<=0?1:Mathf.Clamp01((p.duration-protectedSeconds)/p.duration);
-            p.projectedTrace=Op.trace+p.trace*exposedFraction*Mathf.Max(0,Stat("traceGrowth"));
+            p.projectedTrace=Op.trace+p.trace*exposedFraction;
             p.willIsolate=p.projectedTrace>=TraceLimit;p.losesQuietBonus=Op.trace<Job.quietLimit&&p.projectedTrace>=Job.quietLimit;
             p.allowed=true;p.reason=Op.task!=null&&a.queueable?"Queue after the current task.":"Ready to execute.";return p;
+        }
+        private float ActionTrace(ActionDefinition action,RuleContext context,float duration)
+        {
+            context.Duration=duration;
+            float ordinary=action.baseTrace.Evaluate(context),pressure=duration*Stat("tracePressure",context);
+            float adjusted=ApplyModifiers("baseTrace",ordinary,context);
+            float total=ApplyModifiers("trace",adjusted+pressure,context)*Mathf.Max(0,Stat("traceGrowth",context));
+            if(action.traceFree||Stat("traceFree",context)>0)return 0;
+            // An authored zero base trace (for example Signal) remains trace-free; ambient pressure still applies.
+            return Mathf.Max(((adjusted==0?0:ordinary)+pressure)*Catalog.Data.rig.minimumTraceFraction,total);
         }
         public int? UsesRemaining(string actionId,string targetId=null)
         {
@@ -282,13 +303,16 @@ namespace HackThePlanet
         public bool Execute(string actionId,string targetId=null)
         {
             var action=Catalog.Action(actionId);if(!Active||action==null)return false;
+            if(IsAbilityActive(actionId,targetId)){ReleaseAbility(actionId,targetId);Touch();return true;}
             if(Op.task!=null&&action.queueable&&!action.operatorTarget)
             {
                 if(!CanQueue(actionId,targetId))return false;Op.queue.Add(new QueuedTool(actionId,targetId));Log("QUEUED // "+ActionTitle(actionId,targetId)+" : "+Node(targetId).label);Touch();return true;
             }
             var p=Preview(actionId,targetId);if(!p.allowed)return false;
+            if(Op.task!=null&&!action.instant&&p.duration>0)return false;
+            SpendMemory(action,targetId);
             var task=new ToolTask{actionId=actionId,target=action.operatorTarget?null:targetId,duration=p.duration,trace=p.trace};
-            if(action.operatorTarget&&p.duration==0){Op.trace=Mathf.Min(TraceLimit,Op.trace+p.trace);CompleteTask(task);RefreshGraph();Touch();return true;}
+            if((action.operatorTarget||action.instant)&&p.duration==0){Op.trace=Mathf.Min(TraceLimit,Op.trace+p.trace);CompleteTask(task);RefreshGraph();Touch();return true;}
             if(Op.task!=null)return false;Op.task=task;Log("RUN // "+ActionTitle(actionId,targetId)+" : "+(Node(targetId)?.label??"operator"));Touch();return true;
         }
         private string LegacyAction(ToolKind kind,string target)
@@ -302,15 +326,18 @@ namespace HackThePlanet
         public bool StopTask()
         {
             if(!CanStopTask)return false;
-            Log("TOOL STOPPED // "+ActionTitle(Op.task.actionId,Op.task.target)+". Existing trace remains.");
+            var stopped=Op.task;
+            if(Catalog.Action(stopped.actionId).memoryMode==MemoryMode.Persistent)ReleaseAbility(stopped.actionId,stopped.target);
+            Log("TOOL STOPPED // "+Catalog.Action(stopped.actionId).title+". Existing trace remains.");
             Op.task=null;Op.queue.Clear();Touch();return true;
         }
         public void Tick(float delta)
         {
             if(!Active||Op.paused||delta<=0||!Finite(delta))return;
-            delta=Mathf.Min(delta,Catalog.Data.career.maxTick);Op.elapsed+=delta;bool expired=false;
+            delta=Mathf.Min(delta,Catalog.Data.career.maxTick);Op.elapsed+=delta;Op.memoryReclaiming=Mathf.Max(0,Op.memoryReclaiming-MemoryReclaim*delta);bool expired=false;
             foreach(var status in Op.statuses.ToArray())
             {
+                if(!string.IsNullOrEmpty(status.memoryKey))continue;
                 status.remaining=Mathf.Max(0,status.remaining-delta);if(status.remaining>0)continue;
                 Op.statuses.Remove(status);expired=true;SyncStatuses();
                 Log("STATUS EXPIRED // "+Catalog.Data.statuses.First(s=>s.id==status.id).title+" : "+(Node(status.target)?.label??"operator"));Dispatch(RuleEvent.StatusExpired,Context(Node(status.target)));
@@ -318,7 +345,9 @@ namespace HackThePlanet
             SyncStatuses();if(expired)Touch();var task=Op.task;
             if(task==null){if(!Op.statuses.Any(s=>s.preventsTrace))Op.trace+=delta*Stat("idleTracePerSecond");CheckTrace();return;}
             float step=Mathf.Min(delta,task.duration-task.elapsed);
-            if(!Op.statuses.Any(s=>s.preventsTrace))Op.trace+=step/task.duration*task.trace*Stat("traceGrowth");task.elapsed+=step;
+            // Sustained effects can be toggled while a tool runs; evaluate its remaining trace against current reservations.
+            task.trace=ActionTrace(Catalog.Action(task.actionId),Context(Node(task.target),Catalog.Action(task.actionId)),task.duration);
+            if(!Op.statuses.Any(s=>s.preventsTrace))Op.trace+=step/task.duration*task.trace;task.elapsed+=step;
             if(CheckTrace())return;if(task.elapsed+.0001f<task.duration)return;
             CompleteTask(task);Op.task=null;RefreshGraph();Touch();
             while(Active&&Op.task==null&&Op.queue.Count>0)
@@ -330,7 +359,8 @@ namespace HackThePlanet
         private void CompleteTask(ToolTask task)
         {
             var action=Catalog.Action(task.actionId);var c=Context(Node(task.target),action);c.Duration=task.duration;
-            AddCounter("uses:"+action.id,1);ApplyEffects(action.effects,c);Dispatch(RuleEvent.ActionCompleted,c);
+            AddCounter("uses:"+action.id,1);applyingMemoryKey=action.memoryMode==MemoryMode.Persistent?MemoryKey(action.id,task.target):null;
+            try{ApplyEffects(action.effects,c);}finally{applyingMemoryKey=null;}Dispatch(RuleEvent.ActionCompleted,c);
             if(ObjectiveComplete)Log("ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available.");
         }
         internal void ApplyEffects(IEnumerable<Effect> effects,RuleContext c)
@@ -354,8 +384,8 @@ namespace HackThePlanet
         internal void ApplyStatus(StatusDefinition status,string target,float duration)
         {
             if(duration<=0||!Finite(duration))throw new InvalidOperationException("Invalid status duration for "+status.id);
-            var state=Op.statuses.FirstOrDefault(s=>s.id==status.id&&s.target==target);
-            if(state==null){state=new StatusState{id=status.id,target=target,preventsTrace=status.preventsTrace,disablesDefense=status.disablesDefense};Op.statuses.Add(state);}state.remaining=duration;SyncStatuses();
+            var state=Op.statuses.FirstOrDefault(s=>s.id==status.id&&s.target==target&&s.memoryKey==applyingMemoryKey);
+            if(state==null){state=new StatusState{id=status.id,target=target,preventsTrace=status.preventsTrace,disablesDefense=status.disablesDefense};Op.statuses.Add(state);}state.remaining=duration;state.memoryKey=applyingMemoryKey;SyncStatuses();
         }
         private void SyncStatuses(){foreach(var n in Op.nodes)n.suppressed=Op.statuses.Where(s=>s.target==n.id&&s.disablesDefense).Select(s=>s.remaining).DefaultIfEmpty(0).Max();}
         internal IEnumerable<NetNode> Select(NodeSelector selector,RuleContext c)
@@ -381,7 +411,8 @@ namespace HackThePlanet
                 case NodeState.Objective:node.objective=value;break;
                 case NodeState.Bonus:node.bonus=value;break;
                 case NodeState.Controlled:
-                    bool changed=node.controlled!=value;node.controlled=value;if(value&&changed){Op.lastControlled=node.id;Dispatch(RuleEvent.ControlEstablished,context.At(node));}break;
+                    bool changed=node.controlled!=value;node.controlled=value;
+                    if(value)foreach(var reservation in Op.reservations.Where(r=>r.target==node.id&&Catalog.Action(r.actionId).releaseOnTargetControl).ToArray())ReleaseAbility(reservation.actionId,reservation.target);if(value&&changed){Op.lastControlled=node.id;Dispatch(RuleEvent.ControlEstablished,context.At(node));}break;
                 default:throw new InvalidOperationException("This state is computed and cannot be assigned: "+state);
             }
         }
@@ -468,8 +499,9 @@ namespace HackThePlanet
         }
         public bool RefundResearch()
         {
-            if(Active&&!Catalog.Data.career.researchDuringOperations)return false;var initial=Catalog.Data.career.initialTechnologies.Select(t=>t.id).ToArray();
-            Career.xp+=Mathf.FloorToInt(Career.researchSpent*Catalog.Data.career.refundFraction);Career.researchSpent=0;Career.unlocked=initial.ToList();Career.equipped.Clear();Career.waypoints.Clear();Touch();return true;
+            if(Active&&!Catalog.Data.career.researchDuringOperations)return false;var refund=PreviewResearchRefund();var initial=Catalog.Data.career.initialTechnologies.Select(t=>t.id).ToArray();
+            Career.xp+=Mathf.FloorToInt(Career.researchSpent*Catalog.Data.career.refundFraction);Career.researchSpent=0;Career.unlocked=initial.ToList();Career.equipped.Clear();Career.waypoints.Clear();
+            Career.credits+=refund.credits;Career.rigParts.RemoveAll(p=>refund.soldInstances.Contains(p.instanceId));Touch();return true;
         }
         public int UpgradePrice(string id){var h=Catalog.Data.hardware.FirstOrDefault(x=>x.id==id);var level=Career.Level(id);return h!=null&&level<h.tiers.Length?h.tiers[level].price:0;}
         public ToolPreview PreviewUpgrade(string id)
@@ -499,7 +531,7 @@ namespace HackThePlanet
     [Unity.Scripting.LifecycleManagement.NoAutoStaticsCleanup]
     public static class CareerStorage
     {
-        public static string SavePath=>Path.Combine(Application.persistentDataPath,"career-v2.json");
+        public static string SavePath=>Path.Combine(Application.persistentDataPath,"career-v3.json");
         public static string Warning {get;private set;}
         [Serializable] private sealed class SaveHeader { public int version; }
         public static Career Load(string path=null,GameCatalog catalog=null)
@@ -508,7 +540,7 @@ namespace HackThePlanet
             Career Read(string p)
             {
                 string json=File.ReadAllText(p);var header=JsonUtility.FromJson<SaveHeader>(json);
-                var career=JsonUtility.FromJson<Career>(json);if(career==null||header==null||header.version!=2)throw new InvalidDataException("Unsupported career save.");return new GameSimulation(catalog,career).Career;
+                var career=JsonUtility.FromJson<Career>(json);if(career==null||header==null||header.version!=3)throw new InvalidDataException("Unsupported career save.");return new GameSimulation(catalog,career).Career;
             }
             try{return Read(path);}
             catch(InvalidDataException ex){Warning=ex.Message;throw;}

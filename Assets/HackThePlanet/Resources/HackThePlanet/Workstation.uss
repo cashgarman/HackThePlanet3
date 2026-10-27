@@ -206,3 +206,14 @@ ScrollView { flex-grow: 1; min-height: 0; }
 .cyan { color: #60d8d0; }
 .amber { color: #f2ba68; }
 .violet { color: #b49af0; }
+
+.rig-shop { flex-grow: 1; min-height: 0; }
+.rig-shop-card { margin-bottom: 12px; padding: 8px; border-bottom-width: 1px; border-bottom-color: #284149; }
+.rig-resource-meters { flex-shrink: 1; min-width: 120px; max-width: 240px; margin-left: 12px; }
+.rig-drag-ghost { position: absolute; opacity: 0.92; }
+.rig-drag-ghost.rig-drag-invalid { border-color: #f08080; opacity: 0.75; }
+.rig-drop-valid { background-color: #345f38; border-color: #9af58b; border-width: 3px; }
+.rig-drop-invalid { background-color: #4a2828; border-color: #f08080; border-width: 3px; }
+.flat-rig { background-color: #0a1418; }
+.rig-cell { border-width: 1px; border-color: #2a4349; }
+.rig-module { -unity-text-align: middle-center; white-space: normal; font-size: 11px; letter-spacing: 1px; border-width: 2px; }

@@ -67,7 +67,9 @@ namespace HackThePlanet.Editor
         }
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.HelpBox("Historical asset. Authoritative content is JSON in /data. Use Hack The Planet > Content Editor.",MessageType.Info);
+            bool generated=AssetDatabase.GetAssetPath(target).StartsWith(GameplayAssetGenerator.Output+"/",StringComparison.Ordinal);
+            EditorGUILayout.HelpBox(generated?"Generated from authoritative JSON. Edit in the Content Editor, then Generate Gameplay Assets.":"Historical asset. Authoritative content is JSON in /data.",MessageType.Info);
+            if(GUILayout.Button("Open Content Editor"))ContentEditorWindow.Open();
             using(new EditorGUI.DisabledScope(true)) DrawDefaultInspector();
             if(GUILayout.Button("Validate Gameplay Catalog"))RefreshErrors();
             foreach(var error in errors.Take(12))EditorGUILayout.HelpBox(error,MessageType.Error);
@@ -84,7 +86,7 @@ namespace HackThePlanet.Editor
         public int callbackOrder=>0;
         public void OnPreprocessBuild(BuildReport report)
         {
-            try{using(var data=ContentJson.Load(GameData.DirectoryPath)) { }}
+            try{GameplayAssetGenerator.Generate();}
             catch(Exception ex){throw new BuildFailedException(ex.Message);}
         }
     }

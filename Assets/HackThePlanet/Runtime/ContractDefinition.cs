@@ -12,6 +12,7 @@ namespace HackThePlanet
     {
         public string nodeId, label, actionLabel;
         public ActionDefinition action;
+        public bool payload;
         [SerializeReference] public Condition complete = new NodeStateCondition { state=NodeState.Collected };
         public Requirement[] actionRequirements = Array.Empty<Requirement>();
     }

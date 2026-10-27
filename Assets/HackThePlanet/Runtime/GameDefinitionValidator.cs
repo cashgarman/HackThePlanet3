@@ -10,7 +10,7 @@ namespace HackThePlanet
     {
         public static IEnumerable<GameplayDefinition> Definitions(GameDefinition root)
         {
-            return new GameplayDefinition[]{root,root.career,root.rewards}.Concat(root.companies).Concat(root.contracts).Concat(root.technologies).Concat(root.actions).Concat(root.nodeTypes).Concat(root.networks).Concat(root.hardware).Concat(root.statuses);
+            return new GameplayDefinition[]{root,root.career,root.rewards}.Concat(root.companies).Concat(root.contracts).Concat(root.technologies).Concat(root.actions).Concat(root.nodeTypes).Concat(root.networks).Concat(root.hardware).Concat(root.statuses).Concat(root.chassis).Concat(root.modules).Concat(new[]{root.rig});
         }
         public static void ThrowIfInvalid(GameDefinition root)
         {
@@ -21,8 +21,8 @@ namespace HackThePlanet
             var errors=new List<string>();
             if(root==null){errors.Add("Game: missing root asset.");return errors;}
             void Error(GameplayDefinition owner,string field,string message)=>errors.Add((owner==null?"Game":owner.name)+"."+field+": "+message);
-            if(root.career==null||root.rewards==null){Error(root,"career/rewards","both references are required");return errors;}
-            if(root.companies==null||root.contracts==null||root.technologies==null||root.actions==null||root.nodeTypes==null||root.networks==null||root.hardware==null||root.statuses==null){Error(root,"definitions","catalog arrays cannot be null");return errors;}
+            if(root.career==null||root.rewards==null||root.rig==null){Error(root,"career/rewards","both references are required");return errors;}
+            if(root.companies==null||root.contracts==null||root.technologies==null||root.actions==null||root.nodeTypes==null||root.networks==null||root.hardware==null||root.statuses==null||root.chassis==null||root.modules==null){Error(root,"definitions","catalog arrays cannot be null");return errors;}
             var all=Definitions(root).ToArray();var registered=new HashSet<GameplayDefinition>(all.Where(x=>x!=null));
             foreach(var group in all.Where(x=>x!=null).GroupBy(x=>x.GetType()))
             {
@@ -39,6 +39,8 @@ namespace HackThePlanet
                     if(obj is RandomNumber random&&(random.minimum>random.maximum||random.maximum==int.MaxValue))Error(d,path,"invalid inclusive random range");
                     if(obj is ApplyStatusEffect status&&status.status==null)Error(d,path,"status reference is required");
                     if(obj is ApplyStatusEffect timed&&timed.duration is ConstantNumber time&&time.value<=0)Error(d,path,"status duration must be positive");
+                    if(obj is RigNeighborCondition adjacent&&(adjacent.minimum<0||(!string.IsNullOrEmpty(adjacent.kind)&&!root.modules.Any(m=>m!=null&&(m.id==adjacent.kind||m.family==adjacent.kind||m.branch==adjacent.kind)))))Error(d,path,"invalid adjacency selector or minimum");
+                    if(obj is InputNumber neighbors&&neighbors.input==NumberInput.RigNeighborCount&&!string.IsNullOrEmpty(neighbors.key)&&!root.modules.Any(m=>m!=null&&(m.id==neighbors.key||m.family==neighbors.key||m.branch==neighbors.key)))Error(d,path,"unknown rig neighbor selector");
                     if(obj is ResearchCondition research&&research.technology==null)Error(d,path,"technology reference is required");
                     if(obj is Requirement requirement&&requirement.condition==null)Error(d,path,"requirement condition is required");
                     if(obj is Modifier modifier&&(modifier.value==null||modifier.when==null||string.IsNullOrWhiteSpace(modifier.stat)))Error(d,path,"modifier needs a stat, condition and value");
@@ -72,7 +74,9 @@ namespace HackThePlanet
             foreach(var a in root.actions.Where(x=>x!=null))
             {
                 if(a.duration==null||a.baseTrace==null||a.useLimit==null||a.visible==null)Error(a,"formulas","duration, trace, visibility and use limit are required");
-                if(a.duration is ConstantNumber duration&&(duration.value<0||(!a.operatorTarget&&duration.value==0)))Error(a,"duration","targeted actions need positive duration; instant actions must target the operator");
+                if(a.duration is ConstantNumber duration&&(duration.value<0||(!a.operatorTarget&&!a.instant&&duration.value==0)))Error(a,"duration","targeted actions need positive duration; instant actions must target the operator");
+                if(a.memoryCost<0||!Enum.IsDefined(typeof(MemoryMode),a.memoryMode)||(a.memoryMode==MemoryMode.None&&a.memoryCost!=0))Error(a,"memoryCost","invalid RAM cost or mode");
+                if(a.memoryMode!=MemoryMode.Persistent&&(a.activeModifiers.Length>0||a.releaseOnTargetControl))Error(a,"memoryMode","sustained effects require Persistent mode");
                 if(a.baseTrace is ConstantNumber trace&&trace.value<0)Error(a,"baseTrace","trace cannot be negative");
                 if(a.useLimit is ConstantNumber uses&&uses.value<0)Error(a,"useLimit","use limit cannot be negative");
                 if(a.requirements==null||a.queueRequirements==null||a.effects==null)Error(a,"rules","rule lists cannot be null");
@@ -127,6 +131,36 @@ namespace HackThePlanet
                 else foreach(var goal in c.objectives)if(goal==null||!ids.Contains(goal.nodeId)||goal.complete==null)Error(c,"objectives","missing target node or completion condition");
                 Walk(c,"contract",new HashSet<object>(),0,true,(obj,path)=>{if(obj is NamedNodeCondition named&&!ids.Contains(named.nodeId))Error(c,path,"missing prerequisite node "+named.nodeId);},_=>{});
                 if(c.credits==null||c.xp==null||c.difficulty==null||c.seed==null)Error(c,"formulas","contract formulas are required");
+            }
+            var rig=root.rig;
+            if(rig.startingChassis==null||root.chassis.Length==0)Error(rig,"startingChassis","a registered starting chassis is required");
+            if(rig.saleFraction<0||rig.saleFraction>1||rig.researchSaleFraction<0||rig.researchSaleFraction>1||rig.minimumTraceFraction<0||rig.minimumTraceFraction>1||rig.maximumHackSpeed<=0||rig.maximumTransferSpeed<=0||rig.memoryReclaim<0)Error(rig,"limits","invalid sale, resource or stacking limits");
+            if(root.chassis.GroupBy(c=>c.tier).Any(g=>g.Count()>1))Error(rig,"chassis","tiers must be unique");
+            foreach(var chassis in root.chassis)
+            {
+                if(chassis.rows<1||chassis.columns<1||chassis.tier<1||chassis.price<0||chassis.requiredJobs<0||chassis.slots<0||chassis.storageCapacity<0||chassis.memoryPool<0||chassis.powerCapacity<0||chassis.coolingCapacity<0)Error(chassis,"dimensions/capacities","dimensions must be positive; costs and capacities nonnegative");
+            }
+            foreach(var module in root.modules)
+            {
+                if(module.width<1||module.height<1||module.tier<1||module.price<0||module.powerDemand<0||module.heatOutput<0||module.powerCapacity<0||module.coolingCapacity<0)Error(module,"footprint/budgets","invalid footprint, cost, tier or capacity");
+                if(!root.chassis.Any(c=>(module.width<=c.columns&&module.height<=c.rows)||(module.rotatable&&rig.allowRotation&&module.height<=c.columns&&module.width<=c.rows)))Error(module,"footprint","module cannot fit any chassis");
+                if(string.IsNullOrWhiteSpace(module.family)||!new[]{"RECON","INTRUSION","STEALTH","CONTROL","CROSSOVER"}.Contains(module.branch))Error(module,"family/branch","family and a valid branch are required");
+                if(module.requirements==null||module.modifiers==null)Error(module,"rules","rule arrays cannot be null");
+            }
+            if(root.modules.GroupBy(m=>(m.family,m.tier)).Any(g=>g.Count()>1&&g.Key.family=="power"||g.Count()>1&&g.Key.family=="cooling"))Error(rig,"modules","power and cooling tiers must be unique within their families");
+            if(rig.startingChassis!=null)
+            {
+                var cells=new HashSet<(int,int)>();float power=0,heat=0,pc=rig.startingChassis.powerCapacity,cc=rig.startingChassis.coolingCapacity;
+                foreach(var part in rig.startingParts)
+                {
+                    if(part.module==null){Error(rig,"startingParts","module reference is required");continue;}
+                    var size=GameSimulation.PartSize(part.module,part.rotated);
+                    if(part.rotated&&(!part.module.rotatable||!rig.allowRotation))Error(rig,"startingParts","rotation is unavailable");
+                    for(int y=part.row;y<part.row+size.y;y++)for(int x=part.column;x<part.column+size.x;x++)if(y<0||x<0||y>=rig.startingChassis.rows||x>=rig.startingChassis.columns||!cells.Add((y,x)))Error(rig,"startingParts","overlap or out-of-bounds placement");
+                    power+=part.module.powerDemand;heat+=part.module.heatOutput;pc+=part.module.powerCapacity;cc+=part.module.coolingCapacity;
+                    if(part.module.requirements.Any(r=>r.condition is ResearchCondition gate&&!root.career.initialTechnologies.Contains(gate.technology)))Error(rig,"startingParts","starter module research must be initially unlocked");
+                }
+                if(power>pc||heat>cc)Error(rig,"startingParts","starter build exceeds power or cooling");
             }
             var rules=root.career;
             if(rules.credits<0||rules.xp<0||rules.day<1||rules.traceLimit<=0||rules.maxTick<=0||rules.reportLimit<1||rules.logLimit<1||rules.traceWarning<0||rules.traceWarning>=rules.traceDanger||rules.traceDanger>=rules.traceLimit)Error(rules,"limits","invalid career, trace or retention limits");

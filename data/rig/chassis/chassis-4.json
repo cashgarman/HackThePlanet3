@@ -1,0 +1,15 @@
+{
+  "id": "chassis-4",
+  "title": "Chassis IV",
+  "description": "A larger home for your signal.",
+  "tier": 4,
+  "rows": 5,
+  "columns": 6,
+  "price": 6000,
+  "requiredJobs": 6,
+  "slots": 5,
+  "storageCapacity": 260,
+  "memoryPool": 120,
+  "powerCapacity": 60,
+  "coolingCapacity": 42
+}

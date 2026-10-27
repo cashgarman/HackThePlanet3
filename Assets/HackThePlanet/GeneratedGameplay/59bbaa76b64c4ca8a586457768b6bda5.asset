@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: 59bbaa76b64c4ca8a586457768b6bda5
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: disrupt
+  title: Disrupt scanner
+  description: Suppress a reachable scanner for 45 seconds. Takes 1.2 seconds with 1 base trace. Reusable while equipped. Costs 10 MEM, reclaimed over simulation time.
+  branch: CONTROL
+  cost: 45
+  waypointTier: 0
+  special: 1
+  position: {x: 680, y: 460}
+  parents:
+  - {fileID: 11400000, guid: 733029773cf9b10488a7ba7f575b0713, type: 2}
+  grants:
+  - {fileID: 11400000, guid: aa29b0e4b4fb9d84bb0aea4895a6bf7a, type: 2}
+  modifiers: []
+  triggers: []
+  references:
+    version: 2
+    RefIds: []

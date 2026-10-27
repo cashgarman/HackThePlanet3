@@ -2575,5 +2575,101 @@
         "value": 1
       }
     }
+  },
+  "payloadStorage": {
+    "type": "BinaryNumber",
+    "operation": "Minimum",
+    "left": {
+      "type": "BinaryNumber",
+      "operation": "Add",
+      "left": {
+        "type": "ConstantNumber",
+        "value": 16
+      },
+      "right": {
+        "type": "BinaryNumber",
+        "operation": "Add",
+        "left": {
+          "type": "BinaryNumber",
+          "operation": "Multiply",
+          "left": {
+            "type": "InputNumber",
+            "input": "BaseSecurity",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 1.5
+          }
+        },
+        "right": {
+          "type": "BinaryNumber",
+          "operation": "Multiply",
+          "left": {
+            "type": "InputNumber",
+            "input": "Difficulty",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 2
+          }
+        }
+      }
+    },
+    "right": {
+      "type": "ConstantNumber",
+      "value": 26
+    }
+  },
+  "archiveStorage": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "ConstantNumber",
+      "value": 28
+    },
+    "right": {
+      "type": "BinaryNumber",
+      "operation": "Add",
+      "left": {
+        "type": "BinaryNumber",
+        "operation": "Multiply",
+        "left": {
+          "type": "InputNumber",
+          "input": "BaseSecurity",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 2
+        }
+      },
+      "right": {
+        "type": "BinaryNumber",
+        "operation": "Multiply",
+        "left": {
+          "type": "InputNumber",
+          "input": "Difficulty",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 3
+        }
+      }
+    }
   }
 }

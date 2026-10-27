@@ -1,0 +1,58 @@
+{
+  "id": "quiet-filter",
+  "title": "Quiet Filter",
+  "description": "10% less trace.",
+  "family": "stealth",
+  "branch": "STEALTH",
+  "tier": 1,
+  "width": 2,
+  "height": 1,
+  "price": 800,
+  "rotatable": true,
+  "powerDemand": 3,
+  "heatOutput": 2,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "Another 5% less trace beside a Recycler.",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "signal-engineering",
+        "equipped": false
+      },
+      "message": "Requires Signal Engineering research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "trace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.9
+      }
+    },
+    {
+      "id": "",
+      "stat": "trace",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "RigNeighborCondition",
+        "kind": "reclaim",
+        "minimum": 1
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.95
+      }
+    }
+  ]
+}

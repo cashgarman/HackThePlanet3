@@ -1,7 +1,7 @@
 {
   "id": "decoy",
   "title": "Decoy process",
-  "description": "Once per operation, remove 12 trace and prevent trace growth for 10 seconds. Best used before committing to a noisy tool.",
+  "description": "Sustained decoy reduces trace generation by 35% while enabled. Reserves 16 MEM; disable it to release RAM.",
   "branch": "CONTROL",
   "cost": 95,
   "waypointTier": 0,

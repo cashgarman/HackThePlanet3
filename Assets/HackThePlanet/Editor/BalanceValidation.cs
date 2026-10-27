@@ -33,7 +33,7 @@ namespace HackThePlanet.Editor
                 stop.Op.trace=99;var forecast=stop.Preview("hack","n2");Check(forecast.willIsolate&&forecast.projectedTrace>=stop.TraceLimit,"action forecast warns before exceeding trace limit");
                 stop.Op.trace=stop.Job.quietLimit-1;Check(stop.Preview("hack","n2").losesQuietBonus,"forecast distinguishes losing the quiet bonus");
                 var shielded=Start("disrupt","decoy");shielded.Op.trace=99;shielded.Execute("decoy");
-                var protectedForecast=shielded.Preview("hack","n2");Check(!protectedForecast.willIsolate&&protectedForecast.projectedTrace==shielded.Op.trace,"forecast respects guaranteed trace protection");
+                var protectedForecast=shielded.Preview("hack","n2");Check(protectedForecast.projectedTrace>shielded.Op.trace&&shielded.MemoryReserved==16,"forecast retains trace pressure while decoy reserves RAM");
                 var bridge=Start("wide","efficient","bridge");bridge.Node("n6").known=true;bridge.Node("n6").controlled=true;bridge.Node("n10").known=true;
                 Check(!bridge.Preview("bridge","n10").allowed,"bridge needs prepared intel");bridge.Node("n10").scanned=true;Check(bridge.Preview("bridge","n10").allowed,"one controlled neighbor makes a prepared bridge useful");
                 bridge.AddCounter("uses:bridge",1);bridge.Execute("bridge","n10");bridge.Node("n14").known=true;bridge.Node("n14").controlled=true;bridge.Node("n18").known=true;bridge.Node("n18").scanned=true;
@@ -44,10 +44,9 @@ namespace HackThePlanet.Editor
                 var controller=Start("disrupt","blackout");controller.Execute("hack","n2");GameValidation.FinishTask(controller);controller.Execute("scan","n6");GameValidation.FinishTask(controller);
                 Check(!controller.Reachable(controller.Node("n14"))&&controller.Preview("blackout","n14").allowed,"blackout can reach a mapped hub before crossing its protected firewall");
                 int security=controller.EffectiveSecurity(controller.Node("n10"));controller.Execute("blackout","n14");GameValidation.FinishTask(controller);Check(controller.EffectiveSecurity(controller.Node("n10"))<security,"remote blackout produces an immediate tactical benefit");
-                var hardware=new GameSimulation();Check(!hardware.PreviewUpgrade("memory").allowed&&!hardware.Upgrade("memory"),"empty loadouts cannot accidentally consume starting credits");
-                hardware.Career.xp=45;Check(hardware.BuyTech("disrupt")&&hardware.PreviewUpgrade("memory").allowed,"researching an ability unlocks useful capacity upgrades");
-                var priorCareer=JsonUtility.FromJson<Career>("{\"version\":2,\"initialized\":true,\"credits\":600,\"xp\":50,\"day\":1,\"totalEarnedXp\":100,\"unlocked\":[\"base\",\"quiet\"]}");
-                var prior=new GameSimulation(priorCareer);Check(prior.Career.researchSpent==50&&prior.RefundResearch()&&prior.Career.xp==100,"existing v2 research refunds preserve the XP originally invested before price reductions");
+                var hardware=new GameSimulation();Check(!hardware.PreviewModule("power-2").allowed,"advanced power modules require research");
+                hardware.Career.xp=100;hardware.Career.credits=1000;Check(hardware.BuyTech("infrastructure-2")&&hardware.PreviewModule("power-2").allowed,"infrastructure research unlocks module tiers");
+                RigValidation.ValidatePayloadBalance(Check);
                 var spent=new GameSimulation();spent.Career.xp=100;Check(spent.BuyTech("quiet")&&spent.Career.researchSpent==45,"new purchases record their actual XP investment");
                 var roundtrip=new GameSimulation(JsonUtility.FromJson<Career>(JsonUtility.ToJson(spent.Career)));Check(roundtrip.Career.researchSpent==45&&roundtrip.RefundResearch()&&roundtrip.Career.xp==100,"paid research investment survives save/load and refund");
                 int firstTwoXp=GameContent.Story.Take(2).Sum(c=>c.xp)+GameCatalog.Default.Data.rewards.quietXp*2;

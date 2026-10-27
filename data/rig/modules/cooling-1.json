@@ -1,0 +1,29 @@
+{
+  "id": "cooling-1",
+  "title": "Cooling I",
+  "description": "+6 cooling capacity.",
+  "family": "cooling",
+  "branch": "CONTROL",
+  "tier": 1,
+  "width": 1,
+  "height": 1,
+  "price": 200,
+  "rotatable": true,
+  "powerDemand": 1,
+  "heatOutput": 0,
+  "powerCapacity": 0,
+  "coolingCapacity": 6,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "base",
+        "equipped": false
+      },
+      "message": "Requires Base research."
+    }
+  ],
+  "modifiers": []
+}

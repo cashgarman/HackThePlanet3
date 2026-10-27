@@ -42,8 +42,11 @@ namespace HackThePlanet
         private readonly Dictionary<string, Button> nodeButtons = new Dictionary<string, Button>();
         private readonly IGraphEdgeFilter edgeFilter = new AllEdges();
         private readonly string selectedId;
+        private readonly Action<string> selectNode;
         private readonly GraphCameraState savedCamera;
         private readonly bool research;
+        private readonly bool flat;
+        private readonly Dictionary<string,Vector2> flatSizes=new Dictionary<string,Vector2>();
         private readonly VisualElement focusedCard;
         private readonly Label focusedTitle, focusedDetails;
         private readonly ScrollView focusedScroll;
@@ -94,10 +97,44 @@ namespace HackThePlanet
             UpdateFocusedCard();
         }
 
-        private GraphViewport(GraphScene graph, string selected, Action<string> select, bool research,
-            GraphPathResult route, GraphCameraState cameraState)
+        public GraphViewport(GraphScene graph,Action<string> select,GraphCameraState cameraState,bool flat)
+            :this(graph,null,select,true,null,cameraState,flat) {}
+
+        public void ConfigureFlatNode(string id,Vector2 size,string tooltip,bool decorative=false,bool module=false)
         {
-            scene = graph;
+            flatSizes[id]=size;
+            if(!nodeButtons.TryGetValue(id,out var button))return;
+            button.tooltip=tooltip;
+            if(module)
+            {
+                button.text=scene.Nodes[id].Label;
+                button.pickingMode=PickingMode.Position;
+                var branch=scene.Schema.NodeTypes[scene.Nodes[id].Record.TypeId].Color;
+                button.style.backgroundColor=new Color(branch.r* .22f,branch.g* .22f,branch.b* .22f,.94f);
+                button.style.opacity=1f;
+            }
+            else
+            {
+                button.text="";
+                button.pickingMode=PickingMode.Position;
+                button.style.backgroundColor=new Color(.03f,.07f,.08f,.88f);
+                button.style.opacity=1f;
+            }
+            if(decorative&&!module)
+            {
+                button.text=scene.Nodes[id].Label;
+                button.pickingMode=PickingMode.Ignore;
+                button.style.backgroundColor=new Color(.04f,.09f,.1f,.95f);
+                foreach(var child in button.Query<VisualElement>().ToList())child.pickingMode=PickingMode.Ignore;
+            }
+            PositionLabels();
+        }
+
+        private GraphViewport(GraphScene graph, string selected, Action<string> select, bool research,
+            GraphPathResult route, GraphCameraState cameraState,bool flat=false)
+        {
+            scene = graph;this.flat=flat;selectNode=select;
+            if(flat)foreach(var node in graph.Nodes.Values)node.Position=new Vector3(node.Position.x,node.Position.y,0);
             selectedId = selected ?? "";
             savedCamera = cameraState ?? new GraphCameraState();
             fitPending=!savedCamera.Initialized||(!savedCamera.UserAdjusted&&savedCamera.NodeCount!=graph.Nodes.Count);
@@ -105,6 +142,7 @@ namespace HackThePlanet
             savedCamera.FocusedId = string.IsNullOrEmpty(selectedId) ? null : selectedId;
             this.research = research;
             AddToClassList("graph-viewport");
+            if(flat)AddToClassList("flat-rig");
             style.flexGrow = 1;
             style.minHeight = 0;
 
@@ -116,14 +154,15 @@ namespace HackThePlanet
             image.style.left = image.style.right = image.style.top = image.style.bottom = 0;
             image.pickingMode = PickingMode.Ignore;
             Add(image);
+            if(flat)image.style.display=DisplayStyle.None;
 
-            var cameraObject = new GameObject("Workstation GraphExplorer Camera");
+            var cameraObject = new GameObject("Workstation GraphExplorer Camera") {hideFlags=HideFlags.HideAndDontSave};
             camera = cameraObject.AddComponent<Camera>();
             camera.targetTexture = texture;
             camera.clearFlags = CameraClearFlags.SolidColor;
             camera.backgroundColor = Palette.Hex("071014");
             camera.cullingMask = 1; // GraphRenderer submits its camera-scoped instances on the default layer.
-            camera.fieldOfView = 48;
+            camera.fieldOfView = 48;camera.orthographic=flat;
             camera.nearClipPlane = .1f;
             camera.farClipPlane = 200;
 
@@ -144,7 +183,7 @@ namespace HackThePlanet
                 route.EdgeIds.Select(id => scene.Edges.ContainsKey(id) ? id : string.Join(">", id.Split('>').Reverse())));
             session.Renderer.UpdateMetrics(scene, edgeFilter);
 
-            links = new LinkOverlay(scene, camera, selected, route, research);Add(links);
+            links = new LinkOverlay(scene, camera, selected, route, research, flat);Add(links);
             labels = new VisualElement();
             labels.style.position = Position.Absolute;
             labels.style.left = labels.style.right = labels.style.top = labels.style.bottom = 0;
@@ -152,7 +191,7 @@ namespace HackThePlanet
             Add(labels);
             foreach (var node in scene.Nodes.Values)
             {
-                var button = new Button(() => ClickNode(node.Id, select)) { name = (research ? "tech-" : "node-") + node.Id,
+                var button = new Button(() => ClickNode(node.Id, select)) { name = flat?node.Id:(research ? "tech-" : "node-") + node.Id,
                     text = node.Label };
                 button.style.display = DisplayStyle.None;
                 button.style.position = Position.Absolute;
@@ -231,7 +270,7 @@ namespace HackThePlanet
                 if (evt.button is not (0 or 1 or 2) || evt.target is Button) return;
                 if (evt.button == 1) evt.PreventDefault();
                 dragging = true;
-                orbiting = evt.button == 0;
+                orbiting = !flat&&evt.button == 0;
                 dragStart = evt.position;
                 centerStart = center;
                 yawStart = yaw;
@@ -266,8 +305,14 @@ namespace HackThePlanet
 
         }
 
+        public bool ActivateControl(string name)
+        {
+            var pair=nodeButtons.FirstOrDefault(p=>p.Value.name==name&&p.Value.enabledInHierarchy);
+            if(pair.Value==null)return false;ClickNode(pair.Key,selectNode);return true;
+        }
         private void ClickNode(string id, Action<string> select)
         {
+            if(flat){select(id);return;}
             bool doubleClick = savedCamera.LastClickId == id && Time.unscaledTime - savedCamera.LastClickAt <= .4f;
             savedCamera.LastClickId = doubleClick ? null : id;
             savedCamera.LastClickAt = Time.unscaledTime;
@@ -316,7 +361,7 @@ namespace HackThePlanet
 
         private void UpdateFocusedCard()
         {
-            bool focused = savedCamera.FocusedId == selectedId && scene.Nodes.ContainsKey(selectedId);
+            bool focused = !flat&&savedCamera.FocusedId == selectedId && scene.Nodes.ContainsKey(selectedId);
             focusedCard.style.display = focused ? DisplayStyle.Flex : DisplayStyle.None;
             if (!focused) return;
             focusedTitle.text = scene.Nodes[selectedId].Label;
@@ -456,6 +501,7 @@ namespace HackThePlanet
         public void Tick(GameSimulation state, SignalEffects effects)
         {
             if (disposed) return;
+            if (flat) return;
             waypointOverlay?.Reposition(textScale);
             session.Renderer.ReducedMotion = effects != SignalEffects.Full;
             if (state.Active && !research && state.Op.task != null && !string.IsNullOrEmpty(state.Op.task.target))
@@ -481,6 +527,20 @@ namespace HackThePlanet
         private void PositionLabels()
         {
             if (disposed || contentRect.width <= 0 || contentRect.height <= 0) return;
+            if(flat)
+            {
+                focusedCard.style.display=DisplayStyle.None;
+                foreach(var pair in nodeButtons)
+                {
+                    var node=scene.Nodes[pair.Key];var size=flatSizes.TryGetValue(pair.Key,out var dimensions)?dimensions:Vector2.one*3.8f;
+                    var point=camera.WorldToViewportPoint(node.Position);var edge=camera.WorldToViewportPoint(node.Position+new Vector3(size.x/2,size.y/2,0));
+                    float width=Mathf.Abs(edge.x-point.x)*2*contentRect.width,height=Mathf.Abs(edge.y-point.y)*2*contentRect.height;
+                    pair.Value.style.display=point.z>0?DisplayStyle.Flex:DisplayStyle.None;
+                    pair.Value.style.left=point.x*contentRect.width-width/2;pair.Value.style.top=(1-point.y)*contentRect.height-height/2;
+                    pair.Value.style.width=width;pair.Value.style.height=height;pair.Value.style.whiteSpace=WhiteSpace.Normal;
+                }
+                links.MarkDirtyRepaint();return;
+            }
             waypointOverlay?.Reposition(textScale);
             links.SelectionVisible = false;
             bool showFocusedCard = false;
@@ -576,6 +636,7 @@ namespace HackThePlanet
             var bounds = new Bounds(positions[0], Vector3.one * 3);
             foreach (var position in positions) bounds.Encapsulate(new Bounds(position, Vector3.one * 3));
             center = bounds.center;
+            if(flat){distance=Mathf.Max(bounds.size.y,bounds.size.x/camera.aspect)*1.2f;PlaceCamera();PositionLabels();return;}
             var rotation = Quaternion.Inverse(Quaternion.Euler(pitch, yaw, 0));
             float tangent = Mathf.Tan(camera.fieldOfView * Mathf.Deg2Rad * .5f);
             distance = 4;
@@ -592,6 +653,7 @@ namespace HackThePlanet
 
         private void PlaceCamera()
         {
+            if(flat){pitch=yaw=0;center.z=0;camera.orthographicSize=distance/2;}
             var orientation = Quaternion.Euler(pitch, yaw, 0);
             camera.transform.rotation = orientation;
             camera.transform.position = center + orientation * new Vector3(0, 0, -distance);
@@ -607,12 +669,15 @@ namespace HackThePlanet
             public bool SelectionVisible;
             public Rect SelectionRect, CardRect;
 
-            public LinkOverlay(GraphScene scene, Camera camera, string selected, GraphPathResult route, bool research)
+            private readonly bool flat;
+
+            public LinkOverlay(GraphScene scene, Camera camera, string selected, GraphPathResult route, bool research, bool flat = false)
             {
                 this.scene = scene;
                 this.camera = camera;
                 this.selected = selected;
                 this.research = research;
+                this.flat = flat;
                 path = new HashSet<string>((route?.EdgeIds??Array.Empty<string>()).SelectMany(id=>new[]{id,string.Join(">",id.Split('>').Reverse())}));
                 style.position = Position.Absolute;
                 style.left = style.right = style.top = style.bottom = 0;
@@ -622,7 +687,7 @@ namespace HackThePlanet
 
             private void Draw(MeshGenerationContext context)
             {
-                if (camera == null) return;
+                if (camera == null || flat) return;
                 var painter = context.painter2D;
                 foreach (var edge in scene.Edges.Values)
                 {

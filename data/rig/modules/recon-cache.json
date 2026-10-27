@@ -1,0 +1,58 @@
+{
+  "id": "recon-cache",
+  "title": "Recon Cache",
+  "description": "+0.20 transfer speed.",
+  "family": "transfer",
+  "branch": "RECON",
+  "tier": 1,
+  "width": 1,
+  "height": 2,
+  "price": 650,
+  "rotatable": true,
+  "powerDemand": 3,
+  "heatOutput": 2,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "+0.20 transfer speed beside an Uplink.",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "signal-engineering",
+        "equipped": false
+      },
+      "message": "Requires Signal Engineering research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "transferSpeed",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.2
+      }
+    },
+    {
+      "id": "",
+      "stat": "transferSpeed",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "RigNeighborCondition",
+        "kind": "uplink",
+        "minimum": 1
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.2
+      }
+    }
+  ]
+}

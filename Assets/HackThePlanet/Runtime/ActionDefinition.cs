@@ -3,9 +3,14 @@ using UnityEngine;
 
 namespace HackThePlanet
 {
+    public enum MemoryMode { None, OneShot, Persistent }
     [CreateAssetMenu(menuName="Hack The Planet/Action")]
     public sealed class ActionDefinition : GameplayDefinition
     {
+        public MemoryMode memoryMode;
+        [Min(0)] public float memoryCost;
+        public bool instant, releaseOnTargetControl;
+        public Modifier[] activeModifiers=Array.Empty<Modifier>();
         public string[] tags = Array.Empty<string>();
         public KeyCode shortcut;
         public string shortcutLabel, legacyGroup;

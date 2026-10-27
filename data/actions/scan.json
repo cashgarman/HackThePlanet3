@@ -99,5 +99,10 @@
       "type": "LogEffect",
       "message": "SCAN COMPLETE // New routes mapped around {target}."
     }
-  ]
+  ],
+  "memoryMode": "None",
+  "memoryCost": 0,
+  "instant": false,
+  "releaseOnTargetControl": false,
+  "activeModifiers": []
 }

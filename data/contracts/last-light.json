@@ -7,7 +7,7 @@
   "client": "NULL // everyone is listening",
   "tag": "INFRASTRUCTURE DISRUPTION",
   "objective": "Control Security hub, then erase the index at Research vault.",
-  "condition": "Below 70% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "condition": "Below 70% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
   "aftermath": "The surveillance grid goes dark. Lark opens the research, June publishes the records, and Null keeps the channels alive. You built more than a career. The planet is a little harder to own.",
   "displayKind": "Disrupt",
   "recurring": false,
@@ -39,7 +39,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": false
     },
     {
       "nodeId": "n14",
@@ -50,7 +51,8 @@
         "type": "NodeStateCondition",
         "state": "Controlled"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": false
     }
   ],
   "actionRules": [

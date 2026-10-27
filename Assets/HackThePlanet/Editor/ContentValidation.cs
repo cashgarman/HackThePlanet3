@@ -23,19 +23,12 @@ namespace HackThePlanet.Editor
             {
                 var coverage = ContentFieldHelp.CheckCoverage().ToArray(); Check(coverage.Length == 0, "Descriptions cover every editable field: " + string.Join(", ", coverage));
                 foreach (var file in source.Files) { string path = ContentJson.SafePath(data, file.Key); Directory.CreateDirectory(Path.GetDirectoryName(path)); File.WriteAllText(path, file.Value); }
-                var oldRoot = Resources.Load<GameDefinition>("HackThePlanet/Gameplay/Game");
-                var definitions = GameDefinitionValidator.Definitions(oldRoot).ToArray();
-                foreach (var definition in definitions)
+                GameplayAssetGenerator.Generate();
+                foreach(var entry in source.Manifest.entries)
                 {
-                    var loaded = source.Objects.Values.OfType<GameplayDefinition>().Single(d => d.id == definition.id && d.GetType() == definition.GetType());
-                    Check(ContentJson.Encode(loaded) == ContentJson.Encode(definition), "Asset parity " + definition.GetType().Name + "/" + definition.id);
+                    var generated=AssetDatabase.LoadAssetAtPath<ScriptableObject>(GameplayAssetGenerator.Output+"/"+entry.key+".asset");
+                    Check(generated!=null&&ContentJson.Encode(generated)==ContentJson.Encode(source.Objects[entry.key]),"Generated asset parity "+entry.file);
                 }
-                Check(ContentJson.Encode(source.Get<GameplayTextPalette>("Text Palette")) == ContentJson.Encode(Resources.Load<GameplayTextPalette>("HackThePlanet/GameplayTextPalette")), "Text palette asset parity");
-                Check(ContentJson.Encode(source.Get<GraphNodeLabelSettings>("Graph Labels")) == ContentJson.Encode(GraphResources.Load<GraphNodeLabelSettings>("GraphNodeLabelSettings")), "Graph label asset parity");
-                Check(ContentJson.Encode(source.Get<GraphVisualSettings>("Graph Visuals")) == ContentJson.Encode(GraphResources.Load<GraphVisualSettings>("GraphVisualSettings")), "Graph visual asset parity");
-                var net = UnityEngine.Object.Instantiate(GraphResources.Load<GraphVisualSettings>("GraphVisualSettings"));
-                net.ShadowBrightness = .7f; net.SurfaceEmission = .24f; net.BloomIntensity = .04f; net.OutlinePixels = 1; net.OutlineOpacity = .8f; net.SelectionGlowIntensity = .6f; net.SelectionRimIntensity = .3f;
-                Check(ContentJson.Encode(source.Get<GraphVisualSettings>("Network Visuals")) == ContentJson.Encode(net), "Effective network profile parity"); UnityEngine.Object.DestroyImmediate(net);
                 foreach (var type in ContentJson.RuleTypes)
                 {
                     object instance = Activator.CreateInstance(type); string json = ContentJson.Encode(instance); object copy = Activator.CreateInstance(type);
@@ -62,7 +55,7 @@ namespace HackThePlanet.Editor
                 using (var workspace = new ContentWorkspace(draft, data))
                 {
                     var history = new ContentHistory(data); var entry = workspace.Bundle.Manifest.entries.First(e => e.category == "Actions");
-                    var action = (ActionDefinition)workspace.Bundle.Objects[entry.key]; string before = ContentJson.Encode(action);
+                    var action = (ActionDefinition)workspace.Bundle.Objects[entry.key]; string before = draft.Current[entry.file];
                     action.description += " [history validation]"; workspace.Capture();
                     string first = history.Commit(draft.Current, draft.Original, "First checkpoint"); draft.Accept();
                     Check(history.Revisions(entry.key).Count == 2, "First changed save captures original plus new revision");

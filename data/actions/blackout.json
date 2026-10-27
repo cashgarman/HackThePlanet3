@@ -1,7 +1,7 @@
 {
   "id": "blackout",
   "title": "Blackout hub",
-  "description": "",
+  "description": "Toggle sustained hub suppression: reserves 18 MEM per hub.",
   "tags": [
     "blackout"
   ],
@@ -104,5 +104,10 @@
       "type": "LogEffect",
       "message": "DEFENSE SUPPRESSED // {target}."
     }
-  ]
+  ],
+  "memoryCost": 18,
+  "memoryMode": "Persistent",
+  "activeModifiers": [],
+  "releaseOnTargetControl": true,
+  "instant": false
 }

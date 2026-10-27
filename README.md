@@ -4,7 +4,7 @@ A playable single-player hacking career built in Unity. All systems are fictiona
 
 ## Play
 
-Run **`Builds/Windows/Hack The Planet.exe`**. Keep the executable with its `_Data` directory and the accompanying DLLs. The default window is 1680 × 960 and can be resized. A mouse and keyboard are recommended.
+Run **`Builds/Windows-Rig/Hack The Planet.exe`**. Keep the executable with its `_Data` directory and the accompanying DLLs. The default window is 1680 × 960 and can be resized. A mouse and keyboard are recommended.
 
 Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and use **Hack system** to establish your first foothold. Control connected systems to reach the gold contract objectives. Recover the files, then **Extract & deliver** to bank payment and XP. A short field guide is available from **?** or **F1**.
 
@@ -18,6 +18,7 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 | Left-drag graph | Orbit in 3D |
 | Right- or middle-drag graph | Pan |
 | FIT | Recenter the graph |
+| Drag a rack part / R | Move a module / rotate the selected module |
 | F1 or ? | Operator field guide |
 | Escape or ⚙ button | Settings menu: text size, display effects, interface sounds, Resume, Reset Game Save, Quit |
 
@@ -26,14 +27,14 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 - Six linked story contracts across Helix Dynamics, Morrow Financial, and Aegis Systems: theft, synchronized record edits, evidence recovery, and a final disruption.
 - Contract difficulty controls pre-operation intel: **Easy** shows the complete network and system types; **Medium** shows the complete topology with anonymous, identical unknown systems; **Hard** shows **NO INTEL AVAILABLE** over animated signal static. Connecting starts normal discovery on every tier. Reduced effects freeze the static; effects off retain the message on a plain background.
 - Difficulty also scales the contract's base credits and XP: **Easy ×1**, **Medium ×1.5**, **Hard ×2**. The exchange and brief show the final delivery amounts; optional archive and quiet bonuses are added separately.
-- 32, 44, or 56 systems per operation by difficulty, with three to five approaches through a volumetric 3D network. Short ingress routes expose you to scanners; longer maintenance routes trade time for lower trace. Three optional archive detours contain bonus rewards and authored lore. Hubs strengthen connected targets; scanners add trace while tools run nearby.
+- 32, 44, or 56 systems per operation by difficulty, with three to five approaches through a volumetric 3D network. Short ingress routes expose you to scanners; longer maintenance routes trade time for lower trace. Up to three optional archive detours contain bonus rewards and authored lore; some contracts use these nodes as required files instead. Hubs strengthen connected targets; scanners add trace while tools run nearby.
 - No idle trace, unlimited pause, trace forecasts, a visible queue, tool cancellation, and retryable failures. Scanning prepares targets for 15% faster hacks and 20% less hack trace. Disconnect after completing every objective to deliver. A 100% trace ends the attempt and loses its unbanked rewards; hardware and purchased research persist.
-- Eighteen connected research nodes including the starting toolkit, four branches, and crossover technologies requiring both parents. XP is spent directly. Refund all research for free between contracts. Passives are always active; special abilities occupy a limited loadout.
-- Credits upgrade CPU, bandwidth, and ability capacity. Research and rig changes happen between operations.
+- Twenty-seven connected research nodes include the starting toolkit, four branches, crossover technologies, waypoints, and engineering unlocks. XP is spent directly. Research refunds return invested XP and sell newly locked modules for their full paid prices. Passives are always active; special abilities occupy chassis loadout slots and use RAM during operations.
+- Credits buy module copies and larger chassis. Pack processing, transfer, storage, RAM, power, cooling, and branch parts into the rack. Research and rig changes happen between operations.
 - Success changes corporate defenses and publishes a world bulletin. Three repeatable freelance templates unlock after the third story contract, with defenses, connections, and rewards changing as your career advances.
 - The Intelligence tab preserves the last twenty operation reports, including action timelines and trace at disconnect. Successfully extracted lore stays in a permanent collection independently of report retention.
 
-All bonus conditions are shown before connecting. Optional archives pay +100 credits and +15 XP each; all three award XP, up to +45 per contract. Finishing below the contract's trace threshold adds +100 credits and +20 XP.
+All bonus conditions are shown before connecting. Optional archives pay +100 credits and +15 XP each; held optional archives award XP, up to +45 per contract. Finishing below the contract's trace threshold adds +100 credits and +20 XP.
 
 Early branch roots cost 45 XP. Bridge has two prepared crossings per operation; Backdoor and remote Blackout use discovered routes within three hops. Use **STOP** to cancel a running tool and clear its queue; trace already generated remains. **CLEAR** removes queued tools only.
 
@@ -47,9 +48,9 @@ Open **Settings → Cheats / Debug** to add **1,000,000 credits**, add **1,000,0
 
 Text defaults to **200%**, twice the original size. In Settings, move **Text size** or enter a percentage from **100 to 300**. Changes apply immediately throughout the interface, including graph labels, tooltips, reports, and logs, and are remembered between launches independently of career resets. Panels wrap or scroll to keep larger text and controls accessible.
 
-Windows save location: `%USERPROFILE%/AppData/LocalLow/Independent Operator/Hack The Planet/career-v2.json`.
+Windows save location: `%USERPROFILE%/AppData/LocalLow/Independent Operator/Hack The Planet/career-v3.json`.
 
-V2 careers start fresh. The previous `career-v1.json` and its backup remain untouched; no migration is performed.
+Rig careers use v3. Existing `career-v1.json`, `career-v2.json`, and their backups remain untouched; no migration is performed.
 
 ## Unity project
 
@@ -68,3 +69,11 @@ The **Hack The Planet** editor menu provides a **Content Editor** with category 
 To change balance or add content, follow the [modding guide](Docs/MODDING.md) for direct JSON editing, the Unity Content Editor, revision restoration, and save compatibility. Editing JSON beside a built player requires only a restart. Keep `data/` with the executable and include `.data-history/` in project backups if you want to preserve authoring revisions.
 
 The [balance refinement notes](Docs/BALANCE_REFINEMENT.md) explain the tuning, measured route trade-offs, and compatibility. Validation reports and screenshots are in `Artifacts/`. Expanded persistent footholds, independent extraction endpoints, and long-running investigations remain outside this career loop. Mission approaches branch through the network; entry and delivery still use your gateway.
+
+## Physical rig
+
+Your rig starts with a packed 2×3 chassis. Buy independent module copies, rotate and arrange rectangular footprints, and expand through four chassis tiers. Installed power supplies increase power capacity and produce heat; cooling modules increase cooling capacity and consume power. Both have three researched model tiers. Connections require a legal layout within both budgets. Removed parts stay in inventory; voluntary sales return 75% of the paid price.
+
+Downloaded payloads and optional archives occupy drive space until disconnect. Discard optional archives to make room, forfeiting their pending rewards and lore. Abilities use RAM: toggles reserve capacity and one-shots temporarily occupy it until reclaimed. Pause freezes recovery. The rack, file sizes, RAM costs, and all sixteen module models are editable through external JSON or the Content Editor; see [Modding](Docs/MODDING.md#rig-storage-and-ram-authoring).
+
+The rig uses a fresh v3 career file and leaves old v2 careers untouched. Generated Unity assets are JSON-owned development mirrors; player mods still load directly from the external `data/` folder without Unity or regeneration.

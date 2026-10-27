@@ -102,6 +102,18 @@
     {
       "id": "idleTracePerSecond",
       "value": 0
+    },
+    {
+      "id": "storageCapacity",
+      "value": 0
+    },
+    {
+      "id": "memoryPool",
+      "value": 0
+    },
+    {
+      "id": "memoryReclaim",
+      "value": 0
     }
   ],
   "ranks": [

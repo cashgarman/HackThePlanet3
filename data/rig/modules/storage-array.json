@@ -1,0 +1,76 @@
+{
+  "id": "storage-array",
+  "title": "Storage Array",
+  "description": "+60 GB storage.",
+  "family": "storage",
+  "branch": "RECON",
+  "tier": 1,
+  "width": 2,
+  "height": 2,
+  "price": 750,
+  "rotatable": true,
+  "powerDemand": 3,
+  "heatOutput": 2,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "+10 GB per adjacent storage copy, maximum two.",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "data-engineering",
+        "equipped": false
+      },
+      "message": "Requires Data Engineering research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "storageCapacity",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 60
+      }
+    },
+    {
+      "id": "",
+      "stat": "storageCapacity",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "BinaryNumber",
+        "operation": "Multiply",
+        "left": {
+          "type": "BinaryNumber",
+          "operation": "Minimum",
+          "left": {
+            "type": "InputNumber",
+            "input": "RigNeighborCount",
+            "key": "storage",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 2
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 10
+        }
+      }
+    }
+  ]
+}

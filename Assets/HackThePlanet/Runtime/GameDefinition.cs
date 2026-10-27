@@ -12,6 +12,9 @@ namespace HackThePlanet
         public ActionDefinition[] actions = Array.Empty<ActionDefinition>();
         public NodeTypeDefinition[] nodeTypes = Array.Empty<NodeTypeDefinition>();
         public NetworkDefinition[] networks = Array.Empty<NetworkDefinition>();
+        public RigRulesDefinition rig;
+        public RigChassisDefinition[] chassis = Array.Empty<RigChassisDefinition>();
+        public RigModuleDefinition[] modules = Array.Empty<RigModuleDefinition>();
         public HardwareDefinition[] hardware = Array.Empty<HardwareDefinition>();
         public StatusDefinition[] statuses = Array.Empty<StatusDefinition>();
         public RewardDefinition rewards;

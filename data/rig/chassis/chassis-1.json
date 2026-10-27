@@ -1,0 +1,15 @@
+{
+  "id": "chassis-1",
+  "title": "Chassis I",
+  "description": "A larger home for your signal.",
+  "tier": 1,
+  "rows": 2,
+  "columns": 3,
+  "price": 0,
+  "requiredJobs": 0,
+  "slots": 2,
+  "storageCapacity": 80,
+  "memoryPool": 40,
+  "powerCapacity": 12,
+  "coolingCapacity": 8
+}

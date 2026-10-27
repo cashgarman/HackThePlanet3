@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6351d8921bbb66c4590e73662cfb54e9, type: 3}
+  m_Name: 2a60b7ac1f75494eb78be89d2af2799a
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ActionDefinition
+  id: discard
+  title: Discard archive
+  description: "Free drive space and forfeit this archive\u2019s pending credits, XP and lore. You can download it again."
+  memoryMode: 0
+  memoryCost: 0
+  instant: 1
+  releaseOnTargetControl: 0
+  activeModifiers: []
+  tags:
+  - discard
+  shortcut: 127
+  shortcutLabel: DEL
+  legacyGroup: 
+  presentationPriority: 60
+  operatorTarget: 0
+  queueable: 0
+  initiallyAvailable: 1
+  futureNeighborQueue: 0
+  traceFree: 1
+  visible:
+    rid: 213507078570639517
+  requirements: []
+  queueRequirements: []
+  duration:
+    rid: 213507078570639518
+  baseTrace:
+    rid: 213507078570639519
+  useLimit:
+    rid: 213507078570639520
+  effects:
+  - rid: 213507078570639521
+  - rid: 213507078570639522
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507078570639517
+      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        conditions:
+        - rid: 213507078570639523
+        - rid: 213507078570639524
+        - rid: 213507078570639525
+        - rid: 213507078570639526
+    - rid: 213507078570639518
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507078570639519
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507078570639520
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507078570639521
+      type: {class: SetStateEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        targets:
+          scope: 0
+          nodeId: 
+          filter:
+            rid: 213507078570639527
+        state: 3
+        value: 0
+    - rid: 213507078570639522
+      type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        message: ARCHIVE DISCARDED // {target}. Storage freed; pending rewards forfeited.
+    - rid: 213507078570639523
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 0
+    - rid: 213507078570639524
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507078570639525
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 5
+    - rid: 213507078570639526
+      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        condition:
+          rid: 213507078570639528
+    - rid: 213507078570639527
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570639528
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 4

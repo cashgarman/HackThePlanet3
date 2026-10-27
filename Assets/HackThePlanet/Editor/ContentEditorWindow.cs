@@ -23,6 +23,7 @@ namespace HackThePlanet.Editor
         private static readonly (string Name, string[] Items)[] TabGroups =
         {
             ("Setup", new[] { "Game", "Career", "Rewards" }),
+            ("Rig", new[] { "Rig Rules", "Chassis", "Modules" }),
             ("Gameplay", new[] { "Actions", "Technologies", "Hardware", "Statuses", "Node Types" }),
             ("World", new[] { "Companies", "Contracts", "Networks" }),
             ("Presentation", new[] { "Text Palette", "Graph Visuals", "Graph Labels" }),
@@ -46,7 +47,11 @@ namespace HackThePlanet.Editor
         private readonly List<(Foldout Fold, string Label, object Value)> ruleHeaders = new List<(Foldout Fold, string Label, object Value)>();
         private List<string> lastValidation;
         private DateTime? lastSaved;
+        private bool validationMode;
+        private string DataDirectory=>workspace?.DirectoryPath??GameData.DirectoryPath;
         private bool rebuilding;
+        private string moduleFamily="All",moduleTier="All";
+        private bool previewRotated;
         private ContentDraftFile[] savedBaseline;
         private string RecoveryPath => Path.Combine(Path.GetDirectoryName(GameData.DirectoryPath), "Library/ContentEditor/draft.json");
         private static bool ShowDescriptions => EditorPrefs.GetBool(DescriptionsPref, false);
@@ -75,6 +80,7 @@ namespace HackThePlanet.Editor
         }
         public void CreateGUI()
         {
+            if(validationMode)return;
             ContentEditorUI.Attach(rootVisualElement);
             try
             {
@@ -150,6 +156,7 @@ namespace HackThePlanet.Editor
             toolbar.Add(Separator());
             validateButton = ToolButton("Validate", "Validate", "Check the complete proposed catalog and property descriptions. Click a message to jump to it.", Validate, true, "d_Valid", "Valid");
             toolbar.Add(validateButton);
+            toolbar.Add(ToolButton("GenerateAssets","Generate Assets","Generate Unity asset mirrors from saved, validated JSON.",GameplayAssetGenerator.Generate,true,"Refresh"));
             toolbar.Add(ToolButton("History", "History", "Browse saved revisions and restore an entry or a transaction to the draft.", () => ContentHistoryWindow.Show(history, workspace, selectedKey, Restore), true, "d_UnityEditor.HistoryWindow", "UnityEditor.HistoryWindow"));
             toolbar.Add(ToolButton("Reload", "Reload Disk", "Discard every unsaved draft and reload all JSON files from disk.", ReloadDisk, true, "Refresh"));
             toolbar.Add(Separator());
@@ -172,6 +179,13 @@ namespace HackThePlanet.Editor
             var filter = new ToolbarSearchField { value = search, tooltip = "Search by title, ID, or file path" };
             filter.RegisterValueChangedCallback(e => { search = e.newValue; RefreshList(); });
             sidebar.Add(filter);
+            if(category=="Modules")
+            {
+                var families=new[]{"All"}.Concat(workspace.Bundle.Game.modules.Select(m=>m.family).Distinct()).ToList();
+                var family=new PopupField<string>("Family",families,families.Contains(moduleFamily)?moduleFamily:"All");family.RegisterValueChangedCallback(e=>{moduleFamily=e.newValue;RefreshList();});sidebar.Add(family);
+                var tiers=new[]{"All"}.Concat(workspace.Bundle.Game.modules.Select(m=>m.tier.ToString()).Distinct()).ToList();
+                var tier=new PopupField<string>("Tier",tiers,tiers.Contains(moduleTier)?moduleTier:"All");tier.RegisterValueChangedCallback(e=>{moduleTier=e.newValue;RefreshList();});sidebar.Add(tier);
+            }
             sidebar.Add(list);
             var order = new VisualElement(); order.AddToClassList("ctp-order-row"); sidebar.Add(order);
             order.Add(ContentEditorUI.IconButton("↑ Move up", "Move the selected entry earlier in authored order.", () => Mutate(() => workspace.Move(selectedKey, -1), Redraw.Window)));
@@ -203,11 +217,12 @@ namespace HackThePlanet.Editor
 
         private void BindItem(VisualElement element, string key)
         {
+            if(workspace==null)return;
             var entry = workspace.Bundle.Manifest.entries.Single(e => e.key == key);
             var definition = workspace.Bundle.Objects[key] as GameplayDefinition;
             int issues = EntryErrors(entry).Count();
             element.Q<Label>("title").text = definition != null && !string.IsNullOrWhiteSpace(definition.title) ? definition.title : Path.GetFileNameWithoutExtension(entry.file);
-            element.Q<Label>("sub").text = definition?.id ?? entry.file;
+            element.Q<Label>("sub").text = definition is RigModuleDefinition module?module.family+" / T"+module.tier+" / "+module.width+"x"+module.height+" / "+module.price+" cr":definition?.id ?? entry.file;
             var icon = element.Q<Image>("warnIcon"); var glyph = element.Q<Label>("warnText");
             bool showIssue = issues > 0;
             icon.style.display = showIssue && icon.image != null ? DisplayStyle.Flex : DisplayStyle.None;
@@ -239,6 +254,7 @@ namespace HackThePlanet.Editor
             foreach (var entry in entries)
             {
                 var obj = workspace.Bundle.Objects[entry.key] as GameplayDefinition;
+                if(obj is RigModuleDefinition module&&((moduleFamily!="All"&&module.family!=moduleFamily)||(moduleTier!="All"&&module.tier.ToString()!=moduleTier)))continue;
                 if (string.IsNullOrWhiteSpace(search) || ((obj?.title ?? "") + " " + (obj?.id ?? "") + " " + entry.file).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0) visibleKeys.Add(entry.key);
             }
             if (!visibleKeys.Contains(selectedKey)) selectedKey = visibleKeys.FirstOrDefault();
@@ -265,8 +281,63 @@ namespace HackThePlanet.Editor
                 form.Add(new Label("This file could not be decoded. Fix it externally, then Reload Disk. Its contents will not be replaced by defaults."));
                 return;
             }
-            DrawObject(form, obj, "$", 0);
+            DrawRigPreview(form,obj);DrawObject(form, obj, "$", 0);
             if (keepScroll) form.schedule.Execute(() => form.scrollOffset = new Vector2(0, scroll));
+        }
+
+        internal static Dictionary<string,string> ExerciseRigAuthoring(string directory)
+        {
+            var window=CreateInstance<ContentEditorWindow>();window.validationMode=true;window.Show();
+            var draft=CreateInstance<ContentDraft>();
+            try
+            {
+                window.draft=draft;window.workspace=new ContentWorkspace(draft,directory);window.history=new ContentHistory(directory);window.savedBaseline=draft.originals;
+                ContentEditorUI.Attach(window.rootVisualElement);
+                void Select(string category,string id){window.category=category;window.selectedKey=window.workspace.Bundle.Manifest.entries.Single(e=>e.category==category&&((GameplayDefinition)window.workspace.Bundle.Objects[e.key]).id==id).key;window.DrawWindow();}
+                void Float(string field,float value){window.propertyTargets["$."+field].Q<FloatField>().value=value;}
+                void Integer(string field,int value){window.propertyTargets["$."+field].Q<IntegerField>().value=value;}
+                Select("Modules","power-1");Float("powerCapacity",9);
+                Select("Modules","cooling-1");Float("coolingCapacity",7);
+                Select("Chassis","chassis-1");Float("storageCapacity",81);
+                Select("Actions","backdoor");Float("memoryCost",11);
+                Select("Rig Rules","rig");Float("memoryReclaim",5);
+                Select("Modules","recycler");Integer("price",401);
+                Select("Modules","drive");window.propertyTargets["$.modifiers[0].value.value"].Q<FloatField>().value=21;
+                Select("Modules","storage-array");window.propertyTargets["$.modifiers[1].value.left.right.value"].Q<FloatField>().value=3;
+                Select("Networks","corporate-network");window.propertyTargets["$.payloadStorage.right.value"].Q<FloatField>().value=25;
+                Select("Modules","ram");Integer("width",2);
+                // Restore the starter footprint before validating the full draft.
+                Integer("width",1);
+                window.workspace.Capture();return draft.Current;
+            }
+            finally{window.hasUnsavedChanges=false;DestroyImmediate(window);DestroyImmediate(draft);}
+        }
+
+        private void DrawRigPreview(VisualElement parent,object obj)
+        {
+            if(obj is RigModuleDefinition module)
+            {
+                var preview=new VisualElement();preview.style.flexDirection=FlexDirection.Column;parent.Add(preview);
+                var size=GameSimulation.PartSize(module,previewRotated);
+                for(int y=0;y<size.y;y++){var row=new VisualElement();row.style.flexDirection=FlexDirection.Row;preview.Add(row);for(int x=0;x<size.x;x++){var cell=new Label(" ");cell.style.width=cell.style.height=28;cell.style.marginRight=cell.style.marginBottom=2;cell.style.backgroundColor=Palette.Branch(module.branch);row.Add(cell);}}
+                parent.Add(new Button(()=>{previewRotated=!previewRotated;ShowEntry(true);}){text="Rotate footprint preview"});
+                parent.Add(new Label("Footprint "+size.x+"x"+size.y+" / "+module.powerDemand+" power / "+module.heatOutput+" heat / +"+module.powerCapacity+" power limit / +"+module.coolingCapacity+" cooling limit"));
+            }
+            if(obj is RigRulesDefinition rig&&rig.startingChassis!=null)
+            {
+                var chassis=rig.startingChassis;float power=0,heat=0,pc=chassis.powerCapacity,cc=chassis.coolingCapacity;
+                foreach(var part in rig.startingParts.Where(p=>p.module!=null)){power+=part.module.powerDemand;heat+=part.module.heatOutput;pc+=part.module.powerCapacity;cc+=part.module.coolingCapacity;}
+                parent.Add(new Label("STARTER LAYOUT / POWER "+power+" / "+pc+" / COOLING "+heat+" / "+cc));
+                for(int y=0;y<chassis.rows;y++)
+                {
+                    var row=new VisualElement();row.style.flexDirection=FlexDirection.Row;parent.Add(row);
+                    for(int x=0;x<chassis.columns;x++)
+                    {
+                        var occupants=rig.startingParts.Where(p=>p.module!=null&&x>=p.column&&y>=p.row&&x<p.column+GameSimulation.PartSize(p.module,p.rotated).x&&y<p.row+GameSimulation.PartSize(p.module,p.rotated).y).ToArray();
+                        var cell=new Label(occupants.Length>1?"OVERLAP":occupants.Length==0?"EMPTY":occupants[0].module.title);cell.style.width=100;cell.style.height=42;cell.style.whiteSpace=WhiteSpace.Normal;cell.style.backgroundColor=occupants.Length==1?Palette.Branch(occupants[0].module.branch):Color.gray;cell.style.color=Color.black;cell.style.marginRight=cell.style.marginBottom=2;row.Add(cell);
+                    }
+                }
+            }
         }
 
         private VisualElement BuildHeader(ContentEntry entry, GameplayDefinition definition)
@@ -468,7 +539,8 @@ namespace HackThePlanet.Editor
                 var network = obj as NetworkDefinition ?? (obj as ContractDefinition)?.network;
                 return network?.nodes.Select(n => n.id).Concat(network.routes?.extraIds ?? Array.Empty<string>()) ?? Enumerable.Empty<string>();
             }
-            if (name == "key") return workspace.Bundle.Game.hardware.Select(h => h.id).Concat(workspace.Bundle.Game.statuses.Select(s => s.id));
+            if(name=="kind"||name=="family")return workspace.Bundle.Game.modules.Select(m=>m.family).Concat(workspace.Bundle.Game.modules.Select(m=>m.id)).Concat(workspace.Bundle.Game.modules.Select(m=>m.branch)).Distinct();
+            if (name == "key") return workspace.Bundle.Game.modules.Select(m=>m.family).Concat(workspace.Bundle.Game.modules.Select(m=>m.id)).Concat(workspace.Bundle.Game.modules.Select(m=>m.branch)).Concat( workspace.Bundle.Game.hardware.Select(h => h.id).Concat(workspace.Bundle.Game.statuses.Select(s => s.id)));
             return Enumerable.Empty<string>();
         }
         private object NewValue(Type type)
@@ -590,7 +662,7 @@ namespace HackThePlanet.Editor
 
         private void Cache()
         {
-            if (draft == null) return;
+            if (draft == null||validationMode) return;
             if (!draft.Dirty) { if (File.Exists(RecoveryPath)) File.Delete(RecoveryPath); return; }
             ContentHistory.AtomicWrite(RecoveryPath, JsonUtility.ToJson(draft, true));
         }
@@ -730,6 +802,9 @@ namespace HackThePlanet.Editor
             { "Actions", new[] { "Animation.Play" } },
             { "Technologies", new[] { "Light Icon" } },
             { "Hardware", new[] { "Mesh Icon" } },
+            { "Rig Rules", new[] { "SettingsIcon" } },
+            { "Chassis", new[] { "Mesh Icon" } },
+            { "Modules", new[] { "Mesh Icon" } },
             { "Statuses", new[] { "Shader Icon" } },
             { "Text Palette", new[] { "Font Icon" } },
             { "Graph Visuals", new[] { "Texture Icon" } },
@@ -752,7 +827,8 @@ namespace HackThePlanet.Editor
             bool pro = EditorGUIUtility.isProSkin;
             foreach (string name in names)
             {
-                foreach (string candidate in pro ? new[] { "d_" + name, name } : new[] { name, "d_" + name })
+                string plain=name.StartsWith("d_",StringComparison.Ordinal)?name.Substring(2):name;
+                foreach (string candidate in pro ? new[] { "d_" + plain, plain } : new[] { plain, "d_" + plain })
                 {
                     var content = EditorGUIUtility.IconContent(candidate);
                     if (content != null && content.image != null) return content.image;

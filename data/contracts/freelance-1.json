@@ -1,13 +1,13 @@
 {
   "id": "freelance-1",
   "title": "Friendly Correction",
-  "description": "A verified exchange contract generated from today\u0027s network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
+  "description": "A verified exchange contract generated from today's network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
   "company": "company-1",
   "network": "corporate-network",
   "client": "EXCHANGE // verified escrow",
   "tag": "FREELANCE / REPEATABLE",
   "objective": "Correct Research vault AND Backup mirror.",
-  "condition": "Below 75% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "condition": "Below 75% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
   "aftermath": "A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.",
   "displayKind": "Alter",
   "recurring": true,
@@ -123,7 +123,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": false
     },
     {
       "nodeId": "n20",
@@ -134,7 +135,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": false
     }
   ],
   "actionRules": [],
@@ -144,7 +146,7 @@
       "title": "Maintenance testimony",
       "company": "MORROW FINANCIAL",
       "contract": "Friendly Correction",
-      "text": "Morrow\u0027s reconciliation team keeps a private tally of corrected accounts. Each entry is a household that no longer has to call the help line."
+      "text": "Morrow's reconciliation team keeps a private tally of corrected accounts. Each entry is a household that no longer has to call the help line."
     },
     {
       "id": "freelance/1/1",

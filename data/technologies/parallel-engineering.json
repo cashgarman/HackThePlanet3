@@ -1,0 +1,19 @@
+{
+  "id": "parallel-engineering",
+  "title": "Parallel Engineering",
+  "description": "Unlocks module purchases: Accelerator.",
+  "branch": "INTRUSION",
+  "cost": 100,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 480,
+    "y": 760
+  },
+  "parents": [
+    "efficient"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": []
+}

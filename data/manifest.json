@@ -320,24 +320,6 @@
       "type": "NetworkDefinition"
     },
     {
-      "key": "829ba12fc05d44c8916a99371d837bc4",
-      "category": "Hardware",
-      "file": "hardware/cpu.json",
-      "type": "HardwareDefinition"
-    },
-    {
-      "key": "6daefb8f2ffd4aed80c37ae92eb49e19",
-      "category": "Hardware",
-      "file": "hardware/bandwidth.json",
-      "type": "HardwareDefinition"
-    },
-    {
-      "key": "5b794a46559043578ca43583bd65f786",
-      "category": "Hardware",
-      "file": "hardware/memory.json",
-      "type": "HardwareDefinition"
-    },
-    {
       "key": "07f1ab73a29d4edf99b5f1b5167dbc6b",
       "category": "Statuses",
       "file": "statuses/suppression.json",
@@ -372,6 +354,168 @@
       "category": "Graph Labels",
       "file": "graph-labels/labels.json",
       "type": "GraphNodeLabelSettings"
+    },
+    {
+      "key": "daf52b6c84f741fc9766425867a4a8f3",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-1.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "c1444cfaebba47ffb42b07e2aa71a2c5",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-2.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "548378569a744aad9fe29357ed058682",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-3.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "4b2c67493925482f8d70f1833ef7dd10",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-4.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "0b977c1902734450a5e9bd561ed543bd",
+      "category": "Modules",
+      "file": "rig/modules/processor.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "19272205b9b94259b8bf01eb7f811797",
+      "category": "Modules",
+      "file": "rig/modules/uplink.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "295c2100172e4e1b83486742dc161938",
+      "category": "Modules",
+      "file": "rig/modules/drive.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "3095f25b589d4c41bf26d99a41dee298",
+      "category": "Modules",
+      "file": "rig/modules/ram.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "a4eff3c6ebd94e1398583b324c7863da",
+      "category": "Modules",
+      "file": "rig/modules/recycler.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "e7e252e880884abcb378aa7c34ec68bb",
+      "category": "Modules",
+      "file": "rig/modules/power-1.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "7bf125c725344644be0e776d2de2def0",
+      "category": "Modules",
+      "file": "rig/modules/power-2.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "2dbf5b7f98654d259b6267a9960e8d2f",
+      "category": "Modules",
+      "file": "rig/modules/power-3.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "dbda0fd49b244883843eda5b2c1799bc",
+      "category": "Modules",
+      "file": "rig/modules/cooling-1.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "6adfab24616f494cb5f484b37eeee894",
+      "category": "Modules",
+      "file": "rig/modules/cooling-2.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "1a343bd893844cce8d01b150deeb6faf",
+      "category": "Modules",
+      "file": "rig/modules/cooling-3.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "23ead28b4598459990e1ff6938eabf1d",
+      "category": "Modules",
+      "file": "rig/modules/accelerator.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "fbbda1aa13ca4be1aaf9cb5b1787bb5c",
+      "category": "Modules",
+      "file": "rig/modules/storage-array.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "3d0fbf0856d5401a85785b3f73a2152e",
+      "category": "Modules",
+      "file": "rig/modules/ram-bank.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "60b7eb0857714bf3bf92acc9aab2a3f5",
+      "category": "Modules",
+      "file": "rig/modules/quiet-filter.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "b99ea65839f3467c956afbd056af0fa9",
+      "category": "Modules",
+      "file": "rig/modules/recon-cache.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "d0ca9796020a4aa4aa65fcc473c60d0f",
+      "category": "Technologies",
+      "file": "technologies/infrastructure-2.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "250f567b932546ffa3ebf4e62e6dec34",
+      "category": "Technologies",
+      "file": "technologies/infrastructure-3.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "a7baaeb6c7d54d1fb884cfa943bf7556",
+      "category": "Technologies",
+      "file": "technologies/parallel-engineering.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "b978139d66124d5f926677033522c28c",
+      "category": "Technologies",
+      "file": "technologies/data-engineering.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "8e564181b2d444b4b0d462060c241e5c",
+      "category": "Technologies",
+      "file": "technologies/signal-engineering.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "c927a8a6aac64f89b2bb509febcccd6f",
+      "category": "Rig Rules",
+      "file": "rig/rules/rig.json",
+      "type": "RigRulesDefinition"
+    },
+    {
+      "key": "2a60b7ac1f75494eb78be89d2af2799a",
+      "category": "Actions",
+      "file": "actions/discard.json",
+      "type": "ActionDefinition"
     }
   ]
 }

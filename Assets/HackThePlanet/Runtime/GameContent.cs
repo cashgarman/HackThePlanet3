@@ -16,9 +16,9 @@ namespace HackThePlanet
         public string id, label, detail, typeId;
         public NodeKind kind;
         public int security, column, row;
-        public float x, y, suppressed;
+        public float x, y, suppressed, storage;
         public bool known, controlled, scanned, collected;
-        public bool objective, bonus;
+        public bool objective, bonus, payload;
         public Vector3 position;
         public Color color;
         public string loreId;

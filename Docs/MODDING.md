@@ -9,13 +9,13 @@ Gameplay and presentation settings are loaded from editable JSON at launch. You 
 
 The game uses the application location, independently of its working directory. Keep the entire `data/` tree with a distributed player. Files are read once per launch or Play session. Restart to apply changes; there is no hot reload, asset fallback, or automatic reset of broken data. Missing or invalid data produces an initialization error with the directory, filename and property information. Gameplay and saving remain blocked until the files are fixed.
 
-Back up `career-v2.json` and its recovery backup before changing content identities or topology; see [Saves](../README.md#saves). Renaming/removing referenced IDs can make an existing save incompatible. JSON content and career save JSON have separate purposes. This migration preserves the shipped IDs and save format; it does not migrate saves after arbitrary mod changes.
+Back up `career-v3.json` and its recovery backup before changing content identities or topology; see [Saves](../README.md#saves). Renaming/removing referenced IDs can make an existing save incompatible. JSON content and career save JSON have separate purposes. The rig rework starts a new v3 career; v2 files remain untouched. No old-career conversion is provided. Removing IDs can also invalidate a v3 career.
 
 ## Edit with Unity
 
 Open the project in **Unity 7000.0.0a11**, then choose **Hack The Planet → Content Editor**.
 
-The top tabs cover Game, Companies, Contracts, Networks, Node Types, Actions, Technologies, Hardware, Statuses, Career, Rewards, Text Palette, Graph Visuals, and Graph Labels. Graph Visuals contains both the research/default and network profiles. Search the left list by title, ID or filename. Select an entry to edit its properties on the right; drag the divider to resize the panes. Category selection, search and pane width are remembered with the editor window.
+The top tabs cover Game, Companies, Contracts, Networks, Node Types, Actions, Technologies, Rig Rules, Chassis, Modules, legacy Hardware extensions, Statuses, Career, Rewards, Text Palette, Graph Visuals, and Graph Labels. Graph Visuals contains both the research/default and network profiles. Search the left list by title, ID or filename. Select an entry to edit its properties on the right; drag the divider to resize the panes. Category selection, search and pane width are remembered with the editor window.
 
 Every property has an explanation. Reference pickers show the definition title and stable ID, filtered to the required type. Rule pickers choose among supported formulas, conditions and effects. Colors preserve HDR channels; positions use vector fields; enum, boolean, numeric and multiline-text fields use their corresponding controls. Existing stats, tags and local network IDs are offered where applicable, and text fields permit custom values. Expand array and rule foldouts to edit their children. Arrays support add, duplicate, remove and move controls. Changing a rule type replaces that subtree with the new type's defaults and supports Undo.
 
@@ -82,6 +82,38 @@ Numeric, condition and effect subtrees use registered rule names, for example:
 ```
 
 This is a numeric subtree, not a complete definition file. Use the populated files as templates for complete definitions. New mechanics requiring an additional rule operation, runtime input, procedural generator or UI layout still require C# and a new player build. External JSON cannot instantiate arbitrary CLR types or execute scripts.
+
+## Rig, storage, and RAM authoring
+
+The shipped catalog has four chassis and sixteen module models. `data/rig/rules/rig.json` defines the initial chassis and starter layout, sale fractions, reclaim rate, rotation policy, speed caps, and minimum trace fraction. `data/rig/chassis/` defines grid dimensions, career gates, prices, ability slots, power/cooling limits, base storage (GB), and RAM (MEM). `data/rig/modules/` defines every purchasable model, including all power and cooling tiers.
+
+A module's `width` and `height` describe its unrotated footprint in cells. Rotation swaps those dimensions. `family` identifies its gameplay group; `branch` supplies its research colour. Each purchase creates a separate career-owned instance. Repeated models can be installed together. `price` is the purchase cost; voluntary sales return the configured fraction of the actual price paid, rounded down. Free starter copies sell for zero. Research refunds sell newly locked copies at `researchSaleFraction` and clear their placements. Other owned copies remain in inventory.
+
+Power Supply I/II/III and Cooling I/II/III are separate models, not upgrades to existing copies. Total power limit is the chassis base plus installed `powerCapacity`; cooling limit likewise adds installed `coolingCapacity`. Installed `powerDemand` must fit the power limit; installed `heatOutput` must fit cooling. Equality is valid. Cooling consumes power, and power supplies produce heat. Budgets are static; invalid budgets block connecting but permit rearrangement.
+
+Module `requirements` use the same typed `ResearchCondition` and other requirements as actions. `modifiers` use existing formulas and operations. In a module modifier, `InputNumber` with input `RigNeighborCount` reads adjacent installed copies matching `key`: a model ID, family, branch, or empty for all. `RigNeighborCondition` provides the same match using `kind` and a `minimum`. Orthogonal edge contact counts; diagonal contact does not. A multi-cell neighbor counts once. The Storage Array demonstrates a bounded count using `Minimum`, and Quiet Filter and Recon Cache demonstrate conditional synergies. Copy these files to add models without changing C#; register the new files in the manifest and Game root.
+
+In the Content Editor, the **Rig** tab contains **Rig Rules**, **Chassis**, and **Modules**. Filter modules by family/tier, inspect the footprint, and use **Rotate footprint preview** to inspect the alternate orientation. Rig Rules previews the starter layout and its power/cooling totals. Typed references, nested modifier/condition editors, Undo, drafts, history, duplication, ID renaming, and validation apply to rig content just as to actions and technologies.
+
+### Mission files
+
+Contract objectives have a `payload` flag. Set it only when the objective downloads a file to the rig. Remote alteration, erase, and control tasks leave it false, even if they reuse the legacy download tool internally. Required payloads cannot be discarded. Objectives are excluded from optional archive rewards.
+
+Each network defines `payloadStorage` and `archiveStorage` formulas. They may read seeded security and contract difficulty. Sizes round to nonnegative integer GB after evaluation and remain fixed for the run; later security changes do not resize files. The shipped payload formula caps individual files at 26 GB so the largest three-file objective fits the bare 80 GB starting chassis. The balance validator checks all contracts and sampled seeds/difficulties. Optional archives can exceed available space.
+
+The download action's requirement compares `FreeStorage` with `NodeStorage`. Collected files occupy space until disconnect. `discard.json` is an instant targeted action that clears `Collected` only on optional archives. This removes their pending payout/lore and permits redownloading; rewards count final held files once. Its visibility and effects remain editable content. Storage inputs include `NodeStorage`, `StorageUsed`, `FreeStorage`, and `StorageCapacity`.
+
+### Ability RAM
+
+Actions define `memoryMode` (`None`, `OneShot`, `Persistent`) and nonnegative `memoryCost`. A one-shot moves RAM into the reclaiming bucket when execution begins; it returns at the modified `memoryReclaim` rate per simulation second. Cancellation does not refund it. Persistent actions reserve RAM, apply `activeModifiers`, and keep their associated statuses active until disabled. Cancelling unfinished activation releases its reservation. `releaseOnTargetControl` releases a targeted reservation when the target becomes permanently controlled. Pause freezes reclamation.
+
+Free RAM is pool minus reserved and reclaiming RAM. Chassis ability slots separately limit the equipped loadout. Decoy is an operator toggle with an authored trace modifier; Blackout keeps its suppression status while reserving RAM. Backdoor, Bridge, and Disrupt remain one-shots. RAM inputs include `MemoryFree`, `MemoryPool`, `MemoryReserved`, and `MemoryReclaiming`. Every disconnect outcome clears per-run RAM and storage.
+
+### Generated Unity assets and end-user mods
+
+**Hack The Planet → JSON → Generate Gameplay Assets**, or **Generate Assets** in the Content Editor, creates matching ScriptableObjects under `Assets/HackThePlanet/GeneratedGameplay/`. Save JSON drafts first. Generation validates the saved catalog, preserves asset GUIDs using immutable manifest keys, and remaps all definition references. It also runs before builds. Generated Inspectors are read-only and link back to the Content Editor. Historical assets stay separate.
+
+**Generated assets do not control player mods.** The player reads external `data/` JSON at launch and never requires asset regeneration. End users can edit balance or add supported definitions beside the executable and restart without Unity. The `--validate-content <report-path>` launch option validates installed JSON without opening or writing a career. Generated files are editor/build mirrors, not a runtime fallback or an override.
 
 ## First edit: stronger Efficient hack
 

@@ -1,13 +1,13 @@
 {
   "id": "paper-trail",
   "title": "Paper Trail",
-  "description": "Morrow\u0027s automated debt system has been charging a neighborhood twice. Correct the ledger and its backup mirror so the change survives the next sync.",
+  "description": "Morrow's automated debt system has been charging a neighborhood twice. Correct the ledger and its backup mirror so the change survives the next sync.",
   "company": "company-1",
   "network": "corporate-network",
   "client": "JUNE // public-interest archivist",
   "tag": "RECORD ALTERATION",
   "objective": "Correct Research vault AND Backup mirror.",
-  "condition": "Below 60% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "condition": "Below 60% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
   "aftermath": "Thousands of duplicate balances disappear. Morrow replaces a maintenance identity; its perimeter gets a little stronger.",
   "displayKind": "Alter",
   "recurring": false,
@@ -39,7 +39,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": false
     },
     {
       "nodeId": "n20",
@@ -50,7 +51,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": false
     }
   ],
   "actionRules": [],
@@ -60,7 +62,7 @@
       "title": "Rounding errors",
       "company": "MORROW FINANCIAL",
       "contract": "Paper Trail",
-      "text": "MORROW / INCIDENT 441: Duplicate balances correlate exactly with the migration date. Customer support has filed nineteen matching reports. The classification remains \u0027individual payment dispute\u0027."
+      "text": "MORROW / INCIDENT 441: Duplicate balances correlate exactly with the migration date. Customer support has filed nineteen matching reports. The classification remains 'individual payment dispute'."
     },
     {
       "id": "paper-trail/1",

@@ -1,14 +1,14 @@
 {
   "id": "quiet-copy",
   "title": "The Quiet Copy",
-  "description": "Helix buried a clean-energy prototype. A researcher wants the original files before tomorrow\u0027s product demonstration. Find a way into their research vault. Leave the lights on.",
+  "description": "Helix buried a clean-energy prototype. A researcher wants the original files before tomorrow's product demonstration. Find a way into their research vault. Leave the lights on.",
   "company": "company-0",
   "network": "corporate-network",
   "client": "LARK // independent researcher",
   "tag": "DATA ACQUISITION",
   "objective": "Recover the prototype from Research vault.",
-  "condition": "Below 60% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
-  "aftermath": "An anonymous prototype appears on the open net. Helix\u0027s demonstration goes ahead, but the technology is no longer theirs alone.",
+  "condition": "Below 60% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
+  "aftermath": "An anonymous prototype appears on the open net. Helix's demonstration goes ahead, but the technology is no longer theirs alone.",
   "displayKind": "Copy",
   "recurring": false,
   "requiredWins": 0,
@@ -39,7 +39,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     }
   ],
   "actionRules": [],
@@ -56,14 +57,14 @@
       "title": "Lab notebook, 03:17",
       "company": "HELIX DYNAMICS",
       "contract": "The Quiet Copy",
-      "text": "Lark\u0027s lab notes: We built the first working cell from scavenged parts. The technician who fixed the cooling loop still takes two buses home. Management says affordable energy would disrupt our market position."
+      "text": "Lark's lab notes: We built the first working cell from scavenged parts. The technician who fixed the cooling loop still takes two buses home. Management says affordable energy would disrupt our market position."
     },
     {
       "id": "quiet-copy/2",
       "title": "A public promise",
       "company": "HELIX DYNAMICS",
       "contract": "The Quiet Copy",
-      "text": "Draft press release: Energy belongs to everyone. Revision note: Legal requests replacement of \u0027everyone\u0027 with \u0027approved commercial partners\u0027. The original author declined to initial the change."
+      "text": "Draft press release: Energy belongs to everyone. Revision note: Legal requests replacement of 'everyone' with 'approved commercial partners'. The original author declined to initial the change."
     }
   ]
 }

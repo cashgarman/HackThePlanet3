@@ -1,0 +1,15 @@
+{
+  "id": "chassis-3",
+  "title": "Chassis III",
+  "description": "A larger home for your signal.",
+  "tier": 3,
+  "rows": 4,
+  "columns": 5,
+  "price": 3000,
+  "requiredJobs": 3,
+  "slots": 4,
+  "storageCapacity": 180,
+  "memoryPool": 85,
+  "powerCapacity": 40,
+  "coolingCapacity": 28
+}

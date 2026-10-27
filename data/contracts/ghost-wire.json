@@ -7,8 +7,8 @@
   "client": "NULL // network cooperative",
   "tag": "FORENSIC RECOVERY",
   "objective": "Recover records at Dev terminal, Audit terminal, and Research vault.",
-  "condition": "Below 65% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
-  "aftermath": "The records link Aegis\u0027s contractor to Morrow\u0027s debt platform. Three unrelated jobs begin to look like one story.",
+  "condition": "Below 65% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
+  "aftermath": "The records link Aegis's contractor to Morrow's debt platform. Three unrelated jobs begin to look like one story.",
   "displayKind": "Investigate",
   "recurring": false,
   "requiredWins": 2,
@@ -39,7 +39,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     },
     {
       "nodeId": "n9",
@@ -50,7 +51,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     },
     {
       "nodeId": "n19",
@@ -61,7 +63,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     }
   ],
   "actionRules": [],
@@ -71,7 +74,7 @@
       "title": "Authorized traffic",
       "company": "AEGIS SYSTEMS",
       "contract": "Ghost in the Wire",
-      "text": "AEGIS / SERVICE TICKET: The community network outage was recorded as authorized load testing. No request came from the network\u0027s owners. Approval originated in a Morrow procurement account."
+      "text": "AEGIS / SERVICE TICKET: The community network outage was recorded as authorized load testing. No request came from the network's owners. Approval originated in a Morrow procurement account."
     },
     {
       "id": "ghost-wire/1",

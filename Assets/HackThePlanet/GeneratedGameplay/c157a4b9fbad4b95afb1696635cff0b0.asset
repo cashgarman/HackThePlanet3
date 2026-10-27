@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: c157a4b9fbad4b95afb1696635cff0b0
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: last-light
+  title: Last Light
+  description: The contracts connect at a single surveillance hub. Take control of the hub, then erase the targeting index in the vault. Give the city one quiet night.
+  company: {fileID: 11400000, guid: 3979b1c18fff72b47a14017949de0f0e, type: 2}
+  network: {fileID: 11400000, guid: 25c4e5da1c02d094db8c98790db4959f, type: 2}
+  client: NULL // everyone is listening
+  tag: INFRASTRUCTURE DISRUPTION
+  objective: Control Security hub, then erase the index at Research vault.
+  condition: 'Below 70% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
+  aftermath: The surveillance grid goes dark. Lark opens the research, June publishes the records, and Null keeps the channels alive. You built more than a career. The planet is a little harder to own.
+  displayKind: 3
+  recurring: 0
+  requiredWins: 5
+  quietLimit: 70
+  credits:
+    rid: 213507078570378609
+  xp:
+    rid: 213507078570378610
+  difficulty:
+    rid: 213507078570378611
+  seed:
+    rid: 213507078570378612
+  objectives:
+  - nodeId: n22
+    label: 
+    actionLabel: Erase targeting index
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 0
+    complete:
+      rid: 213507078570378613
+    actionRequirements: []
+  - nodeId: n14
+    label: 
+    actionLabel: 
+    action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+    payload: 0
+    complete:
+      rid: 213507078570378614
+    actionRequirements: []
+  actionRules:
+  - action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    requirements:
+    - condition:
+        rid: 213507078570378615
+      message: Take control of Security hub before erasing the index.
+  lore:
+  - id: last-light/0
+    title: Night shift
+    company: AEGIS SYSTEMS
+    contract: Last Light
+    text: 'AEGIS / NIGHT OPERATIONS: Operators are instructed to treat missing telemetry as hostile activity. A handwritten note underneath reads: Some people simply turn off their phones. That is still allowed.'
+  - id: last-light/1
+    title: The targeting index
+    company: AEGIS SYSTEMS
+    contract: Last Light
+    text: 'Index schema commentary: Risk scores include association with public-interest researchers, debt appeals, and community infrastructure. The system was never looking for a crime. It was looking for connections.'
+  - id: last-light/2
+    title: After the signal
+    company: AEGIS SYSTEMS
+    contract: Last Light
+    text: 'Buffered message from NULL: When the index goes quiet, leave the relays running. People will need those connections tomorrow. We can build something better on the wires they left behind.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507078570378609
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2000
+    - rid: 213507078570378610
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 140
+    - rid: 213507078570378611
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507078570378612
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 669
+    - rid: 213507078570378613
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507078570378614
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1
+    - rid: 213507078570378615
+      type: {class: NamedNodeCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        nodeId: n14
+        condition:
+          rid: 213507078570378616
+    - rid: 213507078570378616
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1

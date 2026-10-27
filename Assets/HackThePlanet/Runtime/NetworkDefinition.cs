@@ -50,6 +50,7 @@ namespace HackThePlanet
     {
         public string entryNode, preferredNode, previewNode;
         public NetworkLayout layout;
+        [SerializeReference] public Number payloadStorage=new ConstantNumber(20), archiveStorage=new ConstantNumber(28);
         public NetworkNode[] nodes = Array.Empty<NetworkNode>();
         public NetworkEdge[] links = Array.Empty<NetworkEdge>();
         public ParallelRouteLayout routes = new ParallelRouteLayout();

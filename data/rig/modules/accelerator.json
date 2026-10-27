@@ -1,0 +1,43 @@
+{
+  "id": "accelerator",
+  "title": "Accelerator",
+  "description": "+0.55 hack speed.",
+  "family": "processing",
+  "branch": "INTRUSION",
+  "tier": 1,
+  "width": 2,
+  "height": 2,
+  "price": 900,
+  "rotatable": true,
+  "powerDemand": 7,
+  "heatOutput": 6,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "parallel-engineering",
+        "equipped": false
+      },
+      "message": "Requires Parallel Engineering research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "hackSpeed",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.55
+      }
+    }
+  ]
+}

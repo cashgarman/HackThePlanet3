@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbbfc9b2201a2346a457582f65eaf4b, type: 3}
+  m_Name: a6d80eb6bd7447bbacabdeea1304b4e3
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.CareerDefinition
+  id: career
+  title: Career rules
+  description: 
+  credits: 600
+  xp: 0
+  day: 1
+  reportLimit: 20
+  logLimit: 100
+  researchDuringOperations: 0
+  hardwareDuringOperations: 0
+  equipDuringOperations: 0
+  allowTaskCancellation: 1
+  refundFraction: 1
+  traceLimit: 100
+  traceWarning: 60
+  traceDanger: 85
+  maxTick: 0.5
+  welcome: EXCHANGE ONLINE // A new operator has entered the network. Your first contract is waiting.
+  outcomes:
+  - outcome: 0
+    verdict: CONTRACT COMPLETE
+    narrative: '{aftermath}'
+    bankRewards: 1
+    recordCompletion: 1
+    bankLore: 1
+    dayAdvance: 1
+  - outcome: 1
+    verdict: CONTRACT ABORTED
+    narrative: You disconnected before securing every required file. Your equipment and research are safe; the contract remains available.
+    bankRewards: 0
+    recordCompletion: 0
+    bankLore: 0
+    dayAdvance: 0
+  - outcome: 2
+    verdict: CONNECTION ISOLATED
+    narrative: The defender isolated your session. Equipment and research are safe. The contract can be retried with a different route.
+    bankRewards: 0
+    recordCompletion: 0
+    bankLore: 0
+    dayAdvance: 0
+  simulationSpeeds:
+  - 1
+  - 2
+  - 4
+  initialTechnologies:
+  - {fileID: 11400000, guid: 733029773cf9b10488a7ba7f575b0713, type: 2}
+  stats:
+  - id: slots
+    value: 2
+  - id: queueCapacity
+    value: 1
+  - id: hackSpeed
+    value: 1
+  - id: transferSpeed
+    value: 1
+  - id: scanRadius
+    value: 2
+  - id: revealRadius
+    value: 1
+  - id: traceGrowth
+    value: 1
+  - id: minimumSecurity
+    value: 1
+  - id: futureQueue
+    value: 0
+  - id: traceFree
+    value: 0
+  - id: tracePressure
+    value: 0
+  - id: idleTracePerSecond
+    value: 0
+  - id: storageCapacity
+    value: 0
+  - id: memoryPool
+    value: 0
+  - id: memoryReclaim
+    value: 0
+  ranks:
+  - jobs: 0
+    title: NEW SIGNAL
+  - jobs: 1
+    title: FREELANCER
+  - jobs: 3
+    title: TRUSTED OPERATOR
+  - jobs: 6
+    title: GHOST IN THE NETWORK

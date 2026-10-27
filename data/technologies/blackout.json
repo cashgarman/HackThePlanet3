@@ -1,7 +1,7 @@
 {
   "id": "blackout",
   "title": "Blackout",
-  "description": "Remotely suppress a discovered hub within three mapped hops for 45 seconds. Its protected defenses immediately lose their bonus.",
+  "description": "Suppress a mapped hub within three controlled hops until disabled or captured. Reserves 18 MEM per hub.",
   "branch": "CONTROL",
   "cost": 85,
   "waypointTier": 0,

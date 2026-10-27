@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63de97ccfa80f844fb59ff2e01500692, type: 3}
+  m_Name: 1c10f3b69e4448e1bcfbca1868f1effe
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.GameDefinition
+  id: game
+  title: Hack The Planet
+  description: 
+  companies:
+  - {fileID: 11400000, guid: 5afcf7db6ffe1274892f54fdb77c3090, type: 2}
+  - {fileID: 11400000, guid: 07ffa550baff7954cb245a7c70394d78, type: 2}
+  - {fileID: 11400000, guid: 3979b1c18fff72b47a14017949de0f0e, type: 2}
+  contracts:
+  - {fileID: 11400000, guid: 6a34350b68296ff47b455e40c97ff2ed, type: 2}
+  - {fileID: 11400000, guid: 4e3d2865eff44c34ba1ec79cafde0cfa, type: 2}
+  - {fileID: 11400000, guid: a19b4e40c8b401049987df9027d0dca6, type: 2}
+  - {fileID: 11400000, guid: a034ed82254e6e8498dca9eb0f89846c, type: 2}
+  - {fileID: 11400000, guid: 7a41c1a038cdee34d9307a20ef44b710, type: 2}
+  - {fileID: 11400000, guid: d4cd40e635f0b5440b69217192fb8a7d, type: 2}
+  - {fileID: 11400000, guid: ec31fc4c84b61d94d8e0e914141035f9, type: 2}
+  - {fileID: 11400000, guid: 83740ccdc11a22448b6c29ceaa87da44, type: 2}
+  - {fileID: 11400000, guid: 2c47c9833fe76f646b4370b8efff930a, type: 2}
+  technologies:
+  - {fileID: 11400000, guid: 733029773cf9b10488a7ba7f575b0713, type: 2}
+  - {fileID: 11400000, guid: 6b508f7d749ee19468e84f1071abd4ef, type: 2}
+  - {fileID: 11400000, guid: 619a96196e20fcd46b64685d162da3b5, type: 2}
+  - {fileID: 11400000, guid: 4a9cdc702c3f34e4394fbbe8d69f96eb, type: 2}
+  - {fileID: 11400000, guid: 7eb03c74738a7fd4b92be168365fe6cc, type: 2}
+  - {fileID: 11400000, guid: f820be6ec75eca04c8eb3a7edf66292f, type: 2}
+  - {fileID: 11400000, guid: 0d6783959d3da2d40a6ad62a35d9d4d3, type: 2}
+  - {fileID: 11400000, guid: a0591d41e54226a4eacab9ab71e30955, type: 2}
+  - {fileID: 11400000, guid: cced540b7bac3984a9917583bf34010b, type: 2}
+  - {fileID: 11400000, guid: 99d56d0898072d14db8b423390664626, type: 2}
+  - {fileID: 11400000, guid: 178c32c0a3a7e894482f3f06460d3a2a, type: 2}
+  - {fileID: 11400000, guid: 550bb15af23762048bed2526bffe8129, type: 2}
+  - {fileID: 11400000, guid: 420d0889431d6a342b611e28bf5521a6, type: 2}
+  - {fileID: 11400000, guid: ba8680d532bc02c429a9a89245857c74, type: 2}
+  - {fileID: 11400000, guid: 6b9a83f12e7d3474bb11f1752b016a1a, type: 2}
+  - {fileID: 11400000, guid: c2a964591c16f304bbf2ae65febb2c7b, type: 2}
+  - {fileID: 11400000, guid: 054c3fc27c01f624fa72fe8faddf3d63, type: 2}
+  - {fileID: 11400000, guid: 5502aa48c22ea0a43808a607ed66f316, type: 2}
+  - {fileID: 11400000, guid: 21aff170fb593824cb5482a7a746e066, type: 2}
+  - {fileID: 11400000, guid: c04115713ec2b9f4c9ff53a9cb48431a, type: 2}
+  - {fileID: 11400000, guid: ed279066ebef5244abfc875d1cd58add, type: 2}
+  - {fileID: 11400000, guid: 78034f01ea22982418f9be2d2815b7a8, type: 2}
+  - {fileID: 11400000, guid: 049ac12394f6b0d4a968c1a7fab8cdd1, type: 2}
+  - {fileID: 11400000, guid: b82e16dda11bb95418276601eadc5426, type: 2}
+  - {fileID: 11400000, guid: 0e611066576dd5946b744e4a652da447, type: 2}
+  - {fileID: 11400000, guid: 6c2d3bb204075f2498d841e31e91520b, type: 2}
+  - {fileID: 11400000, guid: 205dbaaabcd752d4aa1c2b4e6675ad29, type: 2}
+  actions:
+  - {fileID: 11400000, guid: 10b3d54b19946354ca64d7552a6c5a7f, type: 2}
+  - {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+  - {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+  - {fileID: 11400000, guid: aa29b0e4b4fb9d84bb0aea4895a6bf7a, type: 2}
+  - {fileID: 11400000, guid: 056393e12fc722245842e99eada8bcc6, type: 2}
+  - {fileID: 11400000, guid: 733d1a219f4ce9b49bf706c7ad225639, type: 2}
+  - {fileID: 11400000, guid: 4425e30bbe4f313489370582e22e85dd, type: 2}
+  - {fileID: 11400000, guid: 0cb88338658603d4abecdc6450ed7a86, type: 2}
+  - {fileID: 11400000, guid: 0ba8eecc7bdb76347b77c42f926d1e22, type: 2}
+  nodeTypes:
+  - {fileID: 11400000, guid: 0362541d0dc07d64282ac447ff884e45, type: 2}
+  - {fileID: 11400000, guid: c37c4b4d788456b4c93ea37bd43ca422, type: 2}
+  - {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+  - {fileID: 11400000, guid: d3c6d843fe24eee4390c10c9f964577d, type: 2}
+  - {fileID: 11400000, guid: 00f2f7c167e07a047b607982ee82472e, type: 2}
+  - {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+  - {fileID: 11400000, guid: d1bb8220cd49f164f977f94bd383a5f7, type: 2}
+  networks:
+  - {fileID: 11400000, guid: 25c4e5da1c02d094db8c98790db4959f, type: 2}
+  rig: {fileID: 11400000, guid: bce4c4be769fe444f9abfe4384111567, type: 2}
+  chassis:
+  - {fileID: 11400000, guid: f84370b9007f5d448a19022556253a9b, type: 2}
+  - {fileID: 11400000, guid: cee706d1a7305db44876ed930b24a4cf, type: 2}
+  - {fileID: 11400000, guid: 48d9fd7bce0955e4da6c771e95d81a73, type: 2}
+  - {fileID: 11400000, guid: 61978109d14fe3e4fa3ec17c4057ceb9, type: 2}
+  modules:
+  - {fileID: 11400000, guid: dbdeb02db362f634fa504e65179a5258, type: 2}
+  - {fileID: 11400000, guid: 5101f14dac7e2a640a2b193113ef8ef6, type: 2}
+  - {fileID: 11400000, guid: 2a15a42e19f37f04184ef78fd2134b03, type: 2}
+  - {fileID: 11400000, guid: 2c181137322d9464c92504fc752b7b0b, type: 2}
+  - {fileID: 11400000, guid: 4e937da29d231ce488d71567bf061ccb, type: 2}
+  - {fileID: 11400000, guid: 80a14ba33b148db47b4145ce460fc885, type: 2}
+  - {fileID: 11400000, guid: 5fd1f3656d14f5848882b463e849e2e1, type: 2}
+  - {fileID: 11400000, guid: 65f21ea59417b0a42a3277d8911a7115, type: 2}
+  - {fileID: 11400000, guid: 1dd9a5072ec0b22458d62f58a217f8ac, type: 2}
+  - {fileID: 11400000, guid: be00f1791ebd1c84da4d2f6a0c39741b, type: 2}
+  - {fileID: 11400000, guid: beda2b9877b8e1f4aa33dba58b0734e9, type: 2}
+  - {fileID: 11400000, guid: cb0d66ef6407853478f8f29c44fa96fa, type: 2}
+  - {fileID: 11400000, guid: 2101850735de25148a133889db0d7f33, type: 2}
+  - {fileID: 11400000, guid: f5310565030c230488e47a9c0bb1c76e, type: 2}
+  - {fileID: 11400000, guid: 68f34933bddadec4cbe931f844287694, type: 2}
+  - {fileID: 11400000, guid: 7ae5ebb5661a3d640a6407ec6ff15068, type: 2}
+  hardware: []
+  statuses:
+  - {fileID: 11400000, guid: 925ea085fed936542a38cb6906581faf, type: 2}
+  - {fileID: 11400000, guid: f8f24ebde56a90548828110df5637979, type: 2}
+  rewards: {fileID: 11400000, guid: 422c828a552f2e440840d3e4fc692a38, type: 2}
+  career: {fileID: 11400000, guid: 143a693a2c2d1d240b012e48c7c9b567, type: 2}
+  modifiers:
+  - id: scan-preparation-time
+    stat: duration
+    priority: 0
+    operation: 2
+    when:
+      rid: 213507078570378538
+    value:
+      rid: 213507078570378539
+  - id: scan-preparation-trace
+    stat: baseTrace
+    priority: 0
+    operation: 2
+    when:
+      rid: 213507078570378540
+    value:
+      rid: 213507078570378541
+  triggers:
+  - on: 0
+    onceKey: 
+    when:
+      rid: 213507078570378542
+    effects:
+    - rid: 213507078570378543
+  - on: 2
+    onceKey: 
+    when:
+      rid: 213507078570378544
+    effects:
+    - rid: 213507078570378545
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507078570378538
+      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        conditions:
+        - rid: 213507078570378546
+        - rid: 213507078570378547
+    - rid: 213507078570378539
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.85
+    - rid: 213507078570378540
+      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        conditions:
+        - rid: 213507078570378548
+        - rid: 213507078570378549
+    - rid: 213507078570378541
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.8
+    - rid: 213507078570378542
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570378543
+      type: {class: RevealEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        targets:
+          scope: 3
+          nodeId: 
+          filter:
+            rid: 213507078570378550
+        radius:
+          rid: 213507078570378551
+    - rid: 213507078570378544
+      type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        tag: relay
+    - rid: 213507078570378545
+      type: {class: CounterEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        key: relay-controls
+        amount: 1
+    - rid: 213507078570378546
+      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+        tag: 
+    - rid: 213507078570378547
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 2
+    - rid: 213507078570378548
+      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+        tag: 
+    - rid: 213507078570378549
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 2
+    - rid: 213507078570378550
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570378551
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1

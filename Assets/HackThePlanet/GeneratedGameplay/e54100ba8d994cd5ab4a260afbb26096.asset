@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: e54100ba8d994cd5ab4a260afbb26096
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: chain
+  title: Chain hack
+  description: Queue up to three actions. Queue a hack on the next discovered system before the current hack finishes.
+  branch: INTRUSION
+  cost: 85
+  waypointTier: 0
+  special: 0
+  position: {x: 865, y: 85}
+  parents:
+  - {fileID: 11400000, guid: 7eb03c74738a7fd4b92be168365fe6cc, type: 2}
+  grants: []
+  modifiers:
+  - id: 
+    stat: queueCapacity
+    priority: 0
+    operation: 6
+    when:
+      rid: 213507078570378714
+    value:
+      rid: 213507078570378715
+  - id: 
+    stat: futureQueue
+    priority: 0
+    operation: 6
+    when:
+      rid: 213507078570378716
+    value:
+      rid: 213507078570378717
+  triggers: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507078570378714
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570378715
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507078570378716
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570378717
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1

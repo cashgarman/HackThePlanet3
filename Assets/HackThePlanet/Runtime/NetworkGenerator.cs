@@ -14,7 +14,7 @@ namespace HackThePlanet
 
     public static class NetworkGenerator
     {
-        public const int Version = 3;
+        public const int Version = 4;
 
         public static GeneratedNetwork Generate(Contract job,Career career) => Generate(job,career,GameCatalog.Default);
         public static GeneratedNetwork Generate(Contract job,Career career,GameCatalog catalog)
@@ -41,7 +41,7 @@ namespace HackThePlanet
             if(template.layout==NetworkLayout.Authored)
             {
                 foreach(var edge in template.links)if(edge.when.Test(context))result.links.Add(new NetLink(edge.a,edge.b));
-                return result;
+                SizeFiles(result,job,career,catalog,template);return result;
             }
             var config=template.routes;
             int difficulty=Mathf.Clamp(job.difficulty,1,config.tiers.Length);
@@ -151,7 +151,19 @@ namespace HackThePlanet
                         var push = (delta.sqrMagnitude < .0001f ? Vector3.up : delta.normalized) * (config.separationSpacing-delta.magnitude)*config.separationForce;
                         result.nodes[i].position -= push; result.nodes[j].position += push;
                     }
-            return result;
+            SizeFiles(result,job,career,catalog,template);return result;
+        }
+
+        private static void SizeFiles(GeneratedNetwork network,Contract job,Career career,GameCatalog catalog,NetworkDefinition template)
+        {
+            var definition=catalog.Contract(job.id);
+            foreach(var node in network.nodes)
+            {
+                if(node.objective)node.bonus=false;
+                node.payload=definition.objectives.Any(o=>o.nodeId==node.id&&o.payload);
+                var context=catalog.Context(career,job);context.Node=node;context.Random=new System.Random(job.seed);
+                node.storage=node.payload||node.bonus?Mathf.Max(0,Mathf.Round((node.payload?template.payloadStorage:template.archiveStorage).Evaluate(context))):0;
+            }
         }
 
         private static float Jitter(System.Random random) => (float)random.NextDouble() * 2 - 1;

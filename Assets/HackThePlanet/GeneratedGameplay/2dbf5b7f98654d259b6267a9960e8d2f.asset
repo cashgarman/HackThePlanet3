@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb6116ef3368fb478a80b75d9610f5a, type: 3}
+  m_Name: 2dbf5b7f98654d259b6267a9960e8d2f
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
+  id: power-3
+  title: Power Supply III
+  description: +40 power capacity.
+  family: power
+  branch: INTRUSION
+  flavour: Salvaged hardware. A private signal.
+  synergy: 
+  tier: 3
+  width: 3
+  height: 2
+  price: 2000
+  rotatable: 1
+  powerDemand: 0
+  heatOutput: 10
+  powerCapacity: 40
+  coolingCapacity: 0
+  requirements:
+  - condition:
+      rid: 213507078570639487
+    message: Requires Infrastructure 3 research.
+  modifiers: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507078570639487
+      type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        technology: {fileID: 11400000, guid: b82e16dda11bb95418276601eadc5426, type: 2}
+        equipped: 0

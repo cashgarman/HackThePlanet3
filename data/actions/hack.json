@@ -157,5 +157,10 @@
       "type": "LogEffect",
       "message": "CONTROL ESTABLISHED // {target}."
     }
-  ]
+  ],
+  "memoryMode": "None",
+  "memoryCost": 0,
+  "instant": false,
+  "releaseOnTargetControl": false,
+  "activeModifiers": []
 }

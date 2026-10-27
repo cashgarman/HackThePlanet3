@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c3557113ab5f64eaaa53f4a71d9fe9, type: 3}
+  m_Name: daf52b6c84f741fc9766425867a4a8f3
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigChassisDefinition
+  id: chassis-1
+  title: Chassis I
+  description: A larger home for your signal.
+  tier: 1
+  rows: 2
+  columns: 3
+  price: 0
+  requiredJobs: 0
+  slots: 2
+  storageCapacity: 80
+  memoryPool: 40
+  powerCapacity: 12
+  coolingCapacity: 8

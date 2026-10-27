@@ -103,6 +103,29 @@
         }
       },
       "message": "Control the hub to satisfy this objective."
+    },
+    {
+      "condition": {
+        "type": "CompareCondition",
+        "comparison": "GreaterOrEqual",
+        "left": {
+          "type": "InputNumber",
+          "input": "FreeStorage",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "InputNumber",
+          "input": "NodeStorage",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        }
+      },
+      "message": "Not enough storage: discard an archive or free space."
     }
   ],
   "queueRequirements": [
@@ -194,12 +217,17 @@
       "effects": [
         {
           "type": "LogEffect",
-          "message": "OPTIONAL ARCHIVE // \u002B{archiveCredits} cr / \u002B{archiveXp} XP on successful extraction."
+          "message": "OPTIONAL ARCHIVE // +{archiveCredits} cr / +{archiveXp} XP on successful extraction."
         }
       ]
     },
     {
       "type": "RecoverLoreEffect"
     }
-  ]
+  ],
+  "memoryMode": "None",
+  "memoryCost": 0,
+  "instant": false,
+  "releaseOnTargetControl": false,
+  "activeModifiers": []
 }

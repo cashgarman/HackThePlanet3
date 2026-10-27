@@ -64,7 +64,7 @@ namespace HackThePlanet.Editor
             obj.hideFlags = HideFlags.HideAndDontSave;
             var definition = (GameplayDefinition)obj; definition.id = UniqueId(copyKey == null ? "new-" + type.Name.Replace("Definition", "").ToLowerInvariant() : definition.id + "-copy");
             if (copyKey == null) definition.title = "New " + category;
-            string folder = category.ToLowerInvariant().Replace(' ', '-');
+            string folder = category=="Chassis"?"rig/chassis":category=="Modules"?"rig/modules":category.ToLowerInvariant().Replace(' ', '-');
             string stem = System.Text.RegularExpressions.Regex.Replace(definition.id, "[^a-zA-Z0-9_-]", "-");
             string file = folder + "/" + stem + ".json"; int suffix = 2;
             while (Bundle.Manifest.entries.Any(e => string.Equals(e.file, file, StringComparison.OrdinalIgnoreCase)) || File.Exists(ContentJson.SafePath(DirectoryPath, file))) file = folder + "/" + stem + "-" + suffix++ + ".json";
@@ -75,7 +75,7 @@ namespace HackThePlanet.Editor
             var current = (Array)rootField.GetValue(Bundle.Game); var expanded = Array.CreateInstance(type, current.Length + 1); Array.Copy(current, expanded, current.Length); expanded.SetValue(obj, current.Length); rootField.SetValue(Bundle.Game, expanded);
             Capture(); return entry;
         }
-        public static bool Singleton(string category) => new[] { "Game", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals", "Graph Labels" }.Contains(category);
+        public static bool Singleton(string category) => new[] { "Game", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals", "Graph Labels", "Rig Rules" }.Contains(category);
         public string UniqueId(string seed)
         {
             string id = seed; int n = 2; while (Bundle.Objects.Values.OfType<GameplayDefinition>().Any(d => d.id == id)) id = seed + "-" + n++; return id;

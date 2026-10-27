@@ -7,7 +7,7 @@ namespace HackThePlanet.Editor
     {
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.HelpBox("Historical asset. JSON in /data is authoritative; use Hack The Planet > Content Editor. Runtime instances are populated at launch.", MessageType.Info);
+            EditorGUILayout.HelpBox(AssetDatabase.GetAssetPath(target).StartsWith(GameplayAssetGenerator.Output+"/")?"Generated from authoritative JSON. Use Content Editor, save JSON, then Generate Gameplay Assets.":"Historical asset. JSON in /data is authoritative; use Content Editor.", MessageType.Info);
             if (UnityEngine.GUILayout.Button("Open Content Editor")) ContentEditorWindow.Open();
             using (new EditorGUI.DisabledScope(true)) DrawDefaultInspector();
         }

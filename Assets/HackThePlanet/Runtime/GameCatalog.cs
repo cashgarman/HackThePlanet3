@@ -154,7 +154,8 @@ namespace HackThePlanet
         public Career CreateCareer()
         {
             var r=Data.career;
-            return new Career { initialized=true,researchSpent=0,credits=r.credits,xp=r.xp,day=r.day,unlocked=r.initialTechnologies.Select(x=>x.id).ToList(),news=new List<string>{r.welcome} };
+            return new Career { initialized=true,researchSpent=0,credits=r.credits,xp=r.xp,day=r.day,unlocked=r.initialTechnologies.Select(x=>x.id).ToList(),news=new List<string>{r.welcome},chassisId=Data.rig.startingChassis.id,
+                rigParts=Data.rig.startingParts.Select(p=>new RigPart{instanceId=Guid.NewGuid().ToString("N"),modelId=p.module.id,row=p.row,column=p.column,rotated=p.rotated}).ToList() };
         }
         public void Dispose()
         {

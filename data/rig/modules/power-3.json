@@ -1,0 +1,29 @@
+{
+  "id": "power-3",
+  "title": "Power Supply III",
+  "description": "+40 power capacity.",
+  "family": "power",
+  "branch": "INTRUSION",
+  "tier": 3,
+  "width": 3,
+  "height": 2,
+  "price": 2000,
+  "rotatable": true,
+  "powerDemand": 0,
+  "heatOutput": 10,
+  "powerCapacity": 40,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "infrastructure-3",
+        "equipped": false
+      },
+      "message": "Requires Infrastructure 3 research."
+    }
+  ],
+  "modifiers": []
+}

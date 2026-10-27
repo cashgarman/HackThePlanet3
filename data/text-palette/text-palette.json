@@ -78,7 +78,7 @@
       "bold": true
     },
     {
-      "phrase": "SECURITY \\d\u002B",
+      "phrase": "SECURITY \\d+",
       "regex": true,
       "color": {
         "r": 1,
@@ -285,6 +285,61 @@
         "a": 1
       },
       "bold": false
+    },
+    {
+      "phrase": "STORAGE",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "MEMORY",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "RAM",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "POWER",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
+    },
+    {
+      "phrase": "COOLING",
+      "regex": false,
+      "color": {
+        "r": 0.39607844,
+        "g": 0.8509804,
+        "b": 0.92156863,
+        "a": 1
+      },
+      "bold": true
     }
   ]
 }

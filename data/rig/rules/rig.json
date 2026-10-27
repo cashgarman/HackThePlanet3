@@ -1,0 +1,40 @@
+{
+  "id": "rig",
+  "title": "Rig rules",
+  "description": "Physical assembly and resource rules.",
+  "startingChassis": "chassis-1",
+  "startingParts": [
+    {
+      "module": "processor",
+      "row": 0,
+      "column": 0,
+      "rotated": false
+    },
+    {
+      "module": "uplink",
+      "row": 0,
+      "column": 2,
+      "rotated": false
+    },
+    {
+      "module": "drive",
+      "row": 1,
+      "column": 0,
+      "rotated": false
+    },
+    {
+      "module": "ram",
+      "row": 1,
+      "column": 2,
+      "rotated": false
+    }
+  ],
+  "saleFraction": 0.75,
+  "researchSaleFraction": 1,
+  "minimumTraceFraction": 0.2,
+  "maximumHackSpeed": 3,
+  "maximumTransferSpeed": 3,
+  "memoryReclaim": 4,
+  "allowRotation": true,
+  "requireValidBuild": true
+}

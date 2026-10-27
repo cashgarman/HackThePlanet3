@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 0288a435130440358509ee40594ee0a3
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: freelance-1
+  title: Friendly Correction
+  description: A verified exchange contract generated from today's network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.
+  company: {fileID: 11400000, guid: 07ffa550baff7954cb245a7c70394d78, type: 2}
+  network: {fileID: 11400000, guid: 25c4e5da1c02d094db8c98790db4959f, type: 2}
+  client: EXCHANGE // verified escrow
+  tag: FREELANCE / REPEATABLE
+  objective: Correct Research vault AND Backup mirror.
+  condition: 'Below 75% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.'
+  aftermath: A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.
+  displayKind: 1
+  recurring: 1
+  requiredWins: 3
+  quietLimit: 75
+  credits:
+    rid: 213507078570378643
+  xp:
+    rid: 213507078570378644
+  difficulty:
+    rid: 213507078570378645
+  seed:
+    rid: 213507078570378646
+  objectives:
+  - nodeId: n22
+    label: 
+    actionLabel: Correct record
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 0
+    complete:
+      rid: 213507078570378647
+    actionRequirements: []
+  - nodeId: n20
+    label: 
+    actionLabel: Correct record
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 0
+    complete:
+      rid: 213507078570378648
+    actionRequirements: []
+  actionRules: []
+  lore:
+  - id: freelance/1/0
+    title: Maintenance testimony
+    company: MORROW FINANCIAL
+    contract: Friendly Correction
+    text: Morrow's reconciliation team keeps a private tally of corrected accounts. Each entry is a household that no longer has to call the help line.
+  - id: freelance/1/1
+    title: An unofficial record
+    company: MORROW FINANCIAL
+    contract: Friendly Correction
+    text: A branch manager quietly waived fees during the outage. Central accounting demanded an explanation. The response was a photograph of the flooded street.
+  - id: freelance/1/2
+    title: What the archive kept
+    company: MORROW FINANCIAL
+    contract: Friendly Correction
+    text: An old Morrow training guide says a ledger is a promise to remember accurately. Someone has highlighted that sentence on every surviving copy.
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507078570378643
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507078570378649
+        right:
+          rid: 213507078570378650
+    - rid: 213507078570378644
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 60
+    - rid: 213507078570378645
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 4
+        left:
+          rid: 213507078570378651
+        right:
+          rid: 213507078570378652
+    - rid: 213507078570378646
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507078570378653
+        right:
+          rid: 213507078570378654
+    - rid: 213507078570378647
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507078570378648
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507078570378649
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 600
+    - rid: 213507078570378650
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+        left:
+          rid: 213507078570378655
+        right:
+          rid: 213507078570378656
+    - rid: 213507078570378651
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507078570378652
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 5
+        left:
+          rid: 213507078570378657
+        right:
+          rid: 213507078570378658
+    - rid: 213507078570378653
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+        left:
+          rid: 213507078570378659
+        right:
+          rid: 213507078570378660
+    - rid: 213507078570378654
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 37
+    - rid: 213507078570378655
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key: 
+        filter:
+          rid: 213507078570378661
+    - rid: 213507078570378656
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 35
+    - rid: 213507078570378657
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507078570378658
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507078570378662
+        right:
+          rid: 213507078570378663
+    - rid: 213507078570378659
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key: 
+        filter:
+          rid: 213507078570378664
+    - rid: 213507078570378660
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 71
+    - rid: 213507078570378661
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570378662
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507078570378663
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 8
+        left:
+          rid: 213507078570378665
+        right:
+          rid: 213507078570378666
+    - rid: 213507078570378664
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570378665
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 3
+        left:
+          rid: 213507078570378667
+        right:
+          rid: 213507078570378668
+    - rid: 213507078570378666
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507078570378667
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key: 
+        filter:
+          rid: 213507078570378669
+    - rid: 213507078570378668
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 5
+    - rid: 213507078570378669
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 

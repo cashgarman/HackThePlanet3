@@ -1,13 +1,13 @@
 {
   "id": "glasshouse",
   "title": "Glasshouse",
-  "description": "Helix\u0027s prototype was funded through a shell company. Retrieve the ownership archive. Their security team has tightened the core, but the old backup lane is still there.",
+  "description": "Helix's prototype was funded through a shell company. Retrieve the ownership archive. Their security team has tightened the core, but the old backup lane is still there.",
   "company": "company-0",
   "network": "corporate-network",
   "client": "LARK // encrypted channel",
   "tag": "CORPORATE INTELLIGENCE",
   "objective": "Recover the ownership archive from Research vault.",
-  "condition": "Below 60% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "condition": "Below 60% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
   "aftermath": "The shell company belongs to Aegis. A private security contract is turning public research into private leverage.",
   "displayKind": "Copy",
   "recurring": false,
@@ -39,7 +39,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     }
   ],
   "actionRules": [],
@@ -49,7 +50,7 @@
       "title": "Beneficial owners",
       "company": "HELIX DYNAMICS",
       "contract": "Glasshouse",
-      "text": "Ownership schedule: Helix\u0027s research subsidiary pays a holding company for exclusive deployment rights. That holding company has no staff. Its sole voting shareholder is Aegis Systems."
+      "text": "Ownership schedule: Helix's research subsidiary pays a holding company for exclusive deployment rights. That holding company has no staff. Its sole voting shareholder is Aegis Systems."
     },
     {
       "id": "glasshouse/1",

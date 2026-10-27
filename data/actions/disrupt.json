@@ -92,5 +92,10 @@
       "type": "LogEffect",
       "message": "DEFENSE SUPPRESSED // {target}."
     }
-  ]
+  ],
+  "memoryCost": 10,
+  "memoryMode": "OneShot",
+  "activeModifiers": [],
+  "releaseOnTargetControl": false,
+  "instant": false
 }

@@ -13,6 +13,47 @@ namespace HackThePlanet.Editor
     public static class ContentFieldHelp
     {
         private static readonly Dictionary<string, string> Help = @"
+rig|Shared rig rules and starting layout. JSON is authoritative; generated assets are mirrors.
+chassis|Registered chassis models, ordered by their unique progression tier.
+modules|Registered purchasable module models. Each purchase creates an independent owned copy.
+startingChassis|Chassis granted to a new career.
+startingParts|Free installed starter copies and their row, column and rotation. Paid price is zero.
+module|Registered module model reference.
+rotated|Rotate this footprint 90 degrees; swaps width and height.
+rotatable|Permit 90 degree rotation when global rotation is enabled.
+allowRotation|Enable footprint rotation for models that permit it.
+requireValidBuild|Block connections while the rack has placement, power or cooling failures.
+saleFraction|Voluntary sale fraction of the actual price paid; credits round down.
+researchSaleFraction|Fraction of actual paid price returned when a research refund locks the model.
+minimumTraceFraction|Minimum fraction of ordinary trace retained after reductions. Explicitly trace-free tools remain exempt.
+maximumHackSpeed|Upper limit for the modified hack speed multiplier.
+maximumTransferSpeed|Upper limit for the modified transfer speed multiplier.
+memoryReclaim|MEM returned from the reclaiming bucket per simulation second; pauses with simulation time.
+family|Module family used for filtering and adjacency matching, such as power, cooling, storage or reclaim.
+tier|Model tier. Power and cooling tiers are separate purchasable models.
+width|Unrotated module footprint width in rack cells.
+height|Unrotated module footprint height in rack cells.
+rows|Number of rack rows.
+columns|Number of rack columns.
+requiredJobs|Successful deliveries required to purchase this chassis, including freelance work.
+slots|Maximum number of equipped abilities, independent of their RAM costs.
+storageCapacity|Storage capacity in GB, held until disconnect.
+memoryPool|Maximum ability RAM in MEM. Active tools reserve it; one-shots occupy it until reclaimed.
+powerCapacity|Power limit supplied by this chassis or installed module; stacks additively.
+coolingCapacity|Cooling limit supplied by this chassis or installed module; stacks additively.
+powerDemand|Power consumed while this module is installed, including cooling modules.
+heatOutput|Cooling capacity required by this installed module, including power supplies.
+flavour|Long-form flavour text shown in readable module tooltips.
+synergy|Player-facing explanation of adjacency modifiers; mechanics live in Modifiers.
+memoryMode|None, OneShot (reclaiming RAM), or Persistent (reserved until disabled).
+memoryCost|MEM needed to start the tool. Queued actions recheck when they start.
+activeModifiers|Stat modifiers applied while this persistent tool has a RAM reservation.
+instant|Allow a zero-duration targeted action alongside a running tool, such as archive discard.
+releaseOnTargetControl|Release this persistent tool and its RAM when the target becomes permanently controlled.
+payload|This objective downloads a file that occupies storage. Remote erase, alteration and control tasks leave it off.
+payloadStorage|Deterministic GB formula for required payload files. All required payloads must fit the starting chassis.
+archiveStorage|Deterministic GB formula for optional archives. Discarding an archive frees this space.
+kind|Match a neighboring module model ID, family or branch. Empty matches all installed neighbors.
 id|Stable identity used by references and saves. Use Rename ID for existing definitions; local network IDs must match links and objectives.
 title|Player-facing title shown on cards, research nodes, or reports.
 description|Player-facing explanatory copy. Technology copy can interpolate modifier values with {modifier:0:reduction}.
@@ -270,6 +311,8 @@ StackRows|Maximum number of upward label-stacking rows.
 ".Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(l => l.Split(new[] { '|' }, 2)).ToDictionary(p => p[0], p => p[1]);
         public static string Description(FieldInfo field)
         {
+            if(field.DeclaringType==typeof(RigStarterPart)&&field.Name=="row")return "Zero-based starter rack row; the footprint must fit without overlap.";
+            if(field.DeclaringType==typeof(RigStarterPart)&&field.Name=="column")return "Zero-based starter rack column; upgrades preserve this coordinate.";
             var tooltip = field.GetCustomAttribute<TooltipAttribute>();
             if (tooltip != null) return tooltip.tooltip;
             return Help.TryGetValue(field.Name, out var text) ? text : throw new InvalidOperationException("Missing property description: " + field.DeclaringType.Name + "." + field.Name);

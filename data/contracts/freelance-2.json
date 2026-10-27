@@ -1,13 +1,13 @@
 {
   "id": "freelance-2",
   "title": "Signal Lost",
-  "description": "A verified exchange contract generated from today\u0027s network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
+  "description": "A verified exchange contract generated from today's network conditions. Familiar infrastructure, a new layout of defenses, and payment on a clean extraction.",
   "company": "company-2",
   "network": "corporate-network",
   "client": "EXCHANGE // verified escrow",
   "tag": "FREELANCE / REPEATABLE",
   "objective": "Recover records at Dev terminal, Audit terminal, and Research vault.",
-  "condition": "Below 75% trace: \u002B100 cr / \u002B20 XP. Each optional archive: \u002B100 cr / \u002B15 XP; all three pay XP.",
+  "condition": "Below 75% trace: +100 cr / +20 XP. Each optional archive: +100 cr / +15 XP; all three pay XP.",
   "aftermath": "A quiet freelance job closes. The exchange has fresh work, and the network keeps changing.",
   "displayKind": "Investigate",
   "recurring": true,
@@ -123,7 +123,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     },
     {
       "nodeId": "n9",
@@ -134,7 +135,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     },
     {
       "nodeId": "n19",
@@ -145,7 +147,8 @@
         "type": "NodeStateCondition",
         "state": "Collected"
       },
-      "actionRequirements": []
+      "actionRequirements": [],
+      "payload": true
     }
   ],
   "actionRules": [],

@@ -1,0 +1,43 @@
+{
+  "id": "ram",
+  "title": "RAM",
+  "description": "+10 MEM.",
+  "family": "memory",
+  "branch": "CONTROL",
+  "tier": 1,
+  "width": 1,
+  "height": 1,
+  "price": 300,
+  "rotatable": true,
+  "powerDemand": 2,
+  "heatOutput": 1,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "base",
+        "equipped": false
+      },
+      "message": "Requires Base research."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "memoryPool",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 10
+      }
+    }
+  ]
+}

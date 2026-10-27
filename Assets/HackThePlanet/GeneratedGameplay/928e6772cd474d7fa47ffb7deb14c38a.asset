@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6351d8921bbb66c4590e73662cfb54e9, type: 3}
+  m_Name: 928e6772cd474d7fa47ffb7deb14c38a
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ActionDefinition
+  id: decoy
+  title: Decoy process
+  description: 'Toggle a sustained decoy: reserves 16 MEM for 35% less trace.'
+  memoryMode: 2
+  memoryCost: 16
+  instant: 0
+  releaseOnTargetControl: 0
+  activeModifiers:
+  - id: 
+    stat: trace
+    priority: 0
+    operation: 2
+    when:
+      rid: 213507078570378918
+    value:
+      rid: 213507078570378919
+  tags:
+  - decoy
+  shortcut: 0
+  shortcutLabel: 
+  legacyGroup: decoy
+  presentationPriority: 50
+  operatorTarget: 1
+  queueable: 0
+  initiallyAvailable: 0
+  futureNeighborQueue: 0
+  traceFree: 1
+  visible:
+    rid: 213507078570378920
+  requirements: []
+  queueRequirements:
+  - condition:
+      rid: 213507078570378921
+    message: Discover this system first.
+  duration:
+    rid: 213507078570378922
+  baseTrace:
+    rid: 213507078570378923
+  useLimit:
+    rid: 213507078570378924
+  effects:
+  - rid: 213507078570378925
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507078570378918
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data: 
+    - rid: 213507078570378919
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.65
+    - rid: 213507078570378920
+      type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        technology: {fileID: 11400000, guid: 420d0889431d6a342b611e28bf5521a6, type: 2}
+        equipped: 1
+    - rid: 213507078570378921
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 0
+    - rid: 213507078570378922
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507078570378923
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507078570378924
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507078570378925
+      type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        message: DECOY ACTIVE // Trace generation reduced while RAM is reserved.

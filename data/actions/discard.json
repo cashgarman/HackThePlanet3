@@ -1,0 +1,78 @@
+{
+  "id": "discard",
+  "title": "Discard archive",
+  "description": "Free drive space and forfeit this archive\u2019s pending credits, XP and lore. You can download it again.",
+  "tags": [
+    "discard"
+  ],
+  "shortcut": "Delete",
+  "shortcutLabel": "DEL",
+  "legacyGroup": "",
+  "presentationPriority": 60,
+  "operatorTarget": false,
+  "queueable": false,
+  "initiallyAvailable": true,
+  "futureNeighborQueue": false,
+  "traceFree": true,
+  "instant": true,
+  "visible": {
+    "type": "AllCondition",
+    "conditions": [
+      {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      {
+        "type": "NodeStateCondition",
+        "state": "Bonus"
+      },
+      {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Objective"
+        }
+      }
+    ]
+  },
+  "requirements": [],
+  "queueRequirements": [],
+  "duration": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "baseTrace": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "SetStateEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "state": "Collected",
+      "value": false
+    },
+    {
+      "type": "LogEffect",
+      "message": "ARCHIVE DISCARDED // {target}. Storage freed; pending rewards forfeited."
+    }
+  ],
+  "memoryMode": "None",
+  "memoryCost": 0,
+  "releaseOnTargetControl": false,
+  "activeModifiers": []
+}

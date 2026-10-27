@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: 6027865109f7461a86994e12a0d123d7
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: decoy
+  title: Decoy process
+  description: Sustained decoy reduces trace generation by 35% while enabled. Reserves 16 MEM; disable it to release RAM.
+  branch: CONTROL
+  cost: 95
+  waypointTier: 0
+  special: 1
+  position: {x: 865, y: 545}
+  parents:
+  - {fileID: 11400000, guid: 178c32c0a3a7e894482f3f06460d3a2a, type: 2}
+  grants:
+  - {fileID: 11400000, guid: 0cb88338658603d4abecdc6450ed7a86, type: 2}
+  modifiers: []
+  triggers: []
+  references:
+    version: 2
+    RefIds: []

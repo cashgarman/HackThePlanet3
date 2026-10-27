@@ -181,12 +181,12 @@ namespace HackThePlanet.Editor
                 Check(sim.Career.equipped.Count==2,"Special abilities respect the two-slot starting loadout.");
                 Check(!sim.ToggleEquip("decoy"),"A full loadout rejects another equipped ability.");
                 sim.ToggleEquip("backdoor");Check(sim.ToggleEquip("decoy"),"Unequipping frees a slot.");
-                Check(sim.Upgrade(0)&&sim.Career.cpu==1,"Credits buy persistent hardware.");
+                int copies=sim.Career.rigParts.Count;Check(sim.BuyModule("processor")!=null&&sim.Career.rigParts.Count==copies+1,"Credits buy persistent module copies.");
                 Check(!sim.Upgrade(9),"Invalid hardware choices cannot mutate the career.");
                 sim.Start(GameContent.Story[1]);
-                Check(!sim.BuyTech("efficient")&&!sim.RefundResearch()&&!sim.Upgrade(0),"Research, refunds, and hardware changes are locked during operations.");
-                Check(sim.Decoy()&&!sim.Decoy(),"Decoy is usable only once per operation.");
-                var aborted=sim.Disconnect();Check(!aborted.success&&sim.Career.cpu==1&&sim.Has("quiet"),"Abort preserves equipment and purchased technology.");
+                Check(!sim.BuyTech("efficient")&&!sim.RefundResearch()&&sim.BuyModule("processor")==null,"Research, refunds, and hardware changes are locked during operations.");
+                Check(sim.Decoy()&&sim.MemoryReserved==16&&sim.Decoy()&&sim.MemoryReserved==0,"Decoy toggles its RAM reservation.");
+                var aborted=sim.Disconnect();Check(!aborted.success&&sim.Career.rigParts.Count==copies+1&&sim.Has("quiet"),"Abort preserves equipment and purchased technology.");
                 Check(sim.Start(GameContent.Story[1]),"Uncompleted work remains retryable.");
                 sim.Op.trace=99.99f;sim.Execute(ToolKind.Hack,"n2");sim.Tick(.5f);
                 Check(!sim.Active&&!sim.LastReport.success&&sim.LastReport.verdict=="CONNECTION ISOLATED","100% trace closes the connection without rewards.");
@@ -215,7 +215,7 @@ namespace HackThePlanet.Editor
                     if(!campaign.Has("quiet"))campaign.BuyTech("quiet");
                     else if(!campaign.Has("efficient"))campaign.BuyTech("efficient");
                     else if(!campaign.Has("selective"))campaign.BuyTech("selective");
-                    if(campaign.Career.cpu<2)campaign.Upgrade(0);
+                    if(campaign.PreviewChassis().allowed)campaign.UpgradeChassis();
                 }
                 Check(campaign.Career.completed.Count==6&&campaign.Career.jobs==6,"All six authored contracts form a complete career loop.");
                 var repeatable=GameContent.Contracts(campaign.Career).First(c=>c.recurring);
@@ -226,7 +226,7 @@ namespace HackThePlanet.Editor
                 Check(CareerStorage.Save(campaign.Career,save),"Atomic career save succeeds.");
                 var restored=new GameSimulation(CareerStorage.Load(save));
                 Check(restored.Active&&restored.Op.paused&&restored.Op.task!=null&&restored.Op.task.elapsed>0,"Active tool work resumes from save in a paused operation.");
-                Check(restored.Career.completed.Count==6&&restored.Has("quiet")&&restored.Career.cpu==campaign.Career.cpu,"Research, hardware, story, and economy survive a round trip.");
+                Check(restored.Career.completed.Count==6&&restored.Has("quiet")&&restored.Career.chassisId==campaign.Career.chassisId&&restored.Career.rigParts.Count==campaign.Career.rigParts.Count,"Research, hardware, story, and economy survive a round trip.");
                 Check(restored.KnownGraph.Nodes.Count==campaign.KnownGraph.Nodes.Count,"Known graph projection is rebuilt correctly after load.");
                 CareerStorage.Save(restored.Career,save);File.WriteAllText(save,"invalid career");
                 var backup=CareerStorage.Load(save);Check(backup.completed.Count==6,"A corrupt save recovers from its previous atomic backup.");
@@ -237,7 +237,7 @@ namespace HackThePlanet.Editor
                 var reset=new GameSimulation(CareerStorage.Load(resetSave)).Career;
                 Check(reset.credits==600&&reset.xp==0&&reset.day==1&&reset.jobs==0&&reset.totalEarnedXp==0&&reset.operation==null,
                     "Reset clears economy, story statistics, and the active operation.");
-                Check(reset.completed.Count==0&&reset.reports.Count==0&&reset.unlocked.SequenceEqual(new[]{"base"})&&reset.equipped.Count==0&&reset.cpu==0&&reset.bandwidth==0&&reset.memory==0,
+                Check(reset.completed.Count==0&&reset.reports.Count==0&&reset.unlocked.SequenceEqual(new[]{"base"})&&reset.equipped.Count==0&&reset.chassisId=="chassis-1"&&reset.rigParts.Count==4&&reset.rigParts.All(p=>p.paidPrice==0),
                     "Reset clears contracts, reports, research, loadout, and hardware.");
                 var resetBackup=new GameSimulation(CareerStorage.Load(resetSave+".bak")).Career;
                 Check(resetBackup.operation==null&&resetBackup.jobs==0&&resetBackup.completed.Count==0,"Reset also removes old progress from recovery.");

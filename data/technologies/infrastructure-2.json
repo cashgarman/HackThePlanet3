@@ -1,0 +1,19 @@
+{
+  "id": "infrastructure-2",
+  "title": "Infrastructure II",
+  "description": "Unlocks module purchases: Power Supply II, Cooling II.",
+  "branch": "CONTROL",
+  "cost": 100,
+  "waypointTier": 0,
+  "special": false,
+  "position": {
+    "x": 100,
+    "y": 760
+  },
+  "parents": [
+    "base"
+  ],
+  "grants": [],
+  "modifiers": [],
+  "triggers": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "power-2",
+  "title": "Power Supply II",
+  "description": "+20 power capacity.",
+  "family": "power",
+  "branch": "INTRUSION",
+  "tier": 2,
+  "width": 2,
+  "height": 2,
+  "price": 1000,
+  "rotatable": true,
+  "powerDemand": 0,
+  "heatOutput": 5,
+  "powerCapacity": 20,
+  "coolingCapacity": 0,
+  "flavour": "Salvaged hardware. A private signal.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "infrastructure-2",
+        "equipped": false
+      },
+      "message": "Requires Infrastructure 2 research."
+    }
+  ],
+  "modifiers": []
+}

@@ -8,7 +8,7 @@ namespace HackThePlanet
     public enum Arithmetic { Add, Subtract, Multiply, Divide, Minimum, Maximum, Override, Modulo, Floor }
     public enum Comparison { Equal, NotEqual, Less, LessOrEqual, Greater, GreaterOrEqual }
     public enum NodeState { Known, Controlled, Scanned, Collected, Objective, Bonus, DefenseActive, Reachable }
-    public enum NumberInput { Security, BaseSecurity, Day, Difficulty, Seed, Column, Row, CompletedContracts, CompanyWins, BonusFiles, Trace, QuietLimit, ContractCredits, ContractXp, Duration, NeighborCount, NodeCount, Counter, StatusRemaining, HardwareLevel, ArchiveCredits, ArchiveXp, ArchiveXpCap, QuietCredits, QuietXp, Step, Lane, SafeLane, ControlledDistance, UnlockedAbilities }
+    public enum NumberInput { Security, BaseSecurity, Day, Difficulty, Seed, Column, Row, CompletedContracts, CompanyWins, BonusFiles, Trace, QuietLimit, ContractCredits, ContractXp, Duration, NeighborCount, NodeCount, Counter, StatusRemaining, HardwareLevel, ArchiveCredits, ArchiveXp, ArchiveXpCap, QuietCredits, QuietXp, Step, Lane, SafeLane, ControlledDistance, UnlockedAbilities, NodeStorage, StorageUsed, FreeStorage, StorageCapacity, MemoryFree, MemoryPool, MemoryReserved, MemoryReclaiming, RigNeighborCount, JobsCompleted }
 
     public sealed class RuleContext
     {
@@ -20,6 +20,9 @@ namespace HackThePlanet
         internal ActionDefinition Action;
         public float Duration;
         public int Step,Lane;
+        public int RigSlot=-1;
+        public string RigInstance;
+        internal RuleContext ForRig(string instance) {var c=(RuleContext)MemberwiseClone();c.RigInstance=instance;return c;}
         public bool SafeLane;
         public System.Random Random;
         private sealed class Guard { public int depth; }
@@ -76,6 +79,16 @@ namespace HackThePlanet
         {
             switch(input)
             {
+                case NumberInput.JobsCompleted:return c.Career?.jobs??0;
+                case NumberInput.NodeStorage:return c.Node?.storage??0;
+                case NumberInput.StorageUsed:return c.Simulation?.StorageUsed??0;
+                case NumberInput.FreeStorage:return c.Simulation?.FreeStorage??0;
+                case NumberInput.StorageCapacity:return c.Simulation?.StorageCapacity??0;
+                case NumberInput.MemoryFree:return c.Simulation?.MemoryFree??0;
+                case NumberInput.MemoryPool:return c.Simulation?.MemoryPool??0;
+                case NumberInput.MemoryReserved:return c.Simulation?.MemoryReserved??0;
+                case NumberInput.MemoryReclaiming:return c.Simulation?.MemoryReclaiming??0;
+                case NumberInput.RigNeighborCount:return c.Simulation?.RigNeighborCount(c.RigInstance,key)??0;
                 case NumberInput.Step:return c.Step;
                 case NumberInput.Lane:return c.Lane;
                 case NumberInput.SafeLane:return c.SafeLane?1:0;
@@ -195,6 +208,13 @@ namespace HackThePlanet
         public TechnologyDefinition technology;
         public bool equipped;
         protected override bool Check(RuleContext c)=>technology!=null&&(equipped?c.Simulation?.Equipped(technology.id)==true:c.Career?.unlocked.Contains(technology.id)==true);
+    }
+    [Serializable] public sealed class RigNeighborCondition : Condition
+    {
+        // Empty kind matches all neighbors; otherwise a RigModuleKind name or branch.
+        public string kind;
+        public int minimum=1;
+        protected override bool Check(RuleContext c)=>(c.Simulation?.RigNeighborCount(c.RigInstance,kind)??0)>=minimum;
     }
     [Serializable] public sealed class NamedNodeCondition : Condition
     {

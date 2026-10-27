@@ -35,6 +35,10 @@ namespace HackThePlanet.Editor
             EditorApplication.update+=Poll;
             EditorApplication.playModeStateChanged+=state=>
             {
+                if(state==PlayModeStateChange.EnteredPlayMode&&SessionState.GetBool("HTP.RigPreview",false))
+                {
+                    SessionState.SetBool("HTP.RigPreview",false);var app=WorkstationApp.Instance;app.UseTestCareer(new Career{credits=100000,xp=10000,jobs=3});app.State.DebugUnlockAllTech();app.State.UpgradeChassis();app.Navigate("rig");Status("PASS / rig-play");
+                }
                 if(state==PlayModeStateChange.EnteredPlayMode&&SessionState.GetBool("HTP.Smoke",false))
                 {smokePhase=1;smokeFrames=0;}
                 if(state==PlayModeStateChange.EnteredEditMode&&smokePhase==144)
@@ -75,9 +79,15 @@ namespace HackThePlanet.Editor
                     case "data-validate": DataDrivenValidation.Run();break;
                     case "balance-validate": BalanceValidation.Run();break;
                     case "setup": Setup();break;
+                    case "rig-capture": File.WriteAllText(Path.Combine(Project,"Artifacts/rig-pointer-career.json"),JsonUtility.ToJson(WorkstationApp.Instance.State.Career,true));CaptureScreenshot(Path.Combine(Project,"Artifacts/rig-pointer-preview.png"));break;
+                    case "build-notes": File.WriteAllLines(Path.Combine(Project,"Artifacts/rig-build-warnings.txt"),BuildReport.GetLatestReport().steps.SelectMany(step=>step.messages).Where(message=>message.type==LogType.Warning||message.type==LogType.Error).Select(message=>message.content));break;
+                    case "rig-play": SessionState.SetBool("HTP.RigPreview",true);EditorApplication.isPlaying=true;return;
+                    case "rig-validate": RigValidation.Run();break;
+                    case "generate-assets": GameplayAssetGenerator.Generate();break;
                     case "validate": GameValidation.Run();break;
                     case "models": NetworkVisualValidation.Run();break;
                     case "build": BuildWindows();break;
+                    case "build-rig": BuildWindowsAt("Builds/Windows-Rig");break;
                     case "build-volumetric": BuildWindowsAt("Builds/Windows-Volumetric");break;
                     case "play": EditorApplication.isPlaying=true;break;
                     case "stop": EditorApplication.isPlaying=false;break;
@@ -310,9 +320,9 @@ namespace HackThePlanet.Editor
                     case 13:
                         app.Navigate("rig");smokePhase++;return;
                     case 14:
-                        Check(app.ActivateVisibleControl("upgrade-0"),"Hardware purchase button works.");Check(app.State.Career.cpu==1,"CPU upgraded.");smokePhase++;return;
+                        Check(app.ActivateVisibleControl("buy-processor"),"Module purchase button works.");Check(app.State.Career.rigParts.Count(p=>p.modelId=="processor")==2,"Second CPU copy is owned.");smokePhase++;return;
                     case 15:
-                        CaptureScreenshot(Path.Combine(Project,"Artifacts/05-your-rig.png"));smokePhase++;return;
+                        RigValidation.CheckRackUi(app);CaptureScreenshot(Path.Combine(Project,"Artifacts/05-your-rig.png"));smokePhase++;return;
                     case 16:
                         // Isolated display fixture; banking and failure semantics are exercised by NetworkValidation.
                         app.State.Career.lore.Add(LoreContent.For(GameContent.Story[0],0));
@@ -350,7 +360,7 @@ namespace HackThePlanet.Editor
                         Check(!frozenField.SequenceEqual(ReadPixels(app.Visuals.FieldTexture)),"Full effects animate the signal field.");
                         app.Visuals.SetMode(previousEffects);frozenField=null;frozenGlass=null;
                         settingsCareer=app.State.Career;settingsElapsed=app.State.Op.elapsed;settingsTaskElapsed=app.State.Op.task.elapsed;settingsTrace=app.State.Op.trace;
-                        Check(app.ActivateVisibleControl("settings"),"Settings rail button opens the menu.");smokePhase++;return;
+                        Check(app.Root.Q<VisualElement>(className:"settings-menu")!=null,"Settings stays open while display controls are changed.");smokePhase++;return;
                     case 25:
                         var menu=app.Root.Q<VisualElement>(className:"settings-menu");
                         Check(menu!=null&&menu.Q<Button>("resume")?.text=="Resume"&&menu.Q<Button>("reset-save")?.text=="Reset Game Save"&&menu.Q<Button>("quit")?.text=="Quit","Settings retains Resume, Reset Game Save, and Quit.");
@@ -453,10 +463,10 @@ namespace HackThePlanet.Editor
                     case 39:
                         Check(app.ActivateVisibleControl("close-report"),"Asset-only report closes.");app.Navigate("rig");smokePhase++;return;
                     case 40:
-                        app.Root.Q<Button>("upgrade-3").GetFirstAncestorOfType<ScrollView>().ScrollTo(app.Root.Q<Button>("upgrade-3"));smokePhase=104;return;
+                        app.Root.Q<Button>("buy-expansion").GetFirstAncestorOfType<ScrollView>().ScrollTo(app.Root.Q<Button>("buy-expansion"));smokePhase=104;return;
                     case 104:
-                        Check(app.Root.Q<Button>("upgrade-3")!=null&&app.Root.Query<Label>().ToList().Any(l=>l.text.Contains("OF 4")),"New hardware and extra tier appear without UI branches.");
-                        Check(app.ActivateVisibleControl("upgrade-3")&&app.State.Career.Level("expansion")==1,"Asset-only hardware purchases through UI.");
+                        Check(app.Root.Q<Button>("buy-expansion")!=null,"Authored module appears in the rack shop.");
+                        Check(app.ActivateVisibleControl("buy-expansion")&&app.State.Career.rigParts.Any(p=>p.modelId=="expansion"),"Asset-only module purchases through UI.");
                         CaptureScreenshot(Path.Combine(Project,"Artifacts/13-asset-defined-hardware.png"));app.Navigate("research");smokePhase=41;return;
                     case 41:
                         Check(app.Root.Q<Button>("tech-field-analysis")!=null,"Asset-only technology appears in research graph.");

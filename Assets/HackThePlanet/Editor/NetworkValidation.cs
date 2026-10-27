@@ -88,7 +88,7 @@ namespace HackThePlanet.Editor
 
         private static GameSimulation EquippedSimulation(Contract job)
         {
-            var career=new Career{cpu=3,bandwidth=3,unlocked=new List<string>{"base","quiet","efficient","selective","buffer"}};
+            var career=new Career{chassisId="chassis-4",unlocked=new List<string>{"base","quiet","efficient","selective","buffer"}};
             career.completed=GameContent.Story.Take(job.recurring?3:job.requiredWins).Select(c=>c.id).ToList();
             var sim=new GameSimulation(career);sim.Start(job);return sim;
         }
