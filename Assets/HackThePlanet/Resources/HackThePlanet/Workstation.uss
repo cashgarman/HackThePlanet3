@@ -138,6 +138,136 @@ ScrollView {
     border-bottom-color: #c5f56b;
 }
 
+/* Designer playtest lab: a scrollable setup rail, network stage, and results rail. */
+.lab-setup, .lab-results {
+    width: 290px;
+    flex-shrink: 0;
+    padding: 18px;
+    background-color: #0d151c;
+}
+
+.lab-setup {
+    border-right-width: 1px;
+    border-right-color: #23323a;
+}
+
+.lab-results {
+    border-left-width: 1px;
+    border-left-color: #23323a;
+}
+
+.lab-setup .unity-base-field, .lab-results .unity-base-field {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 11px;
+    margin-bottom: 7px;
+    min-height: 34px;
+}
+
+/* Dropdown controls use a pale native surface, so keep both the value and popup dark. */
+.lab-setup .unity-base-popup-field__text, .lab-results .unity-base-popup-field__text {
+    color: #10232b;
+    -unity-font-style: bold;
+}
+
+.lab-setup .unity-base-popup-field__arrow, .lab-results .unity-base-popup-field__arrow {
+    border-top-color: #10232b;
+}
+
+.unity-base-popup-field__menu, .unity-popup-field__menu, .unity-menu {
+    background-color: #10232b;
+    border-color: #00bfb4;
+}
+
+.unity-base-popup-field__menu .unity-menu-item, .unity-popup-field__menu .unity-menu-item,
+.unity-menu .unity-menu-item {
+    color: #eff8fa;
+    background-color: #10232b;
+}
+
+.unity-base-popup-field__menu .unity-menu-item:hover, .unity-popup-field__menu .unity-menu-item:hover,
+.unity-menu .unity-menu-item:hover {
+    color: #06191e;
+    background-color: #00d9ca;
+}
+
+.lab-setup .unity-base-field__label, .lab-results .unity-base-field__label {
+    min-width: 0;
+    white-space: normal;
+    margin-bottom: 5px;
+}
+
+.lab-setup Label, .lab-results Label, .lab-heading Label {
+    white-space: normal;
+}
+
+.lab-setup .primary-button, .lab-setup .secondary-button {
+    margin-top: 14px;
+    min-height: 40px;
+}
+
+.lab-center {
+    flex-grow: 1;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    background-color: #0a1218;
+}
+
+.lab-heading {
+    padding: 18px 22px 12px 22px;
+    min-height: 74px;
+    flex-shrink: 0;
+}
+
+.lab-center .graph-viewport {
+    flex-grow: 1;
+    min-height: 180px;
+}
+
+.lab-summary {
+    flex-grow: 1;
+    padding: 24px;
+}
+
+.lab-summary .body-copy {
+    margin-top: 12px;
+}
+
+.lab-controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    border-top-width: 1px;
+    border-top-color: #23323a;
+}
+
+.lab-controls .map-button {
+    margin-right: 7px;
+    margin-bottom: 5px;
+}
+
+.lab-result {
+    min-height: 62px;
+    margin-top: 9px;
+    padding: 10px;
+    white-space: normal;
+    border-width: 1px;
+    border-color: #29404a;
+    background-color: #14212a;
+    color: #b8cdd2;
+}
+
+.lab-result.active {
+    border-color: #c5f56b;
+    color: #c5f56b;
+}
+
+.lab-finding, .lab-event {
+    white-space: normal;
+    margin-top: 8px;
+}
+
 .wallet {
     flex-direction: row;
     border-left-width: 1px;

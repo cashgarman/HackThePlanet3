@@ -119,6 +119,9 @@ namespace HackThePlanet
 		// Callback invoked when the player selects a node or technology.
 		private readonly Action<string> selectNode;
 
+		// Builds a node-specific context menu for network waypoint planning.
+		private readonly Func<string, VisualElement> nodeContextMenu;
+
 		// Currently selected node or technology id.
 		private readonly string selectedId;
 
@@ -130,6 +133,9 @@ namespace HackThePlanet
 
 		// Optional contract waypoint markers overlaid on the network view.
 		private readonly WaypointOverlay waypointOverlay;
+
+		// Currently open network node menu, if any.
+		private VisualElement contextMenu;
 
 		// Node id showing the in-progress tool progress indicator.
 		private string activeProgressNodeId;
@@ -182,12 +188,14 @@ namespace HackThePlanet
 		/// <param name="guideObjectiveId">Optional objective id for guide arrow rendering.</param>
 		/// <param name="waypoints">Optional contract waypoints to overlay.</param>
 		/// <param name="waypointTier">Unlocked waypoint feature tier for overlays.</param>
+		/// <param name="nodeContextMenu">Optional menu builder for a right-clicked network node.</param>
 		public GraphViewport(List<NetNode> nodes, List<NetLink> links, string selected, bool preview,
 							 Action<string> select, GraphPathResult route = null, GraphCameraState cameraState = null,
 							 ContractIntel intel = ContractIntel.Full, ContractIntel? focusIntel = null,
 							 GameCatalog catalog = null,
 							 string guideEntryId = null, string guideObjectiveId = null,
-							 IReadOnlyList<NetworkWaypoint> waypoints = null, int waypointTier = 0)
+							 IReadOnlyList<NetworkWaypoint> waypoints = null, int waypointTier = 0,
+							 Func<string, VisualElement> nodeContextMenu = null)
 			: this(BuildNetwork(nodes, links, preview, intel), selected, select, false, null, cameraState, false,
 				   preview ? null : new HashSet<string>(nodes.Where(n => n.controlled).Select(n => n.id)),
 				   preview
@@ -201,6 +209,7 @@ namespace HackThePlanet
 																					  other.controlled))))
 												  .Select(n => n.id)))
 		{
+			this.nodeContextMenu = nodeContextMenu;
 			// Keep the guide arrow ids for rendering.
 			this.guideEntryId = guideEntryId;
 			this.guideObjectiveId = guideObjectiveId;
@@ -508,6 +517,8 @@ namespace HackThePlanet
 			// Begin a drag on left, middle, or right press, but not on node buttons.
 			RegisterCallback<PointerDownEvent>(evt =>
 			{
+				// Dismiss an open menu before handling another graph gesture.
+				CloseContextMenu();
 				if (evt.button is not (0 or 1 or 2) || evt.target is Button)
 					return;
 
@@ -567,18 +578,60 @@ namespace HackThePlanet
 
 				// Treat a short drag as a click and pick the node under the pointer.
 				var smallMove = Vector2.Distance(dragStart, evt.position) < 5;
-				var hit = evt.button == 0 && smallMove ? PickNode(this.WorldToLocal(evt.position)) : null;
+				var hit = (evt.button == 0 || evt.button == 1) && smallMove
+					? PickNode(this.WorldToLocal(evt.position)) : null;
 
 				// End the drag and release the pointer.
 				dragging = false;
 				this.ReleasePointer(evt.pointerId);
 
 				// Select the picked node, or clear the selection on a background click.
-				if (hit != null)
+				if (evt.button == 1 && hit != null && nodeContextMenu != null)
+					ShowContextMenu(hit, this.WorldToLocal(evt.position));
+				else if (evt.button == 0 && hit != null)
 					ClickNode(hit, select);
 				else if (evt.button == 0 && smallMove && !string.IsNullOrEmpty(selectedId))
 					ClearSelection(select);
 			});
+		}
+
+		// Displays a waypoint menu beside the node that received a short right click.
+		private void ShowContextMenu(string nodeId, Vector2 local)
+		{
+			var menu = nodeContextMenu?.Invoke(nodeId);
+			if (menu == null)
+				return;
+
+			contextMenu = menu;
+			menu.style.position = Position.Absolute;
+			menu.style.maxWidth = Mathf.Max(120, contentRect.width - 16);
+			menu.style.maxHeight = Mathf.Max(1, contentRect.height - 16);
+			menu.style.left = Mathf.Clamp(local.x, 8, Mathf.Max(8, contentRect.width - 268));
+			menu.style.top = Mathf.Clamp(local.y, 8, Mathf.Max(8, contentRect.height - 80));
+			menu.RegisterCallback<PointerDownEvent>(evt => evt.StopPropagation());
+			menu.RegisterCallback<PointerUpEvent>(evt => evt.StopPropagation());
+			menu.RegisterCallback<WheelEvent>(evt => evt.StopPropagation());
+			menu.RegisterCallback<KeyDownEvent>(evt =>
+			{
+				if (evt.keyCode != KeyCode.Escape)
+					return;
+				CloseContextMenu();
+				evt.StopPropagation();
+			});
+			menu.RegisterCallback<GeometryChangedEvent>(_ =>
+			{
+				if (contextMenu == menu)
+					menu.style.top = Mathf.Clamp(local.y, 8, Mathf.Max(8, contentRect.height - menu.resolvedStyle.height - 8));
+			});
+			Add(menu);
+			menu.focusable = true;
+			menu.Focus();
+		}
+
+		private void CloseContextMenu()
+		{
+			contextMenu?.RemoveFromHierarchy();
+			contextMenu = null;
 		}
 
 		/// <summary>Gets the image element receiving procedural intel-card static from <see cref="SignalVisuals" />.</summary>
@@ -600,6 +653,7 @@ namespace HackThePlanet
 			if (disposed)
 				return;
 			disposed = true;
+			CloseContextMenu();
 
 			// Persist the orbit pose to the saved camera.
 			savedCamera.Center = center;

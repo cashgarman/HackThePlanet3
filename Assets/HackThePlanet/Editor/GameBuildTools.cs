@@ -202,6 +202,10 @@ namespace HackThePlanet.Editor
 					case "data-validate":    DataDrivenValidation.Run(); break;
 					case "balance-validate": BalanceValidation.Run(); break;
 					case "career-balance": BalanceSuite.Run(false); break;
+					case "playtest-validate": PlaytestValidation.Run(); break;
+					case "playtest-ui": PlaytestValidation.StartUi(); return;
+					case "playtest-career-ui": PlaytestValidation.StartUi(true); return;
+					case "build-playtest": BuildWindowsAt("Builds/Windows-Playtest", BuildOptions.Development); break;
 					case "setup":            Setup(); break;
 
 					// Save the rig pointer career and capture its preview screenshot.
@@ -335,7 +339,7 @@ namespace HackThePlanet.Editor
 		}
 
 		// Builds the Windows player into the given output folder after validating content.
-		private static void BuildWindowsAt(string output)
+		private static void BuildWindowsAt(string output, BuildOptions options = BuildOptions.None)
 		{
 			// Refuse to build while play mode is active.
 			if (EditorApplication.isPlaying)
@@ -353,7 +357,7 @@ namespace HackThePlanet.Editor
 			var result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
 			{
 				scenes = new[] { ScenePath }, locationPathName = Path.Combine(Project, output, "Hack The Planet.exe"),
-				target = BuildTarget.StandaloneWindows64, options = BuildOptions.None
+				target = BuildTarget.StandaloneWindows64, options = options
 			});
 
 			// Write the build summary to the report file.

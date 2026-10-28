@@ -1167,3 +1167,51 @@ Button:active {
 .large-text .right-panel, .large-text .left-panel {
     width: 25%;
 }
+
+/* The designer workspace shows the isolated run economy in its own inspector. */
+.playtest-lab .wallet, .playtest-lab .identity { display: none; }
+.playtest-lab .header-summary { flex-wrap: nowrap; flex-shrink: 0; height: auto; }
+.playtest-lab .header-tools { height: auto; flex-shrink: 0; }
+.playtest-lab .header-tabs { margin-left: 0; margin-top: 10px; flex-wrap: wrap; height: auto; }
+.playtest-lab .header { height: auto; }
+.playtest-lab .logo { width: auto; flex-grow: 1; }
+.playtest-lab .lab-setup, .playtest-lab .lab-results { width: 25%; min-width: 270px; }
+.playtest-lab .lab-setup .body-copy { font-size: 16px; }
+
+/* Playtest setup inputs use the light Unity field surface. Keep labels and typed values dark/high contrast. */
+.playtest-lab .lab-setup .unity-base-field__label,
+.playtest-lab .lab-setup .unity-base-field > Label {
+    color: #d8e8ed;
+}
+.playtest-lab .lab-setup TextField,
+.playtest-lab .lab-setup IntegerField,
+.playtest-lab .lab-setup .unity-base-text-field__input,
+.playtest-lab .lab-setup .unity-text-field__input,
+.playtest-lab .lab-setup .unity-base-field__input,
+.playtest-lab .lab-setup .unity-text-input {
+    color: #10232b;
+    -unity-cursor-color: #10232b;
+    -unity-selection-color: #74d9d2;
+}
+.playtest-lab .lab-setup .unity-base-field__input:hover,
+.playtest-lab .lab-setup .unity-base-text-field__input:hover {
+    color: #06191e;
+}
+
+.lab-choice { margin-top: 11px; margin-bottom: 7px; flex-shrink: 0; }
+.lab-choice > Label { color: #d8e8ed; margin-bottom: 5px; white-space: normal; }
+.lab-choice-trigger { min-height: 36px; padding: 8px 12px; color: #10232b; background-color: #d8e8ed; -unity-text-align: middle-left; white-space: normal; }
+.lab-choice-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+.lab-choice-menu { position: absolute; background-color: #10232b; border-width: 1px; border-color: #00bfb4; padding: 6px; }
+.lab-choice-option { min-height: 36px; padding: 8px 12px; margin: 0; color: #eff8fa; background-color: #10232b; white-space: normal; -unity-text-align: middle-left; }
+.lab-choice-option:hover, .lab-choice-option.active { color: #06191e; background-color: #00d9ca; }
+
+.lab-career-details .unity-foldout__text, .lab-career-details > .unity-toggle .unity-toggle__text { color: #d8e8ed; }
+.lab-detail-heading { margin-top: 18px; margin-bottom: 6px; color: #00d9ca; white-space: normal; }
+.lab-detail-row { flex-direction: row; align-items: flex-start; padding: 7px 0; border-bottom-width: 1px; border-bottom-color: #20343c; flex-shrink: 0; }
+.lab-detail-label { width: 52%; flex-shrink: 0; padding-right: 10px; color: #a7bec7; white-space: normal; }
+.lab-detail-value { flex-grow: 1; flex-shrink: 1; min-width: 0; color: #edf6f8; -unity-text-align: upper-right; white-space: normal; }
+.lab-detail-empty { padding: 7px 0; }
+.lab-contract-detail { margin-top: 12px; padding: 10px; border-width: 1px; border-color: #29404a; background-color: #102029; flex-shrink: 0; }
+.lab-contract-detail-title { margin-bottom: 6px; white-space: normal; }
+.lab-detail-reason { white-space: normal; }

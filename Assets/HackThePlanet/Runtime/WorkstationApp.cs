@@ -352,6 +352,8 @@ namespace HackThePlanet
 			if (State == null)
 				return;
 
+			if (Application.isEditor || Debug.isDebugBuild) TickPlaytestLab();
+
 			// Advance the simulation by the scaled frame time.
 			State.Tick(Time.unscaledDeltaTime * speed);
 			var active = State.Active;
@@ -396,7 +398,7 @@ namespace HackThePlanet
 			}
 
 			// Rebuilding mid-drag would call CancelRigDrag and snap a lifted part back into the rack.
-			if (dirty && dragRigId == null)
+			if (dirty && dragRigId == null && labOpenDropdown == null)
 				Build();
 
 			// Refresh the action bar while an operation is running on the network view.
@@ -409,7 +411,10 @@ namespace HackThePlanet
 
 			// Update the meters, canvas, and display effects.
 			UpdateMeters();
-			canvas?.Tick(State, Visuals.Mode);
+			canvas?.Tick(
+				CurrentView == "playtest" && labReplayRunner != null && labReplayRunner.Simulation.Active
+					? labReplayRunner.Simulation :
+				State, Visuals.Mode);
 			Visuals.Tick(State, CurrentView == "research");
 
 			// Sync the motion and trace-alert classes with the current state.
@@ -501,6 +506,19 @@ namespace HackThePlanet
 		// Routes keyboard shortcuts to simulation actions and UI commands.
 		private void HandleShortcut(KeyDownEvent evt)
 		{
+			if (CurrentView == "playtest" && modal == null && evt.keyCode == KeyCode.Space)
+			{
+				var input = evt.target as VisualElement;
+				if (labReplayRunner != null && !(input is TextField) && !(input is IntegerField) &&
+					input?.GetFirstAncestorOfType<TextField>() == null &&
+					input?.GetFirstAncestorOfType<IntegerField>() == null)
+				{
+					labReplayPaused = !labReplayPaused;
+					dirty = true;
+					evt.StopImmediatePropagation();
+				}
+				return;
+			}
 			// Ignore keys until the simulation exists.
 			if (State == null)
 				return;
@@ -643,6 +661,7 @@ namespace HackThePlanet
 			canvas = null;
 
 			// Build the header bar.
+			Root.EnableInClassList("playtest-lab", CurrentView == "playtest");
 			BuildHeader();
 
 			// Create the body containers and the workspace row.
@@ -670,6 +689,8 @@ namespace HackThePlanet
 				BuildResearch(workspace);
 			else if (CurrentView == "rig")
 				BuildRig(workspace);
+			else if (CurrentView == "playtest")
+				BuildPlaytestLab(workspace);
 			else
 				BuildIntel(workspace);
 
@@ -765,6 +786,8 @@ namespace HackThePlanet
 			Tab(tabs, "research", "RESEARCH");
 			Tab(tabs, "rig", "YOUR RIG");
 			Tab(tabs, "intel", "INTELLIGENCE");
+			if (Application.isEditor || Debug.isDebugBuild)
+				Tab(tabs, "playtest", "PLAYTEST LAB");
 		}
 
 		/// <summary>Sets UI text scale and persists it unless <see cref="Testing" /> is true.</summary>
@@ -993,6 +1016,9 @@ namespace HackThePlanet
 		/// <param name="target">View id: network, research, rig, or intel.</param>
 		public void Navigate(string target)
 		{
+			if (target == "playtest" && !Application.isEditor && !Debug.isDebugBuild)
+				return;
+
 			// Pause the operation when leaving the network view.
 			if (State.Active && target != "network")
 				State.SetPaused(true);
@@ -1197,7 +1223,8 @@ namespace HackThePlanet
 				var graphHost = El(map, "map-graph-host");
 				canvas = new GraphViewport(nodes, links, selectedNode, !State.Active, SelectNode, route, networkCamera,
 										   intel, job.Intel, State.Catalog, entryId, objectiveId, State.Waypoints(job),
-										   State.WaypointTier);
+										   State.WaypointTier, !State.Active && State.WaypointTier > 0
+											   ? id => BuildWaypointContextMenu(job, nodes, id) : null);
 				graphHost.Add(canvas);
 				Visuals.AttachField(canvas);
 				Visuals.AttachIntelCard(canvas.IntelStatic);
@@ -1347,6 +1374,86 @@ namespace HackThePlanet
 				Text(bottom, string.Join("\n", State.RigProblems), "small connect-block-warning center-text");
 		}
 
+		// Builds the actions available for a right-clicked network node during contract planning.
+		private VisualElement BuildWaypointContextMenu(Contract job, List<NetNode> nodes, string nodeId)
+		{
+			var node = nodes.FirstOrDefault(n => n.id == nodeId);
+			if (node == null || State.WaypointTier == 0 || job.Intel == ContractIntel.None)
+				return null;
+
+			var tier = State.WaypointTier;
+			var points = State.Waypoints(job);
+			var waypoint = points.FirstOrDefault(w => w.nodeId == nodeId);
+			var canPlan = !State.Active && !State.Career.completed.Contains(job.id) &&
+						  State.Career.completed.Count >= job.requiredWins;
+			var menu = new ScrollView(ScrollViewMode.Vertical) { name = "waypoint-context-menu" };
+			menu.style.width = 260;
+			menu.style.backgroundColor = Palette.Hex("10232B");
+			menu.style.borderTopWidth = menu.style.borderBottomWidth = 1;
+			menu.style.borderLeftWidth = menu.style.borderRightWidth = 1;
+			menu.style.borderTopColor = menu.style.borderBottomColor = Palette.Cyan;
+			menu.style.borderLeftColor = menu.style.borderRightColor = Palette.Cyan;
+			menu.style.paddingLeft = menu.style.paddingRight = 8;
+			menu.style.paddingTop = menu.style.paddingBottom = 8;
+
+			var title = new Label(job.Intel == ContractIntel.Full ? node.label : "UNKNOWN SYSTEM");
+			title.style.color = Palette.Cyan;
+			title.style.fontSize = 14;
+			title.style.whiteSpace = WhiteSpace.Normal;
+			title.style.marginBottom = 6;
+			menu.Add(title);
+
+			Button Action(string name, string caption, Action callback, bool enabled = true)
+			{
+				var button = new Button(callback) { name = name, text = caption };
+				button.style.minHeight = 32;
+				button.style.marginBottom = 4;
+				button.style.color = Palette.Hex("EFF8FA");
+				button.style.backgroundColor = Palette.Hex("183139");
+				button.style.unityTextAlign = TextAnchor.MiddleLeft;
+				button.SetEnabled(enabled);
+				menu.Add(button);
+				return button;
+			}
+
+			if (waypoint == null)
+			{
+				Action("waypoint-context-add", "ADD WAYPOINT (" + points.Count + " / " + tier + ")",
+					   () => State.PlaceWaypoint(job, nodeId), canPlan && points.Count < tier);
+				return menu;
+			}
+
+			if (tier >= 2)
+			{
+				var colors = new[] { "CYAN", "AMBER", "VIOLET", "PINK", "WHITE" };
+				for (var i = 0; i < colors.Length; i++)
+				{
+				var color = i;
+					var button = Action("waypoint-context-color-" + i,
+						"COLOR / " + colors[i] + (waypoint.color == i ? " ✓" : ""),
+						() => State.EditWaypoint(job, nodeId, color, waypoint.label, waypoint.showPath), canPlan);
+					button.style.color = GameSimulation.WaypointColors[i];
+				}
+			}
+
+			if (tier >= 3)
+			{
+				var label = new TextField("LABEL")
+					{ name = "waypoint-context-label", value = waypoint.label, maxLength = 40 };
+				label.SetEnabled(canPlan);
+				menu.Add(label);
+				Action("waypoint-context-save-label", "SAVE LABEL",
+					   () => State.EditWaypoint(job, nodeId, waypoint.color, label.value, waypoint.showPath), canPlan);
+			}
+
+			if (tier >= 4)
+				Action("waypoint-context-route", waypoint.showPath ? "HIDE GATEWAY ROUTE" : "SHOW GATEWAY ROUTE",
+					   () => State.EditWaypoint(job, nodeId, waypoint.color, waypoint.label, !waypoint.showPath), canPlan);
+
+			Action("waypoint-context-remove", "REMOVE WAYPOINT", () => State.RemoveWaypoint(job, nodeId), canPlan);
+			return menu;
+		}
+
 		// Builds the WaypointPlanner section of the workstation UI.
 		private void BuildWaypointPlanner(VisualElement parent)
 		{
@@ -1380,7 +1487,7 @@ namespace HackThePlanet
 
 			// Explain how to place a waypoint.
 			Text(parent,
-				 "Select a system on the map, then place a marker. Markers stay visible during the run, even before discovery.",
+				 "Right-click a system to manage its waypoint, or select it and use the controls below. Markers stay visible during the run, even before discovery.",
 				 "small muted");
 
 			// Add the button that places a waypoint on the selected system.
