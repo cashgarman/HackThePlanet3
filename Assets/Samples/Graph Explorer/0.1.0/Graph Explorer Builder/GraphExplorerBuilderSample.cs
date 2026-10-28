@@ -147,14 +147,98 @@ namespace Cashg.GraphExplorer.Samples
 		private float statsSimMs;
 		private float statsScriptMs;
 
-		private void Awake()
+		public GraphExplorerSettings SettingsProfile;
+        public string SettingsDirectory;
+        private GraphSettingsController settingsController;
+        private Label settingsDirty;
+        private string settingsError;
+        private GraphSettingsData Preferences => settingsController.Active.Data;
+
+        private void InitializeSettings()
+        {
+            var store = new GraphSettingsStore(string.IsNullOrWhiteSpace(SettingsDirectory) ? null : SettingsDirectory);
+            try { settingsController = new GraphSettingsController(store, SettingsProfile); }
+            catch(Exception error) { settingsError=error.Message; settingsController=new GraphSettingsController(store); }
+            try { if(store.LastSelectedId!=null) settingsController.Select(store.LastSelectedId,GraphSettingsSwitchChoice.Discard); }
+            catch(Exception error) { settingsError=error.Message; }
+        }
+        private void ApplyPreferences()
+        {
+            rendering.ApplySettings(settingsController.Active);
+            var data=Preferences;
+            edgeFilter.Visible=data.EdgesVisible; showLabels=data.ShowLabels; labelScale=data.LabelScale;
+            EnableNodeDragging=data.EnableNodeDragging; showRegionNames=data.ShowRegionNames;
+            regions.RenderingEnabled=data.RegionsVisible;
+            foreach(var region in document.Regions.Values) regions.SetRegionPadding(region.Id,regionPadding.TryGetValue(region.Id,out var padding)?padding:data.RegionPadding);
+            GraphSettingsJsonForSampleCopy(data.Tooltips,tooltipController.Settings);
+            RefreshLabels();
+        }
+        private static void GraphSettingsJsonForSampleCopy(object source,object target) => JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(source),target);
+        private void CapturePreferences()
+        {
+            if(settingsController==null || rendering==null)return;
+            var data=Preferences;
+            data.NodesVisible=rendering.Renderer.NodesVisible; data.EdgesVisible=edgeFilter.Visible;
+            data.ClustersVisible=rendering.Renderer.ClustersVisible; data.RegionsVisible=regions.RenderingEnabled;
+            data.ColorBy=rendering.Renderer.ColorBy; data.SizeBy=rendering.Renderer.Size; data.EdgeWidth=rendering.Renderer.EdgeWidthScale;
+            data.ShowLabels=showLabels; data.LabelScale=labelScale; data.Background=graphCamera.backgroundColor;
+            data.EnableNodeDragging=EnableNodeDragging; data.ShowRegionNames=showRegionNames;
+            GraphSettingsJsonForSampleCopy(rendering.Layout,data.Physics);
+            GraphSettingsJsonForSampleCopy(tooltipController.Settings,data.Tooltips);
+            settingsController.NotifyChanged();
+            if(settingsDirty!=null) settingsDirty.text=settingsController.IsDirty ? "Unsaved changes" : "Saved";
+        }
+        private void BuildProfileControls(VisualElement parent)
+        {
+            var box=Section(parent,"Settings profile");
+            var choices=new List<string>(); var ids=new List<string>();
+            choices.Add(settingsController.Active.DisplayName+" ("+settingsController.Active.ProfileId.Substring(0,8)+")"); ids.Add(settingsController.Active.ProfileId);
+            foreach(var path in settingsController.Store.List())
+            {
+                try { var profile=settingsController.Store.Load(System.IO.Path.GetFileNameWithoutExtension(path));
+                    if(!ids.Contains(profile.ProfileId)) { ids.Add(profile.ProfileId); choices.Add(profile.DisplayName+" ("+profile.ProfileId.Substring(0,8)+")"); }
+                    DestroyOwned(profile);
+                } catch(Exception error) { settingsError=error.Message; }
+            }
+            var picker=CreateDropdown("Profile",choices,0); box.Add(picker);
+            var pending=new VisualElement(); box.Add(pending);
+            picker.RegisterValueChangedCallback(evt=> {
+                var id=ids[choices.IndexOf(evt)];
+                if(id==settingsController.Active.ProfileId)return;
+                pending.Clear();
+                if(!settingsController.IsDirty) { ProfileAction(()=>settingsController.Select(id,GraphSettingsSwitchChoice.Discard)); return; }
+                pending.Add(new Label("Save changes before switching?"));
+                AddButton(pending,"Save and switch",()=>ProfileAction(()=>settingsController.Select(id,GraphSettingsSwitchChoice.Save)));
+                AddButton(pending,"Discard and switch",()=>ProfileAction(()=>settingsController.Select(id,GraphSettingsSwitchChoice.Discard)));
+                AddButton(pending,"Cancel",()=>RefreshUi());
+            });
+            var name=AddText(box,"Name",settingsController.Active.DisplayName);
+            name.RegisterValueChangedCallback(evt=> { if(!string.IsNullOrWhiteSpace(evt.newValue)) { settingsController.Active.DisplayName=evt.newValue; settingsDirty.text=settingsController.IsDirty?"Unsaved changes":"Saved"; } });
+            var actions=Row(box);
+            AddButton(actions,"New",()=>ProfileAction(()=>settingsController.Create(name.value)));
+            AddButton(actions,"Save As",()=>ProfileAction(()=>settingsController.Create(name.value)));
+            AddButton(actions,"Save",()=>ProfileAction(()=>{settingsController.Active.DisplayName=name.value; settingsController.Save();}));
+            AddButton(box,"Revert / Reload JSON",()=>ProfileAction(settingsController.Revert));
+            settingsDirty=new Label(settingsController.IsDirty ? "Unsaved changes" : "Saved"); box.Add(settingsDirty);
+            if(settingsError!=null) box.Add(new Label(settingsError));
+        }
+        private void ProfileAction(Action action)
+        {
+            try { action(); ApplyPreferences(); settingsError=null; RefreshUi(); }
+            catch(Exception error) { settingsError=error.Message; SetStatus(error.Message); }
+        }
+
+        private void Awake()
 		{
 			try
 			{
 				InitializeCamera();
-				CreateGraph(16, .17f, 83, true);
+				InitializeSettings();
+                CreateGraph(Preferences.NodeCount, Preferences.EdgeDensity, Preferences.Seed, true);
 				InitializeRendering();
 				InitializeUi();
+                ApplyPreferences();
+                RefreshUi();
 				RefreshLabels();
 			}
 			catch (Exception exception)
@@ -166,6 +250,7 @@ namespace Cashg.GraphExplorer.Samples
 
 		private void OnDestroy()
 		{
+            settingsController?.Dispose();
 			foreach (var label in labels.Values) DestroyOwned(label.gameObject);
 			labels.Clear();
 			foreach (var label in regionLabels.Values) DestroyOwned(label.gameObject);
@@ -330,6 +415,10 @@ namespace Cashg.GraphExplorer.Samples
 			rendering = GraphRenderingSession.Initialize(graphCamera, new GraphResourceConfiguration(), profile,
 				new GraphExplorerOptions(1000, 100));
 			regions = new GraphRegionController(clusterScene, rendering.Layout);
+                if(settingsController!=null) {
+                    regions.RenderingEnabled=Preferences.RegionsVisible;
+                    foreach(var region in document.Regions.Values) regions.SetRegionPadding(region.Id,Preferences.RegionPadding);
+                }
 			rendering.Renderer.Regions = regions;
 			rendering.Renderer.UpdateMetrics(clusterScene, edgeFilter);
 			tooltipController = new GraphTooltipController();
@@ -422,6 +511,10 @@ namespace Cashg.GraphExplorer.Samples
 			{
 				regions?.Dispose();
 				regions = new GraphRegionController(clusterScene, rendering.Layout);
+                if(settingsController!=null) {
+                    regions.RenderingEnabled=Preferences.RegionsVisible;
+                    foreach(var region in document.Regions.Values) regions.SetRegionPadding(region.Id,Preferences.RegionPadding);
+                }
 				rendering.Renderer.Regions = regions;
 				rendering.Layout.Bind(clusterScene);
 				rendering.Renderer.UpdateMetrics(clusterScene, edgeFilter);
@@ -537,7 +630,8 @@ namespace Cashg.GraphExplorer.Samples
 
 		private void BuildControls(VisualElement parent)
 		{
-			parent.Clear();
+            parent.Clear();
+            BuildProfileControls(parent);
 			parent.style.flexGrow = 1;
 			parent.style.color = new Color(.88f, .93f, .98f);
 			var title = new Label("Graph Explorer");
@@ -570,13 +664,16 @@ namespace Cashg.GraphExplorer.Samples
 			var pagePhysics = CreatePage(parent, activeTab == "Physics");
 
 			var generation = Section(pageBuild, "Generate graph");
-			generationCount = new Slider("Nodes", 2, 120) { value = 16, showInputField = true };
-			generationDensity = new Slider("Edge density", 0, .35f) { value = .17f, showInputField = true };
-			generationSeed = new Slider("Seed", 0, 9999) { value = 83, showInputField = true };
+			generationCount = new Slider("Nodes", 2, 120) { value = Preferences.NodeCount, showInputField = true };
+			generationDensity = new Slider("Edge density", 0, .35f) { value = Preferences.EdgeDensity, showInputField = true };
+			generationSeed = new Slider("Seed", 0, 9999) { value = Preferences.Seed, showInputField = true };
 			ApplyFieldSkin(generationCount);
 			ApplyFieldSkin(generationDensity);
 			ApplyFieldSkin(generationSeed);
-			generation.Add(generationCount);
+			generationCount.RegisterValueChangedCallback(evt=>{ Preferences.NodeCount=Mathf.RoundToInt(evt.newValue); CapturePreferences(); });
+            generationDensity.RegisterValueChangedCallback(evt=>{ Preferences.EdgeDensity=evt.newValue; CapturePreferences(); });
+            generationSeed.RegisterValueChangedCallback(evt=>{ Preferences.Seed=Mathf.RoundToInt(evt.newValue); CapturePreferences(); });
+            generation.Add(generationCount);
 			generation.Add(generationDensity);
 			generation.Add(generationSeed);
 			AddButton(generation, "Generate", () =>
@@ -723,7 +820,7 @@ namespace Cashg.GraphExplorer.Samples
 					regions.SetRegionBoundaryVisible(record.Id, value);
 				});
 				var padding = new Slider(record.Name + " padding", 0, 12)
-					{ value = regionPadding.TryGetValue(record.Id, out var amount) ? amount : 1, showInputField = true };
+					{ value = regionPadding.TryGetValue(record.Id, out var amount) ? amount : Preferences.RegionPadding, showInputField = true };
 				ApplyFieldSkin(padding);
 				padding.RegisterValueChangedCallback(evt =>
 				{
@@ -752,14 +849,18 @@ namespace Cashg.GraphExplorer.Samples
 				value => rendering.Renderer.Size = (SizeMapping)value);
 			var edgeRendering = Section(render, "Edges");
 			AddToggle(edgeRendering, "Show edges", edgeFilter.Visible, value => edgeFilter.Visible = value);
-			var edgeWidth = new Slider("Edge width", .25f, 4) { value = 1, showInputField = true };
+			var edgeWidth = new Slider("Edge width", .25f, 4) { value = Preferences.EdgeWidth, showInputField = true };
 			ApplyFieldSkin(edgeWidth);
-			edgeWidth.RegisterValueChangedCallback(evt => rendering.Renderer.EdgeWidthScale = evt.newValue);
+			edgeWidth.RegisterValueChangedCallback(evt => { rendering.Renderer.EdgeWidthScale = evt.newValue; CapturePreferences(); });
 			edgeRendering.Add(edgeWidth);
 			var clusterRendering = Section(render, "Clusters");
 			AddToggle(clusterRendering, "Show representatives", rendering.Renderer.ClustersVisible,
 				value => rendering.Renderer.ClustersVisible = value);
 			var regionRendering = Section(render, "Regions");
+            AddSlider(regionRendering,"Default region padding",0,12,Preferences.RegionPadding,value=> {
+                Preferences.RegionPadding=value;
+                foreach(var region in document.Regions.Values) if(!regionPadding.ContainsKey(region.Id)) regions.SetRegionPadding(region.Id,value);
+            });
 			AddToggle(regionRendering, "Render region boundaries", regions.RenderingEnabled,
 				value => regions.RenderingEnabled = value);
 			AddToggle(regionRendering, "Show region names", showRegionNames,
@@ -782,7 +883,7 @@ namespace Cashg.GraphExplorer.Samples
 				value => tooltipController.Settings.CursorMoveThreshold = value);
 			var labelRendering = Section(render, "Labels");
 			labelsToggle = new Toggle("Show labels") { value = showLabels };
-			labelsToggle.RegisterValueChangedCallback(evt => { showLabels = evt.newValue; UpdateLabels(); });
+			labelsToggle.RegisterValueChangedCallback(evt => { showLabels = evt.newValue; UpdateLabels(); CapturePreferences(); });
 			labelRendering.Add(labelsToggle);
 			labelSize = new Slider("Label size", .5f, 2.5f) { value = labelScale, showInputField = true };
 			ApplyFieldSkin(labelSize);
@@ -815,19 +916,12 @@ namespace Cashg.GraphExplorer.Samples
 			AddButton(physicsButtons, "Reheat", rendering.Layout.Reheat);
 			AddButton(physicsButtons, "Reset layout", () => { rendering.Layout.ResetPositions(); rendering.Navigation.Overview(clusterScene); });
 			AddButton(physics, "Reset physics settings", () =>
-			{
-				rendering.Layout.RepulsionStrength = 65;
-				rendering.Layout.CenteringStrength = .018f;
-				rendering.Layout.SpringRestLength = 7;
-				rendering.Layout.SpringStrengthScale = 1;
-				rendering.Layout.Damping = 3;
-				rendering.Layout.MaximumForce = 140;
-				rendering.Layout.MaximumSpeed = 18;
-				rendering.Layout.Mode = LayoutMode.Spatial;
-				rendering.Layout.Paused = false;
-				rendering.Layout.Reheat();
-				RefreshUi();
-			});
+            {
+                Preferences.Physics = new GraphPhysicsSettings();
+                ApplyPreferences();
+                settingsController.NotifyChanged();
+                RefreshUi();
+            });
 		}
 
 		private static VisualElement CreatePage(VisualElement parent, bool visible)
@@ -848,7 +942,9 @@ namespace Cashg.GraphExplorer.Samples
 		}
 
 		private void RefreshAfterTopology()
-		{
+        {
+            foreach(var region in document.Regions.Values)
+                regions.SetRegionPadding(region.Id,regionPadding.TryGetValue(region.Id,out var padding)?padding:Preferences.RegionPadding);
 			sourceScene.Synchronize();
 			clusterScene.Synchronize();
 			foreach (var id in clusters.Keys.Where(id => !clusterScene.IsCluster(id)).ToArray()) clusters.Remove(id);
@@ -1026,6 +1122,8 @@ namespace Cashg.GraphExplorer.Samples
 					label.transform.position = node.Position + Vector3.up * (rendering.Renderer.Radius(node) * 2 + .25f);
 					label.transform.rotation = graphCamera.transform.rotation;
 					label.transform.localScale = Vector3.one * labelScale;
+                    label.fontSize=Mathf.RoundToInt(Preferences.Labels.NameFontSize * 4);
+                    label.transform.position += graphCamera.transform.up * ((Preferences.Labels.AboveNodeGap - 6f) / 24f);
 					var hiddenCluster = !rendering.Renderer.ClustersVisible && node.Id.StartsWith("graph-explorer:cluster:", StringComparison.Ordinal);
 					label.gameObject.SetActive(showLabels && rendering.Renderer.NodesVisible && !hiddenCluster && node.Visible);
 				}
@@ -1409,6 +1507,8 @@ namespace Cashg.GraphExplorer.Samples
 					: Vector3.zero;
 				label.transform.rotation = graphCamera.transform.rotation;
 				label.transform.localScale = Vector3.one * labelScale;
+                    label.fontSize=Mathf.RoundToInt(Preferences.Labels.NameFontSize * 4);
+                    label.transform.position += graphCamera.transform.up * ((Preferences.Labels.AboveNodeGap - 6f) / 24f);
 				label.gameObject.SetActive(showRegionNames && hasBounds);
 			}
 		}
@@ -1452,12 +1552,12 @@ namespace Cashg.GraphExplorer.Samples
 			parent.Add(button);
 		}
 
-		private static void AddToggle(VisualElement parent, string label, bool value, Action<bool> changed)
+		private void AddToggle(VisualElement parent, string label, bool value, Action<bool> changed)
 		{
 			var toggle = new Toggle(label) { value = value };
 			toggle.style.marginTop = 3;
 			toggle.style.marginBottom = 3;
-			toggle.RegisterValueChangedCallback(evt => changed(evt.newValue));
+			toggle.RegisterValueChangedCallback(evt => { changed(evt.newValue); CapturePreferences(); });
 			parent.Add(toggle);
 		}
 
@@ -1471,19 +1571,19 @@ namespace Cashg.GraphExplorer.Samples
 		private void AddDropdown(VisualElement parent, string label, IReadOnlyList<string> choices, int index, Action<int> changed)
 		{
 			var dropdown = CreateDropdown(label, choices, Mathf.Clamp(index, 0, choices.Count - 1));
-			dropdown.RegisterValueChangedCallback(value => changed(choices.ToList().IndexOf(value)));
+			dropdown.RegisterValueChangedCallback(value => { changed(choices.ToList().IndexOf(value)); CapturePreferences(); });
 			parent.Add(dropdown);
 		}
 
-		private static void AddSlider(VisualElement parent, string label, float low, float high, float value,
+		private void AddSlider(VisualElement parent, string label, float low, float high, float value,
 			Action<float> changed)
 		{
-			var slider = new Slider(label, low, high) { value = Mathf.Clamp(value, low, high), showInputField = true };
+			var slider = new Slider(label, low, Mathf.Max(high,value)) { value = value, showInputField = true };
 			slider.style.marginTop = 2;
 			slider.style.marginBottom = 4;
 			slider.style.minWidth = 0;
 			ApplyFieldSkin(slider);
-			slider.RegisterValueChangedCallback(evt => changed(evt.newValue));
+			slider.RegisterValueChangedCallback(evt => { changed(evt.newValue); CapturePreferences(); });
 			parent.Add(slider);
 		}
 
