@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Scripting.LifecycleManagement;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace HackThePlanet
@@ -464,9 +465,13 @@ namespace HackThePlanet
 		}
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-		// Creates the workstation GameObject and UI document before the first scene loads.
+		// Creates the workstation only when an HTP-owned scene is active.
 		private static void Bootstrap()
 		{
+			var scene = SceneManager.GetActiveScene();
+			if (!scene.path.StartsWith("Assets/HackThePlanet/Scenes/", StringComparison.Ordinal))
+				return;
+
 			// Skip creating the workstation when one already exists in the scene.
 			if (FindAnyObjectByType<WorkstationApp>() != null)
 				return;

@@ -868,7 +868,7 @@
     width: 680px;
 }
 
-/* Settings controls inherit Unity's light field surface; keep labels and values readable. */
+/* Settings controls use the shared deck control surface (see end of file). */
 .settings-menu .unity-base-field__label,
 .settings-menu .unity-base-field > Label,
 .settings-menu .unity-toggle__text {
@@ -881,24 +881,6 @@
     flex-shrink: 0;
     margin-top: 10px;
     margin-bottom: 6px;
-}
-
-.settings-menu TextField .unity-base-field__input,
-.settings-menu .unity-base-text-field__input,
-.settings-menu .unity-text-field__input,
-.settings-menu .unity-base-field__input,
-.settings-menu .unity-text-input {
-    color: #10232b;
-    background-color: #d8e8ed;
-    min-height: 34px;
-    padding: 6px 10px;
-    -unity-cursor-color: #10232b;
-    -unity-selection-color: #74d9d2;
-}
-
-.settings-menu .unity-base-field__input:hover,
-.settings-menu .unity-base-text-field__input:hover {
-    color: #06191e;
 }
 
 .settings-menu .small.muted {
@@ -1225,29 +1207,25 @@ Button:active {
 .playtest-lab .lab-setup, .playtest-lab .lab-results { width: 25%; min-width: 270px; }
 .playtest-lab .lab-setup .body-copy { font-size: 16px; }
 
-/* Playtest setup inputs use the light Unity field surface. Keep labels and typed values dark/high contrast. */
+/* Playtest setup inputs use the shared deck control surface. */
 .playtest-lab .lab-setup .unity-base-field__label,
 .playtest-lab .lab-setup .unity-base-field > Label {
     color: #d8e8ed;
 }
-.playtest-lab .lab-setup TextField,
-.playtest-lab .lab-setup IntegerField,
-.playtest-lab .lab-setup .unity-base-text-field__input,
-.playtest-lab .lab-setup .unity-text-field__input,
-.playtest-lab .lab-setup .unity-base-field__input,
-.playtest-lab .lab-setup .unity-text-input {
-    color: #10232b;
-    -unity-cursor-color: #10232b;
-    -unity-selection-color: #74d9d2;
-}
-.playtest-lab .lab-setup .unity-base-field__input:hover,
-.playtest-lab .lab-setup .unity-base-text-field__input:hover {
-    color: #06191e;
-}
 
 .lab-choice { margin-top: 11px; margin-bottom: 7px; flex-shrink: 0; }
 .lab-choice > Label { color: #d8e8ed; margin-bottom: 5px; white-space: normal; }
-.lab-choice-trigger { min-height: 36px; padding: 8px 12px; color: #10232b; background-color: #d8e8ed; -unity-text-align: middle-left; white-space: normal; }
+.lab-choice-trigger {
+    min-height: 36px;
+    padding: 8px 12px;
+    color: #e9f7f8;
+    background-color: #052832;
+    border-width: 1px;
+    border-color: #00cfc4;
+    border-radius: 5px;
+    -unity-text-align: middle-left;
+    white-space: normal;
+}
 .lab-choice-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
 .lab-choice-menu { position: absolute; background-color: #10232b; border-width: 1px; border-color: #00bfb4; padding: 6px; }
 .lab-choice-option { min-height: 36px; padding: 8px 12px; margin: 0; color: #eff8fa; background-color: #10232b; white-space: normal; -unity-text-align: middle-left; }
@@ -1262,3 +1240,74 @@ Button:active {
 .lab-contract-detail { margin-top: 12px; padding: 10px; border-width: 1px; border-color: #29404a; background-color: #102029; flex-shrink: 0; }
 .lab-contract-detail-title { margin-bottom: 6px; white-space: normal; }
 .lab-detail-reason { white-space: normal; }
+
+/* Control surfaces — same language as .readable-tooltip (dark teal, cyan border, rounded). */
+.workstation .unity-base-field__input,
+.workstation .unity-base-text-field__input,
+.workstation .unity-text-field__input,
+.workstation .unity-integer-field__input,
+.workstation .unity-base-popup-field__input {
+    min-height: 34px;
+    padding: 6px 10px;
+    color: #e9f7f8;
+    background-color: #052832;
+    border-width: 1px;
+    border-color: #00cfc4;
+    border-radius: 5px;
+    -unity-cursor-color: #e9f7f8;
+    -unity-selection-color: rgba(0, 207, 196, 0.35);
+}
+
+.workstation .unity-text-input {
+    color: #e9f7f8;
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 0;
+    padding: 0;
+    min-height: 0;
+    -unity-cursor-color: #e9f7f8;
+    -unity-selection-color: rgba(0, 207, 196, 0.35);
+}
+
+.workstation .unity-base-field__input:hover,
+.workstation .unity-base-text-field__input:hover,
+.workstation .unity-base-popup-field__input:hover {
+    border-color: #00eee2;
+}
+
+.workstation .unity-base-popup-field__text {
+    color: #e9f7f8;
+}
+
+.workstation .unity-base-popup-field__arrow {
+    border-top-color: #00cfc4;
+}
+
+.workstation .unity-toggle__input {
+    background-color: transparent;
+    border-width: 0;
+}
+
+.workstation .unity-toggle__checkmark {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    background-color: #052832;
+    background-image: none;
+    border-width: 1px;
+    border-color: #00cfc4;
+    border-radius: 5px;
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0);
+}
+
+.workstation .unity-toggle:hover .unity-toggle__checkmark,
+.workstation .unity-toggle:focus .unity-toggle__checkmark {
+    border-color: #00eee2;
+}
+
+.workstation .unity-toggle:checked > .unity-toggle__input > .unity-toggle__checkmark,
+.workstation .unity-toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
+    background-color: #0a3d48;
+    border-color: #00eee2;
+}

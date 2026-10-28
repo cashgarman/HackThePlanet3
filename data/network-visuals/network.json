@@ -1,10 +1,6 @@
 {
   "PrewarmLayoutBeforeRender": true,
   "PrewarmLayoutStepsPerFrame": 16,
-  "CloudDensity": 1.8,
-  "DataBeamCount": 7,
-  "DataBeamDirectionRandomness": 1,
-  "DataBeamSeed": 83,
   "CelShading": true,
   "LightBands": 3,
   "ShadowBrightness": 0.7,

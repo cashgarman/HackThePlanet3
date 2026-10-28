@@ -147,6 +147,9 @@ namespace HackThePlanet
 		// Active GraphExplorer rendering session bound to the render texture.
 		private readonly GraphRenderingSession session;
 
+		// Host-owned atmospheric scenery layered behind the shared graph renderer.
+		private readonly GraphAtmosphere atmosphere;
+
 		// UI Toolkit image source for the 3D graph render.
 		private readonly RenderTexture texture;
 
@@ -378,7 +381,10 @@ namespace HackThePlanet
 				graphSettings = resources.Load<GraphVisualSettings>("GraphVisualSettings");
 			session = GraphRenderingSession.Initialize(camera, resources);
 			// Operations maps get the distant data-beam layer; research and flat rig views stay clean.
-			session.Atmosphere.DataBeamsEnabled = !research && !flat;
+			atmosphere = flat ? null : new GraphAtmosphere(camera,
+				GameData.Current.Get<GraphAtmosphereSettings>("Atmosphere Settings"), research, resources);
+			if (atmosphere != null)
+				atmosphere.DataBeamsEnabled = !research;
 			session.Layout.Bind(scene);
 			session.Layout.Mode = LayoutMode.Spatial;
 			var layoutSignature = BuildLayoutSignature();
@@ -708,6 +714,7 @@ namespace HackThePlanet
 
 			// Dispose the rendering session.
 			session.Dispose();
+			atmosphere?.Dispose();
 
 			// Release the owned settings, the camera target, and the render texture.
 			if (graphSettings != null)
@@ -1164,7 +1171,7 @@ namespace HackThePlanet
 			}
 
 			// Advance the world-locked clouds and sparse distance beams with the same motion policy as the graph.
-			session.Atmosphere.Tick(effects != SignalEffects.Full);
+			atmosphere?.Tick(effects != SignalEffects.Full);
 
 			AdvanceLayout();
 

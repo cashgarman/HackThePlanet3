@@ -164,14 +164,9 @@ ScrollView {
     min-height: 34px;
 }
 
-/* Dropdown controls use a pale native surface, so keep both the value and popup dark. */
+/* Dropdown values use the shared deck control surface (SignalDeck.uss). */
 .lab-setup .unity-base-popup-field__text, .lab-results .unity-base-popup-field__text {
-    color: #10232b;
     -unity-font-style: bold;
-}
-
-.lab-setup .unity-base-popup-field__arrow, .lab-results .unity-base-popup-field__arrow {
-    border-top-color: #10232b;
 }
 
 .unity-base-popup-field__menu, .unity-popup-field__menu, .unity-menu {

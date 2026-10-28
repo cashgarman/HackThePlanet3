@@ -106,7 +106,7 @@ namespace HackThePlanet
 			typeof(HardwareDefinition),
 			typeof(StatusDefinition), typeof(CareerDefinition), typeof(RewardDefinition), typeof(GameplayTextPalette),
 			typeof(GraphVisualSettings), typeof(GraphNodeLabelSettings), typeof(RigChassisDefinition),
-			typeof(RigModuleDefinition), typeof(RigRulesDefinition)
+			typeof(RigModuleDefinition), typeof(RigRulesDefinition), typeof(GraphAtmosphereSettings)
 		};
 
 		// Concrete rule classes that may appear inside content graphs.
@@ -144,7 +144,7 @@ namespace HackThePlanet
 		{
 			"Game", "Companies", "Contracts", "Networks", "Node Types", "Actions", "Technologies", "Hardware",
 			"Statuses", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals", "Graph Labels",
-			"Chassis", "Modules", "Rig Rules"
+			"Chassis", "Modules", "Rig Rules", "Atmosphere Settings"
 		};
 
 		/// <summary>Maps a manifest category name to its ScriptableObject type.</summary>
@@ -634,7 +634,7 @@ namespace HackThePlanet
 			foreach (var category in new[]
 					 {
 						 "Game", "Career", "Rewards", "Text Palette", "Graph Visuals", "Network Visuals",
-						 "Graph Labels", "Rig Rules"
+						 "Graph Labels", "Rig Rules", "Atmosphere Settings"
 					 })
 				if (bundle.Manifest.entries.Count(e => e.category == category) != 1)
 					errors.Add("manifest.json: expected one " + category + " entry");

@@ -540,12 +540,6 @@ Label {
     background-color: #9bfacb;
 }
 
-.text-size-slider .unity-text-field__input {
-    color: #dce8e5;
-    background-color: #172f27;
-    padding: 5px;
-}
-
 .readable-tooltip {
     position: absolute;
     display: none;

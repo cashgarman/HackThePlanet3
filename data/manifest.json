@@ -1098,6 +1098,12 @@
       "category": "Contracts",
       "file": "contracts/vesper-freelance-3.json",
       "type": "ContractDefinition"
+    },
+    {
+      "key": "d3b396028edf454686bbe128f87f5ed1",
+      "category": "Atmosphere Settings",
+      "file": "atmosphere-settings/settings.json",
+      "type": "GraphAtmosphereSettings"
     }
   ]
 }

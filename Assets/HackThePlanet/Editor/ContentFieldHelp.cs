@@ -292,8 +292,10 @@ r|Red color channel, preserving HDR intensity.
 g|Green color channel, preserving HDR intensity.
 CelShading|Enables banded lighting on graph node surfaces.
 LightBands|Number of cel-lighting brightness bands.
-CloudDensity|Density multiplier for the animated cloud banks behind graph views.
-DataBeamCount|Number of intermittent data streaks behind graph views.
+ResearchCloudDensity|Density multiplier for animated cloud banks behind research graphs.
+NetworkCloudDensity|Density multiplier for animated cloud banks behind network graphs.
+ResearchDataBeamCount|Number of intermittent data streaks behind research graphs.
+NetworkDataBeamCount|Number of intermittent data streaks behind network graphs.
 DataBeamDirectionRandomness|Spread of data-streak directions; 1 gives every streak a random angle.
 DataBeamSeed|Deterministic seed for data-streak placement and directions.
 ShadowBrightness|Brightness multiplier for shaded node surfaces.

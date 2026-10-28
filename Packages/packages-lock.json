@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.cashg.graph-explorer": {
-      "version": "file:com.cashg.graph-explorer",
+      "version": "file:../../../IfYouCanJoinThemFuckThem/packages/com.cashg.graph-explorer",
       "depth": 0,
-      "source": "embedded",
+      "source": "local",
       "dependencies": {
         "com.unity.inputsystem": "7.0.0",
         "com.unity.render-pipelines.universal": "17.7.0"

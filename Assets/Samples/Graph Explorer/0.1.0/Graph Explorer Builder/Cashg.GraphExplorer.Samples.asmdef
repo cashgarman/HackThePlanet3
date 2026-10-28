@@ -1,0 +1,11 @@
+{
+  "name": "Cashg.GraphExplorer.Samples",
+  "rootNamespace": "Cashg.GraphExplorer.Samples",
+  "references": [
+    "Cashg.GraphExplorer",
+    "Cashg.GraphExplorer.Presentation",
+    "Unity.InputSystem",
+    "Unity.RenderPipelines.Universal.Runtime"
+  ],
+  "autoReferenced": true
+}

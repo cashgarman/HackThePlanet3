@@ -1,0 +1,8 @@
+{
+  "ResearchCloudDensity": 1.5,
+  "NetworkCloudDensity": 1.8,
+  "ResearchDataBeamCount": 0,
+  "NetworkDataBeamCount": 7,
+  "DataBeamDirectionRandomness": 1,
+  "DataBeamSeed": 83
+}
