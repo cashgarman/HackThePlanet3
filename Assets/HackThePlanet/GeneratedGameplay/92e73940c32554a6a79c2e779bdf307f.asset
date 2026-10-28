@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 92e73940c32554a6a79c2e779bdf307f
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: expose-side-1
+  title: Unpaid Overtime / Expose
+  description: An ally needs help away from the main operation. This offer closes in three career days.
+  company: {fileID: 11400000, guid: 49b7aa2a285fc0c43821a56c2a9f518a, type: 2}
+  network: {fileID: 11400000, guid: 875c6161ac704fa4f829077b5d915382, type: 2}
+  client: RHEA / public archivist
+  tag: EXFILTRATE / VESPER
+  objective: Recover evidence at Authoritative record
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: A small service survives because someone chose to maintain it.
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - margin-notes
+  requiredFlags:
+  - expose
+  offerDays: 3
+  isEnding: 0
+  optional: 1
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: A small service survives because someone chose to maintain it.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 4
+  credits:
+    rid: 213507108368551737
+  xp:
+    rid: 213507108368551738
+  difficulty:
+    rid: 213507108368551739
+  seed:
+    rid: 213507108368551740
+  objectives:
+  - nodeId: n22
+    label: Unpaid Overtime / Expose / Authoritative record
+    actionLabel: Recover evidence
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551741
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: expose-side-1-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: expose-side-1-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  lore:
+  - id: expose-side-1/0
+    title: Unpaid Overtime / Expose / Unsent message
+    company:
+    contract: Unpaid Overtime / Expose
+    text: 'RHEA / public archivist: An ally needs help away from the main operation. This offer closes in three career days. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: expose-side-1/1
+    title: Unpaid Overtime / Expose / Custody note
+    company:
+    contract: Unpaid Overtime / Expose
+    text: 'Archive custody, Unpaid Overtime / Expose: A small service survives because someone chose to maintain it. A second copy carries a hand-written objection to the official disposition.'
+  - id: expose-side-1/2
+    title: Unpaid Overtime / Expose / Private annotation
+    company:
+    contract: Unpaid Overtime / Expose
+    text: 'Personal note filed under expose-side-1: A small service survives because someone chose to maintain it. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551737
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1250
+    - rid: 213507108368551738
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 100
+    - rid: 213507108368551739
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551740
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 818
+    - rid: 213507108368551741
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3

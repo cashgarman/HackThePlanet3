@@ -1,17 +1,17 @@
 {
   "id": "loop-feed",
-  "title": "Loop Feed",
+  "title": "False Echo",
   "description": "Reserve RAM to divert active security sweeps until disabled.",
   "branch": "STEALTH",
-  "cost": 75,
+  "cost": 125,
   "waypointTier": 0,
   "special": true,
   "position": {
-    "x": 320,
+    "x": 160.0,
     "y": 620
   },
   "parents": [
-    "quiet"
+    "backdoor"
   ],
   "grants": [
     "loop-feed"

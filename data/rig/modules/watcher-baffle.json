@@ -1,0 +1,43 @@
+{
+  "id": "watcher-baffle",
+  "title": "Watcher Baffle",
+  "description": "35% less Watcher traversal trace.",
+  "family": "stealth",
+  "branch": "STEALTH",
+  "tier": 2,
+  "width": 2,
+  "height": 1,
+  "price": 1000,
+  "rotatable": true,
+  "powerDemand": 5,
+  "heatOutput": 4,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "signal-engineering",
+        "equipped": false
+      },
+      "message": "Requires signal-engineering."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "watcherTrace",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": -0.35
+      }
+    }
+  ]
+}

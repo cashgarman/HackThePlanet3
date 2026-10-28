@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 7862939622ac5d12845fe672e0dba796
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: public-interest
+  title: Public Interest
+  description: Extract the witness registry before its custodians surrender it.
+  company: {fileID: 11400000, guid: 35f0e140c6bf50b429ad40e28dcb1735, type: 2}
+  network: {fileID: 11400000, guid: 2b9364a7ad41d9b4fa337ed300627737, type: 2}
+  client: RHEA / public archivist
+  tag: EVACUATE / VESPER
+  objective: Evacuate protected identities at Authoritative record / Capture controller at Response controller
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: "The archive\u2019s sponsor owns a silent stake in Halden Grid."
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - borrowed-voice
+  requiredFlags:
+  - expose
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: "The archive\u2019s sponsor owns a silent stake in Halden Grid."
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 2.8
+  credits:
+    rid: 213507108368551567
+  xp:
+    rid: 213507108368551568
+  difficulty:
+    rid: 213507108368551569
+  seed:
+    rid: 213507108368551570
+  objectives:
+  - nodeId: n22
+    label: Public Interest / Authoritative record
+    actionLabel: Evacuate protected identities
+    action: {fileID: 11400000, guid: 99272a3567cbacd45aae290b9352ba3c, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551571
+    actionRequirements: []
+  - nodeId: n14
+    label: Public Interest / Response controller
+    actionLabel: Capture controller
+    action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+    payload: 0
+    complete:
+      rid: 213507108368551572
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: public-interest-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: public-interest-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  lore:
+  - id: public-interest/0
+    title: Public Interest / Unsent message
+    company:
+    contract: Public Interest
+    text: 'RHEA / public archivist: Extract the witness registry before its custodians surrender it. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: public-interest/1
+    title: Public Interest / Custody note
+    company:
+    contract: Public Interest
+    text: "Archive custody, Public Interest: The archive\u2019s sponsor owns a silent stake in Halden Grid. A second copy carries a hand-written objection to the official disposition."
+  - id: public-interest/2
+    title: Public Interest / Private annotation
+    company:
+    contract: Public Interest
+    text: "Personal note filed under public-interest: The archive\u2019s sponsor owns a silent stake in Halden Grid. Someone has crossed out the word inevitable. No replacement was supplied."
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551567
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1470
+    - rid: 213507108368551568
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 112
+    - rid: 213507108368551569
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551570
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 529
+    - rid: 213507108368551571
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551572
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1

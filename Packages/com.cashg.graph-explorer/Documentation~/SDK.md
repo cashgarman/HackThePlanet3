@@ -550,7 +550,8 @@ Read them as adapter examples, not package dependencies. Preserve existing `.met
 GUIDs when moving Unity assets. Three `MovedFrom` namespace strings intentionally
 preserve serialization compatibility; they are not runtime Job Harvester dependencies.
 
-Editor menus: **Graph Explorer → Validate semantic graph JSON** and **Validate package resources**. For package test
+Editor menus: **Graph Explorer → Settings**, **Validate semantic graph JSON**, and **Validate package resources**. The
+settings window edits the package's `GraphVisualSettings` defaults, including atmosphere and data-beam controls. For package test
 discovery, add the package ID to
 manifest `testables` and install the host's Unity Test Framework separately.
 Profiler markers use `GraphExplorer.*`.

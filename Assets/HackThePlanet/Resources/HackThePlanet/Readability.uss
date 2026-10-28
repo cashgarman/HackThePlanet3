@@ -483,6 +483,38 @@ Label {
     flex-shrink: 0;
 }
 
+.settings-menu .unity-base-field {
+    flex-wrap: wrap;
+}
+
+.settings-menu .unity-base-field__label {
+    min-width: 0;
+    width: auto;
+    flex-shrink: 1;
+    margin-right: 12px;
+}
+
+.settings-menu .unity-base-field__input {
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 120px;
+}
+
+.settings-menu .unity-toggle {
+    align-items: flex-start;
+}
+
+.settings-menu .unity-toggle__input {
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.settings-menu .unity-toggle__label {
+    flex-grow: 1;
+    min-width: 0;
+    white-space: normal;
+}
+
 .text-size-slider .unity-base-field__label {
     min-width: 0;
     width: auto;

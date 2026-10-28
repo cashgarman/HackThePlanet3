@@ -29,6 +29,15 @@ namespace HackThePlanet
 		/// <summary>Node count when the camera state was saved, used to refit when topology changes.</summary>
 		public int NodeCount;
 
+		/// <summary>Topology key for the settled visual positions cached across viewport rebuilds.</summary>
+		public string LayoutSignature;
+
+		/// <summary>Settled spatial positions retained while the workstation rebuilds its UI.</summary>
+		public readonly Dictionary<string, Vector3> LayoutPositions = new();
+
+		/// <summary>Whether <see cref="LayoutPositions" /> contains a settled layout.</summary>
+		public bool LayoutSettled;
+
 		/// <summary>Orbit pitch in degrees.</summary>
 		public float Pitch = 28f;
 
@@ -51,6 +60,9 @@ namespace HackThePlanet
 			Initialized = false;
 			UserAdjusted = false;
 			NodeCount = 0;
+			LayoutSignature = null;
+			LayoutPositions.Clear();
+			LayoutSettled = false;
 			FocusedId = null;
 			LastClickId = null;
 			LastClickAt = -1;
@@ -65,6 +77,10 @@ namespace HackThePlanet
 		// Guide arrow color highlighting the contract objective node.
 		private static readonly Color GuideObjectiveOrange = new(1f, .55f, .15f, 1f);
 
+		// Bound layout work per frame; fixed integration keeps settling repeatable.
+		private const int LayoutStepsPerFrame = 4;
+		private const float LayoutTimestep = 1f / 30;
+
 		// Off-screen camera that renders the graph into a UI texture.
 		private readonly Camera camera;
 
@@ -76,6 +92,9 @@ namespace HackThePlanet
 
 		// When true, uses orthographic flat layout instead of the 3D render target.
 		private readonly bool flat;
+
+		// Render target image shown after the optional spatial prewarm finishes.
+		private readonly Image graphImage;
 
 		// Measured flat node button sizes for label placement.
 		private readonly Dictionary<string, Vector2> flatSizes = new();
@@ -99,7 +118,7 @@ namespace HackThePlanet
 		private readonly LinkOverlay links;
 
 		// Visual settings asset for network graph rendering.
-		private readonly GraphVisualSettings networkSettings;
+		private readonly GraphVisualSettings graphSettings;
 
 		// Pickable node buttons keyed by graph node id.
 		private readonly Dictionary<string, Button> nodeButtons = new();
@@ -161,6 +180,9 @@ namespace HackThePlanet
 		// Requests an automatic camera fit on the next layout pass.
 		private bool fitPending;
 
+		// Whether the first settled graph frame has been made visible.
+		private bool layoutVisible;
+
 		// Whether right-drag is adjusting orbit angles instead of panning.
 		private bool orbiting;
 
@@ -218,9 +240,11 @@ namespace HackThePlanet
 			if (waypoints != null && waypoints.Count > 0)
 			{
 				// Create the overlay and add it to the viewport.
-				waypointOverlay = new WaypointOverlay(camera, nodes, links, waypoints, waypointTier, guideEntryId);
+				waypointOverlay = new WaypointOverlay(camera, nodes, links, waypoints, waypointTier, guideEntryId,
+					id => scene.Nodes.TryGetValue(id, out var visual) ? visual.Position : (Vector3?)null);
 				Add(waypointOverlay);
 			}
+			SetGraphVisible(layoutVisible);
 
 			// Describe each node that exists in the scene for its intel card.
 			foreach (var node in nodes.Where(n => scene.Nodes.ContainsKey(n.id)))
@@ -281,7 +305,10 @@ namespace HackThePlanet
 			// Flatten the nodes onto the plane for the rig rack.
 			if (flat)
 				foreach (var node in graph.Nodes.Values)
+				{
 					node.Position = new Vector3(node.Position.x, node.Position.y, 0);
+					node.Pinned = true;
+				}
 
 			// Store the selection and saved camera; refit when the view is new or the topology changed.
 			selectedId = selected ?? "";
@@ -304,15 +331,15 @@ namespace HackThePlanet
 			texture.Create();
 
 			// Show the texture in a full-size image element that ignores input.
-			var image = new Image { image = texture, scaleMode = ScaleMode.StretchToFill };
-			image.style.position = Position.Absolute;
-			image.style.left = image.style.right = image.style.top = image.style.bottom = 0;
-			image.pickingMode = PickingMode.Ignore;
-			Add(image);
+			graphImage = new Image { image = texture, scaleMode = ScaleMode.StretchToFill };
+			graphImage.style.position = Position.Absolute;
+			graphImage.style.left = graphImage.style.right = graphImage.style.top = graphImage.style.bottom = 0;
+			graphImage.pickingMode = PickingMode.Ignore;
+			Add(graphImage);
 
 			// Hide the image in flat mode, where cells draw instead.
 			if (flat)
-				image.style.display = DisplayStyle.None;
+				graphImage.style.display = DisplayStyle.None;
 
 			// The rig rack sits on a circuit board; it stays behind the image, links and cells.
 			if (flat)
@@ -346,10 +373,26 @@ namespace HackThePlanet
 			// Create the renderer session with the matching appearance resources.
 			var resources = GameData.Presentation(false);
 			if (!research)
-				resources = NetworkAppearance.Create(out networkSettings);
+				resources = NetworkAppearance.Create(out graphSettings);
+			else
+				graphSettings = resources.Load<GraphVisualSettings>("GraphVisualSettings");
 			session = GraphRenderingSession.Initialize(camera, resources);
+			// Operations maps get the distant data-beam layer; research and flat rig views stay clean.
+			session.Atmosphere.DataBeamsEnabled = !research && !flat;
 			session.Layout.Bind(scene);
-			session.Layout.Paused = true;
+			session.Layout.Mode = LayoutMode.Spatial;
+			var layoutSignature = BuildLayoutSignature();
+			var reuseSettledLayout = !flat && savedCamera.LayoutSettled &&
+				string.Equals(savedCamera.LayoutSignature, layoutSignature, StringComparison.Ordinal) &&
+				scene.Nodes.Keys.All(savedCamera.LayoutPositions.ContainsKey);
+			if (reuseSettledLayout)
+				foreach (var node in scene.Nodes.Values)
+				{
+					node.Position = savedCamera.LayoutPositions[node.Id];
+					node.Velocity = Vector3.zero;
+				}
+			session.Layout.Paused = flat || scene.Nodes.Count == 0 || reuseSettledLayout;
+			layoutVisible = flat || scene.Nodes.Count == 0 || reuseSettledLayout || !graphSettings.PrewarmLayoutBeforeRender;
 
 			// Tune the renderer's size mapping and edge widths.
 			session.Renderer.Size = SizeMapping.Uniform;
@@ -593,6 +636,8 @@ namespace HackThePlanet
 				else if (evt.button == 0 && smallMove && !string.IsNullOrEmpty(selectedId))
 					ClearSelection(select);
 			});
+
+			SetGraphVisible(layoutVisible);
 		}
 
 		// Displays a waypoint menu beside the node that received a short right click.
@@ -665,8 +710,8 @@ namespace HackThePlanet
 			session.Dispose();
 
 			// Release the owned settings, the camera target, and the render texture.
-			if (networkSettings != null)
-				DestroyOwned(networkSettings);
+			if (graphSettings != null)
+				DestroyOwned(graphSettings);
 			if (camera != null)
 				camera.targetTexture = null;
 			if (texture != null)
@@ -925,12 +970,12 @@ namespace HackThePlanet
 						document.UpsertEdge(new GraphEdgeRecord(link.a + ">" + link.b, link.a, link.b, "network"));
 				}
 
-				// Copy the simulation positions onto the redacted scene and pin them.
+				// Warm-start the anonymous layout from authored coordinates.
 				var redacted = new GraphScene(document, schema);
 				foreach (var node in nodes.Where(n => redacted.Nodes.ContainsKey(n.id)))
 				{
 					redacted.Nodes[node.id].Position = node.position;
-					redacted.Nodes[node.id].Pinned = true;
+					redacted.Nodes[node.id].Pinned = false;
 				}
 
 				return redacted;
@@ -973,13 +1018,13 @@ namespace HackThePlanet
 			foreach (var link in links.Where(l => document.Nodes.ContainsKey(l.a) && document.Nodes.ContainsKey(l.b)))
 				document.UpsertEdge(new GraphEdgeRecord(link.a + ">" + link.b, link.a, link.b, "network"));
 
-			// Build the scene and copy the pinned positions and emphasis onto it.
+			// Seed view positions without changing simulation coordinates.
 			var scene = new GraphScene(document, schema);
 			foreach (var node in nodes.Where(n => document.Nodes.ContainsKey(n.id)))
 			{
 				var visual = scene.Nodes[node.id];
 				visual.Position = node.position;
-				visual.Pinned = true;
+				visual.Pinned = false;
 				visual.Emphasis = node.objective && !node.collected ? ToolEmphasis.Next : ToolEmphasis.None;
 			}
 
@@ -1076,10 +1121,10 @@ namespace HackThePlanet
 					: tech.branch == "CONTROL" ? 2.5f : 0f;
 				var nodeDepth = branchDepth + (tech.position.y - 310f) / 100f;
 
-				// Place the node on the tree plane and pin it there.
+				// Use the authored tree coordinates as a warm start for spatial forces.
 				node.Position = new Vector3((tech.position.x - 500) / 43f,
 											(310 - tech.position.y) / 43f, nodeDepth);
-				node.Pinned = true;
+				node.Pinned = false;
 			}
 
 			return scene;
@@ -1118,6 +1163,11 @@ namespace HackThePlanet
 				return;
 			}
 
+			// Advance the world-locked clouds and sparse distance beams with the same motion policy as the graph.
+			session.Atmosphere.Tick(effects != SignalEffects.Full);
+
+			AdvanceLayout();
+
 			// Reposition overlays and sync the reduced-motion flag with the effects tier.
 			waypointOverlay?.Reposition(textScale);
 			session.Renderer.ReducedMotion = effects != SignalEffects.Full;
@@ -1139,7 +1189,80 @@ namespace HackThePlanet
 			// Update the guide arrows and draw the frame.
 			session.Renderer.GuideArrows = BuildGuideArrows();
 			scene.Nodes.TryGetValue(selectedId, out var selected);
-			session.Renderer.Draw(scene, edgeFilter, camera, selected, null, null);
+			if (layoutVisible)
+				session.Renderer.Draw(scene, edgeFilter, camera, selected, null, null);
+		}
+
+		// Move view coordinates only, then freeze once the solver has cooled.
+		private void AdvanceLayout()
+		{
+			if (session.Layout.Paused)
+				return;
+
+			scene.Nodes.TryGetValue(savedCamera.FocusedId ?? "", out var focused);
+			var previousFocus = focused?.Position ?? Vector3.zero;
+			var stepsPerFrame = graphSettings.PrewarmLayoutBeforeRender
+				? Mathf.Clamp(graphSettings.PrewarmLayoutStepsPerFrame, LayoutStepsPerFrame, 64)
+				: LayoutStepsPerFrame;
+			for (var step = 0; step < stepsPerFrame && session.Layout.Temperature >= .025f; step++)
+				session.Layout.Step(LayoutTimestep);
+
+			// Preserve the user's focus offset as its target moves.
+			if (focused != null && savedCamera.UserAdjusted)
+			{
+				center += focused.Position - previousFocus;
+				PlaceCamera();
+			}
+
+			if (session.Layout.Temperature < .025f)
+			{
+				session.Layout.Paused = true;
+				layoutVisible = true;
+				SetGraphVisible(true);
+				foreach (var node in scene.Nodes.Values)
+					node.Velocity = Vector3.zero;
+				RememberSettledLayout();
+
+				if (!savedCamera.UserAdjusted && contentRect.width > 0 && contentRect.height > 0)
+				{
+					var focusedId = savedCamera.FocusedId;
+					ResetView();
+					savedCamera.FocusedId = focusedId;
+					UpdateFocusedCard();
+				}
+			}
+
+			PositionLabels();
+		}
+
+		// Retain the frozen node positions when a selection rebuilds the workstation UI.
+		private void RememberSettledLayout()
+		{
+			savedCamera.LayoutPositions.Clear();
+			foreach (var node in scene.Nodes.Values)
+				savedCamera.LayoutPositions[node.Id] = node.Position;
+			savedCamera.LayoutSignature = BuildLayoutSignature();
+			savedCamera.LayoutSettled = true;
+		}
+
+		// Use IDs and connections so cached positions are discarded when graph topology changes.
+		private string BuildLayoutSignature()
+		{
+			return (research ? "research|" : flat ? "flat|" : "network|") +
+				string.Join("|", scene.Nodes.Keys.OrderBy(id => id, StringComparer.Ordinal)) + "#" +
+				string.Join("|", scene.Edges.Keys.OrderBy(id => id, StringComparer.Ordinal));
+		}
+
+		// Hide every graph-facing layer until prewarming reaches the settled state.
+		private void SetGraphVisible(bool visible)
+		{
+			graphImage.style.display = visible && !flat ? DisplayStyle.Flex : DisplayStyle.None;
+			if (links != null)
+				links.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+			if (labels != null)
+				labels.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+			if (waypointOverlay != null)
+				waypointOverlay.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
 		}
 
 		// Cached state used while rendering or interacting with the view.

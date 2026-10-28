@@ -1,0 +1,139 @@
+{
+  "id": "unlisted-operator",
+  "title": "Unlisted Operator",
+  "description": "Find the signed dispatches behind a technician who appears in payroll but in no identity register.",
+  "company": "company-2",
+  "network": "subnet-unlisted-operator",
+  "client": "MOTH / unverified relay",
+  "tag": "RECONSTRUCT / VESPER",
+  "objective": "Recover signed clue at Authoritative record / Recover signed clue at Signed dispatch record / Recover signed clue at Credential witness",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The technician was real. Their identity was removed after they refused an emergency rehearsal.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 920
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 82
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 444
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Unlisted Operator / Authoritative record",
+      "actionLabel": "Recover signed clue",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n9",
+      "label": "Unlisted Operator / Signed dispatch record",
+      "actionLabel": "Recover signed clue",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n19",
+      "label": "Unlisted Operator / Credential witness",
+      "actionLabel": "Recover signed clue",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "unlisted-operator/0",
+      "title": "Unlisted Operator / Unsent message",
+      "company": "",
+      "contract": "Unlisted Operator",
+      "text": "MOTH / unverified relay: Find the signed dispatches behind a technician who appears in payroll but in no identity register. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "unlisted-operator/1",
+      "title": "Unlisted Operator / Custody note",
+      "company": "",
+      "contract": "Unlisted Operator",
+      "text": "Archive custody, Unlisted Operator: The technician was real. Their identity was removed after they refused an emergency rehearsal. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "unlisted-operator/2",
+      "title": "Unlisted Operator / Private annotation",
+      "company": "",
+      "contract": "Unlisted Operator",
+      "text": "Personal note filed under unlisted-operator: The technician was real. Their identity was removed after they refused an emergency rehearsal. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [],
+  "paceMultiplier": 2.0999999999999996,
+  "revelation": "The technician was real. Their identity was removed after they refused an emergency rehearsal.",
+  "prerequisites": [
+    "redacted-hours"
+  ],
+  "requiredFlags": [],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "Unlisted Operator / Evidence case",
+    "question": "Which explanation fits all three signed records?",
+    "clueNodes": [
+      "n22",
+      "n9",
+      "n19"
+    ],
+    "clues": [
+      "Payroll lists technician 441 alive at 08:10.",
+      "Dispatch shows 441 rejecting a rehearsal order at 08:14.",
+      "The identity mirror deletes 441 at 08:15, signed by a supervisor."
+    ],
+    "answers": [
+      {
+        "id": "accident",
+        "title": "The records disagree because of an ordinary clerical error.",
+        "correct": false,
+        "feedback": "A clerical error does not explain the matching signed authorizations and their order."
+      },
+      {
+        "id": "insider",
+        "title": "A lone outsider forged every record after the event.",
+        "correct": false,
+        "feedback": "The independent receipt and earlier signatures rule out a single later forgery."
+      },
+      {
+        "id": "rehearsal",
+        "title": "The registry was deliberately changed after a refusal.",
+        "correct": true,
+        "feedback": "The technician was real. Their identity was removed after they refused an emergency rehearsal."
+      }
+    ]
+  }
+}

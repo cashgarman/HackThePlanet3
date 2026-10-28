@@ -1,13 +1,13 @@
 {
   "id": "efficient",
-  "title": "Efficient hack",
+  "title": "Lean Payload",
   "description": "All standard hacks finish {modifier:0:reduction}% faster. Hardware speed stacks with this benefit.",
   "branch": "INTRUSION",
   "cost": 45,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 680,
+    "x": -160.0,
     "y": 155
   },
   "parents": [

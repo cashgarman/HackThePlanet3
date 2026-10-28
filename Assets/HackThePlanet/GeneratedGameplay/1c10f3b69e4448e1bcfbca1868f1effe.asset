@@ -16,51 +16,83 @@ MonoBehaviour:
   title: Hack The Planet
   description:
   companies:
-  - {fileID: 11400000, guid: 5afcf7db6ffe1274892f54fdb77c3090, type: 2}
-  - {fileID: 11400000, guid: 07ffa550baff7954cb245a7c70394d78, type: 2}
-  - {fileID: 11400000, guid: 3979b1c18fff72b47a14017949de0f0e, type: 2}
+  - {fileID: 11400000, guid: 49b7aa2a285fc0c43821a56c2a9f518a, type: 2}
+  - {fileID: 11400000, guid: 35f0e140c6bf50b429ad40e28dcb1735, type: 2}
+  - {fileID: 11400000, guid: 0b1df930f3d88d84c9187b8fa3762df7, type: 2}
   contracts:
-  - {fileID: 11400000, guid: 6a34350b68296ff47b455e40c97ff2ed, type: 2}
-  - {fileID: 11400000, guid: 4e3d2865eff44c34ba1ec79cafde0cfa, type: 2}
-  - {fileID: 11400000, guid: a19b4e40c8b401049987df9027d0dca6, type: 2}
-  - {fileID: 11400000, guid: a034ed82254e6e8498dca9eb0f89846c, type: 2}
-  - {fileID: 11400000, guid: 7a41c1a038cdee34d9307a20ef44b710, type: 2}
-  - {fileID: 11400000, guid: d4cd40e635f0b5440b69217192fb8a7d, type: 2}
-  - {fileID: 11400000, guid: ec31fc4c84b61d94d8e0e914141035f9, type: 2}
-  - {fileID: 11400000, guid: 83740ccdc11a22448b6c29ceaa87da44, type: 2}
-  - {fileID: 11400000, guid: 2c47c9833fe76f646b4370b8efff930a, type: 2}
+  - {fileID: 11400000, guid: 403b45cff3002a74990a5e4fc064abee, type: 2}
+  - {fileID: 11400000, guid: 7d59bda8c7eb006408b32b351a4de5dc, type: 2}
+  - {fileID: 11400000, guid: acb47718e15114e46895e4803ef922ac, type: 2}
+  - {fileID: 11400000, guid: a92d81c31ab51a14ba449235958c61f9, type: 2}
+  - {fileID: 11400000, guid: a86c6634005979b47a25e78996c2757e, type: 2}
+  - {fileID: 11400000, guid: 383ca5d20e4f3a5489b86f591cfe7f6f, type: 2}
+  - {fileID: 11400000, guid: c22265161bba92e43aa877f42d82a48f, type: 2}
+  - {fileID: 11400000, guid: 3051aa0fcf7fdd849be4f5da8ec97c62, type: 2}
+  - {fileID: 11400000, guid: 9954f7b329e365e408c193442e3916d0, type: 2}
+  - {fileID: 11400000, guid: a43a433f3bc788743b75dcccbf875cfc, type: 2}
+  - {fileID: 11400000, guid: 8877261ae399e064bb8fd3cc737c81bc, type: 2}
+  - {fileID: 11400000, guid: a73c8d26f7a2c39428503454df060ced, type: 2}
+  - {fileID: 11400000, guid: 1b673162d1f73a4488c9ed37c5143b2b, type: 2}
+  - {fileID: 11400000, guid: c128373b5b608ec44bc70677807a309b, type: 2}
+  - {fileID: 11400000, guid: aad3302d2b0d52b48905f2c609ed9983, type: 2}
+  - {fileID: 11400000, guid: b227a9a13a389824e821c04527b2a637, type: 2}
+  - {fileID: 11400000, guid: fa893af4b05d41d49962455994f4451a, type: 2}
+  - {fileID: 11400000, guid: 65f5bb3065d3b654f9ce4b9e1ed91121, type: 2}
+  - {fileID: 11400000, guid: 25f464b3c455c644cbd0d67a0ad7b094, type: 2}
+  - {fileID: 11400000, guid: 12d9f9433eda9694fa93f71da826d67b, type: 2}
+  - {fileID: 11400000, guid: 8d706f586ea47fe4a9336e70dc9b775d, type: 2}
+  - {fileID: 11400000, guid: 899df05be44d7cb46afaee26e66318a3, type: 2}
+  - {fileID: 11400000, guid: 9c1035748ea1b8940a81e58b1339f132, type: 2}
+  - {fileID: 11400000, guid: 792ba288f0ab7cd45b83fd7720463de7, type: 2}
+  - {fileID: 11400000, guid: 39761ba305bf9304f8dc00d5a33fa910, type: 2}
+  - {fileID: 11400000, guid: 182cd86fbac57b94493efb811098a6d8, type: 2}
+  - {fileID: 11400000, guid: d957b123a86cea3408ff6b807f66cf07, type: 2}
+  - {fileID: 11400000, guid: 229dd68cf0509ad45a0efa5b40caa709, type: 2}
+  - {fileID: 11400000, guid: 89baffeef9661e64992efef629679c3f, type: 2}
+  - {fileID: 11400000, guid: c2460987b35141144b6c69323bfdb3e1, type: 2}
+  - {fileID: 11400000, guid: 16a9ad4043cd4294299b5ea899dd84ee, type: 2}
+  - {fileID: 11400000, guid: 3dc77a2a8cdee2e4680e934fd81c4765, type: 2}
+  - {fileID: 11400000, guid: ce73203f86814ad47982cba06a53223a, type: 2}
+  - {fileID: 11400000, guid: 748376bc4feafde4fb7d2a062fd75b0f, type: 2}
+  - {fileID: 11400000, guid: f3861de47b5c53a4bb4dd8b04c9e1b6b, type: 2}
+  - {fileID: 11400000, guid: 693f746ab6a16da46a14e3098048fd84, type: 2}
+  - {fileID: 11400000, guid: c72dd2ce0f0f80a4aa7d30cccb424400, type: 2}
+  - {fileID: 11400000, guid: 7e3e5e9f344b2c14496692bfffd02f87, type: 2}
+  - {fileID: 11400000, guid: 776320bde4fa84b488deb91a5775029b, type: 2}
+  - {fileID: 11400000, guid: 8bd7ec437cacc0747a1d4f7d71c0aa96, type: 2}
+  - {fileID: 11400000, guid: 6b4558ebd580f864a9c38cd93bf68125, type: 2}
+  - {fileID: 11400000, guid: 6f3d6f46534baaa4c94911c92926f691, type: 2}
+  - {fileID: 11400000, guid: 2958e29506a80964aa8a7bd5505617b8, type: 2}
   technologies:
-  - {fileID: 11400000, guid: 733029773cf9b10488a7ba7f575b0713, type: 2}
-  - {fileID: 11400000, guid: 6b508f7d749ee19468e84f1071abd4ef, type: 2}
-  - {fileID: 11400000, guid: 619a96196e20fcd46b64685d162da3b5, type: 2}
-  - {fileID: 11400000, guid: 4a9cdc702c3f34e4394fbbe8d69f96eb, type: 2}
-  - {fileID: 11400000, guid: 7eb03c74738a7fd4b92be168365fe6cc, type: 2}
-  - {fileID: 11400000, guid: f820be6ec75eca04c8eb3a7edf66292f, type: 2}
-  - {fileID: 11400000, guid: 0d6783959d3da2d40a6ad62a35d9d4d3, type: 2}
-  - {fileID: 11400000, guid: a0591d41e54226a4eacab9ab71e30955, type: 2}
-  - {fileID: 11400000, guid: cced540b7bac3984a9917583bf34010b, type: 2}
-  - {fileID: 11400000, guid: 99d56d0898072d14db8b423390664626, type: 2}
-  - {fileID: 11400000, guid: 178c32c0a3a7e894482f3f06460d3a2a, type: 2}
-  - {fileID: 11400000, guid: 550bb15af23762048bed2526bffe8129, type: 2}
-  - {fileID: 11400000, guid: 420d0889431d6a342b611e28bf5521a6, type: 2}
-  - {fileID: 11400000, guid: ba8680d532bc02c429a9a89245857c74, type: 2}
-  - {fileID: 11400000, guid: 6b9a83f12e7d3474bb11f1752b016a1a, type: 2}
-  - {fileID: 11400000, guid: c2a964591c16f304bbf2ae65febb2c7b, type: 2}
-  - {fileID: 11400000, guid: 054c3fc27c01f624fa72fe8faddf3d63, type: 2}
-  - {fileID: 11400000, guid: 5502aa48c22ea0a43808a607ed66f316, type: 2}
-  - {fileID: 11400000, guid: 21aff170fb593824cb5482a7a746e066, type: 2}
-  - {fileID: 11400000, guid: c04115713ec2b9f4c9ff53a9cb48431a, type: 2}
-  - {fileID: 11400000, guid: ed279066ebef5244abfc875d1cd58add, type: 2}
-  - {fileID: 11400000, guid: 78034f01ea22982418f9be2d2815b7a8, type: 2}
-  - {fileID: 11400000, guid: 049ac12394f6b0d4a968c1a7fab8cdd1, type: 2}
-  - {fileID: 11400000, guid: b82e16dda11bb95418276601eadc5426, type: 2}
-  - {fileID: 11400000, guid: 0e611066576dd5946b744e4a652da447, type: 2}
-  - {fileID: 11400000, guid: 6c2d3bb204075f2498d841e31e91520b, type: 2}
-  - {fileID: 11400000, guid: 205dbaaabcd752d4aa1c2b4e6675ad29, type: 2}
-  - {fileID: 11400000, guid: 8540267394ff743478a34d6deb5891c2, type: 2}
-  - {fileID: 11400000, guid: e15b34ba2cbc59d438c842ea9422c272, type: 2}
-  - {fileID: 11400000, guid: 2143d1f42652984438808114d977993d, type: 2}
-  - {fileID: 11400000, guid: c8c6ea4383ea7c547a4695502670be22, type: 2}
+  - {fileID: 11400000, guid: bb5450113dc0dc04c992e20d73216606, type: 2}
+  - {fileID: 11400000, guid: e11de8da81ef0494e8bbe153ac6b7121, type: 2}
+  - {fileID: 11400000, guid: a8922e986c759c94d8ef6ed1faeb3e21, type: 2}
+  - {fileID: 11400000, guid: 6561db35565d7b04e8b9de53e45d24ac, type: 2}
+  - {fileID: 11400000, guid: 15df3b8d170a2674db5e5557d713bb98, type: 2}
+  - {fileID: 11400000, guid: 8a3fdde08e65dbc46a99684c446da274, type: 2}
+  - {fileID: 11400000, guid: e85bd1e793a7f4f418c25459038340ac, type: 2}
+  - {fileID: 11400000, guid: 50afc7f148191de47a96dc7ee5ecb633, type: 2}
+  - {fileID: 11400000, guid: 9cdee8ca5ab0d0c4c88857985e959d06, type: 2}
+  - {fileID: 11400000, guid: cb7f823de88dc6543961cbc54a3e270d, type: 2}
+  - {fileID: 11400000, guid: ef375cdd92d0bc646a33d6f821b7776f, type: 2}
+  - {fileID: 11400000, guid: b8fa0540cded79f46a317bbc619a3319, type: 2}
+  - {fileID: 11400000, guid: b0f33d0ebd4f0394fa4a85959ef4a019, type: 2}
+  - {fileID: 11400000, guid: cc6703b92f129b74c8aadf908b903bcb, type: 2}
+  - {fileID: 11400000, guid: 36d0faf1389e2d041b3802ed0654b00b, type: 2}
+  - {fileID: 11400000, guid: 86184c6d7de3423448497238c649ce59, type: 2}
+  - {fileID: 11400000, guid: 2b79ad53a42667247b8ac17373e1f968, type: 2}
+  - {fileID: 11400000, guid: 65a8e6b6944b2704186de08291f7fe4b, type: 2}
+  - {fileID: 11400000, guid: f8349e0f456a93744b2d7fd9f4dad61d, type: 2}
+  - {fileID: 11400000, guid: c18513d6fd7691b4bb0c49f3f7a502b5, type: 2}
+  - {fileID: 11400000, guid: 742ca1a05f82eba4882ba7ce86374cf7, type: 2}
+  - {fileID: 11400000, guid: d070be692f9cd494d828860c3ca73c97, type: 2}
+  - {fileID: 11400000, guid: 8482fe8b80ebd9045988517d678fae90, type: 2}
+  - {fileID: 11400000, guid: 2f9850b6b9b70d84b978cf1ba7333b01, type: 2}
+  - {fileID: 11400000, guid: feac526aae7eb304bade71235ac91962, type: 2}
+  - {fileID: 11400000, guid: 0b4f661eafb6505459ff86586df9e7ee, type: 2}
+  - {fileID: 11400000, guid: 05ebc21d647dda44dbbc3df04fbd915f, type: 2}
+  - {fileID: 11400000, guid: 971f105679aa1214f81832d85ee86074, type: 2}
+  - {fileID: 11400000, guid: a65d58e5066f0f04b8b1f1900421ce6b, type: 2}
   actions:
   - {fileID: 11400000, guid: 10b3d54b19946354ca64d7552a6c5a7f, type: 2}
   - {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
@@ -75,6 +107,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b938e26eab20c104f85066c0c81ef690, type: 2}
   - {fileID: 11400000, guid: f239eab61e06f4f439e86af7c979f9d6, type: 2}
   - {fileID: 11400000, guid: b2e826e4b7f276c418edf38cb9b5d022, type: 2}
+  - {fileID: 11400000, guid: 3239472034ebe1440822e027fef68555, type: 2}
+  - {fileID: 11400000, guid: fa6ec7490789e844faf33b389123d5b8, type: 2}
+  - {fileID: 11400000, guid: 99272a3567cbacd45aae290b9352ba3c, type: 2}
   nodeTypes:
   - {fileID: 11400000, guid: 0362541d0dc07d64282ac447ff884e45, type: 2}
   - {fileID: 11400000, guid: c37c4b4d788456b4c93ea37bd43ca422, type: 2}
@@ -84,34 +119,84 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
   - {fileID: 11400000, guid: d1bb8220cd49f164f977f94bd383a5f7, type: 2}
   networks:
-  - {fileID: 11400000, guid: 25c4e5da1c02d094db8c98790db4959f, type: 2}
+  - {fileID: 11400000, guid: fb590625a0050214796a84aab0fbf077, type: 2}
+  - {fileID: 11400000, guid: 66adbba011b874245b9128032334bd17, type: 2}
+  - {fileID: 11400000, guid: a6ae6e53f1d091b4bae9f2098561e828, type: 2}
+  - {fileID: 11400000, guid: b1d325d0b3bc6444988bcbe85b42fb75, type: 2}
+  - {fileID: 11400000, guid: c4b1555e2002e6f4da7d6de3440fb98c, type: 2}
+  - {fileID: 11400000, guid: d9115336d49df824f837cb4f91c64997, type: 2}
+  - {fileID: 11400000, guid: 648b6f0d223b09b40b1b900bb8bb5e6c, type: 2}
+  - {fileID: 11400000, guid: c54a0650f27100045bd2c9a0c2375d4f, type: 2}
+  - {fileID: 11400000, guid: 2c2c704342b26c540acc14fea0d5617c, type: 2}
+  - {fileID: 11400000, guid: 24b616b7a913a03419d590545a114169, type: 2}
+  - {fileID: 11400000, guid: a35281ca5133a5044acdd6bc2f654018, type: 2}
+  - {fileID: 11400000, guid: bb22047e28ce9dd4d946432f89444ade, type: 2}
+  - {fileID: 11400000, guid: b329c061638517c469c3dd0b8f33cfbc, type: 2}
+  - {fileID: 11400000, guid: 2b9364a7ad41d9b4fa337ed300627737, type: 2}
+  - {fileID: 11400000, guid: e3494def80e94c042b2ccb27ed69bb01, type: 2}
+  - {fileID: 11400000, guid: 5468629e08b32be46b51b4a10fd67d4d, type: 2}
+  - {fileID: 11400000, guid: fadd651d4703a714282a4b23c0900761, type: 2}
+  - {fileID: 11400000, guid: b35c52ee51fe5e34ba7cb192621fd614, type: 2}
+  - {fileID: 11400000, guid: 456d868e564a83548bb269e4516ffbf0, type: 2}
+  - {fileID: 11400000, guid: ee6ba13d0505ae142abfd1e41fb13658, type: 2}
+  - {fileID: 11400000, guid: f8f928972d7b0134badaa4a83b3b2db0, type: 2}
+  - {fileID: 11400000, guid: b0cebda3ea18cbb4a9c209d5da63e7d3, type: 2}
+  - {fileID: 11400000, guid: cd8a81ce7d78df94285afc688c7e4168, type: 2}
+  - {fileID: 11400000, guid: 0717299b9507d8445a5a5ba1ce058a59, type: 2}
+  - {fileID: 11400000, guid: 79a2ed82db069e248b614b0a0e06eeca, type: 2}
+  - {fileID: 11400000, guid: 5552066f0467ebf4188138c92e789c79, type: 2}
+  - {fileID: 11400000, guid: c1900aaba03adea468995c4628813c1e, type: 2}
+  - {fileID: 11400000, guid: 9039e8b2268eb5e4eafad1a944da19d3, type: 2}
+  - {fileID: 11400000, guid: 590efe0464308a740a6cee546aca58c7, type: 2}
+  - {fileID: 11400000, guid: fc0954a97d4fcbd438e6a327d1f851c7, type: 2}
+  - {fileID: 11400000, guid: 875c6161ac704fa4f829077b5d915382, type: 2}
+  - {fileID: 11400000, guid: 7ac847671bb206549bde0bd4628a33db, type: 2}
+  - {fileID: 11400000, guid: 01694426b6e6d9f4fa5444e3b5788173, type: 2}
+  - {fileID: 11400000, guid: 6649afe25e6e8204e831c1a565a77de1, type: 2}
+  - {fileID: 11400000, guid: 8d9124608549cb8418557b0d1f4ebe0e, type: 2}
+  - {fileID: 11400000, guid: 3357e8bfe8a6a7541985ebb8c755d3cf, type: 2}
+  - {fileID: 11400000, guid: 6c89ccc925ef5ac43b0f1356bba3983d, type: 2}
+  - {fileID: 11400000, guid: 60eee428c2307d4409d189bbe144ef90, type: 2}
+  - {fileID: 11400000, guid: efd2864cd459a644285bf29e22f8c4e2, type: 2}
+  - {fileID: 11400000, guid: 94579e1debe3d114ea89305104c83653, type: 2}
+  - {fileID: 11400000, guid: 52d6ceafffc63d240b906480c7688078, type: 2}
+  - {fileID: 11400000, guid: 331d2179a84153c47b4df0145e00c983, type: 2}
+  - {fileID: 11400000, guid: 8619b3952b5a77141ad041b41176a055, type: 2}
+  - {fileID: 11400000, guid: 5e6f41492948f6149a37299750cd30af, type: 2}
+  - {fileID: 11400000, guid: 6b5232159cb9ac04e87b30e8e6918d11, type: 2}
+  - {fileID: 11400000, guid: 5e08519642f55d74b8a712585a98ee79, type: 2}
+  - {fileID: 11400000, guid: f3ecc97b6d5c4744da18e7189bee88c6, type: 2}
+  - {fileID: 11400000, guid: e3a6294ff43a6124e8846b6161b93c68, type: 2}
+  - {fileID: 11400000, guid: fdfe055e9b2da1849afc592d27183f24, type: 2}
   rig: {fileID: 11400000, guid: bce4c4be769fe444f9abfe4384111567, type: 2}
   chassis:
-  - {fileID: 11400000, guid: f84370b9007f5d448a19022556253a9b, type: 2}
-  - {fileID: 11400000, guid: cee706d1a7305db44876ed930b24a4cf, type: 2}
-  - {fileID: 11400000, guid: 48d9fd7bce0955e4da6c771e95d81a73, type: 2}
-  - {fileID: 11400000, guid: 61978109d14fe3e4fa3ec17c4057ceb9, type: 2}
+  - {fileID: 11400000, guid: 03525bd8e963c56438e975312106313a, type: 2}
+  - {fileID: 11400000, guid: 7ea45112b58cf0d4f8f57e90e328b882, type: 2}
+  - {fileID: 11400000, guid: 2d2f45dd765a2eb4fbdc23f3238fbb1c, type: 2}
+  - {fileID: 11400000, guid: cedff76eafe574743b1366b1bfa16a92, type: 2}
   modules:
-  - {fileID: 11400000, guid: dbdeb02db362f634fa504e65179a5258, type: 2}
-  - {fileID: 11400000, guid: 5101f14dac7e2a640a2b193113ef8ef6, type: 2}
-  - {fileID: 11400000, guid: 2a15a42e19f37f04184ef78fd2134b03, type: 2}
-  - {fileID: 11400000, guid: 2c181137322d9464c92504fc752b7b0b, type: 2}
-  - {fileID: 11400000, guid: 4e937da29d231ce488d71567bf061ccb, type: 2}
-  - {fileID: 11400000, guid: 80a14ba33b148db47b4145ce460fc885, type: 2}
-  - {fileID: 11400000, guid: 5fd1f3656d14f5848882b463e849e2e1, type: 2}
-  - {fileID: 11400000, guid: 65f21ea59417b0a42a3277d8911a7115, type: 2}
-  - {fileID: 11400000, guid: 1dd9a5072ec0b22458d62f58a217f8ac, type: 2}
-  - {fileID: 11400000, guid: be00f1791ebd1c84da4d2f6a0c39741b, type: 2}
-  - {fileID: 11400000, guid: beda2b9877b8e1f4aa33dba58b0734e9, type: 2}
-  - {fileID: 11400000, guid: cb0d66ef6407853478f8f29c44fa96fa, type: 2}
-  - {fileID: 11400000, guid: 2101850735de25148a133889db0d7f33, type: 2}
-  - {fileID: 11400000, guid: f5310565030c230488e47a9c0bb1c76e, type: 2}
-  - {fileID: 11400000, guid: 68f34933bddadec4cbe931f844287694, type: 2}
-  - {fileID: 11400000, guid: 7ae5ebb5661a3d640a6407ec6ff15068, type: 2}
-  - {fileID: 11400000, guid: 69bffaae93580444db4c6fe6dc3699e0, type: 2}
-  - {fileID: 11400000, guid: 09b779d0eeb5d7941aea844651206eb2, type: 2}
-  - {fileID: 11400000, guid: ea12f8fb3de2fc940a217d1c8e751ce1, type: 2}
-  - {fileID: 11400000, guid: 6bc4150e8c75dcc47af4aa69db609f1d, type: 2}
+  - {fileID: 11400000, guid: a0616a516a3a8754497edae64807ca53, type: 2}
+  - {fileID: 11400000, guid: 995feb6e19d18ef4c9c493cc1da194d2, type: 2}
+  - {fileID: 11400000, guid: 102415c487aeebb4583ffc6e4b1d3b28, type: 2}
+  - {fileID: 11400000, guid: 3841bce83467b0843b0259e58c407075, type: 2}
+  - {fileID: 11400000, guid: 2f415ed85e9d0114b8b6cf7bb1455c63, type: 2}
+  - {fileID: 11400000, guid: 2832bc0aaaa06ae4fb2e1bfa7c252e05, type: 2}
+  - {fileID: 11400000, guid: fe1af955f71bb844eae2a12714f1887a, type: 2}
+  - {fileID: 11400000, guid: e32c3b76e11dc594499fabe9e7e0b76d, type: 2}
+  - {fileID: 11400000, guid: 355851f80a052ae43845504768b79acb, type: 2}
+  - {fileID: 11400000, guid: 68606ffbcf2502843a244891d00e389c, type: 2}
+  - {fileID: 11400000, guid: 89e27599e3209b24ebd39b115767ce2a, type: 2}
+  - {fileID: 11400000, guid: 165bcb7fe12301049863e9c5ed361d26, type: 2}
+  - {fileID: 11400000, guid: 1add7abf364f2c843927d27508424fb3, type: 2}
+  - {fileID: 11400000, guid: 5717a9e2ced8b5444a6ad19966630372, type: 2}
+  - {fileID: 11400000, guid: 42594e174894ace48b3335643dfe1767, type: 2}
+  - {fileID: 11400000, guid: f6fe6d73c8e4a0f46a7c5d27eadb5308, type: 2}
+  - {fileID: 11400000, guid: 31d236c2ddc29cc42adb128c3f9f0638, type: 2}
+  - {fileID: 11400000, guid: 8789dea334615944ab45784b9537a928, type: 2}
+  - {fileID: 11400000, guid: 84687676ef367a04a9a8acd8034d8cc0, type: 2}
+  - {fileID: 11400000, guid: aad4357bd8a0786498850e9e823a51d4, type: 2}
+  - {fileID: 11400000, guid: cd9f8266f52767547a9dc97f7e817ac7, type: 2}
+  - {fileID: 11400000, guid: f8752b22a809af14aa2dd5fec2c50587, type: 2}
   hardware: []
   statuses:
   - {fileID: 11400000, guid: 925ea085fed936542a38cb6906581faf, type: 2}
@@ -124,397 +209,112 @@ MonoBehaviour:
     priority: 0
     operation: 2
     when:
-      rid: 213507098990346240
+      rid: 213507108366974976
     value:
-      rid: 213507098990346241
+      rid: 213507108366974977
   - id: scan-preparation-trace
     stat: baseTrace
     priority: 0
     operation: 2
     when:
-      rid: 213507098990346242
+      rid: 213507108366974978
     value:
-      rid: 213507098990346243
-  - id: career-pacing-1-duration
-    stat: duration
-    priority: 100
-    operation: 2
-    when:
-      rid: 213507098990346244
-    value:
-      rid: 213507098990346245
-  - id: career-pacing-1-trace
+      rid: 213507108366974979
+  - id:
     stat: trace
-    priority: 100
+    priority: 0
     operation: 2
     when:
-      rid: 213507098990346246
+      rid: 213507108366974980
     value:
-      rid: 213507098990346247
-  - id: career-pacing-2-duration
-    stat: duration
-    priority: 100
-    operation: 2
-    when:
-      rid: 213507098990346248
-    value:
-      rid: 213507098990346249
-  - id: career-pacing-2-trace
-    stat: trace
-    priority: 100
-    operation: 2
-    when:
-      rid: 213507098990346250
-    value:
-      rid: 213507098990346251
-  - id: career-pacing-3-duration
-    stat: duration
-    priority: 100
-    operation: 2
-    when:
-      rid: 213507098990346252
-    value:
-      rid: 213507098990346253
-  - id: career-pacing-3-trace
-    stat: trace
-    priority: 100
-    operation: 2
-    when:
-      rid: 213507098990346254
-    value:
-      rid: 213507098990346255
+      rid: 213507108366974981
   triggers:
   - on: 0
     onceKey:
     when:
-      rid: 213507098990346256
+      rid: 213507108366974982
     effects:
-    - rid: 213507098990346257
+    - rid: 213507108366974983
   - on: 2
     onceKey:
     when:
-      rid: 213507098990346258
+      rid: 213507108366974984
     effects:
-    - rid: 213507098990346259
+    - rid: 213507108366974985
   references:
     version: 2
     RefIds:
-    - rid: 213507098990346240
+    - rid: 213507108366974976
       type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         conditions:
-        - rid: 213507098990346260
-        - rid: 213507098990346261
-    - rid: 213507098990346241
+        - rid: 213507108366974986
+        - rid: 213507108366974987
+    - rid: 213507108366974977
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.85
-    - rid: 213507098990346242
+    - rid: 213507108366974978
       type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         conditions:
-        - rid: 213507098990346262
-        - rid: 213507098990346263
-    - rid: 213507098990346243
+        - rid: 213507108366974988
+        - rid: 213507108366974989
+    - rid: 213507108366974979
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.8
-    - rid: 213507098990346244
-      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
+    - rid: 213507108366974980
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        conditions:
-        - rid: 213507098990346264
-        - rid: 213507098990346265
-    - rid: 213507098990346245
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 2.25
-    - rid: 213507098990346246
-      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        conditions:
-        - rid: 213507098990346266
-        - rid: 213507098990346267
-    - rid: 213507098990346247
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 0.8
-    - rid: 213507098990346248
-      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        conditions:
-        - rid: 213507098990346268
-        - rid: 213507098990346269
-    - rid: 213507098990346249
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 3
-    - rid: 213507098990346250
-      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        conditions:
-        - rid: 213507098990346270
-        - rid: 213507098990346271
-    - rid: 213507098990346251
+    - rid: 213507108366974981
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.55
-    - rid: 213507098990346252
-      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        conditions:
-        - rid: 213507098990346272
-        - rid: 213507098990346273
-    - rid: 213507098990346253
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 5
-    - rid: 213507098990346254
-      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        conditions:
-        - rid: 213507098990346274
-        - rid: 213507098990346275
-    - rid: 213507098990346255
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 0.25
-    - rid: 213507098990346256
+    - rid: 213507108366974982
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
-    - rid: 213507098990346257
+    - rid: 213507108366974983
       type: {class: RevealEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         targets:
           scope: 3
           nodeId:
           filter:
-            rid: 213507098990346276
+            rid: 213507108366974990
         radius:
-          rid: 213507098990346277
-    - rid: 213507098990346258
+          rid: 213507108366974991
+    - rid: 213507108366974984
       type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         tag: relay
-    - rid: 213507098990346259
+    - rid: 213507108366974985
       type: {class: CounterEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         key: relay-controls
         amount: 1
-    - rid: 213507098990346260
+    - rid: 213507108366974986
       type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
         tag:
-    - rid: 213507098990346261
+    - rid: 213507108366974987
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 2
-    - rid: 213507098990346262
+    - rid: 213507108366974988
       type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
         tag:
-    - rid: 213507098990346263
+    - rid: 213507108366974989
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 2
-    - rid: 213507098990346264
-      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        comparison: 3
-        left:
-          rid: 213507098990346278
-        right:
-          rid: 213507098990346279
-    - rid: 213507098990346265
-      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        condition:
-          rid: 213507098990346280
-    - rid: 213507098990346266
-      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        comparison: 3
-        left:
-          rid: 213507098990346281
-        right:
-          rid: 213507098990346282
-    - rid: 213507098990346267
-      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        condition:
-          rid: 213507098990346283
-    - rid: 213507098990346268
-      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        comparison: 0
-        left:
-          rid: 213507098990346284
-        right:
-          rid: 213507098990346285
-    - rid: 213507098990346269
-      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        condition:
-          rid: 213507098990346286
-    - rid: 213507098990346270
-      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        comparison: 0
-        left:
-          rid: 213507098990346287
-        right:
-          rid: 213507098990346288
-    - rid: 213507098990346271
-      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        condition:
-          rid: 213507098990346289
-    - rid: 213507098990346272
-      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        comparison: 5
-        left:
-          rid: 213507098990346290
-        right:
-          rid: 213507098990346291
-    - rid: 213507098990346273
-      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        condition:
-          rid: 213507098990346292
-    - rid: 213507098990346274
-      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        comparison: 5
-        left:
-          rid: 213507098990346293
-        right:
-          rid: 213507098990346294
-    - rid: 213507098990346275
-      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        condition:
-          rid: 213507098990346295
-    - rid: 213507098990346276
+    - rid: 213507108366974990
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
-    - rid: 213507098990346277
+    - rid: 213507108366974991
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 1
-    - rid: 213507098990346278
-      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        input: 3
-        key:
-        filter:
-          rid: 213507098990346296
-    - rid: 213507098990346279
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 1
-    - rid: 213507098990346280
-      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        action: {fileID: 0}
-        tag: countermeasure
-    - rid: 213507098990346281
-      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        input: 3
-        key:
-        filter:
-          rid: 213507098990346297
-    - rid: 213507098990346282
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 1
-    - rid: 213507098990346283
-      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        action: {fileID: 0}
-        tag: countermeasure
-    - rid: 213507098990346284
-      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        input: 3
-        key:
-        filter:
-          rid: 213507098990346298
-    - rid: 213507098990346285
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 2
-    - rid: 213507098990346286
-      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        action: {fileID: 0}
-        tag: countermeasure
-    - rid: 213507098990346287
-      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        input: 3
-        key:
-        filter:
-          rid: 213507098990346299
-    - rid: 213507098990346288
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 2
-    - rid: 213507098990346289
-      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        action: {fileID: 0}
-        tag: countermeasure
-    - rid: 213507098990346290
-      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        input: 3
-        key:
-        filter:
-          rid: 213507098990346300
-    - rid: 213507098990346291
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 3
-    - rid: 213507098990346292
-      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        action: {fileID: 0}
-        tag: countermeasure
-    - rid: 213507098990346293
-      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        input: 3
-        key:
-        filter:
-          rid: 213507098990346301
-    - rid: 213507098990346294
-      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        value: 3
-    - rid: 213507098990346295
-      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-        action: {fileID: 0}
-        tag: countermeasure
-    - rid: 213507098990346296
-      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-    - rid: 213507098990346297
-      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-    - rid: 213507098990346298
-      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-    - rid: 213507098990346299
-      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-    - rid: 213507098990346300
-      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:
-    - rid: 213507098990346301
-      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data:

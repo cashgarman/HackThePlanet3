@@ -1,0 +1,1897 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfcd3195e2560d4eb0d4c8cbd3106e7, type: 3}
+  m_Name: 82fbcb71ef675644aba8cb9d0f2e002e
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.NetworkDefinition
+  id: subnet-shelter-side-3
+  title: Someone Still Answers / Shelter / subnet
+  description:
+  entryNode: home
+  preferredNode: n22
+  previewNode: n22
+  layout: 0
+  payloadStorage:
+    rid: 213507108419411156
+  archiveStorage:
+    rid: 213507108419411157
+  nodes:
+  - id: home
+    label: Your gateway
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 0362541d0dc07d64282ac447ff884e45, type: 2}
+    column: -1
+    row: 0
+    x: -20
+    y: 180
+    position: {x: -2.5353785, y: 0, z: -12.75349}
+    known: 1
+    controlled: 1
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411158
+      value:
+        rid: 213507108419411159
+  - id: n1
+    label: Public service terminal
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: c37c4b4d788456b4c93ea37bd43ca422, type: 2}
+    column: 0
+    row: 0
+    x: 100
+    y: 180
+    position: {x: 0.10142451, y: 0, z: -8.141296}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411160
+      value:
+        rid: 213507108419411161
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411162
+      value:
+        rid: 213507108419411163
+  - id: n2
+    label: Maintenance ingress
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    column: 0
+    row: 1
+    x: 100
+    y: 250
+    position: {x: 0.10142451, y: 4, z: -8.141296}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411164
+      value:
+        rid: 213507108419411165
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411166
+      value:
+        rid: 213507108419411167
+  - id: n3
+    label: Fast access gate
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: d3c6d843fe24eee4390c10c9f964577d, type: 2}
+    column: 1
+    row: 0
+    x: 220
+    y: 180
+    position: {x: 1.3677676, y: 0, z: -3.2874541}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411168
+      value:
+        rid: 213507108419411169
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411170
+      value:
+        rid: 213507108419411171
+  - id: n4
+    label: Service crawlspace
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    column: 1
+    row: 1
+    x: 220
+    y: 250
+    position: {x: 1.3677676, y: 4, z: -3.2874541}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411172
+      value:
+        rid: 213507108419411173
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411174
+      value:
+        rid: 213507108419411175
+  - id: n5
+    label: Dispatch console
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: c37c4b4d788456b4c93ea37bd43ca422, type: 2}
+    column: 2
+    row: 0
+    x: 340
+    y: 180
+    position: {x: 0.8976374, y: 0, z: 1.8725755}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411176
+      value:
+        rid: 213507108419411177
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411178
+      value:
+        rid: 213507108419411179
+  - id: n6
+    label: Neighborhood exchange
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    column: 2
+    row: 1
+    x: 340
+    y: 250
+    position: {x: 0.8976374, y: 4, z: 1.8725755}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411180
+      value:
+        rid: 213507108419411181
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411182
+      value:
+        rid: 213507108419411183
+  - id: n7
+    label: Traffic sensor
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 00f2f7c167e07a047b607982ee82472e, type: 2}
+    column: 1
+    row: -1
+    x: 220
+    y: 110
+    position: {x: 1.3677676, y: -4, z: -3.2874541}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411184
+      value:
+        rid: 213507108419411185
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411186
+      value:
+        rid: 213507108419411187
+  - id: n8
+    label: Archive partition
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: d3c6d843fe24eee4390c10c9f964577d, type: 2}
+    column: 3
+    row: 0
+    x: 460
+    y: 180
+    position: {x: -0.07847375, y: 0, z: 7.1218233}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411188
+      value:
+        rid: 213507108419411189
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411190
+      value:
+        rid: 213507108419411191
+  - id: n9
+    label: Signed dispatch record
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    column: 3
+    row: 1
+    x: 460
+    y: 250
+    position: {x: -0.07847375, y: 4, z: 7.1218233}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411192
+      value:
+        rid: 213507108419411193
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411194
+      value:
+        rid: 213507108419411195
+  - id: n14
+    label: Response controller
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: d1bb8220cd49f164f977f94bd383a5f7, type: 2}
+    column: 2
+    row: -1
+    x: 340
+    y: 110
+    position: {x: 0.8976374, y: -4, z: 1.8725755}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411196
+      value:
+        rid: 213507108419411197
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411198
+      value:
+        rid: 213507108419411199
+  - id: n19
+    label: Credential witness
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: c37c4b4d788456b4c93ea37bd43ca422, type: 2}
+    column: 1
+    row: 2
+    x: 220
+    y: 320
+    position: {x: 1.3677676, y: 8, z: -3.2874541}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411200
+      value:
+        rid: 213507108419411201
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411202
+      value:
+        rid: 213507108419411203
+  - id: n20
+    label: Live mirror
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    column: 4
+    row: 1
+    x: 580
+    y: 250
+    position: {x: 0.13512279, y: 4, z: 12.161294}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411204
+      value:
+        rid: 213507108419411205
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411206
+      value:
+        rid: 213507108419411207
+  - id: n22
+    label: Authoritative record
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    column: 4
+    row: 0
+    x: 580
+    y: 180
+    position: {x: 0.13512279, y: 0, z: 12.161294}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411208
+      value:
+        rid: 213507108419411209
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411210
+      value:
+        rid: 213507108419411211
+  - id: n10
+    label: Staff correspondence
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    column: 2
+    row: 2
+    x: 340
+    y: 320
+    position: {x: 0.8976374, y: 8, z: 1.8725755}
+    known: 0
+    controlled: 0
+    bonus: 1
+    loreIndex: 0
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411212
+      value:
+        rid: 213507108419411213
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411214
+      value:
+        rid: 213507108419411215
+  - id: n11
+    label: Maintenance diary
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    column: 3
+    row: -1
+    x: 460
+    y: 110
+    position: {x: -0.07847375, y: -4, z: 7.1218233}
+    known: 0
+    controlled: 0
+    bonus: 1
+    loreIndex: 1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411216
+      value:
+        rid: 213507108419411217
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411218
+      value:
+        rid: 213507108419411219
+  - id: n12
+    label: Unfiled testimony
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    column: 4
+    row: 2
+    x: 580
+    y: 320
+    position: {x: 0.13512279, y: 8, z: 12.161294}
+    known: 0
+    controlled: 0
+    bonus: 1
+    loreIndex: 2
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411220
+      value:
+        rid: 213507108419411221
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411222
+      value:
+        rid: 213507108419411223
+  - id: duct-0
+    label: Utility conduit 1
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    column: 0
+    row: 1
+    x: 100
+    y: 250
+    position: {x: -10, y: -10, z: 6}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411224
+      value:
+        rid: 213507108419411225
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411226
+      value:
+        rid: 213507108419411227
+  - id: duct-1
+    label: Utility conduit 2
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    column: 0
+    row: 1
+    x: 100
+    y: 250
+    position: {x: -6, y: -10, z: 6}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411228
+      value:
+        rid: 213507108419411229
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411230
+      value:
+        rid: 213507108419411231
+  - id: duct-2
+    label: Utility conduit 3
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    column: 0
+    row: 1
+    x: 100
+    y: 250
+    position: {x: -2, y: -10, z: 6}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411232
+      value:
+        rid: 213507108419411233
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411234
+      value:
+        rid: 213507108419411235
+  - id: duct-3
+    label: Utility conduit 4
+    detail: Someone Still Answers / Shelter / VESPER / EVACUATE subnet. Routes share dependencies; inspect the controller before committing.
+    type: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    column: 0
+    row: 1
+    x: 100
+    y: 250
+    position: {x: 2, y: -10, z: 6}
+    known: 0
+    controlled: 0
+    bonus: 0
+    loreIndex: -1
+    securityModifiers:
+    - id:
+      stat: security
+      priority: 0
+      operation: 6
+      when:
+        rid: 213507108419411236
+      value:
+        rid: 213507108419411237
+    - id:
+      stat: security
+      priority: 1
+      operation: 6
+      when:
+        rid: 213507108419411238
+      value:
+        rid: 213507108419411239
+  links:
+  - a: home
+    b: n1
+    when:
+      rid: 213507108419411240
+  - a: home
+    b: n2
+    when:
+      rid: 213507108419411241
+  - a: n1
+    b: n3
+    when:
+      rid: 213507108419411242
+  - a: n3
+    b: n5
+    when:
+      rid: 213507108419411243
+  - a: n5
+    b: n8
+    when:
+      rid: 213507108419411244
+  - a: n8
+    b: n22
+    when:
+      rid: 213507108419411245
+  - a: n2
+    b: n4
+    when:
+      rid: 213507108419411246
+  - a: n4
+    b: n6
+    when:
+      rid: 213507108419411247
+  - a: n6
+    b: n9
+    when:
+      rid: 213507108419411248
+  - a: n9
+    b: n20
+    when:
+      rid: 213507108419411249
+  - a: n20
+    b: n22
+    when:
+      rid: 213507108419411250
+  - a: n4
+    b: n19
+    when:
+      rid: 213507108419411251
+  - a: n19
+    b: n9
+    when:
+      rid: 213507108419411252
+  - a: n1
+    b: n7
+    when:
+      rid: 213507108419411253
+  - a: n7
+    b: n14
+    when:
+      rid: 213507108419411254
+  - a: n14
+    b: n5
+    when:
+      rid: 213507108419411255
+  - a: n6
+    b: n10
+    when:
+      rid: 213507108419411256
+  - a: n8
+    b: n11
+    when:
+      rid: 213507108419411257
+  - a: n20
+    b: n12
+    when:
+      rid: 213507108419411258
+  - a: n4
+    b: n5
+    when:
+      rid: 213507108419411259
+  - a: n9
+    b: n11
+    when:
+      rid: 213507108419411260
+  - a: n2
+    b: n19
+    when:
+      rid: 213507108419411261
+  - a: home
+    b: duct-0
+    when:
+      rid: 213507108419411262
+  - a: duct-0
+    b: duct-1
+    when:
+      rid: 213507108419411263
+  - a: duct-1
+    b: duct-2
+    when:
+      rid: 213507108419411264
+  - a: duct-2
+    b: duct-3
+    when:
+      rid: 213507108419411265
+  - a: duct-3
+    b: n9
+    when:
+      rid: 213507108419411266
+  routes:
+    entrance: n2
+    destination: n22
+    sensorAttachment: n6
+    directRoute:
+    - n6
+    - n10
+    - n14
+    - n18
+    sensors:
+    - n5
+    - n11
+    - watch-a
+    - watch-b
+    secondaryTargets:
+    - n9
+    - n19
+    - n20
+    archives:
+    - n13
+    - n21
+    - archive-c
+    reserved:
+    - home
+    - n2
+    - n22
+    - n9
+    - n19
+    - n20
+    - n6
+    - n10
+    - n14
+    - n18
+    - n5
+    - n11
+    - watch-a
+    - watch-b
+    - n13
+    - n21
+    - archive-c
+    tiers:
+    - nodeCount: 32
+      lengths: 040000000600000008000000i
+      sensorsPerLane: 1
+    - nodeCount: 44
+      lengths: 04000000050000000600000008000000i
+      sensorsPerLane: 2
+    - nodeCount: 56
+      lengths: 0400000005000000060000000700000009000000i
+      sensorsPerLane: 2
+    relay: {fileID: 11400000, guid: 64c8890cbb4b2b3409f45801bad2035e, type: 2}
+    workstation: {fileID: 11400000, guid: c37c4b4d788456b4c93ea37bd43ca422, type: 2}
+    scanner: {fileID: 11400000, guid: 00f2f7c167e07a047b607982ee82472e, type: 2}
+    archive: {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    extraIds:
+    - watch-a
+    - watch-b
+    - archive-c
+    extraLabels:
+    - Ingress sensor
+    - Deep packet sensor
+    - Sealed correspondence
+    extraTypes:
+    - {fileID: 11400000, guid: 00f2f7c167e07a047b607982ee82472e, type: 2}
+    - {fileID: 11400000, guid: 00f2f7c167e07a047b607982ee82472e, type: 2}
+    - {fileID: 11400000, guid: 598a674070928c24b80472f0667bae5e, type: 2}
+    fillerPrefix: extra-
+    fillerLabel: 'Maintenance relay '
+    safeLaneLabel: Maintenance
+    transitLabel: Transit
+    sensorLabel: Transit sensor
+    fillerLabelOffset: 24
+    entryPosition: {x: -19, y: -1, z: -2}
+    entrancePosition: {x: -14, y: 0, z: 0}
+    destinationPosition: {x: 14, y: 0, z: 0}
+    radius: 8
+    laneRadius: 1.5
+    jitter: 0.45
+    satelliteRadius: 3.5
+    satelliteGrowth: 0.025
+    minimumSpacing: 2.6
+    separationSpacing: 2.65
+    separationForce: 0.51
+    placementAttempts: 1000
+    separationPasses: 80
+    crossoverFromLane: 1
+    crossoverToLane: 2
+    crossoverStep: 4
+    directSecurity:
+      rid: 213507108419411267
+    routeSecurity:
+      rid: 213507108419411268
+    workstationWhen:
+      rid: 213507108419411269
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108419411156
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 16
+    - rid: 213507108419411157
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 8
+    - rid: 213507108419411158
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411159
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411160
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411161
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411162
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411270
+        right:
+          rid: 213507108419411271
+    - rid: 213507108419411163
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411164
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411165
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411166
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411272
+        right:
+          rid: 213507108419411273
+    - rid: 213507108419411167
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411168
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411169
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1.5
+    - rid: 213507108419411170
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411274
+        right:
+          rid: 213507108419411275
+    - rid: 213507108419411171
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 2
+        maximum: 3
+    - rid: 213507108419411172
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411173
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411174
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411276
+        right:
+          rid: 213507108419411277
+    - rid: 213507108419411175
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411176
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411177
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411178
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411278
+        right:
+          rid: 213507108419411279
+    - rid: 213507108419411179
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411180
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411181
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411182
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411280
+        right:
+          rid: 213507108419411281
+    - rid: 213507108419411183
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411184
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411185
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411186
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411282
+        right:
+          rid: 213507108419411283
+    - rid: 213507108419411187
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411188
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411189
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1.5
+    - rid: 213507108419411190
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411284
+        right:
+          rid: 213507108419411285
+    - rid: 213507108419411191
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 2
+        maximum: 3
+    - rid: 213507108419411192
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411193
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411194
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411286
+        right:
+          rid: 213507108419411287
+    - rid: 213507108419411195
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411196
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411197
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411198
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411288
+        right:
+          rid: 213507108419411289
+    - rid: 213507108419411199
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411200
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411201
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411202
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411290
+        right:
+          rid: 213507108419411291
+    - rid: 213507108419411203
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411204
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411205
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411206
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411292
+        right:
+          rid: 213507108419411293
+    - rid: 213507108419411207
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411208
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411209
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411210
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411294
+        right:
+          rid: 213507108419411295
+    - rid: 213507108419411211
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411212
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411213
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411214
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411296
+        right:
+          rid: 213507108419411297
+    - rid: 213507108419411215
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411216
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411217
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411218
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411298
+        right:
+          rid: 213507108419411299
+    - rid: 213507108419411219
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411220
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411221
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411222
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411300
+        right:
+          rid: 213507108419411301
+    - rid: 213507108419411223
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411224
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411225
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411226
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411302
+        right:
+          rid: 213507108419411303
+    - rid: 213507108419411227
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411228
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411229
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411230
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411304
+        right:
+          rid: 213507108419411305
+    - rid: 213507108419411231
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411232
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411233
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411234
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411306
+        right:
+          rid: 213507108419411307
+    - rid: 213507108419411235
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411236
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411237
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411238
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 5
+        left:
+          rid: 213507108419411308
+        right:
+          rid: 213507108419411309
+    - rid: 213507108419411239
+      type: {class: RandomNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        minimum: 1
+        maximum: 2
+    - rid: 213507108419411240
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411241
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411242
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411243
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411244
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411245
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411246
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411247
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411248
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411249
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411250
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411251
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411252
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411253
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411254
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411255
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411256
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411257
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411258
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411259
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411260
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411261
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 0
+        left:
+          rid: 213507108419411310
+        right:
+          rid: 213507108419411311
+    - rid: 213507108419411262
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411263
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411264
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411265
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411266
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411267
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507108419411312
+        right:
+          rid: 213507108419411313
+    - rid: 213507108419411268
+      type: {class: ConditionalNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        when:
+          rid: 213507108419411314
+        yes:
+          rid: 213507108419411315
+        no:
+          rid: 213507108419411316
+    - rid: 213507108419411269
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 0
+        left:
+          rid: 213507108419411317
+        right:
+          rid: 213507108419411318
+    - rid: 213507108419411270
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411319
+    - rid: 213507108419411271
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411272
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411320
+    - rid: 213507108419411273
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411274
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411321
+    - rid: 213507108419411275
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411276
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411322
+    - rid: 213507108419411277
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411278
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411323
+    - rid: 213507108419411279
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411280
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411324
+    - rid: 213507108419411281
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411282
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411325
+    - rid: 213507108419411283
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411284
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411326
+    - rid: 213507108419411285
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411286
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411327
+    - rid: 213507108419411287
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411288
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411328
+    - rid: 213507108419411289
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411290
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411329
+    - rid: 213507108419411291
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411292
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411330
+    - rid: 213507108419411293
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411294
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411331
+    - rid: 213507108419411295
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411296
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411332
+    - rid: 213507108419411297
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411298
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411333
+    - rid: 213507108419411299
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411300
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411334
+    - rid: 213507108419411301
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411302
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411335
+    - rid: 213507108419411303
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411304
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411336
+    - rid: 213507108419411305
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411306
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411337
+    - rid: 213507108419411307
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411308
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411338
+    - rid: 213507108419411309
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411310
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 7
+        left:
+          rid: 213507108419411339
+        right:
+          rid: 213507108419411340
+    - rid: 213507108419411311
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507108419411312
+      type: {class: ConditionalNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        when:
+          rid: 213507108419411341
+        yes:
+          rid: 213507108419411342
+        no:
+          rid: 213507108419411343
+    - rid: 213507108419411313
+      type: {class: ConditionalNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        when:
+          rid: 213507108419411344
+        yes:
+          rid: 213507108419411345
+        no:
+          rid: 213507108419411346
+    - rid: 213507108419411314
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 0
+        left:
+          rid: 213507108419411347
+        right:
+          rid: 213507108419411348
+    - rid: 213507108419411315
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411316
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507108419411349
+        right:
+          rid: 213507108419411350
+    - rid: 213507108419411317
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 7
+        left:
+          rid: 213507108419411351
+        right:
+          rid: 213507108419411352
+    - rid: 213507108419411318
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411319
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411320
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411321
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411322
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411323
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411324
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411325
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411326
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411327
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411328
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411329
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411330
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411331
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411332
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411333
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411334
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411335
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411336
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411337
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411338
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411339
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 4
+        key:
+        filter:
+          rid: 213507108419411353
+    - rid: 213507108419411340
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411341
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 0
+        left:
+          rid: 213507108419411354
+        right:
+          rid: 213507108419411355
+    - rid: 213507108419411342
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411343
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411344
+      type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        tag: firewall
+    - rid: 213507108419411345
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507108419411356
+        right:
+          rid: 213507108419411357
+    - rid: 213507108419411346
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507108419411347
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 27
+        key:
+        filter:
+          rid: 213507108419411358
+    - rid: 213507108419411348
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411349
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411350
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 7
+        left:
+          rid: 213507108419411359
+        right:
+          rid: 213507108419411360
+    - rid: 213507108419411351
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 25
+        key:
+        filter:
+          rid: 213507108419411361
+    - rid: 213507108419411352
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507108419411353
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411354
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 25
+        key:
+        filter:
+          rid: 213507108419411362
+    - rid: 213507108419411355
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507108419411356
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 1
+        left:
+          rid: 213507108419411363
+        right:
+          rid: 213507108419411364
+    - rid: 213507108419411357
+      type: {class: ConditionalNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        when:
+          rid: 213507108419411365
+        yes:
+          rid: 213507108419411366
+        no:
+          rid: 213507108419411367
+    - rid: 213507108419411358
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411359
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 25
+        key:
+        filter:
+          rid: 213507108419411368
+    - rid: 213507108419411360
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108419411361
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411362
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411363
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 3
+        key:
+        filter:
+          rid: 213507108419411369
+    - rid: 213507108419411364
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411365
+      type: {class: CompareCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        comparison: 4
+        left:
+          rid: 213507108419411370
+        right:
+          rid: 213507108419411371
+    - rid: 213507108419411366
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1
+    - rid: 213507108419411367
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507108419411368
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411369
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108419411370
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 8
+        key:
+        filter:
+          rid: 213507108419411372
+    - rid: 213507108419411371
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0
+    - rid: 213507108419411372
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:

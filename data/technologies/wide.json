@@ -1,13 +1,13 @@
 {
   "id": "wide",
-  "title": "Wide scan",
+  "title": "Rangefinder",
   "description": "Scans reveal three network hops instead of two. Make a plan before making noise.",
   "branch": "RECON",
   "cost": 45,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 320,
+    "x": -480.0,
     "y": 155
   },
   "parents": [

@@ -1790,7 +1790,6 @@ ScrollView {
 
 .settings-button .rail-help-glyph {
     font-size: 15px;
-    translate: 1px 1px;
 }
 
 .guide-line {

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c3557113ab5f64eaaa53f4a71d9fe9, type: 3}
+  m_Name: 1a68c0f54acd5d9b98b7bd42dc5e61c2
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigChassisDefinition
+  id: chassis-3
+  title: Rackframe
+  description: Vesper field chassis. More room, ability slots and resource headroom.
+  tier: 3
+  rows: 4
+  columns: 5
+  price: 2800
+  requiredJobs: 4
+  slots: 4
+  storageCapacity: 180
+  memoryPool: 85
+  powerCapacity: 40
+  coolingCapacity: 28

@@ -1,14 +1,14 @@
 {
   "id": "signal",
-  "title": "Signal analysis",
+  "title": "Signal Fingerprint",
   "description": "Scans take half the usual time and produce no base trace. Prepared hacks generate another {modifier:2:reduction}% less trace. Active sensors can still detect the scan.",
   "branch": "RECON",
-  "cost": 60,
+  "cost": 70,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 135,
-    "y": 220
+    "x": -480.0,
+    "y": 310
   },
   "parents": [
     "wide"

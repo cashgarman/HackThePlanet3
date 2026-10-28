@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: eec6ef8ffa7d54d49a9e352fd7484501
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: bridge
+  title: Quiet Pivot
+  description: Two charges per operation. Scan a reachable firewall, then cross it in 1.2 seconds with zero trace. Requires Wide scan and Efficient hack. Costs 14 GB RAM, reclaimed over simulation time.
+  branch: CROSSOVER
+  cost: 140
+  waypointTier: 0
+  special: 1
+  position: {x: -495, y: 1000}
+  parents:
+  - {fileID: 11400000, guid: e11de8da81ef0494e8bbe153ac6b7121, type: 2}
+  - {fileID: 11400000, guid: e85bd1e793a7f4f418c25459038340ac, type: 2}
+  grants:
+  - {fileID: 11400000, guid: 733d1a219f4ce9b49bf706c7ad225639, type: 2}
+  modifiers: []
+  triggers: []
+  references:
+    version: 2
+    RefIds: []

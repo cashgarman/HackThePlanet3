@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: 24010b1ac3e9524f80326e97a2044a54
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: credential-analysis
+  title: Cipher Autopsy
+  description: Extract credentials 35% faster. Core extraction is available to every operator.
+  branch: RECON
+  cost: 125
+  waypointTier: 0
+  special: 0
+  position: {x: -480, y: 620}
+  parents:
+  - {fileID: 11400000, guid: 6561db35565d7b04e8b9de53e45d24ac, type: 2}
+  grants:
+  - {fileID: 11400000, guid: 98c8173ceaee91947b77cb8175f1a518, type: 2}
+  modifiers:
+  - id:
+    stat: duration
+    priority: 0
+    operation: 2
+    when:
+      rid: 213507108366975012
+    value:
+      rid: 213507108366975013
+  triggers: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108366975012
+      type: {class: ActionCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        action: {fileID: 11400000, guid: 98c8173ceaee91947b77cb8175f1a518, type: 2}
+        tag:
+    - rid: 213507108366975013
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.65

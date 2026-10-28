@@ -1,0 +1,115 @@
+{
+  "id": "cold-clinic",
+  "title": "Cold Clinic",
+  "description": "Open a protected channel for a clinic\u2019s patients and backup controller.",
+  "company": "company-1",
+  "network": "subnet-cold-clinic",
+  "client": "SABLE / community grid engineer",
+  "tag": "EVACUATE / VESPER",
+  "objective": "Evacuate protected identities at Authoritative record / Capture controller at Response controller",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The clinic\u2019s outage was a test of how long volunteers would share their batteries.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1140
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 94
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 563
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Cold Clinic / Authoritative record",
+      "actionLabel": "Evacuate protected identities",
+      "action": "evacuate",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n14",
+      "label": "Cold Clinic / Response controller",
+      "actionLabel": "Capture controller",
+      "action": "hack",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "actionRequirements": [],
+      "payload": false
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "cold-clinic/0",
+      "title": "Cold Clinic / Unsent message",
+      "company": "",
+      "contract": "Cold Clinic",
+      "text": "SABLE / community grid engineer: Open a protected channel for a clinic\u2019s patients and backup controller. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "cold-clinic/1",
+      "title": "Cold Clinic / Custody note",
+      "company": "",
+      "contract": "Cold Clinic",
+      "text": "Archive custody, Cold Clinic: The clinic\u2019s outage was a test of how long volunteers would share their batteries. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "cold-clinic/2",
+      "title": "Cold Clinic / Private annotation",
+      "company": "",
+      "contract": "Cold Clinic",
+      "text": "Personal note filed under cold-clinic: The clinic\u2019s outage was a test of how long volunteers would share their batteries. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "cold-clinic-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    }
+  ],
+  "paceMultiplier": 2.8,
+  "revelation": "The clinic\u2019s outage was a test of how long volunteers would share their batteries.",
+  "prerequisites": [
+    "listening-room"
+  ],
+  "requiredFlags": [
+    "shelter"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

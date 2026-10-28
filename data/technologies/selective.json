@@ -1,17 +1,17 @@
 {
   "id": "selective",
-  "title": "Selective download",
+  "title": "Mirror Strike",
   "description": "Secure the main objective in {modifier:0:percent}% of the usual recovery time, with {modifier:1:reduction}% less recovery trace.",
   "branch": "INTRUSION",
-  "cost": 85,
+  "cost": 95,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 865,
-    "y": 220
+    "x": -160.0,
+    "y": 465
   },
   "parents": [
-    "efficient"
+    "chain"
   ],
   "grants": [],
   "modifiers": [

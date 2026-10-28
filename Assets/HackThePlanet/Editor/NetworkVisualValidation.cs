@@ -20,6 +20,112 @@ namespace HackThePlanet.Editor
 										   .GetValue(viewport);
 		}
 
+		/// <summary>Exercises settling, view-only coordinates, redaction, research and the fixed rig layout.</summary>
+		public static void RunLayoutChecks()
+		{
+			var sim = new GameSimulation(new Career());
+			var network = NetworkGenerator.Generate(GameContent.Story[0], sim.Career);
+			var before = JsonUtility.ToJson(new NodeSnapshot { nodes = network.nodes });
+			foreach (var intel in new[] { ContractIntel.Full, ContractIntel.Topology, ContractIntel.None })
+			{
+				using var viewport = new GraphViewport(network.nodes, network.links, null, true, _ => { }, intel: intel);
+				CheckLayout(viewport, sim);
+				if (intel == ContractIntel.Full)
+				{
+					CaptureLayout(viewport, sim, "force-layout-network.png");
+					Orbit(viewport, 55, 15);
+					CaptureLayout(viewport, sim, "force-layout-orbit.png");
+				}
+			}
+
+			var career = GameCatalog.Default.CreateCareer();
+			career.researchRevealed = GameCatalog.Default.Technologies.Select(t => t.id).ToList();
+			using (var research = new GraphViewport(career, null, _ => { }))
+			{
+				CheckLayout(research, sim);
+				CaptureLayout(research, sim, "force-layout-research.png");
+			}
+
+			var document = new GraphDocument("layout-rig-test");
+			document.UpsertNode(new GraphNodeRecord("slot", "slot", "Slot"));
+			var rackSchema = new GraphSchema();
+			rackSchema.Register(new GraphNodeTypeDefinition("slot", "Slot", "default", Color.white, 1));
+			var rack = new GraphScene(document, rackSchema);
+			rack.Nodes["slot"].Position = new Vector3(3, 4, 5);
+			using (var rig = new GraphViewport(rack, _ => { }, new GraphCameraState(), true))
+			{
+				rig.Tick(sim, SignalEffects.Full);
+				if (!Field<GraphRenderingSession>(rig, "session").Layout.Paused ||
+					!rack.Nodes["slot"].Pinned || rack.Nodes["slot"].Position != new Vector3(3, 4, 0))
+					throw new InvalidOperationException("Flat rig moved under force layout.");
+			}
+
+			var selected = network.nodes[0].id;
+			using (var focused = new GraphViewport(network.nodes, network.links, selected, true, _ => { }))
+			{
+				focused.FocusNode(selected);
+				var camera = Field<Camera>(focused, "camera");
+				var distance = Field<float>(focused, "distance");
+				for (var frame = 0; frame < 300; frame++)
+					StepLayout(focused);
+				var p = camera.WorldToViewportPoint(Field<GraphScene>(focused, "scene").Nodes[selected].Position);
+				if (Mathf.Abs(p.x - .5f) > .001f || Mathf.Abs(p.y - .5f) > .001f ||
+					Field<float>(focused, "distance") != distance)
+					throw new InvalidOperationException("Layout lost user focus or refitted a manually adjusted camera.");
+			}
+
+			if (before != JsonUtility.ToJson(new NodeSnapshot { nodes = network.nodes }))
+				throw new InvalidOperationException("Layout changed simulation coordinates.");
+			File.WriteAllText(Path.Combine(Directory.GetParent(Application.dataPath).FullName,
+				"Artifacts/force-layout-validation.txt"),
+				"PASS / Spatial operation, redacted, empty and research graphs settle and freeze; authored positions and flat rig remain intact.");
+		}
+
+		/// <summary>Settles a viewport and verifies motion, freezing, finite coordinates and FIT framing.</summary>
+		/// <param name="viewport">Operation or research viewport to check.</param>
+		/// <param name="simulation">Simulation supplying rendering state.</param>
+		public static void CheckLayout(GraphViewport viewport, GameSimulation simulation)
+		{
+			var scene = Field<GraphScene>(viewport, "scene");
+			var solver = Field<GraphRenderingSession>(viewport, "session").Layout;
+			var before = scene.Nodes.ToDictionary(p => p.Key, p => p.Value.Position);
+			if (solver.Mode != LayoutMode.Spatial || scene.Nodes.Values.Any(n => n.Pinned))
+				throw new InvalidOperationException("Graph is not a free spatial layout.");
+			var wasRunning = !solver.Paused;
+			for (var frame = 0; frame < 300 && !solver.Paused; frame++)
+				StepLayout(viewport);
+			if (!solver.Paused || (scene.Nodes.Count > 0 && solver.Temperature >= .025f))
+				throw new InvalidOperationException("Spatial layout did not settle within its bounded step budget.");
+			if (wasRunning && scene.Nodes.Count > 1 && scene.Nodes.Values.All(n => n.Position == before[n.Id]))
+				throw new InvalidOperationException("Forces did not move the warm-start coordinates.");
+			var settled = scene.Nodes.ToDictionary(p => p.Key, p => p.Value.Position);
+			viewport.Tick(simulation, SignalEffects.Full);
+			if (scene.Nodes.Values.Any(n => !float.IsFinite(n.Position.sqrMagnitude) || n.Position != settled[n.Id]))
+				throw new InvalidOperationException("Settled graph drifted or produced non-finite coordinates.");
+			viewport.ResetView();
+			var camera = Field<Camera>(viewport, "camera");
+			foreach (var node in scene.Nodes.Values)
+			{
+				var p = camera.WorldToViewportPoint(node.Position);
+				if (p.z <= 0 || p.x < 0 || p.x > 1 || p.y < 0 || p.y > 1)
+					throw new InvalidOperationException("Settled FIT clips " + node.Id);
+			}
+		}
+
+		private static void CaptureLayout(GraphViewport viewport, GameSimulation simulation, string name)
+		{
+			viewport.Tick(simulation, SignalEffects.Full);
+			Field<Camera>(viewport, "camera").Render();
+			SaveTexture(Field<RenderTexture>(viewport, "texture"), name);
+		}
+
+		// Avoid submitting hundreds of render batches into one editor frame while draining the solver.
+		private static void StepLayout(GraphViewport viewport)
+		{
+			typeof(GraphViewport).GetMethod("AdvanceLayout", BindingFlags.Instance | BindingFlags.NonPublic)
+				.Invoke(viewport, null);
+		}
+
 		/// <summary>Asserts contract-intel redaction rules for focused cards and preview graphs.</summary>
 		/// <param name="check">Callback recording pass/fail assertions.</param>
 		public static void CheckIntel(Action<bool, string> check)

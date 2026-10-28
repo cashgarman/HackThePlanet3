@@ -3,12 +3,12 @@
   "title": "Waypoints III",
   "description": "Place three waypoints and add custom text labels.",
   "branch": "RECON",
-  "cost": 90,
+  "cost": 95,
   "waypointTier": 3,
   "special": false,
   "position": {
-    "x": 580,
-    "y": -75
+    "x": 850,
+    "y": 310
   },
   "parents": [
     "waypoints-2"

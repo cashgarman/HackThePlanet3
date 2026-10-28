@@ -1,0 +1,138 @@
+{
+  "id": "borrowed-voice",
+  "title": "Borrowed Voice",
+  "description": "Intercept an editor\u2019s scheduled confession and its delivery receipt.",
+  "company": "company-0",
+  "network": "subnet-borrowed-voice",
+  "client": "RHEA / public archivist",
+  "tag": "INTERCEPT / VESPER",
+  "objective": "Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "MOTH is a shared identity. One of its authors died before your first contract.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1360
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 106
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 512
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Borrowed Voice / Authoritative record",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "Borrowed Voice / Live mirror",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "borrowed-voice/0",
+      "title": "Borrowed Voice / Unsent message",
+      "company": "",
+      "contract": "Borrowed Voice",
+      "text": "RHEA / public archivist: Intercept an editor\u2019s scheduled confession and its delivery receipt. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "borrowed-voice/1",
+      "title": "Borrowed Voice / Custody note",
+      "company": "",
+      "contract": "Borrowed Voice",
+      "text": "Archive custody, Borrowed Voice: MOTH is a shared identity. One of its authors died before your first contract. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "borrowed-voice/2",
+      "title": "Borrowed Voice / Private annotation",
+      "company": "",
+      "contract": "Borrowed Voice",
+      "text": "Personal note filed under borrowed-voice: MOTH is a shared identity. One of its authors died before your first contract. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "borrowed-voice-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "borrowed-voice-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 100,
+      "traceBurst": 0
+    },
+    {
+      "id": "borrowed-voice-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 2.8,
+  "revelation": "MOTH is a shared identity. One of its authors died before your first contract.",
+  "prerequisites": [
+    "sealed-hearing"
+  ],
+  "requiredFlags": [
+    "expose"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

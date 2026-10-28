@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: a6ee95875b995b82b7dd5bd7cf337702
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: shelter-ending-careful
+  title: Islands of Light / Protected
+  description: "Complete your alliance\u2019s final operation against the distributed fallback system."
+  company: {fileID: 11400000, guid: 35f0e140c6bf50b429ad40e28dcb1735, type: 2}
+  network: {fileID: 11400000, guid: 3357e8bfe8a6a7541985ebb8c755d3cf, type: 2}
+  client: SABLE / community grid engineer
+  tag: EVACUATE / VESPER
+  objective: Evacuate protected identities at Authoritative record / Capture controller at Response controller
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: Independent districts keep their own power and identity ledgers. The Directorate loses its monopoly on continuity. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear.
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - shelter-threshold
+  requiredFlags:
+  - shelter
+  - shelter-careful
+  offerDays: 0
+  isEnding: 1
+  optional: 0
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: Independent districts keep their own power and identity ledgers. The Directorate loses its monopoly on continuity. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 3.15
+  credits:
+    rid: 213507108368551786
+  xp:
+    rid: 213507108368551787
+  difficulty:
+    rid: 213507108368551788
+  seed:
+    rid: 213507108368551789
+  objectives:
+  - nodeId: n22
+    label: Islands of Light / Protected / Authoritative record
+    actionLabel: Evacuate protected identities
+    action: {fileID: 11400000, guid: 99272a3567cbacd45aae290b9352ba3c, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551790
+    actionRequirements: []
+  - nodeId: n14
+    label: Islands of Light / Protected / Response controller
+    actionLabel: Capture controller
+    action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+    payload: 0
+    complete:
+      rid: 213507108368551791
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: shelter-ending-careful-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: shelter-ending-careful-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  - id: shelter-ending-careful-sweep
+    sourceNodeId: n14
+    targetNodeIds: []
+    kind: 1
+    minimumDifficulty: 1
+    intervalSeconds: 65
+    traceBurst: 7
+  lore:
+  - id: shelter-ending-careful/0
+    title: Islands of Light / Protected / Unsent message
+    company:
+    contract: Islands of Light / Protected
+    text: "SABLE / community grid engineer: Complete your alliance\u2019s final operation against the distributed fallback system. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+  - id: shelter-ending-careful/1
+    title: Islands of Light / Protected / Custody note
+    company:
+    contract: Islands of Light / Protected
+    text: 'Archive custody, Islands of Light / Protected: Independent districts keep their own power and identity ledgers. The Directorate loses its monopoly on continuity. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear. A second copy carries a hand-written objection to the official disposition.'
+  - id: shelter-ending-careful/2
+    title: Islands of Light / Protected / Private annotation
+    company:
+    contract: Islands of Light / Protected
+    text: 'Personal note filed under shelter-ending-careful: Independent districts keep their own power and identity ledgers. The Directorate loses its monopoly on continuity. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551786
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2020
+    - rid: 213507108368551787
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 142
+    - rid: 213507108368551788
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507108368551789
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 903
+    - rid: 213507108368551790
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551791
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1

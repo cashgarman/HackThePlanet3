@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb6116ef3368fb478a80b75d9610f5a, type: 3}
+  m_Name: ed81702277b55b408c7b18c58e84bf56
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
+  id: recycler
+  title: Reclaim Controller
+  description: +2 GB/s RAM reclaimed per simulation second.
+  family: reclaim
+  branch: CONTROL
+  flavour: PATCHBAY / Vesper salvage exchange. Every component has a previous owner.
+  synergy:
+  tier: 1
+  width: 1
+  height: 2
+  price: 400
+  rotatable: 1
+  powerDemand: 2
+  heatOutput: 2
+  powerCapacity: 0
+  coolingCapacity: 0
+  requirements:
+  - condition:
+      rid: 213507108366975091
+    message: Requires Base research.
+  modifiers:
+  - id:
+    stat: memoryReclaim
+    priority: 0
+    operation: 0
+    when:
+      rid: 213507108366975092
+    value:
+      rid: 213507108366975093
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108366975091
+      type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        technology: {fileID: 11400000, guid: bb5450113dc0dc04c992e20d73216606, type: 2}
+        equipped: 0
+    - rid: 213507108366975092
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108366975093
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2

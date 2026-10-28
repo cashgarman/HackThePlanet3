@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb6116ef3368fb478a80b75d9610f5a, type: 3}
+  m_Name: 7b798b35b9185d4d804ae9d88dfe7723
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
+  id: drive
+  title: Cold Archive
+  description: +20 GB storage.
+  family: storage
+  branch: RECON
+  flavour: PATCHBAY / Vesper salvage exchange. Every component has a previous owner.
+  synergy:
+  tier: 1
+  width: 2
+  height: 1
+  price: 300
+  rotatable: 1
+  powerDemand: 1
+  heatOutput: 1
+  powerCapacity: 0
+  coolingCapacity: 0
+  requirements:
+  - condition:
+      rid: 213507108366975072
+    message: Requires Base research.
+  modifiers:
+  - id:
+    stat: storageCapacity
+    priority: 0
+    operation: 0
+    when:
+      rid: 213507108366975073
+    value:
+      rid: 213507108366975074
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108366975072
+      type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        technology: {fileID: 11400000, guid: bb5450113dc0dc04c992e20d73216606, type: 2}
+        equipped: 0
+    - rid: 213507108366975073
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108366975074
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 20

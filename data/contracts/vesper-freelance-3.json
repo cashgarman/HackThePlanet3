@@ -1,0 +1,142 @@
+{
+  "id": "vesper-freelance-3",
+  "title": "Exchange / Quiet Custody",
+  "description": "Verified escrow offers a fresh target. No faction commitment is required.",
+  "company": "company-2",
+  "network": "subnet-vesper-freelance-3",
+  "client": "MOTH / unverified relay",
+  "tag": "SEIZE / VESPER",
+  "objective": "Recover evidence at Authoritative record / Capture controller at Response controller",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The exchange settles another job. The city keeps changing.",
+  "displayKind": "Copy",
+  "recurring": true,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1040
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 95
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Day",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 71
+      }
+    },
+    "right": {
+      "type": "ConstantNumber",
+      "value": 757
+    }
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Exchange / Quiet Custody / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n14",
+      "label": "Exchange / Quiet Custody / Response controller",
+      "actionLabel": "Capture controller",
+      "action": "hack",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "actionRequirements": [],
+      "payload": false
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "vesper-freelance-3/0",
+      "title": "Exchange / Quiet Custody / Unsent message",
+      "company": "",
+      "contract": "Exchange / Quiet Custody",
+      "text": "MOTH / unverified relay: Verified escrow offers a fresh target. No faction commitment is required. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "vesper-freelance-3/1",
+      "title": "Exchange / Quiet Custody / Custody note",
+      "company": "",
+      "contract": "Exchange / Quiet Custody",
+      "text": "Archive custody, Exchange / Quiet Custody: The exchange settles another job. The city keeps changing. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "vesper-freelance-3/2",
+      "title": "Exchange / Quiet Custody / Private annotation",
+      "company": "",
+      "contract": "Exchange / Quiet Custody",
+      "text": "Personal note filed under vesper-freelance-3: The exchange settles another job. The city keeps changing. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "vesper-freelance-3-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "vesper-freelance-3-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 4,
+  "revelation": "The exchange settles another job. The city keeps changing.",
+  "prerequisites": [],
+  "requiredFlags": [],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

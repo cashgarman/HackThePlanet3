@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 44cabd04afe45f7080dabd0be84d8fd8
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: no-central-server
+  title: No Central Server
+  description: Capture the fallback coordinator and obtain the dependency map.
+  company: {fileID: 11400000, guid: 0b1df930f3d88d84c9187b8fa3762df7, type: 2}
+  network: {fileID: 11400000, guid: c1900aaba03adea468995c4628813c1e, type: 2}
+  client: MOTH / unverified relay
+  tag: SEIZE / VESPER
+  objective: Recover evidence at Authoritative record / Capture controller at Response controller
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: There is no master switch. Publication, independent infrastructure and command seizure each attack a different dependency.
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - thirteenth-test
+  requiredFlags: []
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: There is no master switch. Publication, independent infrastructure and command seizure each attack a different dependency.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 4.5
+  credits:
+    rid: 213507108368551699
+  xp:
+    rid: 213507108368551700
+  difficulty:
+    rid: 213507108368551701
+  seed:
+    rid: 213507108368551702
+  objectives:
+  - nodeId: n22
+    label: No Central Server / Authoritative record
+    actionLabel: Recover evidence
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551703
+    actionRequirements: []
+  - nodeId: n14
+    label: No Central Server / Response controller
+    actionLabel: Capture controller
+    action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+    payload: 0
+    complete:
+      rid: 213507108368551704
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: no-central-server-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: no-central-server-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  - id: no-central-server-sweep
+    sourceNodeId: n14
+    targetNodeIds: []
+    kind: 1
+    minimumDifficulty: 1
+    intervalSeconds: 65
+    traceBurst: 7
+  lore:
+  - id: no-central-server/0
+    title: No Central Server / Unsent message
+    company:
+    contract: No Central Server
+    text: 'MOTH / unverified relay: Capture the fallback coordinator and obtain the dependency map. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: no-central-server/1
+    title: No Central Server / Custody note
+    company:
+    contract: No Central Server
+    text: 'Archive custody, No Central Server: There is no master switch. Publication, independent infrastructure and command seizure each attack a different dependency. A second copy carries a hand-written objection to the official disposition.'
+  - id: no-central-server/2
+    title: No Central Server / Private annotation
+    company:
+    contract: No Central Server
+    text: 'Personal note filed under no-central-server: There is no master switch. Publication, independent infrastructure and command seizure each attack a different dependency. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551699
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1800
+    - rid: 213507108368551700
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 130
+    - rid: 213507108368551701
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507108368551702
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 750
+    - rid: 213507108368551703
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551704
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1

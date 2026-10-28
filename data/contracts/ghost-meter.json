@@ -1,0 +1,86 @@
+{
+  "id": "ghost-meter",
+  "title": "Ghost Meter",
+  "description": "An occupied apartment is billed for power it never received. MOTH offers payment for the original meter certificate.",
+  "company": "company-0",
+  "network": "subnet-ghost-meter",
+  "client": "MOTH / unverified relay",
+  "tag": "EXFILTRATE / VESPER",
+  "objective": "Recover evidence at Authoritative record",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The meter reports a deliberate disconnection, signed hours before the outage.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 700
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 70
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 410
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Ghost Meter / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "ghost-meter/0",
+      "title": "Ghost Meter / Unsent message",
+      "company": "",
+      "contract": "Ghost Meter",
+      "text": "MOTH / unverified relay: An occupied apartment is billed for power it never received. MOTH offers payment for the original meter certificate. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "ghost-meter/1",
+      "title": "Ghost Meter / Custody note",
+      "company": "",
+      "contract": "Ghost Meter",
+      "text": "Archive custody, Ghost Meter: The meter reports a deliberate disconnection, signed hours before the outage. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "ghost-meter/2",
+      "title": "Ghost Meter / Private annotation",
+      "company": "",
+      "contract": "Ghost Meter",
+      "text": "Personal note filed under ghost-meter: The meter reports a deliberate disconnection, signed hours before the outage. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [],
+  "paceMultiplier": 3,
+  "revelation": "The meter reports a deliberate disconnection, signed hours before the outage.",
+  "prerequisites": [],
+  "requiredFlags": [],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

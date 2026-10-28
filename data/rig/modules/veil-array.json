@@ -1,19 +1,19 @@
 {
   "id": "veil-array",
-  "title": "Veil Array",
+  "title": "Veil Mesh",
   "description": "6% less action trace and 20% less security sweep trace.",
   "family": "stealth",
   "branch": "STEALTH",
-  "tier": 2,
+  "tier": 3,
   "width": 2,
   "height": 1,
-  "price": 900,
+  "price": 1500,
   "rotatable": true,
   "powerDemand": 3,
   "heatOutput": 2,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Purpose-built countermeasure hardware.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

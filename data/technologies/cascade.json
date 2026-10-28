@@ -1,17 +1,17 @@
 {
   "id": "cascade",
-  "title": "System cascade",
-  "description": "Disabling or capturing the hub reduces every firewall\u0027s security by two for the rest of the contract.",
+  "title": "Controlled Backdoor",
+  "description": "Disabling or capturing the hub reduces every firewall's security by two for the rest of the contract.",
   "branch": "CROSSOVER",
-  "cost": 140,
+  "cost": 200,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 715,
-    "y": 310
+    "x": 495.0,
+    "y": 1000
   },
   "parents": [
-    "efficient",
+    "ghost",
     "disrupt"
   ],
   "grants": [],

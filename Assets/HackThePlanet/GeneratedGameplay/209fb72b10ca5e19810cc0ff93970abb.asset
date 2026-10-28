@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 209fb72b10ca5e19810cc0ff93970abb
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: vesper-freelance-0
+  title: Exchange / Cold Copy
+  description: Verified escrow offers a fresh target. No faction commitment is required.
+  company: {fileID: 11400000, guid: 49b7aa2a285fc0c43821a56c2a9f518a, type: 2}
+  network: {fileID: 11400000, guid: 5e08519642f55d74b8a712585a98ee79, type: 2}
+  client: MOTH / unverified relay
+  tag: EXFILTRATE / VESPER
+  objective: Recover evidence at Authoritative record
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: The exchange settles another job. The city keeps changing.
+  displayKind: 0
+  recurring: 1
+  prerequisites: []
+  requiredFlags: []
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: The exchange settles another job. The city keeps changing.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 4
+  credits:
+    rid: 213507108368551884
+  xp:
+    rid: 213507108368551885
+  difficulty:
+    rid: 213507108368551886
+  seed:
+    rid: 213507108368551887
+  objectives:
+  - nodeId: n22
+    label: Exchange / Cold Copy / Authoritative record
+    actionLabel: Recover evidence
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551888
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: vesper-freelance-0-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  lore:
+  - id: vesper-freelance-0/0
+    title: Exchange / Cold Copy / Unsent message
+    company:
+    contract: Exchange / Cold Copy
+    text: 'MOTH / unverified relay: Verified escrow offers a fresh target. No faction commitment is required. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: vesper-freelance-0/1
+    title: Exchange / Cold Copy / Custody note
+    company:
+    contract: Exchange / Cold Copy
+    text: 'Archive custody, Exchange / Cold Copy: The exchange settles another job. The city keeps changing. A second copy carries a hand-written objection to the official disposition.'
+  - id: vesper-freelance-0/2
+    title: Exchange / Cold Copy / Private annotation
+    company:
+    contract: Exchange / Cold Copy
+    text: 'Personal note filed under vesper-freelance-0: The exchange settles another job. The city keeps changing. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551884
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 650
+    - rid: 213507108368551885
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 65
+    - rid: 213507108368551886
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551887
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507108368551889
+        right:
+          rid: 213507108368551890
+    - rid: 213507108368551888
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551889
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+        left:
+          rid: 213507108368551891
+        right:
+          rid: 213507108368551892
+    - rid: 213507108368551890
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 700
+    - rid: 213507108368551891
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key:
+        filter:
+          rid: 213507108368551893
+    - rid: 213507108368551892
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 71
+    - rid: 213507108368551893
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:

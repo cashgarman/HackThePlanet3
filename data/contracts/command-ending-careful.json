@@ -1,0 +1,136 @@
+{
+  "id": "command-ending-careful",
+  "title": "Human Quorum / Protected",
+  "description": "Complete your alliance\u2019s final operation against the distributed fallback system.",
+  "company": "company-2",
+  "network": "subnet-command-ending-careful",
+  "client": "ORIN / Directorate defector",
+  "tag": "SEIZE / VESPER",
+  "objective": "Recover evidence at Authoritative record / Capture controller at Response controller",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 2020
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 142
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 3
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 1005
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Human Quorum / Protected / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n14",
+      "label": "Human Quorum / Protected / Response controller",
+      "actionLabel": "Capture controller",
+      "action": "hack",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "actionRequirements": [],
+      "payload": false
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "command-ending-careful/0",
+      "title": "Human Quorum / Protected / Unsent message",
+      "company": "",
+      "contract": "Human Quorum / Protected",
+      "text": "ORIN / Directorate defector: Complete your alliance\u2019s final operation against the distributed fallback system. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "command-ending-careful/1",
+      "title": "Human Quorum / Protected / Custody note",
+      "company": "",
+      "contract": "Human Quorum / Protected",
+      "text": "Archive custody, Human Quorum / Protected: A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "command-ending-careful/2",
+      "title": "Human Quorum / Protected / Private annotation",
+      "company": "",
+      "contract": "Human Quorum / Protected",
+      "text": "Personal note filed under command-ending-careful: A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "command-ending-careful-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "command-ending-careful-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    },
+    {
+      "id": "command-ending-careful-sweep",
+      "kind": "SecuritySweep",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 65,
+      "traceBurst": 7
+    }
+  ],
+  "paceMultiplier": 4.5,
+  "revelation": "A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. Your allies protected the witnesses before acting; some records escaped, but their people did not disappear.",
+  "prerequisites": [
+    "command-threshold"
+  ],
+  "requiredFlags": [
+    "command",
+    "command-careful"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": true,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

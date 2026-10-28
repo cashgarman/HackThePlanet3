@@ -2,7 +2,7 @@
   "id": "career",
   "title": "Career rules",
   "description": "",
-  "credits": 600,
+  "credits": 500,
   "xp": 0,
   "day": 1,
   "reportLimit": 20,
@@ -16,7 +16,7 @@
   "traceWarning": 60,
   "traceDanger": 85,
   "maxTick": 0.5,
-  "welcome": "EXCHANGE ONLINE // A new operator has entered the network. Your first contract is waiting.",
+  "welcome": "VESPER RELAY ONLINE // MOTH has left a meter certificate in your inbox. Start with Ghost Meter. Read the signatures.",
   "outcomes": [
     {
       "outcome": "Delivered",
@@ -34,7 +34,7 @@
       "bankRewards": false,
       "recordCompletion": false,
       "bankLore": false,
-      "dayAdvance": 0
+      "dayAdvance": 1
     },
     {
       "outcome": "Caught",
@@ -43,7 +43,7 @@
       "bankRewards": false,
       "recordCompletion": false,
       "bankLore": false,
-      "dayAdvance": 0
+      "dayAdvance": 1
     }
   ],
   "simulationSpeeds": [
@@ -121,6 +121,10 @@
     },
     {
       "id": "sweepTrace",
+      "value": 0
+    },
+    {
+      "id": "watcherTrace",
       "value": 0
     }
   ],

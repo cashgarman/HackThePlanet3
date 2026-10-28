@@ -1,18 +1,18 @@
 {
   "id": "weakpoint",
-  "title": "Weak-point analysis",
+  "title": "Forensic Breach",
   "description": "Scanned targets generate {modifier:0:reduction}% less hack trace. Requires both Recon and Intrusion roots.",
   "branch": "CROSSOVER",
-  "cost": 130,
+  "cost": 160,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 500,
-    "y": 65
+    "x": -165.0,
+    "y": 1000
   },
   "parents": [
-    "wide",
-    "efficient"
+    "signal",
+    "selective"
   ],
   "grants": [],
   "modifiers": [

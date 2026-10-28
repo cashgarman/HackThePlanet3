@@ -1,0 +1,160 @@
+{
+  "id": "expose-threshold",
+  "title": "The Unredacted City",
+  "description": "Intercept the fallback order before the Directorate disperses its signing keys.",
+  "company": "company-0",
+  "network": "subnet-expose-threshold",
+  "client": "RHEA / public archivist",
+  "tag": "INTERCEPT / VESPER",
+  "objective": "Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "Your allies can act, but the method will determine who carries the risk.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1910
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 136
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 3
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 767
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "The Unredacted City / Authoritative record",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "The Unredacted City / Live mirror",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "expose-threshold/0",
+      "title": "The Unredacted City / Unsent message",
+      "company": "",
+      "contract": "The Unredacted City",
+      "text": "RHEA / public archivist: Intercept the fallback order before the Directorate disperses its signing keys. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "expose-threshold/1",
+      "title": "The Unredacted City / Custody note",
+      "company": "",
+      "contract": "The Unredacted City",
+      "text": "Archive custody, The Unredacted City: Your allies can act, but the method will determine who carries the risk. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "expose-threshold/2",
+      "title": "The Unredacted City / Private annotation",
+      "company": "",
+      "contract": "The Unredacted City",
+      "text": "Personal note filed under expose-threshold: Your allies can act, but the method will determine who carries the risk. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "expose-threshold-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "expose-threshold-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 80,
+      "traceBurst": 0
+    },
+    {
+      "id": "expose-threshold-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    },
+    {
+      "id": "expose-threshold-sweep",
+      "kind": "SecuritySweep",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 65,
+      "traceBurst": 7
+    }
+  ],
+  "paceMultiplier": 3.15,
+  "revelation": "Your allies can act, but the method will determine who carries the risk.",
+  "prerequisites": [
+    "no-central-server"
+  ],
+  "requiredFlags": [
+    "expose"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [
+    {
+      "id": "expose-open",
+      "title": "Act immediately",
+      "description": "Move before the Directorate can regroup. The conclusion favors reach and accepts disruption.",
+      "flag": "expose-open"
+    },
+    {
+      "id": "expose-careful",
+      "title": "Protect the named people first",
+      "description": "Use a slower release and preserve specific service routes. The conclusion favors protection over reach.",
+      "flag": "expose-careful"
+    }
+  ],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

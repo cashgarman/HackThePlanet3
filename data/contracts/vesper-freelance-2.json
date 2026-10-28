@@ -1,0 +1,154 @@
+{
+  "id": "vesper-freelance-2",
+  "title": "Exchange / Transit Receipt",
+  "description": "Verified escrow offers a fresh target. No faction commitment is required.",
+  "company": "company-0",
+  "network": "subnet-vesper-freelance-2",
+  "client": "MOTH / unverified relay",
+  "tag": "INTERCEPT / VESPER",
+  "objective": "Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The exchange settles another job. The city keeps changing.",
+  "displayKind": "Copy",
+  "recurring": true,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 910
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 85
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Day",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 71
+      }
+    },
+    "right": {
+      "type": "ConstantNumber",
+      "value": 738
+    }
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Exchange / Transit Receipt / Authoritative record",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "Exchange / Transit Receipt / Live mirror",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "vesper-freelance-2/0",
+      "title": "Exchange / Transit Receipt / Unsent message",
+      "company": "",
+      "contract": "Exchange / Transit Receipt",
+      "text": "MOTH / unverified relay: Verified escrow offers a fresh target. No faction commitment is required. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "vesper-freelance-2/1",
+      "title": "Exchange / Transit Receipt / Custody note",
+      "company": "",
+      "contract": "Exchange / Transit Receipt",
+      "text": "Archive custody, Exchange / Transit Receipt: The exchange settles another job. The city keeps changing. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "vesper-freelance-2/2",
+      "title": "Exchange / Transit Receipt / Private annotation",
+      "company": "",
+      "contract": "Exchange / Transit Receipt",
+      "text": "Personal note filed under vesper-freelance-2: The exchange settles another job. The city keeps changing. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "vesper-freelance-2-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "vesper-freelance-2-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 100,
+      "traceBurst": 0
+    },
+    {
+      "id": "vesper-freelance-2-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 2.8,
+  "revelation": "The exchange settles another job. The city keeps changing.",
+  "prerequisites": [],
+  "requiredFlags": [],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 0394faf71f0c5beb8046762da606c2ee
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: dead-signature
+  title: Dead Signature
+  description: Reconstruct a signing chain attributed to an administrator who died years ago.
+  company: {fileID: 11400000, guid: 0b1df930f3d88d84c9187b8fa3762df7, type: 2}
+  network: {fileID: 11400000, guid: cd8a81ce7d78df94285afc688c7e4168, type: 2}
+  client: ORIN / Directorate defector
+  tag: RECONSTRUCT / VESPER
+  objective: Recover signed clue at Authoritative record / Recover signed clue at Signed dispatch record / Recover signed clue at Credential witness
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: "MOTH\u2019s relay holds fragments of that administrator\u2019s authorization."
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - black-budget
+  requiredFlags:
+  - command
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices: []
+  evidence:
+    title: Dead Signature / Evidence case
+    question: Which explanation fits all three signed records?
+    clueNodes:
+    - n22
+    - n9
+    - n19
+    clues:
+    - "The administrator\u2019s death certificate predates the signing event by eleven years."
+    - Three vendors each retain a different fragment of the old credential.
+    - A quorum receipt combines the fragments without a living administrator.
+    answers:
+    - id: accident
+      title: The records disagree because of an ordinary clerical error.
+      feedback: A clerical error does not explain the matching signed authorizations and their order.
+      correct: 0
+    - id: insider
+      title: A lone outsider forged every record after the event.
+      feedback: The independent receipt and earlier signatures rule out a single later forgery.
+      correct: 0
+    - id: rehearsal
+      title: The old authority persists through a distributed quorum.
+      feedback: "MOTH\u2019s relay holds fragments of that administrator\u2019s authorization."
+      correct: 1
+  revelation: "MOTH\u2019s relay holds fragments of that administrator\u2019s authorization."
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 2.8
+  credits:
+    rid: 213507108368551657
+  xp:
+    rid: 213507108368551658
+  difficulty:
+    rid: 213507108368551659
+  seed:
+    rid: 213507108368551660
+  objectives:
+  - nodeId: n22
+    label: Dead Signature / Authoritative record
+    actionLabel: Recover signed clue
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551661
+    actionRequirements: []
+  - nodeId: n9
+    label: Dead Signature / Signed dispatch record
+    actionLabel: Recover signed clue
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551662
+    actionRequirements: []
+  - nodeId: n19
+    label: Dead Signature / Credential witness
+    actionLabel: Recover signed clue
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551663
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: dead-signature-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: dead-signature-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  lore:
+  - id: dead-signature/0
+    title: Dead Signature / Unsent message
+    company:
+    contract: Dead Signature
+    text: 'ORIN / Directorate defector: Reconstruct a signing chain attributed to an administrator who died years ago. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: dead-signature/1
+    title: Dead Signature / Custody note
+    company:
+    contract: Dead Signature
+    text: "Archive custody, Dead Signature: MOTH\u2019s relay holds fragments of that administrator\u2019s authorization. A second copy carries a hand-written objection to the official disposition."
+  - id: dead-signature/2
+    title: Dead Signature / Private annotation
+    company:
+    contract: Dead Signature
+    text: "Personal note filed under dead-signature: MOTH\u2019s relay holds fragments of that administrator\u2019s authorization. Someone has crossed out the word inevitable. No replacement was supplied."
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551657
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1360
+    - rid: 213507108368551658
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 106
+    - rid: 213507108368551659
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551660
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 682
+    - rid: 213507108368551661
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551662
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551663
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3

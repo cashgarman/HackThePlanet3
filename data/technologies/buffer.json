@@ -1,18 +1,18 @@
 {
   "id": "buffer",
-  "title": "Trace buffer",
+  "title": "Blind Suppression",
   "description": "All trace generation is reduced by another {modifier:0:reduction}%. Requires both Stealth and Control roots.",
   "branch": "CROSSOVER",
-  "cost": 135,
+  "cost": 180,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 500,
-    "y": 565
+    "x": 165.0,
+    "y": 1000
   },
   "parents": [
     "quiet",
-    "disrupt"
+    "blackout"
   ],
   "grants": [],
   "modifiers": [

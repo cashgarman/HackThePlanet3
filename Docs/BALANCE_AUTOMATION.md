@@ -1,3 +1,9 @@
+# Vesper v4 balance automation
+
+The active campaign suite is documented in [Vesper campaign](VESPER_CAMPAIGN.md). `scripts/run-balance.ps1` runs all ending paths over 20 seeds with carried base-payout careers. Results are written to `Artifacts/vesper-validation.txt`.
+
+The following measurements describe the archived v3 catalog and are retained for comparison.
+
 # Progression and automated balance
 
 The shipped catalog contains 31 research nodes, 20 module models, four chassis, six story contracts and three freelance definitions. Later networks combine credential locks with recurring security sweeps. All content remains editable in `data/` and the Content Editor.

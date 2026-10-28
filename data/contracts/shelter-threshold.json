@@ -1,0 +1,160 @@
+{
+  "id": "shelter-threshold",
+  "title": "Load Bearing People",
+  "description": "Intercept the fallback order before the Directorate disperses its signing keys.",
+  "company": "company-0",
+  "network": "subnet-shelter-threshold",
+  "client": "SABLE / community grid engineer",
+  "tag": "INTERCEPT / VESPER",
+  "objective": "Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "Your allies can act, but the method will determine who carries the risk.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1910
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 136
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 3
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 869
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Load Bearing People / Authoritative record",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "Load Bearing People / Live mirror",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "shelter-threshold/0",
+      "title": "Load Bearing People / Unsent message",
+      "company": "",
+      "contract": "Load Bearing People",
+      "text": "SABLE / community grid engineer: Intercept the fallback order before the Directorate disperses its signing keys. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "shelter-threshold/1",
+      "title": "Load Bearing People / Custody note",
+      "company": "",
+      "contract": "Load Bearing People",
+      "text": "Archive custody, Load Bearing People: Your allies can act, but the method will determine who carries the risk. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "shelter-threshold/2",
+      "title": "Load Bearing People / Private annotation",
+      "company": "",
+      "contract": "Load Bearing People",
+      "text": "Personal note filed under shelter-threshold: Your allies can act, but the method will determine who carries the risk. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "shelter-threshold-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "shelter-threshold-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 80,
+      "traceBurst": 0
+    },
+    {
+      "id": "shelter-threshold-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    },
+    {
+      "id": "shelter-threshold-sweep",
+      "kind": "SecuritySweep",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 65,
+      "traceBurst": 7
+    }
+  ],
+  "paceMultiplier": 3.15,
+  "revelation": "Your allies can act, but the method will determine who carries the risk.",
+  "prerequisites": [
+    "no-central-server"
+  ],
+  "requiredFlags": [
+    "shelter"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [
+    {
+      "id": "shelter-open",
+      "title": "Act immediately",
+      "description": "Move before the Directorate can regroup. The conclusion favors reach and accepts disruption.",
+      "flag": "shelter-open"
+    },
+    {
+      "id": "shelter-careful",
+      "title": "Protect the named people first",
+      "description": "Use a slower release and preserve specific service routes. The conclusion favors protection over reach.",
+      "flag": "shelter-careful"
+    }
+  ],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

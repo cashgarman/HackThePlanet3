@@ -1,0 +1,113 @@
+{
+  "id": "redacted-hours",
+  "title": "Redacted Hours",
+  "description": "A dispatcher asks you to restore the missing minutes in a service ledger and its mirror.",
+  "company": "company-1",
+  "network": "subnet-redacted-hours",
+  "client": "MOTH / unverified relay",
+  "tag": "ALTER / VESPER",
+  "objective": "Synchronize signed mirror at Authoritative record / Synchronize signed mirror at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "Three unrelated failures share the same authorization token. The city was following a schedule.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 810
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 76
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 1
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 427
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Redacted Hours / Authoritative record",
+      "actionLabel": "Synchronize signed mirror",
+      "action": "alter-record",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "Redacted Hours / Live mirror",
+      "actionLabel": "Synchronize signed mirror",
+      "action": "alter-record",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "redacted-hours/0",
+      "title": "Redacted Hours / Unsent message",
+      "company": "",
+      "contract": "Redacted Hours",
+      "text": "MOTH / unverified relay: A dispatcher asks you to restore the missing minutes in a service ledger and its mirror. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "redacted-hours/1",
+      "title": "Redacted Hours / Custody note",
+      "company": "",
+      "contract": "Redacted Hours",
+      "text": "Archive custody, Redacted Hours: Three unrelated failures share the same authorization token. The city was following a schedule. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "redacted-hours/2",
+      "title": "Redacted Hours / Private annotation",
+      "company": "",
+      "contract": "Redacted Hours",
+      "text": "Personal note filed under redacted-hours: Three unrelated failures share the same authorization token. The city was following a schedule. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "redacted-hours-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 100,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 2.0999999999999996,
+  "revelation": "Three unrelated failures share the same authorization token. The city was following a schedule.",
+  "prerequisites": [
+    "ghost-meter"
+  ],
+  "requiredFlags": [],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

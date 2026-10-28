@@ -1,19 +1,19 @@
 {
   "id": "storage-array",
-  "title": "Storage Array",
+  "title": "Evidence Vault",
   "description": "+60 GB storage.",
   "family": "storage",
   "branch": "RECON",
-  "tier": 1,
+  "tier": 2,
   "width": 2,
   "height": 2,
-  "price": 750,
+  "price": 900,
   "rotatable": true,
   "powerDemand": 3,
   "heatOutput": 2,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "+10 GB per adjacent storage copy, maximum two.",
   "requirements": [
     {

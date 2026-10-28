@@ -4,9 +4,9 @@ A playable single-player hacking career built in Unity. All systems are fictiona
 
 ## Play
 
-Run **`Builds/Windows-Rig/Hack The Planet.exe`**. Keep the executable with its `_Data` directory and the accompanying DLLs. The default window is 1680 × 960 and can be resized. A mouse and keyboard are recommended.
+Run **`Builds/Windows/Hack The Planet.exe`**. Keep the executable with its `_Data` directory and the accompanying DLLs. The default window is 1680 × 960 and can be resized. A mouse and keyboard are recommended.
 
-Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and use **Hack system** to establish your first foothold. Control connected systems to reach the gold contract objectives. Recover the files, then **Extract & deliver** to bank payment and XP. A short field guide is available from **?** or **F1**.
+Choose **Ghost Meter**, then **Connect to network**. Select a known ingress system and use **Hack system** to establish your first foothold. Control connected systems to reach the gold contract objectives. Recover the files, then **Extract & deliver** to bank payment and XP. A short field guide is available from **?** or **F1**.
 
 | Control | Action |
 | --- | --- |
@@ -24,19 +24,11 @@ Choose **The Quiet Copy**, then **Connect to network**. Select Public relay and 
 
 ## Career loop
 
-- Six linked story contracts across Helix Dynamics, Morrow Financial, and Aegis Systems: theft, synchronized record edits, evidence recovery, and a final disruption.
-- Contract difficulty controls pre-operation intel: **Easy** shows the complete network and system types; **Medium** shows the complete topology with anonymous, identical unknown systems; **Hard** shows **NO INTEL AVAILABLE** over animated signal static. Connecting starts normal discovery on every tier. Reduced effects freeze the static; effects off retain the message on a plain background.
-- Difficulty also scales the contract's base credits and XP: **Easy ×1**, **Medium ×1.5**, **Hard ×2**. The exchange and brief show the final delivery amounts; optional archive and quiet bonuses are added separately.
-- 32, 44, or 56 systems per operation by difficulty, with three to five approaches through a volumetric 3D network. Short ingress routes expose you to scanners; longer maintenance routes trade time for lower trace. Up to three optional archive detours contain bonus rewards and authored lore; some contracts use these nodes as required files instead. Hubs strengthen connected targets; scanners add trace while tools run nearby.
-- No idle trace, unlimited pause, trace forecasts, a visible queue, tool cancellation, and retryable failures. Scanning prepares targets for 15% faster hacks and 20% less hack trace. Disconnect after completing every objective to deliver. A 100% trace ends the attempt and loses its unbanked rewards; hardware and purchased research persist.
-- Twenty-seven connected research nodes include the starting toolkit, four branches, crossover technologies, waypoints, and engineering unlocks. XP is spent directly. Research refunds return invested XP and sell newly locked modules for their full paid prices. Passives are always active; special abilities occupy chassis loadout slots and use RAM during operations.
-- Credits buy module copies and larger chassis. Pack processing, transfer, storage, RAM, power, cooling, and branch parts into the rack. Research and rig changes happen between operations.
-- Success changes corporate defenses and publishes a world bulletin. Three repeatable freelance templates unlock after the third story contract, with defenses, connections, and rewards changing as your career advances.
-- The Intelligence tab preserves the last twenty operation reports, including action timelines and trace at disconnect. Successfully extracted lore stays in a permanent collection independently of report retention.
+The Vesper v4 campaign contains 30 authored story definitions across three divergent alliances, with 13 story operations on each route, nine optional contracts and four repeatable templates. Start with **Ghost Meter**. The first four jobs uncover the Night Index; your alliance determines the middle campaign and the final operation.
 
-All bonus conditions are shown before connecting. Optional archives pay +100 credits and +15 XP each; held optional archives award XP, up to +45 per contract. Finishing below the contract's trace threshold adds +100 credits and +20 XP.
+Research has 29 nodes. The physical rig has four chassis and 22 module models. Plan routes around credential locks, Watchers, sweeps and linked purge windows. Recover signed clues and reconstruct evidence cases. Main plot discoveries are banked automatically after successful delivery; optional archives add context and bonuses.
 
-Early branch roots cost 45 XP. Bridge has two prepared crossings per operation; Backdoor and remote Blackout use discovered routes within three hops. Use **STOP** to cancel a running tool and clear its queue; trace already generated remains. **CLEAR** removes queued tools only.
+Failures retain equipment and research, lose unbanked rewards, and advance one career day. Optional offers can expire; main story jobs and repeatable work remain available. Choices and explicit contract prerequisites govern progression. See [Vesper campaign](Docs/VESPER_CAMPAIGN.md) for mechanics, balance targets and verification; its final section contains story spoilers.
 
 ## Saves
 
@@ -48,9 +40,9 @@ Open **Settings → Cheats / Debug** to add **1,000,000 credits**, add **1,000,0
 
 Text defaults to **200%**, twice the original size. In Settings, move **Text size** or enter a percentage from **100 to 300**. Changes apply immediately throughout the interface, including graph labels, tooltips, reports, and logs, and are remembered between launches independently of career resets. Panels wrap or scroll to keep larger text and controls accessible.
 
-Windows save location: `%USERPROFILE%/AppData/LocalLow/Independent Operator/Hack The Planet/career-v3.json`.
+Windows save location: `%USERPROFILE%/AppData/LocalLow/Independent Operator/Hack The Planet/career-v4.json`.
 
-Rig careers use v3. Existing `career-v1.json`, `career-v2.json`, and their backups remain untouched; no migration is performed.
+Vesper careers use v4. Existing `career-v1.json`, `career-v2.json`, `career-v3.json`, and their backups remain untouched; no migration is performed.
 
 ## Unity project
 
@@ -60,7 +52,7 @@ The included Graph Explorer package supplies the discovered graph document, cont
 
 Source files are under `Assets/HackThePlanet/Runtime/`. Launch-loaded JSON under project-root `data/` defines gameplay and presentation; built players load `data/` beside the executable. `ContentJson.cs` populates temporary ScriptableObjects and validates references; `GameCatalog.cs` compiles immutable catalogs; `GameSimulation.cs` owns tools, trace, progression, and persistence; `WorkstationApp.cs` and `GraphViewport.cs` present the workstation. Historical definition assets are retained as migration sources. Styles remain under `Assets/HackThePlanet/Resources/HackThePlanet/`.
 
-`NetworkGenerator` builds seeded topology and stable XYZ positions together for previews and live operations. V2 active saves preserve their topology, positions, tools, queues, counters, and timed statuses. The seven original low-poly hardware meshes are game-owned resources; regenerate them with `scripts/generate_network_models.py` using Python 3. The importer keeps meshes readable for player-side instancing. Lore includes eighteen story fragments and nine reusable company fragments for freelance work.
+`NetworkGenerator` builds seeded topology and stable XYZ positions together for previews and live operations. V2 active saves preserve their topology, positions, tools, queues, counters, and timed statuses. The seven original low-poly hardware meshes are game-owned resources; regenerate them with `scripts/generate_network_models.py` using Python 3. The importer keeps meshes readable for player-side instancing. Lore includes guaranteed story debriefs and three optional archive fragments per contract.
 
 The **Ghost Frequency** graphics style uses mint phosphor, bracketed instrument cards, circuit routes with packet flow, a procedural signal field, and subtle phosphor glass. Display effects can be reduced to a static treatment or disabled from Settings. The [art-direction guide](Docs/GHOST_FREQUENCY_ART_DIRECTION.md) covers the palette, shader stack, motion settings, and rendering budget.
 
@@ -74,6 +66,6 @@ The [automated balance guide](Docs/BALANCE_AUTOMATION.md) covers credential lock
 
 Your rig starts with a packed 2×3 chassis. Buy independent module copies, rotate and arrange rectangular footprints, and expand through four chassis tiers. Installed power supplies increase power capacity and produce heat; cooling modules increase cooling capacity and consume power. Both have three researched model tiers. Connections require a legal layout within both budgets. Removed parts stay in inventory; voluntary sales return 75% of the paid price.
 
-Downloaded payloads and optional archives occupy drive space until disconnect. Discard optional archives to make room, forfeiting their pending rewards and lore. Abilities use RAM: toggles reserve capacity and one-shots temporarily occupy it until reclaimed. Pause freezes recovery. The rack, file sizes, RAM costs, and all twenty module models are editable through external JSON or the Content Editor; see [Modding](Docs/MODDING.md#rig-storage-and-ram-authoring).
+Downloaded payloads and optional archives occupy drive space until disconnect. Discard optional archives to make room, forfeiting their pending rewards and lore. Abilities use RAM: toggles reserve capacity and one-shots temporarily occupy it until reclaimed. Pause freezes recovery. The rack, file sizes, RAM costs, and all 22 module models are editable through external JSON or the Content Editor; see [Modding](Docs/MODDING.md#rig-storage-and-ram-authoring).
 
-The rig uses a fresh v3 career file and leaves old v2 careers untouched. Generated Unity assets are JSON-owned development mirrors; player mods still load directly from the external `data/` folder without Unity or regeneration.
+The rig uses a fresh v4 career file and leaves old v3 careers untouched. Generated Unity assets are JSON-owned development mirrors; player mods still load directly from the external `data/` folder without Unity or regeneration.

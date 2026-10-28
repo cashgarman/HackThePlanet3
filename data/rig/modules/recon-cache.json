@@ -1,19 +1,19 @@
 {
   "id": "recon-cache",
-  "title": "Recon Cache",
+  "title": "Survey Cache",
   "description": "+0.20 GB/s bandwidth.",
   "family": "transfer",
   "branch": "RECON",
-  "tier": 1,
+  "tier": 2,
   "width": 1,
   "height": 2,
-  "price": 650,
+  "price": 750,
   "rotatable": true,
   "powerDemand": 3,
   "heatOutput": 2,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "+0.20 GB/s bandwidth beside an Uplink.",
   "requirements": [
     {

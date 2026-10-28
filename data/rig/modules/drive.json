@@ -1,19 +1,19 @@
 {
   "id": "drive",
-  "title": "Drive",
+  "title": "Cold Archive",
   "description": "+20 GB storage.",
   "family": "storage",
   "branch": "RECON",
   "tier": 1,
   "width": 2,
   "height": 1,
-  "price": 250,
+  "price": 300,
   "rotatable": true,
   "powerDemand": 1,
   "heatOutput": 1,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

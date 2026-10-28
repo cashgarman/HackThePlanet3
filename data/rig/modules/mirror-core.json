@@ -1,0 +1,43 @@
+{
+  "id": "mirror-core",
+  "title": "Mirror Core",
+  "description": "+0.55 GB/s transfer bandwidth; pair with adjacent processing.",
+  "family": "processing",
+  "branch": "INTRUSION",
+  "tier": 3,
+  "width": 2,
+  "height": 1,
+  "price": 1800,
+  "rotatable": true,
+  "powerDemand": 5,
+  "heatOutput": 4,
+  "powerCapacity": 0,
+  "coolingCapacity": 0,
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
+  "synergy": "",
+  "requirements": [
+    {
+      "condition": {
+        "type": "ResearchCondition",
+        "technology": "parallel-engineering",
+        "equipped": false
+      },
+      "message": "Requires parallel-engineering."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "bandwidth",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.55
+      }
+    }
+  ]
+}

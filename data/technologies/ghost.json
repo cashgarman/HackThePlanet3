@@ -1,14 +1,14 @@
 {
   "id": "ghost",
-  "title": "Ghost relay",
+  "title": "Ghost Lane",
   "description": "The first relay hack in every contract generates no trace, including scanner pressure.",
   "branch": "STEALTH",
   "cost": 70,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 135,
-    "y": 400
+    "x": 160.0,
+    "y": 310
   },
   "parents": [
     "quiet"

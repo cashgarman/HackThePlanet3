@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: 8f8b0509a40c504f97641d39c8822011
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: parallel-engineering
+  title: Vector Engineering
+  description: +0.15 compute and access to the Mirror Core and Credential Loom.
+  branch: INTRUSION
+  cost: 160
+  waypointTier: 0
+  special: 0
+  position: {x: -160, y: 775}
+  parents:
+  - {fileID: 11400000, guid: cb7f823de88dc6543961cbc54a3e270d, type: 2}
+  grants: []
+  modifiers:
+  - id:
+    stat: compute
+    priority: 0
+    operation: 0
+    when:
+      rid: 213507108366975030
+    value:
+      rid: 213507108366975031
+  triggers: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108366975030
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108366975031
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.15

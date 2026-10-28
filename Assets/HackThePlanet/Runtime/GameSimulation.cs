@@ -48,8 +48,8 @@ namespace HackThePlanet
 	[Serializable]
 	public sealed class Career
 	{
-		/// <summary>Save format version; v3 is the current schema.</summary>
-		public int version = 3, credits = -1, xp, day = 1, totalEarnedXp, jobs;
+		/// <summary>Save format version; v4 is the current schema.</summary>
+		public int version = 4, credits = -1, xp, day = 1, totalEarnedXp, jobs;
 
 		/// <summary>When true, default economy and research have been applied once.</summary>
 		public bool initialized;
@@ -71,6 +71,9 @@ namespace HackThePlanet
 
 		/// <summary>Technologies visible on the research graph; persists across refunds.</summary>
 		public List<string> researchRevealed = new();
+        public List<string> storyFlags = new(), resolvedChoices = new();
+        public List<ContractOffer> offers = new();
+        public List<ResearchInvestment> investments = new();
 
 		/// <summary>Archived operation reports retained up to the career report limit.</summary>
 		public List<OperationReport> reports = new();
@@ -232,7 +235,7 @@ namespace HackThePlanet
 		public ToolTask task;
 
 		/// <summary>Trace percentage, elapsed simulation seconds, and RAM returning to the pool.</summary>
-		public float trace, elapsed, memoryReclaiming;
+		public float trace, peakTrace, elapsed, memoryReclaiming;
 
 		/// <summary>Persistent ability RAM reservations.</summary>
 		public List<MemoryReservation> reservations = new();
@@ -419,7 +422,7 @@ namespace HackThePlanet
 
 		/// <summary>Gets whether every non-recurring contract has been delivered.</summary>
 		public bool StoryComplete =>
-			Catalog.Contracts(Career).Where(x => !x.recurring).All(x => Career.completed.Contains(x.id));
+			Catalog.Data.contracts.Any(x => x.isEnding && Career.completed.Contains(x.id));
 
 		/// <summary>Gets the career rank title for the current job count.</summary>
 		public string Rank =>
@@ -437,7 +440,7 @@ namespace HackThePlanet
 		public int ObjectiveTotal => Active ? Definition.objectives.Length : 0;
 
 		/// <summary>Gets whether all required objectives are secured.</summary>
-		public bool ObjectiveComplete => Active && ObjectiveTotal > 0 && ObjectiveCount == ObjectiveTotal;
+		public bool ObjectiveComplete => Active && ObjectiveTotal > 0 && ObjectiveCount == ObjectiveTotal && EvidenceSolved;
 
 		/// <summary>Gets normalized progress of the running tool, or zero when idle.</summary>
 		public float Progress => Op?.task == null ? 0 : Mathf.Clamp01(Op.task.elapsed / Op.task.duration);
@@ -558,6 +561,8 @@ namespace HackThePlanet
 			Career.hardware ??= new List<HardwareLevel>();
 			Career.waypoints ??= new List<NetworkWaypoint>();
 			Career.researchRevealed ??= new List<string>();
+            Career.storyFlags ??= new List<string>(); Career.resolvedChoices ??= new List<string>();
+            Career.offers ??= new List<ContractOffer>(); Career.investments ??= new List<ResearchInvestment>(); RefreshOffers();
 
 			// Apply starter defaults once for a new career.
 			if (!Career.initialized)
@@ -639,7 +644,7 @@ namespace HackThePlanet
 			}
 		}
 
-		/// <summary>Validates a v3 career save against the catalog.</summary>
+		/// <summary>Validates a v4 career save against the catalog.</summary>
 		/// <param name="career">Career to validate.</param>
 		/// <param name="catalog">Catalog used for reference checks.</param>
 		/// <exception cref="InvalidDataException">The career fails validation.</exception>
@@ -649,15 +654,18 @@ namespace HackThePlanet
 			void Require(bool pass, string message)
 			{
 				if (!pass)
-					throw new InvalidDataException("Career v3: " + message + ". The save has not been overwritten.");
+					throw new InvalidDataException("Career v4: " + message + ". The save has not been overwritten.");
 			}
 
 			// Validate the save version and the economy values.
-			Require(career.version == 3, "unsupported save version");
+			Require(career.version == 4, "unsupported save version");
 
 			Require(career.credits >= 0 && career.xp >= 0 && career.day >= 1 && career.researchSpent >= 0,
 					"invalid economy values");
 
+            Require(career.storyFlags != null && career.resolvedChoices != null && career.offers != null && career.investments != null, "missing campaign collections");
+            Require(career.offers.All(o => o != null && catalog.Contract(o.id)?.optional == true && o.openedDay >= 1) && career.offers.Select(o => o.id).Distinct().Count() == career.offers.Count, "invalid offer history");
+            Require(career.investments.All(i => i != null && i.paid >= 0 && career.unlocked.Contains(i.id)), "invalid paid research investment");
 			// Validate completed contracts and unlocked technology.
 			Require(career.completed.All(id => catalog.Contract(id) != null && !catalog.Contract(id).recurring),
 					"unknown completed contract");
@@ -767,7 +775,7 @@ namespace HackThePlanet
 			var definition = Catalog.Contract(job?.id);
 
 			// Reject the start when busy, unready, unknown, or already completed.
-			if (Active || !RigValid || definition == null || Career.completed.Count < definition.requiredWins ||
+			if (Active || !RigValid || definition == null || !ContractAvailable(definition) ||
 				(!definition.recurring && Career.completed.Contains(definition.id)))
 				return false;
 
@@ -1175,7 +1183,7 @@ namespace HackThePlanet
 			// Calculate the duration and trace cost.
 			p.duration = ApplyModifiers("duration", a.duration.Evaluate(c), c) * Definition.paceMultiplier;
 			c.Duration = p.duration;
-			p.trace = ActionTrace(a, c, p.duration);
+			p.trace = ActionTrace(a, c, p.duration) + WatcherTrace(a.id, node?.id);
 
 			// Reject non-finite, negative, or zero-length durations and negative traces.
 			if (!Finite(p.duration) || !Finite(p.trace) || p.duration < 0 ||
@@ -1195,6 +1203,8 @@ namespace HackThePlanet
 			// Mark the action allowed and explain how it will run.
 			p.allowed = true;
 			p.reason = Op.task != null && a.queueable ? "Queue after the current task." : "Ready to execute.";
+            var purge = Defenses.FirstOrDefault(d => d.kind == DefenseKind.PurgeTimer && d.keyAcquired && !d.disabled);
+            if (purge != null) p.reason += " PURGE: " + Mathf.CeilToInt(purge.remaining) + "s left; controller capture or suppression prevents destruction.";
 			Step(p.reason, true);
 			return p;
 		}
@@ -1472,6 +1482,8 @@ namespace HackThePlanet
 			delta = Mathf.Min(delta, Catalog.Data.career.maxTick);
 			Op.elapsed += delta;
 			AdvanceSweeps(delta);
+            AdvancePurge(delta);
+            if (!Active) return;
 			if (CheckTrace()) return;
 			Op.memoryReclaiming = Mathf.Max(0, Op.memoryReclaiming - MemoryReclaim * delta);
 
@@ -1517,7 +1529,7 @@ namespace HackThePlanet
 
 			// Sustained effects can be toggled while a tool runs; evaluate its remaining trace against current reservations.
 			task.trace = ActionTrace(Catalog.Action(task.actionId),
-									 Context(Node(task.target), Catalog.Action(task.actionId)), task.duration);
+									 Context(Node(task.target), Catalog.Action(task.actionId)), task.duration) + WatcherTrace(task.actionId, task.target);
 			if (!Op.statuses.Any(s => s.preventsTrace))
 				Op.trace += step / task.duration * task.trace;
 			task.elapsed += step;
@@ -1551,6 +1563,7 @@ namespace HackThePlanet
 		// Disconnects with a caught outcome when trace reaches the career limit.
 		private bool CheckTrace()
 		{
+            Op.peakTrace = Mathf.Max(Op.peakTrace, Op.trace);
 			// Keep running while trace is below the limit.
 			if (Op.trace < TraceLimit)
 				return false;
@@ -1585,6 +1598,7 @@ namespace HackThePlanet
 
 			// Fire completion triggers and log when all objectives are secured.
 			Dispatch(RuleEvent.ActionCompleted, c);
+            ArmPurges(task.actionId, task.target);
 			if (ObjectiveComplete)
 				Log(
 					"ALL OBJECTIVES SECURED // Disconnect to deliver and collect your reward. Optional archives remain available.");
@@ -1889,7 +1903,7 @@ namespace HackThePlanet
 					}
 
 				// Record the quiet bonus and add the rewards to the career.
-				report.quietBonusEarned = report.trace < Job.quietLimit;
+				report.quietBonusEarned = Mathf.Max(Op.peakTrace, report.trace) < Job.quietLimit;
 				Career.credits += report.credits;
 				Career.xp += report.xp;
 				Career.totalEarnedXp += report.xp;
@@ -1913,11 +1927,14 @@ namespace HackThePlanet
 				// Mark non-recurring contracts as completed.
 				if (!Job.recurring && !Career.completed.Contains(Job.id))
 					Career.completed.Add(Job.id);
-				Career.news.Insert(0, "DAY " + Career.day.ToString("00") + " // " + Job.aftermath);
+				if (!string.IsNullOrEmpty(Definition.revelation) && !Career.lore.Any(l => l.id == Job.id + "/revelation"))
+                    Career.lore.Add(new LoreFragment { id = Job.id + "/revelation", title = Job.title + " / Debrief", contract = Job.title, company = Job.company, text = Definition.revelation });
+                Career.news.Insert(0, "DAY " + Career.day.ToString("00") + " // " + Job.aftermath);
 			}
 
 			// Advance the career day and store the report.
 			Career.day += policy.dayAdvance;
+            RefreshOffers();
 			Career.reports.Insert(0, report);
 
 			// Trim the report archive to the configured limit.
@@ -2009,6 +2026,8 @@ namespace HackThePlanet
 		{
 			// Ensure the reveal list exists and drop ids that no longer exist in the catalog.
 			Career.researchRevealed ??= new List<string>();
+            Career.storyFlags ??= new List<string>(); Career.resolvedChoices ??= new List<string>();
+            Career.offers ??= new List<ContractOffer>(); Career.investments ??= new List<ResearchInvestment>(); RefreshOffers();
 			Career.researchRevealed.RemoveAll(id => Catalog.Technology(id) == null);
 
 			// Reveal the research around every unlocked technology.
@@ -2032,6 +2051,7 @@ namespace HackThePlanet
 			// Spend the XP and record the research spending.
 			Career.xp -= tech.cost;
 			Career.researchSpent += tech.cost;
+            Career.investments.Add(new ResearchInvestment { id = tech.id, paid = tech.cost });
 
 			// Unlock the technology and reveal its children.
 			Career.unlocked.Add(id);
@@ -2084,6 +2104,7 @@ namespace HackThePlanet
 			// Return the refunded XP and reset research spending.
 			Career.xp += Mathf.FloorToInt(Career.researchSpent * Catalog.Data.career.refundFraction);
 			Career.researchSpent = 0;
+            Career.investments.Clear();
 
 			// Reset unlocks to the starter set and clear equipment and waypoints.
 			Career.unlocked = initial.ToList();
@@ -2226,12 +2247,12 @@ namespace HackThePlanet
 		}
 	}
 
-	/// <summary>Loads and saves v3 career JSON to persistent storage.</summary>
+	/// <summary>Loads and saves v4 career JSON to persistent storage.</summary>
 	[NoAutoStaticsCleanup]
 	public static class CareerStorage
 	{
 		/// <summary>Gets the default career save file path under persistent data.</summary>
-		public static string SavePath => Path.Combine(Application.persistentDataPath, "career-v3.json");
+		public static string SavePath => Path.Combine(Application.persistentDataPath, "career-v4.json");
 
 		/// <summary>Gets the last load or save warning message, if any.</summary>
 		public static string Warning { get; private set; }
@@ -2259,8 +2280,8 @@ namespace HackThePlanet
 				var header = JsonUtility.FromJson<SaveHeader>(json);
 				var career = JsonUtility.FromJson<Career>(json);
 
-				// Reject saves that are missing or not version 3.
-				if (career == null || header == null || header.version != 3)
+				// Reject saves that are missing or not version 4.
+				if (career == null || header == null || header.version != 4)
 					throw new InvalidDataException("Unsupported career save.");
 
 				return new GameSimulation(catalog, career).Career;

@@ -1,25 +1,25 @@
 {
   "id": "cooling-3",
-  "title": "Cooling III",
+  "title": "Cryogenic Loop",
   "description": "+32 cooling capacity.",
   "family": "cooling",
   "branch": "CONTROL",
   "tier": 3,
   "width": 2,
   "height": 2,
-  "price": 1400,
+  "price": 1600,
   "rotatable": true,
   "powerDemand": 6,
   "heatOutput": 0,
   "powerCapacity": 0,
   "coolingCapacity": 32,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {
       "condition": {
         "type": "ResearchCondition",
-        "technology": "infrastructure-3",
+        "technology": "infrastructure-2",
         "equipped": false
       },
       "message": "Requires Infrastructure 3 research."

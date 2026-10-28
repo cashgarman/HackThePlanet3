@@ -1,0 +1,271 @@
+{
+  "id": "evacuate",
+  "title": "Open evacuation channel",
+  "description": "Export the protected identity through a controlled response hub. Keep the route open until extraction.",
+  "tags": [
+    "download"
+  ],
+  "shortcut": "None",
+  "shortcutLabel": "",
+  "legacyGroup": "",
+  "presentationPriority": 1,
+  "operatorTarget": false,
+  "queueable": true,
+  "initiallyAvailable": true,
+  "futureNeighborQueue": false,
+  "traceFree": false,
+  "visible": {
+    "type": "AllCondition",
+    "conditions": [
+      {
+        "type": "AnyCondition",
+        "conditions": [
+          {
+            "type": "NodeStateCondition",
+            "state": "Objective"
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Bonus"
+          }
+        ]
+      },
+      {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Collected"
+        }
+      },
+      {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeTagCondition",
+          "tag": "securityhub"
+        }
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Scan to discover this system."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Reachable"
+      },
+      "message": "Control a connected neighbor first."
+    },
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "message": "Hack this system before recovering its files."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Collected"
+        }
+      },
+      "message": "Files already secured."
+    },
+    {
+      "condition": {
+        "type": "AnyCondition",
+        "conditions": [
+          {
+            "type": "NodeStateCondition",
+            "state": "Objective"
+          },
+          {
+            "type": "NodeStateCondition",
+            "state": "Bonus"
+          }
+        ]
+      },
+      "message": "No contract files or optional archives on this node."
+    },
+    {
+      "condition": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeTagCondition",
+          "tag": "securityhub"
+        }
+      },
+      "message": "Control the hub to satisfy this objective."
+    },
+    {
+      "condition": {
+        "type": "CompareCondition",
+        "comparison": "GreaterOrEqual",
+        "left": {
+          "type": "InputNumber",
+          "input": "FreeStorage",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "InputNumber",
+          "input": "NodeStorage",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        }
+      },
+      "message": "Not enough storage: discard an archive or free space."
+    },
+    {
+      "condition": {
+        "type": "NamedNodeCondition",
+        "nodeId": "n14",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Controlled"
+        }
+      },
+      "message": "Capture the response controller to open a protected evacuation route."
+    }
+  ],
+  "queueRequirements": [
+    {
+      "condition": {
+        "type": "NodeStateCondition",
+        "state": "Known"
+      },
+      "message": "Discover this system first."
+    }
+  ],
+  "duration": {
+    "type": "BinaryNumber",
+    "operation": "Divide",
+    "left": {
+      "type": "ConditionalNumber",
+      "when": {
+        "type": "CompareCondition",
+        "comparison": "Greater",
+        "left": {
+          "type": "InputNumber",
+          "input": "NodeStorage",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 0
+        }
+      },
+      "yes": {
+        "type": "InputNumber",
+        "input": "NodeStorage",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "no": {
+        "type": "ConditionalNumber",
+        "when": {
+          "type": "NodeStateCondition",
+          "state": "Objective"
+        },
+        "yes": {
+          "type": "ConstantNumber",
+          "value": 5.5
+        },
+        "no": {
+          "type": "ConstantNumber",
+          "value": 4
+        }
+      }
+    },
+    "right": {
+      "type": "StatNumber",
+      "stat": "bandwidth"
+    }
+  },
+  "baseTrace": {
+    "type": "ConditionalNumber",
+    "when": {
+      "type": "NodeStateCondition",
+      "state": "Objective"
+    },
+    "yes": {
+      "type": "ConstantNumber",
+      "value": 8
+    },
+    "no": {
+      "type": "ConstantNumber",
+      "value": 6
+    }
+  },
+  "useLimit": {
+    "type": "ConstantNumber",
+    "value": 0
+  },
+  "effects": [
+    {
+      "type": "SetStateEffect",
+      "targets": {
+        "scope": "Target",
+        "nodeId": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "state": "Collected",
+      "value": true
+    },
+    {
+      "type": "ConditionalEffect",
+      "when": {
+        "type": "NodeStateCondition",
+        "state": "Objective"
+      },
+      "effects": [
+        {
+          "type": "LogEffect",
+          "message": "OBJECTIVE SECURED // {target}."
+        }
+      ]
+    },
+    {
+      "type": "ConditionalEffect",
+      "when": {
+        "type": "NotCondition",
+        "condition": {
+          "type": "NodeStateCondition",
+          "state": "Objective"
+        }
+      },
+      "effects": [
+        {
+          "type": "LogEffect",
+          "message": "OPTIONAL ARCHIVE // +{archiveCredits} cr / +{archiveXp} XP on successful extraction."
+        }
+      ]
+    },
+    {
+      "type": "RecoverLoreEffect"
+    }
+  ],
+  "memoryMode": "None",
+  "memoryCost": 0,
+  "instant": false,
+  "releaseOnTargetControl": false,
+  "activeModifiers": []
+}

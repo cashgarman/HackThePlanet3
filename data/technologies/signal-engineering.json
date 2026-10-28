@@ -1,19 +1,33 @@
 {
   "id": "signal-engineering",
-  "title": "Signal Engineering",
-  "description": "Unlocks module purchases: Quiet Filter, Recon Cache.",
+  "title": "Veil Engineering",
+  "description": "25% less monitored-link trace; unlock Veil Mesh and Watcher Baffle.",
   "branch": "STEALTH",
-  "cost": 100,
+  "cost": 160,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 860,
-    "y": 760
+    "x": 160.0,
+    "y": 775
   },
   "parents": [
-    "quiet"
+    "loop-feed"
   ],
   "grants": [],
-  "modifiers": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "watcherTrace",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": -0.25
+      }
+    }
+  ],
   "triggers": []
 }

@@ -1,19 +1,19 @@
 {
   "id": "accelerator",
-  "title": "Accelerator",
+  "title": "Burst ASIC",
   "description": "+0.55 GFLOP/s compute.",
   "family": "processing",
   "branch": "INTRUSION",
-  "tier": 1,
+  "tier": 2,
   "width": 2,
   "height": 2,
-  "price": 900,
+  "price": 1000,
   "rotatable": true,
   "powerDemand": 7,
   "heatOutput": 6,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

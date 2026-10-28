@@ -364,7 +364,7 @@ namespace HackThePlanet
 		/// <returns>Resolved contracts with scaled payouts and lore attached.</returns>
 		public IReadOnlyList<Contract> Contracts(Career career)
 		{
-			return Array.AsReadOnly(Data.contracts.Where(d => !d.recurring || career.completed.Count >= d.requiredWins)
+			return Array.AsReadOnly(Data.contracts.Where(d => (!d.recurring || career.completed.Count >= d.requiredWins) && (career.completed.Contains(d.id) || (d.prerequisites.All(career.completed.Contains) && d.requiredFlags.All(career.storyFlags.Contains))))
 										.Select(d => DescribeContract(d, career)).ToArray());
 		}
 

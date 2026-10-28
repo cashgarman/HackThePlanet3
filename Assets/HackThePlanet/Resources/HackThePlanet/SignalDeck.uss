@@ -132,11 +132,17 @@
 .header-tool {
     width: 28px;
     height: 28px;
+    min-width: 28px;
+    min-height: 28px;
     margin-left: 6px;
+    padding: 0;
     border-width: 1px;
     border-color: #156873;
     border-radius: 4px;
     color: #00eee2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     -unity-text-align: middle-center;
 }
 
@@ -147,6 +153,10 @@
 
 .header-tool .rail-help-glyph {
     color: #00eee2;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    align-self: stretch;
     -unity-text-align: middle-center;
     font-size: 17px;
 }
@@ -856,6 +866,43 @@
 
 .settings-menu {
     width: 680px;
+}
+
+/* Settings controls inherit Unity's light field surface; keep labels and values readable. */
+.settings-menu .unity-base-field__label,
+.settings-menu .unity-base-field > Label,
+.settings-menu .unity-toggle__text {
+    color: #d8e8ed;
+    white-space: normal;
+}
+
+.settings-menu .unity-base-field {
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 10px;
+    margin-bottom: 6px;
+}
+
+.settings-menu TextField .unity-base-field__input,
+.settings-menu .unity-base-text-field__input,
+.settings-menu .unity-text-field__input,
+.settings-menu .unity-base-field__input,
+.settings-menu .unity-text-input {
+    color: #10232b;
+    background-color: #d8e8ed;
+    min-height: 34px;
+    padding: 6px 10px;
+    -unity-cursor-color: #10232b;
+    -unity-selection-color: #74d9d2;
+}
+
+.settings-menu .unity-base-field__input:hover,
+.settings-menu .unity-base-text-field__input:hover {
+    color: #06191e;
+}
+
+.settings-menu .small.muted {
+    color: #b8ccd6;
 }
 
 .modal-box .large-heading {

@@ -1,19 +1,19 @@
 {
   "id": "spoof-asic",
-  "title": "Spoof ASIC",
+  "title": "Credential Loom",
   "description": "+0.25 GFLOP/s compute and one more spoof per operation.",
   "family": "processing",
   "branch": "INTRUSION",
-  "tier": 2,
+  "tier": 3,
   "width": 2,
   "height": 2,
-  "price": 1000,
+  "price": 1600,
   "rotatable": true,
   "powerDemand": 6,
   "heatOutput": 5,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Purpose-built countermeasure hardware.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

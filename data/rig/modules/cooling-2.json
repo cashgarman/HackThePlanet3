@@ -1,19 +1,19 @@
 {
   "id": "cooling-2",
-  "title": "Cooling II",
+  "title": "Loop Cooler",
   "description": "+16 cooling capacity.",
   "family": "cooling",
   "branch": "CONTROL",
   "tier": 2,
   "width": 2,
   "height": 1,
-  "price": 600,
+  "price": 700,
   "rotatable": true,
   "powerDemand": 3,
   "heatOutput": 0,
   "powerCapacity": 0,
   "coolingCapacity": 16,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

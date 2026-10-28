@@ -8,48 +8,80 @@
     "company-2"
   ],
   "contracts": [
-    "quiet-copy",
-    "paper-trail",
-    "ghost-wire",
-    "glasshouse",
-    "dead-drop",
-    "last-light",
-    "freelance-0",
-    "freelance-1",
-    "freelance-2"
+    "ghost-meter",
+    "redacted-hours",
+    "unlisted-operator",
+    "listening-room",
+    "margin-notes",
+    "sealed-hearing",
+    "borrowed-voice",
+    "public-interest",
+    "proof-of-life",
+    "cold-clinic",
+    "spare-capacity",
+    "names-in-copper",
+    "island-mode",
+    "open-door",
+    "accession",
+    "black-budget",
+    "dead-signature",
+    "proxy-war",
+    "quorum",
+    "thirteenth-test",
+    "no-central-server",
+    "expose-threshold",
+    "expose-ending-open",
+    "expose-ending-careful",
+    "expose-side-1",
+    "expose-side-2",
+    "expose-side-3",
+    "shelter-threshold",
+    "shelter-ending-open",
+    "shelter-ending-careful",
+    "shelter-side-1",
+    "shelter-side-2",
+    "shelter-side-3",
+    "command-threshold",
+    "command-ending-open",
+    "command-ending-careful",
+    "command-side-1",
+    "command-side-2",
+    "command-side-3",
+    "vesper-freelance-0",
+    "vesper-freelance-1",
+    "vesper-freelance-2",
+    "vesper-freelance-3"
   ],
   "technologies": [
     "base",
     "wide",
-    "blueprint",
     "signal",
+    "blueprint",
+    "credential-analysis",
+    "data-engineering",
     "efficient",
     "chain",
     "selective",
+    "protocol-spoof",
+    "parallel-engineering",
     "quiet",
     "ghost",
     "backdoor",
+    "loop-feed",
+    "signal-engineering",
     "disrupt",
     "blackout",
     "decoy",
-    "passive",
-    "weakpoint",
-    "cascade",
-    "bridge",
-    "buffer",
+    "hard-reset",
+    "infrastructure-2",
     "waypoints-1",
     "waypoints-2",
     "waypoints-3",
     "waypoints-4",
-    "infrastructure-2",
-    "infrastructure-3",
-    "parallel-engineering",
-    "data-engineering",
-    "signal-engineering",
-    "credential-analysis",
-    "protocol-spoof",
-    "loop-feed",
-    "hard-reset"
+    "bridge",
+    "weakpoint",
+    "buffer",
+    "cascade"
   ],
   "actions": [
     "scan",
@@ -64,7 +96,10 @@
     "extract-key",
     "spoof-gate",
     "loop-feed",
-    "hard-reset"
+    "hard-reset",
+    "alter-record",
+    "intercept",
+    "evacuate"
   ],
   "nodeTypes": [
     "gateway",
@@ -76,7 +111,55 @@
     "securityhub"
   ],
   "networks": [
-    "corporate-network"
+    "vesper-exfiltrate",
+    "vesper-alter",
+    "vesper-reconstruct",
+    "vesper-intercept",
+    "vesper-evacuate",
+    "vesper-seize",
+    "subnet-ghost-meter",
+    "subnet-redacted-hours",
+    "subnet-unlisted-operator",
+    "subnet-listening-room",
+    "subnet-margin-notes",
+    "subnet-sealed-hearing",
+    "subnet-borrowed-voice",
+    "subnet-public-interest",
+    "subnet-proof-of-life",
+    "subnet-cold-clinic",
+    "subnet-spare-capacity",
+    "subnet-names-in-copper",
+    "subnet-island-mode",
+    "subnet-open-door",
+    "subnet-accession",
+    "subnet-black-budget",
+    "subnet-dead-signature",
+    "subnet-proxy-war",
+    "subnet-quorum",
+    "subnet-thirteenth-test",
+    "subnet-no-central-server",
+    "subnet-expose-threshold",
+    "subnet-expose-ending-open",
+    "subnet-expose-ending-careful",
+    "subnet-expose-side-1",
+    "subnet-expose-side-2",
+    "subnet-expose-side-3",
+    "subnet-shelter-threshold",
+    "subnet-shelter-ending-open",
+    "subnet-shelter-ending-careful",
+    "subnet-shelter-side-1",
+    "subnet-shelter-side-2",
+    "subnet-shelter-side-3",
+    "subnet-command-threshold",
+    "subnet-command-ending-open",
+    "subnet-command-ending-careful",
+    "subnet-command-side-1",
+    "subnet-command-side-2",
+    "subnet-command-side-3",
+    "subnet-vesper-freelance-0",
+    "subnet-vesper-freelance-1",
+    "subnet-vesper-freelance-2",
+    "subnet-vesper-freelance-3"
   ],
   "hardware": [],
   "statuses": [
@@ -135,237 +218,16 @@
       }
     },
     {
-      "id": "career-pacing-1-duration",
-      "stat": "duration",
-      "priority": 100,
-      "operation": "Multiply",
-      "when": {
-        "type": "AllCondition",
-        "conditions": [
-          {
-            "type": "CompareCondition",
-            "comparison": "LessOrEqual",
-            "left": {
-              "type": "InputNumber",
-              "input": "Difficulty",
-              "key": "",
-              "filter": {
-                "type": "AlwaysCondition"
-              }
-            },
-            "right": {
-              "type": "ConstantNumber",
-              "value": 1
-            }
-          },
-          {
-            "type": "NotCondition",
-            "condition": {
-              "type": "ActionCondition",
-              "action": null,
-              "tag": "countermeasure"
-            }
-          }
-        ]
-      },
-      "value": {
-        "type": "ConstantNumber",
-        "value": 2.25
-      }
-    },
-    {
-      "id": "career-pacing-1-trace",
+      "id": "",
       "stat": "trace",
-      "priority": 100,
+      "priority": 0,
       "operation": "Multiply",
       "when": {
-        "type": "AllCondition",
-        "conditions": [
-          {
-            "type": "CompareCondition",
-            "comparison": "LessOrEqual",
-            "left": {
-              "type": "InputNumber",
-              "input": "Difficulty",
-              "key": "",
-              "filter": {
-                "type": "AlwaysCondition"
-              }
-            },
-            "right": {
-              "type": "ConstantNumber",
-              "value": 1
-            }
-          },
-          {
-            "type": "NotCondition",
-            "condition": {
-              "type": "ActionCondition",
-              "action": null,
-              "tag": "countermeasure"
-            }
-          }
-        ]
-      },
-      "value": {
-        "type": "ConstantNumber",
-        "value": 0.8
-      }
-    },
-    {
-      "id": "career-pacing-2-duration",
-      "stat": "duration",
-      "priority": 100,
-      "operation": "Multiply",
-      "when": {
-        "type": "AllCondition",
-        "conditions": [
-          {
-            "type": "CompareCondition",
-            "comparison": "Equal",
-            "left": {
-              "type": "InputNumber",
-              "input": "Difficulty",
-              "key": "",
-              "filter": {
-                "type": "AlwaysCondition"
-              }
-            },
-            "right": {
-              "type": "ConstantNumber",
-              "value": 2
-            }
-          },
-          {
-            "type": "NotCondition",
-            "condition": {
-              "type": "ActionCondition",
-              "action": null,
-              "tag": "countermeasure"
-            }
-          }
-        ]
-      },
-      "value": {
-        "type": "ConstantNumber",
-        "value": 3
-      }
-    },
-    {
-      "id": "career-pacing-2-trace",
-      "stat": "trace",
-      "priority": 100,
-      "operation": "Multiply",
-      "when": {
-        "type": "AllCondition",
-        "conditions": [
-          {
-            "type": "CompareCondition",
-            "comparison": "Equal",
-            "left": {
-              "type": "InputNumber",
-              "input": "Difficulty",
-              "key": "",
-              "filter": {
-                "type": "AlwaysCondition"
-              }
-            },
-            "right": {
-              "type": "ConstantNumber",
-              "value": 2
-            }
-          },
-          {
-            "type": "NotCondition",
-            "condition": {
-              "type": "ActionCondition",
-              "action": null,
-              "tag": "countermeasure"
-            }
-          }
-        ]
+        "type": "AlwaysCondition"
       },
       "value": {
         "type": "ConstantNumber",
         "value": 0.55
-      }
-    },
-    {
-      "id": "career-pacing-3-duration",
-      "stat": "duration",
-      "priority": 100,
-      "operation": "Multiply",
-      "when": {
-        "type": "AllCondition",
-        "conditions": [
-          {
-            "type": "CompareCondition",
-            "comparison": "GreaterOrEqual",
-            "left": {
-              "type": "InputNumber",
-              "input": "Difficulty",
-              "key": "",
-              "filter": {
-                "type": "AlwaysCondition"
-              }
-            },
-            "right": {
-              "type": "ConstantNumber",
-              "value": 3
-            }
-          },
-          {
-            "type": "NotCondition",
-            "condition": {
-              "type": "ActionCondition",
-              "action": null,
-              "tag": "countermeasure"
-            }
-          }
-        ]
-      },
-      "value": {
-        "type": "ConstantNumber",
-        "value": 5
-      }
-    },
-    {
-      "id": "career-pacing-3-trace",
-      "stat": "trace",
-      "priority": 100,
-      "operation": "Multiply",
-      "when": {
-        "type": "AllCondition",
-        "conditions": [
-          {
-            "type": "CompareCondition",
-            "comparison": "GreaterOrEqual",
-            "left": {
-              "type": "InputNumber",
-              "input": "Difficulty",
-              "key": "",
-              "filter": {
-                "type": "AlwaysCondition"
-              }
-            },
-            "right": {
-              "type": "ConstantNumber",
-              "value": 3
-            }
-          },
-          {
-            "type": "NotCondition",
-            "condition": {
-              "type": "ActionCondition",
-              "action": null,
-              "tag": "countermeasure"
-            }
-          }
-        ]
-      },
-      "value": {
-        "type": "ConstantNumber",
-        "value": 0.25
       }
     }
   ],
@@ -418,24 +280,26 @@
   ],
   "modules": [
     "processor",
+    "accelerator",
     "uplink",
+    "recon-cache",
     "drive",
+    "storage-array",
     "ram",
+    "ram-bank",
     "recycler",
+    "quiet-filter",
+    "decoder-board",
+    "spoof-asic",
+    "veil-array",
+    "isolation-bank",
     "power-1",
     "power-2",
     "power-3",
     "cooling-1",
     "cooling-2",
     "cooling-3",
-    "accelerator",
-    "storage-array",
-    "ram-bank",
-    "quiet-filter",
-    "recon-cache",
-    "decoder-board",
-    "spoof-asic",
-    "veil-array",
-    "isolation-bank"
+    "watcher-baffle",
+    "mirror-core"
   ]
 }

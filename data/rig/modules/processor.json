@@ -1,6 +1,6 @@
 {
   "id": "processor",
-  "title": "Processor",
+  "title": "Salvage Vector CPU",
   "description": "+0.20 GFLOP/s compute.",
   "family": "processing",
   "branch": "INTRUSION",
@@ -13,7 +13,7 @@
   "heatOutput": 3,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

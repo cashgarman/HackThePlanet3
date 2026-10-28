@@ -1,7 +1,7 @@
 {
   "id": "chassis-2",
-  "title": "Chassis II",
-  "description": "A larger home for your signal.",
+  "title": "Workbench",
+  "description": "Vesper field chassis. More room, ability slots and resource headroom.",
   "tier": 2,
   "rows": 3,
   "columns": 4,

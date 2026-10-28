@@ -1,10 +1,10 @@
 {
   "id": "quiet-filter",
-  "title": "Quiet Filter",
+  "title": "Noise Comb",
   "description": "10% less trace.",
   "family": "stealth",
   "branch": "STEALTH",
-  "tier": 1,
+  "tier": 2,
   "width": 2,
   "height": 1,
   "price": 800,
@@ -13,7 +13,7 @@
   "heatOutput": 2,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "Another 5% less trace beside a Recycler.",
   "requirements": [
     {

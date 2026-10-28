@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 8b9aa96e9a74510a9e37c30ab8bfa41a
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: command-ending-open
+  title: Human Quorum / Unbound
+  description: "Complete your alliance\u2019s final operation against the distributed fallback system."
+  company: {fileID: 11400000, guid: 0b1df930f3d88d84c9187b8fa3762df7, type: 2}
+  network: {fileID: 11400000, guid: 52d6ceafffc63d240b906480c7688078, type: 2}
+  client: ORIN / Directorate defector
+  tag: SEIZE / VESPER
+  objective: Recover evidence at Authoritative record / Capture controller at Response controller
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. The release reaches every district at once. It breaks the old consensus and leaves difficult repairs for the survivors.
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - command-threshold
+  requiredFlags:
+  - command
+  - command-open
+  offerDays: 0
+  isEnding: 1
+  optional: 0
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. The release reaches every district at once. It breaks the old consensus and leaves difficult repairs for the survivors.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 4.5
+  credits:
+    rid: 213507108368551835
+  xp:
+    rid: 213507108368551836
+  difficulty:
+    rid: 213507108368551837
+  seed:
+    rid: 213507108368551838
+  objectives:
+  - nodeId: n22
+    label: Human Quorum / Unbound / Authoritative record
+    actionLabel: Recover evidence
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551839
+    actionRequirements: []
+  - nodeId: n14
+    label: Human Quorum / Unbound / Response controller
+    actionLabel: Capture controller
+    action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+    payload: 0
+    complete:
+      rid: 213507108368551840
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: command-ending-open-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: command-ending-open-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  - id: command-ending-open-sweep
+    sourceNodeId: n14
+    targetNodeIds: []
+    kind: 1
+    minimumDifficulty: 1
+    intervalSeconds: 65
+    traceBurst: 7
+  lore:
+  - id: command-ending-open/0
+    title: Human Quorum / Unbound / Unsent message
+    company:
+    contract: Human Quorum / Unbound
+    text: "ORIN / Directorate defector: Complete your alliance\u2019s final operation against the distributed fallback system. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+  - id: command-ending-open/1
+    title: Human Quorum / Unbound / Custody note
+    company:
+    contract: Human Quorum / Unbound
+    text: 'Archive custody, Human Quorum / Unbound: A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. The release reaches every district at once. It breaks the old consensus and leaves difficult repairs for the survivors. A second copy carries a hand-written objection to the official disposition.'
+  - id: command-ending-open/2
+    title: Human Quorum / Unbound / Private annotation
+    company:
+    contract: Human Quorum / Unbound
+    text: 'Personal note filed under command-ending-open: A human quorum takes the signing seats. The protocol must answer to named people whose decisions can be challenged. The release reaches every district at once. It breaks the old consensus and leaves difficult repairs for the survivors. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551835
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2020
+    - rid: 213507108368551836
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 142
+    - rid: 213507108368551837
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507108368551838
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 988
+    - rid: 213507108368551839
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551840
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1

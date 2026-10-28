@@ -402,6 +402,9 @@ namespace HackThePlanet
 					RichText(card, model.width + "x" + model.height + " / " + model.price + " cr / " +
 								   model.powerDemand + " POWER / " + model.heatOutput + " HEAT", "micro muted");
 					RichText(card, model.description, "small");
+                    Text(card, "IF INSTALLED / power " + State.PowerUsed.ToString("0.#") + " → " + (State.PowerUsed + model.powerDemand).ToString("0.#") +
+                        " / cooling load " + State.HeatUsed.ToString("0.#") + " → " + (State.HeatUsed + model.heatOutput).ToString("0.#") +
+                        ". Requires a free " + model.width + "×" + model.height + " footprint. " + model.synergy, "small muted");
 
 					// Create the buy button, which buys one copy and places it in the first free slot.
 					var preview = State.PreviewModule(model.id);

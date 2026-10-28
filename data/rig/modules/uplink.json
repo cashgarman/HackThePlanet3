@@ -1,6 +1,6 @@
 {
   "id": "uplink",
-  "title": "Uplink",
+  "title": "Folded Antenna",
   "description": "+0.25 GB/s bandwidth.",
   "family": "transfer",
   "branch": "RECON",
@@ -13,7 +13,7 @@
   "heatOutput": 1,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

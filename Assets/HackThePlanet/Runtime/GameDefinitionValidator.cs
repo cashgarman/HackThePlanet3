@@ -487,6 +487,14 @@ namespace HackThePlanet
 					d.minimumDifficulty < 1 || d.intervalSeconds <= 0 || d.traceBurst < 0) ||
 					c.defenses.Select(d => d?.id).Distinct().Count() != c.defenses.Length)
 					Error(c, "defenses", "security layers need unique IDs, valid nodes, and positive timing");
+                if (c.prerequisites == null || c.prerequisites.Any(id => id == c.id || !root.contracts.Any(other => other.id == id)) || c.offerDays < 0 || (c.offerDays > 0 && !c.optional))
+                    Error(c, "prerequisites/offerDays", "valid prerequisites and optional-only offer windows are required");
+                if (c.requiredFlags == null || c.choices == null || c.choices.Any(o => o == null || string.IsNullOrWhiteSpace(o.id) || string.IsNullOrWhiteSpace(o.flag)) || c.choices.Select(o => o.id).Distinct().Count() != c.choices.Length)
+                    Error(c, "choices", "choices need unique IDs and nonempty flags");
+                if (c.evidence == null || c.evidence.clueNodes == null || c.evidence.clues == null || c.evidence.answers == null ||
+                    c.evidence.clueNodes.Length != c.evidence.clues.Length || c.evidence.clueNodes.Any(id => !ids.Contains(id)) ||
+                    (c.evidence.answers.Length > 0 && (c.evidence.clueNodes.Length == 0 || c.evidence.answers.Length != 3 || c.evidence.answers.Count(a => a.correct) != 1 || c.evidence.answers.Select(a => a.id).Distinct().Count() != 3)))
+                    Error(c, "evidence", "cases require valid clues and three unique answers with one correct interpretation");
 				if (c.paceMultiplier <= 0 || float.IsNaN(c.paceMultiplier) || float.IsInfinity(c.paceMultiplier))
 					Error(c, "paceMultiplier", "contract pacing must be positive and finite");
 

@@ -1,19 +1,19 @@
 {
   "id": "isolation-bank",
-  "title": "Isolation Bank",
+  "title": "Isolation Matrix",
   "description": "+15 GB RAM; Hard Reset is 25% faster.",
   "family": "memory",
   "branch": "CONTROL",
-  "tier": 2,
+  "tier": 3,
   "width": 2,
   "height": 2,
-  "price": 1000,
+  "price": 1700,
   "rotatable": true,
   "powerDemand": 4,
   "heatOutput": 3,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Purpose-built countermeasure hardware.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

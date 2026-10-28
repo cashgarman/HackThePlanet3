@@ -20,210 +20,6 @@
       "type": "RewardDefinition"
     },
     {
-      "key": "27cd2ba455b9402289fe1518262b1a82",
-      "category": "Companies",
-      "file": "companies/company-0.json",
-      "type": "CompanyDefinition"
-    },
-    {
-      "key": "fbb32beecebd40cbad7562e4c84244e5",
-      "category": "Companies",
-      "file": "companies/company-1.json",
-      "type": "CompanyDefinition"
-    },
-    {
-      "key": "43d127df2f114550adfa46656d413258",
-      "category": "Companies",
-      "file": "companies/company-2.json",
-      "type": "CompanyDefinition"
-    },
-    {
-      "key": "c061f0257dbc447a8fb8afa41869fa9f",
-      "category": "Contracts",
-      "file": "contracts/quiet-copy.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "0a183564d09e4256ae5504b6a5dfd720",
-      "category": "Contracts",
-      "file": "contracts/paper-trail.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "7a1f93f718ff4a288c3ee192c9e7946f",
-      "category": "Contracts",
-      "file": "contracts/ghost-wire.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "7d05dceb0af94cb99cdf93fe95d306f9",
-      "category": "Contracts",
-      "file": "contracts/glasshouse.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "9835a7e5244540e888412012a397ed52",
-      "category": "Contracts",
-      "file": "contracts/dead-drop.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "c157a4b9fbad4b95afb1696635cff0b0",
-      "category": "Contracts",
-      "file": "contracts/last-light.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "cbfac0610e3045e6ba9cac9fb7a615e2",
-      "category": "Contracts",
-      "file": "contracts/freelance-0.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "0288a435130440358509ee40594ee0a3",
-      "category": "Contracts",
-      "file": "contracts/freelance-1.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "20bba83af25c4f9c85faa9470f128c4b",
-      "category": "Contracts",
-      "file": "contracts/freelance-2.json",
-      "type": "ContractDefinition"
-    },
-    {
-      "key": "7037a2949808452585fa79d9304479da",
-      "category": "Technologies",
-      "file": "technologies/base.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "d13354bb2b97403c957965ba2a182423",
-      "category": "Technologies",
-      "file": "technologies/wide.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "5c46ece93fe346a4b79f896f7ca18e7b",
-      "category": "Technologies",
-      "file": "technologies/blueprint.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "d18de6e8f0fe4a2e824ce05e1e4de4a9",
-      "category": "Technologies",
-      "file": "technologies/signal.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "ee5114c51aa148408e0a2ef95bd1d2a2",
-      "category": "Technologies",
-      "file": "technologies/efficient.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "e54100ba8d994cd5ab4a260afbb26096",
-      "category": "Technologies",
-      "file": "technologies/chain.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "966d619cd99f45e084917ab0375e12d6",
-      "category": "Technologies",
-      "file": "technologies/selective.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "be50e6ce94dc4f17a9585972717a06ee",
-      "category": "Technologies",
-      "file": "technologies/quiet.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "a0f13f8d23a14ef8880368ed269bd676",
-      "category": "Technologies",
-      "file": "technologies/ghost.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "fd5d828f77504ffe869c19a4f25c3bc4",
-      "category": "Technologies",
-      "file": "technologies/backdoor.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "59bbaa76b64c4ca8a586457768b6bda5",
-      "category": "Technologies",
-      "file": "technologies/disrupt.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "34be64622d624b63afeb3b442f558177",
-      "category": "Technologies",
-      "file": "technologies/blackout.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "6027865109f7461a86994e12a0d123d7",
-      "category": "Technologies",
-      "file": "technologies/decoy.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "6fa6ef88e07e44ec90c2c10a16fe7948",
-      "category": "Technologies",
-      "file": "technologies/passive.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "f1f54cc7b1934d0085f12e4a4bcc88d4",
-      "category": "Technologies",
-      "file": "technologies/weakpoint.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "67daf3009f5346679e8f8a63d444938e",
-      "category": "Technologies",
-      "file": "technologies/cascade.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "f15f1585a2f8448192e8373ee5e764ec",
-      "category": "Technologies",
-      "file": "technologies/bridge.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "87649f3c3bd6435ab47e25965c72176c",
-      "category": "Technologies",
-      "file": "technologies/buffer.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "1f7720cb56b847e2aeb98cb78cecf9be",
-      "category": "Technologies",
-      "file": "technologies/waypoints-1.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "365f531d95a741f98c484b9cb0dddbc2",
-      "category": "Technologies",
-      "file": "technologies/waypoints-2.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "2f5228fa1de14d0bb91247205a9dd5fe",
-      "category": "Technologies",
-      "file": "technologies/waypoints-3.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "33367345f1584dedaee9dffaad11f956",
-      "category": "Technologies",
-      "file": "technologies/waypoints-4.json",
-      "type": "TechnologyDefinition"
-    },
-    {
       "key": "b3fb60fc52a84ab59396a32b5e15d51a",
       "category": "Actions",
       "file": "actions/scan.json",
@@ -314,12 +110,6 @@
       "type": "NodeTypeDefinition"
     },
     {
-      "key": "3d587f2d1cec4dd6a0f68954ab244009",
-      "category": "Networks",
-      "file": "networks/corporate-network.json",
-      "type": "NetworkDefinition"
-    },
-    {
       "key": "07f1ab73a29d4edf99b5f1b5167dbc6b",
       "category": "Statuses",
       "file": "statuses/suppression.json",
@@ -354,156 +144,6 @@
       "category": "Graph Labels",
       "file": "graph-labels/labels.json",
       "type": "GraphNodeLabelSettings"
-    },
-    {
-      "key": "daf52b6c84f741fc9766425867a4a8f3",
-      "category": "Chassis",
-      "file": "rig/chassis/chassis-1.json",
-      "type": "RigChassisDefinition"
-    },
-    {
-      "key": "c1444cfaebba47ffb42b07e2aa71a2c5",
-      "category": "Chassis",
-      "file": "rig/chassis/chassis-2.json",
-      "type": "RigChassisDefinition"
-    },
-    {
-      "key": "548378569a744aad9fe29357ed058682",
-      "category": "Chassis",
-      "file": "rig/chassis/chassis-3.json",
-      "type": "RigChassisDefinition"
-    },
-    {
-      "key": "4b2c67493925482f8d70f1833ef7dd10",
-      "category": "Chassis",
-      "file": "rig/chassis/chassis-4.json",
-      "type": "RigChassisDefinition"
-    },
-    {
-      "key": "0b977c1902734450a5e9bd561ed543bd",
-      "category": "Modules",
-      "file": "rig/modules/processor.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "19272205b9b94259b8bf01eb7f811797",
-      "category": "Modules",
-      "file": "rig/modules/uplink.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "295c2100172e4e1b83486742dc161938",
-      "category": "Modules",
-      "file": "rig/modules/drive.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "3095f25b589d4c41bf26d99a41dee298",
-      "category": "Modules",
-      "file": "rig/modules/ram.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "a4eff3c6ebd94e1398583b324c7863da",
-      "category": "Modules",
-      "file": "rig/modules/recycler.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "e7e252e880884abcb378aa7c34ec68bb",
-      "category": "Modules",
-      "file": "rig/modules/power-1.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "7bf125c725344644be0e776d2de2def0",
-      "category": "Modules",
-      "file": "rig/modules/power-2.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "2dbf5b7f98654d259b6267a9960e8d2f",
-      "category": "Modules",
-      "file": "rig/modules/power-3.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "dbda0fd49b244883843eda5b2c1799bc",
-      "category": "Modules",
-      "file": "rig/modules/cooling-1.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "6adfab24616f494cb5f484b37eeee894",
-      "category": "Modules",
-      "file": "rig/modules/cooling-2.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "1a343bd893844cce8d01b150deeb6faf",
-      "category": "Modules",
-      "file": "rig/modules/cooling-3.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "23ead28b4598459990e1ff6938eabf1d",
-      "category": "Modules",
-      "file": "rig/modules/accelerator.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "fbbda1aa13ca4be1aaf9cb5b1787bb5c",
-      "category": "Modules",
-      "file": "rig/modules/storage-array.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "3d0fbf0856d5401a85785b3f73a2152e",
-      "category": "Modules",
-      "file": "rig/modules/ram-bank.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "60b7eb0857714bf3bf92acc9aab2a3f5",
-      "category": "Modules",
-      "file": "rig/modules/quiet-filter.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "b99ea65839f3467c956afbd056af0fa9",
-      "category": "Modules",
-      "file": "rig/modules/recon-cache.json",
-      "type": "RigModuleDefinition"
-    },
-    {
-      "key": "d0ca9796020a4aa4aa65fcc473c60d0f",
-      "category": "Technologies",
-      "file": "technologies/infrastructure-2.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "250f567b932546ffa3ebf4e62e6dec34",
-      "category": "Technologies",
-      "file": "technologies/infrastructure-3.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "a7baaeb6c7d54d1fb884cfa943bf7556",
-      "category": "Technologies",
-      "file": "technologies/parallel-engineering.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "b978139d66124d5f926677033522c28c",
-      "category": "Technologies",
-      "file": "technologies/data-engineering.json",
-      "type": "TechnologyDefinition"
-    },
-    {
-      "key": "8e564181b2d444b4b0d462060c241e5c",
-      "category": "Technologies",
-      "file": "technologies/signal-engineering.json",
-      "type": "TechnologyDefinition"
     },
     {
       "key": "c927a8a6aac64f89b2bb509febcccd6f",
@@ -542,52 +182,922 @@
       "type": "ActionDefinition"
     },
     {
-      "key": "63e8dee24d0b4a6083d10690d288a380",
+      "key": "9a259b77eb965395916c936d8ba1c83e",
+      "category": "Technologies",
+      "file": "technologies/base.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "4c482d20811a510ebd0247f661573fbf",
+      "category": "Technologies",
+      "file": "technologies/wide.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "b04e8594b5025f93b514c6fccd794d50",
+      "category": "Technologies",
+      "file": "technologies/signal.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "a6c1c9759d295452b745832c14670131",
+      "category": "Technologies",
+      "file": "technologies/blueprint.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "24010b1ac3e9524f80326e97a2044a54",
       "category": "Technologies",
       "file": "technologies/credential-analysis.json",
       "type": "TechnologyDefinition"
     },
     {
-      "key": "12244d9f033e4f8388b9ed198d911a43",
+      "key": "d993ba4478a258518856cf9d8e4cead2",
+      "category": "Technologies",
+      "file": "technologies/data-engineering.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "151721057c125115ade5f014902767e1",
+      "category": "Technologies",
+      "file": "technologies/efficient.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "5b71f04f388852939ae49999d4899368",
+      "category": "Technologies",
+      "file": "technologies/chain.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "a4954ea43d6f508f995aa518f3923133",
+      "category": "Technologies",
+      "file": "technologies/selective.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "01ad6434f40957039c0850b655c7f3e3",
       "category": "Technologies",
       "file": "technologies/protocol-spoof.json",
       "type": "TechnologyDefinition"
     },
     {
-      "key": "fc6009f6d1774681820c70391c5b0f31",
+      "key": "8f8b0509a40c504f97641d39c8822011",
+      "category": "Technologies",
+      "file": "technologies/parallel-engineering.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "9c66b9cf62a35825b289890246b8fe17",
+      "category": "Technologies",
+      "file": "technologies/quiet.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "3dd126aec00b5c5fa6d381259bb3ee2c",
+      "category": "Technologies",
+      "file": "technologies/ghost.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "170308ed7dbc5774942853fac5b10cb0",
+      "category": "Technologies",
+      "file": "technologies/backdoor.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "608769f4b5ac5c4ebfb5f260487406a6",
       "category": "Technologies",
       "file": "technologies/loop-feed.json",
       "type": "TechnologyDefinition"
     },
     {
-      "key": "51c60c8e283f4a0d9b76dcdde37d17d8",
+      "key": "66b852026cd3529fbd0ea335d2c236af",
+      "category": "Technologies",
+      "file": "technologies/signal-engineering.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "1f1eed1ecb895841a4813b619cd12803",
+      "category": "Technologies",
+      "file": "technologies/disrupt.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "9c21b792bd8459b8a4796bf31f30a75f",
+      "category": "Technologies",
+      "file": "technologies/blackout.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "744b409236505e869470ddc0608ab028",
+      "category": "Technologies",
+      "file": "technologies/decoy.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "314f3d8b14415d1d82b52918b494dcab",
       "category": "Technologies",
       "file": "technologies/hard-reset.json",
       "type": "TechnologyDefinition"
     },
     {
-      "key": "1f3ac4c491fc40e7b22331a3f526c772",
+      "key": "31acbd2890a6549da90ee53a93a69ac5",
+      "category": "Technologies",
+      "file": "technologies/infrastructure-2.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "6d8596e3837b53598e8cbf244d9575d6",
+      "category": "Technologies",
+      "file": "technologies/waypoints-1.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "808be2c6e9ca5af48ec037be0649daea",
+      "category": "Technologies",
+      "file": "technologies/waypoints-2.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "3101e4e24ec056248123b91672685c25",
+      "category": "Technologies",
+      "file": "technologies/waypoints-3.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "264523db5f46565387ddd27c8efe9e42",
+      "category": "Technologies",
+      "file": "technologies/waypoints-4.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "eec6ef8ffa7d54d49a9e352fd7484501",
+      "category": "Technologies",
+      "file": "technologies/bridge.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "ee0d457bc01454388f5f22acc9ca08aa",
+      "category": "Technologies",
+      "file": "technologies/weakpoint.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "8dfbeb6405315a8ebd3ba9b0d06c0fc3",
+      "category": "Technologies",
+      "file": "technologies/buffer.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "e16c86b8854a574189b346920128d5e5",
+      "category": "Technologies",
+      "file": "technologies/cascade.json",
+      "type": "TechnologyDefinition"
+    },
+    {
+      "key": "87bcf61805e55e6e97f0ce96c0a17270",
+      "category": "Modules",
+      "file": "rig/modules/processor.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "878efc0842025c6ba65cacd19d894eaa",
+      "category": "Modules",
+      "file": "rig/modules/accelerator.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "6d79b5edc7f251a791e39243cbdb4514",
+      "category": "Modules",
+      "file": "rig/modules/uplink.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "90604702b1f05c03bfb8e4269e95b45e",
+      "category": "Modules",
+      "file": "rig/modules/recon-cache.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "7b798b35b9185d4d804ae9d88dfe7723",
+      "category": "Modules",
+      "file": "rig/modules/drive.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "9887e48120d458d2ae9c6c551d1c0157",
+      "category": "Modules",
+      "file": "rig/modules/storage-array.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "1b66a6ac1449516b93b930a124886635",
+      "category": "Modules",
+      "file": "rig/modules/ram.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "51f064efb7d7571db71dc2fb5db6c8f8",
+      "category": "Modules",
+      "file": "rig/modules/ram-bank.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "ed81702277b55b408c7b18c58e84bf56",
+      "category": "Modules",
+      "file": "rig/modules/recycler.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "51e72355264f5980afb85be1e04dd229",
+      "category": "Modules",
+      "file": "rig/modules/quiet-filter.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "493e97c4aa0559c898e36854c9e06ff8",
       "category": "Modules",
       "file": "rig/modules/decoder-board.json",
       "type": "RigModuleDefinition"
     },
     {
-      "key": "6adcc20697384b078988fb9cde58254f",
+      "key": "8d55869ef1d450dd852a12d32e1113ab",
       "category": "Modules",
       "file": "rig/modules/spoof-asic.json",
       "type": "RigModuleDefinition"
     },
     {
-      "key": "1927ac83a4fc4814b0efac0f8027caca",
+      "key": "603c17537a445311ac8a3443921dca20",
       "category": "Modules",
       "file": "rig/modules/veil-array.json",
       "type": "RigModuleDefinition"
     },
     {
-      "key": "6b4c527c8c2449158b11a15b576e0e36",
+      "key": "bb4d1ced53195fadb9b57877f04a7e78",
       "category": "Modules",
       "file": "rig/modules/isolation-bank.json",
       "type": "RigModuleDefinition"
+    },
+    {
+      "key": "bece6b3c126f5d3d9cf1ce1694b4c64b",
+      "category": "Modules",
+      "file": "rig/modules/power-1.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "bab4863a7e885b93bd6b26f16a3ca440",
+      "category": "Modules",
+      "file": "rig/modules/power-2.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "70ad198e794053dc95b7dda4f877647f",
+      "category": "Modules",
+      "file": "rig/modules/power-3.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "daca79b0ea1d5c6abce7566dcf3bfbd8",
+      "category": "Modules",
+      "file": "rig/modules/cooling-1.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "ac4440a09689529eae11924a50590664",
+      "category": "Modules",
+      "file": "rig/modules/cooling-2.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "500cfd50017a58509826c9eafd3c30d9",
+      "category": "Modules",
+      "file": "rig/modules/cooling-3.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "dd0da27850cc5ac4a7099299d9ac5cba",
+      "category": "Modules",
+      "file": "rig/modules/watcher-baffle.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "35f9d52fba705f49ab9bbf531a0b3693",
+      "category": "Modules",
+      "file": "rig/modules/mirror-core.json",
+      "type": "RigModuleDefinition"
+    },
+    {
+      "key": "d8b46664d97c54fb917678c43ed0bb00",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-1.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "d6f563cf421c55a78de32ba0ed44f68e",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-2.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "1a68c0f54acd5d9b98b7bd42dc5e61c2",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-3.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "745856aa990a504e880778649fc7142e",
+      "category": "Chassis",
+      "file": "rig/chassis/chassis-4.json",
+      "type": "RigChassisDefinition"
+    },
+    {
+      "key": "16589f61b0d05a0b871dc7b4e4625b9d",
+      "category": "Companies",
+      "file": "companies/company-0.json",
+      "type": "CompanyDefinition"
+    },
+    {
+      "key": "9c57975342325fc6b877f129016af354",
+      "category": "Companies",
+      "file": "companies/company-1.json",
+      "type": "CompanyDefinition"
+    },
+    {
+      "key": "ba8b52e174155932bf21d98710ca6b77",
+      "category": "Companies",
+      "file": "companies/company-2.json",
+      "type": "CompanyDefinition"
+    },
+    {
+      "key": "72bec4d7dcc658eca23e9560f59484c7",
+      "category": "Networks",
+      "file": "networks/vesper-exfiltrate.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "d3e0df692e2d5ce6a86f0954e2bdd14c",
+      "category": "Networks",
+      "file": "networks/vesper-alter.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "aee11471f4985f40989e1260ce59f995",
+      "category": "Networks",
+      "file": "networks/vesper-reconstruct.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "c2ba7948362c519b9dba870caea21df4",
+      "category": "Networks",
+      "file": "networks/vesper-intercept.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "ad39e1846282534fbb8ab7e659bb0a94",
+      "category": "Networks",
+      "file": "networks/vesper-evacuate.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "f7fd30ca751151148aaf7cef719c43d1",
+      "category": "Networks",
+      "file": "networks/vesper-seize.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "fb88ec8edf755a21a74dd3987ef22f45",
+      "category": "Actions",
+      "file": "actions/alter-record.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "597a2bd32c555c2bbc81178c59f2e0f0",
+      "category": "Actions",
+      "file": "actions/intercept.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "28007b0a6d435d1dbf89a4b6f67aa68d",
+      "category": "Actions",
+      "file": "actions/evacuate.json",
+      "type": "ActionDefinition"
+    },
+    {
+      "key": "0895c3bb518051eebacbb927df21c1db",
+      "category": "Networks",
+      "file": "networks/subnet-ghost-meter.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "3e6fee4d568e51d598a07dcc6f2c59df",
+      "category": "Networks",
+      "file": "networks/subnet-redacted-hours.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "34788e3750cc536292faa8f82a8fd25b",
+      "category": "Networks",
+      "file": "networks/subnet-unlisted-operator.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "798a4b3ba8bf5fba8f6da9207c22e8ca",
+      "category": "Networks",
+      "file": "networks/subnet-listening-room.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "e51c40bbaacf582faad0361eb7a62dcc",
+      "category": "Networks",
+      "file": "networks/subnet-margin-notes.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "b6fa01e6313758599f711889d9dbf779",
+      "category": "Networks",
+      "file": "networks/subnet-sealed-hearing.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "0231cae52334569b8a192a66d00750c8",
+      "category": "Networks",
+      "file": "networks/subnet-borrowed-voice.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "65cdfd8c24035cd38379d2b6fa213e56",
+      "category": "Networks",
+      "file": "networks/subnet-public-interest.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "fafd17d0f2e2503aad0f5490220aa037",
+      "category": "Networks",
+      "file": "networks/subnet-proof-of-life.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "a322fbacf2035ce492a19c17c42acc5c",
+      "category": "Networks",
+      "file": "networks/subnet-cold-clinic.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "d974120ffac554f1ba2e0635c8549b1e",
+      "category": "Networks",
+      "file": "networks/subnet-spare-capacity.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "936d1cb1e0635ff6bd310e3356205a67",
+      "category": "Networks",
+      "file": "networks/subnet-names-in-copper.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "cfdbe5aa597e505c8c92e6d6a16abc09",
+      "category": "Networks",
+      "file": "networks/subnet-island-mode.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "233a29ce5c705f529ebe86390ad8e615",
+      "category": "Networks",
+      "file": "networks/subnet-open-door.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "01e542cd3c255cb9a50afd2a9631998f",
+      "category": "Networks",
+      "file": "networks/subnet-accession.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "7870941c8327597585af8aa8cf98a28b",
+      "category": "Networks",
+      "file": "networks/subnet-black-budget.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "0bd9d2a84e9e590c88ff1be4024d7224",
+      "category": "Networks",
+      "file": "networks/subnet-dead-signature.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "5d8378425030558b89f4f08f48366f12",
+      "category": "Networks",
+      "file": "networks/subnet-proxy-war.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "caed53502f14577397f878bbfb09a8ed",
+      "category": "Networks",
+      "file": "networks/subnet-quorum.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "a561ceeb5e585522acefe31fed6e35cd",
+      "category": "Networks",
+      "file": "networks/subnet-thirteenth-test.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "29fc6d1ca9a958dbacf297c16f5ad9be",
+      "category": "Networks",
+      "file": "networks/subnet-no-central-server.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "d7ed798efb835c45acc9f0476e2577c2",
+      "category": "Networks",
+      "file": "networks/subnet-expose-threshold.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "b2ff07ab584f5dc8bb3e9b1619ed6ac8",
+      "category": "Networks",
+      "file": "networks/subnet-expose-ending-open.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "115037871e7356f5beb985ca0d28817e",
+      "category": "Networks",
+      "file": "networks/subnet-expose-ending-careful.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "6ae593685dd35f23abda9785b027f764",
+      "category": "Networks",
+      "file": "networks/subnet-expose-side-1.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "c81e1df933515c7986074b1446c1ef08",
+      "category": "Networks",
+      "file": "networks/subnet-expose-side-2.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "b1528451e9d3575b903baf3acb82a82b",
+      "category": "Networks",
+      "file": "networks/subnet-expose-side-3.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "6de98cf6e556536c90b0d73745e73b3d",
+      "category": "Networks",
+      "file": "networks/subnet-shelter-threshold.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "b9c3fc7746b7538889d0956d6e4c963f",
+      "category": "Networks",
+      "file": "networks/subnet-shelter-ending-open.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "a75aebd1996e515586969b6a8d8e4137",
+      "category": "Networks",
+      "file": "networks/subnet-shelter-ending-careful.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "e7b427456dc15beebe82fbca8c6103ff",
+      "category": "Networks",
+      "file": "networks/subnet-shelter-side-1.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "67c907d96ea458688b31765794e1d613",
+      "category": "Networks",
+      "file": "networks/subnet-shelter-side-2.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "82fbcb71ef675644aba8cb9d0f2e002e",
+      "category": "Networks",
+      "file": "networks/subnet-shelter-side-3.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "851ff46437d55570921f218acc698c8e",
+      "category": "Networks",
+      "file": "networks/subnet-command-threshold.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "00e23475c80b555ea835c64253ef59a4",
+      "category": "Networks",
+      "file": "networks/subnet-command-ending-open.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "ec7a5e0cd8a355fa89900e0f844e5bcf",
+      "category": "Networks",
+      "file": "networks/subnet-command-ending-careful.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "6027fc13de9c54e9ae73dc053ff84fe7",
+      "category": "Networks",
+      "file": "networks/subnet-command-side-1.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "26cc903db84456668bacf44c3c7ad32e",
+      "category": "Networks",
+      "file": "networks/subnet-command-side-2.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "d35bdee622005ef0ad3396174c8d7045",
+      "category": "Networks",
+      "file": "networks/subnet-command-side-3.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "846aa01e44a853289646871207615774",
+      "category": "Networks",
+      "file": "networks/subnet-vesper-freelance-0.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "1b30b1354f085f0a832af86afa8796cd",
+      "category": "Networks",
+      "file": "networks/subnet-vesper-freelance-1.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "0dd4b96f4965509a9d9d1c2043f626da",
+      "category": "Networks",
+      "file": "networks/subnet-vesper-freelance-2.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "07be4d053fa154cba77bd594453f2f6c",
+      "category": "Networks",
+      "file": "networks/subnet-vesper-freelance-3.json",
+      "type": "NetworkDefinition"
+    },
+    {
+      "key": "5448e4d527885fe09461a6d41d043096",
+      "category": "Contracts",
+      "file": "contracts/ghost-meter.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "63c168a517ba5621b5b245d3fe1e9bc7",
+      "category": "Contracts",
+      "file": "contracts/redacted-hours.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "3b4fd15e1a1c5ac6866663c4400d9aaf",
+      "category": "Contracts",
+      "file": "contracts/unlisted-operator.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "3cd0013d3d65550798804d7984275f55",
+      "category": "Contracts",
+      "file": "contracts/listening-room.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "8cfab9bee0c859f194e30f069d862d04",
+      "category": "Contracts",
+      "file": "contracts/margin-notes.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "c55472c560785057abc961bf325469b7",
+      "category": "Contracts",
+      "file": "contracts/sealed-hearing.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "924b74147e7c56bcb635052a274bcb54",
+      "category": "Contracts",
+      "file": "contracts/borrowed-voice.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "7862939622ac5d12845fe672e0dba796",
+      "category": "Contracts",
+      "file": "contracts/public-interest.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "7eb4e0c90a12506e97b9bc6242a5150c",
+      "category": "Contracts",
+      "file": "contracts/proof-of-life.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "b4617a0ddacf5df180a0d76e4ed0a5f1",
+      "category": "Contracts",
+      "file": "contracts/cold-clinic.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "f781ed2ff54d556198021e9b5dc9cef6",
+      "category": "Contracts",
+      "file": "contracts/spare-capacity.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "e7f744ab6a185814a47db1244461e808",
+      "category": "Contracts",
+      "file": "contracts/names-in-copper.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "63bbb95164d85214ab54cf206a4ff5f6",
+      "category": "Contracts",
+      "file": "contracts/island-mode.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "4f3255192f195e51ab77fd3139a1b6fc",
+      "category": "Contracts",
+      "file": "contracts/open-door.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "6a829ad7899d5ac380a21a1f277ba5bf",
+      "category": "Contracts",
+      "file": "contracts/accession.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "4aa47ab0da58530e9184dd90fe620864",
+      "category": "Contracts",
+      "file": "contracts/black-budget.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "0394faf71f0c5beb8046762da606c2ee",
+      "category": "Contracts",
+      "file": "contracts/dead-signature.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "d319e48813cd5335abe6316ddfe87285",
+      "category": "Contracts",
+      "file": "contracts/proxy-war.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "aedb3f2a4edc5ea8adfa631e8bca265b",
+      "category": "Contracts",
+      "file": "contracts/quorum.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "6b89dd88cc40549485b3d66b1fdfbd16",
+      "category": "Contracts",
+      "file": "contracts/thirteenth-test.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "44cabd04afe45f7080dabd0be84d8fd8",
+      "category": "Contracts",
+      "file": "contracts/no-central-server.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "d9f098e5dfa05887acfe75e7710d4034",
+      "category": "Contracts",
+      "file": "contracts/expose-threshold.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "45bae0fb2bce5a8ea0091c48ba4a4142",
+      "category": "Contracts",
+      "file": "contracts/expose-ending-open.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "dd2669681df6551c8579a9865c213b6a",
+      "category": "Contracts",
+      "file": "contracts/expose-ending-careful.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "92e73940c32554a6a79c2e779bdf307f",
+      "category": "Contracts",
+      "file": "contracts/expose-side-1.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "fedd58ad11cb5098aff94447d09d5473",
+      "category": "Contracts",
+      "file": "contracts/expose-side-2.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "a4f7e4cecb5f58fc895d926a4b88b40a",
+      "category": "Contracts",
+      "file": "contracts/expose-side-3.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "d26f44597da15318b77f8b367bea26e0",
+      "category": "Contracts",
+      "file": "contracts/shelter-threshold.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "837704ed5fa4580d843b783d5e0abbac",
+      "category": "Contracts",
+      "file": "contracts/shelter-ending-open.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "a6ee95875b995b82b7dd5bd7cf337702",
+      "category": "Contracts",
+      "file": "contracts/shelter-ending-careful.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "c9efdbb7ff2457f78ea4890857c4cbf9",
+      "category": "Contracts",
+      "file": "contracts/shelter-side-1.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "a726b61097be5a5aa8ff0e3c789a69d2",
+      "category": "Contracts",
+      "file": "contracts/shelter-side-2.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "69a0d61f03a45de6b6e276d4b3cb9c02",
+      "category": "Contracts",
+      "file": "contracts/shelter-side-3.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "23abda677d8756adb3bf46c1ce260a0c",
+      "category": "Contracts",
+      "file": "contracts/command-threshold.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "8b9aa96e9a74510a9e37c30ab8bfa41a",
+      "category": "Contracts",
+      "file": "contracts/command-ending-open.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "8ff9839142e45f5f910f06ab4db2647f",
+      "category": "Contracts",
+      "file": "contracts/command-ending-careful.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "f27a285ce4a957c391d65fc50648d52b",
+      "category": "Contracts",
+      "file": "contracts/command-side-1.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "2346e52eb4e355989eebad656875fa6e",
+      "category": "Contracts",
+      "file": "contracts/command-side-2.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "103fa75fba965969965c8c161113e420",
+      "category": "Contracts",
+      "file": "contracts/command-side-3.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "209fb72b10ca5e19810cc0ff93970abb",
+      "category": "Contracts",
+      "file": "contracts/vesper-freelance-0.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "6fd797feb3c75261883096f942ff5c27",
+      "category": "Contracts",
+      "file": "contracts/vesper-freelance-1.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "e2910fbb89fa54be9da2240c663a4a68",
+      "category": "Contracts",
+      "file": "contracts/vesper-freelance-2.json",
+      "type": "ContractDefinition"
+    },
+    {
+      "key": "ded3c2078c0b591ea9440f1a520a9a4a",
+      "category": "Contracts",
+      "file": "contracts/vesper-freelance-3.json",
+      "type": "ContractDefinition"
     }
   ]
 }

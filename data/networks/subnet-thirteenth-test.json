@@ -1,0 +1,1980 @@
+{
+  "id": "subnet-thirteenth-test",
+  "title": "The Thirteenth Test / subnet",
+  "description": "",
+  "entryNode": "home",
+  "preferredNode": "n22",
+  "previewNode": "n22",
+  "layout": "Authored",
+  "nodes": [
+    {
+      "id": "home",
+      "type": "gateway",
+      "label": "Your gateway",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": -1,
+      "row": 0,
+      "x": -20,
+      "y": 180,
+      "position": {
+        "x": -11.040352006437205,
+        "y": 0,
+        "z": -7.067030582009124
+      },
+      "known": true,
+      "controlled": true,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n1",
+      "type": "workstation",
+      "label": "Public service terminal",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 0,
+      "x": 100,
+      "y": 180,
+      "position": {
+        "x": -7.297325783918626,
+        "y": 0,
+        "z": -3.749176395567916
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "relay",
+      "label": "Maintenance ingress",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": -7.297325783918626,
+        "y": 4,
+        "z": -3.749176395567916
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "firewall",
+      "label": "Fast access gate",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 1,
+      "row": 0,
+      "x": 220,
+      "y": 180,
+      "position": {
+        "x": -2.4795537146764284,
+        "y": 0,
+        "z": -1.7121544330852845
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1.5
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 2,
+            "maximum": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "relay",
+      "label": "Service crawlspace",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 1,
+      "row": 1,
+      "x": 220,
+      "y": 250,
+      "position": {
+        "x": -2.4795537146764284,
+        "y": 4,
+        "z": -1.7121544330852845
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "workstation",
+      "label": "Dispatch console",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 2,
+      "row": 0,
+      "x": 340,
+      "y": 180,
+      "position": {
+        "x": 2.505015420165539,
+        "y": 0,
+        "z": 0.12608652723464875
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "relay",
+      "label": "Neighborhood exchange",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 2,
+      "row": 1,
+      "x": 340,
+      "y": 250,
+      "position": {
+        "x": 2.505015420165539,
+        "y": 4,
+        "z": 0.12608652723464875
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "scanner",
+      "label": "Traffic sensor",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 1,
+      "row": -1,
+      "x": 220,
+      "y": 110,
+      "position": {
+        "x": -2.4795537146764284,
+        "y": -4,
+        "z": -1.7121544330852845
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "firewall",
+      "label": "Archive partition",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 3,
+      "row": 0,
+      "x": 460,
+      "y": 180,
+      "position": {
+        "x": 6.595080386595081,
+        "y": 0,
+        "z": 3.0303560438505865
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1.5
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 2,
+            "maximum": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "database",
+      "label": "Signed dispatch record",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 3,
+      "row": 1,
+      "x": 460,
+      "y": 250,
+      "position": {
+        "x": 6.595080386595081,
+        "y": 4,
+        "z": 3.0303560438505865
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n14",
+      "type": "securityhub",
+      "label": "Response controller",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 2,
+      "row": -1,
+      "x": 340,
+      "y": 110,
+      "position": {
+        "x": 2.505015420165539,
+        "y": -4,
+        "z": 0.12608652723464875
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n19",
+      "type": "workstation",
+      "label": "Credential witness",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 1,
+      "row": 2,
+      "x": 220,
+      "y": 320,
+      "position": {
+        "x": -2.4795537146764284,
+        "y": 8,
+        "z": -1.7121544330852845
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n20",
+      "type": "database",
+      "label": "Live mirror",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 4,
+      "row": 1,
+      "x": 580,
+      "y": 250,
+      "position": {
+        "x": 9.551742957821059,
+        "y": 4,
+        "z": 7.285361936805255
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n22",
+      "type": "database",
+      "label": "Authoritative record",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 4,
+      "row": 0,
+      "x": 580,
+      "y": 180,
+      "position": {
+        "x": 9.551742957821059,
+        "y": 0,
+        "z": 7.285361936805255
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "database",
+      "label": "Staff correspondence",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 2,
+      "row": 2,
+      "x": 340,
+      "y": 320,
+      "position": {
+        "x": 2.505015420165539,
+        "y": 8,
+        "z": 0.12608652723464875
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": true,
+      "loreIndex": 0,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n11",
+      "type": "database",
+      "label": "Maintenance diary",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 3,
+      "row": -1,
+      "x": 460,
+      "y": 110,
+      "position": {
+        "x": 6.595080386595081,
+        "y": -4,
+        "z": 3.0303560438505865
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": true,
+      "loreIndex": 1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n12",
+      "type": "database",
+      "label": "Unfiled testimony",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 4,
+      "row": 2,
+      "x": 580,
+      "y": 320,
+      "position": {
+        "x": 9.551742957821059,
+        "y": 8,
+        "z": 7.285361936805255
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": true,
+      "loreIndex": 2,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "duct-0",
+      "type": "relay",
+      "label": "Utility conduit 1",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": -10,
+        "y": -9,
+        "z": 8
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "duct-1",
+      "type": "relay",
+      "label": "Utility conduit 2",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": -6,
+        "y": -9,
+        "z": 8
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "duct-2",
+      "type": "relay",
+      "label": "Utility conduit 3",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": -2,
+        "y": -9,
+        "z": 8
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "duct-3",
+      "type": "relay",
+      "label": "Utility conduit 4",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": 2,
+        "y": -9,
+        "z": 8
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "duct-4",
+      "type": "relay",
+      "label": "Utility conduit 5",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": 6,
+        "y": -9,
+        "z": 8
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "duct-5",
+      "type": "relay",
+      "label": "Utility conduit 6",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": 10,
+        "y": -9,
+        "z": 8
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "duct-6",
+      "type": "relay",
+      "label": "Utility conduit 7",
+      "detail": "The Thirteenth Test / VESPER / RECONSTRUCT subnet. Routes share dependencies; inspect the controller before committing.",
+      "column": 0,
+      "row": 1,
+      "x": 100,
+      "y": 250,
+      "position": {
+        "x": 14,
+        "y": -9,
+        "z": 8
+      },
+      "known": false,
+      "controlled": false,
+      "bonus": false,
+      "loreIndex": -1,
+      "securityModifiers": [
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 0,
+          "operation": "Override",
+          "when": {
+            "type": "AlwaysCondition"
+          },
+          "value": {
+            "type": "ConstantNumber",
+            "value": 1
+          }
+        },
+        {
+          "id": "",
+          "stat": "security",
+          "priority": 1,
+          "operation": "Override",
+          "when": {
+            "type": "CompareCondition",
+            "comparison": "GreaterOrEqual",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 2
+            }
+          },
+          "value": {
+            "type": "RandomNumber",
+            "minimum": 1,
+            "maximum": 2
+          }
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "a": "home",
+      "b": "n1",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "home",
+      "b": "n2",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n1",
+      "b": "n3",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n3",
+      "b": "n5",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n5",
+      "b": "n8",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n8",
+      "b": "n22",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n2",
+      "b": "n4",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n4",
+      "b": "n6",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n6",
+      "b": "n9",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n9",
+      "b": "n20",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n20",
+      "b": "n22",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n4",
+      "b": "n19",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n19",
+      "b": "n9",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n1",
+      "b": "n7",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n7",
+      "b": "n14",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n14",
+      "b": "n5",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n6",
+      "b": "n10",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n8",
+      "b": "n11",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n20",
+      "b": "n12",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n4",
+      "b": "n5",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n9",
+      "b": "n11",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "n2",
+      "b": "n19",
+      "when": {
+        "type": "CompareCondition",
+        "comparison": "Equal",
+        "left": {
+          "type": "BinaryNumber",
+          "operation": "Modulo",
+          "left": {
+            "type": "InputNumber",
+            "input": "Seed",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 2
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 0
+        }
+      }
+    },
+    {
+      "a": "home",
+      "b": "duct-0",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "duct-0",
+      "b": "duct-1",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "duct-1",
+      "b": "duct-2",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "duct-2",
+      "b": "duct-3",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "duct-3",
+      "b": "duct-4",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "duct-4",
+      "b": "duct-5",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "duct-5",
+      "b": "duct-6",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    },
+    {
+      "a": "duct-6",
+      "b": "n9",
+      "when": {
+        "type": "AlwaysCondition"
+      }
+    }
+  ],
+  "routes": {
+    "entrance": "n2",
+    "destination": "n22",
+    "sensorAttachment": "n6",
+    "directRoute": [
+      "n6",
+      "n10",
+      "n14",
+      "n18"
+    ],
+    "sensors": [
+      "n5",
+      "n11",
+      "watch-a",
+      "watch-b"
+    ],
+    "secondaryTargets": [
+      "n9",
+      "n19",
+      "n20"
+    ],
+    "archives": [
+      "n13",
+      "n21",
+      "archive-c"
+    ],
+    "reserved": [
+      "home",
+      "n2",
+      "n22",
+      "n9",
+      "n19",
+      "n20",
+      "n6",
+      "n10",
+      "n14",
+      "n18",
+      "n5",
+      "n11",
+      "watch-a",
+      "watch-b",
+      "n13",
+      "n21",
+      "archive-c"
+    ],
+    "tiers": [
+      {
+        "nodeCount": 32,
+        "lengths": [
+          4,
+          6,
+          8
+        ],
+        "sensorsPerLane": 1
+      },
+      {
+        "nodeCount": 44,
+        "lengths": [
+          4,
+          5,
+          6,
+          8
+        ],
+        "sensorsPerLane": 2
+      },
+      {
+        "nodeCount": 56,
+        "lengths": [
+          4,
+          5,
+          6,
+          7,
+          9
+        ],
+        "sensorsPerLane": 2
+      }
+    ],
+    "relay": "relay",
+    "workstation": "workstation",
+    "scanner": "scanner",
+    "archive": "database",
+    "extraIds": [
+      "watch-a",
+      "watch-b",
+      "archive-c"
+    ],
+    "extraLabels": [
+      "Ingress sensor",
+      "Deep packet sensor",
+      "Sealed correspondence"
+    ],
+    "extraTypes": [
+      "scanner",
+      "scanner",
+      "database"
+    ],
+    "fillerPrefix": "extra-",
+    "fillerLabel": "Maintenance relay ",
+    "safeLaneLabel": "Maintenance",
+    "transitLabel": "Transit",
+    "sensorLabel": "Transit sensor",
+    "fillerLabelOffset": 24,
+    "entryPosition": {
+      "x": -19,
+      "y": -1,
+      "z": -2
+    },
+    "entrancePosition": {
+      "x": -14,
+      "y": 0,
+      "z": 0
+    },
+    "destinationPosition": {
+      "x": 14,
+      "y": 0,
+      "z": 0
+    },
+    "radius": 8,
+    "laneRadius": 1.5,
+    "jitter": 0.45,
+    "satelliteRadius": 3.5,
+    "satelliteGrowth": 0.025,
+    "minimumSpacing": 2.6,
+    "separationSpacing": 2.65,
+    "separationForce": 0.51,
+    "placementAttempts": 1000,
+    "separationPasses": 80,
+    "crossoverFromLane": 1,
+    "crossoverToLane": 2,
+    "crossoverStep": 4,
+    "directSecurity": {
+      "type": "BinaryNumber",
+      "operation": "Add",
+      "left": {
+        "type": "ConditionalNumber",
+        "when": {
+          "type": "CompareCondition",
+          "comparison": "Equal",
+          "left": {
+            "type": "InputNumber",
+            "input": "Step",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 0
+          }
+        },
+        "yes": {
+          "type": "ConstantNumber",
+          "value": 1
+        },
+        "no": {
+          "type": "ConstantNumber",
+          "value": 2
+        }
+      },
+      "right": {
+        "type": "ConditionalNumber",
+        "when": {
+          "type": "NodeTagCondition",
+          "tag": "firewall"
+        },
+        "yes": {
+          "type": "BinaryNumber",
+          "operation": "Add",
+          "left": {
+            "type": "BinaryNumber",
+            "operation": "Subtract",
+            "left": {
+              "type": "InputNumber",
+              "input": "Difficulty",
+              "key": "",
+              "filter": {
+                "type": "AlwaysCondition"
+              }
+            },
+            "right": {
+              "type": "ConstantNumber",
+              "value": 1
+            }
+          },
+          "right": {
+            "type": "ConditionalNumber",
+            "when": {
+              "type": "CompareCondition",
+              "comparison": "Greater",
+              "left": {
+                "type": "InputNumber",
+                "input": "CompanyWins",
+                "key": "",
+                "filter": {
+                  "type": "AlwaysCondition"
+                }
+              },
+              "right": {
+                "type": "ConstantNumber",
+                "value": 0
+              }
+            },
+            "yes": {
+              "type": "ConstantNumber",
+              "value": 1
+            },
+            "no": {
+              "type": "ConstantNumber",
+              "value": 0
+            }
+          }
+        },
+        "no": {
+          "type": "ConstantNumber",
+          "value": 0
+        }
+      }
+    },
+    "routeSecurity": {
+      "type": "ConditionalNumber",
+      "when": {
+        "type": "CompareCondition",
+        "comparison": "Equal",
+        "left": {
+          "type": "InputNumber",
+          "input": "SafeLane",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 1
+        }
+      },
+      "yes": {
+        "type": "ConstantNumber",
+        "value": 1
+      },
+      "no": {
+        "type": "BinaryNumber",
+        "operation": "Add",
+        "left": {
+          "type": "ConstantNumber",
+          "value": 1
+        },
+        "right": {
+          "type": "BinaryNumber",
+          "operation": "Modulo",
+          "left": {
+            "type": "InputNumber",
+            "input": "Step",
+            "key": "",
+            "filter": {
+              "type": "AlwaysCondition"
+            }
+          },
+          "right": {
+            "type": "ConstantNumber",
+            "value": 2
+          }
+        }
+      }
+    },
+    "workstationWhen": {
+      "type": "CompareCondition",
+      "comparison": "Equal",
+      "left": {
+        "type": "BinaryNumber",
+        "operation": "Modulo",
+        "left": {
+          "type": "InputNumber",
+          "input": "Step",
+          "key": "",
+          "filter": {
+            "type": "AlwaysCondition"
+          }
+        },
+        "right": {
+          "type": "ConstantNumber",
+          "value": 3
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 1
+      }
+    }
+  },
+  "payloadStorage": {
+    "type": "ConstantNumber",
+    "value": 16
+  },
+  "archiveStorage": {
+    "type": "ConstantNumber",
+    "value": 8
+  }
+}

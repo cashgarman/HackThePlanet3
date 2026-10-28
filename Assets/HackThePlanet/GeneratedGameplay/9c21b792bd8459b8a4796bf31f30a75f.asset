@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: 9c21b792bd8459b8a4796bf31f30a75f
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: blackout
+  title: Dark Interval
+  description: Suppress a mapped hub within three controlled hops until disabled or captured. Reserves 18 GB RAM per hub.
+  branch: CONTROL
+  cost: 70
+  waypointTier: 0
+  special: 1
+  position: {x: 480, y: 310}
+  parents:
+  - {fileID: 11400000, guid: 2b79ad53a42667247b8ac17373e1f968, type: 2}
+  grants:
+  - {fileID: 11400000, guid: 056393e12fc722245842e99eada8bcc6, type: 2}
+  modifiers: []
+  triggers: []
+  references:
+    version: 2
+    RefIds: []

@@ -18,6 +18,21 @@ namespace HackThePlanet.Editor
 	{
 		// Parse the embedded help table into a lookup keyed by field name.
 		private static readonly Dictionary<string, string> Help = @"
+prerequisites|Contract IDs that must all be delivered before this offer opens.
+requiredFlags|Story choice flags that must all be present in this career.
+offerDays|Optional offer lifetime in career days after prerequisites become available; zero means no deadline.
+isEnding|Delivering this contract completes the chosen campaign path.
+optional|Side contract excluded from required campaign progression.
+choices|Exclusive story options offered after this contract is delivered.
+evidence|Signed clue case; empty answers means no deduction is required.
+revelation|Guaranteed debrief banked in Intelligence on successful delivery.
+flag|Persistent campaign flag granted by this story option.
+clueNodes|Network node IDs whose payloads must be recovered before interpreting the case.
+clues|Player-facing signed records, parallel to clueNodes.
+answers|Three mutually exclusive interpretations; exactly one must be correct.
+question|Prompt shown by the evidence case panel.
+feedback|Explanation shown after this interpretation is selected.
+correct|Whether this interpretation completes the evidence case.
 rig|Shared rig rules and starting layout. JSON is authoritative; generated assets are mirrors.
 chassis|Registered chassis models, ordered by their unique progression tier.
 modules|Registered purchasable module models. Each purchase creates an independent owned copy.
@@ -277,6 +292,10 @@ r|Red color channel, preserving HDR intensity.
 g|Green color channel, preserving HDR intensity.
 CelShading|Enables banded lighting on graph node surfaces.
 LightBands|Number of cel-lighting brightness bands.
+CloudDensity|Density multiplier for the animated cloud banks behind graph views.
+DataBeamCount|Number of intermittent data streaks behind graph views.
+DataBeamDirectionRandomness|Spread of data-streak directions; 1 gives every streak a random angle.
+DataBeamSeed|Deterministic seed for data-streak placement and directions.
 ShadowBrightness|Brightness multiplier for shaded node surfaces.
 BandSoftness|Width of transitions between cel-lighting bands.
 LightDirection|Direction of the simulated graph lighting.

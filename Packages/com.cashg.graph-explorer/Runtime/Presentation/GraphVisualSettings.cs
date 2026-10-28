@@ -8,6 +8,26 @@ namespace Cashg.GraphExplorer
 	[MovedFrom(true, "JobHarvester.Graph", "Assembly-CSharp", "GraphVisualSettings")]
 	public sealed class GraphVisualSettings : ScriptableObject
 	{
+		/// <summary>Gets or sets whether a spatial graph is prewarmed before it becomes visible.</summary>
+		[Header("Force-directed layout")]
+		public bool PrewarmLayoutBeforeRender = true;
+
+		/// <summary>Gets or sets the number of force-layout steps per frame while prewarming.</summary>
+		[Range(4, 64)] public int PrewarmLayoutStepsPerFrame = 16;
+
+		/// <summary>Gets or sets the density multiplier for the drifting cloud banks behind the graph.</summary>
+		[Header("Atmosphere")]
+		[Range(.25f, 3f)] public float CloudDensity = 1.5f;
+
+		/// <summary>Gets or sets how many intermittent data beams are created behind the graph.</summary>
+		[Range(0, 32)] public int DataBeamCount = 7;
+
+		/// <summary>Gets or sets how far beam directions spread from the default horizontal direction.</summary>
+		[Range(0, 1)] public float DataBeamDirectionRandomness = 1f;
+
+		/// <summary>Gets or sets the deterministic seed used to place and aim data beams.</summary>
+		public int DataBeamSeed = 83;
+
 		/// <summary>Gets or sets whether cel shading is applied.</summary>
 		[Header("Cel shading")] public bool CelShading = true;
 

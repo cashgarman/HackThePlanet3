@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: e2910fbb89fa54be9da2240c663a4a68
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: vesper-freelance-2
+  title: Exchange / Transit Receipt
+  description: Verified escrow offers a fresh target. No faction commitment is required.
+  company: {fileID: 11400000, guid: 49b7aa2a285fc0c43821a56c2a9f518a, type: 2}
+  network: {fileID: 11400000, guid: e3a6294ff43a6124e8846b6161b93c68, type: 2}
+  client: MOTH / unverified relay
+  tag: INTERCEPT / VESPER
+  objective: Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: The exchange settles another job. The city keeps changing.
+  displayKind: 0
+  recurring: 1
+  prerequisites: []
+  requiredFlags: []
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: The exchange settles another job. The city keeps changing.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 2.8
+  credits:
+    rid: 213507108368551913
+  xp:
+    rid: 213507108368551914
+  difficulty:
+    rid: 213507108368551915
+  seed:
+    rid: 213507108368551916
+  objectives:
+  - nodeId: n22
+    label: Exchange / Transit Receipt / Authoritative record
+    actionLabel: Intercept transfer receipt
+    action: {fileID: 11400000, guid: fa6ec7490789e844faf33b389123d5b8, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551917
+    actionRequirements: []
+  - nodeId: n20
+    label: Exchange / Transit Receipt / Live mirror
+    actionLabel: Intercept transfer receipt
+    action: {fileID: 11400000, guid: fa6ec7490789e844faf33b389123d5b8, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551918
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: vesper-freelance-2-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: vesper-freelance-2-purge
+    sourceNodeId: n14
+    targetNodeIds:
+    - n22
+    - n20
+    kind: 3
+    minimumDifficulty: 1
+    intervalSeconds: 100
+    traceBurst: 0
+  - id: vesper-freelance-2-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  lore:
+  - id: vesper-freelance-2/0
+    title: Exchange / Transit Receipt / Unsent message
+    company:
+    contract: Exchange / Transit Receipt
+    text: 'MOTH / unverified relay: Verified escrow offers a fresh target. No faction commitment is required. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: vesper-freelance-2/1
+    title: Exchange / Transit Receipt / Custody note
+    company:
+    contract: Exchange / Transit Receipt
+    text: 'Archive custody, Exchange / Transit Receipt: The exchange settles another job. The city keeps changing. A second copy carries a hand-written objection to the official disposition.'
+  - id: vesper-freelance-2/2
+    title: Exchange / Transit Receipt / Private annotation
+    company:
+    contract: Exchange / Transit Receipt
+    text: 'Personal note filed under vesper-freelance-2: The exchange settles another job. The city keeps changing. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551913
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 910
+    - rid: 213507108368551914
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 85
+    - rid: 213507108368551915
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551916
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 0
+        left:
+          rid: 213507108368551919
+        right:
+          rid: 213507108368551920
+    - rid: 213507108368551917
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551918
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551919
+      type: {class: BinaryNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        operation: 2
+        left:
+          rid: 213507108368551921
+        right:
+          rid: 213507108368551922
+    - rid: 213507108368551920
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 738
+    - rid: 213507108368551921
+      type: {class: InputNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        input: 2
+        key:
+        filter:
+          rid: 213507108368551923
+    - rid: 213507108368551922
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 71
+    - rid: 213507108368551923
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:

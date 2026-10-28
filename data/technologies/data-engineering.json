@@ -1,19 +1,35 @@
 {
   "id": "data-engineering",
-  "title": "Data Engineering",
-  "description": "Unlocks module purchases: Storage Array, RAM Bank.",
+  "title": "Forensic Overlay",
+  "description": "Recover evidence and archives 20% faster; unlock Cipher Lens hardware.",
   "branch": "RECON",
-  "cost": 100,
+  "cost": 160,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 670,
-    "y": 850
+    "x": -480.0,
+    "y": 775
   },
   "parents": [
-    "wide"
+    "credential-analysis"
   ],
   "grants": [],
-  "modifiers": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "duration",
+      "priority": 0,
+      "operation": "Multiply",
+      "when": {
+        "type": "ActionCondition",
+        "action": "download",
+        "tag": ""
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.8
+      }
+    }
+  ],
   "triggers": []
 }

@@ -454,7 +454,7 @@ namespace HackThePlanet
 				case NumberInput.CompanyWins:
 					return c.Career?.completed.Count(id => c.Catalog.CompanyFor(id) == c.Contract?.company) ?? 0;
 				case NumberInput.BonusFiles: return c.Simulation?.Op?.nodes.Count(n => n.bonus && n.collected) ?? 0;
-				case NumberInput.Trace: return c.Simulation?.Op?.trace ?? 0;
+				case NumberInput.Trace: return c.Simulation?.Op == null ? 0 : Mathf.Max(c.Simulation.Op.peakTrace, c.Simulation.Op.trace);
 				case NumberInput.QuietLimit: return c.Contract?.quietLimit ?? 0;
 				case NumberInput.ContractCredits: return c.Contract?.credits ?? 0;
 				case NumberInput.ContractXp: return c.Contract?.xp ?? 0;

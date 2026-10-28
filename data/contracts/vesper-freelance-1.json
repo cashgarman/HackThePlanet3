@@ -1,0 +1,143 @@
+{
+  "id": "vesper-freelance-1",
+  "title": "Exchange / Mirror Repair",
+  "description": "Verified escrow offers a fresh target. No faction commitment is required.",
+  "company": "company-1",
+  "network": "subnet-vesper-freelance-1",
+  "client": "MOTH / unverified relay",
+  "tag": "ALTER / VESPER",
+  "objective": "Synchronize signed mirror at Authoritative record / Synchronize signed mirror at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The exchange settles another job. The city keeps changing.",
+  "displayKind": "Copy",
+  "recurring": true,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 780
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 75
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "BinaryNumber",
+    "operation": "Add",
+    "left": {
+      "type": "BinaryNumber",
+      "operation": "Multiply",
+      "left": {
+        "type": "InputNumber",
+        "input": "Day",
+        "key": "",
+        "filter": {
+          "type": "AlwaysCondition"
+        }
+      },
+      "right": {
+        "type": "ConstantNumber",
+        "value": 71
+      }
+    },
+    "right": {
+      "type": "ConstantNumber",
+      "value": 719
+    }
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Exchange / Mirror Repair / Authoritative record",
+      "actionLabel": "Synchronize signed mirror",
+      "action": "alter-record",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "Exchange / Mirror Repair / Live mirror",
+      "actionLabel": "Synchronize signed mirror",
+      "action": "alter-record",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "vesper-freelance-1/0",
+      "title": "Exchange / Mirror Repair / Unsent message",
+      "company": "",
+      "contract": "Exchange / Mirror Repair",
+      "text": "MOTH / unverified relay: Verified escrow offers a fresh target. No faction commitment is required. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "vesper-freelance-1/1",
+      "title": "Exchange / Mirror Repair / Custody note",
+      "company": "",
+      "contract": "Exchange / Mirror Repair",
+      "text": "Archive custody, Exchange / Mirror Repair: The exchange settles another job. The city keeps changing. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "vesper-freelance-1/2",
+      "title": "Exchange / Mirror Repair / Private annotation",
+      "company": "",
+      "contract": "Exchange / Mirror Repair",
+      "text": "Personal note filed under vesper-freelance-1: The exchange settles another job. The city keeps changing. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "vesper-freelance-1-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "vesper-freelance-1-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 100,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 2.8,
+  "revelation": "The exchange settles another job. The city keeps changing.",
+  "prerequisites": [],
+  "requiredFlags": [],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

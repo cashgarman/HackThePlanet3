@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0368dca73bc1048b7c644a73ffa640, type: 3}
   m_Name: GraphVisualSettings
   m_EditorClassIdentifier: Cashg.GraphExplorer.Presentation::Cashg.GraphExplorer.GraphVisualSettings
+  CloudDensity: 1.5
+  DataBeamCount: 7
+  DataBeamDirectionRandomness: 1
+  DataBeamSeed: 83
   CelShading: 1
   LightBands: 3
   ShadowBrightness: 0.38

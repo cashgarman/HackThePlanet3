@@ -1,17 +1,17 @@
 {
   "id": "infrastructure-2",
-  "title": "Infrastructure II",
+  "title": "Countermeasure Engineering",
   "description": "Unlocks module purchases: Power Supply II, Cooling II.",
   "branch": "CONTROL",
-  "cost": 100,
+  "cost": 160,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 100,
-    "y": 760
+    "x": 480.0,
+    "y": 775
   },
   "parents": [
-    "base"
+    "hard-reset"
   ],
   "grants": [],
   "modifiers": [],

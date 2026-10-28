@@ -1,0 +1,132 @@
+{
+  "id": "listening-room",
+  "title": "The Listening Room",
+  "description": "Trace MOTH\u2019s relay to a vacant switching office. Capture its controller and recover the listening log.",
+  "company": "company-2",
+  "network": "subnet-listening-room",
+  "client": "MOTH / unverified relay",
+  "tag": "SEIZE / VESPER",
+  "objective": "Recover evidence at Authoritative record / Capture controller at Response controller",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1030
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 88
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 461
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "The Listening Room / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n14",
+      "label": "The Listening Room / Response controller",
+      "actionLabel": "Capture controller",
+      "action": "hack",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "actionRequirements": [],
+      "payload": false
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "listening-room/0",
+      "title": "The Listening Room / Unsent message",
+      "company": "",
+      "contract": "The Listening Room",
+      "text": "MOTH / unverified relay: Trace MOTH\u2019s relay to a vacant switching office. Capture its controller and recover the listening log. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "listening-room/1",
+      "title": "The Listening Room / Custody note",
+      "company": "",
+      "contract": "The Listening Room",
+      "text": "Archive custody, The Listening Room: The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "listening-room/2",
+      "title": "The Listening Room / Private annotation",
+      "company": "",
+      "contract": "The Listening Room",
+      "text": "Personal note filed under listening-room: The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "listening-room-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    }
+  ],
+  "paceMultiplier": 4,
+  "revelation": "The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence.",
+  "prerequisites": [
+    "unlisted-operator"
+  ],
+  "requiredFlags": [],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [
+    {
+      "id": "expose",
+      "title": "Ally with RHEA",
+      "description": "Build a public evidence chain. Opens the Exposure arc and closes the other alliances.",
+      "flag": "expose"
+    },
+    {
+      "id": "shelter",
+      "title": "Ally with SABLE",
+      "description": "Build independent service routes. Opens the Shelter arc and closes the other alliances.",
+      "flag": "shelter"
+    },
+    {
+      "id": "command",
+      "title": "Ally with ORIN",
+      "description": "Seize the command chain. Opens the Command arc and closes the other alliances.",
+      "flag": "command"
+    }
+  ],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

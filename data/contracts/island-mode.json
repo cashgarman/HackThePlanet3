@@ -1,0 +1,138 @@
+{
+  "id": "island-mode",
+  "title": "Island Mode",
+  "description": "Synchronize the community grid\u2019s island-mode permits.",
+  "company": "company-1",
+  "network": "subnet-island-mode",
+  "client": "SABLE / community grid engineer",
+  "tag": "ALTER / VESPER",
+  "objective": "Synchronize signed mirror at Authoritative record / Synchronize signed mirror at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The emergency interlock can be broken without shutting down the city.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1470
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 112
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 614
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Island Mode / Authoritative record",
+      "actionLabel": "Synchronize signed mirror",
+      "action": "alter-record",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "Island Mode / Live mirror",
+      "actionLabel": "Synchronize signed mirror",
+      "action": "alter-record",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "island-mode/0",
+      "title": "Island Mode / Unsent message",
+      "company": "",
+      "contract": "Island Mode",
+      "text": "SABLE / community grid engineer: Synchronize the community grid\u2019s island-mode permits. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "island-mode/1",
+      "title": "Island Mode / Custody note",
+      "company": "",
+      "contract": "Island Mode",
+      "text": "Archive custody, Island Mode: The emergency interlock can be broken without shutting down the city. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "island-mode/2",
+      "title": "Island Mode / Private annotation",
+      "company": "",
+      "contract": "Island Mode",
+      "text": "Personal note filed under island-mode: The emergency interlock can be broken without shutting down the city. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "island-mode-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "island-mode-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 100,
+      "traceBurst": 0
+    },
+    {
+      "id": "island-mode-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 2.8,
+  "revelation": "The emergency interlock can be broken without shutting down the city.",
+  "prerequisites": [
+    "names-in-copper"
+  ],
+  "requiredFlags": [
+    "shelter"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

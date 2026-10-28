@@ -10,7 +10,7 @@ namespace HackThePlanet
 	public sealed class PlaytestConfig
 	{
 		public bool career;
-		public string contractId = "quiet-copy", strategy = "Direct", build = "Stock";
+		public string contractId = "ghost-meter", strategy = "Direct", build = "Stock";
 		public int difficulty = 1, startSeed, seedCount = 5;
 		public string customTech = "", customEquipped = "", customModules = "";
 		public PlaytestConfig Copy() => JsonUtility.FromJson<PlaytestConfig>(JsonUtility.ToJson(this));
@@ -259,7 +259,7 @@ namespace HackThePlanet
 		{
 			this.catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
 			config = source.Copy();
-			story = catalog.Data.contracts.Where(c => !c.recurring).OrderBy(c => c.requiredWins).ToArray();
+			story = catalog.Data.contracts.Where(c => !c.recurring && !c.optional).OrderBy(c => c.requiredWins).ToArray();
 			Result = new PlaytestResult { seed = seed, contractId = config.career ? "career" : config.contractId,
 				strategy = config.strategy, build = config.career ? CareerUpgradePlanner.Name(config.strategy) : config.build,
 				minRam = float.MaxValue, minStorage = float.MaxValue };
@@ -270,9 +270,12 @@ namespace HackThePlanet
 				if (definition == null) { Fail("Unknown contract"); return; }
 				Simulation.Career.xp = 10000;
 				Simulation.Career.credits = 10000;
-				var predecessors = story.Where(c => c.requiredWins < definition.requiredWins).Select(c => c.id).ToArray();
+				var predecessors = new HashSet<string>();
+                void Include(ContractDefinition d) { foreach (var id in d.prerequisites) if (predecessors.Add(id)) Include(catalog.Contract(id)); }
+                Include(definition);
+                Simulation.Career.storyFlags.AddRange(definition.requiredFlags);
 				Simulation.Career.completed.AddRange(predecessors);
-				Simulation.Career.jobs = Math.Max(3, predecessors.Length);
+				Simulation.Career.jobs = Math.Max(3, predecessors.Count);
 				if (!InstallBuild()) return;
 				current = definition;
 				StartOperation(definition, false);
@@ -290,8 +293,9 @@ namespace HackThePlanet
 			var profile = config.build == "Custom"
 				? (config.customTech, config.customEquipped, config.customModules)
 				: Profiles.TryGetValue(config.build, out var preset) ? preset : Profiles["Stock"];
-			foreach (var id in Ids(profile.Item1))
-				if (!Simulation.Has(id) && !Simulation.BuyTech(id)) { Fail("Cannot buy research " + id); return false; }
+			bool Buy(string id) { var t = catalog.Technology(id); return t != null && (Simulation.Has(id) || (t.parents.All(p => Buy(p.id)) && Simulation.BuyTech(id))); }
+            foreach (var id in Ids(profile.Item1))
+                if (!Buy(id)) { Fail("Cannot buy research " + id); return false; }
 			foreach (var id in Simulation.Career.equipped.ToArray()) Simulation.ToggleEquip(id);
 			foreach (var id in Ids(profile.Item2))
 				if (!Simulation.ToggleEquip(id)) { Fail("Cannot equip " + id); return false; }
@@ -359,7 +363,10 @@ namespace HackThePlanet
 
 		private void StartCareerStage()
 		{
-			if (storyIndex >= story.Length) { Succeed(); return; }
+			if (Simulation.StoryComplete) { Succeed(); return; }
+            while (Simulation.PendingChoice != null) Simulation.ChooseStory(Simulation.PendingChoice.choices.First().id);
+            var next = story.FirstOrDefault(Simulation.ContractAvailable);
+            if (next == null) { Fail("No available story continuation"); return; }
 			PrepareCareer();
 			if (missingPurchase && freelanceAtStage < 2 && AvailableFreelance() is { } fund)
 			{
@@ -370,7 +377,7 @@ namespace HackThePlanet
 			if (missingPurchase) Log("skip-purchase", null, AvailableFreelance() == null
 				? "Upgrades need more earnings. No freelance jobs are unlocked yet, so the AI will earn rewards from the next story contract."
 				: "Upgrades need more earnings. The two freelance jobs allowed for this stage have been used, so the AI will try the story contract with its current build.");
-			StartOperation(story[storyIndex], false);
+			StartOperation(next, false);
 		}
 
 		public void Step()
@@ -396,7 +403,10 @@ namespace HackThePlanet
 				if (!Simulation.Active) EndOperation("Caught by trace");
 				return;
 			}
-			var observation = PlaytestObservation.Capture(Simulation);
+			var evidence = current.evidence;
+            if (!Simulation.EvidenceSolved && evidence.clueNodes.All(id => Simulation.Node(id)?.collected == true))
+                Simulation.SolveEvidence(evidence.answers.First(a => a.correct).id);
+            var observation = PlaytestObservation.Capture(Simulation);
 			var choice = PlaytestPolicy.Decide(observation, config.strategy);
 			CurrentReason = choice.reason;
 			CurrentTarget = choice.target;

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: 170308ed7dbc5774942853fac5b10cb0
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: backdoor
+  title: Dead Address
+  description: Once per operation, reclaim a discovered workstation or relay within three mapped hops of controlled access. Takes 0.8 seconds and produces no trace. Costs 12 GB RAM, reclaimed over simulation time.
+  branch: STEALTH
+  cost: 95
+  waypointTier: 0
+  special: 1
+  position: {x: 160, y: 465}
+  parents:
+  - {fileID: 11400000, guid: b0f33d0ebd4f0394fa4a85959ef4a019, type: 2}
+  grants:
+  - {fileID: 11400000, guid: 4425e30bbe4f313489370582e22e85dd, type: 2}
+  modifiers: []
+  triggers: []
+  references:
+    version: 2
+    RefIds: []

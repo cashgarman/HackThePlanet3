@@ -1,14 +1,14 @@
 {
   "id": "bridge",
-  "title": "Firewall bridge",
+  "title": "Quiet Pivot",
   "description": "Two charges per operation. Scan a reachable firewall, then cross it in 1.2 seconds with zero trace. Requires Wide scan and Efficient hack. Costs 14 GB RAM, reclaimed over simulation time.",
   "branch": "CROSSOVER",
   "cost": 140,
   "waypointTier": 0,
   "special": true,
   "position": {
-    "x": 500,
-    "y": 200
+    "x": -495.0,
+    "y": 1000
   },
   "parents": [
     "wide",

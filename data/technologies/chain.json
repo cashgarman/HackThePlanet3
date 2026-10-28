@@ -1,14 +1,14 @@
 {
   "id": "chain",
-  "title": "Chain hack",
+  "title": "Task Weaver",
   "description": "Queue up to three actions. Queue a hack on the next discovered system before the current hack finishes.",
   "branch": "INTRUSION",
-  "cost": 85,
+  "cost": 70,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 865,
-    "y": 85
+    "x": -160.0,
+    "y": 310
   },
   "parents": [
     "efficient"

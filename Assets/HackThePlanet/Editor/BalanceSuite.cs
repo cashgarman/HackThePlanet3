@@ -59,10 +59,10 @@ namespace HackThePlanet.Editor
 		};
 
 		[MenuItem("Hack The Planet/Balance/Run Career Balance Suite")]
-		public static void RunMenu() => Run(false);
+		public static void RunMenu() => VesperValidation.Run();
 
 		/// <summary>Unity batch entry; pass -balanceFull for twenty seeds rather than five.</summary>
-		public static void RunBatch() => Run(Environment.GetCommandLineArgs().Contains("-balanceFull"));
+		public static void RunBatch() => VesperValidation.RunBatch();
 
 		/// <summary>Runs the existing content, simulation, rig, and tool regression suites.</summary>
 		public static void ValidateIntegration()

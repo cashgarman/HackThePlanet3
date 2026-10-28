@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: d26f44597da15318b77f8b367bea26e0
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: shelter-threshold
+  title: Load Bearing People
+  description: Intercept the fallback order before the Directorate disperses its signing keys.
+  company: {fileID: 11400000, guid: 49b7aa2a285fc0c43821a56c2a9f518a, type: 2}
+  network: {fileID: 11400000, guid: 6649afe25e6e8204e831c1a565a77de1, type: 2}
+  client: SABLE / community grid engineer
+  tag: INTERCEPT / VESPER
+  objective: Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: Your allies can act, but the method will determine who carries the risk.
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - no-central-server
+  requiredFlags:
+  - shelter
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices:
+  - id: shelter-open
+    title: Act immediately
+    description: Move before the Directorate can regroup. The conclusion favors reach and accepts disruption.
+    flag: shelter-open
+  - id: shelter-careful
+    title: Protect the named people first
+    description: Use a slower release and preserve specific service routes. The conclusion favors protection over reach.
+    flag: shelter-careful
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: Your allies can act, but the method will determine who carries the risk.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 3.15
+  credits:
+    rid: 213507108368551766
+  xp:
+    rid: 213507108368551767
+  difficulty:
+    rid: 213507108368551768
+  seed:
+    rid: 213507108368551769
+  objectives:
+  - nodeId: n22
+    label: Load Bearing People / Authoritative record
+    actionLabel: Intercept transfer receipt
+    action: {fileID: 11400000, guid: fa6ec7490789e844faf33b389123d5b8, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551770
+    actionRequirements: []
+  - nodeId: n20
+    label: Load Bearing People / Live mirror
+    actionLabel: Intercept transfer receipt
+    action: {fileID: 11400000, guid: fa6ec7490789e844faf33b389123d5b8, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551771
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: shelter-threshold-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: shelter-threshold-purge
+    sourceNodeId: n14
+    targetNodeIds:
+    - n22
+    - n20
+    kind: 3
+    minimumDifficulty: 1
+    intervalSeconds: 80
+    traceBurst: 0
+  - id: shelter-threshold-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  - id: shelter-threshold-sweep
+    sourceNodeId: n14
+    targetNodeIds: []
+    kind: 1
+    minimumDifficulty: 1
+    intervalSeconds: 65
+    traceBurst: 7
+  lore:
+  - id: shelter-threshold/0
+    title: Load Bearing People / Unsent message
+    company:
+    contract: Load Bearing People
+    text: 'SABLE / community grid engineer: Intercept the fallback order before the Directorate disperses its signing keys. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: shelter-threshold/1
+    title: Load Bearing People / Custody note
+    company:
+    contract: Load Bearing People
+    text: 'Archive custody, Load Bearing People: Your allies can act, but the method will determine who carries the risk. A second copy carries a hand-written objection to the official disposition.'
+  - id: shelter-threshold/2
+    title: Load Bearing People / Private annotation
+    company:
+    contract: Load Bearing People
+    text: 'Personal note filed under shelter-threshold: Your allies can act, but the method will determine who carries the risk. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551766
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1910
+    - rid: 213507108368551767
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 136
+    - rid: 213507108368551768
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507108368551769
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 869
+    - rid: 213507108368551770
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551771
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3

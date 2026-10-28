@@ -46,7 +46,7 @@ namespace HackThePlanet
 	}
 
 	/// <summary>Types of contract security layer.</summary>
-	public enum DefenseKind { CredentialLock, SecuritySweep }
+	public enum DefenseKind { CredentialLock, SecuritySweep, Watcher, PurgeTimer }
 
 	/// <summary>Scriptable contract with company, network, payouts, objectives, and lore.</summary>
 	[CreateAssetMenu(menuName = "Hack The Planet/Contract")]
@@ -66,6 +66,12 @@ namespace HackThePlanet
 
 		/// <summary>Gets or sets whether the contract can be taken repeatedly.</summary>
 		public bool recurring;
+        public string[] prerequisites = Array.Empty<string>(), requiredFlags = Array.Empty<string>();
+        public int offerDays;
+        public bool isEnding, optional;
+        public StoryOption[] choices = Array.Empty<StoryOption>();
+        public EvidenceCase evidence = new();
+        public string revelation;
 
 		/// <summary>Gets or sets prior wins required before this contract is offered.</summary>
 		public int requiredWins;

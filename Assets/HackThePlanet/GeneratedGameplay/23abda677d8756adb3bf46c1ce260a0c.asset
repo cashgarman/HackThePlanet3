@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 23abda677d8756adb3bf46c1ce260a0c
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: command-threshold
+  title: The Empty Chair
+  description: Intercept the fallback order before the Directorate disperses its signing keys.
+  company: {fileID: 11400000, guid: 49b7aa2a285fc0c43821a56c2a9f518a, type: 2}
+  network: {fileID: 11400000, guid: 94579e1debe3d114ea89305104c83653, type: 2}
+  client: ORIN / Directorate defector
+  tag: INTERCEPT / VESPER
+  objective: Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: Your allies can act, but the method will determine who carries the risk.
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - no-central-server
+  requiredFlags:
+  - command
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices:
+  - id: command-open
+    title: Act immediately
+    description: Move before the Directorate can regroup. The conclusion favors reach and accepts disruption.
+    flag: command-open
+  - id: command-careful
+    title: Protect the named people first
+    description: Use a slower release and preserve specific service routes. The conclusion favors protection over reach.
+    flag: command-careful
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: Your allies can act, but the method will determine who carries the risk.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 3.15
+  credits:
+    rid: 213507108368551825
+  xp:
+    rid: 213507108368551826
+  difficulty:
+    rid: 213507108368551827
+  seed:
+    rid: 213507108368551828
+  objectives:
+  - nodeId: n22
+    label: The Empty Chair / Authoritative record
+    actionLabel: Intercept transfer receipt
+    action: {fileID: 11400000, guid: fa6ec7490789e844faf33b389123d5b8, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551829
+    actionRequirements: []
+  - nodeId: n20
+    label: The Empty Chair / Live mirror
+    actionLabel: Intercept transfer receipt
+    action: {fileID: 11400000, guid: fa6ec7490789e844faf33b389123d5b8, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551830
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: command-threshold-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: command-threshold-purge
+    sourceNodeId: n14
+    targetNodeIds:
+    - n22
+    - n20
+    kind: 3
+    minimumDifficulty: 1
+    intervalSeconds: 80
+    traceBurst: 0
+  - id: command-threshold-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  - id: command-threshold-sweep
+    sourceNodeId: n14
+    targetNodeIds: []
+    kind: 1
+    minimumDifficulty: 1
+    intervalSeconds: 65
+    traceBurst: 7
+  lore:
+  - id: command-threshold/0
+    title: The Empty Chair / Unsent message
+    company:
+    contract: The Empty Chair
+    text: 'ORIN / Directorate defector: Intercept the fallback order before the Directorate disperses its signing keys. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: command-threshold/1
+    title: The Empty Chair / Custody note
+    company:
+    contract: The Empty Chair
+    text: 'Archive custody, The Empty Chair: Your allies can act, but the method will determine who carries the risk. A second copy carries a hand-written objection to the official disposition.'
+  - id: command-threshold/2
+    title: The Empty Chair / Private annotation
+    company:
+    contract: The Empty Chair
+    text: 'Personal note filed under command-threshold: Your allies can act, but the method will determine who carries the risk. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551825
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1910
+    - rid: 213507108368551826
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 136
+    - rid: 213507108368551827
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3
+    - rid: 213507108368551828
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 971
+    - rid: 213507108368551829
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551830
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3

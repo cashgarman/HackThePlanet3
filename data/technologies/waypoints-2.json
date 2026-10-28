@@ -3,12 +3,12 @@
   "title": "Waypoints II",
   "description": "Place two waypoints and choose their colours.",
   "branch": "RECON",
-  "cost": 60,
+  "cost": 65,
   "waypointTier": 2,
   "special": false,
   "position": {
-    "x": 400,
-    "y": -75
+    "x": 850,
+    "y": 155
   },
   "parents": [
     "waypoints-1"

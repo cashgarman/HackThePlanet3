@@ -29,4 +29,4 @@ if ($process.ExitCode -ne 0) {
     throw "Balance suite failed with Unity exit code $($process.ExitCode)."
 }
 
-Get-Content -LiteralPath (Join-Path $projectRoot 'Artifacts\career-balance.txt')
+Get-Content -LiteralPath (Join-Path $projectRoot 'Artifacts\vesper-validation.txt')

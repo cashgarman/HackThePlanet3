@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: e16c86b8854a574189b346920128d5e5
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: cascade
+  title: Controlled Backdoor
+  description: Disabling or capturing the hub reduces every firewall's security by two for the rest of the contract.
+  branch: CROSSOVER
+  cost: 200
+  waypointTier: 0
+  special: 0
+  position: {x: 495, y: 1000}
+  parents:
+  - {fileID: 11400000, guid: b0f33d0ebd4f0394fa4a85959ef4a019, type: 2}
+  - {fileID: 11400000, guid: 2b79ad53a42667247b8ac17373e1f968, type: 2}
+  grants: []
+  modifiers: []
+  triggers:
+  - on: 1
+    onceKey: cascade
+    when:
+      rid: 213507108366975050
+    effects:
+    - rid: 213507108366975051
+    - rid: 213507108366975052
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108366975050
+      type: {class: AllCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        conditions:
+        - rid: 213507108366975053
+        - rid: 213507108366975054
+    - rid: 213507108366975051
+      type: {class: SecurityEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        targets:
+          scope: 1
+          nodeId:
+          filter:
+            rid: 213507108366975055
+        minimum: 1
+        amount:
+          rid: 213507108366975056
+    - rid: 213507108366975052
+      type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        message: SYSTEM CASCADE // Firewall security reduced across the network.
+    - rid: 213507108366975053
+      type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        tag: securityhub
+    - rid: 213507108366975054
+      type: {class: NotCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        condition:
+          rid: 213507108366975057
+    - rid: 213507108366975055
+      type: {class: NodeTagCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        tag: firewall
+    - rid: 213507108366975056
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: -2
+    - rid: 213507108366975057
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 6

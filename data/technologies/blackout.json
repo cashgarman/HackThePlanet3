@@ -1,14 +1,14 @@
 {
   "id": "blackout",
-  "title": "Blackout",
+  "title": "Dark Interval",
   "description": "Suppress a mapped hub within three controlled hops until disabled or captured. Reserves 18 GB RAM per hub.",
   "branch": "CONTROL",
-  "cost": 85,
+  "cost": 70,
   "waypointTier": 0,
   "special": true,
   "position": {
-    "x": 865,
-    "y": 400
+    "x": 480.0,
+    "y": 310
   },
   "parents": [
     "disrupt"

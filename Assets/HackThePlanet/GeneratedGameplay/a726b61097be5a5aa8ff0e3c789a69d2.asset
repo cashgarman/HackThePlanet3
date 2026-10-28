@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: a726b61097be5a5aa8ff0e3c789a69d2
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: shelter-side-2
+  title: The Spare Key / Shelter
+  description: An ally needs help away from the main operation. This offer closes in three career days.
+  company: {fileID: 11400000, guid: 35f0e140c6bf50b429ad40e28dcb1735, type: 2}
+  network: {fileID: 11400000, guid: 60eee428c2307d4409d189bbe144ef90, type: 2}
+  client: SABLE / community grid engineer
+  tag: ALTER / VESPER
+  objective: Synchronize signed mirror at Authoritative record / Synchronize signed mirror at Live mirror
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: A small service survives because someone chose to maintain it.
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - spare-capacity
+  requiredFlags:
+  - shelter
+  offerDays: 3
+  isEnding: 0
+  optional: 1
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: A small service survives because someone chose to maintain it.
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 2.8
+  credits:
+    rid: 213507108368551805
+  xp:
+    rid: 213507108368551806
+  difficulty:
+    rid: 213507108368551807
+  seed:
+    rid: 213507108368551808
+  objectives:
+  - nodeId: n22
+    label: The Spare Key / Shelter / Authoritative record
+    actionLabel: Synchronize signed mirror
+    action: {fileID: 11400000, guid: 3239472034ebe1440822e027fef68555, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551809
+    actionRequirements: []
+  - nodeId: n20
+    label: The Spare Key / Shelter / Live mirror
+    actionLabel: Synchronize signed mirror
+    action: {fileID: 11400000, guid: 3239472034ebe1440822e027fef68555, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551810
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: shelter-side-2-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  - id: shelter-side-2-purge
+    sourceNodeId: n14
+    targetNodeIds:
+    - n22
+    - n20
+    kind: 3
+    minimumDifficulty: 1
+    intervalSeconds: 100
+    traceBurst: 0
+  - id: shelter-side-2-lock
+    sourceNodeId: n19
+    targetNodeIds:
+    - n22
+    kind: 0
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 0
+  lore:
+  - id: shelter-side-2/0
+    title: The Spare Key / Shelter / Unsent message
+    company:
+    contract: The Spare Key / Shelter
+    text: 'SABLE / community grid engineer: An ally needs help away from the main operation. This offer closes in three career days. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before.'
+  - id: shelter-side-2/1
+    title: The Spare Key / Shelter / Custody note
+    company:
+    contract: The Spare Key / Shelter
+    text: 'Archive custody, The Spare Key / Shelter: A small service survives because someone chose to maintain it. A second copy carries a hand-written objection to the official disposition.'
+  - id: shelter-side-2/2
+    title: The Spare Key / Shelter / Private annotation
+    company:
+    contract: The Spare Key / Shelter
+    text: 'Personal note filed under shelter-side-2: A small service survives because someone chose to maintain it. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551805
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1360
+    - rid: 213507108368551806
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 106
+    - rid: 213507108368551807
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551808
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 937
+    - rid: 213507108368551809
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551810
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3

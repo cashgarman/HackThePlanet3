@@ -1,10 +1,10 @@
 {
   "id": "ram-bank",
-  "title": "RAM Bank",
+  "title": "Session Bank",
   "description": "+35 GB RAM.",
   "family": "memory",
   "branch": "CONTROL",
-  "tier": 1,
+  "tier": 2,
   "width": 2,
   "height": 2,
   "price": 850,
@@ -13,7 +13,7 @@
   "heatOutput": 3,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

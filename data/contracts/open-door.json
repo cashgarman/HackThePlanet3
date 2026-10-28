@@ -1,0 +1,145 @@
+{
+  "id": "open-door",
+  "title": "Open Door",
+  "description": "Intercept the next forced reconnection order and its receipt.",
+  "company": "company-0",
+  "network": "subnet-open-door",
+  "client": "SABLE / community grid engineer",
+  "tag": "INTERCEPT / VESPER",
+  "objective": "Intercept transfer receipt at Authoritative record / Intercept transfer receipt at Live mirror",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "A hidden office is mapping every independent route that volunteers create.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1580
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 118
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 631
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Open Door / Authoritative record",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n20",
+      "label": "Open Door / Live mirror",
+      "actionLabel": "Intercept transfer receipt",
+      "action": "intercept",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "open-door/0",
+      "title": "Open Door / Unsent message",
+      "company": "",
+      "contract": "Open Door",
+      "text": "SABLE / community grid engineer: Intercept the next forced reconnection order and its receipt. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "open-door/1",
+      "title": "Open Door / Custody note",
+      "company": "",
+      "contract": "Open Door",
+      "text": "Archive custody, Open Door: A hidden office is mapping every independent route that volunteers create. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "open-door/2",
+      "title": "Open Door / Private annotation",
+      "company": "",
+      "contract": "Open Door",
+      "text": "Personal note filed under open-door: A hidden office is mapping every independent route that volunteers create. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "open-door-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "open-door-purge",
+      "kind": "PurgeTimer",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n22",
+        "n20"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 80,
+      "traceBurst": 0
+    },
+    {
+      "id": "open-door-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 2.8,
+  "revelation": "A hidden office is mapping every independent route that volunteers create.",
+  "prerequisites": [
+    "island-mode"
+  ],
+  "requiredFlags": [
+    "shelter"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [
+    {
+      "id": "continue-shelter",
+      "title": "Follow the hidden channel",
+      "description": "Your alliance has enough evidence to confront the Night Index rehearsal.",
+      "flag": "arc-complete"
+    }
+  ],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

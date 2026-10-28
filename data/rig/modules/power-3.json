@@ -1,6 +1,6 @@
 {
   "id": "power-3",
-  "title": "Power Supply III",
+  "title": "District Supply",
   "description": "+40 power capacity.",
   "family": "power",
   "branch": "INTRUSION",
@@ -13,13 +13,13 @@
   "heatOutput": 10,
   "powerCapacity": 40,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {
       "condition": {
         "type": "ResearchCondition",
-        "technology": "infrastructure-3",
+        "technology": "infrastructure-2",
         "equipped": false
       },
       "message": "Requires Infrastructure 3 research."

@@ -131,6 +131,16 @@ namespace HackThePlanet.Tests
 				Assert.That(tierFour.Anchors, Is.EquivalentTo(new[]
 					{ nodes[0].position, nodes[1].position, nodes[2].position, nodes[2].position }));
 				tierFour.RemoveFromHierarchy();
+
+				var liveTarget = new Vector3(7, 8, 9);
+				var moving = new WaypointOverlay(camera, nodes, links, waypoints, 4, "entry",
+					id => id == "target" ? liveTarget : (Vector3?)null);
+				Assert.That(moving.Anchors, Does.Contain(liveTarget));
+				liveTarget += Vector3.right;
+				Assert.That(moving.Anchors, Does.Contain(liveTarget));
+				Assert.That(moving.Anchors, Does.Contain(nodes[0].position), "Hidden anchors retain authored coordinates.");
+				Assert.That(nodes[2].position, Is.EqualTo(new Vector3(0, 0, 15)));
+				moving.RemoveFromHierarchy();
 			}
 			finally
 			{

@@ -1,17 +1,17 @@
 {
   "id": "backdoor",
-  "title": "Backdoor",
+  "title": "Dead Address",
   "description": "Once per operation, reclaim a discovered workstation or relay within three mapped hops of controlled access. Takes 0.8 seconds and produces no trace. Costs 12 GB RAM, reclaimed over simulation time.",
   "branch": "STEALTH",
-  "cost": 100,
+  "cost": 95,
   "waypointTier": 0,
   "special": true,
   "position": {
-    "x": 135,
-    "y": 545
+    "x": 160.0,
+    "y": 465
   },
   "parents": [
-    "quiet"
+    "ghost"
   ],
   "grants": [
     "backdoor"

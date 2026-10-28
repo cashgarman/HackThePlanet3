@@ -1,0 +1,172 @@
+{
+  "id": "thirteenth-test",
+  "title": "The Thirteenth Test",
+  "description": "Recover the signed evaluation behind the city\u2019s thirteenth emergency rehearsal.",
+  "company": "company-2",
+  "network": "subnet-thirteenth-test",
+  "client": "MOTH / unverified relay",
+  "tag": "RECONSTRUCT / VESPER",
+  "objective": "Recover signed clue at Authoritative record / Recover signed clue at Signed dispatch record / Recover signed clue at Credential witness",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "The Directorate cultivated both its defenders and its opposition. Your contracts were part of a succession test.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1690
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 124
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 3
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 733
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "The Thirteenth Test / Authoritative record",
+      "actionLabel": "Recover signed clue",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n9",
+      "label": "The Thirteenth Test / Signed dispatch record",
+      "actionLabel": "Recover signed clue",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n19",
+      "label": "The Thirteenth Test / Credential witness",
+      "actionLabel": "Recover signed clue",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "thirteenth-test/0",
+      "title": "The Thirteenth Test / Unsent message",
+      "company": "",
+      "contract": "The Thirteenth Test",
+      "text": "MOTH / unverified relay: Recover the signed evaluation behind the city\u2019s thirteenth emergency rehearsal. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "thirteenth-test/1",
+      "title": "The Thirteenth Test / Custody note",
+      "company": "",
+      "contract": "The Thirteenth Test",
+      "text": "Archive custody, The Thirteenth Test: The Directorate cultivated both its defenders and its opposition. Your contracts were part of a succession test. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "thirteenth-test/2",
+      "title": "The Thirteenth Test / Private annotation",
+      "company": "",
+      "contract": "The Thirteenth Test",
+      "text": "Personal note filed under thirteenth-test: The Directorate cultivated both its defenders and its opposition. Your contracts were part of a succession test. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "thirteenth-test-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "thirteenth-test-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    },
+    {
+      "id": "thirteenth-test-sweep",
+      "kind": "SecuritySweep",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 65,
+      "traceBurst": 7
+    }
+  ],
+  "paceMultiplier": 3.15,
+  "revelation": "The Directorate cultivated both its defenders and its opposition. Your contracts were part of a succession test.",
+  "prerequisites": [],
+  "requiredFlags": [
+    "arc-complete"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "The Thirteenth Test / Evidence case",
+    "question": "Which explanation fits all three signed records?",
+    "clueNodes": [
+      "n22",
+      "n9",
+      "n19"
+    ],
+    "clues": [
+      "The Directorate\u2019s budget funds both the response team and the resistance relay.",
+      "A test plan names your first contract before you accepted it.",
+      "Success criteria score the replacement operator, not the service outage."
+    ],
+    "answers": [
+      {
+        "id": "accident",
+        "title": "The records disagree because of an ordinary clerical error.",
+        "correct": false,
+        "feedback": "A clerical error does not explain the matching signed authorizations and their order."
+      },
+      {
+        "id": "insider",
+        "title": "A lone outsider forged every record after the event.",
+        "correct": false,
+        "feedback": "The independent receipt and earlier signatures rule out a single later forgery."
+      },
+      {
+        "id": "rehearsal",
+        "title": "The resistance and its handler were part of a succession test.",
+        "correct": true,
+        "feedback": "The Directorate cultivated both its defenders and its opposition. Your contracts were part of a succession test."
+      }
+    ]
+  }
+}

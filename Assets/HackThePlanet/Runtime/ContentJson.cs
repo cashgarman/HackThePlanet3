@@ -131,7 +131,7 @@ namespace HackThePlanet
 		{
 			typeof(RigStarterPart), typeof(ContentManifest), typeof(ContentEntry), typeof(NamedStat),
 			typeof(Requirement), typeof(Modifier), typeof(Trigger), typeof(Aura), typeof(NodeSelector),
-			typeof(ObjectiveDefinition), typeof(ContractActionRule), typeof(ContractDefenseDefinition), typeof(LoreFragment), typeof(HardwareTier),
+			typeof(StoryOption), typeof(EvidenceCase), typeof(EvidenceAnswer), typeof(ObjectiveDefinition), typeof(ContractActionRule), typeof(ContractDefenseDefinition), typeof(LoreFragment), typeof(HardwareTier),
 			typeof(NetworkNode), typeof(NetworkEdge),
 			typeof(RouteTier), typeof(ParallelRouteLayout), typeof(CareerRank), typeof(OutcomeRule), typeof(RewardRule),
 			typeof(GameplayTextPalette.TermStyle),
@@ -467,7 +467,7 @@ namespace HackThePlanet
 			// Require every serialized field to be present in the JSON.
 			foreach (var field in fields.Values)
 				if (!seen.Contains(field.Name) && !(type == typeof(ContractDefinition) &&
-					(field.Name == "defenses" || field.Name == "paceMultiplier")))
+					(new[] { "defenses", "paceMultiplier", "prerequisites", "requiredFlags", "offerDays", "isEnding", "optional", "choices", "evidence", "revelation" }.Contains(field.Name))))
 					throw new InvalidDataException(path + "." + field.Name + ": required property missing");
 
 			return target;

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988e79b7641bf84aa6dd469db042dfd, type: 3}
+  m_Name: 4c482d20811a510ebd0247f661573fbf
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.TechnologyDefinition
+  id: wide
+  title: Rangefinder
+  description: Scans reveal three network hops instead of two. Make a plan before making noise.
+  branch: RECON
+  cost: 45
+  waypointTier: 0
+  special: 0
+  position: {x: -480, y: 155}
+  parents:
+  - {fileID: 11400000, guid: bb5450113dc0dc04c992e20d73216606, type: 2}
+  grants: []
+  modifiers:
+  - id:
+    stat: scanRadius
+    priority: 0
+    operation: 6
+    when:
+      rid: 213507108366974998
+    value:
+      rid: 213507108366974999
+  triggers: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108366974998
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108366974999
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 3

@@ -12,7 +12,7 @@
   "presentationPriority": 12,
   "operatorTarget": false,
   "queueable": false,
-  "initiallyAvailable": false,
+  "initiallyAvailable": true,
   "futureNeighborQueue": false,
   "traceFree": false,
   "visible": {

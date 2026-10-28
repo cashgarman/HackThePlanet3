@@ -1,0 +1,126 @@
+{
+  "id": "shelter-side-3",
+  "title": "Someone Still Answers / Shelter",
+  "description": "An ally needs help away from the main operation. This offer closes in three career days.",
+  "company": "company-1",
+  "network": "subnet-shelter-side-3",
+  "client": "SABLE / community grid engineer",
+  "tag": "EVACUATE / VESPER",
+  "objective": "Evacuate protected identities at Authoritative record / Capture controller at Response controller",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "A small service survives because someone chose to maintain it.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1470
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 112
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 954
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Someone Still Answers / Shelter / Authoritative record",
+      "actionLabel": "Evacuate protected identities",
+      "action": "evacuate",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n14",
+      "label": "Someone Still Answers / Shelter / Response controller",
+      "actionLabel": "Capture controller",
+      "action": "hack",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "actionRequirements": [],
+      "payload": false
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "shelter-side-3/0",
+      "title": "Someone Still Answers / Shelter / Unsent message",
+      "company": "",
+      "contract": "Someone Still Answers / Shelter",
+      "text": "SABLE / community grid engineer: An ally needs help away from the main operation. This offer closes in three career days. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "shelter-side-3/1",
+      "title": "Someone Still Answers / Shelter / Custody note",
+      "company": "",
+      "contract": "Someone Still Answers / Shelter",
+      "text": "Archive custody, Someone Still Answers / Shelter: A small service survives because someone chose to maintain it. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "shelter-side-3/2",
+      "title": "Someone Still Answers / Shelter / Private annotation",
+      "company": "",
+      "contract": "Someone Still Answers / Shelter",
+      "text": "Personal note filed under shelter-side-3: A small service survives because someone chose to maintain it. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "shelter-side-3-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "shelter-side-3-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 2.8,
+  "revelation": "A small service survives because someone chose to maintain it.",
+  "prerequisites": [
+    "names-in-copper"
+  ],
+  "requiredFlags": [
+    "shelter"
+  ],
+  "offerDays": 3,
+  "optional": true,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

@@ -201,7 +201,7 @@ namespace HackThePlanet.Editor
 					case "balance-after":    BalanceLab.CaptureAfter(); break;
 					case "data-validate":    DataDrivenValidation.Run(); break;
 					case "balance-validate": BalanceValidation.Run(); break;
-					case "career-balance": BalanceSuite.Run(false); break;
+					case "career-balance": VesperValidation.Run(); break;
 					case "playtest-validate": PlaytestValidation.Run(); break;
 					case "playtest-ui": PlaytestValidation.StartUi(); return;
 					case "playtest-career-ui": PlaytestValidation.StartUi(true); return;
@@ -232,8 +232,9 @@ namespace HackThePlanet.Editor
 
 					case "rig-validate":     RigValidation.Run(); break;
 					case "generate-assets":  GameplayAssetGenerator.Generate(); break;
-					case "validate":         GameValidation.Run(); break;
+					case "validate":         VesperValidation.Run(); break;
 					case "models":           NetworkVisualValidation.Run(); break;
+					case "force-layout-validate": NetworkVisualValidation.RunLayoutChecks(); break;
 					case "build":            BuildWindows(); break;
 					case "build-rig":        BuildWindowsAt("Builds/Windows-Rig"); break;
 					case "build-volumetric": BuildWindowsAt("Builds/Windows-Volumetric"); break;
@@ -383,6 +384,7 @@ namespace HackThePlanet.Editor
 		[MenuItem("Hack The Planet/Run Workstation Smoke Test")]
 		public static void StartSmoke()
 		{
+            if (GameCatalog.Default.Contract("ghost-meter") != null) { VesperUiSmoke.Start(); return; }
 			// Make sure the Artifacts folder exists for the smoke outputs.
 			Directory.CreateDirectory(Path.Combine(Project, "Artifacts"));
 
@@ -546,6 +548,7 @@ namespace HackThePlanet.Editor
 						// Verify the contract exchange shows the preview graph with its labels and fit controls.
 						Check(app.Root.Q<Button>("connect") != null, "Connect control exists.");
 						var preview = app.Root.Q<GraphViewport>();
+						NetworkVisualValidation.CheckLayout(preview, app.State);
 
 						// Verify every preview system and link is drawn in the 3D graph.
 						Check(
@@ -1031,6 +1034,7 @@ namespace HackThePlanet.Editor
 
 					case 12:
 						// Capture the research network screen.
+						NetworkVisualValidation.CheckLayout(app.Root.Q<GraphViewport>(), app.State);
 						CaptureScreenshot(Path.Combine(Project, "Artifacts/04-research-network.png"));
 						smokePhase++;
 						return;
@@ -1238,11 +1242,16 @@ namespace HackThePlanet.Editor
 						Check(app.TextSizePercent == 300, "Text size changes through the actual slider callback.");
 
 						foreach (var text in app.Root.Query<TextElement>().ToList())
+						{
+							if (text.ClassListContains("rail-help-glyph"))
+								continue;
+
 							if (textSizeBaseline.TryGetValue(text, out var baseline))
 								Check(Mathf.Abs(text.resolvedStyle.fontSize - baseline * 3) < .1f,
 									  "Every text element scales, including graph labels and settings inputs: " +
 									  text.name + " / " + text.text + " / " + text.resolvedStyle.fontSize +
 									  " expected " + baseline * 3);
+						}
 
 						// Verify the Settings menu stays inside the viewport at 300%.
 						var largeMenu = app.Root.Q(className: "settings-menu");

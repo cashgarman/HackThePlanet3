@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: 3cd0013d3d65550798804d7984275f55
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: listening-room
+  title: The Listening Room
+  description: "Trace MOTH\u2019s relay to a vacant switching office. Capture its controller and recover the listening log."
+  company: {fileID: 11400000, guid: 0b1df930f3d88d84c9187b8fa3762df7, type: 2}
+  network: {fileID: 11400000, guid: 24b616b7a913a03419d590545a114169, type: 2}
+  client: MOTH / unverified relay
+  tag: SEIZE / VESPER
+  objective: Recover evidence at Authoritative record / Capture controller at Response controller
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: 'The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence.'
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - unlisted-operator
+  requiredFlags: []
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices:
+  - id: expose
+    title: Ally with RHEA
+    description: Build a public evidence chain. Opens the Exposure arc and closes the other alliances.
+    flag: expose
+  - id: shelter
+    title: Ally with SABLE
+    description: Build independent service routes. Opens the Shelter arc and closes the other alliances.
+    flag: shelter
+  - id: command
+    title: Ally with ORIN
+    description: Seize the command chain. Opens the Command arc and closes the other alliances.
+    flag: command
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: 'The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence.'
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 4
+  credits:
+    rid: 213507108368551527
+  xp:
+    rid: 213507108368551528
+  difficulty:
+    rid: 213507108368551529
+  seed:
+    rid: 213507108368551530
+  objectives:
+  - nodeId: n22
+    label: The Listening Room / Authoritative record
+    actionLabel: Recover evidence
+    action: {fileID: 11400000, guid: aa5d3ee30b33ca446a446555e76240ef, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551531
+    actionRequirements: []
+  - nodeId: n14
+    label: The Listening Room / Response controller
+    actionLabel: Capture controller
+    action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+    payload: 0
+    complete:
+      rid: 213507108368551532
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: listening-room-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  lore:
+  - id: listening-room/0
+    title: The Listening Room / Unsent message
+    company:
+    contract: The Listening Room
+    text: "MOTH / unverified relay: Trace MOTH\u2019s relay to a vacant switching office. Capture its controller and recover the listening log. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+  - id: listening-room/1
+    title: The Listening Room / Custody note
+    company:
+    contract: The Listening Room
+    text: 'Archive custody, The Listening Room: The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence. A second copy carries a hand-written objection to the official disposition.'
+  - id: listening-room/2
+    title: The Listening Room / Private annotation
+    company:
+    contract: The Listening Room
+    text: 'Personal note filed under listening-room: The emergency protocol has a name: Night Index. Three people contact you with incompatible plans for the same evidence. Someone has crossed out the word inevitable. No replacement was supplied.'
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551527
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1030
+    - rid: 213507108368551528
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 88
+    - rid: 213507108368551529
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551530
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 461
+    - rid: 213507108368551531
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551532
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1

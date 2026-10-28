@@ -1,19 +1,19 @@
 {
   "id": "cooling-1",
-  "title": "Cooling I",
+  "title": "Fin Cooler",
   "description": "+6 cooling capacity.",
   "family": "cooling",
   "branch": "CONTROL",
   "tier": 1,
   "width": 1,
   "height": 1,
-  "price": 200,
+  "price": 250,
   "rotatable": true,
   "powerDemand": 1,
   "heatOutput": 0,
   "powerCapacity": 0,
   "coolingCapacity": 6,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

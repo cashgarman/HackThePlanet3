@@ -1,0 +1,114 @@
+{
+  "id": "sealed-hearing",
+  "title": "Sealed Hearing",
+  "description": "Recover testimony from a hearing whose transcript was never published.",
+  "company": "company-0",
+  "network": "subnet-sealed-hearing",
+  "client": "RHEA / public archivist",
+  "tag": "EXFILTRATE / VESPER",
+  "objective": "Recover evidence at Authoritative record",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "Every witness received a different explanation for the same missing hour.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1250
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 100
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 495
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Sealed Hearing / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "sealed-hearing/0",
+      "title": "Sealed Hearing / Unsent message",
+      "company": "",
+      "contract": "Sealed Hearing",
+      "text": "RHEA / public archivist: Recover testimony from a hearing whose transcript was never published. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "sealed-hearing/1",
+      "title": "Sealed Hearing / Custody note",
+      "company": "",
+      "contract": "Sealed Hearing",
+      "text": "Archive custody, Sealed Hearing: Every witness received a different explanation for the same missing hour. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "sealed-hearing/2",
+      "title": "Sealed Hearing / Private annotation",
+      "company": "",
+      "contract": "Sealed Hearing",
+      "text": "Personal note filed under sealed-hearing: Every witness received a different explanation for the same missing hour. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "sealed-hearing-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "sealed-hearing-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 4,
+  "revelation": "Every witness received a different explanation for the same missing hour.",
+  "prerequisites": [
+    "margin-notes"
+  ],
+  "requiredFlags": [
+    "expose"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

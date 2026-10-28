@@ -11,9 +11,13 @@ namespace Cashg.GraphExplorer
 	public sealed class GraphAtmosphere : IDisposable
 	{
 		private readonly Mesh bankMesh;
+		private readonly Beam[] beams;
+		private readonly Mesh beamMesh;
+		private readonly List<Renderer> beamRenderers = new();
 		private readonly Bank[] banks;
 
 		private readonly Camera camera;
+		private readonly Material beamMaterial;
 		private readonly Material fogMaterial;
 		private readonly List<Renderer> renderers = new();
 		private readonly GameObject rig;
@@ -32,6 +36,8 @@ namespace Cashg.GraphExplorer
 			resources ??= new GraphResourceConfiguration();
 			var skyShader = resources.Load<Shader>("GraphSky");
 			var fogShader = resources.Load<Shader>("GraphFog");
+			var beamShader = resources.Load<Shader>("GraphBeam");
+			var settings = resources.Load<GraphVisualSettings>("GraphVisualSettings");
 			if (skyShader == null || fogShader == null)
 				throw new InvalidOperationException("Missing Resources/GraphSky or Resources/GraphFog shader.");
 			var skySource = resources.Load<Material>("GraphSkyMaterial");
@@ -40,26 +46,40 @@ namespace Cashg.GraphExplorer
 			var fogSource = resources.Load<Material>("GraphFogMaterial");
 			skyMaterial = skySource != null ? new Material(skySource) : new Material(skyShader);
 			fogMaterial = fogSource != null ? new Material(fogSource) : new Material(fogShader);
+			beamMaterial = beamShader != null ? new Material(beamShader) : null;
 			skyMaterial.name = "Graph sky";
 			fogMaterial.name = "Graph fog";
+			if (beamMaterial != null) beamMaterial.name = "Graph data beams";
 			skyMaterial.renderQueue = (int)RenderQueue.Background;
 			fogMaterial.renderQueue = (int)RenderQueue.Transparent;
+			if (beamMaterial != null) beamMaterial.renderQueue = (int)RenderQueue.Transparent;
 			skyMaterial.hideFlags = HideFlags.HideAndDontSave;
 			fogMaterial.hideFlags = HideFlags.HideAndDontSave;
+			if (beamMaterial != null) beamMaterial.hideFlags = HideFlags.HideAndDontSave;
 
 			skyMesh = UvSphere(28, 18);
 			bankMesh = Quad();
+			beamMesh = beamMaterial != null ? Quad() : null;
 			skyMesh.hideFlags = HideFlags.HideAndDontSave;
 			bankMesh.hideFlags = HideFlags.HideAndDontSave;
+			if (beamMesh != null) beamMesh.hideFlags = HideFlags.HideAndDontSave;
 			sky = new GameObject("Graph Sky") { hideFlags = HideFlags.DontSave };
 			sky.transform.localScale = Vector3.one * 2200f;
 			renderers.Add(AddRenderer(sky, skyMesh, skyMaterial));
 			rig = new GameObject("Graph Fog") { hideFlags = HideFlags.DontSave };
-			banks = CreateBanks();
+			banks = CreateBanks(settings?.CloudDensity ?? 1.5f);
+			beams = beamMaterial != null
+				? CreateBeams(settings?.DataBeamCount ?? 7, settings?.DataBeamDirectionRandomness ?? 1f,
+					settings?.DataBeamSeed ?? 83)
+				: Array.Empty<Beam>();
 			PlaceSky();
 			foreach (var bank in banks) Place(bank);
+			foreach (var beam in beams) Place(beam);
 			RenderPipelineManager.beginCameraRendering += BeginCamera;
 		}
+
+		/// <summary>Gets or sets whether the occasional distant data beams are visible.</summary>
+		public bool DataBeamsEnabled { get; set; } = true;
 
 		/// <summary>Releases atmosphere objects, materials, meshes, and render callbacks.</summary>
 		public void Dispose()
@@ -72,14 +92,18 @@ namespace Cashg.GraphExplorer
 			DestroyObject(rig);
 			DestroyObject(skyMaterial);
 			DestroyObject(fogMaterial);
+			DestroyObject(beamMaterial);
 			DestroyObject(skyMesh);
 			DestroyObject(bankMesh);
+			DestroyObject(beamMesh);
 		}
 
 		private void BeginCamera(ScriptableRenderContext context, Camera renderingCamera)
 		{
 			// Hide these shared scene renderers from every camera except the graph camera that owns them.
 			foreach (var renderer in renderers) renderer.forceRenderingOff = renderingCamera != camera;
+			foreach (var renderer in beamRenderers)
+				renderer.forceRenderingOff = renderingCamera != camera || !DataBeamsEnabled;
 		}
 
 		/// <summary>Advances the sky and cloud animation.</summary>
@@ -92,11 +116,17 @@ namespace Cashg.GraphExplorer
 			clock += dt;
 			skyMaterial.SetFloat("_GraphAtmosphereTime", clock);
 			fogMaterial.SetFloat("_GraphAtmosphereTime", clock);
+			beamMaterial?.SetFloat("_GraphAtmosphereTime", clock);
 			PlaceSky();
 			for (var i = 0; i < banks.Length; i++)
 			{
 				banks[i].Angle += banks[i].Speed * dt;
 				Place(banks[i]);
+			}
+			for (var i = 0; i < beams.Length; i++)
+			{
+				beams[i].Angle += beams[i].Speed * dt;
+				Place(beams[i]);
 			}
 		}
 
@@ -112,15 +142,23 @@ namespace Cashg.GraphExplorer
 				new Vector3(Mathf.Cos(bank.Angle) * bank.Radius, y, Mathf.Sin(bank.Angle) * bank.Radius);
 		}
 
-		private Bank[] CreateBanks()
+		private void Place(Beam beam)
+		{
+			var y = beam.Height + Mathf.Sin(clock * beam.BobSpeed + beam.Phase) * beam.Bob;
+			beam.Transform.localPosition = new Vector3(Mathf.Cos(beam.Angle) * beam.Radius, y,
+				Mathf.Sin(beam.Angle) * beam.Radius);
+		}
+
+		private Bank[] CreateBanks(float density)
 		{
 			// Build each atmosphere layer from its own mesh and material configuration.
 			var random = new Random(17);
-			var created = new Bank[12];
+			var created = new Bank[Mathf.Clamp(Mathf.RoundToInt(12 * Mathf.Clamp(density, .25f, 3f)), 3, 36)];
+			var distantCount = Mathf.Clamp(Mathf.RoundToInt(created.Length * .58f), 1, created.Length - 1);
 			for (var i = 0; i < created.Length; i++)
 			{
 				// Use a fixed seed for repeatable near/far fog placement and independent per-renderer shader values.
-				var distant = i < 7;
+				var distant = i < distantCount;
 				var radius = Lerp(random, distant ? 250f : 125f, distant ? 460f : 195f);
 				var size = Lerp(random, distant ? 150f : 78f, distant ? 240f : 130f);
 				var color = Color.Lerp(new Color(0.16f, 0.26f, 0.40f), new Color(0.26f, 0.38f, 0.54f),
@@ -146,6 +184,48 @@ namespace Cashg.GraphExplorer
 					Height = Lerp(random, -28f, 46f),
 					Bob = Lerp(random, 8f, distant ? 26f : 14f),
 					BobSpeed = Lerp(random, 0.08f, 0.18f),
+					Phase = (float)(random.NextDouble() * Math.PI * 2)
+				};
+			}
+
+			return created;
+		}
+
+		private Beam[] CreateBeams(int count, float directionRandomness, int seed)
+		{
+			// Keep the pass sparse: each beam has a long idle window and a different phase.
+			var random = new Random(seed);
+			var created = new Beam[Mathf.Clamp(count, 0, 32)];
+			var directionSpread = Mathf.Clamp01(directionRandomness);
+			for (var i = 0; i < created.Length; i++)
+			{
+				var host = new GameObject("Distant data beam") { hideFlags = HideFlags.DontSave };
+				host.transform.SetParent(rig.transform, false);
+				host.transform.localScale = new Vector3(Lerp(random, 42f, 78f), Lerp(random, 1.1f, 2.4f), 1);
+				var renderer = AddRenderer(host, beamMesh, beamMaterial);
+				renderers.Add(renderer);
+				beamRenderers.Add(renderer);
+				var block = new MaterialPropertyBlock();
+				block.SetColor("_BeamColor", Color.Lerp(new Color(.16f, .55f, .65f), new Color(.34f, .92f, .76f),
+					(float)random.NextDouble()));
+				block.SetFloat("_Opacity", Lerp(random, .12f, .22f));
+				block.SetFloat("_Seed", i * 3.17f + .8f);
+				block.SetFloat("_Speed", Lerp(random, .65f, 1.15f));
+				block.SetFloat("_Interval", Lerp(random, 4.5f, 8.5f));
+				block.SetFloat("_Duration", Lerp(random, .13f, .24f));
+				block.SetFloat("_Phase", (float)random.NextDouble() * 8f);
+				block.SetFloat("_DirectionAngle", Mathf.Lerp(0, (float)random.NextDouble() * Mathf.PI * 2f,
+					directionSpread));
+				renderer.SetPropertyBlock(block);
+				created[i] = new Beam
+				{
+					Transform = host.transform,
+					Angle = (float)(random.NextDouble() * Math.PI * 2),
+					Speed = Lerp(random, .004f, .012f) * (i % 2 == 0 ? 1f : -1f),
+					Radius = Lerp(random, 62f, 138f),
+					Height = Lerp(random, -18f, 38f),
+					Bob = Lerp(random, 3f, 10f),
+					BobSpeed = Lerp(random, .08f, .16f),
 					Phase = (float)(random.NextDouble() * Math.PI * 2)
 				};
 			}
@@ -233,6 +313,12 @@ namespace Cashg.GraphExplorer
 		}
 
 		private sealed class Bank
+		{
+			public float Angle, Speed, Radius, Height, Bob, BobSpeed, Phase;
+			public Transform Transform;
+		}
+
+		private sealed class Beam
 		{
 			public float Angle, Speed, Radius, Height, Bob, BobSpeed, Phase;
 			public Transform Transform;

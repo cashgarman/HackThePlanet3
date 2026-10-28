@@ -124,7 +124,7 @@ namespace HackThePlanet
 
 		// Internal member supporting workstation or graph viewport behavior.
 		private Label traceNumber, traceState;
-		private Label sweepStatus;
+		private Label sweepStatus, purgeStatus;
 
 		/// <summary>Gets the live workstation instance created at bootstrap.</summary>
 		public static WorkstationApp Instance { get; private set; }
@@ -181,7 +181,7 @@ namespace HackThePlanet
 					? State.Job
 					: State.Catalog.Contracts(State.Career)
 						   .FirstOrDefault(c => !State.Career.completed.Contains(c.id) &&
-												State.Career.completed.Count >= c.requiredWins) ?? State.Catalog
+												State.ContractAvailable(State.Catalog.Contract(c.id))) ?? State.Catalog
 						.Contracts(State.Career).First(c => !c.recurring);
 
 				// Mark the view dirty and autosave on every simulation change.
@@ -656,7 +656,7 @@ namespace HackThePlanet
 			traceFill = null;
 			traceNumber = null;
 			traceState = null;
-			sweepStatus = null;
+			sweepStatus = purgeStatus = null;
 			opPower = opCooling = opCompute = opBandwidth = opStorage = opMemory = opReclaim = null;
 			canvas = null;
 
@@ -705,13 +705,21 @@ namespace HackThePlanet
 				 "footer-save");
 
 			// Disable the underlying UI while a settings or confirmation modal is open.
-			if (modal == "settings" || modal == "reset-save" || modal == "debug" || modal == "refund-research")
+			if (modal == "settings" || modal == "reset-save" || modal == "debug" || modal == "refund-research" || modal == "selective-refund")
 				foreach (var child in Root.Children())
 					child.SetEnabled(false);
 
 			// Build the open modal, if any.
-			if (modal == "refund-research")
-				BuildRefundModal();
+			if (modal == "selective-refund")
+            {
+                overlay = El(Root, "modal-overlay"); var box = Scroll(overlay, "modal-box"); OpenModalWithMotion(box);
+                Text(box, "REFUND SELECTED RESEARCH", "large-heading");
+                Text(box, State.PreviewTechnologyRefund(refundTechnologyId).description, "body-copy");
+                Btn(box, "CONFIRM REFUND", () => { State.RefundTechnology(refundTechnologyId); modal = null; dirty = true; }, "confirm-selective-refund", "primary-button");
+                Btn(box, "CANCEL", () => { modal = null; dirty = true; }, "cancel-selective-refund", "secondary-button");
+            }
+            else if (modal == "refund-research")
+                BuildRefundModal();
 			else if (modal != null)
 				BuildModal();
 
@@ -778,7 +786,7 @@ namespace HackThePlanet
 			// Add the help and settings buttons.
 			var utilities = El(summary, "header-tools");
 			RailCircleButton(utilities, "?", ShowHelp, "help", "header-tool").tooltip = "Field guide / F1";
-			RailCircleButton(utilities, "⚙", ShowSettings, "settings", "header-tool").tooltip = "Settings / Escape";
+			RailCircleButton(utilities, "\u2699", ShowSettings, "settings", "header-tool").tooltip = "Settings / Escape";
 
 			// Add the navigation tabs for each shell view.
 			var tabs = El(header, "header-tabs");
@@ -923,7 +931,13 @@ namespace HackThePlanet
 
 			// Scale every snapshotted text element from its authored size.
 			foreach (var pair in baseTextSizes)
+			{
+				// Header and rail icons stay authored size so they stay centered in fixed buttons.
+				if (pair.Key.ClassListContains("rail-help-glyph"))
+					continue;
+
 				pair.Key.style.fontSize = pair.Value * scale;
+			}
 
 			// Scale the tooltip label.
 			if (tooltipLabel != null)
@@ -1044,13 +1058,14 @@ namespace HackThePlanet
 			if (!State.Active)
 			{
 				var list = El(left, "contract-list");
+                BuildCampaignChoices(list);
 
 				// Create one card for each contract.
 				foreach (var job in State.Catalog.Contracts(State.Career))
 				{
 					// Work out whether the contract is delivered or still locked.
 					bool done = State.Career.completed.Contains(job.id),
-						 locked = State.Career.completed.Count < job.requiredWins;
+						 locked = !State.ContractAvailable(State.Catalog.Contract(job.id));
 
 					// Create the contract card that selects this job when clicked.
 					var card = Btn(list, "", () =>
@@ -1072,7 +1087,7 @@ namespace HackThePlanet
 
 					// Show the contract status and its number or recurring tag.
 					var meta = El(card, "row-between");
-					Text(meta, done ? "DELIVERED" : locked ? "ENCRYPTED" : "AVAILABLE",
+					Text(meta, State.Availability(State.Catalog.Contract(job.id)),
 						 "contract-state" + (done ? " lime" : locked ? " muted" : " cyan"));
 					Text(meta, job.recurring
 							 ? "R"
@@ -1111,7 +1126,9 @@ namespace HackThePlanet
 				if (expandedBrief)
 					RichText(brief, State.Job.description, "body-copy");
 
-				// List each objective node and mark the ones already secured.
+				BuildEvidenceCase(brief);
+
+                // List each objective node and mark the ones already secured.
 				SectionTitle(brief, "OBJECTIVES");
 
 				// Add a row for each objective node.
@@ -1134,6 +1151,7 @@ namespace HackThePlanet
 					SectionTitle(brief, "SECURITY LAYERS");
 					Text(brief, State.DefenseBrief(State.Job), "small amber");
 					sweepStatus = Text(brief, State.SweepStatus, "small amber");
+                    purgeStatus = Text(brief, State.PurgeStatus, "small amber");
 				}
 			}
 
@@ -1360,7 +1378,7 @@ namespace HackThePlanet
 
 			// Work out whether the contract is delivered, locked, or blocked by the rig.
 			bool done = State.Career.completed.Contains(selectedJob.id),
-				 locked = State.Career.completed.Count < selectedJob.requiredWins,
+				 locked = !State.ContractAvailable(State.Catalog.Contract(selectedJob.id)),
 				 rigBlocked = !State.RigValid;
 
 			// Create the connect button, enabled only when the contract can start.
@@ -1385,7 +1403,7 @@ namespace HackThePlanet
 			var points = State.Waypoints(job);
 			var waypoint = points.FirstOrDefault(w => w.nodeId == nodeId);
 			var canPlan = !State.Active && !State.Career.completed.Contains(job.id) &&
-						  State.Career.completed.Count >= job.requiredWins;
+						  State.ContractAvailable(State.Catalog.Contract(job.id));
 			var menu = new ScrollView(ScrollViewMode.Vertical) { name = "waypoint-context-menu" };
 			menu.style.width = 260;
 			menu.style.backgroundColor = Palette.Hex("10232B");
@@ -1455,7 +1473,33 @@ namespace HackThePlanet
 		}
 
 		// Builds the WaypointPlanner section of the workstation UI.
-		private void BuildWaypointPlanner(VisualElement parent)
+		private string refundTechnologyId;
+        private void BuildCampaignChoices(VisualElement parent)
+        {
+            var pending = State.PendingChoice;
+            if (pending == null) return;
+            Text(parent, "INCOMING / CHOOSE YOUR NEXT MOVE", "eyebrow amber");
+            foreach (var option in pending.choices)
+            {
+                Text(parent, option.description, "small muted");
+                Btn(parent, option.title, () => State.ChooseStory(option.id), "story-choice-" + option.id, "secondary-button");
+            }
+        }
+        private void BuildEvidenceCase(VisualElement parent)
+        {
+            var evidence = State.Active ? State.Catalog.Contract(State.Job.id).evidence : null;
+            if (evidence == null || evidence.answers.Length == 0) return;
+            Text(parent, evidence.title, "eyebrow cyan");
+            for (var i = 0; i < evidence.clueNodes.Length; i++)
+                Text(parent, State.Node(evidence.clueNodes[i])?.collected == true ? evidence.clues[i] : "[ ] Recover clue: " + (State.Node(evidence.clueNodes[i])?.known == true ? State.Node(evidence.clueNodes[i]).label : "source undiscovered"), "small muted");
+            Text(parent, State.EvidenceSolved ? "CASE RECONSTRUCTED" : evidence.question, "small");
+            if (!State.EvidenceSolved)
+                foreach (var answer in evidence.answers)
+                    Btn(parent, answer.title, () => State.SolveEvidence(answer.id), "case-answer-" + answer.id, "secondary-button")
+                        .SetEnabled(evidence.clueNodes.All(id => State.Node(id)?.collected == true));
+            if (!string.IsNullOrEmpty(State.EvidenceFeedback)) Text(parent, State.EvidenceFeedback, "small amber");
+        }
+        private void BuildWaypointPlanner(VisualElement parent)
 		{
 			// Read the waypoint slots unlocked by research.
 			var tier = State.WaypointTier;
@@ -1483,7 +1527,7 @@ namespace HackThePlanet
 
 			// Waypoints can only be changed while the contract is open.
 			var canPlan = !State.Career.completed.Contains(selectedJob.id) &&
-						  State.Career.completed.Count >= selectedJob.requiredWins;
+						  State.ContractAvailable(State.Catalog.Contract(selectedJob.id));
 
 			// Explain how to place a waypoint.
 			Text(parent,
@@ -1601,7 +1645,7 @@ namespace HackThePlanet
 			{
 				Text(scroll, "UNDISCOVERED SYSTEM", "mission-title");
 				Text(scroll,
-					 "Scan a reachable system to discover its neighbors. Blueprint research reveals objective regions at the start of a contract.",
+					 "Scan a reachable system to discover its neighbors. Branch Map research reveals objective regions at the start of a contract.",
 					 "body-copy muted");
 				var exit = El(right, "inspector-bottom");
 				Btn(exit, "DISCONNECT", DisconnectClicked, "disconnect", "danger-button");
@@ -2031,6 +2075,7 @@ namespace HackThePlanet
 		private void UpdateMeters()
 		{
 			if (sweepStatus != null) sweepStatus.text = State.SweepStatus;
+            if (purgeStatus != null) purgeStatus.text = State.PurgeStatus;
 			// Refresh the rig stats readouts and the resource radials.
 			UpdateOperationStats();
 			RefreshResourceRadials();
@@ -2237,6 +2282,8 @@ namespace HackThePlanet
 			Text(info, tech.title, "mission-title");
 			Text(info, tech.description, "body-copy");
 			Text(info, State.Has(tech.id) ? "UNLOCKED" : tech.cost + " XP", "research-price");
+            if (State.Has(tech.id) && tech.id != "base")
+                Btn(info, "REFUND THIS RESEARCH + DEPENDENTS", () => { refundTechnologyId = tech.id; modal = "selective-refund"; dirty = true; }, "refund-tech", "secondary-button").SetEnabled(!State.Active);
 
 			// List the prerequisites and mark which ones are unlocked.
 			Text(info, "PREREQUISITES", "eyebrow section-space");
@@ -2797,6 +2844,7 @@ namespace HackThePlanet
 
 				// Show the bonuses and the narrative.
 				ReportBonuses(box, report);
+                if (modal != "archive") BuildCampaignChoices(box);
 				Text(box, report.narrative, "body-copy");
 
 				// Show the operation timeline in a scrolling list.
@@ -2906,7 +2954,7 @@ namespace HackThePlanet
 			selectedJob =
 				State.Catalog.Contracts(State.Career)
 					 .FirstOrDefault(c => !State.Career.completed.Contains(c.id) &&
-										  State.Career.completed.Count >= c.requiredWins) ??
+										  State.ContractAvailable(State.Catalog.Contract(c.id))) ??
 				State.Catalog.Contracts(State.Career).Last();
 
 			// Clear the node selection and reset the camera.

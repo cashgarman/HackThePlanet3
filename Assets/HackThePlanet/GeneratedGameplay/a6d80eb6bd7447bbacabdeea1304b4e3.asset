@@ -15,7 +15,7 @@ MonoBehaviour:
   id: career
   title: Career rules
   description:
-  credits: 600
+  credits: 500
   xp: 0
   day: 1
   reportLimit: 20
@@ -29,7 +29,7 @@ MonoBehaviour:
   traceWarning: 60
   traceDanger: 85
   maxTick: 0.5
-  welcome: EXCHANGE ONLINE // A new operator has entered the network. Your first contract is waiting.
+  welcome: VESPER RELAY ONLINE // MOTH has left a meter certificate in your inbox. Start with Ghost Meter. Read the signatures.
   outcomes:
   - outcome: 0
     verdict: CONTRACT COMPLETE
@@ -44,20 +44,20 @@ MonoBehaviour:
     bankRewards: 0
     recordCompletion: 0
     bankLore: 0
-    dayAdvance: 0
+    dayAdvance: 1
   - outcome: 2
     verdict: CONNECTION ISOLATED
     narrative: The defender isolated your session. Equipment and research are safe. The contract can be retried with a different route.
     bankRewards: 0
     recordCompletion: 0
     bankLore: 0
-    dayAdvance: 0
+    dayAdvance: 1
   simulationSpeeds:
   - 1
   - 2
   - 4
   initialTechnologies:
-  - {fileID: 11400000, guid: 733029773cf9b10488a7ba7f575b0713, type: 2}
+  - {fileID: 11400000, guid: bb5450113dc0dc04c992e20d73216606, type: 2}
   stats:
   - id: slots
     value: 2
@@ -92,6 +92,8 @@ MonoBehaviour:
   - id: spoofBonus
     value: 0
   - id: sweepTrace
+    value: 0
+  - id: watcherTrace
     value: 0
   ranks:
   - jobs: 0

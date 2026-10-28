@@ -1,0 +1,114 @@
+{
+  "id": "shelter-side-1",
+  "title": "Unpaid Overtime / Shelter",
+  "description": "An ally needs help away from the main operation. This offer closes in three career days.",
+  "company": "company-0",
+  "network": "subnet-shelter-side-1",
+  "client": "SABLE / community grid engineer",
+  "tag": "EXFILTRATE / VESPER",
+  "objective": "Recover evidence at Authoritative record",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "A small service survives because someone chose to maintain it.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1250
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 100
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 920
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Unpaid Overtime / Shelter / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "shelter-side-1/0",
+      "title": "Unpaid Overtime / Shelter / Unsent message",
+      "company": "",
+      "contract": "Unpaid Overtime / Shelter",
+      "text": "SABLE / community grid engineer: An ally needs help away from the main operation. This offer closes in three career days. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "shelter-side-1/1",
+      "title": "Unpaid Overtime / Shelter / Custody note",
+      "company": "",
+      "contract": "Unpaid Overtime / Shelter",
+      "text": "Archive custody, Unpaid Overtime / Shelter: A small service survives because someone chose to maintain it. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "shelter-side-1/2",
+      "title": "Unpaid Overtime / Shelter / Private annotation",
+      "company": "",
+      "contract": "Unpaid Overtime / Shelter",
+      "text": "Personal note filed under shelter-side-1: A small service survives because someone chose to maintain it. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "shelter-side-1-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "shelter-side-1-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 4,
+  "revelation": "A small service survives because someone chose to maintain it.",
+  "prerequisites": [
+    "cold-clinic"
+  ],
+  "requiredFlags": [
+    "shelter"
+  ],
+  "offerDays": 3,
+  "optional": true,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

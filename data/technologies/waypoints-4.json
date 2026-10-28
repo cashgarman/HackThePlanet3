@@ -3,12 +3,12 @@
   "title": "Waypoints IV",
   "description": "Place four waypoints. Select one to continuously show the shortest route from the gateway, including undiscovered systems.",
   "branch": "RECON",
-  "cost": 120,
+  "cost": 125,
   "waypointTier": 4,
   "special": false,
   "position": {
-    "x": 760,
-    "y": -75
+    "x": 850,
+    "y": 465
   },
   "parents": [
     "waypoints-3"

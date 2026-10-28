@@ -1,6 +1,6 @@
 {
   "id": "ram",
-  "title": "RAM",
+  "title": "Working Memory",
   "description": "+10 GB RAM.",
   "family": "memory",
   "branch": "CONTROL",
@@ -13,7 +13,7 @@
   "heatOutput": 1,
   "powerCapacity": 0,
   "coolingCapacity": 0,
-  "flavour": "Salvaged hardware. A private signal.",
+  "flavour": "PATCHBAY / Vesper salvage exchange. Every component has a previous owner.",
   "synergy": "",
   "requirements": [
     {

@@ -88,15 +88,16 @@ namespace HackThePlanet.Tests.PlayMode
 		{
 			var catalog = GameCatalog.Default;
 			var setup = new GameSimulation(catalog);
-			setup.Career.completed.AddRange(new[] { "quiet-copy", "paper-trail", "ghost-wire", "glasshouse" });
+			setup.Career.completed.AddRange(new[] { "ghost-meter", "redacted-hours", "unlisted-operator", "listening-room" });
 			setup.Career.jobs = 4;
+            setup.Career.storyFlags.Add("arc-complete");
 			setup.Career.xp = 1000;
-			foreach (var id in new[] { "efficient", "protocol-spoof", "quiet", "loop-feed" })
+			foreach (var id in new[] { "efficient", "chain", "selective", "protocol-spoof" })
 				Assert.That(setup.BuyTech(id), Is.True);
-			app.UseTestCatalog(catalog, setup.Career, "dead-drop");
+			app.UseTestCatalog(catalog, setup.Career, "thirteenth-test");
 			app.SendMessage("Update");
 			DisableGraphViewportCameras();
-			Assert.That(app.Root.Query<Label>().ToList().Any(l => l.text.Contains("Credential Analysis or Protocol Spoof")), Is.True);
+			Assert.That(app.Root.Query<Label>().ToList().Any(l => l.text.Contains("Extract Key (core) or Credential Fork")), Is.True);
 			Assert.That(app.ActivateVisibleControl("connect"), Is.True);
 			app.State.SetManualPause(true);
 			app.SendMessage("Update");
@@ -114,6 +115,52 @@ namespace HackThePlanet.Tests.PlayMode
 			Assert.That(app.ActivateVisibleControl("action-spoof-gate"), Is.True);
 			Assert.That(app.State.Op.task.actionId, Is.EqualTo("spoof-gate"));
 		}
+
+
+        [Test]
+        public void StoryChoiceButtonsOpenOnlyTheSelectedAlliance()
+        {
+            var career = GameCatalog.Default.CreateCareer();
+            career.completed.AddRange(new[] { "ghost-meter", "redacted-hours", "unlisted-operator", "listening-room" });
+            app.UseTestCatalog(GameCatalog.Default, career); app.SendMessage("Update"); DisableGraphViewportCameras();
+            Assert.That(app.ActivateVisibleControl("story-choice-shelter"), Is.True);
+            app.SendMessage("Update"); DisableGraphViewportCameras();
+            Assert.That(app.State.Career.storyFlags, Does.Contain("shelter"));
+            Assert.That(app.Root.Q<Button>("contract-cold-clinic"), Is.Not.Null);
+            Assert.That(app.Root.Q<Button>("contract-margin-notes"), Is.Null);
+        }
+
+        [Test]
+        public void EvidencePanelUsesRealAnswerCallbacksAndKeepsWrongAnswersRetryable()
+        {
+            var career = GameCatalog.Default.CreateCareer(); career.completed.AddRange(new[] { "ghost-meter", "redacted-hours" });
+            app.UseTestCatalog(GameCatalog.Default, career, "unlisted-operator");
+            app.SendMessage("Update"); Assert.That(app.ActivateVisibleControl("connect"), Is.True);
+            foreach (var id in new[] { "n22", "n9", "n19" }) app.State.Node(id).collected = true;
+            app.SelectNode("n22"); app.SendMessage("Update"); DisableGraphViewportCameras();
+            Assert.That(app.ActivateVisibleControl("case-answer-accident"), Is.True);
+            Assert.That(app.State.EvidenceSolved, Is.False);
+            app.SendMessage("Update"); DisableGraphViewportCameras();
+            Assert.That(app.ActivateVisibleControl("case-answer-rehearsal"), Is.True);
+            Assert.That(app.State.EvidenceSolved, Is.True);
+        }
+
+        [UnityTest]
+        public IEnumerator NewCampaignRendersNonblankWorkstation()
+        {
+            app.UseTestCatalog(GameCatalog.Default); app.SendMessage("Update");
+            var texture = new RenderTexture(1680, 960, 24); texture.Create();
+            var panel = app.GetComponent<UIDocument>().panelSettings;
+            panel.targetTexture = texture;
+            yield return null; yield return null; yield return null;
+            var previous = RenderTexture.active; RenderTexture.active = texture;
+            var capture = new Texture2D(texture.width, texture.height, TextureFormat.RGB24, false);
+            capture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0); capture.Apply(); RenderTexture.active = previous;
+            var colors = capture.GetPixels32();
+            Assert.That(colors.Select(c => (c.r, c.g, c.b)).Distinct().Take(20).Count(), Is.GreaterThan(10));
+            System.IO.File.WriteAllBytes("Artifacts/vesper-workstation.png", capture.EncodeToPNG());
+            panel.targetTexture = null; texture.Release(); Object.Destroy(texture); Object.Destroy(capture);
+        }
 
 		[Test]
 		public void WorkstationTabsBuildTheirViewsAndCanBeActivatedByName()

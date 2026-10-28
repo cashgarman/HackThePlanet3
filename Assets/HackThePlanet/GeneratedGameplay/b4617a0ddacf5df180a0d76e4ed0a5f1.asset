@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71ac7618f718dc428d3658a922ff90a, type: 3}
+  m_Name: b4617a0ddacf5df180a0d76e4ed0a5f1
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.ContractDefinition
+  id: cold-clinic
+  title: Cold Clinic
+  description: "Open a protected channel for a clinic\u2019s patients and backup controller."
+  company: {fileID: 11400000, guid: 35f0e140c6bf50b429ad40e28dcb1735, type: 2}
+  network: {fileID: 11400000, guid: 5468629e08b32be46b51b4a10fd67d4d, type: 2}
+  client: SABLE / community grid engineer
+  tag: EVACUATE / VESPER
+  objective: Evacuate protected identities at Authoritative record / Capture controller at Response controller
+  condition: All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.
+  aftermath: "The clinic\u2019s outage was a test of how long volunteers would share their batteries."
+  displayKind: 0
+  recurring: 0
+  prerequisites:
+  - listening-room
+  requiredFlags:
+  - shelter
+  offerDays: 0
+  isEnding: 0
+  optional: 0
+  choices: []
+  evidence:
+    title:
+    question:
+    clueNodes: []
+    clues: []
+    answers: []
+  revelation: "The clinic\u2019s outage was a test of how long volunteers would share their batteries."
+  requiredWins: 0
+  quietLimit: 60
+  paceMultiplier: 2.8
+  credits:
+    rid: 213507108368551587
+  xp:
+    rid: 213507108368551588
+  difficulty:
+    rid: 213507108368551589
+  seed:
+    rid: 213507108368551590
+  objectives:
+  - nodeId: n22
+    label: Cold Clinic / Authoritative record
+    actionLabel: Evacuate protected identities
+    action: {fileID: 11400000, guid: 99272a3567cbacd45aae290b9352ba3c, type: 2}
+    payload: 1
+    complete:
+      rid: 213507108368551591
+    actionRequirements: []
+  - nodeId: n14
+    label: Cold Clinic / Response controller
+    actionLabel: Capture controller
+    action: {fileID: 11400000, guid: 9fa6084cb9befcd47bdfb3be075d382e, type: 2}
+    payload: 0
+    complete:
+      rid: 213507108368551592
+    actionRequirements: []
+  actionRules: []
+  defenses:
+  - id: cold-clinic-watch
+    sourceNodeId: n14
+    targetNodeIds:
+    - n3
+    - n8
+    kind: 2
+    minimumDifficulty: 1
+    intervalSeconds: 60
+    traceBurst: 6
+  lore:
+  - id: cold-clinic/0
+    title: Cold Clinic / Unsent message
+    company:
+    contract: Cold Clinic
+    text: "SABLE / community grid engineer: Open a protected channel for a clinic\u2019s patients and backup controller. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+  - id: cold-clinic/1
+    title: Cold Clinic / Custody note
+    company:
+    contract: Cold Clinic
+    text: "Archive custody, Cold Clinic: The clinic\u2019s outage was a test of how long volunteers would share their batteries. A second copy carries a hand-written objection to the official disposition."
+  - id: cold-clinic/2
+    title: Cold Clinic / Private annotation
+    company:
+    contract: Cold Clinic
+    text: "Personal note filed under cold-clinic: The clinic\u2019s outage was a test of how long volunteers would share their batteries. Someone has crossed out the word inevitable. No replacement was supplied."
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108368551587
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 1140
+    - rid: 213507108368551588
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 94
+    - rid: 213507108368551589
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 2
+    - rid: 213507108368551590
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 563
+    - rid: 213507108368551591
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 3
+    - rid: 213507108368551592
+      type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        state: 1

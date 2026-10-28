@@ -20,7 +20,7 @@ namespace Cashg.GraphExplorer.Editor
 			Require(GraphResources.Load<StyleSheet>("GraphExplorer"), "explorer stylesheet");
 			Require(GraphResources.Load<StyleSheet>("GraphShell"), "shell stylesheet");
 			foreach (var name in new[]
-						 { "GraphNodeToon", "GraphNodeMask", "GraphNodePost", "GraphEdge", "GraphSky", "GraphFog" })
+						 { "GraphNodeToon", "GraphNodeMask", "GraphNodePost", "GraphEdge", "GraphSky", "GraphFog", "GraphBeam" })
 			{
 				// Confirm each required shader loads and compiles successfully.
 				var shader = GraphResources.Load<Shader>(name);

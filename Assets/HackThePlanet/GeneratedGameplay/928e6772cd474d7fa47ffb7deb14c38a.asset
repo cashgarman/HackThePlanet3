@@ -20,18 +20,18 @@ MonoBehaviour:
   instant: 0
   releaseOnTargetControl: 0
   activeModifiers:
-  - id: 
+  - id:
     stat: trace
     priority: 0
     operation: 2
     when:
-      rid: 213507095544725868
+      rid: 213507108419403820
     value:
-      rid: 213507095544725869
+      rid: 213507108419403821
   tags:
   - decoy
   shortcut: 0
-  shortcutLabel: 
+  shortcutLabel:
   legacyGroup: decoy
   presentationPriority: 50
   operatorTarget: 1
@@ -40,52 +40,52 @@ MonoBehaviour:
   futureNeighborQueue: 0
   traceFree: 1
   visible:
-    rid: 213507095544725870
+    rid: 213507108419403822
   requirements: []
   queueRequirements:
   - condition:
-      rid: 213507095544725871
+      rid: 213507108419403823
     message: Discover this system first.
   duration:
-    rid: 213507095544725872
+    rid: 213507108419403824
   baseTrace:
-    rid: 213507095544725873
+    rid: 213507108419403825
   useLimit:
-    rid: 213507095544725874
+    rid: 213507108419403826
   effects:
-  - rid: 213507095544725875
+  - rid: 213507108419403827
   references:
     version: 2
     RefIds:
-    - rid: 213507095544725868
+    - rid: 213507108419403820
       type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
-      data: 
-    - rid: 213507095544725869
+      data:
+    - rid: 213507108419403821
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0.65
-    - rid: 213507095544725870
+    - rid: 213507108419403822
       type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
-        technology: {fileID: 11400000, guid: 420d0889431d6a342b611e28bf5521a6, type: 2}
+        technology: {fileID: 11400000, guid: f8349e0f456a93744b2d7fd9f4dad61d, type: 2}
         equipped: 1
-    - rid: 213507095544725871
+    - rid: 213507108419403823
       type: {class: NodeStateCondition, ns: HackThePlanet, asm: HackThePlanet}
       data:
         state: 0
-    - rid: 213507095544725872
+    - rid: 213507108419403824
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0
-    - rid: 213507095544725873
+    - rid: 213507108419403825
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0
-    - rid: 213507095544725874
+    - rid: 213507108419403826
       type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
       data:
         value: 0
-    - rid: 213507095544725875
+    - rid: 213507108419403827
       type: {class: LogEffect, ns: HackThePlanet, asm: HackThePlanet}
       data:
         message: DECOY ACTIVE // Trace generation reduced while RAM is reserved.

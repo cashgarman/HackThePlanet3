@@ -1,0 +1,126 @@
+{
+  "id": "spare-capacity",
+  "title": "Spare Capacity",
+  "description": "Capture a reserve controller that reports no spare power.",
+  "company": "company-2",
+  "network": "subnet-spare-capacity",
+  "client": "SABLE / community grid engineer",
+  "tag": "SEIZE / VESPER",
+  "objective": "Recover evidence at Authoritative record / Capture controller at Response controller",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "Its reserve is real. The allocation is being sold to an unnamed continuity fund.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1250
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 100
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 580
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Spare Capacity / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    },
+    {
+      "nodeId": "n14",
+      "label": "Spare Capacity / Response controller",
+      "actionLabel": "Capture controller",
+      "action": "hack",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Controlled"
+      },
+      "actionRequirements": [],
+      "payload": false
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "spare-capacity/0",
+      "title": "Spare Capacity / Unsent message",
+      "company": "",
+      "contract": "Spare Capacity",
+      "text": "SABLE / community grid engineer: Capture a reserve controller that reports no spare power. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "spare-capacity/1",
+      "title": "Spare Capacity / Custody note",
+      "company": "",
+      "contract": "Spare Capacity",
+      "text": "Archive custody, Spare Capacity: Its reserve is real. The allocation is being sold to an unnamed continuity fund. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "spare-capacity/2",
+      "title": "Spare Capacity / Private annotation",
+      "company": "",
+      "contract": "Spare Capacity",
+      "text": "Personal note filed under spare-capacity: Its reserve is real. The allocation is being sold to an unnamed continuity fund. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "spare-capacity-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "spare-capacity-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 4,
+  "revelation": "Its reserve is real. The allocation is being sold to an unnamed continuity fund.",
+  "prerequisites": [
+    "cold-clinic"
+  ],
+  "requiredFlags": [
+    "shelter"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

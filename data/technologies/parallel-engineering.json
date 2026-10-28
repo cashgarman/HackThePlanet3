@@ -1,19 +1,33 @@
 {
   "id": "parallel-engineering",
-  "title": "Parallel Engineering",
-  "description": "Unlocks module purchases: Accelerator.",
+  "title": "Vector Engineering",
+  "description": "+0.15 compute and access to the Mirror Core and Credential Loom.",
   "branch": "INTRUSION",
-  "cost": 100,
+  "cost": 160,
   "waypointTier": 0,
   "special": false,
   "position": {
-    "x": 480,
-    "y": 760
+    "x": -160.0,
+    "y": 775
   },
   "parents": [
-    "efficient"
+    "protocol-spoof"
   ],
   "grants": [],
-  "modifiers": [],
+  "modifiers": [
+    {
+      "id": "",
+      "stat": "compute",
+      "priority": 0,
+      "operation": "Add",
+      "when": {
+        "type": "AlwaysCondition"
+      },
+      "value": {
+        "type": "ConstantNumber",
+        "value": 0.15
+      }
+    }
+  ],
   "triggers": []
 }

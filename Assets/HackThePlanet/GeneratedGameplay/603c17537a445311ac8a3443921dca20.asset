@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb6116ef3368fb478a80b75d9610f5a, type: 3}
+  m_Name: 603c17537a445311ac8a3443921dca20
+  m_EditorClassIdentifier: HackThePlanet::HackThePlanet.RigModuleDefinition
+  id: veil-array
+  title: Veil Mesh
+  description: 6% less action trace and 20% less security sweep trace.
+  family: stealth
+  branch: STEALTH
+  flavour: PATCHBAY / Vesper salvage exchange. Every component has a previous owner.
+  synergy:
+  tier: 3
+  width: 2
+  height: 1
+  price: 1500
+  rotatable: 1
+  powerDemand: 3
+  heatOutput: 2
+  powerCapacity: 0
+  coolingCapacity: 0
+  requirements:
+  - condition:
+      rid: 213507108366975109
+    message: Requires Signal Engineering research.
+  modifiers:
+  - id:
+    stat: trace
+    priority: 0
+    operation: 2
+    when:
+      rid: 213507108366975110
+    value:
+      rid: 213507108366975111
+  - id:
+    stat: sweepTrace
+    priority: 0
+    operation: 2
+    when:
+      rid: 213507108366975112
+    value:
+      rid: 213507108366975113
+  references:
+    version: 2
+    RefIds:
+    - rid: 213507108366975109
+      type: {class: ResearchCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        technology: {fileID: 11400000, guid: 86184c6d7de3423448497238c649ce59, type: 2}
+        equipped: 0
+    - rid: 213507108366975110
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108366975111
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.94
+    - rid: 213507108366975112
+      type: {class: AlwaysCondition, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+    - rid: 213507108366975113
+      type: {class: ConstantNumber, ns: HackThePlanet, asm: HackThePlanet}
+      data:
+        value: 0.8

@@ -74,7 +74,7 @@ namespace HackThePlanet
 			foreach (var group in Defenses.GroupBy(d => d.sourceNodeId))
 			{
 				var source = Node(group.Key);
-				var roles = group.Select(d => d.kind == DefenseKind.CredentialLock ? "Key server" : "Sweep controller").Distinct();
+				var roles = group.Select(d => d.kind == DefenseKind.CredentialLock ? "Key server" : d.kind == DefenseKind.Watcher ? "Link watcher" : d.kind == DefenseKind.PurgeTimer ? "Purge controller" : "Sweep controller").Distinct();
 				source.label = string.Join(" + ", roles) + " / " + source.label;
 				source.detail += "\nContract security service. Inspect its countermeasure actions after discovery.";
 			}
@@ -98,8 +98,10 @@ namespace HackThePlanet
 			var layers = definition.defenses.Where(d => d.minimumDifficulty <= job.difficulty).ToArray();
 			if (layers.Length == 0) return "No special security layers reported.";
 			return string.Join("  ", layers.Select(d => d.kind == DefenseKind.CredentialLock
-				? "CREDENTIAL LOCK / Credential Analysis or Protocol Spoof"
-				: "SECURITY SWEEP / Loop Feed, Hard Reset, Blackout, or controller capture"));
+				? "CREDENTIAL LOCK / Extract Key (core) or Credential Fork"
+				: d.kind == DefenseKind.Watcher ? "WATCHER / Monitored ingress adds " + d.traceBurst + " trace. Use maintenance links, suppress, or capture its controller."
+                : d.kind == DefenseKind.PurgeTimer ? "PURGE / First linked recovery arms a " + d.intervalSeconds + "s window. Prepare both targets, suppress, or capture its controller."
+                : "SECURITY SWEEP / False Echo, Controller Capture, Dark Interval, or controller capture"));
 		}
 
 		/// <summary>Checks target eligibility for an authored security countermeasure.</summary>

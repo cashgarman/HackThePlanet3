@@ -15,21 +15,21 @@ MonoBehaviour:
   id: rig
   title: Rig rules
   description: Physical assembly and resource rules.
-  startingChassis: {fileID: 11400000, guid: f84370b9007f5d448a19022556253a9b, type: 2}
+  startingChassis: {fileID: 11400000, guid: 03525bd8e963c56438e975312106313a, type: 2}
   startingParts:
-  - module: {fileID: 11400000, guid: dbdeb02db362f634fa504e65179a5258, type: 2}
+  - module: {fileID: 11400000, guid: a0616a516a3a8754497edae64807ca53, type: 2}
     row: 0
     column: 0
     rotated: 0
-  - module: {fileID: 11400000, guid: 5101f14dac7e2a640a2b193113ef8ef6, type: 2}
+  - module: {fileID: 11400000, guid: 102415c487aeebb4583ffc6e4b1d3b28, type: 2}
     row: 0
     column: 2
     rotated: 0
-  - module: {fileID: 11400000, guid: 2a15a42e19f37f04184ef78fd2134b03, type: 2}
+  - module: {fileID: 11400000, guid: 2f415ed85e9d0114b8b6cf7bb1455c63, type: 2}
     row: 1
     column: 0
     rotated: 0
-  - module: {fileID: 11400000, guid: 2c181137322d9464c92504fc752b7b0b, type: 2}
+  - module: {fileID: 11400000, guid: fe1af955f71bb844eae2a12714f1887a, type: 2}
     row: 1
     column: 2
     rotated: 0

@@ -21,6 +21,9 @@ namespace HackThePlanet
 		// World positions keyed by network node id for projection and routing.
 		private readonly Dictionary<string, Vector3> positions;
 
+		// Optional live view position, falling back to authored anchors for hidden nodes.
+		private readonly Func<string, Vector3?> viewPosition;
+
 		// Stroke color for the active path preview line.
 		private readonly Color routeColor;
 
@@ -34,11 +37,14 @@ namespace HackThePlanet
 		/// <param name="waypoints">Stored markers for the current contract instance.</param>
 		/// <param name="tier">Unlocked waypoint feature tier (0–4).</param>
 		/// <param name="entry">Gateway node id used as the path start.</param>
+		/// <param name="viewPosition">Optional resolver for moving graph view coordinates.</param>
 		public WaypointOverlay(Camera camera, List<NetNode> nodes, List<NetLink> links,
-							   IReadOnlyList<NetworkWaypoint> waypoints, int tier, string entry)
+							   IReadOnlyList<NetworkWaypoint> waypoints, int tier, string entry,
+							   Func<string, Vector3?> viewPosition = null)
 		{
 			// Keep the camera and index node positions by id.
 			this.camera = camera;
+			this.viewPosition = viewPosition;
 			positions = nodes.ToDictionary(n => n.id, n => n.position);
 
 			// Cover the parent without intercepting input.
@@ -86,7 +92,9 @@ namespace HackThePlanet
 
 		/// <summary>Gets world positions for waypoint nodes and nodes on the active path preview.</summary>
 		public IEnumerable<Vector3> Anchors =>
-			markers.Select(m => positions[m.waypoint.nodeId]).Concat(path.Select(id => positions[id]));
+			markers.Select(m => ResolvePosition(m.waypoint.nodeId)).Concat(path.Select(ResolvePosition));
+
+		private Vector3 ResolvePosition(string id) => viewPosition?.Invoke(id) ?? positions[id];
 
 		/// <summary>Updates marker layout and font scale after camera or viewport changes.</summary>
 		/// <param name="scale">UI text scale multiplier from the workstation shell.</param>
@@ -99,7 +107,7 @@ namespace HackThePlanet
 			foreach (var item in markers)
 			{
 				// Show the marker only when its node is in front of the camera.
-				var p = camera.WorldToViewportPoint(positions[item.waypoint.nodeId]);
+				var p = camera.WorldToViewportPoint(ResolvePosition(item.waypoint.nodeId));
 				item.marker.style.display = p.z > camera.nearClipPlane ? DisplayStyle.Flex : DisplayStyle.None;
 
 				// Keep the marker at the edge when its node lies outside the current camera frame.
@@ -129,8 +137,8 @@ namespace HackThePlanet
 			for (var i = 1; i < path.Count; i++)
 			{
 				// Project both ends of the segment.
-				var a = camera.WorldToViewportPoint(positions[path[i - 1]]);
-				var b = camera.WorldToViewportPoint(positions[path[i]]);
+				var a = camera.WorldToViewportPoint(ResolvePosition(path[i - 1]));
+				var b = camera.WorldToViewportPoint(ResolvePosition(path[i]));
 
 				// Skip segments that reach behind the camera.
 				if (a.z <= camera.nearClipPlane || b.z <= camera.nearClipPlane)
@@ -147,7 +155,7 @@ namespace HackThePlanet
 			foreach (var item in markers)
 			{
 				// Project the marker and skip it when it is behind the camera.
-				var p = camera.WorldToViewportPoint(positions[item.waypoint.nodeId]);
+				var p = camera.WorldToViewportPoint(ResolvePosition(item.waypoint.nodeId));
 				if (p.z <= camera.nearClipPlane)
 					continue;
 

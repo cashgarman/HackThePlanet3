@@ -1,17 +1,17 @@
 {
   "id": "decoy",
-  "title": "Decoy process",
+  "title": "Trace Sink",
   "description": "Sustained decoy reduces trace generation by 35% while enabled. Reserves 16 GB RAM; disable it to release RAM.",
   "branch": "CONTROL",
   "cost": 95,
   "waypointTier": 0,
   "special": true,
   "position": {
-    "x": 865,
-    "y": 545
+    "x": 480.0,
+    "y": 465
   },
   "parents": [
-    "disrupt"
+    "blackout"
   ],
   "grants": [
     "decoy"

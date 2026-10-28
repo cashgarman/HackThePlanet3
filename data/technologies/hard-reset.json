@@ -1,17 +1,17 @@
 {
   "id": "hard-reset",
-  "title": "Hard Reset",
+  "title": "Controller Capture",
   "description": "Permanently shut down one discovered sweep controller per operation.",
   "branch": "CONTROL",
-  "cost": 85,
+  "cost": 125,
   "waypointTier": 0,
   "special": true,
   "position": {
-    "x": 1060,
-    "y": 460
+    "x": 480.0,
+    "y": 620
   },
   "parents": [
-    "disrupt"
+    "decoy"
   ],
   "grants": [
     "hard-reset"

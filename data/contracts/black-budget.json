@@ -1,0 +1,114 @@
+{
+  "id": "black-budget",
+  "title": "Black Budget",
+  "description": "Recover the invoices that keep the vacancy funded.",
+  "company": "company-0",
+  "network": "subnet-black-budget",
+  "client": "ORIN / Directorate defector",
+  "tag": "EXFILTRATE / VESPER",
+  "objective": "Recover evidence at Authoritative record",
+  "condition": "All required objectives must be secured. Optional archives pay extra. Quiet bonus uses peak trace.",
+  "aftermath": "Three competitors pay the same unseen administrator.",
+  "displayKind": "Copy",
+  "recurring": false,
+  "requiredWins": 0,
+  "quietLimit": 60,
+  "credits": {
+    "type": "ConstantNumber",
+    "value": 1250
+  },
+  "xp": {
+    "type": "ConstantNumber",
+    "value": 100
+  },
+  "difficulty": {
+    "type": "ConstantNumber",
+    "value": 2
+  },
+  "seed": {
+    "type": "ConstantNumber",
+    "value": 665
+  },
+  "objectives": [
+    {
+      "nodeId": "n22",
+      "label": "Black Budget / Authoritative record",
+      "actionLabel": "Recover evidence",
+      "action": "download",
+      "complete": {
+        "type": "NodeStateCondition",
+        "state": "Collected"
+      },
+      "actionRequirements": [],
+      "payload": true
+    }
+  ],
+  "actionRules": [],
+  "lore": [
+    {
+      "id": "black-budget/0",
+      "title": "Black Budget / Unsent message",
+      "company": "",
+      "contract": "Black Budget",
+      "text": "ORIN / Directorate defector: Recover the invoices that keep the vacancy funded. The sender asks you to keep the names attached to the evidence; anonymous totals have concealed people before."
+    },
+    {
+      "id": "black-budget/1",
+      "title": "Black Budget / Custody note",
+      "company": "",
+      "contract": "Black Budget",
+      "text": "Archive custody, Black Budget: Three competitors pay the same unseen administrator. A second copy carries a hand-written objection to the official disposition."
+    },
+    {
+      "id": "black-budget/2",
+      "title": "Black Budget / Private annotation",
+      "company": "",
+      "contract": "Black Budget",
+      "text": "Personal note filed under black-budget: Three competitors pay the same unseen administrator. Someone has crossed out the word inevitable. No replacement was supplied."
+    }
+  ],
+  "defenses": [
+    {
+      "id": "black-budget-watch",
+      "kind": "Watcher",
+      "sourceNodeId": "n14",
+      "targetNodeIds": [
+        "n3",
+        "n8"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 6
+    },
+    {
+      "id": "black-budget-lock",
+      "kind": "CredentialLock",
+      "sourceNodeId": "n19",
+      "targetNodeIds": [
+        "n22"
+      ],
+      "minimumDifficulty": 1,
+      "intervalSeconds": 60,
+      "traceBurst": 0
+    }
+  ],
+  "paceMultiplier": 4,
+  "revelation": "Three competitors pay the same unseen administrator.",
+  "prerequisites": [
+    "accession"
+  ],
+  "requiredFlags": [
+    "command"
+  ],
+  "offerDays": 0,
+  "optional": false,
+  "isEnding": false,
+  "choices": [],
+  "evidence": {
+    "title": "",
+    "question": "",
+    "clueNodes": [],
+    "clues": [],
+    "answers": []
+  }
+}

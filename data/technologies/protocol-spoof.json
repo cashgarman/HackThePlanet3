@@ -1,17 +1,17 @@
 {
   "id": "protocol-spoof",
-  "title": "Protocol Spoof",
+  "title": "Credential Fork",
   "description": "Spoof two protected downloads per operation without a key.",
   "branch": "INTRUSION",
-  "cost": 90,
+  "cost": 125,
   "waypointTier": 0,
   "special": true,
   "position": {
-    "x": 1060,
-    "y": 155
+    "x": -160.0,
+    "y": 620
   },
   "parents": [
-    "efficient"
+    "selective"
   ],
   "grants": [
     "spoof-gate"

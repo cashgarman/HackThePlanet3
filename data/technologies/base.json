@@ -1,7 +1,7 @@
 {
   "id": "base",
-  "title": "Basic toolkit",
-  "description": "Your starting tools: scan, hack, recover data, and disconnect. Every unlocked passive is always active.",
+  "title": "Field Kit",
+  "description": "Your private workstation. Scan, establish access, recover evidence and leave with a plan.",
   "branch": "CORE",
   "cost": 0,
   "waypointTier": 0,
